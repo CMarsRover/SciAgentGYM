@@ -1,0 +1,178 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_thin_film_interference",
+            "description": "计算薄膜干涉中反射光的增强和减弱波长。该函数基于薄膜干涉理论，计算在给定折射率和薄膜厚度条件下，哪些波长的光在反射时会发生增强或减弱。考虑了半波损失的情况。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "n1": {
+                        "type": "number",
+                        "description": "入射介质的折射率"
+                    },
+                    "n2": {
+                        "type": "number",
+                        "description": "薄膜介质的折射率"
+                    },
+                    "n3": {
+                        "type": "number",
+                        "description": "基底介质的折射率"
+                    },
+                    "d": {
+                        "type": "number",
+                        "description": "薄膜厚度，单位为纳米(nm)"
+                    },
+                    "wavelength_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "需要考察的波长范围(nm)，默认为可见光范围(380, 780)"
+                    },
+                    "incidence_angle": {
+                        "type": "number",
+                        "description": "入射角，单位为度，默认为0度(垂直入射)"
+                    }
+                },
+                "required": [
+                    "n1",
+                    "n2",
+                    "n3",
+                    "d"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_interference_solver_204.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "find_extrema_wavelengths",
+            "description": "通过数值方法找出反射系数的极值点，确定反射增强和减弱的精确波长。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "n1": {
+                        "type": "number",
+                        "description": "入射介质的折射率"
+                    },
+                    "n2": {
+                        "type": "number",
+                        "description": "薄膜介质的折射率"
+                    },
+                    "n3": {
+                        "type": "number",
+                        "description": "基底介质的折射率"
+                    },
+                    "d": {
+                        "type": "number",
+                        "description": "薄膜厚度(nm)"
+                    },
+                    "wavelength_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "波长范围(nm)，默认为(380, 780)"
+                    },
+                    "num_points": {
+                        "type": "integer",
+                        "description": "用于初始扫描的点数，默认为1000"
+                    }
+                },
+                "required": [
+                    "n1",
+                    "n2",
+                    "n3",
+                    "d"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_interference_solver_204.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_reflection_spectrum",
+            "description": "可视化薄膜在不同波长下的反射光谱。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "n1": {
+                        "type": "number",
+                        "description": "入射介质的折射率"
+                    },
+                    "n2": {
+                        "type": "number",
+                        "description": "薄膜介质的折射率"
+                    },
+                    "n3": {
+                        "type": "number",
+                        "description": "基底介质的折射率"
+                    },
+                    "d": {
+                        "type": "number",
+                        "description": "薄膜厚度(nm)"
+                    },
+                    "wavelength_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "波长范围(nm)，默认为(380, 780)"
+                    },
+                    "num_points": {
+                        "type": "integer",
+                        "description": "用于绘图的点数，默认为500"
+                    }
+                },
+                "required": [
+                    "n1",
+                    "n2",
+                    "n3",
+                    "d"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_interference_solver_204.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "wavelength_to_color_name",
+            "description": "将波长转换为对应的颜色名称。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wavelength": {
+                        "type": "number",
+                        "description": "光的波长(nm)"
+                    }
+                },
+                "required": [
+                    "wavelength"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_interference_solver_204.py"
+        }
+    }
+]

@@ -1,0 +1,176 @@
+[
+  {
+    "category": "addition",
+    "subcategory": "hydration",
+    "name": "Markovnikov hydration",
+    "smarts": "[C;H2:1]=[C;H1:2]>>[C:1][C:2]O"
+  },
+  {
+    "category": "addition",
+    "subcategory": "hydration",
+    "name": "Anti-Markovnikov hydration",
+    "smarts": "[C;H2:1]=[C;H1:2]>>[C:1]O[C:2]"
+  },
+  {
+    "category": "addition",
+    "subcategory": "halogenation",
+    "name": "Bromination",
+    "smarts": "[C:1]=[C:2]>>[C:1]([Br])[C:2]Br"
+  },
+  {
+    "category": "addition",
+    "subcategory": "halogenation",
+    "name": "Chlorination",
+    "smarts": "[C:1]=[C:2]>>[C:1]([Cl])[C:2]Cl"
+  },
+  {
+    "category": "addition",
+    "subcategory": "halogenation",
+    "name": "HBr addition",
+    "smarts": "[C;H2:1]=[C;H1:2]>>[C:1][C:2]Br"
+  },
+  {
+    "category": "addition",
+    "subcategory": "acid_addition",
+    "name": "Sulfuric acid addition",
+    "smarts": "[C;H2:1]=[C;H1:2]>>[C:1][C:2]OS(=O)(=O)O"
+  },
+  {
+    "category": "addition",
+    "subcategory": "acid_addition",
+    "name": "HCl addition",
+    "smarts": "[C;H2:1]=[C;H1:2]>>[C:1][C:2]Cl"
+  },
+  {
+    "category": "addition",
+    "subcategory": "cycloaddition",
+    "name": "Diels-Alder",
+    "smarts": "[C:1]=[C:2][C:3]=[C:4].[C:5]=[C:6]>>[C:1]1[C:2]=[C:3][C:4][C:5][C:6]1"
+  },
+  {
+    "category": "addition",
+    "subcategory": "cycloaddition",
+    "name": "Epoxidation",
+    "smarts": "[C:1]=[C:2]>>[C:1]1[C:2]O1"
+  },
+  {
+    "category": "elimination",
+    "subcategory": "dehydration",
+    "name": "Alcohol dehydration",
+    "smarts": "[C:1][C:2]O>>[C:1]=[C:2]"
+  },
+  {
+    "category": "elimination",
+    "subcategory": "dehydrohalogenation",
+    "name": "Dehydrohalogenation",
+    "smarts": "[C:1][C:2]Br>>[C:1]=[C:2]"
+  },
+  {
+    "category": "substitution",
+    "subcategory": "nucleophilic",
+    "name": "SN2 with OH",
+    "smarts": "[C:1]Br>>[C:1]O"
+  },
+  {
+    "category": "substitution",
+    "subcategory": "nucleophilic",
+    "name": "SN2 with CN",
+    "smarts": "[C:1]Br>>[C:1]C#N"
+  },
+  {
+    "category": "substitution",
+    "subcategory": "nucleophilic",
+    "name": "SN2 with NH2",
+    "smarts": "[C:1]Br>>[C:1]N"
+  },
+  {
+    "category": "substitution",
+    "subcategory": "electrophilic_aromatic",
+    "name": "Nitration",
+    "smarts": "[c:1]>>[c:1][N+](=O)[O-]"
+  },
+  {
+    "category": "substitution",
+    "subcategory": "electrophilic_aromatic",
+    "name": "Aromatic halogenation",
+    "smarts": "[c:1]>>[c:1]Br"
+  },
+  {
+    "category": "substitution",
+    "subcategory": "electrophilic_aromatic",
+    "name": "Friedel-Crafts alkylation",
+    "smarts": "[c:1]>>[c:1]C"
+  },
+  {
+    "category": "oxidation_reduction",
+    "subcategory": "oxidation",
+    "name": "Primary alcohol to aldehyde",
+    "smarts": "[C;H2:1][O;H1:2]>>[C:1]=[O:2]"
+  },
+  {
+    "category": "oxidation_reduction",
+    "subcategory": "oxidation",
+    "name": "Aldehyde to carboxylic acid",
+    "smarts": "[C:1]=[O:2]>>[C:1](=[O:2])O"
+  },
+  {
+    "category": "oxidation_reduction",
+    "subcategory": "oxidation",
+    "name": "Secondary alcohol to ketone",
+    "smarts": "[C:1][C;H1:2]([O;H1:3])[C:4]>>[C:1][C:2](=[O:3])[C:4]"
+  },
+  {
+    "category": "oxidation_reduction",
+    "subcategory": "reduction",
+    "name": "Carbonyl reduction",
+    "smarts": "[C:1]=[O:2]>>[C:1][O:2]"
+  },
+  {
+    "category": "oxidation_reduction",
+    "subcategory": "reduction",
+    "name": "Alkene hydrogenation",
+    "smarts": "[C:1]=[C:2]>>[C:1][C:2]"
+  },
+  {
+    "category": "functional_group_interconversion",
+    "subcategory": "ester_formation",
+    "name": "Esterification",
+    "smarts": "[C:1](=[O:2])[O;H1:3].[C:4][O;H1:5]>>[C:1](=[O:2])[O:3][C:4]"
+  },
+  {
+    "category": "functional_group_interconversion",
+    "subcategory": "amide_formation",
+    "name": "Amidation",
+    "smarts": "[C:1](=[O:2])[O;H1:3].[N;H2:4]>>[C:1](=[O:2])[N:4]"
+  },
+  {
+    "category": "functional_group_interconversion",
+    "subcategory": "hydrolysis",
+    "name": "Ester hydrolysis",
+    "smarts": "[C:1](=[O:2])[O:3][C:4]>>[C:1](=[O:2])O.[C:4]O"
+  },
+  {
+    "category": "functional_group_interconversion",
+    "subcategory": "hydrolysis",
+    "name": "Amide hydrolysis",
+    "smarts": "[C:1](=[O:2])[N:3]>>[C:1](=[O:2])O.[N:3]"
+  },
+  {
+    "category": "rearrangement",
+    "subcategory": "claisen",
+    "name": "Claisen rearrangement",
+    "smarts": "[C:1]=[C:2][C:3][O:4][C:5]=[C:6]>>[C:1]=[C:2][C:3]([C:5]=[C:6])[O:4]"
+  },
+  {
+    "category": "protection",
+    "subcategory": "alcohol_protection",
+    "name": "TMS protection",
+    "smarts": "[C:1][O;H1:2]>>[C:1][O:2][Si](C)(C)C"
+  },
+  {
+    "category": "protection",
+    "subcategory": "alcohol_protection",
+    "name": "Acetylation",
+    "smarts": "[C:1][O;H1:2]>>[C:1][O:2]C(=O)C"
+  }
+]

@@ -1,0 +1,190 @@
+{
+  "class_name": "Unknown",
+  "description": "A utility toolkit for analyzing Python functions, generating standardized tool and MCP protocol formats, and exporting or printing the results for integration with AI-driven systems.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "extract_function_info",
+        "description": "Extracts metadata and structural information from a given Python function, such as name, parameters, and source code.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "func": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "func"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "提取函数信息",
+        "properties": {
+          "function_name": {
+            "type": "string",
+            "description": "函数名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "函数的描述信息"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/convert_to_mcp_format.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_function_description",
+        "description": "Retrieves a natural language description for a specified function based on its name or docstring.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "func_name": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "func_name"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "根据函数名获取描述",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "函数的描述文本"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/convert_to_mcp_format.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "generate_mcp_format",
+        "description": "Converts function metadata into a standardized MCP (Model Control Protocol) compliant format.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "生成MCP协议格式",
+        "properties": {
+          "mcp_data": {
+            "type": "object",
+            "description": "符合MCP协议格式的数据"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/convert_to_mcp_format.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "generate_tool_format",
+        "description": "Generates a list of tool definitions in a format suitable for use by AI agents or tool-calling systems.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "生成tool格式",
+        "properties": {
+          "tool_data": {
+            "type": "object",
+            "description": "符合tool格式的数据"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/convert_to_mcp_format.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "save_formats",
+        "description": "Saves both MCP and tool format outputs to a specified file in JSON or YAML format.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "保存两种格式到文件",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "保存操作的状态，如success或error"
+          },
+          "message": {
+            "type": "string",
+            "description": "保存结果的详细信息"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/convert_to_mcp_format.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "print_formats",
+        "description": "Prints the generated MCP and tool formats to the console for debugging or inspection.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "打印两种格式",
+        "properties": {
+          "output": {
+            "type": "string",
+            "description": "打印输出的内容"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/convert_to_mcp_format.py"
+      }
+    }
+  ]
+}

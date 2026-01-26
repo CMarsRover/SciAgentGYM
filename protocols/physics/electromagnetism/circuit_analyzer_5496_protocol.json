@@ -1,0 +1,108 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_series_resistance",
+            "description": "计算串联电阻的等效电阻。在串联连接中，等效电阻是所有单个电阻的总和。公式：R_eq = R1 + R2 + ... + Rn",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "resistances": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "电阻值列表，单位为欧姆(Ω)"
+                    }
+                },
+                "required": [
+                    "resistances"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circuit_analyzer_5496.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_parallel_resistance",
+            "description": "计算并联电阻的等效电阻。在并联连接中，等效电阻的倒数是所有单个电阻倒数的总和。公式：1/R_eq = 1/R1 + 1/R2 + ... + 1/Rn",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "resistances": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "电阻值列表，单位为欧姆(Ω)"
+                    }
+                },
+                "required": [
+                    "resistances"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circuit_analyzer_5496.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_wheatstone_bridge",
+            "description": "计算惠斯通电桥电路的等效电阻。惠斯通电桥由四个电阻组成，排列成菱形图案。此函数计算两个相对角之间的等效电阻。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "r1": {
+                        "type": "number",
+                        "description": "电阻r1的值，单位为欧姆(Ω)，位于a-c之间"
+                    },
+                    "r2": {
+                        "type": "number",
+                        "description": "电阻r2的值，单位为欧姆(Ω)，位于c-d之间"
+                    },
+                    "r3": {
+                        "type": "number",
+                        "description": "电阻r3的值，单位为欧姆(Ω)，位于b-d之间"
+                    },
+                    "r4": {
+                        "type": "number",
+                        "description": "电阻r4的值，单位为欧姆(Ω)，位于a-b之间"
+                    }
+                },
+                "required": [
+                    "r1",
+                    "r2",
+                    "r3",
+                    "r4"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circuit_analyzer_5496.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "essential_circuit_analysis_guide",
+            "description": "🔧 等效电路分析工具 - 基本阅读指南。这是一个多模态分析工具，帮助您正确分析电路图并计算等效电阻。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circuit_analyzer_5496.py"
+        }
+    }
+]

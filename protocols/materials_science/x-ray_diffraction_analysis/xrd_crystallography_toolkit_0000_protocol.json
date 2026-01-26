@@ -1,0 +1,365 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_d_spacing",
+            "description": "根据Bragg定律计算晶面间距。基于Bragg衍射定律 nλ = 2d sinθ，从XRD峰位2θ角计算对应晶面的d间距。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta": {
+                        "type": "number",
+                        "description": "衍射峰位置/度，范围10-120°"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长/Å，默认Cu Kα (1.5406 Å)"
+                    }
+                },
+                "required": [
+                    "two_theta"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_cubic_lattice_parameter",
+            "description": "计算立方晶系的晶格参数。对于立方晶系，晶格参数a与晶面间距d的关系为 a = d × √(h²+k²+l²)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "d_spacing": {
+                        "type": "number",
+                        "description": "晶面间距/Å"
+                    },
+                    "h": {
+                        "type": "integer",
+                        "description": "Miller指数h"
+                    },
+                    "k": {
+                        "type": "integer",
+                        "description": "Miller指数k"
+                    },
+                    "l": {
+                        "type": "integer",
+                        "description": "Miller指数l"
+                    }
+                },
+                "required": [
+                    "d_spacing",
+                    "h",
+                    "k",
+                    "l"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "generate_cubic_hkl_list",
+            "description": "生成立方晶系允许的Miller指数列表。根据晶系类型（原始立方、体心立方、面心立方）的系统消光规则，生成所有允许的hkl组合。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "max_index": {
+                        "type": "integer",
+                        "description": "Miller指数的最大值，默认5"
+                    },
+                    "crystal_system": {
+                        "type": "string",
+                        "description": "晶系类型",
+                        "enum": ["primitive_cubic", "body_centered_cubic", "face_centered_cubic"]
+                    }
+                },
+                "required": [],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "assign_miller_indices_to_peaks",
+            "description": "将Miller指数分配给XRD衍射峰。基于已知晶格参数，计算理论衍射峰位置，并与实验峰位匹配分配hkl指数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "实验测得的2θ峰位列表/度"
+                    },
+                    "lattice_a": {
+                        "type": "number",
+                        "description": "晶格参数/Å"
+                    },
+                    "crystal_system": {
+                        "type": "string",
+                        "description": "晶系类型",
+                        "enum": ["primitive_cubic", "body_centered_cubic", "face_centered_cubic"]
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "峰位匹配容差/度，默认0.02°"
+                    }
+                },
+                "required": [
+                    "two_theta_list",
+                    "lattice_a"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "refine_lattice_parameter_least_squares",
+            "description": "使用最小二乘法精修晶格参数。通过最小化实验峰位与理论峰位的残差平方和，优化晶格参数a的值。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "实验2θ峰位列表/度"
+                    },
+                    "hkl_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "对应的Miller指数列表 [(h,k,l), ...]"
+                    },
+                    "initial_a": {
+                        "type": "number",
+                        "description": "初始晶格参数猜测值/Å，默认5.0"
+                    }
+                },
+                "required": [
+                    "two_theta_list",
+                    "hkl_list"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_xrd_pattern",
+            "description": "完整分析XRD图谱：峰位→Miller指数→晶格参数精修。集成峰位分析、指数分配和晶格参数精修的完整流程，输出相鉴定结果。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_peaks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "XRD衍射峰2θ位置列表/度"
+                    },
+                    "crystal_system": {
+                        "type": "string",
+                        "description": "晶系类型",
+                        "enum": ["primitive_cubic", "body_centered_cubic", "face_centered_cubic"]
+                    },
+                    "initial_lattice_guess": {
+                        "type": "number",
+                        "description": "初始晶格参数估计/Å，默认5.0"
+                    }
+                },
+                "required": [
+                    "two_theta_peaks"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "identify_phase_from_lattice",
+            "description": "根据晶格参数从数据库识别晶体相（模拟功能）。在实际应用中会查询Materials Project或ICSD数据库，这里提供模拟实现。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_a": {
+                        "type": "number",
+                        "description": "晶格参数/Å"
+                    },
+                    "composition_hint": {
+                        "type": "string",
+                        "description": "化学组成提示（如'Ag-O'）"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "晶格参数匹配容差/Å，默认0.05"
+                    }
+                },
+                "required": [
+                    "lattice_a"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_xrd_pattern_with_indexing",
+            "description": "绘制带Miller指数标注的XRD图谱。生成交互式XRD图谱，标注每个峰的hkl指数和2θ位置。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_exp": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "实验2θ角度数组"
+                    },
+                    "intensities": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应的强度数组"
+                    },
+                    "peak_assignments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "2theta_exp": {
+                                    "type": "number"
+                                },
+                                "2theta_theory": {
+                                    "type": "number"
+                                },
+                                "hkl": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    },
+                                    "minItems": 3,
+                                    "maxItems": 3
+                                },
+                                "d_spacing": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": ["2theta_exp", "hkl", "d_spacing"],
+                            "additionalProperties": false
+                        },
+                        "description": "峰指数分配结果列表"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "图片保存路径，默认'./images/'"
+                    }
+                },
+                "required": [
+                    "two_theta_exp",
+                    "intensities",
+                    "peak_assignments"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_lattice_parameter_convergence",
+            "description": "绘制晶格参数收敛图。展示各个峰单独计算的晶格参数与精修后统一值的对比。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "individual_a_values": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各峰单独计算的a值列表"
+                    },
+                    "refined_a": {
+                        "type": "number",
+                        "description": "精修后的统一a值"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存路径，默认'./images/'"
+                    }
+                },
+                "required": [
+                    "individual_a_values",
+                    "refined_a"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_crystallography_toolkit_0000.py"
+        }
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+

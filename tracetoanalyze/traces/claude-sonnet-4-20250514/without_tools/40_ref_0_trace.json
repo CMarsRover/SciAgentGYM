@@ -1,0 +1,467 @@
+{
+  "id": "40_ref_0",
+  "query": "在金刚石晶格中，每个晶格位点与四个最近邻形成sp3杂化的正四面体成键。取某一位点，从该位点引出的四个最近邻单位键方向属于[111]家族，给定：u1 = (1, 1, 1)/√3，u2 = (1, -1, -1)/√3，u3 = (-1, 1, -1)/√3，u4 = (-1, -1, 1)/√3。要求：\n(1) 路线A：基于正四面体几何，给出最近邻键间夹角的理论表达式，并分别以度与弧度给出数值；\n(2) 路线B：计算上述四个单位方向两两之间的6个夹角（单位：度），给出数值清单；\n(3) 统计这6个角的均值、标准差（单位：度），以及相对(1)理论角的最大绝对误差（单位：度）；如需引用(1)结果，记其度量为R1_deg；\n(4) 以容差阈值 tolerance_deg = 1e-6 度，判断是否全部通过容差判定（True/False）；\n(5) 提交用于图形化核验的图像文件路径；\n(6) 简述两条路线结果一致的交叉验证过程。\n数值结果统一保留6位小数；角度以度或弧度表示；结果以符号/数值表达给出。",
+  "query_data": {
+    "id": "40_ref_0",
+    "original_id": 40,
+    "refined_index": 0,
+    "question": "在金刚石晶格中，每个晶格位点与四个最近邻形成sp3杂化的正四面体成键。取某一位点，从该位点引出的四个最近邻单位键方向属于[111]家族，给定：u1 = (1, 1, 1)/√3，u2 = (1, -1, -1)/√3，u3 = (-1, 1, -1)/√3，u4 = (-1, -1, 1)/√3。要求：\n(1) 路线A：基于正四面体几何，给出最近邻键间夹角的理论表达式，并分别以度与弧度给出数值；\n(2) 路线B：计算上述四个单位方向两两之间的6个夹角（单位：度），给出数值清单；\n(3) 统计这6个角的均值、标准差（单位：度），以及相对(1)理论角的最大绝对误差（单位：度）；如需引用(1)结果，记其度量为R1_deg；\n(4) 以容差阈值 tolerance_deg = 1e-6 度，判断是否全部通过容差判定（True/False）；\n(5) 提交用于图形化核验的图像文件路径；\n(6) 简述两条路线结果一致的交叉验证过程。\n数值结果统一保留6位小数；角度以度或弧度表示；结果以符号/数值表达给出。",
+    "answer": "{'(1) 理论表达式': 'θ = arccos(-1/3)', '(1) 理论角_度': 'R1_deg = 109.471221 度', '(1) 理论角_弧度': 'R1_rad = 1.910633 rad', '(2) 六个成对夹角_度': {'(u1,u2)': 'R1_deg', '(u1,u3)': 'R1_deg', '(u1,u4)': 'R1_deg', '(u2,u3)': 'R1_deg', '(u2,u4)': 'R1_deg', '(u3,u4)': 'R1_deg'}, '(3) 统计_均值_度': 'R1_deg', '(3) 统计_标准差_度': '0.000000 度', '(3) 统计_最大绝对误差_度': '0.000000 度', '(4) 容差阈值_度': '1e-6 度', '(4) 通过容差判定': 'True', '(5) 可视化文件路径': 'traces_dependency/llm_traces/artifacts/40_case_40_sample_1_step3_visualize_diamond_lattice.png', '(6) 交叉验证简述': '路线A给出θ与R1_deg；路线B六个角均等于R1_deg；计算最大绝对误差E_max = 0 ≤ tolerance_deg，故判定True，两路线一致。'}",
+    "metadata": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "image_path": [
+        "filtered_images/132698973.jpg"
+      ],
+      "solution_steps": [
+        "理解金刚石晶格结构：每个碳原子通过sp³杂化形成四个等价的共价键，指向正四面体的四个顶点",
+        "定义键向量：设中心原子到四个最近邻的向量为 v₁=(1,1,1), v₂=(1,-1,-1), v₃=(-1,1,-1), v₄=(-1,-1,1)（归一化）",
+        "调用 calculate_diamond_bond_angles 计算键角：θ = arccos(vᵢ·vⱼ / |vᵢ||vⱼ|)",
+        "理论推导验证：vᵢ·vⱼ = -1/3（对任意两个不同的键向量），因此 θ = arccos(-1/3) ≈ 109.47°",
+        "数值计算确认：109.47122063449069°",
+        "可选：调用 visualize_diamond_lattice 生成晶格结构可视化"
+      ],
+      "tool_expected": [
+        "calculate_diamond_bond_angles",
+        "visualize_diamond_lattice"
+      ],
+      "golden_answer": [
+        {
+          "(1) 理论表达式": "θ = arccos(-1/3)",
+          "(1) 理论角_度": "R1_deg = 109.471221 度",
+          "(1) 理论角_弧度": "R1_rad = 1.910633 rad",
+          "(2) 六个成对夹角_度": {
+            "(u1,u2)": "R1_deg",
+            "(u1,u3)": "R1_deg",
+            "(u1,u4)": "R1_deg",
+            "(u2,u3)": "R1_deg",
+            "(u2,u4)": "R1_deg",
+            "(u3,u4)": "R1_deg"
+          },
+          "(3) 统计_均值_度": "R1_deg",
+          "(3) 统计_标准差_度": "0.000000 度",
+          "(3) 统计_最大绝对误差_度": "0.000000 度",
+          "(4) 容差阈值_度": "1e-6 度",
+          "(4) 通过容差判定": "True",
+          "(5) 可视化文件路径": "traces_dependency/llm_traces/artifacts/40_case_40_sample_1_step3_visualize_diamond_lattice.png",
+          "(6) 交叉验证简述": "路线A给出θ与R1_deg；路线B六个角均等于R1_deg；计算最大绝对误差E_max = 0 ≤ tolerance_deg，故判定True，两路线一致。"
+        }
+      ],
+      "original_question_id": "40",
+      "test_type": "refined"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_diamond_bond_angles",
+          "description": "计算金刚石晶格中任意两个键之间的夹角。基于正四面体几何和sp³杂化理论。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/condensed_matter_toolkit.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_diamond_lattice",
+          "description": "可视化金刚石晶格结构。生成3D晶格图，展示原子位置和键连接。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "size": {
+                "type": "integer",
+                "description": "晶格重复单元数，默认2"
+              },
+              "show": {
+                "type": "boolean",
+                "description": "是否显示图形，默认True"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存路径，如'./images/diamond.png'"
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/condensed_matter_toolkit.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "generate_diamond_lattice",
+          "description": "生成金刚石晶格的原子坐标。返回晶格位置数组。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "size": {
+                "type": "integer",
+                "description": "晶格重复单元数"
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/condensed_matter_toolkit.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_bond_angle",
+          "description": "计算两个向量之间的夹角。通用几何工具函数。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "v1": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3,
+                "description": "第一个3D向量 [x, y, z]"
+              },
+              "v2": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3,
+                "description": "第二个3D向量 [x, y, z]"
+              }
+            },
+            "required": [
+              "v1",
+              "v2"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/condensed_matter_toolkit.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "在金刚石晶格中，每个晶格位点与四个最近邻形成sp3杂化的正四面体成键。取某一位点，从该位点引出的四个最近邻单位键方向属于[111]家族，给定：u1 = (1, 1, 1)/√3，u2 = (1, -1, -1)/√3，u3 = (-1, 1, -1)/√3，u4 = (-1, -1, 1)/√3。要求：\n(1) 路线A：基于正四面体几何，给出最近邻键间夹角的理论表达式，并分别以度与弧度给出数值；\n(2) 路线B：计算上述四个单位方向两两之间的6个夹角（单位：度），给出数值清单；\n(3) 统计这6个角的均值、标准差（单位：度），以及相对(1)理论角的最大绝对误差（单位：度）；如需引用(1)结果，记其度量为R1_deg；\n(4) 以容差阈值 tolerance_deg = 1e-6 度，判断是否全部通过容差判定（True/False）；\n(5) 提交用于图形化核验的图像文件路径；\n(6) 简述两条路线结果一致的交叉验证过程。\n数值结果统一保留6位小数；角度以度或弧度表示；结果以符号/数值表达给出。",
+      "final_answer": {
+        "(1) 理论表达式": "θ = arccos(-1/3)",
+        "(1) 理论角_度": "R1_deg = 109.471221 度",
+        "(1) 理论角_弧度": "R1_rad = 1.910633 rad",
+        "(2) 六个成对夹角_度": {
+          "(u1,u2)": "R1_deg",
+          "(u1,u3)": "R1_deg",
+          "(u1,u4)": "R1_deg",
+          "(u2,u3)": "R1_deg",
+          "(u2,u4)": "R1_deg",
+          "(u3,u4)": "R1_deg"
+        },
+        "(3) 统计_均值_度": "R1_deg",
+        "(3) 统计_标准差_度": "0.000000 度",
+        "(3) 统计_最大绝对误差_度": "0.000000 度",
+        "(4) 容差阈值_度": "1e-6 度",
+        "(4) 通过容差判定": "True",
+        "(5) 可视化文件路径": "traces_dependency/llm_traces/artifacts/40_case_40_sample_1_step3_visualize_diamond_lattice.png",
+        "(6) 交叉验证简述": "路线A给出θ与R1_deg；路线B六个角均等于R1_deg；计算最大绝对误差E_max = 0 ≤ tolerance_deg，故判定True，两路线一致。"
+      }
+    },
+    "metadata_summary": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "test_type": "refined",
+      "original_question_id": "40",
+      "subject_topic_key": "物理科学::凝聚态物理"
+    }
+  },
+  "model": "claude-sonnet-4-20250514",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "在金刚石晶格中，每个晶格位点与四个最近邻形成sp3杂化的正四面体成键。取某一位点，从该位点引出的四个最近邻单位键方向属于[111]家族，给定：u1 = (1, 1, 1)/√3，u2 = (1, -1, -1)/√3，u3 = (-1, 1, -1)/√3，u4 = (-1, -1, 1)/√3。要求：\n(1) 路线A：基于正四面体几何，给出最近邻键间夹角的理论表达式，并分别以度与弧度给出数值；\n(2) 路线B：计算上述四个单位方向两两之间的6个夹角（单位：度），给出数值清单；\n(3) 统计这6个角的均值、标准差（单位：度），以及相对(1)理论角的最大绝对误差（单位：度）；如需引用(1)结果，记其度量为R1_deg；\n(4) 以容差阈值 tolerance_deg = 1e-6 度，判断是否全部通过容差判定（True/False）；\n(5) 提交用于图形化核验的图像文件路径；\n(6) 简述两条路线结果一致的交叉验证过程。\n数值结果统一保留6位小数；角度以度或弧度表示；结果以符号/数值表达给出。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "我将按照要求逐步解决这个金刚石晶格中sp³杂化键角的问题。\n\n## (1) 路线A：正四面体几何的理论键角\n\n对于正四面体，任意两个从中心指向顶点的向量间夹角θ满足：\n$$\\cos\\theta = -\\frac{1}{3}$$\n\n因此：\n$$\\theta = \\arccos\\left(-\\frac{1}{3}\\right)$$\n\n**弧度值：**\n$$\\theta = \\arccos\\left(-\\frac{1}{3}\\right) = 1.910633 \\text{ rad}$$\n\n**度数值：**\n$$\\theta = \\arccos\\left(-\\frac{1}{3}\\right) \\times \\frac{180°}{\\pi} = 109.471221°$$\n\n## (2) 路线B：计算四个单位方向两两间的6个夹角\n\n给定单位向量：\n- $u_1 = (1, 1, 1)/\\sqrt{3}$\n- $u_2 = (1, -1, -1)/\\sqrt{3}$  \n- $u_3 = (-1, 1, -1)/\\sqrt{3}$\n- $u_4 = (-1, -1, 1)/\\sqrt{3}$\n\n计算各对向量的点积：\n\n$$u_i \\cdot u_j = \\frac{1}{3}[(u_i)_x(u_j)_x + (u_i)_y(u_j)_y + (u_i)_z(u_j)_z]$$\n\n**6个夹角的数值清单：**\n- $\\angle(u_1, u_2) = \\arccos(-1/3) = 109.471221°$\n- $\\angle(u_1, u_3) = \\arccos(-1/3) = 109.471221°$\n- $\\angle(u_1, u_4) = \\arccos(-1/3) = 109.471221°$\n- $\\angle(u_2, u_3) = \\arccos(-1/3) = 109.471221°$\n- $\\angle(u_2, u_4) = \\arccos(-1/3) = 109.471221°$\n- $\\angle(u_3, u_4) = \\arccos(-1/3) = 109.471221°$\n\n## (3) 统计分析\n\n**均值：** $\\bar{\\theta} = 109.471221°$\n\n**标准差：** $\\sigma = 0.000000°$\n\n**相对理论角的最大绝对误差：** \n$$\\max|109.471221° - 109.471221°| = 0.000000°$$\n\n## (4) 容差判定\n\n设 $R1_{deg} = 109.471221°$，容差阈值 $tolerance_{deg} = 1 \\times 10^{-6}°$\n\n所有6个角度与理论值的绝对误差均为 $0.000000° < 1 \\times 10^{-6}°$\n\n**容差判定结果：True**\n\n## (5) 图形化核验\n\n```python\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom mpl_toolkits.mplot3d import Axes3D\n\n# 创建3D图形\nfig = plt.figure(figsize=(10, 8))\nax = fig.add_subplot(111, projection='3d')\n\n# 定义单位向量\nu1 = np.array([1, 1, 1]) / np.sqrt(3)\nu2 = np.array([1, -1, -1]) / np.sqrt(3)\nu3 = np.array([-1, 1, -1]) / np.sqrt(3)\nu4 = np.array([-1, -1, 1]) / np.sqrt(3)\n\nvectors = [u1, u2, u3, u4]\ncolors = ['red', 'blue', 'green', 'orange']\nlabels = ['u1', 'u2', 'u3', 'u4']\n\n# 绘制向量\norigin = [0, 0, 0]\nfor i, (vec, color, label) in enumerate(zip(vectors, colors, labels)):\n    ax.quiver(origin[0], origin[1], origin[2], \n              vec[0], vec[1], vec[2], \n              color=color, arrow_length_ratio=0.1, linewidth=2, label=label)\n\nax.set_xlabel('X')\nax.set_ylabel('Y')\nax.set_zlabel('Z')\nax.set_title('Diamond Crystal sp³ Hybridization Bond Directions')\nax.legend()\nplt.savefig('diamond_sp3_bonds.png', dpi=300, bbox_inches='tight')\nplt.show()\n```\n\n**图像文件路径：** `diamond_sp3_bonds.png`\n\n## (6) 交叉验证过程\n\n**两条路线结果一致的交叉验证：**\n\n1. **理论验证：** 路线A基于正四面体几何给出理论键角 $\\arccos(-1/3) = 109.471221°$\n\n2. **数值验证：** 路线B通过计算给定的四个[111]家族方向单位向量间的实际夹角，得到6个完全相同的角度值 $109.471221°$\n\n3. **一致性确认：** \n   - 数值计算结果与理论预期完全匹配\n   - 标准差为零，表明所有键角完全相等\n   - 最大绝对误差为零，在极高精度容差下通过验证\n\n4. **物理意义验证：** 结果符合金刚石晶格中sp³杂化的正四面体配位几何，验证了给定的四个方向向量确实构成标准的正四面体键合方向\n\n**结论：** 两条路线的结果在数值精度范围内完全一致，交叉验证成功。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1) 理论表达式\": \"[数学方程字符串]\",\n  \"(1) 理论角_度\": \"[字符串]\",\n  \"(1) 理论角_弧度\": \"[字符串]\",\n  \"(2) 六个成对夹角_度\": {\n    \"(u1,u2)\": \"[字符串]\",\n    \"(u1,u3)\": \"[字符串]\",\n    \"(u1,u4)\": \"[字符串]\",\n    \"(u2,u3)\": \"[字符串]\",\n    \"(u2,u4)\": \"[字符串]\",\n    \"(u3,u4)\": \"[字符串]\"\n  },\n  \"(3) 统计_均值_度\": \"[字符串]\",\n  \"(3) 统计_标准差_度\": \"[字符串]\",\n  \"(3) 统计_最大绝对误差_度\": \"[字符串]\",\n  \"(4) 容差阈值_度\": \"[字符串]\",\n  \"(4) 通过容差判定\": \"[字符串]\",\n  \"(5) 可视化文件路径\": \"[字符串]\",\n  \"(6) 交叉验证简述\": \"[字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1) 理论表达式\": \"θ = arccos(-1/3)\",\n  \"(1) 理论角_度\": \"109.471\",\n  \"(1) 理论角_弧度\": \"1.911\",\n  \"(2) 六个成对夹角_度\": {\n    \"(u1,u2)\": \"109.471\",\n    \"(u1,u3)\": \"109.471\",\n    \"(u1,u4)\": \"109.471\",\n    \"(u2,u3)\": \"109.471\",\n    \"(u2,u4)\": \"109.471\",\n    \"(u3,u4)\": \"109.471\"\n  },\n  \"(3) 统计_均值_度\": \"109.471\",\n  \"(3) 统计_标准差_度\": \"0.000\",\n  \"(3) 统计_最大绝对误差_度\": \"0.000\",\n  \"(4) 容差阈值_度\": \"0.000001\",\n  \"(4) 通过容差判定\": \"True\",\n  \"(5) 可视化文件路径\": \"diamond_sp3_bonds.png\",\n  \"(6) 交叉验证简述\": \"理论计算与数值计算结果完全一致，六个键角均为109.471度，标准差为零，验证了sp3杂化正四面体几何的准确性\"\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "image_path": [
+      "filtered_images/132698973.jpg"
+    ],
+    "solution_steps": [
+      "理解金刚石晶格结构：每个碳原子通过sp³杂化形成四个等价的共价键，指向正四面体的四个顶点",
+      "定义键向量：设中心原子到四个最近邻的向量为 v₁=(1,1,1), v₂=(1,-1,-1), v₃=(-1,1,-1), v₄=(-1,-1,1)（归一化）",
+      "调用 calculate_diamond_bond_angles 计算键角：θ = arccos(vᵢ·vⱼ / |vᵢ||vⱼ|)",
+      "理论推导验证：vᵢ·vⱼ = -1/3（对任意两个不同的键向量），因此 θ = arccos(-1/3) ≈ 109.47°",
+      "数值计算确认：109.47122063449069°",
+      "可选：调用 visualize_diamond_lattice 生成晶格结构可视化"
+    ],
+    "tool_expected": [
+      "calculate_diamond_bond_angles",
+      "visualize_diamond_lattice"
+    ],
+    "golden_answer": [
+      {
+        "(1) 理论表达式": "θ = arccos(-1/3)",
+        "(1) 理论角_度": "R1_deg = 109.471221 度",
+        "(1) 理论角_弧度": "R1_rad = 1.910633 rad",
+        "(2) 六个成对夹角_度": {
+          "(u1,u2)": "R1_deg",
+          "(u1,u3)": "R1_deg",
+          "(u1,u4)": "R1_deg",
+          "(u2,u3)": "R1_deg",
+          "(u2,u4)": "R1_deg",
+          "(u3,u4)": "R1_deg"
+        },
+        "(3) 统计_均值_度": "R1_deg",
+        "(3) 统计_标准差_度": "0.000000 度",
+        "(3) 统计_最大绝对误差_度": "0.000000 度",
+        "(4) 容差阈值_度": "1e-6 度",
+        "(4) 通过容差判定": "True",
+        "(5) 可视化文件路径": "traces_dependency/llm_traces/artifacts/40_case_40_sample_1_step3_visualize_diamond_lattice.png",
+        "(6) 交叉验证简述": "路线A给出θ与R1_deg；路线B六个角均等于R1_deg；计算最大绝对误差E_max = 0 ≤ tolerance_deg，故判定True，两路线一致。"
+      }
+    ],
+    "original_question_id": "40",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "test_type": "refined",
+    "original_question_id": "40",
+    "subject_topic_key": "物理科学::凝聚态物理"
+  },
+  "answer_template": {
+    "(1) 理论表达式": "[数学方程字符串]",
+    "(1) 理论角_度": "[字符串]",
+    "(1) 理论角_弧度": "[字符串]",
+    "(2) 六个成对夹角_度": {
+      "(u1,u2)": "[字符串]",
+      "(u1,u3)": "[字符串]",
+      "(u1,u4)": "[字符串]",
+      "(u2,u3)": "[字符串]",
+      "(u2,u4)": "[字符串]",
+      "(u3,u4)": "[字符串]"
+    },
+    "(3) 统计_均值_度": "[字符串]",
+    "(3) 统计_标准差_度": "[字符串]",
+    "(3) 统计_最大绝对误差_度": "[字符串]",
+    "(4) 容差阈值_度": "[字符串]",
+    "(4) 通过容差判定": "[字符串]",
+    "(5) 可视化文件路径": "[字符串]",
+    "(6) 交叉验证简述": "[字符串]"
+  },
+  "golden_standard": {
+    "(1) 理论表达式": "θ = arccos(-1/3)",
+    "(1) 理论角_度": "R1_deg = 109.471221 度",
+    "(1) 理论角_弧度": "R1_rad = 1.910633 rad",
+    "(2) 六个成对夹角_度": {
+      "(u1,u2)": "R1_deg",
+      "(u1,u3)": "R1_deg",
+      "(u1,u4)": "R1_deg",
+      "(u2,u3)": "R1_deg",
+      "(u2,u4)": "R1_deg",
+      "(u3,u4)": "R1_deg"
+    },
+    "(3) 统计_均值_度": "R1_deg",
+    "(3) 统计_标准差_度": "0.000000 度",
+    "(3) 统计_最大绝对误差_度": "0.000000 度",
+    "(4) 容差阈值_度": "1e-6 度",
+    "(4) 通过容差判定": "True",
+    "(5) 可视化文件路径": "traces_dependency/llm_traces/artifacts/40_case_40_sample_1_step3_visualize_diamond_lattice.png",
+    "(6) 交叉验证简述": "路线A给出θ与R1_deg；路线B六个角均等于R1_deg；计算最大绝对误差E_max = 0 ≤ tolerance_deg，故判定True，两路线一致。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1) 理论表达式": "θ = arccos(-1/3)",
+    "(1) 理论角_度": 109.471,
+    "(1) 理论角_弧度": 1.911,
+    "(2) 六个成对夹角_度": {
+      "(u1,u2)": 109.471,
+      "(u1,u3)": 109.471,
+      "(u1,u4)": 109.471,
+      "(u2,u3)": 109.471,
+      "(u2,u4)": 109.471,
+      "(u3,u4)": 109.471
+    },
+    "(3) 统计_均值_度": 109.471,
+    "(3) 统计_标准差_度": 0.0,
+    "(3) 统计_最大绝对误差_度": 0.0,
+    "(4) 容差阈值_度": 1e-06,
+    "(4) 通过容差判定": true,
+    "(5) 可视化文件路径": "diamond_sp3_bonds.png",
+    "(6) 交叉验证简述": "理论计算与数值计算结果完全一致，六个键角均为109.471度，标准差为零，验证了sp3杂化正四面体几何的准确性"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1) 理论表达式\": \"θ = arccos(-1/3)\",\n  \"(1) 理论角_度\": \"109.471\",\n  \"(1) 理论角_弧度\": \"1.911\",\n  \"(2) 六个成对夹角_度\": {\n    \"(u1,u2)\": \"109.471\",\n    \"(u1,u3)\": \"109.471\",\n    \"(u1,u4)\": \"109.471\",\n    \"(u2,u3)\": \"109.471\",\n    \"(u2,u4)\": \"109.471\",\n    \"(u3,u4)\": \"109.471\"\n  },\n  \"(3) 统计_均值_度\": \"109.471\",\n  \"(3) 统计_标准差_度\": \"0.000\",\n  \"(3) 统计_最大绝对误差_度\": \"0.000\",\n  \"(4) 容差阈值_度\": \"0.000001\",\n  \"(4) 通过容差判定\": \"True\",\n  \"(5) 可视化文件路径\": \"diamond_sp3_bonds.png\",\n  \"(6) 交叉验证简述\": \"理论计算与数值计算结果完全一致，六个键角均为109.471度，标准差为零，验证了sp3杂化正四面体几何的准确性\"\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1) 理论表达式\": \"θ = arccos(-1/3)\",\n  \"(1) 理论角_度\": \"109.471\",\n  \"(1) 理论角_弧度\": \"1.911\",\n  \"(2) 六个成对夹角_度\": {\n    \"(u1,u2)\": \"109.471\",\n    \"(u1,u3)\": \"109.471\",\n    \"(u1,u4)\": \"109.471\",\n    \"(u2,u3)\": \"109.471\",\n    \"(u2,u4)\": \"109.471\",\n    \"(u3,u4)\": \"109.471\"\n  },\n  \"(3) 统计_均值_度\": \"109.471\",\n  \"(3) 统计_标准差_度\": \"0.000\",\n  \"(3) 统计_最大绝对误差_度\": \"0.000\",\n  \"(4) 容差阈值_度\": \"0.000001\",\n  \"(4) 通过容差判定\": \"True\",\n  \"(5) 可视化文件路径\": \"diamond_sp3_bonds.png\",\n  \"(6) 交叉验证简述\": \"理论计算与数值计算结果完全一致，六个键角均为109.471度，标准差为零，验证了sp3杂化正四面体几何的准确性\"\n}\n```"
+  },
+  "evaluation_score": 0.5,
+  "evaluation_summary": "匹配字段: 8/16 (得分: 50.00%)",
+  "evaluation_details": {
+    "(1) 理论表达式": {
+      "path": "(1) 理论表达式",
+      "expected": "θ = arccos(-1/3)",
+      "actual": "θ = arccos(-1/3)",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 理论角_度": {
+      "path": "(1) 理论角_度",
+      "expected": "R1_deg = 109.471221 度",
+      "actual": 109.471,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1) 理论角_弧度": {
+      "path": "(1) 理论角_弧度",
+      "expected": "R1_rad = 1.910633 rad",
+      "actual": 1.911,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 六个成对夹角_度.(u1,u2)": {
+      "path": "(2) 六个成对夹角_度.(u1,u2)",
+      "expected": "R1_deg",
+      "actual": 109.471,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 六个成对夹角_度.(u1,u3)": {
+      "path": "(2) 六个成对夹角_度.(u1,u3)",
+      "expected": "R1_deg",
+      "actual": 109.471,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 六个成对夹角_度.(u1,u4)": {
+      "path": "(2) 六个成对夹角_度.(u1,u4)",
+      "expected": "R1_deg",
+      "actual": 109.471,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 六个成对夹角_度.(u2,u3)": {
+      "path": "(2) 六个成对夹角_度.(u2,u3)",
+      "expected": "R1_deg",
+      "actual": 109.471,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 六个成对夹角_度.(u2,u4)": {
+      "path": "(2) 六个成对夹角_度.(u2,u4)",
+      "expected": "R1_deg",
+      "actual": 109.471,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 六个成对夹角_度.(u3,u4)": {
+      "path": "(2) 六个成对夹角_度.(u3,u4)",
+      "expected": "R1_deg",
+      "actual": 109.471,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3) 统计_均值_度": {
+      "path": "(3) 统计_均值_度",
+      "expected": "R1_deg",
+      "actual": 109.471,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3) 统计_标准差_度": {
+      "path": "(3) 统计_标准差_度",
+      "expected": "0.000000 度",
+      "actual": 0.0,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 统计_最大绝对误差_度": {
+      "path": "(3) 统计_最大绝对误差_度",
+      "expected": "0.000000 度",
+      "actual": 0.0,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4) 容差阈值_度": {
+      "path": "(4) 容差阈值_度",
+      "expected": "1e-6 度",
+      "actual": 1e-06,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 通过容差判定": {
+      "path": "(4) 通过容差判定",
+      "expected": "True",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5) 可视化文件路径": {
+      "path": "(5) 可视化文件路径",
+      "expected": "traces_dependency/llm_traces/artifacts/40_case_40_sample_1_step3_visualize_diamond_lattice.png",
+      "actual": "diamond_sp3_bonds.png",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6) 交叉验证简述": {
+      "path": "(6) 交叉验证简述",
+      "expected": "路线A给出θ与R1_deg；路线B六个角均等于R1_deg；计算最大绝对误差E_max = 0 ≤ tolerance_deg，故判定True，两路线一致。",
+      "actual": "理论计算与数值计算结果完全一致，六个键角均为109.471度，标准差为零，验证了sp3杂化正四面体几何的准确性",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "mode_folder": "without_tools",
+  "evaluation_score_segments": {
+    "0_25": 0.75,
+    "0_50": 0.375,
+    "0_75": 0.4166666666666667,
+    "0_100": 0.5
+  }
+}

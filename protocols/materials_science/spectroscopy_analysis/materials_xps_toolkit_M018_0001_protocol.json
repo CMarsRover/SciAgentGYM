@@ -1,0 +1,456 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_peaks_in_spectrum",
+            "description": "在XPS光谱中自动检测峰位置，使用scipy的find_peaks算法，根据峰突出度和最小间距筛选显著峰。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数据点/eV，必须单调递增或递减"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应的强度值（counts或CPS），长度需与binding_energy一致"
+                    },
+                    "prominence_threshold": {
+                        "type": "number",
+                        "description": "峰突出度阈值（相对于最大强度），范围0-1，默认0.1"
+                    },
+                    "min_distance": {
+                        "type": "integer",
+                        "description": "相邻峰的最小间隔点数，默认10（对应约0.5-1 eV）"
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fit_voigt_peak",
+            "description": "使用Voigt函数拟合单个XPS峰，结合高斯与洛伦兹成分，返回峰位、峰高、FWHM、面积及拟合优度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数据/eV"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数据"
+                    },
+                    "initial_center": {
+                        "type": "number",
+                        "description": "峰中心初始猜测值/eV"
+                    },
+                    "initial_amplitude": {
+                        "type": "number",
+                        "description": "峰高初始猜测值"
+                    },
+                    "initial_fwhm": {
+                        "type": "number",
+                        "description": "半高全宽初始猜测值/eV，默认1.0"
+                    },
+                    "gamma_fraction": {
+                        "type": "number",
+                        "description": "洛伦兹成分占比（0-1），默认0.5表示高斯洛伦兹各半"
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity",
+                    "initial_center",
+                    "initial_amplitude"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_spin_orbit_splitting",
+            "description": "计算并验证自旋轨道分裂能，比较实验分裂能与理论值并给出偏差与有效性。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak1_position": {
+                        "type": "number",
+                        "description": "第一个峰的结合能/eV（通常是j=l-1/2的低能峰）"
+                    },
+                    "peak2_position": {
+                        "type": "number",
+                        "description": "第二个峰的结合能/eV（通常是j=l+1/2的高能峰）"
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "元素符号，如'Ir', 'Pt', 'Au'"
+                    },
+                    "orbital": {
+                        "type": "string",
+                        "description": "轨道标记，如'4f', '3d', '4d'"
+                    }
+                },
+                "required": [
+                    "peak1_position",
+                    "peak2_position",
+                    "element",
+                    "orbital"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "assign_oxidation_state",
+            "description": "根据结合能判断元素的氧化态，匹配参考数据库并给出置信度与化学位移。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_position": {
+                        "type": "number",
+                        "description": "实验测得的峰位/eV"
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "元素符号"
+                    },
+                    "orbital": {
+                        "type": "string",
+                        "description": "轨道标记（如'4f7/2', '3d5/2'）"
+                    }
+                },
+                "required": [
+                    "peak_position",
+                    "element",
+                    "orbital"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_peak_area_ratio",
+            "description": "计算峰面积比并与理论值对比，判断一致性。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "area1": {
+                        "type": "number",
+                        "description": "第一个峰的面积（通常是低能峰）"
+                    },
+                    "area2": {
+                        "type": "number",
+                        "description": "第二个峰的面积（通常是高能峰）"
+                    },
+                    "theoretical_ratio": {
+                        "type": "number",
+                        "description": "理论面积比 area2/area1"
+                    }
+                },
+                "required": [
+                    "area1",
+                    "area2",
+                    "theoretical_ratio"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_xps_doublet",
+            "description": "完整分析XPS自旋轨道分裂双峰，包含峰检测、拟合、氧化态判断、分裂能与面积比验证并生成总结。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数据/eV"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数据"
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "元素符号（如'Ir'）"
+                    },
+                    "orbital": {
+                        "type": "string",
+                        "description": "轨道类型（如'4f'）"
+                    },
+                    "prominence_threshold": {
+                        "type": "number",
+                        "description": "峰检测阈值（相对突出度），默认0.1"
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity",
+                    "element",
+                    "orbital"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "batch_analyze_multiple_elements",
+            "description": "批量分析多个元素的XPS谱，按给定元素-轨道对执行双峰分析。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "spectra_data": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "光谱数据字典：{'元素_轨道': {'BE': [...], 'intensity': [...]}}"
+                    },
+                    "element_orbital_pairs": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "element": {
+                                    "type": "string",
+                                    "description": "元素符号"
+                                },
+                                "orbital": {
+                                    "type": "string",
+                                    "description": "轨道类型（如'4f'）"
+                                }
+                            },
+                            "required": [
+                                "element",
+                                "orbital"
+                            ]
+                        },
+                        "description": "元素-轨道对列表，例如 [{'element': 'Ir', 'orbital': '4f'}]"
+                    }
+                },
+                "required": [
+                    "spectra_data",
+                    "element_orbital_pairs"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_oxidation_states_across_samples",
+            "description": "对比多个样品的氧化态分布与平均结合能，给出氧化趋势。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "sample_analyses": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "样品分析结果字典：{'sample1': {analyze_xps_doublet的输出}, ...}"
+                    }
+                },
+                "required": [
+                    "sample_analyses"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_xps_spectrum_with_deconvolution",
+            "description": "绘制XPS谱图及峰去卷积结果，保存图像文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数据/eV"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数据"
+                    },
+                    "fitted_peaks": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "center": {
+                                    "type": "number",
+                                    "description": "峰中心/eV"
+                                },
+                                "amplitude": {
+                                    "type": "number",
+                                    "description": "峰高"
+                                },
+                                "fwhm": {
+                                    "type": "number",
+                                    "description": "半高全宽/eV"
+                                },
+                                "oxidation_state": {
+                                    "type": "string",
+                                    "description": "氧化态标记（可选）"
+                                }
+                            },
+                            "required": [
+                                "center",
+                                "amplitude",
+                                "fwhm"
+                            ]
+                        },
+                        "description": "拟合峰列表，每个包含{'center','amplitude','fwhm','oxidation_state'}"
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "元素符号"
+                    },
+                    "orbital": {
+                        "type": "string",
+                        "description": "轨道标记"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "保存目录，默认工具内置目录"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不含扩展名），默认自动生成"
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity",
+                    "fitted_peaks",
+                    "element",
+                    "orbital"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_oxidation_state_comparison",
+            "description": "可视化多样品氧化态对比，生成平均结合能柱状图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "comparison_data": {
+                        "type": "object",
+                        "properties": {
+                            "average_binding_energy": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "number"
+                                },
+                                "description": "样品名到平均结合能的映射"
+                            },
+                            "oxidation_state_distribution": {
+                                "type": "object",
+                                "description": "氧化态分布的表格数据（DataFrame结构的字典表示）"
+                            },
+                            "oxidation_trend": {
+                                "type": "string",
+                                "description": "氧化趋势描述（可选）"
+                            }
+                        },
+                        "required": [
+                            "average_binding_energy"
+                        ],
+                        "description": "compare_oxidation_states_across_samples的输出结果字典"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "保存目录，默认工具内置目录"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不含扩展名），默认自动生成"
+                    }
+                },
+                "required": [
+                    "comparison_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xps_toolkit_M018_0001.py"
+        }
+    }
+]

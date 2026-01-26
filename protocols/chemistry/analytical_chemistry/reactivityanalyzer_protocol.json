@@ -1,0 +1,25 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "Reactivi_visualize_analysis",
+            "description": "协议封装：可视化分析结果。返回一个占位结果（图像显示由 matplotlib 负责）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "object",
+                        "description": "分析结果对象，包含需要可视化的数据"
+                    }
+                },
+                "required": [
+                    "result"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/ReactivityAnalyzer.py"
+        }
+    }
+]

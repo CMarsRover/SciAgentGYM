@@ -1,0 +1,167 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_forces_on_inclined_block",
+            "description": "计算作用在斜面上的物体的力。计算物体在斜面上的重力分量（平行和垂直于斜面）、法向力和摩擦力。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体质量，单位：kg"
+                    },
+                    "angle_deg": {
+                        "type": "number",
+                        "description": "斜面角度，单位：度（相对于水平面测量）"
+                    },
+                    "mu_k": {
+                        "type": "number",
+                        "description": "物体与斜面之间的动摩擦系数（无量纲），默认为0"
+                    },
+                    "g": {
+                        "type": "number",
+                        "description": "重力加速度，单位：m/s²，默认为9.8"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "angle_deg"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6851.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_pulley_system_with_incline",
+            "description": "求解滑轮系统中未知质量，其中一个物体在斜面上。计算通过绳索连接到斜面上另一个物体(m2)的悬挂物体(m1)的质量，假设系统以恒定速度运动。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m2": {
+                        "type": "number",
+                        "description": "斜面上物体的质量，单位：kg"
+                    },
+                    "angle_deg": {
+                        "type": "number",
+                        "description": "斜面角度，单位：度（相对于水平面测量）"
+                    },
+                    "mu_k": {
+                        "type": "number",
+                        "description": "物体m2与斜面之间的动摩擦系数"
+                    },
+                    "constant_speed": {
+                        "type": "boolean",
+                        "description": "如果为True，假设系统以恒定速度运动（合力=0），默认为True"
+                    },
+                    "g": {
+                        "type": "number",
+                        "description": "重力加速度，单位：m/s²，默认为9.8"
+                    }
+                },
+                "required": [
+                    "m2",
+                    "angle_deg",
+                    "mu_k"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6851.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_pulley_system",
+            "description": "分析滑轮系统的动力学，其中一个物体在斜面上。计算所有力并确定系统是否会加速、保持静止或以恒定速度运动。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "悬挂物体的质量，单位：kg"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "斜面上物体的质量，单位：kg"
+                    },
+                    "angle_deg": {
+                        "type": "number",
+                        "description": "斜面角度，单位：度（相对于水平面测量）"
+                    },
+                    "mu_k": {
+                        "type": "number",
+                        "description": "物体m2与斜面之间的动摩擦系数"
+                    },
+                    "g": {
+                        "type": "number",
+                        "description": "重力加速度，单位：m/s²，默认为9.8"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "angle_deg",
+                    "mu_k"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6851.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_pulley_system",
+            "description": "可视化滑轮系统及其作用力。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "悬挂物体的质量，单位：kg"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "斜面上物体的质量，单位：kg"
+                    },
+                    "angle_deg": {
+                        "type": "number",
+                        "description": "斜面角度，单位：度（相对于水平面测量）"
+                    },
+                    "mu_k": {
+                        "type": "number",
+                        "description": "动摩擦系数"
+                    },
+                    "show_forces": {
+                        "type": "boolean",
+                        "description": "是否显示力矢量，默认为True"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图像的路径，如果为None，则显示图像"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "angle_deg",
+                    "mu_k"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6851.py"
+        }
+    }
+]

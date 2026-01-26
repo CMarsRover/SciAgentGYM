@@ -1,0 +1,180 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "decompose_force",
+            "description": "将力向量分解为其 x 和 y 分量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "force_magnitude": {
+                        "type": "number",
+                        "description": "力的大小，单位为牛顿(N)"
+                    },
+                    "angle_degrees": {
+                        "type": "number",
+                        "description": "角度，以度为单位，从正x轴开始测量（逆时针为正）"
+                    }
+                },
+                "required": [
+                    "force_magnitude",
+                    "angle_degrees"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6557.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_pulley_system_acceleration",
+            "description": "计算带有两个质量的滑轮系统中的加速度和张力。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "applied_force": {
+                        "type": "number",
+                        "description": "施加到质量1上的外力大小，单位为牛顿(N)"
+                    },
+                    "applied_force_angle": {
+                        "type": "number",
+                        "description": "施加力的角度，以度为单位，从正x轴测量"
+                    },
+                    "mass_1": {
+                        "type": "number",
+                        "description": "水平面上物体的质量，单位为千克(kg)"
+                    },
+                    "mass_2": {
+                        "type": "number",
+                        "description": "悬挂物体的质量，单位为千克(kg)"
+                    },
+                    "friction_coefficient": {
+                        "type": "number",
+                        "description": "质量1与表面之间的动摩擦系数（默认：0.0）"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度，单位为m/s²（默认：9.8）"
+                    }
+                },
+                "required": [
+                    "applied_force",
+                    "applied_force_angle",
+                    "mass_1",
+                    "mass_2"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6557.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_pulley_system",
+            "description": "可视化滑轮系统，包括力、质量和计算结果。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "applied_force": {
+                        "type": "number",
+                        "description": "施加到质量1上的外力大小，单位为牛顿(N)"
+                    },
+                    "applied_force_angle": {
+                        "type": "number",
+                        "description": "施加力的角度，以度为单位，从正x轴测量"
+                    },
+                    "mass_1": {
+                        "type": "number",
+                        "description": "水平面上物体的质量，单位为千克(kg)"
+                    },
+                    "mass_2": {
+                        "type": "number",
+                        "description": "悬挂物体的质量，单位为千克(kg)"
+                    },
+                    "results": {
+                        "type": "object",
+                        "description": "从calculate_pulley_system_acceleration函数计算得到的结果字典"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存可视化图像的路径。如果为None，则显示图像但不保存"
+                    }
+                },
+                "required": [
+                    "applied_force",
+                    "applied_force_angle",
+                    "mass_1",
+                    "mass_2",
+                    "results"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6557.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_connected_masses_problem",
+            "description": "解决滑轮系统中连接质量的问题。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "force": {
+                        "type": "number",
+                        "description": "外力大小，单位为牛顿(N)"
+                    },
+                    "force_angle": {
+                        "type": "number",
+                        "description": "施加力的角度，以度为单位，从正x轴测量"
+                    },
+                    "mass_ratio": {
+                        "type": "object",
+                        "description": "质量1与质量2的比率（浮点数），或者(质量1, 质量2)的元组"
+                    },
+                    "mass_value": {
+                        "type": "number",
+                        "description": "如果mass_ratio是比率，则这是质量2的值，单位为kg"
+                    },
+                    "friction_coefficient": {
+                        "type": "number",
+                        "description": "动摩擦系数（默认：0.0）"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度，单位为m/s²（默认：9.8）"
+                    },
+                    "visualize": {
+                        "type": "boolean",
+                        "description": "是否生成可视化（默认：False）"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "如果visualize为True，保存可视化的路径"
+                    },
+                    "round_digits": {
+                        "type": "integer",
+                        "description": "结果四舍五入的小数位数（默认：1）"
+                    }
+                },
+                "required": [
+                    "force",
+                    "force_angle",
+                    "mass_ratio"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6557.py"
+        }
+    }
+]

@@ -1,0 +1,854 @@
+{
+  "class_name": "RelativisticPhysicsCalculator",
+  "description": "A comprehensive toolkit for relativistic physics calculations, supporting numerical computation, symbolic derivation, and visualization of key phenomena in special and general relativity, including Lorentz factor, time dilation, length contraction, relativistic velocity addition, energy-momentum relations, relativistic mass, and black hole orbital dynamics.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_lorentz_factor_coding",
+        "description": "Computes the Lorentz factor γ numerically using the formula γ = 1 / sqrt(1 - v²/c²) for a given velocity v.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of lorentz_factor_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_lorentz_factor_math",
+        "description": "Symbolically derives the Lorentz factor expression γ = 1 / sqrt(1 - v²/c²) using symbolic mathematics.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of lorentz_factor_math function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_plot_lorentz_factor_visual",
+        "description": "Plots the Lorentz factor γ as a function of velocity v/c, showing its divergence as v approaches c.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "v_range": {
+              "type": "string",
+              "description": ""
+            },
+            "num_points": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "v_range",
+            "num_points"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_lorentz_factor_visual function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_time_dilation_coding",
+        "description": "Calculates time dilation: coordinate time t = γ × proper time τ, for a given velocity.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "proper_time": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "proper_time",
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of time_dilation_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_length_contraction_coding",
+        "description": "Computes length contraction: observed length L = proper length L₀ / γ, at relativistic speeds.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "proper_length": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "proper_length",
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of length_contraction_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_relativistic_effects_math",
+        "description": "Symbolically expresses time dilation and length contraction formulas in terms of γ.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "相对论效应计算结果",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "相对论效应计算值"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_plot_time_length_effects_visual",
+        "description": "Visualizes and compares time dilation and length contraction effects across a range of velocities.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "v_range": {
+              "type": "string",
+              "description": ""
+            },
+            "num_points": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "v_range",
+            "num_points"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_time_length_effects_visual function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_velocity_addition_coding",
+        "description": "Computes relativistic velocity addition: w = (u + v) / (1 + u*v/c²), avoiding superluminal results.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "u": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "u",
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of velocity_addition_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_velocity_addition_math",
+        "description": "Symbolically derives the relativistic velocity addition formula.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of velocity_addition_math function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_plot_velocity_addition_visual",
+        "description": "Plots classical vs. relativistic velocity addition to illustrate deviations at high speeds.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "v_rest": {
+              "type": "string",
+              "description": ""
+            },
+            "u_range": {
+              "type": "string",
+              "description": ""
+            },
+            "num_points": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "v_rest",
+            "u_range",
+            "num_points"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_velocity_addition_visual function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_energy_momentum_coding",
+        "description": "Calculates relativistic total energy E = γmc² and momentum p = γmv for a given mass and velocity.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "m": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "m",
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of energy_momentum_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_energy_momentum_math",
+        "description": "Symbolically derives the relativistic energy-momentum relation E² = (pc)² + (mc²)².",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of energy_momentum_math function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_plot_energy_components_visual",
+        "description": "Plots rest energy, kinetic energy, and total energy as functions of velocity.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "m": {
+              "type": "string",
+              "description": ""
+            },
+            "v_range": {
+              "type": "string",
+              "description": ""
+            },
+            "num_points": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "m",
+            "v_range",
+            "num_points"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_energy_components_visual function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_schwarzschild_geodesic_rhs",
+        "description": "Computes the right-hand side of the geodesic equations for equatorial orbits in Schwarzschild spacetime (simplified).",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "description": ""
+            },
+            "y": {
+              "type": "string",
+              "description": ""
+            },
+            "M": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "t",
+            "y",
+            "M"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of schwarzschild_geodesic_rhs function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_solve_black_hole_orbit_coding",
+        "description": "Numerically integrates the equations of motion to simulate a particle's orbit near a Schwarzschild black hole.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "M": {
+              "type": "string",
+              "description": ""
+            },
+            "r0": {
+              "type": "string",
+              "description": ""
+            },
+            "v0_radial": {
+              "type": "string",
+              "description": ""
+            },
+            "v0_angular": {
+              "type": "string",
+              "description": ""
+            },
+            "lambda_max": {
+              "type": "string",
+              "description": ""
+            },
+            "steps": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "M",
+            "r0",
+            "v0_radial",
+            "v0_angular",
+            "lambda_max",
+            "steps"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of solve_black_hole_orbit_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_plot_black_hole_orbit_visual",
+        "description": "Visualizes the trajectory of a particle orbiting a black hole in polar or Cartesian coordinates.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "M": {
+              "type": "string",
+              "description": ""
+            },
+            "r0": {
+              "type": "string",
+              "description": ""
+            },
+            "v0_radial": {
+              "type": "string",
+              "description": ""
+            },
+            "v0_angular": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "M",
+            "r0",
+            "v0_radial",
+            "v0_angular"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_black_hole_orbit_visual function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_longitudinal_mass_coding",
+        "description": "Computes longitudinal relativistic mass: m_long = γ³m₀, where force and motion are parallel.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "m": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "m",
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of longitudinal_mass_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_transverse_mass_coding",
+        "description": "Computes transverse relativistic mass: m_trans = γm₀, where force is perpendicular to motion.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "m": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "m",
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of transverse_mass_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_relativistic_mass_math",
+        "description": "Symbolically derives expressions for longitudinal and transverse relativistic mass.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "相对论效应计算结果",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "相对论效应计算值"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_plot_relativistic_mass_visual",
+        "description": "Plots longitudinal and transverse relativistic mass as functions of velocity.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "m": {
+              "type": "string",
+              "description": ""
+            },
+            "v_range": {
+              "type": "string",
+              "description": ""
+            },
+            "num_points": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "m",
+            "v_range",
+            "num_points"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "相对论效应计算结果",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "相对论效应计算值"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_calculate_force_acceleration_ratio_coding",
+        "description": "Computes the ratio of force to acceleration (F/a) in longitudinal or transverse directions, illustrating relativistic inertia.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "m": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            },
+            "force_direction": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "m",
+            "v",
+            "force_direction"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of calculate_force_acceleration_ratio_coding function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "RPC_relativistic_mass_comparison_coding",
+        "description": "Compares rest mass, longitudinal mass, and transverse mass across a velocity range.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "m": {
+              "type": "string",
+              "description": ""
+            },
+            "v": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "m",
+            "v"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "相对论效应计算结果",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "相对论效应计算值"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/RelativisticPhysicsCalculator.py"
+      }
+    }
+  ]
+}

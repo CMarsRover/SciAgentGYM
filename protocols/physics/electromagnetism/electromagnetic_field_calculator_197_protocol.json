@@ -1,0 +1,262 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_mutual_inductance_wire_loop",
+            "description": "计算直导线与任意形状闭合回路之间的互感系数。基于比奥-萨伐尔定律和法拉第电磁感应定律，计算直导线产生的磁场通过闭合回路的磁通量，从而得到互感系数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "geometry_func": {
+                        "type": "object",
+                        "description": "描述闭合回路几何形状的函数，接收参数t(参数方程的参数)，返回回路上对应点的坐标(x,y,z)和切向量(dx,dy,dz)"
+                    },
+                    "wire_position": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "直导线的位置坐标 (x, y, z)"
+                    },
+                    "current_direction": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "直导线的电流方向单位向量 (dx, dy, dz)"
+                    },
+                    "integration_limits": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "积分参数的上下限 (t_min, t_max)"
+                    },
+                    "num_points": {
+                        "type": "integer",
+                        "description": "数值积分使用的点数，默认为1000"
+                    }
+                },
+                "required": [
+                    "geometry_func",
+                    "wire_position",
+                    "current_direction",
+                    "integration_limits"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_calculator_197.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_mutual_inductance_wire_triangle",
+            "description": "计算无限长直导线与等边三角形线框之间的互感。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "d": {
+                        "type": "number",
+                        "description": "直导线到三角形最近顶点的距离，单位为米"
+                    },
+                    "a": {
+                        "type": "number",
+                        "description": "等边三角形的边长，单位为米"
+                    },
+                    "analytical": {
+                        "type": "boolean",
+                        "description": "是否使用解析解，默认为True。若为False则使用数值积分"
+                    }
+                },
+                "required": [
+                    "d",
+                    "a"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_calculator_197.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_electromagnetic_field",
+            "description": "计算电磁场分布。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "source_func": {
+                        "type": "object",
+                        "description": "描述电磁场源的函数，接收参数和观测点坐标，返回场强"
+                    },
+                    "observation_points": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "description": "观测点的坐标数组，形状为(n, 3)，表示n个点的(x,y,z)坐标"
+                    },
+                    "params": {
+                        "type": "object",
+                        "description": "传递给source_func的参数字典"
+                    }
+                },
+                "required": [
+                    "source_func",
+                    "observation_points",
+                    "params"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_calculator_197.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "infinite_wire_magnetic_field",
+            "description": "计算无限长直导线在给定点产生的磁场。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "point": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "观测点的坐标 (x, y, z)"
+                    },
+                    "wire_position": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "导线的位置坐标 (x, y, z)，表示导线上的一点"
+                    },
+                    "current_direction": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "导线的方向单位向量 (dx, dy, dz)"
+                    },
+                    "current": {
+                        "type": "number",
+                        "description": "电流大小，单位为安培，默认为1.0"
+                    }
+                },
+                "required": [
+                    "point",
+                    "wire_position",
+                    "current_direction"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_calculator_197.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_electromagnetic_scattering",
+            "description": "计算电磁波散射问题。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "incident_field_func": {
+                        "type": "object",
+                        "description": "入射场函数，接收观测点坐标和参数，返回入射场"
+                    },
+                    "scatterer_func": {
+                        "type": "object",
+                        "description": "散射体函数，接收入射场、观测点和参数，返回散射场"
+                    },
+                    "observation_points": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "description": "观测点的坐标数组"
+                    },
+                    "params": {
+                        "type": "object",
+                        "description": "参数字典"
+                    }
+                },
+                "required": [
+                    "incident_field_func",
+                    "scatterer_func",
+                    "observation_points",
+                    "params"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_calculator_197.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_coupled_electromagnetic_thermal",
+            "description": "计算电磁场与热场耦合问题。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "em_field_func": {
+                        "type": "object",
+                        "description": "电磁场计算函数"
+                    },
+                    "thermal_response_func": {
+                        "type": "object",
+                        "description": "热响应计算函数"
+                    },
+                    "material_properties": {
+                        "type": "object",
+                        "description": "材料属性字典"
+                    },
+                    "geometry": {
+                        "type": "object",
+                        "description": "几何形状描述"
+                    },
+                    "time_steps": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "时间步长数组"
+                    }
+                },
+                "required": [
+                    "em_field_func",
+                    "thermal_response_func",
+                    "material_properties",
+                    "geometry",
+                    "time_steps"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_calculator_197.py"
+        }
+    }
+]

@@ -1,0 +1,1054 @@
+{
+  "id": "56_ref_0",
+  "query": "给定一条RNA序列及其已知统计与结构结果如下（单位与格式见各项说明）：\n- 序列: GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA\n- 序列统计：valid=true；length=76（nt）；GC含量=0.539（比例）；碱基组成：G=23、C=18、A=18、U=17；3'端是否包含“CCA”：true\n- 两次碱基配对检测：\n  • 运行A（min_stem_length=3）：total_pairs=32；stem_regions: [{start:0,end:65,length:7},{start:8,end:13,length:4},{start:27,end:31,length:3}]\n  • 运行B（min_stem_length=5）：total_pairs=30；stem_regions: [{start:0,end:65,length:7}]\n  • 鲁棒性阈值：差异百分比以A为基准，阈值≤10%；最大茎长度在两次检测中一致则记为“一致”\n- 结构复杂度：stem_count=3；pseudoknot_count=0；long_range_interactions=8；complexity_score=0.408（比例）；has_tertiary=true\n- 初次分类：标签“mRNA”，置信度=0.7；特征映射：low_complexity、few_stems\n- 催化活性：catalytic_score=0.0（比例）；核酶阈值：≥0.5 判为可能为ribozyme\n- 二次分类：标签“mRNA”，置信度=0.7\n- 最终定型纠偏规则（覆盖为“tRNA”的必要条件）：(i) 3'端含“CCA”；(ii) length∈[73,95]（nt）；(iii) 两次检测的最大茎长度一致且≥7；(iv) catalytic_score<0.5。否则保持“mRNA”。\n任务：\nA. 报告序列合法性与统计（length、GC含量、碱基组成、3'端“CCA”有无），并判断其是否落入典型tRNA范围和/或mRNA特征区间（给出简要理由）。\nB. 给出两次检测的配对总数与stem_regions分布；计算以A为基准的差异百分比并据阈值判断是否“鲁棒”；报告最大茎长度是否一致。\nC. 报告结构复杂度指标（stem_count、pseudoknot_count、long_range_interactions、complexity_score、has_tertiary），并据此简述与tRNA或mRNA的相符性。\nD. 给出初次分类标签与置信度，并说明结构特征映射理由。\nE. 给出催化活性分数、阈值判断（是否可能为ribozyme）及关键解释特征。\nF. 做一致性复核：列出二次分类标签、是否与初次一致、与序列/功能性约束是否一致、差异说明；据纠偏规则给出最终定型标签。\n数值与单位要求：除定性判断外，其余量以题干给定单位或比例/百分比表示；百分比保留两位小数；无需推导过程。结果以数值或符号表达给出。",
+  "query_data": {
+    "id": "56_ref_0",
+    "original_id": 56,
+    "refined_index": 0,
+    "question": "给定一条RNA序列及其已知统计与结构结果如下（单位与格式见各项说明）：\n- 序列: GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA\n- 序列统计：valid=true；length=76（nt）；GC含量=0.539（比例）；碱基组成：G=23、C=18、A=18、U=17；3'端是否包含“CCA”：true\n- 两次碱基配对检测：\n  • 运行A（min_stem_length=3）：total_pairs=32；stem_regions: [{start:0,end:65,length:7},{start:8,end:13,length:4},{start:27,end:31,length:3}]\n  • 运行B（min_stem_length=5）：total_pairs=30；stem_regions: [{start:0,end:65,length:7}]\n  • 鲁棒性阈值：差异百分比以A为基准，阈值≤10%；最大茎长度在两次检测中一致则记为“一致”\n- 结构复杂度：stem_count=3；pseudoknot_count=0；long_range_interactions=8；complexity_score=0.408（比例）；has_tertiary=true\n- 初次分类：标签“mRNA”，置信度=0.7；特征映射：low_complexity、few_stems\n- 催化活性：catalytic_score=0.0（比例）；核酶阈值：≥0.5 判为可能为ribozyme\n- 二次分类：标签“mRNA”，置信度=0.7\n- 最终定型纠偏规则（覆盖为“tRNA”的必要条件）：(i) 3'端含“CCA”；(ii) length∈[73,95]（nt）；(iii) 两次检测的最大茎长度一致且≥7；(iv) catalytic_score<0.5。否则保持“mRNA”。\n任务：\nA. 报告序列合法性与统计（length、GC含量、碱基组成、3'端“CCA”有无），并判断其是否落入典型tRNA范围和/或mRNA特征区间（给出简要理由）。\nB. 给出两次检测的配对总数与stem_regions分布；计算以A为基准的差异百分比并据阈值判断是否“鲁棒”；报告最大茎长度是否一致。\nC. 报告结构复杂度指标（stem_count、pseudoknot_count、long_range_interactions、complexity_score、has_tertiary），并据此简述与tRNA或mRNA的相符性。\nD. 给出初次分类标签与置信度，并说明结构特征映射理由。\nE. 给出催化活性分数、阈值判断（是否可能为ribozyme）及关键解释特征。\nF. 做一致性复核：列出二次分类标签、是否与初次一致、与序列/功能性约束是否一致、差异说明；据纠偏规则给出最终定型标签。\n数值与单位要求：除定性判断外，其余量以题干给定单位或比例/百分比表示；百分比保留两位小数；无需推导过程。结果以数值或符号表达给出。",
+    "answer": "{'A': {'valid': True, 'length': '76 nt', 'gc_content': 0.539, 'base_composition': {'G': 23, 'C': 18, 'A': 18, 'U': 17}, 'has_3prime_CCA': True, 'in_tRNA_range': True, 'in_mRNA_feature_range': False, 'reason': \"长度落入[73,95]且3'端含CCA，GC含量中等；缺乏可由序列统计支持的mRNA特征。\"}, 'B': {'run_A_total_pairs': 32, 'run_A_stem_regions': [{'start': 0, 'end': 65, 'length': 7}, {'start': 8, 'end': 13, 'length': 4}, {'start': 27, 'end': 31, 'length': 3}], 'run_B_total_pairs': 30, 'run_B_stem_regions': [{'start': 0, 'end': 65, 'length': 7}], 'diff_percent_vs_A': '6.25%', 'robust_by_threshold': True, 'max_stem_length_consistent': True}, 'C': {'stem_count': 3, 'pseudoknot_count': 0, 'long_range_interactions': 8, 'complexity_score': 0.408, 'has_tertiary': True, 'concordance': '少茎、无假结且存在长程与三级接触，整体更贴近tRNA的稳定折叠；低复杂度亦可被mRNA特征解释。'}, 'D': {'initial_label': 'mRNA', 'confidence': 0.7, 'feature_mapping': ['low_complexity', 'few_stems']}, 'E': {'catalytic_score': 0.0, 'ribozyme_threshold': 0.5, 'is_ribozyme': False, 'key_explanation': '分数低于阈值，不支持催化型。'}, 'F': {'secondary_label': 'mRNA', 'secondary_consistent_with_initial': True, 'consistent_with_sequence_function_constraints': False, 'discrepancy_reason': '序列与结构满足tRNA覆盖条件，与mRNA标签不一致。', 'override_rule_triggered': True, 'final_label': 'tRNA'}}",
+    "metadata": {
+      "subject": "life",
+      "topic": "",
+      "image_path": [
+        "/sfe_images/L016_0002_a83c83c6c0627af62fd33688d9f03420.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "parse_rna_sequence",
+        "detect_base_pairs",
+        "calculate_structure_complexity",
+        "classify_rna_type",
+        "predict_catalytic_activity"
+      ],
+      "golden_answer": [
+        {
+          "A": {
+            "valid": true,
+            "length": "76 nt",
+            "gc_content": 0.539,
+            "base_composition": {
+              "G": 23,
+              "C": 18,
+              "A": 18,
+              "U": 17
+            },
+            "has_3prime_CCA": true,
+            "in_tRNA_range": true,
+            "in_mRNA_feature_range": false,
+            "reason": "长度落入[73,95]且3'端含CCA，GC含量中等；缺乏可由序列统计支持的mRNA特征。"
+          },
+          "B": {
+            "run_A_total_pairs": 32,
+            "run_A_stem_regions": [
+              {
+                "start": 0,
+                "end": 65,
+                "length": 7
+              },
+              {
+                "start": 8,
+                "end": 13,
+                "length": 4
+              },
+              {
+                "start": 27,
+                "end": 31,
+                "length": 3
+              }
+            ],
+            "run_B_total_pairs": 30,
+            "run_B_stem_regions": [
+              {
+                "start": 0,
+                "end": 65,
+                "length": 7
+              }
+            ],
+            "diff_percent_vs_A": "6.25%",
+            "robust_by_threshold": true,
+            "max_stem_length_consistent": true
+          },
+          "C": {
+            "stem_count": 3,
+            "pseudoknot_count": 0,
+            "long_range_interactions": 8,
+            "complexity_score": 0.408,
+            "has_tertiary": true,
+            "concordance": "少茎、无假结且存在长程与三级接触，整体更贴近tRNA的稳定折叠；低复杂度亦可被mRNA特征解释。"
+          },
+          "D": {
+            "initial_label": "mRNA",
+            "confidence": 0.7,
+            "feature_mapping": [
+              "low_complexity",
+              "few_stems"
+            ]
+          },
+          "E": {
+            "catalytic_score": 0.0,
+            "ribozyme_threshold": 0.5,
+            "is_ribozyme": false,
+            "key_explanation": "分数低于阈值，不支持催化型。"
+          },
+          "F": {
+            "secondary_label": "mRNA",
+            "secondary_consistent_with_initial": true,
+            "consistent_with_sequence_function_constraints": false,
+            "discrepancy_reason": "序列与结构满足tRNA覆盖条件，与mRNA标签不一致。",
+            "override_rule_triggered": true,
+            "final_label": "tRNA"
+          }
+        }
+      ],
+      "original_question_id": "56",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "parse_rna_sequence",
+          "description": "解析RNA序列并提取基础特征，验证序列合法性并计算GC含量、长度等基本参数",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串，仅包含A/U/G/C（如'AUGCGAU'）"
+              },
+              "validate": {
+                "type": "boolean",
+                "description": "是否验证序列合法性，默认True"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "detect_base_pairs",
+          "description": "检测RNA序列中的碱基配对（简化版二级结构预测），使用动态规划算法寻找最大配对数，返回配对位置列表",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "min_stem_length": {
+                "type": "integer",
+                "description": "最小茎区长度，默认3（连续配对数）"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_structure_complexity",
+          "description": "计算RNA结构复杂度指标，基于配对模式分析结构特征：茎区数量、假结、长程相互作用等",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pairs": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "description": "碱基配对列表 [(i, j), ...]，其中 i < j"
+              },
+              "sequence_length": {
+                "type": "integer",
+                "description": "序列总长度"
+              }
+            },
+            "required": [
+              "pairs",
+              "sequence_length"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "classify_rna_type",
+          "description": "基于结构特征分类RNA类型，根据长度、茎区数量、三级结构等特征判断RNA类型（tRNA/rRNA/ribozyme/mRNA）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "structure_features": {
+                "type": "object",
+                "description": "可选的预计算结构特征（来自analyze_rna_structure）"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "predict_catalytic_activity",
+          "description": "预测RNA的催化活性可能性，基于结构复杂度、三级相互作用等特征评估是否具有催化功能（ribozyme特性）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "structure_features": {
+                "type": "object",
+                "description": "可选的预计算结构特征"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "给定一条RNA序列及其已知统计与结构结果如下（单位与格式见各项说明）：\n- 序列: GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA\n- 序列统计：valid=true；length=76（nt）；GC含量=0.539（比例）；碱基组成：G=23、C=18、A=18、U=17；3'端是否包含“CCA”：true\n- 两次碱基配对检测：\n  • 运行A（min_stem_length=3）：total_pairs=32；stem_regions: [{start:0,end:65,length:7},{start:8,end:13,length:4},{start:27,end:31,length:3}]\n  • 运行B（min_stem_length=5）：total_pairs=30；stem_regions: [{start:0,end:65,length:7}]\n  • 鲁棒性阈值：差异百分比以A为基准，阈值≤10%；最大茎长度在两次检测中一致则记为“一致”\n- 结构复杂度：stem_count=3；pseudoknot_count=0；long_range_interactions=8；complexity_score=0.408（比例）；has_tertiary=true\n- 初次分类：标签“mRNA”，置信度=0.7；特征映射：low_complexity、few_stems\n- 催化活性：catalytic_score=0.0（比例）；核酶阈值：≥0.5 判为可能为ribozyme\n- 二次分类：标签“mRNA”，置信度=0.7\n- 最终定型纠偏规则（覆盖为“tRNA”的必要条件）：(i) 3'端含“CCA”；(ii) length∈[73,95]（nt）；(iii) 两次检测的最大茎长度一致且≥7；(iv) catalytic_score<0.5。否则保持“mRNA”。\n任务：\nA. 报告序列合法性与统计（length、GC含量、碱基组成、3'端“CCA”有无），并判断其是否落入典型tRNA范围和/或mRNA特征区间（给出简要理由）。\nB. 给出两次检测的配对总数与stem_regions分布；计算以A为基准的差异百分比并据阈值判断是否“鲁棒”；报告最大茎长度是否一致。\nC. 报告结构复杂度指标（stem_count、pseudoknot_count、long_range_interactions、complexity_score、has_tertiary），并据此简述与tRNA或mRNA的相符性。\nD. 给出初次分类标签与置信度，并说明结构特征映射理由。\nE. 给出催化活性分数、阈值判断（是否可能为ribozyme）及关键解释特征。\nF. 做一致性复核：列出二次分类标签、是否与初次一致、与序列/功能性约束是否一致、差异说明；据纠偏规则给出最终定型标签。\n数值与单位要求：除定性判断外，其余量以题干给定单位或比例/百分比表示；百分比保留两位小数；无需推导过程。结果以数值或符号表达给出。",
+      "final_answer": {
+        "A": {
+          "valid": true,
+          "length": "76 nt",
+          "gc_content": 0.539,
+          "base_composition": {
+            "G": 23,
+            "C": 18,
+            "A": 18,
+            "U": 17
+          },
+          "has_3prime_CCA": true,
+          "in_tRNA_range": true,
+          "in_mRNA_feature_range": false,
+          "reason": "长度落入[73,95]且3'端含CCA，GC含量中等；缺乏可由序列统计支持的mRNA特征。"
+        },
+        "B": {
+          "run_A_total_pairs": 32,
+          "run_A_stem_regions": [
+            {
+              "start": 0,
+              "end": 65,
+              "length": 7
+            },
+            {
+              "start": 8,
+              "end": 13,
+              "length": 4
+            },
+            {
+              "start": 27,
+              "end": 31,
+              "length": 3
+            }
+          ],
+          "run_B_total_pairs": 30,
+          "run_B_stem_regions": [
+            {
+              "start": 0,
+              "end": 65,
+              "length": 7
+            }
+          ],
+          "diff_percent_vs_A": "6.25%",
+          "robust_by_threshold": true,
+          "max_stem_length_consistent": true
+        },
+        "C": {
+          "stem_count": 3,
+          "pseudoknot_count": 0,
+          "long_range_interactions": 8,
+          "complexity_score": 0.408,
+          "has_tertiary": true,
+          "concordance": "少茎、无假结且存在长程与三级接触，整体更贴近tRNA的稳定折叠；低复杂度亦可被mRNA特征解释。"
+        },
+        "D": {
+          "initial_label": "mRNA",
+          "confidence": 0.7,
+          "feature_mapping": [
+            "low_complexity",
+            "few_stems"
+          ]
+        },
+        "E": {
+          "catalytic_score": 0.0,
+          "ribozyme_threshold": 0.5,
+          "is_ribozyme": false,
+          "key_explanation": "分数低于阈值，不支持催化型。"
+        },
+        "F": {
+          "secondary_label": "mRNA",
+          "secondary_consistent_with_initial": true,
+          "consistent_with_sequence_function_constraints": false,
+          "discrepancy_reason": "序列与结构满足tRNA覆盖条件，与mRNA标签不一致。",
+          "override_rule_triggered": true,
+          "final_label": "tRNA"
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "life",
+      "test_type": "refined",
+      "original_question_id": "56"
+    }
+  },
+  "model": "gpt-4o",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": "给定一条RNA序列及其已知统计与结构结果如下（单位与格式见各项说明）：\n- 序列: GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA\n- 序列统计：valid=true；length=76（nt）；GC含量=0.539（比例）；碱基组成：G=23、C=18、A=18、U=17；3'端是否包含“CCA”：true\n- 两次碱基配对检测：\n  • 运行A（min_stem_length=3）：total_pairs=32；stem_regions: [{start:0,end:65,length:7},{start:8,end:13,length:4},{start:27,end:31,length:3}]\n  • 运行B（min_stem_length=5）：total_pairs=30；stem_regions: [{start:0,end:65,length:7}]\n  • 鲁棒性阈值：差异百分比以A为基准，阈值≤10%；最大茎长度在两次检测中一致则记为“一致”\n- 结构复杂度：stem_count=3；pseudoknot_count=0；long_range_interactions=8；complexity_score=0.408（比例）；has_tertiary=true\n- 初次分类：标签“mRNA”，置信度=0.7；特征映射：low_complexity、few_stems\n- 催化活性：catalytic_score=0.0（比例）；核酶阈值：≥0.5 判为可能为ribozyme\n- 二次分类：标签“mRNA”，置信度=0.7\n- 最终定型纠偏规则（覆盖为“tRNA”的必要条件）：(i) 3'端含“CCA”；(ii) length∈[73,95]（nt）；(iii) 两次检测的最大茎长度一致且≥7；(iv) catalytic_score<0.5。否则保持“mRNA”。\n任务：\nA. 报告序列合法性与统计（length、GC含量、碱基组成、3'端“CCA”有无），并判断其是否落入典型tRNA范围和/或mRNA特征区间（给出简要理由）。\nB. 给出两次检测的配对总数与stem_regions分布；计算以A为基准的差异百分比并据阈值判断是否“鲁棒”；报告最大茎长度是否一致。\nC. 报告结构复杂度指标（stem_count、pseudoknot_count、long_range_interactions、complexity_score、has_tertiary），并据此简述与tRNA或mRNA的相符性。\nD. 给出初次分类标签与置信度，并说明结构特征映射理由。\nE. 给出催化活性分数、阈值判断（是否可能为ribozyme）及关键解释特征。\nF. 做一致性复核：列出二次分类标签、是否与初次一致、与序列/功能性约束是否一致、差异说明；据纠偏规则给出最终定型标签。\n数值与单位要求：除定性判断外，其余量以题干给定单位或比例/百分比表示；百分比保留两位小数；无需推导过程。结果以数值或符号表达给出。"
+    },
+    {
+      "role": "assistant",
+      "content": "[阶段 1: 规划]\nPlan:\n\n1. 报告序列合法性与统计信息，包括长度、GC含量、碱基组成、3'端“CCA”有无，并判断其是否符合tRNA或mRNA的典型特征。\n2. 报告两次碱基配对检测的配对总数与stem_regions分布，计算以运行A为基准的差异百分比，并判断是否“鲁棒”；检查最大茎长度是否一致。\n3. 报告结构复杂度指标，并简述这些指标与tRNA或mRNA的相符性。\n4. 报告初次分类标签与置信度，并说明结构特征映射的理由。\n5. 报告催化活性分数，并根据阈值判断是否可能为ribozyme，提供关键解释特征。\n6. 进行一致性复核，列出二次分类标签，检查是否与初次一致，与序列/功能性约束是否一致，并说明差异；根据纠偏规则给出最终定型标签。\n\n[阶段 2: 执行]\n\nThought: 我现在处于计划的第1步，需要报告序列的合法性与统计信息，并判断其是否符合tRNA或mRNA的典型特征。\n\nFinal Answer: \nA. 序列合法性与统计：\n- 合法性：Valid = true\n- 长度：76 nt\n- GC含量：53.9%\n- 碱基组成：G=23、C=18、A=18、U=17\n- 3'端包含“CCA”：true\n\n判断：\n- 该序列符合tRNA的典型特征，因为长度在73到95 nt之间，并且3'端含有“CCA”。\n- 根据初次分类结果，其被标签为“mRNA”，但从统计上看，序列的结构特征与tRNA更为接近。\n\nB. 两次检测结果对比：\n- 运行A配对总数：32；stem_regions分布：[{start:0,end:65,length:7},{start:8,end:13,length:4},{start:27,end:31,length:3}]\n- 运行B配对总数：30；stem_regions分布：[{start:0,end:65,length:7}]\n- 差异百分比以A为基准：((32-30)/32) * 100 = 6.25%，小于10%，判为“鲁棒”。\n- 最大茎长度一致：是（均为7）\n\nC. 结构复杂度指标：\n- stem_count：3\n- pseudoknot_count：0\n- long_range_interactions：8\n- complexity_score：0.408\n- has_tertiary：true\n\n简述：结构复杂度较低，符合mRNA的特征映射（low_complexity、few_stems），但是也支持tRNA的特征（有三级结构）。\n\nD. 初次分类标签与置信度：\n- 标签：mRNA\n- 置信度：0.7\n\n特征映射理由：基于low_complexity和few_stems的特征映射。\n\nE. 催化活性：\n- catalytic_score：0.0\n- 阈值判断：不可能为ribozyme（因为核酶阈值≥0.5）\n\n关键解释特征：低催化评分与缺乏催化活性相关的结构特征。\n\nF. 一致性复核：\n- 二次分类标签：mRNA\n- 是否与初次一致：是\n- 与序列/功能性约束是否一致：初次和二次分类均为mRNA，但结构统计与tRNA更接近\n- 差异说明：虽然被分类为mRNA，但符合tRNA的纠偏规则条件。\n\n根据最终定型纠偏规则，最终定型标签为“tRNA”。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"A\": {\n    \"valid\": \"[布尔值]\",\n    \"length\": \"[字符串]\",\n    \"gc_content\": \"[数值]\",\n    \"base_composition\": {\n      \"G\": \"[数值]\",\n      \"C\": \"[数值]\",\n      \"A\": \"[数值]\",\n      \"U\": \"[数值]\"\n    },\n    \"has_3prime_CCA\": \"[布尔值]\",\n    \"in_tRNA_range\": \"[布尔值]\",\n    \"in_mRNA_feature_range\": \"[布尔值]\",\n    \"reason\": \"[字符串]\"\n  },\n  \"B\": {\n    \"run_A_total_pairs\": \"[数值]\",\n    \"run_A_stem_regions\": [\n      {\n        \"start\": \"[数值]\",\n        \"end\": \"[数值]\",\n        \"length\": \"[数值]\"\n      }\n    ],\n    \"run_B_total_pairs\": \"[数值]\",\n    \"run_B_stem_regions\": [\n      {\n        \"start\": \"[数值]\",\n        \"end\": \"[数值]\",\n        \"length\": \"[数值]\"\n      }\n    ],\n    \"diff_percent_vs_A\": \"[字符串]\",\n    \"robust_by_threshold\": \"[布尔值]\",\n    \"max_stem_length_consistent\": \"[布尔值]\"\n  },\n  \"C\": {\n    \"stem_count\": \"[数值]\",\n    \"pseudoknot_count\": \"[数值]\",\n    \"long_range_interactions\": \"[数值]\",\n    \"complexity_score\": \"[数值]\",\n    \"has_tertiary\": \"[布尔值]\",\n    \"concordance\": \"[字符串]\"\n  },\n  \"D\": {\n    \"initial_label\": \"[字符串]\",\n    \"confidence\": \"[数值]\",\n    \"feature_mapping\": \"[2个字符串的数组]\"\n  },\n  \"E\": {\n    \"catalytic_score\": \"[数值]\",\n    \"ribozyme_threshold\": \"[数值]\",\n    \"is_ribozyme\": \"[布尔值]\",\n    \"key_explanation\": \"[字符串]\"\n  },\n  \"F\": {\n    \"secondary_label\": \"[字符串]\",\n    \"secondary_consistent_with_initial\": \"[布尔值]\",\n    \"consistent_with_sequence_function_constraints\": \"[布尔值]\",\n    \"discrepancy_reason\": \"[字符串]\",\n    \"override_rule_triggered\": \"[布尔值]\",\n    \"final_label\": \"[字符串]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"A\": {\n    \"valid\": true,\n    \"length\": \"76 nt\",\n    \"gc_content\": 0.539,\n    \"base_composition\": {\n      \"G\": 23,\n      \"C\": 18,\n      \"A\": 18,\n      \"U\": 17\n    },\n    \"has_3prime_CCA\": true,\n    \"in_tRNA_range\": true,\n    \"in_mRNA_feature_range\": false,\n    \"reason\": \"符合tRNA的典型特征，长度在73到95 nt之间，3'端含有CCA\"\n  },\n  \"B\": {\n    \"run_A_total_pairs\": 32,\n    \"run_A_stem_regions\": [\n      {\n        \"start\": 0,\n        \"end\": 65,\n        \"length\": 7\n      }\n    ],\n    \"run_B_total_pairs\": 30,\n    \"run_B_stem_regions\": [\n      {\n        \"start\": 0,\n        \"end\": 65,\n        \"length\": 7\n      }\n    ],\n    \"diff_percent_vs_A\": \"6.25%\",\n    \"robust_by_threshold\": true,\n    \"max_stem_length_consistent\": true\n  },\n  \"C\": {\n    \"stem_count\": 3,\n    \"pseudoknot_count\": 0,\n    \"long_range_interactions\": 8,\n    \"complexity_score\": 0.408,\n    \"has_tertiary\": true,\n    \"concordance\": \"结构复杂度较低，符合mRNA的特征，但有tRNA的三级结构\"\n  },\n  \"D\": {\n    \"initial_label\": \"mRNA\",\n    \"confidence\": 0.7,\n    \"feature_mapping\": [\"low_complexity\", \"few_stems\"]\n  },\n  \"E\": {\n    \"catalytic_score\": 0.0,\n    \"ribozyme_threshold\": 0.5,\n    \"is_ribozyme\": false,\n    \"key_explanation\": \"低催化评分，不具备催化活性\"\n  },\n  \"F\": {\n    \"secondary_label\": \"mRNA\",\n    \"secondary_consistent_with_initial\": true,\n    \"consistent_with_sequence_function_constraints\": false,\n    \"discrepancy_reason\": \"虽然被分类为mRNA，但符合tRNA的纠偏规则条件\",\n    \"override_rule_triggered\": true,\n    \"final_label\": \"tRNA\"\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "life",
+    "topic": "",
+    "image_path": [
+      "/sfe_images/L016_0002_a83c83c6c0627af62fd33688d9f03420.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "parse_rna_sequence",
+      "detect_base_pairs",
+      "calculate_structure_complexity",
+      "classify_rna_type",
+      "predict_catalytic_activity"
+    ],
+    "golden_answer": [
+      {
+        "A": {
+          "valid": true,
+          "length": "76 nt",
+          "gc_content": 0.539,
+          "base_composition": {
+            "G": 23,
+            "C": 18,
+            "A": 18,
+            "U": 17
+          },
+          "has_3prime_CCA": true,
+          "in_tRNA_range": true,
+          "in_mRNA_feature_range": false,
+          "reason": "长度落入[73,95]且3'端含CCA，GC含量中等；缺乏可由序列统计支持的mRNA特征。"
+        },
+        "B": {
+          "run_A_total_pairs": 32,
+          "run_A_stem_regions": [
+            {
+              "start": 0,
+              "end": 65,
+              "length": 7
+            },
+            {
+              "start": 8,
+              "end": 13,
+              "length": 4
+            },
+            {
+              "start": 27,
+              "end": 31,
+              "length": 3
+            }
+          ],
+          "run_B_total_pairs": 30,
+          "run_B_stem_regions": [
+            {
+              "start": 0,
+              "end": 65,
+              "length": 7
+            }
+          ],
+          "diff_percent_vs_A": "6.25%",
+          "robust_by_threshold": true,
+          "max_stem_length_consistent": true
+        },
+        "C": {
+          "stem_count": 3,
+          "pseudoknot_count": 0,
+          "long_range_interactions": 8,
+          "complexity_score": 0.408,
+          "has_tertiary": true,
+          "concordance": "少茎、无假结且存在长程与三级接触，整体更贴近tRNA的稳定折叠；低复杂度亦可被mRNA特征解释。"
+        },
+        "D": {
+          "initial_label": "mRNA",
+          "confidence": 0.7,
+          "feature_mapping": [
+            "low_complexity",
+            "few_stems"
+          ]
+        },
+        "E": {
+          "catalytic_score": 0.0,
+          "ribozyme_threshold": 0.5,
+          "is_ribozyme": false,
+          "key_explanation": "分数低于阈值，不支持催化型。"
+        },
+        "F": {
+          "secondary_label": "mRNA",
+          "secondary_consistent_with_initial": true,
+          "consistent_with_sequence_function_constraints": false,
+          "discrepancy_reason": "序列与结构满足tRNA覆盖条件，与mRNA标签不一致。",
+          "override_rule_triggered": true,
+          "final_label": "tRNA"
+        }
+      }
+    ],
+    "original_question_id": "56",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+  },
+  "metadata_summary": {
+    "subject": "life",
+    "test_type": "refined",
+    "original_question_id": "56"
+  },
+  "answer_template": {
+    "A": {
+      "valid": "[布尔值]",
+      "length": "[字符串]",
+      "gc_content": "[数值]",
+      "base_composition": {
+        "G": "[数值]",
+        "C": "[数值]",
+        "A": "[数值]",
+        "U": "[数值]"
+      },
+      "has_3prime_CCA": "[布尔值]",
+      "in_tRNA_range": "[布尔值]",
+      "in_mRNA_feature_range": "[布尔值]",
+      "reason": "[字符串]"
+    },
+    "B": {
+      "run_A_total_pairs": "[数值]",
+      "run_A_stem_regions": [
+        {
+          "start": "[数值]",
+          "end": "[数值]",
+          "length": "[数值]"
+        }
+      ],
+      "run_B_total_pairs": "[数值]",
+      "run_B_stem_regions": [
+        {
+          "start": "[数值]",
+          "end": "[数值]",
+          "length": "[数值]"
+        }
+      ],
+      "diff_percent_vs_A": "[字符串]",
+      "robust_by_threshold": "[布尔值]",
+      "max_stem_length_consistent": "[布尔值]"
+    },
+    "C": {
+      "stem_count": "[数值]",
+      "pseudoknot_count": "[数值]",
+      "long_range_interactions": "[数值]",
+      "complexity_score": "[数值]",
+      "has_tertiary": "[布尔值]",
+      "concordance": "[字符串]"
+    },
+    "D": {
+      "initial_label": "[字符串]",
+      "confidence": "[数值]",
+      "feature_mapping": "[2个字符串的数组]"
+    },
+    "E": {
+      "catalytic_score": "[数值]",
+      "ribozyme_threshold": "[数值]",
+      "is_ribozyme": "[布尔值]",
+      "key_explanation": "[字符串]"
+    },
+    "F": {
+      "secondary_label": "[字符串]",
+      "secondary_consistent_with_initial": "[布尔值]",
+      "consistent_with_sequence_function_constraints": "[布尔值]",
+      "discrepancy_reason": "[字符串]",
+      "override_rule_triggered": "[布尔值]",
+      "final_label": "[字符串]"
+    }
+  },
+  "golden_standard": {
+    "A": {
+      "valid": true,
+      "length": "76 nt",
+      "gc_content": 0.539,
+      "base_composition": {
+        "G": 23,
+        "C": 18,
+        "A": 18,
+        "U": 17
+      },
+      "has_3prime_CCA": true,
+      "in_tRNA_range": true,
+      "in_mRNA_feature_range": false,
+      "reason": "长度落入[73,95]且3'端含CCA，GC含量中等；缺乏可由序列统计支持的mRNA特征。"
+    },
+    "B": {
+      "run_A_total_pairs": 32,
+      "run_A_stem_regions": [
+        {
+          "start": 0,
+          "end": 65,
+          "length": 7
+        },
+        {
+          "start": 8,
+          "end": 13,
+          "length": 4
+        },
+        {
+          "start": 27,
+          "end": 31,
+          "length": 3
+        }
+      ],
+      "run_B_total_pairs": 30,
+      "run_B_stem_regions": [
+        {
+          "start": 0,
+          "end": 65,
+          "length": 7
+        }
+      ],
+      "diff_percent_vs_A": "6.25%",
+      "robust_by_threshold": true,
+      "max_stem_length_consistent": true
+    },
+    "C": {
+      "stem_count": 3,
+      "pseudoknot_count": 0,
+      "long_range_interactions": 8,
+      "complexity_score": 0.408,
+      "has_tertiary": true,
+      "concordance": "少茎、无假结且存在长程与三级接触，整体更贴近tRNA的稳定折叠；低复杂度亦可被mRNA特征解释。"
+    },
+    "D": {
+      "initial_label": "mRNA",
+      "confidence": 0.7,
+      "feature_mapping": [
+        "low_complexity",
+        "few_stems"
+      ]
+    },
+    "E": {
+      "catalytic_score": 0.0,
+      "ribozyme_threshold": 0.5,
+      "is_ribozyme": false,
+      "key_explanation": "分数低于阈值，不支持催化型。"
+    },
+    "F": {
+      "secondary_label": "mRNA",
+      "secondary_consistent_with_initial": true,
+      "consistent_with_sequence_function_constraints": false,
+      "discrepancy_reason": "序列与结构满足tRNA覆盖条件，与mRNA标签不一致。",
+      "override_rule_triggered": true,
+      "final_label": "tRNA"
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "A": {
+      "valid": true,
+      "length": "76 nt",
+      "gc_content": 0.539,
+      "base_composition": {
+        "G": 23,
+        "C": 18,
+        "A": 18,
+        "U": 17
+      },
+      "has_3prime_CCA": true,
+      "in_tRNA_range": true,
+      "in_mRNA_feature_range": false,
+      "reason": "符合tRNA的典型特征，长度在73到95 nt之间，3'端含有CCA"
+    },
+    "B": {
+      "run_A_total_pairs": 32,
+      "run_A_stem_regions": [
+        {
+          "start": 0,
+          "end": 65,
+          "length": 7
+        }
+      ],
+      "run_B_total_pairs": 30,
+      "run_B_stem_regions": [
+        {
+          "start": 0,
+          "end": 65,
+          "length": 7
+        }
+      ],
+      "diff_percent_vs_A": "6.25%",
+      "robust_by_threshold": true,
+      "max_stem_length_consistent": true
+    },
+    "C": {
+      "stem_count": 3,
+      "pseudoknot_count": 0,
+      "long_range_interactions": 8,
+      "complexity_score": 0.408,
+      "has_tertiary": true,
+      "concordance": "结构复杂度较低，符合mRNA的特征，但有tRNA的三级结构"
+    },
+    "D": {
+      "initial_label": "mRNA",
+      "confidence": 0.7,
+      "feature_mapping": [
+        "low_complexity",
+        "few_stems"
+      ]
+    },
+    "E": {
+      "catalytic_score": 0.0,
+      "ribozyme_threshold": 0.5,
+      "is_ribozyme": false,
+      "key_explanation": "低催化评分，不具备催化活性"
+    },
+    "F": {
+      "secondary_label": "mRNA",
+      "secondary_consistent_with_initial": true,
+      "consistent_with_sequence_function_constraints": false,
+      "discrepancy_reason": "虽然被分类为mRNA，但符合tRNA的纠偏规则条件",
+      "override_rule_triggered": true,
+      "final_label": "tRNA"
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"A\": {\n    \"valid\": true,\n    \"length\": \"76 nt\",\n    \"gc_content\": 0.539,\n    \"base_composition\": {\n      \"G\": 23,\n      \"C\": 18,\n      \"A\": 18,\n      \"U\": 17\n    },\n    \"has_3prime_CCA\": true,\n    \"in_tRNA_range\": true,\n    \"in_mRNA_feature_range\": false,\n    \"reason\": \"符合tRNA的典型特征，长度在73到95 nt之间，3'端含有CCA\"\n  },\n  \"B\": {\n    \"run_A_total_pairs\": 32,\n    \"run_A_stem_regions\": [\n      {\n        \"start\": 0,\n        \"end\": 65,\n        \"length\": 7\n      }\n    ],\n    \"run_B_total_pairs\": 30,\n    \"run_B_stem_regions\": [\n      {\n        \"start\": 0,\n        \"end\": 65,\n        \"length\": 7\n      }\n    ],\n    \"diff_percent_vs_A\": \"6.25%\",\n    \"robust_by_threshold\": true,\n    \"max_stem_length_consistent\": true\n  },\n  \"C\": {\n    \"stem_count\": 3,\n    \"pseudoknot_count\": 0,\n    \"long_range_interactions\": 8,\n    \"complexity_score\": 0.408,\n    \"has_tertiary\": true,\n    \"concordance\": \"结构复杂度较低，符合mRNA的特征，但有tRNA的三级结构\"\n  },\n  \"D\": {\n    \"initial_label\": \"mRNA\",\n    \"confidence\": 0.7,\n    \"feature_mapping\": [\"low_complexity\", \"few_stems\"]\n  },\n  \"E\": {\n    \"catalytic_score\": 0.0,\n    \"ribozyme_threshold\": 0.5,\n    \"is_ribozyme\": false,\n    \"key_explanation\": \"低催化评分，不具备催化活性\"\n  },\n  \"F\": {\n    \"secondary_label\": \"mRNA\",\n    \"secondary_consistent_with_initial\": true,\n    \"consistent_with_sequence_function_constraints\": false,\n    \"discrepancy_reason\": \"虽然被分类为mRNA，但符合tRNA的纠偏规则条件\",\n    \"override_rule_triggered\": true,\n    \"final_label\": \"tRNA\"\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"A\": {\n    \"valid\": true,\n    \"length\": \"76 nt\",\n    \"gc_content\": 0.539,\n    \"base_composition\": {\n      \"G\": 23,\n      \"C\": 18,\n      \"A\": 18,\n      \"U\": 17\n    },\n    \"has_3prime_CCA\": true,\n    \"in_tRNA_range\": true,\n    \"in_mRNA_feature_range\": false,\n    \"reason\": \"符合tRNA的典型特征，长度在73到95 nt之间，3'端含有CCA\"\n  },\n  \"B\": {\n    \"run_A_total_pairs\": 32,\n    \"run_A_stem_regions\": [\n      {\n        \"start\": 0,\n        \"end\": 65,\n        \"length\": 7\n      }\n    ],\n    \"run_B_total_pairs\": 30,\n    \"run_B_stem_regions\": [\n      {\n        \"start\": 0,\n        \"end\": 65,\n        \"length\": 7\n      }\n    ],\n    \"diff_percent_vs_A\": \"6.25%\",\n    \"robust_by_threshold\": true,\n    \"max_stem_length_consistent\": true\n  },\n  \"C\": {\n    \"stem_count\": 3,\n    \"pseudoknot_count\": 0,\n    \"long_range_interactions\": 8,\n    \"complexity_score\": 0.408,\n    \"has_tertiary\": true,\n    \"concordance\": \"结构复杂度较低，符合mRNA的特征，但有tRNA的三级结构\"\n  },\n  \"D\": {\n    \"initial_label\": \"mRNA\",\n    \"confidence\": 0.7,\n    \"feature_mapping\": [\"low_complexity\", \"few_stems\"]\n  },\n  \"E\": {\n    \"catalytic_score\": 0.0,\n    \"ribozyme_threshold\": 0.5,\n    \"is_ribozyme\": false,\n    \"key_explanation\": \"低催化评分，不具备催化活性\"\n  },\n  \"F\": {\n    \"secondary_label\": \"mRNA\",\n    \"secondary_consistent_with_initial\": true,\n    \"consistent_with_sequence_function_constraints\": false,\n    \"discrepancy_reason\": \"虽然被分类为mRNA，但符合tRNA的纠偏规则条件\",\n    \"override_rule_triggered\": true,\n    \"final_label\": \"tRNA\"\n  }\n}\n```"
+  },
+  "evaluation_score": 0.7916666666666666,
+  "evaluation_summary": "匹配字段: 38/48 (得分: 79.17%)",
+  "evaluation_details": {
+    "A.valid": {
+      "path": "A.valid",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.length": {
+      "path": "A.length",
+      "expected": "76 nt",
+      "actual": "76 nt",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.gc_content": {
+      "path": "A.gc_content",
+      "expected": 0.539,
+      "actual": 0.539,
+      "expected_num": 0.539,
+      "actual_num": 0.539,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.base_composition.G": {
+      "path": "A.base_composition.G",
+      "expected": 23,
+      "actual": 23,
+      "expected_num": 23.0,
+      "actual_num": 23.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.base_composition.C": {
+      "path": "A.base_composition.C",
+      "expected": 18,
+      "actual": 18,
+      "expected_num": 18.0,
+      "actual_num": 18.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.base_composition.A": {
+      "path": "A.base_composition.A",
+      "expected": 18,
+      "actual": 18,
+      "expected_num": 18.0,
+      "actual_num": 18.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.base_composition.U": {
+      "path": "A.base_composition.U",
+      "expected": 17,
+      "actual": 17,
+      "expected_num": 17.0,
+      "actual_num": 17.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.has_3prime_CCA": {
+      "path": "A.has_3prime_CCA",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.in_tRNA_range": {
+      "path": "A.in_tRNA_range",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.in_mRNA_feature_range": {
+      "path": "A.in_mRNA_feature_range",
+      "expected": false,
+      "actual": false,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "A.reason": {
+      "path": "A.reason",
+      "expected": "长度落入[73,95]且3'端含CCA，GC含量中等；缺乏可由序列统计支持的mRNA特征。",
+      "actual": "符合tRNA的典型特征，长度在73到95 nt之间，3'端含有CCA",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "B.run_A_total_pairs": {
+      "path": "B.run_A_total_pairs",
+      "expected": 32,
+      "actual": 32,
+      "expected_num": 32.0,
+      "actual_num": 32.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "B.run_A_stem_regions": {
+      "status": "length_mismatch",
+      "path": "B.run_A_stem_regions",
+      "expected_length": 3,
+      "actual_length": 1,
+      "expected": [
+        {
+          "start": 0,
+          "end": 65,
+          "length": 7
+        },
+        {
+          "start": 8,
+          "end": 13,
+          "length": 4
+        },
+        {
+          "start": 27,
+          "end": 31,
+          "length": 3
+        }
+      ],
+      "actual": [
+        {
+          "start": 0,
+          "end": 65,
+          "length": 7
+        }
+      ]
+    },
+    "B.run_B_total_pairs": {
+      "path": "B.run_B_total_pairs",
+      "expected": 30,
+      "actual": 30,
+      "expected_num": 30.0,
+      "actual_num": 30.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "B.run_B_stem_regions[0].start": {
+      "path": "B.run_B_stem_regions[0].start",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "B.run_B_stem_regions[0].end": {
+      "path": "B.run_B_stem_regions[0].end",
+      "expected": 65,
+      "actual": 65,
+      "expected_num": 65.0,
+      "actual_num": 65.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "B.run_B_stem_regions[0].length": {
+      "path": "B.run_B_stem_regions[0].length",
+      "expected": 7,
+      "actual": 7,
+      "expected_num": 7.0,
+      "actual_num": 7.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "B.diff_percent_vs_A": {
+      "path": "B.diff_percent_vs_A",
+      "expected": "6.25%",
+      "actual": "6.25%",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "B.robust_by_threshold": {
+      "path": "B.robust_by_threshold",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "B.max_stem_length_consistent": {
+      "path": "B.max_stem_length_consistent",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "C.stem_count": {
+      "path": "C.stem_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "C.pseudoknot_count": {
+      "path": "C.pseudoknot_count",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "C.long_range_interactions": {
+      "path": "C.long_range_interactions",
+      "expected": 8,
+      "actual": 8,
+      "expected_num": 8.0,
+      "actual_num": 8.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "C.complexity_score": {
+      "path": "C.complexity_score",
+      "expected": 0.408,
+      "actual": 0.408,
+      "expected_num": 0.408,
+      "actual_num": 0.408,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "C.has_tertiary": {
+      "path": "C.has_tertiary",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "C.concordance": {
+      "path": "C.concordance",
+      "expected": "少茎、无假结且存在长程与三级接触，整体更贴近tRNA的稳定折叠；低复杂度亦可被mRNA特征解释。",
+      "actual": "结构复杂度较低，符合mRNA的特征，但有tRNA的三级结构",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "D.initial_label": {
+      "path": "D.initial_label",
+      "expected": "mRNA",
+      "actual": "mRNA",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "D.confidence": {
+      "path": "D.confidence",
+      "expected": 0.7,
+      "actual": 0.7,
+      "expected_num": 0.7,
+      "actual_num": 0.7,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "D.feature_mapping[0]": {
+      "path": "D.feature_mapping[0]",
+      "expected": "low_complexity",
+      "actual": "low_complexity",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "D.feature_mapping[1]": {
+      "path": "D.feature_mapping[1]",
+      "expected": "few_stems",
+      "actual": "few_stems",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "E.catalytic_score": {
+      "path": "E.catalytic_score",
+      "expected": 0.0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "E.ribozyme_threshold": {
+      "path": "E.ribozyme_threshold",
+      "expected": 0.5,
+      "actual": 0.5,
+      "expected_num": 0.5,
+      "actual_num": 0.5,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "E.is_ribozyme": {
+      "path": "E.is_ribozyme",
+      "expected": false,
+      "actual": false,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "E.key_explanation": {
+      "path": "E.key_explanation",
+      "expected": "分数低于阈值，不支持催化型。",
+      "actual": "低催化评分，不具备催化活性",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "F.secondary_label": {
+      "path": "F.secondary_label",
+      "expected": "mRNA",
+      "actual": "mRNA",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F.secondary_consistent_with_initial": {
+      "path": "F.secondary_consistent_with_initial",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F.consistent_with_sequence_function_constraints": {
+      "path": "F.consistent_with_sequence_function_constraints",
+      "expected": false,
+      "actual": false,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F.discrepancy_reason": {
+      "path": "F.discrepancy_reason",
+      "expected": "序列与结构满足tRNA覆盖条件，与mRNA标签不一致。",
+      "actual": "虽然被分类为mRNA，但符合tRNA的纠偏规则条件",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "F.override_rule_triggered": {
+      "path": "F.override_rule_triggered",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F.final_label": {
+      "path": "F.final_label",
+      "expected": "tRNA",
+      "actual": "tRNA",
+      "status": "match",
+      "match_type": "exact"
+    }
+  },
+  "mode_folder": "with_tools_react"
+}

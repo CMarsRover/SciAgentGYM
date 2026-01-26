@@ -1,0 +1,61 @@
+{
+  "initial_state": "|3,0,0⟩",
+  "final_state": "|1,0,0⟩",
+  "total_paths": 3,
+  "paths": [
+    {
+      "intermediate_state": [
+        2,
+        1,
+        -1
+      ],
+      "probability": 0.0006038939015709837,
+      "path_notation": "|3,0,0⟩ → |2,1,-1⟩ → |1,0,0⟩",
+      "details": {
+        "total_probability": 0.0006038939015709837,
+        "step1_probability": 0.0006038939015709837,
+        "step2_probability": 0.09248815888069738,
+        "branching_ratio": 1.0,
+        "transition_path": "|3,0,0⟩ → |2,1,-1⟩ → |1,0,0⟩",
+        "decay_channels_from_intermediate": 1
+      },
+      "normalized_probability": 0.3333333333333333
+    },
+    {
+      "intermediate_state": [
+        2,
+        1,
+        0
+      ],
+      "probability": 0.0006038939015709837,
+      "path_notation": "|3,0,0⟩ → |2,1,0⟩ → |1,0,0⟩",
+      "details": {
+        "total_probability": 0.0006038939015709837,
+        "step1_probability": 0.0006038939015709837,
+        "step2_probability": 0.09248815888069738,
+        "branching_ratio": 1.0,
+        "transition_path": "|3,0,0⟩ → |2,1,0⟩ → |1,0,0⟩",
+        "decay_channels_from_intermediate": 1
+      },
+      "normalized_probability": 0.3333333333333333
+    },
+    {
+      "intermediate_state": [
+        2,
+        1,
+        1
+      ],
+      "probability": 0.0006038939015709837,
+      "path_notation": "|3,0,0⟩ → |2,1,1⟩ → |1,0,0⟩",
+      "details": {
+        "total_probability": 0.0006038939015709837,
+        "step1_probability": 0.0006038939015709837,
+        "step2_probability": 0.09248815888069738,
+        "branching_ratio": 1.0,
+        "transition_path": "|3,0,0⟩ → |2,1,1⟩ → |1,0,0⟩",
+        "decay_channels_from_intermediate": 1
+      },
+      "normalized_probability": 0.3333333333333333
+    }
+  ]
+}

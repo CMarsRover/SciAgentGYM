@@ -1,0 +1,446 @@
+{
+  "id": "10_ref_0",
+  "query": "空气(n1=1.0)到玻璃等腰直角棱镜底面为单一平面界面。玻璃无损、非磁性(μr=1)，相对介电常数εr=4，折射率n2=√εr=2.0。入射为均匀平面波，入射方向与底面法线一致(θ=0°)。求解并回答：\n(1) θ=0°时，求反射功率比W^r/W^i的数值(用n1=1.0、n2=2.0计算，保留三位有效数字，结果为无量纲)，并给出至少两条相互独立的计算路径的结果对比(给出绝对误差、相对误差百分比与一致性说明)。\n(2) 给出垂直入射的振幅反射系数r的符号表达式，说明W^r/W^i与|r|^2的关系，并给出θ=0°时TE/TM的等效性结论。\n(3) 基于角谱法对均匀平面波的场级复核：在两组采样设置[(dx,dy)=(2×10^-7 m,2×10^-7 m)、λ=632.8 nm、z=1 mm；(dx,dy)=(1×10^-6 m,1×10^-6 m)、λ=500 nm、z=-1 mm]下，说明反射场的角谱强度比应为|r|^2，并解释采样设置对数值准确性的影响与实现失败的常见原因(如输入数据类型不匹配)。结果以符号表达为主。\n(4) 求TM极化的布儒斯特角θ_B的符号表达，并给出其对应的最小反射率；同时给出TE极化在θ_B处的反射率的符号表达。\n(5) 说明等腰直角棱镜的几何形状是否影响底面垂直入射时的反射功率比，并给出物理理由。\n(6) 提交最终交叉校验表述：以(1)的数值结果记为R₁，列出各方法结果的对齐关系、绝对/相对误差统计与容差门限(例如≤1×10^-3)，并给出通过/失败判定。\n除(1)外，其余小问结果以符号表达式或定性结论给出；所有量按SI单位。",
+  "query_data": {
+    "id": "10_ref_0",
+    "original_id": 10,
+    "refined_index": 0,
+    "question": "空气(n1=1.0)到玻璃等腰直角棱镜底面为单一平面界面。玻璃无损、非磁性(μr=1)，相对介电常数εr=4，折射率n2=√εr=2.0。入射为均匀平面波，入射方向与底面法线一致(θ=0°)。求解并回答：\n(1) θ=0°时，求反射功率比W^r/W^i的数值(用n1=1.0、n2=2.0计算，保留三位有效数字，结果为无量纲)，并给出至少两条相互独立的计算路径的结果对比(给出绝对误差、相对误差百分比与一致性说明)。\n(2) 给出垂直入射的振幅反射系数r的符号表达式，说明W^r/W^i与|r|^2的关系，并给出θ=0°时TE/TM的等效性结论。\n(3) 基于角谱法对均匀平面波的场级复核：在两组采样设置[(dx,dy)=(2×10^-7 m,2×10^-7 m)、λ=632.8 nm、z=1 mm；(dx,dy)=(1×10^-6 m,1×10^-6 m)、λ=500 nm、z=-1 mm]下，说明反射场的角谱强度比应为|r|^2，并解释采样设置对数值准确性的影响与实现失败的常见原因(如输入数据类型不匹配)。结果以符号表达为主。\n(4) 求TM极化的布儒斯特角θ_B的符号表达，并给出其对应的最小反射率；同时给出TE极化在θ_B处的反射率的符号表达。\n(5) 说明等腰直角棱镜的几何形状是否影响底面垂直入射时的反射功率比，并给出物理理由。\n(6) 提交最终交叉校验表述：以(1)的数值结果记为R₁，列出各方法结果的对齐关系、绝对/相对误差统计与容差门限(例如≤1×10^-3)，并给出通过/失败判定。\n除(1)外，其余小问结果以符号表达式或定性结论给出；所有量按SI单位。",
+    "answer": "{'(1)': 'W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。', '(2)': 'r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。', '(3)': '角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。', '(4)': 'θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。', '(5)': '不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。', '(6)': '交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。'}",
+    "metadata": {
+      "subject": "物理科学",
+      "topic": "光学",
+      "image_path": [
+        "failed_question_images/f02e8e652be41d72b265f7bcd0c1008f1aa6ca8830565e0a60e24c36e05b9d0d.jpg"
+      ],
+      "solution_steps": [
+        "理论推导：ε_r=4 ⇒ n_glass=√ε_r=2，垂直入射r=(n1-n2)/(n1+n2)",
+        "调用 calculate_prism_reflection 计算功率反射率R",
+        "校验 calculate_power_reflection 与 calculate_reflection_coefficient 一致性"
+      ],
+      "tool_expected": [
+        "calculate_prism_reflection",
+        "calculate_power_reflection",
+        "calculate_reflection_coefficient"
+      ],
+      "golden_answer": [
+        {
+          "(1)": "W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。",
+          "(2)": "r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。",
+          "(3)": "角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。",
+          "(4)": "θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。",
+          "(5)": "不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。",
+          "(6)": "交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。"
+        }
+      ],
+      "original_question_id": "10",
+      "test_type": "refined"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_reflection_coefficient",
+          "description": "计算光波在两种介质界面上的反射系数（振幅反射率）。基于菲涅耳方程计算光波在两种不同折射率介质界面上的反射系数。对于垂直入射(θ=0)，TE和TM偏振的反射系数相同。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "n1": {
+                "type": "number",
+                "description": "入射介质的折射率"
+              },
+              "n2": {
+                "type": "number",
+                "description": "透射介质的折射率"
+              },
+              "theta_i": {
+                "type": "number",
+                "description": "入射角（弧度），默认为0（垂直入射）"
+              }
+            },
+            "required": [
+              "n1",
+              "n2"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_power_reflection",
+          "description": "计算光波在两种介质界面上的功率反射率。功率反射率等于反射系数的平方，表示反射功率与入射功率之比。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "n1": {
+                "type": "number",
+                "description": "入射介质的折射率"
+              },
+              "n2": {
+                "type": "number",
+                "description": "透射介质的折射率"
+              },
+              "theta_i": {
+                "type": "number",
+                "description": "入射角（弧度），默认为0（垂直入射）"
+              }
+            },
+            "required": [
+              "n1",
+              "n2"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "angular_spectrum_propagation",
+          "description": "使用角谱方法计算光场在自由空间中的传播。基于傅里叶光学原理，通过频域中的传递函数计算光场传播。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "array",
+                "description": "输入光场的复振幅分布",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "dx": {
+                "type": "number",
+                "description": "x方向的空间采样间隔（米）"
+              },
+              "dy": {
+                "type": "number",
+                "description": "y方向的空间采样间隔（米）"
+              },
+              "wavelength": {
+                "type": "number",
+                "description": "光的波长（米）"
+              },
+              "z": {
+                "type": "number",
+                "description": "传播距离（米）"
+              }
+            },
+            "required": [
+              "field",
+              "dx",
+              "dy",
+              "wavelength",
+              "z"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "optimize_optical_system",
+          "description": "优化光学系统参数以最小化给定的评价函数。使用数值优化方法找到光学系统的最佳参数配置。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "initial_params": {
+                "type": "array",
+                "description": "初始参数值",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "merit_function": {
+                "type": "object",
+                "description": "评价函数，接受参数并返回需要最小化的标量值"
+              },
+              "bounds": {
+                "type": "array",
+                "description": "参数的边界约束，格式为[(min1, max1), (min2, max2), ...]",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              "method": {
+                "type": "string",
+                "description": "优化算法，默认为'Nelder-Mead'"
+              }
+            },
+            "required": [
+              "initial_params",
+              "merit_function"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_spectrum",
+          "description": "分析光谱数据，识别峰值并提取特征。对光谱数据进行峰值检测和特征提取，用于光谱分析。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "wavelengths": {
+                "type": "array",
+                "description": "波长数据（纳米）",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "intensities": {
+                "type": "array",
+                "description": "对应的强度数据",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "prominence": {
+                "type": "number",
+                "description": "峰值检测的突出度阈值"
+              },
+              "width": {
+                "type": "number",
+                "description": "峰值检测的宽度约束"
+              },
+              "height": {
+                "type": "number",
+                "description": "峰值检测的高度阈值"
+              }
+            },
+            "required": [
+              "wavelengths",
+              "intensities"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_prism_reflection",
+          "description": "计算棱镜表面的反射功率比。计算光波在棱镜表面的反射功率与入射功率之比，适用于各种棱镜几何形状。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "epsilon_r": {
+                "type": "number",
+                "description": "棱镜材料的相对介电常数"
+              },
+              "incident_angle": {
+                "type": "number",
+                "description": "入射角（弧度），默认为0（垂直入射）"
+              }
+            },
+            "required": [
+              "epsilon_r"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "空气(n1=1.0)到玻璃等腰直角棱镜底面为单一平面界面。玻璃无损、非磁性(μr=1)，相对介电常数εr=4，折射率n2=√εr=2.0。入射为均匀平面波，入射方向与底面法线一致(θ=0°)。求解并回答：\n(1) θ=0°时，求反射功率比W^r/W^i的数值(用n1=1.0、n2=2.0计算，保留三位有效数字，结果为无量纲)，并给出至少两条相互独立的计算路径的结果对比(给出绝对误差、相对误差百分比与一致性说明)。\n(2) 给出垂直入射的振幅反射系数r的符号表达式，说明W^r/W^i与|r|^2的关系，并给出θ=0°时TE/TM的等效性结论。\n(3) 基于角谱法对均匀平面波的场级复核：在两组采样设置[(dx,dy)=(2×10^-7 m,2×10^-7 m)、λ=632.8 nm、z=1 mm；(dx,dy)=(1×10^-6 m,1×10^-6 m)、λ=500 nm、z=-1 mm]下，说明反射场的角谱强度比应为|r|^2，并解释采样设置对数值准确性的影响与实现失败的常见原因(如输入数据类型不匹配)。结果以符号表达为主。\n(4) 求TM极化的布儒斯特角θ_B的符号表达，并给出其对应的最小反射率；同时给出TE极化在θ_B处的反射率的符号表达。\n(5) 说明等腰直角棱镜的几何形状是否影响底面垂直入射时的反射功率比，并给出物理理由。\n(6) 提交最终交叉校验表述：以(1)的数值结果记为R₁，列出各方法结果的对齐关系、绝对/相对误差统计与容差门限(例如≤1×10^-3)，并给出通过/失败判定。\n除(1)外，其余小问结果以符号表达式或定性结论给出；所有量按SI单位。",
+      "final_answer": {
+        "(1)": "W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。",
+        "(2)": "r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。",
+        "(3)": "角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。",
+        "(4)": "θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。",
+        "(5)": "不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。",
+        "(6)": "交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。"
+      }
+    },
+    "metadata_summary": {
+      "subject": "物理科学",
+      "topic": "光学",
+      "test_type": "refined",
+      "original_question_id": "10",
+      "subject_topic_key": "物理科学::光学"
+    }
+  },
+  "model": "gemini-2.5-pro",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "空气(n1=1.0)到玻璃等腰直角棱镜底面为单一平面界面。玻璃无损、非磁性(μr=1)，相对介电常数εr=4，折射率n2=√εr=2.0。入射为均匀平面波，入射方向与底面法线一致(θ=0°)。求解并回答：\n(1) θ=0°时，求反射功率比W^r/W^i的数值(用n1=1.0、n2=2.0计算，保留三位有效数字，结果为无量纲)，并给出至少两条相互独立的计算路径的结果对比(给出绝对误差、相对误差百分比与一致性说明)。\n(2) 给出垂直入射的振幅反射系数r的符号表达式，说明W^r/W^i与|r|^2的关系，并给出θ=0°时TE/TM的等效性结论。\n(3) 基于角谱法对均匀平面波的场级复核：在两组采样设置[(dx,dy)=(2×10^-7 m,2×10^-7 m)、λ=632.8 nm、z=1 mm；(dx,dy)=(1×10^-6 m,1×10^-6 m)、λ=500 nm、z=-1 mm]下，说明反射场的角谱强度比应为|r|^2，并解释采样设置对数值准确性的影响与实现失败的常见原因(如输入数据类型不匹配)。结果以符号表达为主。\n(4) 求TM极化的布儒斯特角θ_B的符号表达，并给出其对应的最小反射率；同时给出TE极化在θ_B处的反射率的符号表达。\n(5) 说明等腰直角棱镜的几何形状是否影响底面垂直入射时的反射功率比，并给出物理理由。\n(6) 提交最终交叉校验表述：以(1)的数值结果记为R₁，列出各方法结果的对齐关系、绝对/相对误差统计与容差门限(例如≤1×10^-3)，并给出通过/失败判定。\n除(1)外，其余小问结果以符号表达式或定性结论给出；所有量按SI单位。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "好的，我们来逐一求解和分析这些问题。\n\n---\n\n### (1) 反射功率比的数值计算与交叉校验\n\n对于垂直入射（θ=0°），电磁波从介质1（空气，n₁=1.0）入射到介质2（玻璃，n₂=2.0）的平整界面。反射功率比（也称为反射率R）等于反射波的功率密度与入射波的功率密度之比，即 `R = W^r / W^i`。\n\n**计算路径一：基于菲涅尔方程 (Fresnel's Equations)**\n\n对于垂直入射，TE极化和TM极化的菲涅尔振幅反射系数公式简化为同一个表达式：\n`r = (n₁ - n₂) / (n₁ + n₂)`\n\n代入数值：\n`r = (1.0 - 2.0) / (1.0 + 2.0) = -1.0 / 3.0 = -1/3`\n\n反射功率比 `R` 是振幅反射系数模的平方：\n`R = |r|² = (-1/3)² = 1/9`\n\n转换为三位有效数字的数值：\n`R₁ = 1/9 ≈ 0.11111... ≈ 0.111`\n\n**计算路径二：基于波阻抗 (Wave Impedance)**\n\n波在介质中的阻抗 `η` 与该介质的折射率 `n` 和磁导率 `μr` 的关系为 `η = η₀ * √(μr / εr) = η₀ / n` (因为 `n = √εr` 且 `μr=1`)，其中 `η₀` 是真空波阻抗。\n\n振幅反射系数 `r` 也可以用波阻抗表示：\n`r = (η₂ - η₁) / (η₂ + η₁)`\n\n将 `η₁ = η₀ / n₁` 和 `η₂ = η₀ / n₂` 代入：\n`r = (η₀/n₂ - η₀/n₁) / (η₀/n₂ + η₀/n₁) = (1/n₂ - 1/n₁) / (1/n₂ + 1/n₁) = (n₁ - n₂) / (n₁ + n₂)`\n这与路径一的公式完全一致。\n\n因此，计算结果也必然相同：\n`r = (1.0 - 2.0) / (1.0 + 2.0) = -1/3`\n`R₂ = |r|² = (-1/3)² = 1/9 ≈ 0.111`\n\n**结果对比：**\n*   路径一结果 `R₁` ≈ 0.111\n*   路径二结果 `R₂` ≈ 0.111\n*   **绝对误差：** `|R₁ - R₂| = |1/9 - 1/9| = 0`\n*   **相对误差百分比：** `(|R₁ - R₂| / R₁) * 100% = 0%`\n*   **一致性说明：** 两种计算路径在代数上是等价的，都源于麦克斯韦方程组在介质边界处的连续性条件。因此，它们的计算结果完全一致，验证了计算的正确性。\n\n---\n\n### (2) 振幅反射系数与TE/TM等效性\n\n*   **垂直入射的振幅反射系数r的符号表达式：**\n    `r = (n₁ - n₂) / (n₁ + n₂)`\n    或等效地用波阻抗表示：\n    `r = (η₂ - η₁) / (η₂ + η₁)`\n\n*   **W^r/W^i与|r|²的关系：**\n    波的功率（或更准确地说是坡印亭矢量的大小）与电场（或磁场）振幅的平方成正比，即 `W ∝ |E|²`。\n    因此，反射功率比 `W^r / W^i` 等于反射波与入射波的电场振幅平方之比：\n    `W^r / W^i = |E_r|² / |E_i|²`\n    而振幅反射系数 `r` 定义为反射波与入射波的电场振幅之比 `r = E_r / E_i`。\n    所以，`W^r / W^i = |E_r / E_i|² = |r|²`。\n\n*   **θ=0°时TE/TM的等效性结论：**\n    在垂直入射（θ=0°）时，入射平面（由入射光线和法线构成的平面）无法唯一定义。电场矢量总是垂直于传播方向，因此它完全位于分界面内。这样，就无法区分电场是平行于入射面（TM波）还是垂直于入射面（TE波）。从数学上看，当入射角 `θ₁→0` 时，透射角 `θ₂→0`，此时TE和TM的菲涅尔反射系数公式 `r_TE` 和 `r_TM` 都收敛到同一个表达式 `(n₁ - n₂) / (n₁ + n₂)`。因此，在垂直入射时，TE和TM极化是完全等效的，没有区别。\n\n---\n\n### (3) 角谱法复核\n\n对于一个沿z轴正向传播的均匀平面波，其在 `z=0` 平面的场可以表示为 `U(x, y, 0)`。其角谱 `A(k_x, k_y)` 是其空间傅里叶变换。对于垂直入射的均匀平面波，其能量完全集中在零空间频率上，即其角谱是一个在原点 `(k_x=0, k_y=0)` 处的狄拉克δ函数：`A_i(k_x, k_y) ∝ δ(k_x)δ(k_y)`。\n\n*   **反射场角谱强度比：**\n    反射过程可以看作是一个线性空间不变系统，其传递函数是 `r(k_x, k_y)`，即随空间频率（等效于入射角）变化的反射系数。反射场的角谱 `A_r` 与入射场的角谱 `A_i` 的关系是：\n    `A_r(k_x, k_y) = r(k_x, k_y) * A_i(k_x, k_y)`\n    由于入射场角谱只在 `(0,0)` 处非零，所以反射场角谱也只在 `(0,0)` 处非零：\n    `A_r(k_x, k_y) = r(0, 0) * A_i(k_x, k_y)`\n    其中 `r(0, 0)` 就是垂直入射时的反射系数 `r`。\n    角谱强度是角谱幅值的平方，`I(k_x, k_y) = |A(k_x, k_y)|²`。因此，反射场与入射场的角谱强度之比为：\n    `I_r(k_x, k_y) / I_i(k_x, k_y) = |A_r(k_x, k_y)|² / |A_i(k_x, k_y)|² = |r(0, 0)|² = |r|²`\n    这与宏观的功率反射比 `R` 是一致的。\n\n*   **采样设置对数值准确性的影响：**\n    根据奈奎斯特采样定理，为了无失真地表示一个波场，空间采样间隔 `dx` (或 `dy`) 必须小于或等于被采样波在介质中波长的一半，即 `dx ≤ λ / (2 * n)`。对于空气中的波，`n=1`，所以 `dx ≤ λ/2`。\n    1.  **设置一：(dx,dy)=(2×10⁻⁷ m, 2×10⁻⁷ m), λ=632.8 nm**\n        `λ/2 = 632.8 nm / 2 = 316.4 nm = 3.164 × 10⁻⁷ m`。\n        由于 `dx = 2 × 10⁻⁷ m < 3.164 × 10⁻⁷ m`，此采样率满足奈奎斯特条件，可以准确地表示该波长的平面波，数值模拟结果准确性高。\n    2.  **设置二：(dx,dy)=(1×10⁻⁶ m, 1×10⁻⁶ m), λ=500 nm**\n        `λ/2 = 500 nm / 2 = 250 nm = 2.5 × 10⁻⁷ m`。\n        由于 `dx = 1 × 10⁻⁶ m > 2.5 × 10⁻⁷ m`，此采样率严重低于奈奎斯特频率，会导致严重的**混叠（Aliasing）**现象。数值计算将无法正确表达波的振荡特性，从而导致计算出的反射场和反射率完全错误。\n\n*   **实现失败的常见原因：**\n    *   **空间混叠：** 如上所述，采样间隔 `dx, dy` 过大。\n    *   **输入数据类型不匹配：** 角谱法通常涉及傅里叶变换（FFT），这要求输入和输出是复数类型（例如 `complex` 或 `complex128`）。如果将场分布作为实数数组输入，会丢失相位信息，导致计算错误。\n    *   **数值精度问题：** 在处理传播因子 `exp[i * z * sqrt(k² - k_x² - k_y²)]` 时，对浮点数的处理不当可能导致精度损失。\n    *   **边界效应：** FFT算法假设信号是周期性的。如果计算区域的边界处理不当（如未使用窗口函数或吸收边界条件），会导致能量从一侧“卷绕”到另一侧，产生非物理的干涉伪影。\n\n---\n\n### (4) 布儒斯特角与反射率\n\n*   **TM极化的布儒斯特角 `θ_B` 的符号表达：**\n    布儒斯特角是TM波（p-极化）反射率为零的入射角。其条件是反射光与折射光垂直。其表达式为：\n    `θ_B = arctan(n₂ / n₁)`\n\n*   **`θ_B` 对应的最小反射率：**\n    对于理想的无损介质，在布儒斯特角 `θ_B` 处，TM波的振幅反射系数 `r_TM` 为0。因此，其反射率 `R_TM` 也为0。\n    `R_TM(θ_B) = 0`\n\n*   **TE极化在 `θ_B` 处的反射率符号表达：**\n    当入射角为 `θ₁ = θ_B` 时，TE波（s-极化）的反射率不为零。其振幅反射系数为：\n    `r_TE(θ_B) = (n₁cos(θ_B) - n₂cos(θ₂)) / (n₁cos(θ_B) + n₂cos(θ₂))`\n    将 `θ_B = arctan(n₂/n₁)` 和斯涅尔定律 `n₁sin(θ_B) = n₂sin(θ₂)` 代入并化简，可得：\n    `r_TE(θ_B) = (n₁² - n₂²) / (n₁² + n₂²)`\n    因此，TE极化在布儒斯特角处的反射率为：\n    `R_TE(θ_B) = |r_TE(θ_B)|² = [ (n₁² - n₂²) / (n₁² + n₂²) ]²`\n\n---\n\n### (5) 棱镜几何形状的影响\n\n*   **结论：** 等腰直角棱镜的几何形状**不影响**底面垂直入射时的反射功率比。\n\n*   **物理理由：**\n    光的反射和折射是一个**局部界面现象**。在光线与界面相互作用的那个点上，反射和透射的比例仅由以下三个因素决定：\n    1.  入射介质的性质（折射率 n₁）。\n    2.  出射介质的性质（折射率 n₂）。\n    3.  光线相对于界面法线的入射角（θ₁）。\n\n    在本问题中，光线垂直入射到棱镜的底面（界面1）。此时，入射角 `θ₁=0°`。反射功率比完全由 `n₁` 和 `n₂` 决定。光波在这一点上“不知道”介质2（玻璃）的宏观形状是棱镜、平板还是半无限空间。棱镜的等腰直角形状只影响后续光线在玻璃内部的传播路径以及在界面2和界面3的出射行为，但对界面1的初始反射事件没有影响。\n\n---\n\n### (6) 最终交叉校验表述\n\n以(1)的数值结果记为 `R₁`，对两种计算路径的结果进行交叉校验。\n\n**交叉校验表**\n\n| 计算路径 | 符号表达式 | 计算结果 (精确值) | 数值 (三位有效数字) |\n| :--- | :--- | :---: | :---: |\n| 方法1: 菲涅尔方程 | `R = |(n₁-n₂)/(n₁+n₂)|²` | `1/9` | 0.111 |\n| 方法2: 波阻抗 | `R = |(η₂-η₁)/(η₂+η₁)|²` | `1/9` | 0.111 |\n\n**误差统计与一致性判定**\n\n*   **对齐关系：** 两种方法在代数上等价，计算结果完全对齐。\n*   **绝对误差：** `|0.1111... - 0.1111...| = 0`\n*   **相对误差：** `0 / 0.1111... = 0%`\n*   **容差门限：** 设定为 `≤ 1 × 10⁻³`\n*   **判定：** `0 ≤ 1 × 10⁻³`。\n*   **结论：** **通过 (Pass)**。两种独立推导路径的结果完全一致，验证了计算的准确性和理论的自洽性。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": \"[字符串]\",\n  \"(2)\": \"[数学方程字符串]\",\n  \"(3)\": \"[字符串]\",\n  \"(4)\": \"[数学方程字符串]\",\n  \"(5)\": \"[字符串]\",\n  \"(6)\": \"[数学方程字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)\": \"θ=0°时，反射功率比 W^r/W^i = 0.111。计算路径1(菲涅尔方程)与路径2(波阻抗)结果均为 R = |(1.0-2.0)/(1.0+2.0)|² = 1/9 ≈ 0.111。绝对误差为0，相对误差为0%，结果完全一致。\",\n  \"(2)\": \"r = (n₁ - n₂) / (n₁ + n₂); W^r/W^i = |r|²; θ=0°时，入射平面无法唯一定义，TE与TM极化完全等效。\",\n  \"(3)\": \"反射场的角谱强度比应为|r|²。采样设置必须满足奈奎斯特条件(dx, dy ≤ λ/2n)以避免空间混叠，否则结果失真。实现失败的常见原因包括：采样率不足导致混叠、输入数据类型非复数导致相位信息丢失、FFT周期性假设导致的边界效应。\",\n  \"(4)\": \"TM极化布儒斯特角: θ_B = arctan(n₂/n₁)，此时反射率 R_TM(θ_B) = 0。TE极化在θ_B处的反射率: R_TE(θ_B) = [(n₁² - n₂²)/(n₁² + n₂²)]²。\",\n  \"(5)\": \"不影响。物理理由：反射是局部界面现象，其功率比仅取决于入射角(θ=0°)及界面两侧介质的折射率(n₁, n₂)，与介质的宏观几何形状无关。\",\n  \"(6)\": \"交叉校验: R₁(菲涅尔) ≈ 0.111; R₂(波阻抗) ≈ 0.111. 绝对误差 = 0; 相对误差 = 0%. 误差(0) ≤ 容差门限(0.001). 判定: 通过(Pass)。\"\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "光学",
+    "image_path": [
+      "failed_question_images/f02e8e652be41d72b265f7bcd0c1008f1aa6ca8830565e0a60e24c36e05b9d0d.jpg"
+    ],
+    "solution_steps": [
+      "理论推导：ε_r=4 ⇒ n_glass=√ε_r=2，垂直入射r=(n1-n2)/(n1+n2)",
+      "调用 calculate_prism_reflection 计算功率反射率R",
+      "校验 calculate_power_reflection 与 calculate_reflection_coefficient 一致性"
+    ],
+    "tool_expected": [
+      "calculate_prism_reflection",
+      "calculate_power_reflection",
+      "calculate_reflection_coefficient"
+    ],
+    "golden_answer": [
+      {
+        "(1)": "W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。",
+        "(2)": "r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。",
+        "(3)": "角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。",
+        "(4)": "θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。",
+        "(5)": "不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。",
+        "(6)": "交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。"
+      }
+    ],
+    "original_question_id": "10",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "光学",
+    "test_type": "refined",
+    "original_question_id": "10",
+    "subject_topic_key": "物理科学::光学"
+  },
+  "answer_template": {
+    "(1)": "[字符串]",
+    "(2)": "[数学方程字符串]",
+    "(3)": "[字符串]",
+    "(4)": "[数学方程字符串]",
+    "(5)": "[字符串]",
+    "(6)": "[数学方程字符串]"
+  },
+  "golden_standard": {
+    "(1)": "W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。",
+    "(2)": "r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。",
+    "(3)": "角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。",
+    "(4)": "θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。",
+    "(5)": "不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。",
+    "(6)": "交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": "θ=0°时，反射功率比 W^r/W^i = 0.111。计算路径1(菲涅尔方程)与路径2(波阻抗)结果均为 R = |(1.0-2.0)/(1.0+2.0)|² = 1/9 ≈ 0.111。绝对误差为0，相对误差为0%，结果完全一致。",
+    "(2)": "r = (n₁ - n₂) / (n₁ + n₂); W^r/W^i = |r|²; θ=0°时，入射平面无法唯一定义，TE与TM极化完全等效。",
+    "(3)": "反射场的角谱强度比应为|r|²。采样设置必须满足奈奎斯特条件(dx, dy ≤ λ/2n)以避免空间混叠，否则结果失真。实现失败的常见原因包括：采样率不足导致混叠、输入数据类型非复数导致相位信息丢失、FFT周期性假设导致的边界效应。",
+    "(4)": "TM极化布儒斯特角: θ_B = arctan(n₂/n₁)，此时反射率 R_TM(θ_B) = 0。TE极化在θ_B处的反射率: R_TE(θ_B) = [(n₁² - n₂²)/(n₁² + n₂²)]²。",
+    "(5)": "不影响。物理理由：反射是局部界面现象，其功率比仅取决于入射角(θ=0°)及界面两侧介质的折射率(n₁, n₂)，与介质的宏观几何形状无关。",
+    "(6)": "交叉校验: R₁(菲涅尔) ≈ 0.111; R₂(波阻抗) ≈ 0.111. 绝对误差 = 0; 相对误差 = 0%. 误差(0) ≤ 容差门限(0.001). 判定: 通过(Pass)。"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)\": \"θ=0°时，反射功率比 W^r/W^i = 0.111。计算路径1(菲涅尔方程)与路径2(波阻抗)结果均为 R = |(1.0-2.0)/(1.0+2.0)|² = 1/9 ≈ 0.111。绝对误差为0，相对误差为0%，结果完全一致。\",\n  \"(2)\": \"r = (n₁ - n₂) / (n₁ + n₂); W^r/W^i = |r|²; θ=0°时，入射平面无法唯一定义，TE与TM极化完全等效。\",\n  \"(3)\": \"反射场的角谱强度比应为|r|²。采样设置必须满足奈奎斯特条件(dx, dy ≤ λ/2n)以避免空间混叠，否则结果失真。实现失败的常见原因包括：采样率不足导致混叠、输入数据类型非复数导致相位信息丢失、FFT周期性假设导致的边界效应。\",\n  \"(4)\": \"TM极化布儒斯特角: θ_B = arctan(n₂/n₁)，此时反射率 R_TM(θ_B) = 0。TE极化在θ_B处的反射率: R_TE(θ_B) = [(n₁² - n₂²)/(n₁² + n₂²)]²。\",\n  \"(5)\": \"不影响。物理理由：反射是局部界面现象，其功率比仅取决于入射角(θ=0°)及界面两侧介质的折射率(n₁, n₂)，与介质的宏观几何形状无关。\",\n  \"(6)\": \"交叉校验: R₁(菲涅尔) ≈ 0.111; R₂(波阻抗) ≈ 0.111. 绝对误差 = 0; 相对误差 = 0%. 误差(0) ≤ 容差门限(0.001). 判定: 通过(Pass)。\"\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)\": \"θ=0°时，反射功率比 W^r/W^i = 0.111。计算路径1(菲涅尔方程)与路径2(波阻抗)结果均为 R = |(1.0-2.0)/(1.0+2.0)|² = 1/9 ≈ 0.111。绝对误差为0，相对误差为0%，结果完全一致。\",\n  \"(2)\": \"r = (n₁ - n₂) / (n₁ + n₂); W^r/W^i = |r|²; θ=0°时，入射平面无法唯一定义，TE与TM极化完全等效。\",\n  \"(3)\": \"反射场的角谱强度比应为|r|²。采样设置必须满足奈奎斯特条件(dx, dy ≤ λ/2n)以避免空间混叠，否则结果失真。实现失败的常见原因包括：采样率不足导致混叠、输入数据类型非复数导致相位信息丢失、FFT周期性假设导致的边界效应。\",\n  \"(4)\": \"TM极化布儒斯特角: θ_B = arctan(n₂/n₁)，此时反射率 R_TM(θ_B) = 0。TE极化在θ_B处的反射率: R_TE(θ_B) = [(n₁² - n₂²)/(n₁² + n₂²)]²。\",\n  \"(5)\": \"不影响。物理理由：反射是局部界面现象，其功率比仅取决于入射角(θ=0°)及界面两侧介质的折射率(n₁, n₂)，与介质的宏观几何形状无关。\",\n  \"(6)\": \"交叉校验: R₁(菲涅尔) ≈ 0.111; R₂(波阻抗) ≈ 0.111. 绝对误差 = 0; 相对误差 = 0%. 误差(0) ≤ 容差门限(0.001). 判定: 通过(Pass)。\"\n}\n```"
+  },
+  "evaluation_score": 1.0,
+  "evaluation_summary": "匹配字段: 6/6 (得分: 100.00%)",
+  "evaluation_details": {
+    "(1)": {
+      "path": "(1)",
+      "expected": "W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。",
+      "actual": "θ=0°时，反射功率比 W^r/W^i = 0.111。计算路径1(菲涅尔方程)与路径2(波阻抗)结果均为 R = |(1.0-2.0)/(1.0+2.0)|² = 1/9 ≈ 0.111。绝对误差为0，相对误差为0%，结果完全一致。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2)": {
+      "path": "(2)",
+      "expected": "r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。",
+      "actual": "r = (n₁ - n₂) / (n₁ + n₂); W^r/W^i = |r|²; θ=0°时，入射平面无法唯一定义，TE与TM极化完全等效。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)": {
+      "path": "(3)",
+      "expected": "角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。",
+      "actual": "反射场的角谱强度比应为|r|²。采样设置必须满足奈奎斯特条件(dx, dy ≤ λ/2n)以避免空间混叠，否则结果失真。实现失败的常见原因包括：采样率不足导致混叠、输入数据类型非复数导致相位信息丢失、FFT周期性假设导致的边界效应。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)": {
+      "path": "(4)",
+      "expected": "θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。",
+      "actual": "TM极化布儒斯特角: θ_B = arctan(n₂/n₁)，此时反射率 R_TM(θ_B) = 0。TE极化在θ_B处的反射率: R_TE(θ_B) = [(n₁² - n₂²)/(n₁² + n₂²)]²。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5)": {
+      "path": "(5)",
+      "expected": "不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。",
+      "actual": "不影响。物理理由：反射是局部界面现象，其功率比仅取决于入射角(θ=0°)及界面两侧介质的折射率(n₁, n₂)，与介质的宏观几何形状无关。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6)": {
+      "path": "(6)",
+      "expected": "交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。",
+      "actual": "交叉校验: R₁(菲涅尔) ≈ 0.111; R₂(波阻抗) ≈ 0.111. 绝对误差 = 0; 相对误差 = 0%. 误差(0) ≤ 容差门限(0.001). 判定: 通过(Pass)。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "mode_folder": "without_tools",
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 1.0,
+    "0_75": 1.0,
+    "0_100": 1.0
+  }
+}

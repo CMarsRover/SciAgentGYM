@@ -1,0 +1,155 @@
+{
+  "id": "4_ref_0",
+  "query": "一根无限长直导线沿 z 轴通过原点，电流沿 +z。空间中有等边三角形细导线闭合回路，位于 y=0 的 x–z 平面，边长 a=0.2 m。顶点坐标：V1=(0.1,0,0) m，V2=(0.2,0,0.17320508075688773) m，V3=(0.2,0,-0.17320508075688773) m。回路方向 V1→V2→V3→V1（法向为 −y）。磁常数 μ0=4π×10^-7 H/m。已知：\n- 解析基准互感 M0=-7.817573973477641e-10 H。\n- 数值法1与数值法2的互感：M_N1=-3.2226719599719743e-10 H，M_N2=-7.8152000e-10 H。\n- I=1 A 时，磁场采样：B(V1)=(0,2.0e-6,0) T，B(V2)=B(V3)=(0,1.0e-6,0) T。\n- 将三角形绕过 V1 且平行 y 轴的直线刚体旋转 β∈{15°,30°,45°}，其互感分别为 M(15°)=-7.5547640e-10 H，M(30°)=-6.7543842e-10 H，M(45°)=-5.4996630e-10 H。\n- 灵敏度测试（有限差分，Δd=Δa=0.001 m）：M(d+Δd)=-7.743e-10 H，M(d-Δd)=-7.893e-10 H；M(a+Δa)=-7.835e-10 H，M(a-Δa)=-7.800e-10 H。d 表示直导线到最近顶点 V1 的距离。\n- 数值收敛（加密前后结果变化量）：数值法1的变化量 <1.5e-13 H；数值法2的变化量为 5.0e-14 H。\n任务：\n(1) 以 M0 为基准，分别给出 M_N1、M_N2 的相对误差（%）并判定是否满足 1% 阈值（通过/未通过）。\n(2) 计算 β=15°,30°,45° 时 r(β)=M(β)/M(0)，并与 cosβ 比较，给出相对偏差 δ=[r(β)−cosβ]/cosβ（%）及是否在 1% 阈值内。\n(3) 利用给定的 B(V1)、B(V2)、B(V3) 与回路法向（−y），判断互感的正负号与物理是否一致，并给出符号与理由。\n(4) 由给定有限差分数据求 ∂M/∂d 与 ∂M/∂a（单位 H/m）。用线性近似在 ±Δ 处回代检验，并报告相对残差（%）。\n(5) 用“加密前后变化量”作为各数值法的数值误差上界（单位 H），并据此与解析值差异综合给出推荐不确定度（单位 H）。\n(6) 汇总各项交叉校验的通过/未通过结论；给出最终推荐的 M0 数值与不确定度。\n说明：除(3)外，其余小问均需给出数值；数值结果以 SI 单位表示，百分比以 % 表示，保留 3–4 位有效数字。",
+  "model": "gpt-4o-20241120",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "一根无限长直导线沿 z 轴通过原点，电流沿 +z。空间中有等边三角形细导线闭合回路，位于 y=0 的 x–z 平面，边长 a=0.2 m。顶点坐标：V1=(0.1,0,0) m，V2=(0.2,0,0.17320508075688773) m，V3=(0.2,0,-0.17320508075688773) m。回路方向 V1→V2→V3→V1（法向为 −y）。磁常数 μ0=4π×10^-7 H/m。已知：\n- 解析基准互感 M0=-7.817573973477641e-10 H。\n- 数值法1与数值法2的互感：M_N1=-3.2226719599719743e-10 H，M_N2=-7.8152000e-10 H。\n- I=1 A 时，磁场采样：B(V1)=(0,2.0e-6,0) T，B(V2)=B(V3)=(0,1.0e-6,0) T。\n- 将三角形绕过 V1 且平行 y 轴的直线刚体旋转 β∈{15°,30°,45°}，其互感分别为 M(15°)=-7.5547640e-10 H，M(30°)=-6.7543842e-10 H，M(45°)=-5.4996630e-10 H。\n- 灵敏度测试（有限差分，Δd=Δa=0.001 m）：M(d+Δd)=-7.743e-10 H，M(d-Δd)=-7.893e-10 H；M(a+Δa)=-7.835e-10 H，M(a-Δa)=-7.800e-10 H。d 表示直导线到最近顶点 V1 的距离。\n- 数值收敛（加密前后结果变化量）：数值法1的变化量 <1.5e-13 H；数值法2的变化量为 5.0e-14 H。\n任务：\n(1) 以 M0 为基准，分别给出 M_N1、M_N2 的相对误差（%）并判定是否满足 1% 阈值（通过/未通过）。\n(2) 计算 β=15°,30°,45° 时 r(β)=M(β)/M(0)，并与 cosβ 比较，给出相对偏差 δ=[r(β)−cosβ]/cosβ（%）及是否在 1% 阈值内。\n(3) 利用给定的 B(V1)、B(V2)、B(V3) 与回路法向（−y），判断互感的正负号与物理是否一致，并给出符号与理由。\n(4) 由给定有限差分数据求 ∂M/∂d 与 ∂M/∂a（单位 H/m）。用线性近似在 ±Δ 处回代检验，并报告相对残差（%）。\n(5) 用“加密前后变化量”作为各数值法的数值误差上界（单位 H），并据此与解析值差异综合给出推荐不确定度（单位 H）。\n(6) 汇总各项交叉校验的通过/未通过结论；给出最终推荐的 M0 数值与不确定度。\n说明：除(3)外，其余小问均需给出数值；数值结果以 SI 单位表示，百分比以 % 表示，保留 3–4 位有效数字。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "### 解题过程\n\n#### (1) **相对误差计算与阈值判定**\n\n相对误差的计算公式为：\n\\[\n\\text{Relative Error (\\%)} = \\frac{|M_x - M_0|}{|M_0|} \\times 100\n\\]\n\n计算：\n1. 对于 \\( M_{N1} = -3.2226719599719743 \\times 10^{-10} \\, \\text{H} \\):\n   \\[\n   \\text{Relative Error (\\%)} = \\frac{|-3.2226719599719743 \\times 10^{-10} - (-7.817573973477641 \\times 10^{-10})|}{|-7.817573973477641 \\times 10^{-10}|} \\times 100 = 58.76\\%\n   \\]\n   未通过（超过 1% 阈值）。\n\n2. 对于 \\( M_{N2} = -7.8152000 \\times 10^{-10} \\, \\text{H} \\):\n   \\[\n   \\text{Relative Error (\\%)} = \\frac{|-7.8152000 \\times 10^{-10} - (-7.817573973477641 \\times 10^{-10})|}{|-7.817573973477641 \\times 10^{-10}|} \\times 100 = 0.0304\\%\n   \\]\n   通过（小于 1% 阈值）。\n\n#### (2) **计算 \\( r(\\beta) \\) 与偏差 δ，并判定阈值**\n\n定义 \\( r(\\beta) = \\frac{M(\\beta)}{M(0)} \\)，其中 \\( M(0) = M_0 \\)。  \n相对偏差公式为：\n\\[\n\\delta (\\%) = \\frac{r(\\beta) - \\cos\\beta}{\\cos\\beta} \\times 100\n\\]\n\n计算：\n1. **当 \\( \\beta = 15^\\circ \\):**\n   \\[\n   r(15^\\circ) = \\frac{-7.5547640 \\times 10^{-10}}{-7.817573973477641 \\times 10^{-10}} = 0.9664\n   \\]\n   \\[\n   \\cos(15^\\circ) = 0.9659\n   \\]\n   \\[\n   \\delta (\\%) = \\frac{0.9664 - 0.9659}{0.9659} \\times 100 = 0.0518\\%\n   \\]\n   通过（小于 1% 阈值）。\n\n2. **当 \\( \\beta = 30^\\circ \\):**\n   \\[\n   r(30^\\circ) = \\frac{-6.7543842 \\times 10^{-10}}{-7.817573973477641 \\times 10^{-10}} = 0.8641\n   \\]\n   \\[\n   \\cos(30^\\circ) = 0.8660\n   \\]\n   \\[\n   \\delta (\\%) = \\frac{0.8641 - 0.8660}{0.8660} \\times 100 = -0.2193\\%\n   \\]\n   通过（小于 1% 阈值）。\n\n3. **当 \\( \\beta = 45^\\circ \\):**\n   \\[\n   r(45^\\circ) = \\frac{-5.4996630 \\times 10^{-10}}{-7.817573973477641 \\times 10^{-10}} = 0.7033\n   \\]\n   \\[\n   \\cos(45^\\circ) = 0.7071\n   \\]\n   \\[\n   \\delta (\\%) = \\frac{0.7033 - 0.7071}{0.7071} \\times 100 = -0.5378\\%\n   \\]\n   通过（小于 1% 阈值）。\n\n#### (3) **判断互感符号是否正确**\n\n根据磁场 \\( \\mathbf{B}(V_1) = (0, 2.0 \\times 10^{-6}, 0) \\, \\text{T} \\) 和 \\( \\mathbf{B}(V_2) = \\mathbf{B}(V_3) = (0, 1.0 \\times 10^{-6}, 0) \\, \\text{T} \\)，磁场方向为 +y。回路法向为 −y。因此，磁场与法向相反，说明磁通为负，互感 \\( M \\) 应为负值。\n\n结论：互感的负号与物理规律一致。\n\n#### (4) **求导数与线性近似检验**\n\n利用有限差分公式：\n\\[\n\\frac{\\partial M}{\\partial d} = \\frac{M(d+\\Delta d) - M(d-\\Delta d)}{2\\Delta d}\n\\]\n\\[\n\\frac{\\partial M}{\\partial a} = \\frac{M(a+\\Delta a) - M(a-\\Delta a)}{2\\Delta a}\n\\]\n\n计算：\n1. **导数 \\( \\partial M / \\partial d \\):**\n   \\[\n   \\frac{\\partial M}{\\partial d} = \\frac{-7.743 \\times 10^{-10} - (-7.893 \\times 10^{-10})}{2 \\times 0.001} = 7.5 \\times 10^{-8} \\, \\text{H/m}\n   \\]\n\n2. **导数 \\( \\partial M / \\partial a \\):**\n   \\[\n   \\frac{\\partial M}{\\partial a} = \\frac{-7.835 \\times 10^{-10} - (-7.800 \\times 10^{-10})}{2 \\times 0.001} = -1.75 \\times 10^{-8} \\, \\text{H/m}\n   \\]\n\n线性近似检验：\n\\[\nM(d+\\Delta d) \\approx M(d) + \\frac{\\partial M}{\\partial d} \\cdot \\Delta d\n\\]\n\\[\nM(a+\\Delta a) \\approx M(a) + \\frac{\\partial M}{\\partial a} \\cdot \\Delta a\n\\]\n\n检验结果：\n- 对于 \\( d+\\Delta d \\):  \n  \\[\n  M \\approx -7.893 \\times 10^{-10} + (7.5 \\times 10^{-8}) \\cdot 0.001 = -7.743 \\times 10^{-10} \\, \\text{H}\n  \\]\n  相对残差为 \\( 0\\% \\)。\n\n- 对于 \\( a+\\Delta a \\):  \n  \\[\n  M \\approx -7.800 \\times 10^{-10} + (-1.75 \\times 10^{-8}) \\cdot 0.001 = -7.835 \\times 10^{-10} \\, \\text{H}\n  \\]\n  相对残差为 \\( 0\\% \\)。\n\n#### (5) **推荐不确定度**\n\n根据数值法的误差上界：\n- 数值法1：<\\( 1.5 \\times 10^{-13} \\, \\text{H} \\)\n- 数值法2：\\( 5.0 \\times 10^{-14} \\, \\text{H} \\)\n\n推荐综合不确定度：\\( 5.0 \\times 10^{-14} \\, \\text{H} \\)。\n\n#### (6) **汇总结论**\n\n1. \\( M_{N1} \\) 未通过；\\( M_{N2} \\) 通过。\n2. \\( r(\\beta) \\) 与 \\( \\cos\\beta \\) 的偏差均通过。\n3. 符号一致，物理正确。\n4. 导数计算与线性近似检验通过。\n5. 推荐不确定度为 \\( 5.0 \\times 10^{-14} \\, \\text{H} \\)。\n\n最终推荐值：  \n\\( M_0 = -7.817573973477641 \\times 10^{-10} \\, \\text{H} \\)  \n不确定度：\\( 5.0 \\times 10^{-14} \\, \\text{H} \\)。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": \"[字符串]\",\n  \"(2)\": \"[字符串]\",\n  \"(3)\": \"[字符串]\",\n  \"(4)\": \"[字符串]\",\n  \"(5)\": \"[字符串]\",\n  \"(6)\": \"[字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)\": \"M_N1 未通过（误差 58.76%），M_N2 通过（误差 0.03%）\",\n  \"(2)\": \"r(β) 和 cosβ 的相对偏差均通过（最大偏差 0.54%）\",\n  \"(3)\": \"符号正确，磁场方向与回路法向相反，因此互感为负\",\n  \"(4)\": \"∂M/∂d ≈ 7.50e-8 H/m，∂M/∂a ≈ -1.75e-8 H/m，线性近似残差为 0%\",\n  \"(5)\": \"推荐不确定度为 5.00e-14 H，基于数值法误差上界\",\n  \"(6)\": \"最终推荐 M0 = -7.818e-10 H，推荐不确定度为 5.00e-14 H\"\n}\n```"
+    }
+  ],
+  "answer_template": {
+    "(1)": "[字符串]",
+    "(2)": "[字符串]",
+    "(3)": "[字符串]",
+    "(4)": "[字符串]",
+    "(5)": "[字符串]",
+    "(6)": "[字符串]"
+  },
+  "golden_standard": {
+    "(1)": "相对误差_N1=58.8%，判定：未通过；相对误差_N2=0.0304%，判定：通过",
+    "(2)": "β=15°：δ=0.00770%，通过；β=30°：δ=−0.2338%，通过；β=45°：δ=−0.510%，通过",
+    "(3)": "符号：负；理由：B 在各顶点沿 +y，而回路法向为 −y，B·n<0 → 磁通量为负 → 互感为负，符号一致",
+    "(4)": "∂M/∂d=7.50e−09 H/m；∂M/∂a=−1.75e−09 H/m；残差：d± 均为 0.055%，a± 均为 0.0095%",
+    "(5)": "数值法1误差上界 ≤1.5e−13 H；数值法2误差上界 ≤5.0e−14 H；推荐不确定度：3.0e−13 H",
+    "(6)": "汇总：解析基线 通过；数值法1 未通过；数值法2 通过；倾斜趋势 通过；场方向与符号 通过；灵敏度线性化 通过；收敛性：数值法2良好、数值法1存在系统偏差。最终推荐：M0=−7.818e−10 H，不确定度=3.0e−13 H"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": "M_N1 未通过（误差 58.76%），M_N2 通过（误差 0.03%）",
+    "(2)": "r(β) 和 cosβ 的相对偏差均通过（最大偏差 0.54%）",
+    "(3)": "符号正确，磁场方向与回路法向相反，因此互感为负",
+    "(4)": "∂M/∂d ≈ 7.50e-8 H/m，∂M/∂a ≈ -1.75e-8 H/m，线性近似残差为 0%",
+    "(5)": "推荐不确定度为 5.00e-14 H，基于数值法误差上界",
+    "(6)": "最终推荐 M0 = -7.818e-10 H，推荐不确定度为 5.00e-14 H"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)\": \"M_N1 未通过（误差 58.76%），M_N2 通过（误差 0.03%）\",\n  \"(2)\": \"r(β) 和 cosβ 的相对偏差均通过（最大偏差 0.54%）\",\n  \"(3)\": \"符号正确，磁场方向与回路法向相反，因此互感为负\",\n  \"(4)\": \"∂M/∂d ≈ 7.50e-8 H/m，∂M/∂a ≈ -1.75e-8 H/m，线性近似残差为 0%\",\n  \"(5)\": \"推荐不确定度为 5.00e-14 H，基于数值法误差上界\",\n  \"(6)\": \"最终推荐 M0 = -7.818e-10 H，推荐不确定度为 5.00e-14 H\"\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)\": \"M_N1 未通过（误差 58.76%），M_N2 通过（误差 0.03%）\",\n  \"(2)\": \"r(β) 和 cosβ 的相对偏差均通过（最大偏差 0.54%）\",\n  \"(3)\": \"符号正确，磁场方向与回路法向相反，因此互感为负\",\n  \"(4)\": \"∂M/∂d ≈ 7.50e-8 H/m，∂M/∂a ≈ -1.75e-8 H/m，线性近似残差为 0%\",\n  \"(5)\": \"推荐不确定度为 5.00e-14 H，基于数值法误差上界\",\n  \"(6)\": \"最终推荐 M0 = -7.818e-10 H，推荐不确定度为 5.00e-14 H\"\n}\n```"
+  },
+  "evaluation_score": 0.5,
+  "evaluation_summary": "匹配字段: 3/6 (得分: 50.00%)",
+  "evaluation_details": {
+    "(1)": {
+      "path": "(1)",
+      "expected": "相对误差_N1=58.8%，判定：未通过；相对误差_N2=0.0304%，判定：通过",
+      "actual": "M_N1 未通过（误差 58.76%），M_N2 通过（误差 0.03%）",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2)": {
+      "path": "(2)",
+      "expected": "β=15°：δ=0.00770%，通过；β=30°：δ=−0.2338%，通过；β=45°：δ=−0.510%，通过",
+      "actual": "r(β) 和 cosβ 的相对偏差均通过（最大偏差 0.54%）",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)": {
+      "path": "(3)",
+      "expected": "符号：负；理由：B 在各顶点沿 +y，而回路法向为 −y，B·n<0 → 磁通量为负 → 互感为负，符号一致",
+      "actual": "符号正确，磁场方向与回路法向相反，因此互感为负",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)": {
+      "path": "(4)",
+      "expected": "∂M/∂d=7.50e−09 H/m；∂M/∂a=−1.75e−09 H/m；残差：d± 均为 0.055%，a± 均为 0.0095%",
+      "actual": "∂M/∂d ≈ 7.50e-8 H/m，∂M/∂a ≈ -1.75e-8 H/m，线性近似残差为 0%",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5)": {
+      "path": "(5)",
+      "expected": "数值法1误差上界 ≤1.5e−13 H；数值法2误差上界 ≤5.0e−14 H；推荐不确定度：3.0e−13 H",
+      "actual": "推荐不确定度为 5.00e-14 H，基于数值法误差上界",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(6)": {
+      "path": "(6)",
+      "expected": "汇总：解析基线 通过；数值法1 未通过；数值法2 通过；倾斜趋势 通过；场方向与符号 通过；灵敏度线性化 通过；收敛性：数值法2良好、数值法1存在系统偏差。最终推荐：M0=−7.818e−10 H，不确定度=3.0e−13 H",
+      "actual": "最终推荐 M0 = -7.818e-10 H，推荐不确定度为 5.00e-14 H",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "电磁学",
+    "image_path": [
+      "failed_question_images/cb748e9a0c64accbf89daa58c1259b927f9fd18088f64bd0bb2464c0a74e1bb1.jpg"
+    ],
+    "solution_steps": [
+      "写出解析公式 M=(√3 μ0)/(3π)[ d ln((2d+√3 a)/d) - (√3/2)a ]",
+      "调用 calculate_mutual_inductance_wire_triangle 分别用解析与数值法求M并对比",
+      "可选：用 calculate_mutual_inductance_wire_loop 验证参数化回路数值一致性"
+    ],
+    "tool_expected": [
+      "calculate_mutual_inductance_wire_triangle",
+      "calculate_mutual_inductance_wire_loop"
+    ],
+    "golden_answer": [
+      {
+        "(1) 相对误差与阈值判据": "ε1 = |M1 − M0| / |M0|；ε2 = |M2 − M0| / |M0|。判据：εi ≤ 1% 为通过，εi > 1% 为未通过（i=1,2）。",
+        "(2) 倾斜比值与余弦对比": "对每个 β：rβ = M(β)/M(0)，δβ = |rβ − cosβ| / |cosβ|。判据：δβ ≤ 1% 为通过，δβ > 1% 为未通过。",
+        "(3) 互感符号与物理一致性": "结论：M < 0。理由：回路法向 n = −ŷ；三顶点处 B 均沿 +ŷ，故 B·n < 0 ⇒ Φ = ∬ B·n dS < 0；按 M = Φ/I（I>0）得 M 为负，符号与几何与取向一致。",
+        "(4) 灵敏度与线性回代残差": "∂M/∂d ≈ [M(d+Δd) − M(d−Δd)] / (2Δd)，单位 H/m；∂M/∂a ≈ [M(a+Δa) − M(a−Δa)] / (2Δa)，单位 H/m。线性回代预测：M̂(d±Δd) = M0 ± (∂M/∂d)Δd；相对残差 r_d± = |M̂(d±Δd) − M(d±Δd)| / |M(d±Δd)|。同理：M̂(a±Δa) = M0 ± (∂M/∂a)Δa；r_a± = |M̂(a±Δa) − M(a±Δa)| / |M(a±Δa)|。",
+        "(5) 误差上界与综合不确定度": "方法1数值误差上界 u1 ≤ ΔN1；方法2数值误差上界 u2 ≤ ΔN2。与解析差异：ΔA1 = |M1 − M0|，ΔA2 = |M2 − M0|。综合不确定度（保守）可取 U = max{ΔN1, ΔN2, ΔA1, ΔA2}。",
+        "(6) 汇总判据与推荐值（数值）": "- 通过判据：若(1)中至少有一方法满足 1% 且(2)各 β 满足 1% 且(3)符号一致且(4)残差皆小于预设阈值（如远小于1%）且(5)所得 U 有限且不劣于主要偏差，则总体通过；否则未通过。\n- 推荐：M_rec = M0；不确定度取 U（见(5)）。\n- 数值给出：M_rec = -7.818e-10 H；U = 3.0e-13 H。"
+      }
+    ],
+    "original_question_id": "4",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "电磁学",
+    "test_type": "refined",
+    "original_question_id": "4",
+    "subject_topic_key": "物理科学::电磁学"
+  },
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 1.0,
+    "0_75": 0.6,
+    "0_100": 0.5
+  }
+}

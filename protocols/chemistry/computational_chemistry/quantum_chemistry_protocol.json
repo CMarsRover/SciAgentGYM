@@ -1,0 +1,44 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_potential_energy_curve",
+            "description": "绘制势能曲线。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "bond_lengths": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "键长数组，单位为埃(Å)"
+                    },
+                    "energies": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应的能量数组，单位为哈特里(Hartree)"
+                    },
+                    "equilibrium_length": {
+                        "type": "number",
+                        "description": "平衡键长，如果提供则会在图上标记"
+                    },
+                    "min_energy": {
+                        "type": "number",
+                        "description": "最小能量，如果提供则会在图上标记"
+                    }
+                },
+                "required": [
+                    "bond_lengths",
+                    "energies"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/quantum_chemistry.py"
+        }
+    }
+]

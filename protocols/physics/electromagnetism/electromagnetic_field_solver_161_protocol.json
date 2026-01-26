@@ -1,0 +1,241 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_conical_conductor_potential",
+            "description": "计算无限长导体圆锥在导体平面上的电位分布。该函数基于拉普拉斯方程在球坐标系中的解，适用于轴对称电位分布问题。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "theta": {
+                        "type": "number",
+                        "description": "极角，单位为弧度，有效范围为[alpha, pi/2]"
+                    },
+                    "alpha": {
+                        "type": "number",
+                        "description": "圆锥半夹角，单位为弧度，范围(0, pi/2)"
+                    },
+                    "phi_0": {
+                        "type": "number",
+                        "description": "圆锥表面的电位值，默认为1.0"
+                    }
+                },
+                "required": [
+                    "theta",
+                    "alpha"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_161.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "derive_potential_constants",
+            "description": "从轴对称拉普拉斯角向方程推导电位分布常数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "alpha": {
+                        "type": "number",
+                        "description": "圆锥半夹角，弧度，(0, π/2)"
+                    },
+                    "phi_0": {
+                        "type": "number",
+                        "description": "圆锥表面的电位值，默认为1.0"
+                    },
+                    "verbose": {
+                        "type": "boolean",
+                        "description": "若 True，打印推导与线性求解细节，默认为False"
+                    }
+                },
+                "required": [
+                    "alpha"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_161.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "potential_via_integration",
+            "description": "使用显式积分推导得到的解析式计算电位，并可选打印推导步骤与常数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "theta": {
+                        "type": "number",
+                        "description": "极角（弧度），取值区间 [alpha, π/2]"
+                    },
+                    "alpha": {
+                        "type": "number",
+                        "description": "圆锥半夹角（弧度），(0, π/2)"
+                    },
+                    "phi_0": {
+                        "type": "number",
+                        "description": "圆锥表面的电位值，默认为1.0"
+                    },
+                    "verbose": {
+                        "type": "boolean",
+                        "description": "若为 True，则打印积分推导关键步骤与 A、B 常数，默认为False"
+                    }
+                },
+                "required": [
+                    "theta",
+                    "alpha"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_161.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_electric_field",
+            "description": "计算无限长导体圆锥在导体平面上的电场分布。电场是电位的负梯度，在球坐标系中分为径向和角向分量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "r": {
+                        "type": "number",
+                        "description": "径向距离，单位为米"
+                    },
+                    "theta": {
+                        "type": "number",
+                        "description": "极角，单位为弧度，有效范围为[alpha, pi/2]"
+                    },
+                    "alpha": {
+                        "type": "number",
+                        "description": "圆锥半夹角，单位为弧度，范围(0, pi/2)"
+                    },
+                    "phi_0": {
+                        "type": "number",
+                        "description": "圆锥表面的电位值，默认为1.0"
+                    }
+                },
+                "required": [
+                    "r",
+                    "theta",
+                    "alpha"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_161.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_charge_density",
+            "description": "计算导体表面的电荷密度分布。根据高斯定理，导体表面的电荷密度等于ε₀乘以电场的法向分量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "r": {
+                        "type": "number",
+                        "description": "径向距离，单位为米"
+                    },
+                    "theta": {
+                        "type": "number",
+                        "description": "极角，单位为弧度"
+                    },
+                    "alpha": {
+                        "type": "number",
+                        "description": "圆锥半夹角，单位为弧度"
+                    },
+                    "phi_0": {
+                        "type": "number",
+                        "description": "圆锥表面的电位值，默认为1.0"
+                    },
+                    "epsilon_0": {
+                        "type": "number",
+                        "description": "真空介电常数，默认为8.85e-12 F/m"
+                    }
+                },
+                "required": [
+                    "r",
+                    "theta",
+                    "alpha"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_161.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_potential_distribution",
+            "description": "绘制电位分布图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "alpha": {
+                        "type": "number",
+                        "description": "圆锥半夹角，单位为弧度"
+                    },
+                    "phi_0": {
+                        "type": "number",
+                        "description": "圆锥表面的电位值，默认为1.0"
+                    },
+                    "resolution": {
+                        "type": "integer",
+                        "description": "网格分辨率，默认为100"
+                    }
+                },
+                "required": [
+                    "alpha"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_161.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_electric_field",
+            "description": "绘制电场分布图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "alpha": {
+                        "type": "number",
+                        "description": "圆锥半夹角，单位为弧度"
+                    },
+                    "phi_0": {
+                        "type": "number",
+                        "description": "圆锥表面的电位值，默认为1.0"
+                    },
+                    "resolution": {
+                        "type": "integer",
+                        "description": "网格分辨率，默认为20"
+                    }
+                },
+                "required": [
+                    "alpha"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_161.py"
+        }
+    }
+]

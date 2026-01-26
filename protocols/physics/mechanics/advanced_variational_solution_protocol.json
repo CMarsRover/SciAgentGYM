@@ -1,0 +1,290 @@
+{
+  "class_name": "AdvancedVariationalSolution",
+  "description": "高级变分问题求解工具，提供变分问题的创建、解析验证、路径族分析、数值方法对比、能量分析和可视化功能。",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "create_variational_problem",
+        "description": "创建变分问题。创建拉格朗日函数和拉格朗日力学系统，用于变分问题的求解和分析。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "lagrangian_expr": {
+              "type": "string",
+              "description": "拉格朗日函数表达式，默认为\"(1/2)*x_dot^2 - (1/2)*x^2\""
+            },
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "包含两个元素的元组：lagrangian(拉格朗日函数对象)、mechanics(拉格朗日力学系统对象)",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "包含两个元素的元组：lagrangian(拉格朗日函数对象)、mechanics(拉格朗日力学系统对象)"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_equation/advanced_variational_solution.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "analytical_verification",
+        "description": "解析验证。验证目标路径是否满足变分原理，计算拉格朗日函数积分值和欧拉-拉格朗日方程误差。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "A": {
+              "type": "number",
+              "description": "路径振幅，默认为1.0"
+            },
+            "t_span": {
+              "type": "array",
+              "description": "时间范围，格式为[t_start, t_end]，默认为[0, π/8]"
+            },
+            "n_points": {
+              "type": "integer",
+              "description": "时间网格点数，默认为1000"
+            },
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "包含验证结果的字典：t_eval(时间数组)、x_target(目标路径位置数组)、x_dot_target(目标路径速度数组)、L_values(拉格朗日函数值数组)、integral_value(积分值)、equation_error(欧拉-拉格朗日方程误差)",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "包含验证结果的字典：t_eval(时间数组)、x_target(目标路径位置数组)、x_dot_target(目标路径速度数组)、L_values(拉格朗日函数值数组)、integral_value(积分值)、equation_error(欧拉-拉格朗日方程误差)"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_equation/advanced_variational_solution.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "path_family_analysis",
+        "description": "路径族分析。分析路径族x = A(sin(t) + c sin(8t))的积分值变化，找到使积分最小的c值。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "A": {
+              "type": "number",
+              "description": "路径振幅，默认为1.0"
+            },
+            "t_span": {
+              "type": "array",
+              "description": "时间范围，格式为[t_start, t_end]，默认为[0, π/8]"
+            },
+            "n_points": {
+              "type": "integer",
+              "description": "时间网格点数，默认为1000"
+            },
+            "c_range": {
+              "type": "array",
+              "description": "c值范围，格式为[c_min, c_max]，默认为[-1.0, 1.0]"
+            },
+            "n_c_points": {
+              "type": "integer",
+              "description": "c值网格点数，默认为41"
+            },
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "包含路径族分析结果的字典：c_values(c值数组)、integral_values(积分值列表)、boundary_errors(边界条件误差列表)、min_c(使积分最小的c值)、min_integral(最小积分值)",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "包含路径族分析结果的字典：c_values(c值数组)、integral_values(积分值列表)、boundary_errors(边界条件误差列表)、min_c(使积分最小的c值)、min_integral(最小积分值)"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_equation/advanced_variational_solution.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "numerical_methods_comparison",
+        "description": "数值方法对比。使用有限差分法和直接法求解变分问题，比较不同数值方法的效果。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "t_span": {
+              "type": "array",
+              "description": "时间范围，格式为[t_start, t_end]，默认为[0, π/8]"
+            },
+            "num_points": {
+              "type": "integer",
+              "description": "数值求解的网格点数，默认为100"
+            },
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "包含数值方法对比结果的字典：finite_difference(有限差分法求解结果)、direct_method(直接法求解结果)",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "包含数值方法对比结果的字典：finite_difference(有限差分法求解结果)、direct_method(直接法求解结果)"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_equation/advanced_variational_solution.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "energy_analysis",
+        "description": "能量分析。分析目标路径和路径族的动能、势能和总能量变化。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "A": {
+              "type": "number",
+              "description": "路径振幅，默认为1.0"
+            },
+            "t_span": {
+              "type": "array",
+              "description": "时间范围，格式为[t_start, t_end]，默认为[0, π/8]"
+            },
+            "n_points": {
+              "type": "integer",
+              "description": "时间网格点数，默认为1000"
+            },
+            "c_test_values": {
+              "type": "array",
+              "description": "测试的c值列表，默认为[-0.5, 0, 0.5]"
+            },
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "包含能量分析结果的字典：t_eval(时间数组)、target_energy(目标路径的能量信息)、family_energies(路径族的能量信息)",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "包含能量分析结果的字典：t_eval(时间数组)、target_energy(目标路径的能量信息)、family_energies(路径族的能量信息)"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_equation/advanced_variational_solution.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_comprehensive_results",
+        "description": "绘制主要分析结果。创建包含目标路径和路径族对比的综合分析图表。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "analytical_results": {
+              "type": "object",
+              "description": "解析验证结果字典"
+            },
+            "family_results": {
+              "type": "object",
+              "description": "路径族分析结果字典"
+            },
+            "energy_results": {
+              "type": "object",
+              "description": "能量分析结果字典"
+            },
+            "figsize": {
+              "type": "array",
+              "description": "图表尺寸，默认为[15, 6]"
+            },
+            "c_test_values": {
+              "type": "array",
+              "description": "测试的c值列表，默认为[-0.5, 0, 0.5]"
+            },
+            "save_path": {
+              "type": "string",
+              "description": "图表保存路径，默认为'advanced_variational_solution.png'"
+            },
+            "dpi": {
+              "type": "integer",
+              "description": "图像分辨率，默认为300"
+            },
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True"
+            }
+          },
+          "required": [
+            "analytical_results",
+            "family_results",
+            "energy_results"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "显示并保存图表",
+        "properties": {
+          "result": {
+            "type": "null",
+            "description": "无返回值，显示并保存图表"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_equation/advanced_variational_solution.py"
+      }
+    }
+  ]
+}

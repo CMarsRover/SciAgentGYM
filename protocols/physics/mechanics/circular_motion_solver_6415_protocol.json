@@ -1,0 +1,179 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_conical_pendulum_velocity",
+            "description": "计算圆锥摆（在水平圆周上运动的物体）的速度。该函数计算圆锥摆运动中物体的速度，物体在水平圆周上运动，同时由一根与垂直方向成一定角度的绳子或杆悬挂。计算基于张力的水平分量（提供向心力）与垂直分量平衡重力之间的平衡。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "length": {
+                        "type": "number",
+                        "description": "绳子或杆的长度（米）"
+                    },
+                    "angle": {
+                        "type": "number",
+                        "description": "绳子与垂直方向的夹角（弧度）"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度（米/秒²），默认为9.8米/秒²"
+                    }
+                },
+                "required": [
+                    "length",
+                    "angle"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_6415.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_circular_motion_parameters",
+            "description": "计算匀速圆周运动物体的各种参数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "velocity": {
+                        "type": "number",
+                        "description": "物体的切向速度（米/秒）"
+                    },
+                    "radius": {
+                        "type": "number",
+                        "description": "圆周路径的半径（米）"
+                    },
+                    "mass": {
+                        "type": "number",
+                        "description": "物体的质量（千克），默认为1.0千克"
+                    }
+                },
+                "required": [
+                    "velocity",
+                    "radius"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_6415.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_tension_force",
+            "description": "计算圆锥摆中绳子或杆的张力。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体的质量（千克）"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度（米/秒²）"
+                    },
+                    "angle": {
+                        "type": "number",
+                        "description": "绳子与垂直方向的夹角（弧度）"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "gravity",
+                    "angle"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_6415.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_conical_pendulum",
+            "description": "可视化圆锥摆系统及其关键参数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "length": {
+                        "type": "number",
+                        "description": "绳子或杆的长度（米）"
+                    },
+                    "angle": {
+                        "type": "number",
+                        "description": "绳子与垂直方向的夹角（弧度）"
+                    },
+                    "mass": {
+                        "type": "number",
+                        "description": "物体的质量（千克），默认为1.0千克"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度（米/秒²），默认为9.8米/秒²"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图像的路径，如果为None，则不保存图像"
+                    }
+                },
+                "required": [
+                    "length",
+                    "angle"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_6415.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "animate_conical_pendulum",
+            "description": "创建圆锥摆的动画。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "length": {
+                        "type": "number",
+                        "description": "绳子或杆的长度（米）"
+                    },
+                    "angle": {
+                        "type": "number",
+                        "description": "绳子与垂直方向的夹角（弧度）"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "description": "动画持续时间（秒），默认为5秒"
+                    },
+                    "fps": {
+                        "type": "integer",
+                        "description": "每秒帧数，默认为30"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存动画的路径，如果为None，则不保存动画"
+                    }
+                },
+                "required": [
+                    "length",
+                    "angle"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_6415.py"
+        }
+    }
+]

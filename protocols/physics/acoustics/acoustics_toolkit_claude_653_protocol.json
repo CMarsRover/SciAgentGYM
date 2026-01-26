@@ -1,0 +1,23 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_lookup_table_visualization",
+            "description": "可视化SPL查找表及其插值曲线。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "save_path": {
+                        "type": "string",
+                        "description": "可选的自定义保存路径"
+                    }
+                },
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/acoustics_toolkit_claude_653.py"
+        }
+    }
+]

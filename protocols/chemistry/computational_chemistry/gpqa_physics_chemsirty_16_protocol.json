@@ -1,0 +1,564 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "ensure_dirs",
+            "description": "确保所需的中间结果与图像目录存在。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "save_mid_result",
+            "description": "将中间结果以JSON格式保存到文件系统，并返回结构化信息。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "学科或主题标签，例如“chemistry”。"
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "中间结果标记，用于文件命名。"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "要保存的中间结果数据（字典对象，内容可嵌套）。"
+                    }
+                },
+                "required": [
+                    "subject",
+                    "label",
+                    "data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "load_file",
+            "description": "通用文件加载器，支持JSON或文本文件内容读取。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "文件路径；支持.json与文本文件。"
+                    }
+                },
+                "required": [
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "google_search_resources",
+            "description": "Google 搜索工具桩函数：返回与化学对称性相关的API与文档的参考列表（仅元数据）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "检索关键词，例如“molecular symmetry point groups; PubChem; RDKit”。"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "init_local_db",
+            "description": "初始化本地SQLite数据库并创建分子对称性表结构。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite数据库文件路径。"
+                    }
+                },
+                "required": [
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "insert_local_entries",
+            "description": "将经整理的分子对称性条目插入本地数据库。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "entries": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "待插入的条目列表；每个条目为字典对象，通常包含name、smiles、point_group、has_c3_axis、has_sigma_h、has_c2_perp_axes、provenance等字段。"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite数据库文件路径。"
+                    }
+                },
+                "required": [
+                    "entries",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "query_local_symmetry",
+            "description": "按分子名称查询本地数据库中的对称性信息。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "分子名称。"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite数据库文件路径。"
+                    }
+                },
+                "required": [
+                    "name",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "pubchem_fetch_cid_by_name",
+            "description": "通过化合物名称从PubChem获取CID。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "化合物名称（非空）。"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "pubchem_fetch_smiles",
+            "description": "根据PubChem CID获取标准SMILES字符串。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "cid": {
+                        "type": "integer",
+                        "description": "PubChem CID（正整数）。"
+                    }
+                },
+                "required": [
+                    "cid"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "rdkit_generate_3d",
+            "description": "使用RDKit从SMILES生成3D构象坐标与元素列表。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "smiles": {
+                        "type": "string",
+                        "description": "SMILES字符串（非空）。"
+                    }
+                },
+                "required": [
+                    "smiles"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_planarity",
+            "description": "计算点集相对于最佳拟合平面的平面度（RMS偏差）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "description": "单个原子的三维坐标 [x, y, z]。"
+                        },
+                        "description": "三维坐标列表，形状为N×3；至少包含6个原子。"
+                    }
+                },
+                "required": [
+                    "coords"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_c3_axis",
+            "description": "基于投影角度分布的启发式方法检测分子的C3主轴。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "description": "单个原子的三维坐标 [x, y, z]。"
+                        },
+                        "description": "三维坐标列表，形状为N×3。"
+                    },
+                    "centroid": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "坐标质心 [cx, cy, cz]。"
+                    },
+                    "normal": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "最佳拟合平面的法向量 [nx, ny, nz]。"
+                    }
+                },
+                "required": [
+                    "coords",
+                    "centroid",
+                    "normal"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_sigma_h",
+            "description": "依据平面度阈值检测是否存在水平镜面（σh）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "planarity_rms": {
+                        "type": "number",
+                        "description": "平面度RMS偏差（单位：Å）。"
+                    }
+                },
+                "required": [
+                    "planarity_rms"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_c2_perp_axes",
+            "description": "启发式检测与C3轴垂直的多个C2轴，用于区分D3h与C3h。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "description": "单个原子的三维坐标 [x, y, z]。"
+                        },
+                        "description": "三维坐标列表，形状为N×3。"
+                    },
+                    "centroid": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "坐标质心 [cx, cy, cz]。"
+                    },
+                    "normal": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "最佳拟合平面的法向量 [nx, ny, nz]。"
+                    }
+                },
+                "required": [
+                    "coords",
+                    "centroid",
+                    "normal"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "infer_point_group",
+            "description": "根据几何特征推断简化的分子点群（C3h、D3h、C3v、C3或C1）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "type": "object",
+                        "properties": {
+                            "has_c3_axis": {
+                                "type": "boolean",
+                                "description": "是否检测到C3主轴。"
+                            },
+                            "has_sigma_h": {
+                                "type": "boolean",
+                                "description": "是否检测到水平镜面σh。"
+                            },
+                            "has_c2_perp_axes": {
+                                "type": "boolean",
+                                "description": "是否检测到与C3轴垂直的多个C2轴。"
+                            },
+                            "planarity_rms": {
+                                "type": "number",
+                                "description": "平面度RMS偏差（Å）。"
+                            }
+                        },
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "几何与对称性特征字典。"
+                    }
+                },
+                "required": [
+                    "features"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "assess_symmetry_by_name",
+            "description": "基于名称尝试判定分子点群：优先使用PubChem与RDKit的几何启发式，失败时回退至本地数据库。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "分子名称（非空）。"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_molecule_3d",
+            "description": "使用py3Dmol按XYZ格式渲染分子，并保存文本文件路径。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "description": "单个原子的三维坐标 [x, y, z]。"
+                        },
+                        "description": "三维坐标列表，形状为N×3；与elements长度一致。"
+                    },
+                    "elements": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "元素符号列表，例如“C”、“H”、“O”；与coords长度一致。"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "分子名称，用于输出文件命名。"
+                    }
+                },
+                "required": [
+                    "coords",
+                    "elements",
+                    "name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "prepare_local_db_entries",
+            "description": "插入与题目相关的经整理分子及其点群分类到本地数据库，并记录溯源信息。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "batch_assess",
+            "description": "批量评估多个分子名称的点群并返回映射字典。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "names": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "分子名称列表。"
+                    }
+                },
+                "required": [
+                    "names"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_16.py"
+        }
+    }
+]

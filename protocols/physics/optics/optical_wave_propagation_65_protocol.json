@@ -1,0 +1,225 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_reflection_coefficient",
+            "description": "计算光波在两种介质界面上的反射系数（振幅反射率）。基于菲涅耳方程计算光波在两种不同折射率介质界面上的反射系数。对于垂直入射(θ=0)，TE和TM偏振的反射系数相同。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "n1": {
+                        "type": "number",
+                        "description": "入射介质的折射率"
+                    },
+                    "n2": {
+                        "type": "number",
+                        "description": "透射介质的折射率"
+                    },
+                    "theta_i": {
+                        "type": "number",
+                        "description": "入射角（弧度），默认为0（垂直入射）"
+                    }
+                },
+                "required": [
+                    "n1",
+                    "n2"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_power_reflection",
+            "description": "计算光波在两种介质界面上的功率反射率。功率反射率等于反射系数的平方，表示反射功率与入射功率之比。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "n1": {
+                        "type": "number",
+                        "description": "入射介质的折射率"
+                    },
+                    "n2": {
+                        "type": "number",
+                        "description": "透射介质的折射率"
+                    },
+                    "theta_i": {
+                        "type": "number",
+                        "description": "入射角（弧度），默认为0（垂直入射）"
+                    }
+                },
+                "required": [
+                    "n1",
+                    "n2"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "angular_spectrum_propagation",
+            "description": "使用角谱方法计算光场在自由空间中的传播。基于傅里叶光学原理，通过频域中的传递函数计算光场传播。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "field": {
+                        "type": "array",
+                        "description": "输入光场的复振幅分布（二维数值数组，shape = [Ny, Nx]）",
+                        "items": {
+                            "type": "array",
+                            "items": { "type": "number" }
+                        }
+                    },
+                    "dx": {
+                        "type": "number",
+                        "description": "x方向的空间采样间隔（米）"
+                    },
+                    "dy": {
+                        "type": "number",
+                        "description": "y方向的空间采样间隔（米）"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "光的波长（米）"
+                    },
+                    "z": {
+                        "type": "number",
+                        "description": "传播距离（米）"
+                    }
+                },
+                "required": [
+                    "field",
+                    "dx",
+                    "dy",
+                    "wavelength",
+                    "z"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "optimize_optical_system",
+            "description": "优化光学系统参数以最小化给定的评价函数。使用数值优化方法找到光学系统的最佳参数配置。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "initial_params": {
+                        "type": "array",
+                        "description": "初始参数值",
+                        "items": { "type": "number" }
+                    },
+                    "merit_function": {
+                        "type": "object",
+                        "description": "评价函数，接受参数并返回需要最小化的标量值"
+                    },
+                    "bounds": {
+                        "type": "array",
+                        "description": "参数的边界约束，格式为[(min1, max1), (min2, max2), ...]",
+                        "items": {
+                            "type": "array",
+                            "items": { "type": "number" },
+                            "minItems": 2,
+                            "maxItems": 2
+                        }
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "优化算法，默认为'Nelder-Mead'"
+                    }
+                },
+                "required": [
+                    "initial_params",
+                    "merit_function"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_spectrum",
+            "description": "分析光谱数据，识别峰值并提取特征。对光谱数据进行峰值检测和特征提取，用于光谱分析。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wavelengths": {
+                        "type": "array",
+                        "description": "波长数据（纳米）",
+                        "items": { "type": "number" }
+                    },
+                    "intensities": {
+                        "type": "array",
+                        "description": "对应的强度数据",
+                        "items": { "type": "number" }
+                    },
+                    "prominence": {
+                        "type": "number",
+                        "description": "峰值检测的突出度阈值"
+                    },
+                    "width": {
+                        "type": "number",
+                        "description": "峰值检测的宽度约束"
+                    },
+                    "height": {
+                        "type": "number",
+                        "description": "峰值检测的高度阈值"
+                    }
+                },
+                "required": [
+                    "wavelengths",
+                    "intensities"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_prism_reflection",
+            "description": "计算棱镜表面的反射功率比。计算光波在棱镜表面的反射功率与入射功率之比，适用于各种棱镜几何形状。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "epsilon_r": {
+                        "type": "number",
+                        "description": "棱镜材料的相对介电常数"
+                    },
+                    "incident_angle": {
+                        "type": "number",
+                        "description": "入射角（弧度），默认为0（垂直入射）"
+                    }
+                },
+                "required": [
+                    "epsilon_r"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/optical_wave_propagation_65.py"
+        }
+    }
+]

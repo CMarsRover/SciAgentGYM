@@ -1,0 +1,300 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_bond_angle",
+            "description": "计算两个键向量之间的夹角",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "v1": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "第一个键向量"
+                    },
+                    "v2": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "第二个键向量"
+                    }
+                },
+                "required": [
+                    "v1",
+                    "v2"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "generate_diamond_lattice",
+            "description": "生成金刚石晶格结构",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "size": {
+                        "type": "integer",
+                        "description": "晶格的大小（单位晶胞的数量），默认为2"
+                    }
+                },
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_diamond_bond_angles",
+            "description": "计算金刚石晶格中键之间的夹角",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_diamond_lattice",
+            "description": "可视化金刚石晶格结构",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "size": {
+                        "type": "integer",
+                        "description": "晶格的大小，默认为2"
+                    },
+                    "show": {
+                        "type": "boolean",
+                        "description": "是否显示图形，默认为True"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图形的路径，如果为None则不保存"
+                    }
+                },
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_quantum_system",
+            "description": "模拟量子多体系统，求解哈密顿量的本征值和本征态",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "hamiltonian": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "系统的哈密顿量矩阵"
+                    },
+                    "num_states": {
+                        "type": "integer",
+                        "description": "需要计算的能级数量，默认为5"
+                    }
+                },
+                "required": [
+                    "hamiltonian"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_energy_spectrum",
+            "description": "绘制能谱图",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "eigenvalues": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "能级值数组"
+                    },
+                    "labels": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "能级标签"
+                    },
+                    "show": {
+                        "type": "boolean",
+                        "description": "是否显示图形，默认为True"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图形的路径，如果为None则不保存"
+                    }
+                },
+                "required": [
+                    "eigenvalues"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "monte_carlo_ising_step",
+            "description": "执行一步蒙特卡洛模拟（Metropolis算法）用于伊辛模型",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "表示伊辛模型的晶格，元素为+1或-1"
+                    },
+                    "beta": {
+                        "type": "number",
+                        "description": "逆温度参数 β = 1/(k_B*T)"
+                    },
+                    "J": {
+                        "type": "number",
+                        "description": "自旋间相互作用强度，默认为1.0（铁磁性）"
+                    }
+                },
+                "required": [
+                    "lattice",
+                    "beta"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_ising_model",
+            "description": "模拟二维伊辛模型的相变",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "L": {
+                        "type": "integer",
+                        "description": "晶格大小，默认为50"
+                    },
+                    "T": {
+                        "type": "number",
+                        "description": "温度（单位为J/k_B），默认为2.27（接近临界温度）"
+                    },
+                    "steps": {
+                        "type": "integer",
+                        "description": "模拟步数，默认为10000"
+                    },
+                    "equilibration": {
+                        "type": "integer",
+                        "description": "平衡步数，默认为1000"
+                    },
+                    "J": {
+                        "type": "number",
+                        "description": "自旋间相互作用强度，默认为1.0"
+                    }
+                },
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_ising_results",
+            "description": "绘制伊辛模型模拟结果",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "最终晶格状态"
+                    },
+                    "magnetizations": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "磁化强度历史"
+                    },
+                    "energies": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "能量历史"
+                    },
+                    "T": {
+                        "type": "number",
+                        "description": "模拟温度"
+                    },
+                    "show": {
+                        "type": "boolean",
+                        "description": "是否显示图形，默认为True"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图形的路径前缀，如果为None则不保存"
+                    }
+                },
+                "required": [
+                    "lattice",
+                    "magnetizations",
+                    "energies",
+                    "T"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+    }
+]

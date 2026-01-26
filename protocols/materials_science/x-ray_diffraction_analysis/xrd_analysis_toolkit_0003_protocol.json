@@ -1,0 +1,308 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "bragg_law_d_spacing",
+            "description": "根据Bragg定律计算晶面间距。使用Bragg定律 nλ = 2d·sinθ 计算晶面间距，假设一级衍射(n=1)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta": {
+                        "type": "number",
+                        "description": "衍射角2θ，单位度(°)，范围10-90"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长，单位埃(Å)，默认Cu Kα = 1.5406 Å"
+                    }
+                },
+                "required": [
+                    "two_theta"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "cubic_lattice_parameter",
+            "description": "从晶面间距和Miller指数计算立方晶系晶格参数。对于立方晶系，晶格参数 a = d·√(h²+k²+l²)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "d_spacing": {
+                        "type": "number",
+                        "description": "晶面间距，单位埃(Å)"
+                    },
+                    "hkl": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "Miller指数元组 (h, k, l)"
+                    }
+                },
+                "required": [
+                    "d_spacing",
+                    "hkl"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "assign_fcc_miller_indices",
+            "description": "为FCC结构的衍射峰自动分配Miller指数。基于FCC晶格系统消光规则(h,k,l全奇或全偶)，按h²+k²+l²递增顺序分配指数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_positions": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "衍射峰2θ位置列表，单位度(°)"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长，单位埃(Å)，默认Cu Kα = 1.5406 Å"
+                    }
+                },
+                "required": [
+                    "peak_positions"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "refine_lattice_parameter_lsq",
+            "description": "使用最小二乘法精修立方晶格参数。通过最小化理论2θ与实验2θ的残差平方和，优化晶格参数a。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                        },
+                        "description": "峰位置与Miller指数对列表，格式[(2θ, (h,k,l))...]"
+                    },
+                    "initial_guess": {
+                        "type": "number",
+                        "description": "晶格参数初始猜测值(Å)，默认4.5"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长(Å)，默认Cu Kα = 1.5406 Å"
+                    }
+                },
+                "required": [
+                    "peak_data"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fetch_structure_from_mp",
+            "description": "从Materials Project数据库获取晶体结构。使用mp-api访问Materials Project数据库，获取标准晶体结构数据。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_id": {
+                        "type": "string",
+                        "description": "Materials Project ID (如 'mp-1234') 或化学式 (如 'BP')"
+                    },
+                    "api_key": {
+                        "type": "string",
+                        "description": "MP API密钥，若为None则尝试使用环境变量"
+                    }
+                },
+                "required": [
+                    "material_id"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_xrd_pattern",
+            "description": "完整分析XRD图谱：峰标定、晶格参数计算、精修。组合调用峰位标定、晶格参数计算和最小二乘精修功能。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_positions": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "实验测得的衍射峰2θ位置列表(°)"
+                    },
+                    "structure_type": {
+                        "type": "string",
+                        "description": "晶体结构类型，目前支持'FCC'",
+                        "enum": ["FCC"]
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长(Å)，默认Cu Kα = 1.5406 Å"
+                    }
+                },
+                "required": [
+                    "peak_positions"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_with_database",
+            "description": "将实验XRD与数据库标准谱图对比。从Materials Project获取标准结构，计算理论XRD，与实验数据对比。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "experimental_peaks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "实验衍射峰位置(°)"
+                    },
+                    "material_formula": {
+                        "type": "string",
+                        "description": "材料化学式"
+                    },
+                    "api_key": {
+                        "type": "string",
+                        "description": "Materials Project API密钥"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长(Å)，默认Cu Kα = 1.5406 Å"
+                    }
+                },
+                "required": [
+                    "experimental_peaks",
+                    "material_formula"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_xrd_analysis",
+            "description": "生成XRD图谱分析可视化图表。绘制衍射峰并标注Miller指数，支持交互式和静态两种模式。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_positions": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "峰位置2θ(°)"
+                    },
+                    "intensities": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "峰强度（归一化）"
+                    },
+                    "assignments": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "标定结果列表，格式[(2θ, hkl, d)...]"
+                    },
+                    "plot_type": {
+                        "type": "string",
+                        "description": "绘图类型",
+                        "enum": ["interactive", "static"]
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "图片保存路径，默认'./images/'"
+                    }
+                },
+                "required": [
+                    "peak_positions",
+                    "intensities",
+                    "assignments"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0003.py"
+        }
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+

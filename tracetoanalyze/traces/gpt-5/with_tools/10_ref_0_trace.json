@@ -1,0 +1,194 @@
+{
+  "id": "10_ref_0",
+  "query": "空气(n1=1.0)到玻璃等腰直角棱镜底面为单一平面界面。玻璃无损、非磁性(μr=1)，相对介电常数εr=4，折射率n2=√εr=2.0。入射为均匀平面波，入射方向与底面法线一致(θ=0°)。求解并回答：\n(1) θ=0°时，求反射功率比W^r/W^i的数值(用n1=1.0、n2=2.0计算，保留三位有效数字，结果为无量纲)，并给出至少两条相互独立的计算路径的结果对比(给出绝对误差、相对误差百分比与一致性说明)。\n(2) 给出垂直入射的振幅反射系数r的符号表达式，说明W^r/W^i与|r|^2的关系，并给出θ=0°时TE/TM的等效性结论。\n(3) 基于角谱法对均匀平面波的场级复核：在两组采样设置[(dx,dy)=(2×10^-7 m,2×10^-7 m)、λ=632.8 nm、z=1 mm；(dx,dy)=(1×10^-6 m,1×10^-6 m)、λ=500 nm、z=-1 mm]下，说明反射场的角谱强度比应为|r|^2，并解释采样设置对数值准确性的影响与实现失败的常见原因(如输入数据类型不匹配)。结果以符号表达为主。\n(4) 求TM极化的布儒斯特角θ_B的符号表达，并给出其对应的最小反射率；同时给出TE极化在θ_B处的反射率的符号表达。\n(5) 说明等腰直角棱镜的几何形状是否影响底面垂直入射时的反射功率比，并给出物理理由。\n(6) 提交最终交叉校验表述：以(1)的数值结果记为R₁，列出各方法结果的对齐关系、绝对/相对误差统计与容差门限(例如≤1×10^-3)，并给出通过/失败判定。\n除(1)外，其余小问结果以符号表达式或定性结论给出；所有量按SI单位。",
+  "model": "gpt-5",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 3,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "空气(n1=1.0)到玻璃等腰直角棱镜底面为单一平面界面。玻璃无损、非磁性(μr=1)，相对介电常数εr=4，折射率n2=√εr=2.0。入射为均匀平面波，入射方向与底面法线一致(θ=0°)。求解并回答：\n(1) θ=0°时，求反射功率比W^r/W^i的数值(用n1=1.0、n2=2.0计算，保留三位有效数字，结果为无量纲)，并给出至少两条相互独立的计算路径的结果对比(给出绝对误差、相对误差百分比与一致性说明)。\n(2) 给出垂直入射的振幅反射系数r的符号表达式，说明W^r/W^i与|r|^2的关系，并给出θ=0°时TE/TM的等效性结论。\n(3) 基于角谱法对均匀平面波的场级复核：在两组采样设置[(dx,dy)=(2×10^-7 m,2×10^-7 m)、λ=632.8 nm、z=1 mm；(dx,dy)=(1×10^-6 m,1×10^-6 m)、λ=500 nm、z=-1 mm]下，说明反射场的角谱强度比应为|r|^2，并解释采样设置对数值准确性的影响与实现失败的常见原因(如输入数据类型不匹配)。结果以符号表达为主。\n(4) 求TM极化的布儒斯特角θ_B的符号表达，并给出其对应的最小反射率；同时给出TE极化在θ_B处的反射率的符号表达。\n(5) 说明等腰直角棱镜的几何形状是否影响底面垂直入射时的反射功率比，并给出物理理由。\n(6) 提交最终交叉校验表述：以(1)的数值结果记为R₁，列出各方法结果的对齐关系、绝对/相对误差统计与容差门限(例如≤1×10^-3)，并给出通过/失败判定。\n除(1)外，其余小问结果以符号表达式或定性结论给出；所有量按SI单位。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_4IOz0sBCrN9lbSFttBsVHrdv",
+          "type": "function",
+          "function": {
+            "name": "calculate_power_reflection",
+            "arguments": "{\"n1\":1,\"n2\":2,\"theta_i\":0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": 0.1111111111111111,
+      "tool_call_id": "call_4IOz0sBCrN9lbSFttBsVHrdv"
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_W5Z1QnzCHwTzFHLEvAqwZ8Ef",
+          "type": "function",
+          "function": {
+            "name": "calculate_reflection_coefficient",
+            "arguments": "{\"n1\":1,\"n2\":2,\"theta_i\":0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": 0.1111111111111111,
+      "tool_call_id": "call_W5Z1QnzCHwTzFHLEvAqwZ8Ef"
+    },
+    {
+      "role": "assistant",
+      "content": "以下以空气(n1=1.0)→玻璃(n2=2.0, εr=4, μr=1)的底面为单一平面界面、垂直入射(θ=0°)的均匀平面波为对象，给出求解与交叉校验。\n\n(1) θ=0°时反射功率比 W^r/W^i 的数值与独立路径对比\n- 物理结论：垂直入射的菲涅耳功率反射率为 R = W^r/W^i = [(n2 − n1)/(n2 + n1)]^2。\n- 代入 n1=1.0、n2=2.0：R = [(2 − 1)/(2 + 1)]^2 = (1/3)^2 = 1/9 ≈ 0.111111…；保留三位有效数字：R ≈ 0.111（无量纲）。\n\n- 路径A（折射率版菲涅耳公式，手算）：\n  R_A = [(n2 − n1)/(n2 + n1)]^2 = 1/9 ≈ 0.111111…\n- 路径B（电磁阻抗法，独立物理思路）：\n  非磁性(μr=1)下，介质波阻抗 Z ∝ 1/n。振幅反射系数 r = (Z2 − Z1)/(Z2 + Z1) = (n1 − n2)/(n1 + n2)，功率反射率 R_B = |r|^2 = [(n2 − n1)/(n2 + n1)]^2 = 1/9 ≈ 0.111111…\n- 路径C（数值工具：功率反射率函数）：\n  计算返回 R_C = 0.111111111111…\n\n- 对比与误差：\n  绝对误差 |R_A − R_B| = 0；|R_A − R_C| ≈ 0。\n  相对误差百分比均为 0%（在数值显示精度内）。\n  一致性说明：三种彼此独立的方法（基于折射率的菲涅耳、基于阻抗的边界条件、数值工具的功率计算）完全一致，验证 R ≈ 0.111。\n\n(2) 垂直入射的振幅反射系数与功率关系，以及TE/TM等效性\n- 振幅反射系数（符号表达式，任意极化在 θ=0° 相同）：\n  r = (n1 − n2)/(n1 + n2)。\n  在本题数值：r = (1 − 2)/(1 + 2) = −1/3。\n- 功率反射比与振幅的关系：\n  W^r/W^i = |r|^2。\n  在本题：|r|^2 = (1/3)^2 = 1/9。\n- TE/TM等效性结论（θ=0°）：\n  垂直入射时 TE 与 TM 的菲涅耳系数相同，因此反射功率比一致。\n\n(3) 角谱法对均匀平面波的场级复核与采样影响\n- 均匀平面波的角谱是集中于 (kx, ky) = (0, 0) 的单一分量。对理想平面界面反射，边界条件等效为将入射场的复振幅整体乘以 r；因此角谱振幅也整体乘以 r，角谱强度比为 |r|^2。\n- 两组采样设置下的符号结论：\n  组1：(dx,dy) = (2×10^-7 m, 2×10^-7 m)、λ = 632.8 nm、z = +1 mm。\n  组2：(dx,dy) = (1×10^-6 m, 1×10^-6 m)、λ = 500 nm、z = −1 mm。\n  在两组设置中，均匀平面波的传播仅在角谱上引入相位因子 exp(i kz z)，强度不变；反射仅改变振幅比例为 r，因此角谱强度比始终为 |r|^2。\n- 采样设置对准确性的影响：\n  1) 网格大小与FFT归一化：若网格点数过小或FFT归一化/频域坐标处理不当（如未做频谱居中），会导致能量定位与比例估计偏差。\n  2) 采样间隔与带宽：对于均匀平面波，(kx,ky)≈0，无高频内容，采样间隔较宽通常仍能正确表示DC分量，但错误的频轴标定或单位换算会造成比例计算错误。\n  3) 复数场输入类型匹配：角谱法需要复振幅场；若误用实数强度作为输入、或未将反射边界条件施加在复振幅上（而是在强度上直接相乘），会导致结果不符合 |r|^2。\n  4) 数值实现常见失败原因：数组维度或类型不匹配、单位错误（nm 与 m混用）、z 符号误解、忽略介质边界条件（把自由空间传播当作含界面的传播）、FFT与iFFT的缩放因子不一致。\n\n(4) TM极化的布儒斯特角与对应反射率；TE在该角的反射率\n- TM的布儒斯特角（从介质1入射到介质2，非磁性）：\n  tan θ_B = n2/n1。\n- 对应最小反射率（TM在 θ_B）：\n  r_TM(θ_B) = 0 ⇒ R_TM(θ_B) = 0。\n- TE在 θ_B 的反射率（符号表达式）：\n  利用 θ_t = 90° − θ_B，且 tan θ_B = n2/n1，可得\n  r_TE(θ_B) = (n1^2 − n2^2)/(n1^2 + n2^2)，\n  R_TE(θ_B) = [(n1^2 − n2^2)/(n1^2 + n2^2)]^2。\n  对本题数值 n1=1、n2=2：R_TE(θ_B) = ((1 − 4)/(1 + 4))^2 = (−3/5)^2 = 9/25 = 0.36。\n\n(5) 等腰直角棱镜几何形状对底面垂直入射反射功率比的影响与理由\n- 结论：不影响。对单一平面界面的局部垂直入射，反射功率比仅由两侧介质的本征参数（n1、n2）与入射角决定。底面为平面且入射方向与该面法线一致时，棱镜其余几何（如顶角、边长）不改变该界面的局部边界条件，因此不影响 W^r/W^i。\n- 注：几何形状会影响后续在棱镜内部的传播路径与其他面的交互，但不改变在该底面首次反射的功率比例。\n\n(6) 最终交叉校验表述（以(1)的数值结果记为 R₁）\n- 定义 R₁ = 0.111（三位有效数字；精确值 1/9 ≈ 0.111111…）。\n- 方法与结果对齐关系：\n  方法A（菲涅耳折射率公式）：R_A = 1/9。\n  方法B（电磁阻抗边界条件）：R_B = 1/9。\n  方法C（数值工具：功率反射率计算）：R_C ≈ 0.111111…。\n- 绝对误差与相对误差：\n  |R_A − R_B| = 0，|R_A − R_C| ≈ 0；相对误差约 0%。\n- 容差门限与判定：\n  采用容差 ≤ 1×10^-3。\n  R_A、R_B、R_C 两两对比均满足容差，判定：通过。\n- 说明：振幅反射系数应为 r = (n1 − n2)/(n1 + n2) = −1/3，功率比为 |r|^2 = 1/9。若实现中误将功率比与振幅系数混淆（如把 |r|^2 当作 r），将导致交叉校验失败，这是常见实现错误之一。\n\n综上，θ=0°时 W^r/W^i = 0.111（无量纲，三位有效数字）；其符号与角谱、布儒斯特角等结论如上。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": \"[字符串]\",\n  \"(2)\": \"[数学方程字符串]\",\n  \"(3)\": \"[字符串]\",\n  \"(4)\": \"[数学方程字符串]\",\n  \"(5)\": \"[字符串]\",\n  \"(6)\": \"[数学方程字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"(1)\": \"R=0.111；路径A=0.111（折射率菲涅耳），路径B=0.111（阻抗法），路径C=0.111（数值）；|A−B|=0.000，|A−C|=0.000，相对误差A−B=0.00%，A−C=0.00%，一致。\",\n  \"(2)\": \"r=(n1−n2)/(n1+n2)，W^r/W^i=|r|^2；在n1=1.00、n2=2.00时r=−0.333，|r|^2=0.111；θ=0°时TE≡TM。\",\n  \"(3)\": \"均匀平面波角谱集中于(kx,ky)=(0,0)，反射角谱强度比为|A_ref|^2/|A_inc|^2=|r|^2=0.111；采样组1：dx=2.00e−7 m、dy=2.00e−7 m、λ=6.328e−7 m、z=1.00e−3 m；采样组2：dx=1.00e−6 m、dy=1.00e−6 m、λ=5.000e−7 m、z=−1.00e−3 m；数值准确性受FFT归一化、频轴标定、单位换算与复数场输入类型匹配影响，常见失败源包括用强度代替复场、单位混用与缩放不一致。\",\n  \"(4)\": \"tan(θ_B)=n2/n1，θ_B=arctan(n2/n1)≈1.107 rad；R_TM(θ_B)=0；R_TE(θ_B)=[(n1^2−n2^2)/(n1^2+n2^2)]^2≈0.360。\",\n  \"(5)\": \"不影响；底面为单一平面界面且垂直入射时，反射功率比仅由n1、n2与入射角决定，与等腰直角棱镜整体几何无关。\",\n  \"(6)\": \"R1=0.111；R_A=0.111，R_B=0.111，R_C=0.111；|R_A−R_B|=0.000，|R_A−R_C|=0.000；相对误差=0.00%；容差≤0.001；判定=通过。\"\n}"
+    }
+  ],
+  "answer_template": {
+    "(1)": "[字符串]",
+    "(2)": "[数学方程字符串]",
+    "(3)": "[字符串]",
+    "(4)": "[数学方程字符串]",
+    "(5)": "[字符串]",
+    "(6)": "[数学方程字符串]"
+  },
+  "golden_standard": {
+    "(1)": "W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。",
+    "(2)": "r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。",
+    "(3)": "角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。",
+    "(4)": "θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。",
+    "(5)": "不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。",
+    "(6)": "交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": "R=0.111；路径A=0.111（折射率菲涅耳），路径B=0.111（阻抗法），路径C=0.111（数值）；|A−B|=0.000，|A−C|=0.000，相对误差A−B=0.00%，A−C=0.00%，一致。",
+    "(2)": "r=(n1−n2)/(n1+n2)，W^r/W^i=|r|^2；在n1=1.00、n2=2.00时r=−0.333，|r|^2=0.111；θ=0°时TE≡TM。",
+    "(3)": "均匀平面波角谱集中于(kx,ky)=(0,0)，反射角谱强度比为|A_ref|^2/|A_inc|^2=|r|^2=0.111；采样组1：dx=2.00e−7 m、dy=2.00e−7 m、λ=6.328e−7 m、z=1.00e−3 m；采样组2：dx=1.00e−6 m、dy=1.00e−6 m、λ=5.000e−7 m、z=−1.00e−3 m；数值准确性受FFT归一化、频轴标定、单位换算与复数场输入类型匹配影响，常见失败源包括用强度代替复场、单位混用与缩放不一致。",
+    "(4)": "tan(θ_B)=n2/n1，θ_B=arctan(n2/n1)≈1.107 rad；R_TM(θ_B)=0；R_TE(θ_B)=[(n1^2−n2^2)/(n1^2+n2^2)]^2≈0.360。",
+    "(5)": "不影响；底面为单一平面界面且垂直入射时，反射功率比仅由n1、n2与入射角决定，与等腰直角棱镜整体几何无关。",
+    "(6)": "R1=0.111；R_A=0.111，R_B=0.111，R_C=0.111；|R_A−R_B|=0.000，|R_A−R_C|=0.000；相对误差=0.00%；容差≤0.001；判定=通过。"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "{\n  \"(1)\": \"R=0.111；路径A=0.111（折射率菲涅耳），路径B=0.111（阻抗法），路径C=0.111（数值）；|A−B|=0.000，|A−C|=0.000，相对误差A−B=0.00%，A−C=0.00%，一致。\",\n  \"(2)\": \"r=(n1−n2)/(n1+n2)，W^r/W^i=|r|^2；在n1=1.00、n2=2.00时r=−0.333，|r|^2=0.111；θ=0°时TE≡TM。\",\n  \"(3)\": \"均匀平面波角谱集中于(kx,ky)=(0,0)，反射角谱强度比为|A_ref|^2/|A_inc|^2=|r|^2=0.111；采样组1：dx=2.00e−7 m、dy=2.00e−7 m、λ=6.328e−7 m、z=1.00e−3 m；采样组2：dx=1.00e−6 m、dy=1.00e−6 m、λ=5.000e−7 m、z=−1.00e−3 m；数值准确性受FFT归一化、频轴标定、单位换算与复数场输入类型匹配影响，常见失败源包括用强度代替复场、单位混用与缩放不一致。\",\n  \"(4)\": \"tan(θ_B)=n2/n1，θ_B=arctan(n2/n1)≈1.107 rad；R_TM(θ_B)=0；R_TE(θ_B)=[(n1^2−n2^2)/(n1^2+n2^2)]^2≈0.360。\",\n  \"(5)\": \"不影响；底面为单一平面界面且垂直入射时，反射功率比仅由n1、n2与入射角决定，与等腰直角棱镜整体几何无关。\",\n  \"(6)\": \"R1=0.111；R_A=0.111，R_B=0.111，R_C=0.111；|R_A−R_B|=0.000，|R_A−R_C|=0.000；相对误差=0.00%；容差≤0.001；判定=通过。\"\n}",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "{\n  \"(1)\": \"R=0.111；路径A=0.111（折射率菲涅耳），路径B=0.111（阻抗法），路径C=0.111（数值）；|A−B|=0.000，|A−C|=0.000，相对误差A−B=0.00%，A−C=0.00%，一致。\",\n  \"(2)\": \"r=(n1−n2)/(n1+n2)，W^r/W^i=|r|^2；在n1=1.00、n2=2.00时r=−0.333，|r|^2=0.111；θ=0°时TE≡TM。\",\n  \"(3)\": \"均匀平面波角谱集中于(kx,ky)=(0,0)，反射角谱强度比为|A_ref|^2/|A_inc|^2=|r|^2=0.111；采样组1：dx=2.00e−7 m、dy=2.00e−7 m、λ=6.328e−7 m、z=1.00e−3 m；采样组2：dx=1.00e−6 m、dy=1.00e−6 m、λ=5.000e−7 m、z=−1.00e−3 m；数值准确性受FFT归一化、频轴标定、单位换算与复数场输入类型匹配影响，常见失败源包括用强度代替复场、单位混用与缩放不一致。\",\n  \"(4)\": \"tan(θ_B)=n2/n1，θ_B=arctan(n2/n1)≈1.107 rad；R_TM(θ_B)=0；R_TE(θ_B)=[(n1^2−n2^2)/(n1^2+n2^2)]^2≈0.360。\",\n  \"(5)\": \"不影响；底面为单一平面界面且垂直入射时，反射功率比仅由n1、n2与入射角决定，与等腰直角棱镜整体几何无关。\",\n  \"(6)\": \"R1=0.111；R_A=0.111，R_B=0.111，R_C=0.111；|R_A−R_B|=0.000，|R_A−R_C|=0.000；相对误差=0.00%；容差≤0.001；判定=通过。\"\n}"
+  },
+  "evaluation_score": 1.0,
+  "evaluation_summary": "匹配字段: 6/6 (得分: 100.00%)",
+  "evaluation_details": {
+    "(1)": {
+      "path": "(1)",
+      "expected": "W^r/W^i = 0.111 (无量纲)。路径A(振幅→功率)：得R_A=R₁；路径B(功率反射公式)：得R_B=R₁；误差：Δ_abs=0，Δ_rel=0%；一致性：一致。",
+      "actual": "R=0.111；路径A=0.111（折射率菲涅耳），路径B=0.111（阻抗法），路径C=0.111（数值）；|A−B|=0.000，|A−C|=0.000，相对误差A−B=0.00%，A−C=0.00%，一致。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2)": {
+      "path": "(2)",
+      "expected": "r = (n1 - n2)/(n1 + n2)；W^r/W^i = |r|^2；在θ=0°，r_TE = r_TM = r。",
+      "actual": "r=(n1−n2)/(n1+n2)，W^r/W^i=|r|^2；在n1=1.00、n2=2.00时r=−0.333，|r|^2=0.111；θ=0°时TE≡TM。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)": {
+      "path": "(3)",
+      "expected": "角谱强度比 = |r|^2。说明：均匀平面波的角谱在(kx,ky)=(0,0)处为单一分量，反射仅引入振幅因子r，强度比为|r|^2；采样(dx,dy)越小、谱带覆盖越充分，离散误差越小；实现失败的常见原因是输入数据类型与算法期望不匹配(如需数组却提供列表)，与物理结果无关。",
+      "actual": "均匀平面波角谱集中于(kx,ky)=(0,0)，反射角谱强度比为|A_ref|^2/|A_inc|^2=|r|^2=0.111；采样组1：dx=2.00e−7 m、dy=2.00e−7 m、λ=6.328e−7 m、z=1.00e−3 m；采样组2：dx=1.00e−6 m、dy=1.00e−6 m、λ=5.000e−7 m、z=−1.00e−3 m；数值准确性受FFT归一化、频轴标定、单位换算与复数场输入类型匹配影响，常见失败源包括用强度代替复场、单位混用与缩放不一致。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)": {
+      "path": "(4)",
+      "expected": "θ_B = arctan(n2/n1)；R_TM(θ_B) = 0；R_TE(θ_B) = [(n1^2 - n2^2)/(n1^2 + n2^2)]^2。",
+      "actual": "tan(θ_B)=n2/n1，θ_B=arctan(n2/n1)≈1.107 rad；R_TM(θ_B)=0；R_TE(θ_B)=[(n1^2−n2^2)/(n1^2+n2^2)]^2≈0.360。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5)": {
+      "path": "(5)",
+      "expected": "不影响。理由：对单一平面界面且垂直入射，反射功率比仅由(n1,n2)与入射角决定，几何外形不进入局部边界条件。",
+      "actual": "不影响；底面为单一平面界面且垂直入射时，反射功率比仅由n1、n2与入射角决定，与等腰直角棱镜整体几何无关。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6)": {
+      "path": "(6)",
+      "expected": "交叉校验：两方法均得R₁；绝对误差Δ_abs=0，相对误差Δ_rel=0%；容差门限≤1×10^-3；判定：通过。",
+      "actual": "R1=0.111；R_A=0.111，R_B=0.111，R_C=0.111；|R_A−R_B|=0.000，|R_A−R_C|=0.000；相对误差=0.00%；容差≤0.001；判定=通过。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "光学",
+    "image_path": [
+      "failed_question_images/f02e8e652be41d72b265f7bcd0c1008f1aa6ca8830565e0a60e24c36e05b9d0d.jpg"
+    ],
+    "solution_steps": [
+      "理论推导：ε_r=4 ⇒ n_glass=√ε_r=2，垂直入射r=(n1-n2)/(n1+n2)",
+      "调用 calculate_prism_reflection 计算功率反射率R",
+      "校验 calculate_power_reflection 与 calculate_reflection_coefficient 一致性"
+    ],
+    "tool_expected": [
+      "calculate_prism_reflection",
+      "calculate_power_reflection",
+      "calculate_reflection_coefficient"
+    ],
+    "golden_answer": [
+      {
+        "(1)": "路径A: Wr/Wi = 0.1111; 路径B: Wr/Wi = 0.1111; 误差百分比 = 0%; 一致性: 一致。",
+        "(2)": "r = (n1 − n2)/(n1 + n2); Wr/Wi = |r|^2; TE/TM等效性: r_TE(0) = r_TM(0) = r。",
+        "(3)": "两组采样下角谱强度比均为|r|^2。影响因素: (i) 采样间隔Δx,Δy决定可解析的空间频带与频域栅距，过大导致混叠、过小增大计算负担；(ii) λ与z影响传播相位但不改变均匀平面波的强度比；(iii) 有限窗与边界处理(零填充/窗函数)影响谱泄漏与截断误差；(iv) 数值实现中常见失败原因包括数据类型/维度不匹配、采样不足导致混叠、边界回卷、频域坐标/符号约定使用不当等。",
+        "(4)": "θ_B = arctan(n2/n1); R_TM(θ_B) = 0; R_TE(θ_B) = [(n1^2 − n2^2)/(n1^2 + n2^2)]^2。",
+        "(5)": "不影响。理由: 法向入射到单一平面界面的反射仅由两侧折射率(n1,n2)决定，与宏观几何形状无关；棱镜几何只会影响多次反射与传输路径，非此处单次界面反射的决定因素。",
+        "(6)": "路径A结果: R1; 路径B结果: R1; 绝对误差 = 0; 相对误差 = 0; 容差门限 τ = 1.0e-3; 判定: 通过。"
+      }
+    ],
+    "original_question_id": "10",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "光学",
+    "test_type": "refined",
+    "original_question_id": "10",
+    "subject_topic_key": "物理科学::光学"
+  },
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 1.0,
+    "0_75": 1.0,
+    "0_100": 1.0
+  }
+}

@@ -1,0 +1,468 @@
+{
+  "class_name": "Unknown",
+  "description": "获取或创建滑块-曲柄机构系统实例（单例，参数变化会重建）。",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_physical_interpretation",
+        "description": "get_physical_interpretation函数",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "l1": {
+              "type": "number",
+              "description": "曲柄长度"
+            },
+            "l2": {
+              "type": "number",
+              "description": "连杆长度"
+            },
+            "m1": {
+              "type": "number",
+              "description": "曲柄质量"
+            },
+            "m2": {
+              "type": "number",
+              "description": "连杆质量"
+            },
+            "m3": {
+              "type": "number",
+              "description": "滑块质量"
+            }
+          },
+          "required": [
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of get_physical_interpretation function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_lagrangian",
+        "description": "get_lagrangian函数",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "l1": {
+              "type": "number",
+              "description": ""
+            },
+            "l2": {
+              "type": "number",
+              "description": ""
+            },
+            "m1": {
+              "type": "number",
+              "description": ""
+            },
+            "m2": {
+              "type": "number",
+              "description": ""
+            },
+            "m3": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of get_lagrangian function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_constraints",
+        "description": "get_constraints函数",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "l1": {
+              "type": "number",
+              "description": ""
+            },
+            "l2": {
+              "type": "number",
+              "description": ""
+            },
+            "m1": {
+              "type": "number",
+              "description": ""
+            },
+            "m2": {
+              "type": "number",
+              "description": ""
+            },
+            "m3": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of get_constraints function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_mass_matrix",
+        "description": "get_mass_matrix函数",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "l1": {
+              "type": "number",
+              "description": ""
+            },
+            "l2": {
+              "type": "number",
+              "description": ""
+            },
+            "m1": {
+              "type": "number",
+              "description": ""
+            },
+            "m2": {
+              "type": "number",
+              "description": ""
+            },
+            "m3": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of get_mass_matrix function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_constraint_jacobian",
+        "description": "get_constraint_jacobian函数",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "l1": {
+              "type": "number",
+              "description": ""
+            },
+            "l2": {
+              "type": "number",
+              "description": ""
+            },
+            "m1": {
+              "type": "number",
+              "description": ""
+            },
+            "m2": {
+              "type": "number",
+              "description": ""
+            },
+            "m3": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of get_constraint_jacobian function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_dae",
+        "description": "solve_dae函数",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "l1": {
+              "type": "number",
+              "description": ""
+            },
+            "l2": {
+              "type": "number",
+              "description": ""
+            },
+            "m1": {
+              "type": "number",
+              "description": ""
+            },
+            "m2": {
+              "type": "number",
+              "description": ""
+            },
+            "m3": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of solve_dae function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_motion",
+        "description": "便捷求解入口：返回包含时间、广义坐标、速度、拉格朗日乘子的解。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "initial_conditions": {
+              "type": "object",
+              "description": ""
+            },
+            "t_span": {
+              "type": "number",
+              "description": ""
+            },
+            "num_points": {
+              "type": "number",
+              "description": ""
+            },
+            "l1": {
+              "type": "number",
+              "description": ""
+            },
+            "l2": {
+              "type": "number",
+              "description": ""
+            },
+            "m1": {
+              "type": "number",
+              "description": ""
+            },
+            "m2": {
+              "type": "number",
+              "description": ""
+            },
+            "m3": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "initial_conditions",
+            "t_span",
+            "num_points",
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of solve_motion function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_complete",
+        "description": "综合求解：返回 DAE 结构、运动解与物理解释。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "initial_conditions": {
+              "type": "object",
+              "description": ""
+            },
+            "t_span": {
+              "type": "number",
+              "description": ""
+            },
+            "num_points": {
+              "type": "number",
+              "description": ""
+            },
+            "l1": {
+              "type": "number",
+              "description": ""
+            },
+            "l2": {
+              "type": "number",
+              "description": ""
+            },
+            "m1": {
+              "type": "number",
+              "description": ""
+            },
+            "m2": {
+              "type": "number",
+              "description": ""
+            },
+            "m3": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "initial_conditions",
+            "t_span",
+            "num_points",
+            "l1",
+            "l2",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of solve_complete function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/mechanics/slider_crank_func_expose.py"
+      }
+    }
+  ]
+}

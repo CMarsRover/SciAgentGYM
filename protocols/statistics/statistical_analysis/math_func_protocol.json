@@ -1,0 +1,151 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of utility functions designed for mathematical analysis, code generation, and data visualization tasks, enabling automated problem solving and insight generation through programmatic workflows.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "math_func",
+        "description": "Performs mathematical analysis or computation on input data, such as statistical evaluation, symbolic manipulation, or numerical operations.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "G": {
+              "type": "string",
+              "description": ""
+            },
+            "A": {
+              "type": "string",
+              "description": ""
+            },
+            "B": {
+              "type": "string",
+              "description": ""
+            },
+            "multiply": {
+              "type": "string",
+              "description": ""
+            },
+            "identity": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "G",
+            "A",
+            "B",
+            "multiply",
+            "identity"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "返回数学计算结果",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "数学运算的数值结果"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/Davenport/math_func.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "coding_func",
+        "description": "Generates executable code snippets or scripts based on specified requirements or input logic, supporting automated programming tasks.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "A": {
+              "type": "string",
+              "description": ""
+            },
+            "B": {
+              "type": "string",
+              "description": ""
+            },
+            "multiply": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "A",
+            "B",
+            "multiply"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "返回代码处理相关结果",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "生成或处理后的代码字符串"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "代码处理是否成功"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/Davenport/math_func.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "visual_func",
+        "description": "Creates visual representations of data, such as charts or graphs, to support exploratory data analysis and result interpretation.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "object",
+              "description": ""
+            },
+            "title": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "result",
+            "title"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "返回可视化相关数据",
+        "properties": {
+          "image_url": {
+            "type": "string",
+            "description": "生成的可视化图像的URL地址"
+          },
+          "alt_text": {
+            "type": "string",
+            "description": "图像的替代文本描述"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/Davenport/math_func.py"
+      }
+    }
+  ]
+}

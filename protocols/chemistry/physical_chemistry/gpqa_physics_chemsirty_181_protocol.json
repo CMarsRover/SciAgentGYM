@@ -1,0 +1,618 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "parse_element_counts_from_condensed",
+            "description": "解析凝缩结构式字符串中的元素计数（C与H），支持括号与倍数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "condensed": {
+                        "type": "string",
+                        "description": "凝缩结构式字符串，例如：(CH3)2C=CH-..."
+                    }
+                },
+                "required": [
+                    "condensed"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "count_bonds_from_condensed",
+            "description": "根据凝缩结构式统计键类型数量：C-H、C-C(单)、C=C(双)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "condensed": {
+                        "type": "string",
+                        "description": "凝缩结构式字符串。"
+                    }
+                },
+                "required": [
+                    "condensed"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_atomization_energy",
+            "description": "计算从元素标准态到原子态的原子化焓。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "elements_counts": {
+                        "type": "object",
+                        "properties": {
+                            "C": {
+                                "type": "integer",
+                                "description": "碳原子个数。"
+                            },
+                            "H": {
+                                "type": "integer",
+                                "description": "氢原子个数（应为偶数）。"
+                            }
+                        },
+                        "required": [
+                            "C",
+                            "H"
+                        ],
+                        "description": "元素计数字典，例如{'C': 12, 'H': 22}。"
+                    },
+                    "atomization_data": {
+                        "type": "object",
+                        "properties": {
+                            "C": {
+                                "type": "number",
+                                "description": "碳的原子化焓，单位kJ/mol-atom。"
+                            }
+                        },
+                        "required": [
+                            "C"
+                        ],
+                        "description": "原子化焓数据，例如{'C': 1000}。"
+                    },
+                    "h2_bond_energy": {
+                        "type": "number",
+                        "description": "H-H 键能 D(H-H)，单位kJ/mol。"
+                    }
+                },
+                "required": [
+                    "elements_counts",
+                    "atomization_data",
+                    "h2_bond_energy"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_bond_energy_sum",
+            "description": "计算分子内各键的总键能（断键能）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "bond_counts": {
+                        "type": "object",
+                        "properties": {
+                            "C-H": {
+                                "type": "integer",
+                                "description": "C-H 键数量。"
+                            },
+                            "C-C": {
+                                "type": "integer",
+                                "description": "C-C 单键数量。"
+                            },
+                            "C=C": {
+                                "type": "integer",
+                                "description": "C=C 双键数量。"
+                            }
+                        },
+                        "required": [
+                            "C-H",
+                            "C-C",
+                            "C=C"
+                        ],
+                        "description": "键类型数量统计。"
+                    },
+                    "bond_energy_data": {
+                        "type": "object",
+                        "properties": {
+                            "C-H": {
+                                "type": "number",
+                                "description": "C-H 键能，单位kJ/mol。"
+                            },
+                            "C-C": {
+                                "type": "number",
+                                "description": "C-C 单键键能，单位kJ/mol。"
+                            },
+                            "C=C": {
+                                "type": "number",
+                                "description": "C=C 双键键能，单位kJ/mol。"
+                            }
+                        },
+                        "required": [
+                            "C-H",
+                            "C-C",
+                            "C=C"
+                        ],
+                        "description": "各键类型的平均键能。"
+                    }
+                },
+                "required": [
+                    "bond_counts",
+                    "bond_energy_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_enthalpy_of_formation",
+            "description": "计算标准生成焓（基于键能法近似）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "atomization_energy": {
+                        "type": "number",
+                        "description": "元素原子化焓总和，单位kJ/mol。"
+                    },
+                    "bond_energy_sum_value": {
+                        "type": "number",
+                        "description": "分子内键能总和，单位kJ/mol。"
+                    }
+                },
+                "required": [
+                    "atomization_energy",
+                    "bond_energy_sum_value"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_molar_mass",
+            "description": "计算摩尔质量（g/mol）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "formula_counts": {
+                        "type": "object",
+                        "properties": {
+                            "C": {
+                                "type": "integer",
+                                "description": "碳原子个数。"
+                            },
+                            "H": {
+                                "type": "integer",
+                                "description": "氢原子个数。"
+                            }
+                        },
+                        "required": [
+                            "C",
+                            "H"
+                        ],
+                        "description": "化学式元素计数，例如{'C': 12, 'H': 22}。"
+                    },
+                    "atomic_masses": {
+                        "type": "object",
+                        "properties": {
+                            "C": {
+                                "type": "number",
+                                "description": "碳的原子量，g/mol。"
+                            },
+                            "H": {
+                                "type": "number",
+                                "description": "氢的原子量，g/mol。"
+                            }
+                        },
+                        "required": [
+                            "C",
+                            "H"
+                        ],
+                        "description": "元素原子量字典，例如{'C': 12.0, 'H': 1.0}。"
+                    }
+                },
+                "required": [
+                    "formula_counts",
+                    "atomic_masses"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "save_json",
+            "description": "保存通用JSON文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "待保存的通用JSON数据对象。"
+                    },
+                    "filepath": {
+                        "type": "string",
+                        "description": "保存文件路径。"
+                    }
+                },
+                "required": [
+                    "data",
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "load_file",
+            "description": "文件解析函数，支持加载JSON。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "待加载的文件路径。"
+                    }
+                },
+                "required": [
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "workflow_enthalpy_from_condensed",
+            "description": "完整计算流程：解析→数目→能量→ΔHf→kJ/g。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "condensed": {
+                        "type": "string",
+                        "description": "凝缩结构式字符串。"
+                    },
+                    "atomization_C_kj_per_mol_atom": {
+                        "type": "number",
+                        "description": "碳的原子化焓，单位kJ/mol-atom。"
+                    },
+                    "bond_energy_map": {
+                        "type": "object",
+                        "properties": {
+                            "C-H": {
+                                "type": "number",
+                                "description": "C-H 键能，kJ/mol。"
+                            },
+                            "C-C": {
+                                "type": "number",
+                                "description": "C-C 单键键能，kJ/mol。"
+                            },
+                            "C=C": {
+                                "type": "number",
+                                "description": "C=C 双键键能，kJ/mol。"
+                            }
+                        },
+                        "required": [
+                            "C-H",
+                            "C-C",
+                            "C=C"
+                        ],
+                        "description": "键能映射字典。"
+                    },
+                    "h_h_bond_energy": {
+                        "type": "number",
+                        "description": "H-H 键能 D(H-H)，单位kJ/mol。"
+                    },
+                    "atomic_masses": {
+                        "type": "object",
+                        "properties": {
+                            "C": {
+                                "type": "number",
+                                "description": "碳的原子量，g/mol。"
+                            },
+                            "H": {
+                                "type": "number",
+                                "description": "氢的原子量，g/mol。"
+                            }
+                        },
+                        "required": [
+                            "C",
+                            "H"
+                        ],
+                        "description": "元素原子量字典。"
+                    }
+                },
+                "required": [
+                    "condensed",
+                    "atomization_C_kj_per_mol_atom",
+                    "bond_energy_map",
+                    "h_h_bond_energy",
+                    "atomic_masses"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_bond_distribution",
+            "description": "可视化：键分布柱状图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "bond_counts": {
+                        "type": "object",
+                        "properties": {
+                            "C-H": {
+                                "type": "integer",
+                                "description": "C-H 键数量。"
+                            },
+                            "C-C": {
+                                "type": "integer",
+                                "description": "C-C 单键数量。"
+                            },
+                            "C=C": {
+                                "type": "integer",
+                                "description": "C=C 双键数量。"
+                            }
+                        },
+                        "required": [
+                            "C-H",
+                            "C-C",
+                            "C=C"
+                        ],
+                        "description": "键类型数量统计。"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "保存文件名（不含路径）。"
+                    }
+                },
+                "required": [
+                    "bond_counts",
+                    "title",
+                    "filename"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "setup_local_bond_energy_db",
+            "description": "构建本地SQLite数据库，存储键能与原子化焓。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite 数据库文件路径。"
+                    },
+                    "bond_energy_data": {
+                        "type": "object",
+                        "properties": {
+                            "C-H": {
+                                "type": "number",
+                                "description": "C-H 键能，kJ/mol。"
+                            },
+                            "C-C": {
+                                "type": "number",
+                                "description": "C-C 单键键能，kJ/mol。"
+                            },
+                            "C=C": {
+                                "type": "number",
+                                "description": "C=C 双键键能，kJ/mol。"
+                            }
+                        },
+                        "required": [
+                            "C-H",
+                            "C-C",
+                            "C=C"
+                        ],
+                        "description": "键能数据字典。"
+                    },
+                    "atomization_data": {
+                        "type": "object",
+                        "properties": {
+                            "C": {
+                                "type": "number",
+                                "description": "碳的原子化焓，kJ/mol-atom。"
+                            }
+                        },
+                        "required": [
+                            "C"
+                        ],
+                        "description": "原子化焓数据字典。"
+                    }
+                },
+                "required": [
+                    "db_path",
+                    "bond_energy_data",
+                    "atomization_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "query_bond_energy_db",
+            "description": "查询本地数据库中的键能与原子化焓。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite 数据库文件路径。"
+                    },
+                    "bond_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "待查询的键类型列表，例如['C-H','C-C','C=C']。"
+                    },
+                    "elements": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "待查询的元素列表，例如['C']。"
+                    }
+                },
+                "required": [
+                    "db_path",
+                    "bond_types",
+                    "elements"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_atomic_masses_mendeleev",
+            "description": "使用 mendeleev 获取元素的标准原子量（g/mol）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "symbols": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "元素符号列表，例如['C','H']。"
+                    }
+                },
+                "required": [
+                    "symbols"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "query_pubchem_molar_mass_by_formula",
+            "description": "使用 pubchempy 根据化学式查询分子的摩尔质量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "formula": {
+                        "type": "string",
+                        "description": "化学式字符串，例如 'C12H22'。"
+                    }
+                },
+                "required": [
+                    "formula"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_energy_cycle",
+            "description": "简单能量循环示意图（柱状）：原子化焓与键能总和对比。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "atomization_energy": {
+                        "type": "number",
+                        "description": "元素原子化焓总和，kJ/mol。"
+                    },
+                    "bond_energy_sum_value": {
+                        "type": "number",
+                        "description": "分子内键能总和，kJ/mol。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "保存文件名（不含路径）。"
+                    }
+                },
+                "required": [
+                    "atomization_energy",
+                    "bond_energy_sum_value",
+                    "filename"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_181.py"
+        }
+    }
+]

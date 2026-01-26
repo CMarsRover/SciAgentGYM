@@ -1,0 +1,366 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "save_mid_result",
+            "description": "将中间结果以JSON保存到 ./mid_result/{subject}/{filename}.json。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "学科分类，仅支持：physics、chemistry、materials、astronomy、geography。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "不含扩展名的文件名，将保存为同名的 .json 文件。"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "要保存的数据对象（将序列化为JSON）。"
+                    }
+                },
+                "required": [
+                    "subject",
+                    "filename",
+                    "data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "load_file",
+            "description": "通用文件加载器，支持读取JSON与CSV文件并返回解析结果与元数据。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "文件路径，支持 .json 或 .csv。"
+                    }
+                },
+                "required": [
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "validate_percentages",
+            "description": "校验百分数输入（0-100），返回归一化分数与实际/理论的比例。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "theoretical_pct": {
+                        "type": "number",
+                        "description": "理论产率百分数，取值区间 (0, 100]。"
+                    },
+                    "actual_pct": {
+                        "type": "number",
+                        "description": "实际产率百分数，取值区间 [0, 100]。"
+                    }
+                },
+                "required": [
+                    "theoretical_pct",
+                    "actual_pct"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "henderson_hasselbalch",
+            "description": "根据 Henderson-Hasselbalch 方程 pH = pKa + log10([A-]/[HA]) 计算溶液的 pH。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pKa": {
+                        "type": "number",
+                        "description": "酸的 pKa 值。"
+                    },
+                    "base_to_acid_ratio": {
+                        "type": "number",
+                        "description": "碱/酸浓度比 [A-]/[HA]，需为正数。"
+                    }
+                },
+                "required": [
+                    "pKa",
+                    "base_to_acid_ratio"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "round_pH",
+            "description": "按给定小数位数对 pH 值进行四舍五入。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pH": {
+                        "type": "number",
+                        "description": "待四舍五入的 pH 值。"
+                    },
+                    "decimals": {
+                        "type": "integer",
+                        "description": "保留的小数位数，范围为 0 到 6。"
+                    }
+                },
+                "required": [
+                    "pH",
+                    "decimals"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "create_local_acid_db",
+            "description": "创建并填充本地SQLite数据库，存储选定单元酸及其有效 pKa 值。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite 数据库文件路径；若不存在将创建。"
+                    }
+                },
+                "required": [
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "query_local_acid_pKa",
+            "description": "从本地数据库查询指定酸的 pKa 值（不区分大小写，支持模糊匹配）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "本地SQLite数据库文件路径。"
+                    },
+                    "compound_name": {
+                        "type": "string",
+                        "description": "化合物名称（酸名），用于查询 pKa。"
+                    }
+                },
+                "required": [
+                    "db_path",
+                    "compound_name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fetch_pKa_from_pubchem",
+            "description": "尝试通过 pubchempy 从 PubChem 获取 pKa（常规API通常不提供，可能返回不可用）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "compound_name": {
+                        "type": "string",
+                        "description": "化合物名称（酸名），用于在 PubChem 上检索。"
+                    }
+                },
+                "required": [
+                    "compound_name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "choose_best_acid_for_ratio",
+            "description": "给定碱/酸比值，从候选酸中筛选计算得到 pH 落在典型缓冲区间(3-6)的酸，并优先选择最接近 pH=4.5 的结果。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "本地SQLite数据库文件路径。"
+                    },
+                    "ratio": {
+                        "type": "number",
+                        "description": "碱/酸浓度比 [A-]/[HA]，需为正数。"
+                    },
+                    "candidate_names": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "候选酸名称列表。"
+                    }
+                },
+                "required": [
+                    "db_path",
+                    "ratio",
+                    "candidate_names"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "estimate_pH_from_yields_with_buffer",
+            "description": "在“X 形成单元酸缓冲”的假设下，根据产率比例 ratio = actual/theoretical，用 Henderson-Hasselbalch 方程并结合本地库或PubChem的 pKa 估算最终 pH。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "theoretical_pct": {
+                        "type": "number",
+                        "description": "理论产率百分数，取值区间 (0, 100]。"
+                    },
+                    "actual_pct": {
+                        "type": "number",
+                        "description": "实际产率百分数，取值区间 [0, 100]。"
+                    },
+                    "acid_name": {
+                        "type": "string",
+                        "description": "可选，指定酸的名称；若未提供则会从常见候选酸中自动选择。"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "本地SQLite数据库文件路径，用于查询或选择 pKa。"
+                    }
+                },
+                "required": [
+                    "theoretical_pct",
+                    "actual_pct",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "scan_pH_over_acids",
+            "description": "在多种酸列表上扫描，基于给定产率计算的比例为每个酸估算 pH，以比较对 pKa 的敏感性。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "theoretical_pct": {
+                        "type": "number",
+                        "description": "理论产率百分数，取值区间 (0, 100]。"
+                    },
+                    "actual_pct": {
+                        "type": "number",
+                        "description": "实际产率百分数，取值区间 [0, 100]。"
+                    },
+                    "acid_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "酸名称列表，将对其中每个酸计算对应 pH。"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "本地SQLite数据库文件路径。"
+                    }
+                },
+                "required": [
+                    "theoretical_pct",
+                    "actual_pct",
+                    "acid_list",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "generate_pH_vs_ratio_curve",
+            "description": "生成基于 Henderson-Hasselbalch 的 pH-比例曲线图，并保存为 ./tool_images/{outfile}.png。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pKa": {
+                        "type": "number",
+                        "description": "酸的 pKa 值。"
+                    },
+                    "ratios": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "比值列表 [A-]/[HA]，需为正数。"
+                    },
+                    "outfile": {
+                        "type": "string",
+                        "description": "输出图像文件名（不含扩展名），将在 ./tool_images 下生成 PNG 文件。"
+                    }
+                },
+                "required": [
+                    "pKa",
+                    "ratios",
+                    "outfile"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_10.py"
+        }
+    }
+]

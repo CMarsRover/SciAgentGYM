@@ -1,0 +1,1252 @@
+{
+  "id": "13_ref_0",
+  "query": "考虑金刚石晶格的常规立方晶胞，A 子晶格格点 A = (0,0,0)、B 子晶格格点 B = (1/4,1/4,1/4)（分数坐标），立方坐标基为 x̂=[1,0,0], ŷ=[0,1,0], ẑ=[0,0,1]。设晶格常数为 a（SI），从 A（或 B）到四个最近邻的原始位移可写为 (±a/4, ±a/4, ±a/4) 的适当四种组合。\n(1) 在 A 点构建与立方坐标一致的局部坐标系，写出指向四个最近邻的单位化键向量；在 B 点也写出四条单位化键向量；并说明尺度不变性：将原始向量 (±a/4, ±a/4, ±a/4) 单位化后与所列方向一致，且夹角与 a 无关。\n(2) 以点积形式解析推导任意两条最近邻键的夹角 θ；可自选 A 点两条 <111> 方向的单位向量 u 与 v，给出 cosθ 与 θ 的符号表达式。\n(3) 设化学中 sp3 理想键角记为 θ_sp3（不需给出具体数值），与(2)结果比较，报告差异 Δθ = |θ − θ_sp3| 的符号表达式（记号引用(2)结果即可）。\n(4) 说明当在不同子晶格（A 与 B）选择两条键，或对任一对键施加绕 z 轴 90° 的旋转 R = [[0,−1,0],[1,0,0],[0,0,1]] 后，所得夹角不变；可通过对任意两单位向量应用 R 后的点积关系加以说明。\n(5) 给出三维几何描述，说明四面体对称与等角性（文字描述即可，无需图/编号/渲染）。\n(6) 总结回答：“某格点与其四个最近邻所连键任意两两之间的夹角为何？”给出角度的符号表达式。\n结果以符号表达式给出。",
+  "query_data": {
+    "id": "13_ref_0",
+    "original_id": 13,
+    "refined_index": 0,
+    "question": "考虑金刚石晶格的常规立方晶胞，A 子晶格格点 A = (0,0,0)、B 子晶格格点 B = (1/4,1/4,1/4)（分数坐标），立方坐标基为 x̂=[1,0,0], ŷ=[0,1,0], ẑ=[0,0,1]。设晶格常数为 a（SI），从 A（或 B）到四个最近邻的原始位移可写为 (±a/4, ±a/4, ±a/4) 的适当四种组合。\n(1) 在 A 点构建与立方坐标一致的局部坐标系，写出指向四个最近邻的单位化键向量；在 B 点也写出四条单位化键向量；并说明尺度不变性：将原始向量 (±a/4, ±a/4, ±a/4) 单位化后与所列方向一致，且夹角与 a 无关。\n(2) 以点积形式解析推导任意两条最近邻键的夹角 θ；可自选 A 点两条 <111> 方向的单位向量 u 与 v，给出 cosθ 与 θ 的符号表达式。\n(3) 设化学中 sp3 理想键角记为 θ_sp3（不需给出具体数值），与(2)结果比较，报告差异 Δθ = |θ − θ_sp3| 的符号表达式（记号引用(2)结果即可）。\n(4) 说明当在不同子晶格（A 与 B）选择两条键，或对任一对键施加绕 z 轴 90° 的旋转 R = [[0,−1,0],[1,0,0],[0,0,1]] 后，所得夹角不变；可通过对任意两单位向量应用 R 后的点积关系加以说明。\n(5) 给出三维几何描述，说明四面体对称与等角性（文字描述即可，无需图/编号/渲染）。\n(6) 总结回答：“某格点与其四个最近邻所连键任意两两之间的夹角为何？”给出角度的符号表达式。\n结果以符号表达式给出。",
+    "answer": "{'(1)': 'A 点四条单位化键向量可取：±号组合为 1/√3(1,1,1), 1/√3(1,−1,−1), 1/√3(−1,1,−1), 1/√3(−1,−1,1)。B 点四条单位化键向量为上述向量的相反数。尺度不变性：将 (±a/4, ±a/4, ±a/4) 归一化后方向与上述一致，夹角与 a 无关。', '(2)': 'cosθ = −1/3，θ = arccos(−1/3)。', '(3)': '记(2)结果为 Θ₂，则 Δθ = |Θ₂ − θ_sp3|。', '(4)': '取任意两条单位键向量 u, v 于 A 或 B，施加 R 后得 u′ = Ru, v′ = Rv，有 u′·v′ = u·v，故旋转前后夹角相同；于不同子晶格取向量亦满足相同点积，故夹角与(2)一致，即 θ′ = Θ₂。', '(5)': '四条单位向量指向单位球上正四面体的四个顶点，任意两向量间夹角相等，体现四面体对称与等角性。', '(6)': 'θ = arccos(−1/3)。'}",
+    "metadata": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "image_path": [
+        "filtered_images/132698973.jpg"
+      ],
+      "solution_steps": [
+        "从金刚石晶格四面体最近邻方向出发进行几何分析，得出键间角为arccos(-1/3)",
+        "调用 calculate_diamond_bond_angles() 进行数值验证并获得标准数值",
+        "核对结果(≈109.47°)并记录"
+      ],
+      "tool_expected": [
+        "calculate_diamond_bond_angles"
+      ],
+      "golden_answer": [
+        {
+          "(1)": "A 点四条单位化键向量可取：±号组合为 1/√3(1,1,1), 1/√3(1,−1,−1), 1/√3(−1,1,−1), 1/√3(−1,−1,1)。B 点四条单位化键向量为上述向量的相反数。尺度不变性：将 (±a/4, ±a/4, ±a/4) 归一化后方向与上述一致，夹角与 a 无关。",
+          "(2)": "cosθ = −1/3，θ = arccos(−1/3)。",
+          "(3)": "记(2)结果为 Θ₂，则 Δθ = |Θ₂ − θ_sp3|。",
+          "(4)": "取任意两条单位键向量 u, v 于 A 或 B，施加 R 后得 u′ = Ru, v′ = Rv，有 u′·v′ = u·v，故旋转前后夹角相同；于不同子晶格取向量亦满足相同点积，故夹角与(2)一致，即 θ′ = Θ₂。",
+          "(5)": "四条单位向量指向单位球上正四面体的四个顶点，任意两向量间夹角相等，体现四面体对称与等角性。",
+          "(6)": "θ = arccos(−1/3)。"
+        }
+      ],
+      "original_question_id": "13",
+      "test_type": "refined",
+      "topic_protocol_scope": "凝聚态物理",
+      "with_all_tools": true
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_diamond_bond_angles",
+          "description": "计算金刚石晶格中键之间的夹角",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_17363.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_load_distribution",
+          "description": "计算复合材料系统中的载荷分布和最大安全载荷。该函数基于材料的弹性模量、横截面积、长度和最大允许应力，计算复合材料系统中各组件的载荷分布，并确定整个系统的最大安全载荷。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "areas": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的横截面积，单位为 mm²"
+              },
+              "elastic_moduli": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的弹性模量，单位为 N/mm²"
+              },
+              "lengths": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的长度，单位为 mm"
+              },
+              "max_stresses": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的最大允许应力，单位为 N/mm²"
+              }
+            },
+            "required": [
+              "areas",
+              "elastic_moduli",
+              "lengths",
+              "max_stresses"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_material_solver_17911.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_flux_density",
+          "description": "计算给定材料与磁场强度(H)的磁通密度(B)",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "material_name": {
+                "type": "string",
+                "description": "磁性材料名称"
+              },
+              "h_value": {
+                "type": "number",
+                "description": "磁场强度(A/m)"
+              },
+              "curve_points": {
+                "type": "object",
+                "description": "可选自定义B–H数据点"
+              }
+            },
+            "required": [
+              "material_name",
+              "h_value"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/magnetic_materials_analyzer_18856.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "construct_hamiltonian",
+          "description": "构建量子多体系统的哈密顿量矩阵（稀疏格式）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "system_size": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              },
+              "interaction_matrix": {
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                ]
+              },
+              "potential": {
+                "type": "object"
+              },
+              "periodic": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "system_size",
+              "interaction_matrix"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "solve_eigensystem",
+          "description": "求解稀疏哈密顿量的本征值和本征态",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "hamiltonian": {
+                "type": "object"
+              },
+              "k": {
+                "type": "integer"
+              },
+              "which": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "hamiltonian"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_density_matrix",
+          "description": "计算量子态的密度矩阵或约化密度矩阵",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "eigenvector": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "trace_subsystem": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "required": [
+              "eigenvector"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "monte_carlo_ising",
+          "description": "二维Ising模型的蒙特卡洛模拟",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "lattice_size": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "temperature": {
+                "type": "number"
+              },
+              "num_steps": {
+                "type": "integer"
+              },
+              "J": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "lattice_size",
+              "temperature",
+              "num_steps"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_phase_diagram",
+          "description": "绘制相变图，展示物理量随温度变化",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "temp_range": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "results": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "observable": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "temp_range",
+              "results"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_lattice",
+          "description": "可视化二维Ising晶格构型",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "lattice": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "lattice"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_correlation_function",
+          "description": "计算二维Ising模型的自旋关联函数",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "lattice": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "max_distance": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "lattice"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "essential_circuit_analysis_guide",
+          "description": "🔧 等效电路分析工具 - 基本阅读指南。这是一个多模态分析工具，帮助您正确分析电路图并计算等效电阻。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/circuit_analyzer_5496.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_parallel_resistance",
+          "description": "计算并联电阻的等效电阻。在并联连接中，等效电阻的倒数是所有单个电阻倒数的总和。公式：1/R_eq = 1/R1 + 1/R2 + ... + 1/Rn",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "resistances": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "电阻值列表，单位为欧姆(Ω)"
+              }
+            },
+            "required": [
+              "resistances"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./new_tst.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_series_resistance",
+          "description": "计算串联电阻的等效电阻。在串联连接中，等效电阻是所有单个电阻的总和。公式：R_eq = R1 + R2 + ... + Rn",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "resistances": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "电阻值列表，单位为欧姆(Ω)"
+              }
+            },
+            "required": [
+              "resistances"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./new_tst.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_diamond_lattice",
+          "description": "可视化金刚石晶格结构。生成3D晶格图，展示原子位置和键连接。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "size": {
+                "type": "integer",
+                "description": "晶格重复单元数，默认2"
+              },
+              "show": {
+                "type": "boolean",
+                "description": "是否显示图形，默认True"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存路径，如'./images/diamond.png'"
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/condensed_matter_toolkit.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "generate_diamond_lattice",
+          "description": "生成金刚石晶格的原子坐标。返回晶格位置数组。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "size": {
+                "type": "integer",
+                "description": "晶格重复单元数"
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/condensed_matter_toolkit.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_bond_angle",
+          "description": "计算两个向量之间的夹角。通用几何工具函数。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "v1": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3,
+                "description": "第一个3D向量 [x, y, z]"
+              },
+              "v2": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3,
+                "description": "第二个3D向量 [x, y, z]"
+              }
+            },
+            "required": [
+              "v1",
+              "v2"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/condensed_matter_toolkit.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "construct_ssh_hamiltonian",
+          "description": "构建SSH模型（Su-Schrieffer-Heeger）哈密顿量。最简单的1D拓扑绝缘体。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "N": {
+                "type": "integer",
+                "description": "单胞数（总格点数为2N）"
+              },
+              "t1": {
+                "type": "number",
+                "description": "单胞内跃迁积分（intra-cell hopping）"
+              },
+              "t2": {
+                "type": "number",
+                "description": "单胞间跃迁积分（inter-cell hopping）"
+              },
+              "periodic": {
+                "type": "boolean",
+                "description": "是否使用周期性边界条件，False表示开边界（可观察边缘态），默认False"
+              }
+            },
+            "required": [
+              "N",
+              "t1",
+              "t2"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/topological_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_ssh_gap",
+          "description": "计算SSH模型的能隙。可以排除边缘态来计算体态能隙。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "eigenvalues": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "本征能量（已排序）"
+              },
+              "exclude_edge_states": {
+                "type": "boolean",
+                "description": "是否排除能隙中的边缘态（零能态），True表示计算体态能隙，默认True"
+              },
+              "edge_threshold": {
+                "type": "number",
+                "description": "判断零能态的阈值，默认0.01"
+              }
+            },
+            "required": [
+              "eigenvalues"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/topological_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "identify_edge_states",
+          "description": "识别SSH模型的边缘态。边缘态的特征是能量接近零且波函数局域在边缘。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "eigenvalues": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "本征能量"
+              },
+              "eigenvectors": {
+                "type": "object",
+                "description": "本征态（列向量）"
+              },
+              "gap_threshold": {
+                "type": "number",
+                "description": "判断是否在能隙中的阈值，默认0.1"
+              }
+            },
+            "required": [
+              "eigenvalues",
+              "eigenvectors"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/topological_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "scan_ssh_model",
+          "description": "扫描SSH模型的拓扑相变。固定t₁+t₂扫描δ参数。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "N": {
+                "type": "integer",
+                "description": "单胞数"
+              },
+              "t_sum": {
+                "type": "number",
+                "description": "t₁ + t₂ 的值"
+              },
+              "delta_values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "δ = (t₁ - t₂)/(t₁ + t₂) 值列表"
+              },
+              "periodic": {
+                "type": "boolean",
+                "description": "边界条件，默认False"
+              }
+            },
+            "required": [
+              "N",
+              "t_sum",
+              "delta_values"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/topological_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "construct_hubbard_hamiltonian",
+          "description": "构建Hubbard模型的哈密顿量。用于描述强关联电子系统。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "L": {
+                "type": "integer",
+                "description": "格点数（系统大小）"
+              },
+              "N_up": {
+                "type": "integer",
+                "description": "自旋向上电子数"
+              },
+              "N_down": {
+                "type": "integer",
+                "description": "自旋向下电子数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分（动能项），默认1.0"
+              },
+              "U": {
+                "type": "number",
+                "description": "库仑相互作用强度，默认1.0"
+              },
+              "boundary": {
+                "type": "string",
+                "description": "边界条件：'periodic'（周期性）或'open'（开边界），默认'periodic'",
+                "enum": [
+                  "periodic",
+                  "open"
+                ]
+              },
+              "method": {
+                "type": "string",
+                "description": "使用的方法，'quspin'或'tenpy'，默认'quspin'",
+                "enum": [
+                  "quspin",
+                  "tenpy"
+                ]
+              }
+            },
+            "required": [
+              "L",
+              "N_up",
+              "N_down"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/strongly_correlated_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "solve_hubbard_ground_state",
+          "description": "求解Hubbard模型的基态或低能激发态。可直接传入模型参数（L,N_up,N_down,t,U,boundary,method）由函数内部重建哈密顿量；亦兼容传入 H_dict（由构造函数返回）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "H_dict": {
+                "type": "object",
+                "description": "可选。由 construct_hubbard_hamiltonian 返回的对象。若提供则忽略 L/N_up/... 参数。"
+              },
+              "L": {
+                "type": "integer",
+                "description": "格点数（系统大小）"
+              },
+              "N_up": {
+                "type": "integer",
+                "description": "自旋向上电子数"
+              },
+              "N_down": {
+                "type": "integer",
+                "description": "自旋向下电子数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分（动能项），默认1.0"
+              },
+              "U": {
+                "type": "number",
+                "description": "库仑相互作用强度，默认1.0"
+              },
+              "boundary": {
+                "type": "string",
+                "enum": [
+                  "periodic",
+                  "open"
+                ],
+                "description": "边界条件，默认'periodic'"
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "quspin",
+                  "tenpy"
+                ],
+                "description": "计算方法，默认'quspin'"
+              },
+              "k": {
+                "type": "integer",
+                "description": "求解前k个本征态，默认1（只求基态）"
+              },
+              "which": {
+                "type": "string",
+                "description": "'SA'（最小代数值）或'LA'（最大代数值）",
+                "enum": [
+                  "SA",
+                  "LA"
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/strongly_correlated_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_double_occupancy",
+          "description": "计算Hubbard模型的双占据（double occupancy）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "L": {
+                "type": "integer",
+                "description": "格点数（系统大小）"
+              },
+              "N_up": {
+                "type": "integer",
+                "description": "自旋向上电子数"
+              },
+              "N_down": {
+                "type": "integer",
+                "description": "自旋向下电子数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分（动能项），默认1.0"
+              },
+              "U": {
+                "type": "number",
+                "description": "库仑相互作用强度，默认1.0"
+              },
+              "boundary": {
+                "type": "string",
+                "enum": [
+                  "periodic",
+                  "open"
+                ],
+                "description": "边界条件，默认'periodic'"
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "quspin",
+                  "tenpy"
+                ],
+                "description": "计算方法，默认'quspin'"
+              },
+              "return_total": {
+                "type": "boolean",
+                "description": "True返回总双占据数，False返回包含总数与每格点平均"
+              }
+            },
+            "required": [
+              "L",
+              "N_up",
+              "N_down"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/strongly_correlated_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_charge_gap",
+          "description": "计算电荷能隙。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "L": {
+                "type": "integer",
+                "description": "系统大小（格点数）"
+              },
+              "N_up": {
+                "type": "integer",
+                "description": "自旋向上电子数"
+              },
+              "N_down": {
+                "type": "integer",
+                "description": "自旋向下电子数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分"
+              },
+              "U": {
+                "type": "number",
+                "description": "相互作用强度"
+              },
+              "boundary": {
+                "type": "string",
+                "description": "边界条件，默认'periodic'",
+                "enum": [
+                  "periodic",
+                  "open"
+                ]
+              }
+            },
+            "required": [
+              "L",
+              "N_up",
+              "N_down",
+              "t",
+              "U"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/strongly_correlated_systems.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_localization_disorder_average",
+          "description": "对多个无序样本进行平均分析。Anderson局域化研究的标准方法。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "N": {
+                "type": "integer",
+                "description": "系统格点数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分"
+              },
+              "disorder_strengths": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "无序强度列表（W值），例如 [0,1,2,4,8]"
+              },
+              "num_samples": {
+                "type": "integer",
+                "description": "样本数量，默认100"
+              },
+              "energy_window": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "能量窗口 [E_min, E_max]，可选"
+              },
+              "periodic": {
+                "type": "boolean",
+                "description": "是否使用周期性边界条件，默认False"
+              }
+            },
+            "required": [
+              "N",
+              "t",
+              "disorder_strengths"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/disorder_localization.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "construct_anderson_hamiltonian_1d",
+          "description": "构建一维Anderson模型哈密顿量。用于研究无序系统中的局域化现象。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "N": {
+                "type": "integer",
+                "description": "系统格点数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分（hopping amplitude），默认1.0"
+              },
+              "disorder_strength": {
+                "type": "number",
+                "description": "无序强度W（随机势的范围），默认0.0"
+              },
+              "periodic": {
+                "type": "boolean",
+                "description": "是否使用周期性边界条件，默认False"
+              },
+              "seed": {
+                "type": "integer",
+                "description": "随机数种子，用于可重复性"
+              }
+            },
+            "required": [
+              "N"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/disorder_localization.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_inverse_participation_ratio",
+          "description": "计算逆参与率（IPR）。用于判断波函数的局域化程度。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "wavefunction": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "波函数（本征态），一维数组"
+              }
+            },
+            "required": [
+              "wavefunction"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/disorder_localization.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "考虑金刚石晶格的常规立方晶胞，A 子晶格格点 A = (0,0,0)、B 子晶格格点 B = (1/4,1/4,1/4)（分数坐标），立方坐标基为 x̂=[1,0,0], ŷ=[0,1,0], ẑ=[0,0,1]。设晶格常数为 a（SI），从 A（或 B）到四个最近邻的原始位移可写为 (±a/4, ±a/4, ±a/4) 的适当四种组合。\n(1) 在 A 点构建与立方坐标一致的局部坐标系，写出指向四个最近邻的单位化键向量；在 B 点也写出四条单位化键向量；并说明尺度不变性：将原始向量 (±a/4, ±a/4, ±a/4) 单位化后与所列方向一致，且夹角与 a 无关。\n(2) 以点积形式解析推导任意两条最近邻键的夹角 θ；可自选 A 点两条 <111> 方向的单位向量 u 与 v，给出 cosθ 与 θ 的符号表达式。\n(3) 设化学中 sp3 理想键角记为 θ_sp3（不需给出具体数值），与(2)结果比较，报告差异 Δθ = |θ − θ_sp3| 的符号表达式（记号引用(2)结果即可）。\n(4) 说明当在不同子晶格（A 与 B）选择两条键，或对任一对键施加绕 z 轴 90° 的旋转 R = [[0,−1,0],[1,0,0],[0,0,1]] 后，所得夹角不变；可通过对任意两单位向量应用 R 后的点积关系加以说明。\n(5) 给出三维几何描述，说明四面体对称与等角性（文字描述即可，无需图/编号/渲染）。\n(6) 总结回答：“某格点与其四个最近邻所连键任意两两之间的夹角为何？”给出角度的符号表达式。\n结果以符号表达式给出。",
+      "final_answer": {
+        "(1)": "A 点四条单位化键向量可取：±号组合为 1/√3(1,1,1), 1/√3(1,−1,−1), 1/√3(−1,1,−1), 1/√3(−1,−1,1)。B 点四条单位化键向量为上述向量的相反数。尺度不变性：将 (±a/4, ±a/4, ±a/4) 归一化后方向与上述一致，夹角与 a 无关。",
+        "(2)": "cosθ = −1/3，θ = arccos(−1/3)。",
+        "(3)": "记(2)结果为 Θ₂，则 Δθ = |Θ₂ − θ_sp3|。",
+        "(4)": "取任意两条单位键向量 u, v 于 A 或 B，施加 R 后得 u′ = Ru, v′ = Rv，有 u′·v′ = u·v，故旋转前后夹角相同；于不同子晶格取向量亦满足相同点积，故夹角与(2)一致，即 θ′ = Θ₂。",
+        "(5)": "四条单位向量指向单位球上正四面体的四个顶点，任意两向量间夹角相等，体现四面体对称与等角性。",
+        "(6)": "θ = arccos(−1/3)。"
+      }
+    },
+    "metadata_summary": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "test_type": "refined",
+      "original_question_id": "13",
+      "subject_topic_key": "物理科学::凝聚态物理"
+    }
+  },
+  "model": "gemini-2.5-pro",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 2,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "考虑金刚石晶格的常规立方晶胞，A 子晶格格点 A = (0,0,0)、B 子晶格格点 B = (1/4,1/4,1/4)（分数坐标），立方坐标基为 x̂=[1,0,0], ŷ=[0,1,0], ẑ=[0,0,1]。设晶格常数为 a（SI），从 A（或 B）到四个最近邻的原始位移可写为 (±a/4, ±a/4, ±a/4) 的适当四种组合。\n(1) 在 A 点构建与立方坐标一致的局部坐标系，写出指向四个最近邻的单位化键向量；在 B 点也写出四条单位化键向量；并说明尺度不变性：将原始向量 (±a/4, ±a/4, ±a/4) 单位化后与所列方向一致，且夹角与 a 无关。\n(2) 以点积形式解析推导任意两条最近邻键的夹角 θ；可自选 A 点两条 <111> 方向的单位向量 u 与 v，给出 cosθ 与 θ 的符号表达式。\n(3) 设化学中 sp3 理想键角记为 θ_sp3（不需给出具体数值），与(2)结果比较，报告差异 Δθ = |θ − θ_sp3| 的符号表达式（记号引用(2)结果即可）。\n(4) 说明当在不同子晶格（A 与 B）选择两条键，或对任一对键施加绕 z 轴 90° 的旋转 R = [[0,−1,0],[1,0,0],[0,0,1]] 后，所得夹角不变；可通过对任意两单位向量应用 R 后的点积关系加以说明。\n(5) 给出三维几何描述，说明四面体对称与等角性（文字描述即可，无需图/编号/渲染）。\n(6) 总结回答：“某格点与其四个最近邻所连键任意两两之间的夹角为何？”给出角度的符号表达式。\n结果以符号表达式给出。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "(1) **键向量与尺度不变性**\n*   在 A 点 (0,0,0)（为方便选为原点），指向四个最近邻 B 格点的键向量可以写作：\n    *   `v1 = (a/4, a/4, a/4)`\n    *   `v2 = (a/4, -a/4, -a/4)`\n    *   `v3 = (-a/4, a/4, -a/4)`\n    *   `v4 = (-a/4, -a/4, a/4)`\n    这些向量的长度为 `L = sqrt((a/4)^2 + (a/4)^2 + (a/4)^2) = a * sqrt(3) / 4`。\n    单位化的键向量为：\n    *   `u1 = (1/√3) * (1, 1, 1)`\n    *   `u2 = (1/√3) * (1, -1, -1)`\n    *   `u3 = (1/√3) * (-1, 1, -1)`\n    *   `u4 = (1/√3) * (-1, -1, 1)`\n*   在 B 点 (a/4, a/4, a/4)，指向四个最近邻 A 格点的键向量与上述向量方向相反。例如，指向原点 (0,0,0) 的向量是 `(-a/4, -a/4, -a/4)`。其单位向量为 `(1/√3) * (-1, -1, -1)`。\n*   **尺度不变性**: 在单位化过程中，晶格常数 `a` 被消去。因此，任意两条键之间的夹角仅由 `(±1, ±1, ±1)` 型方向决定，与 `a` 的具体值无关。\n\n(2) **夹角解析推导**\n我们可以任意选择 A 点的两条单位键向量，例如 `u = u1 = (1/√3) * (1, 1, 1)` 和 `v = u2 = (1/√3) * (1, -1, -1)`。\n它们之间的夹角 `θ` 可以通过点积 `u · v = |u||v|cos(θ)` 计算。因为 `u` 和 `v` 都是单位向量，`|u| = |v| = 1`，所以 `cos(θ) = u · v`。\n`cos(θ) = (1/√3) * (1, 1, 1) · (1/√3) * (1, -1, -1)`\n`cos(θ) = (1/3) * (1*1 + 1*(-1) + 1*(-1))`\n`cos(θ) = (1/3) * (1 - 1 - 1) = -1/3`\n因此，夹角的符号表达式为 `θ = arccos(-1/3)`。\n\n(3) **与 sp³ 理想键角比较**\n化学中的 sp³ 杂化轨道形成的理想四面体键角 `θ_sp3` 的精确值就是 `arccos(-1/3)`。因此，金刚石晶格中的实际键角与理想键角没有差异：\n`Δθ = |θ - θ_sp3| = |arccos(-1/3) - arccos(-1/3)| = 0`\n\n(4) **对称性与夹角不变性**\n*   **子晶格选择**: 从 B 点出发的键向量是 A 点对应键向量的相反向量。设从 A 点出发的两条键为 `u` 和 `v`，则从 B 点出发的对应两条键为 `-u` 和 `-v`。它们之间的夹角 `θ'` 满足 `cos(θ') = (-u) · (-v) = u · v = cos(θ)`。因此，夹角不变。\n*   **旋转不变性**: 点积运算在坐标旋转下是不变的。对于一个旋转矩阵 `R`，它是一个正交矩阵，满足 `R^T R = I` (单位矩阵)。旋转后的向量为 `u' = Ru` 和 `v' = Rv`。它们的新点积为 `u' · v' = (Ru)^T (Rv) = u^T R^T R v = u^T I v = u^T v = u · v`。因为点积不变，所以夹角也不变。\n\n(5) **三维几何描述**\n在金刚石晶格中，每一个碳原子都与它周围的四个最近邻原子形成化学键。这个结构在三维空间中形成了一个正四面体，中心原子位于四面体的几何中心，而四个最近邻原子则分别位于四面体的四个顶点。由于正四面体具有高度的对称性，从中心到任意两个顶点的连线（即化学键）所形成的夹角都是完全相同的。\n\n(6) **总结**\n某格点与其四个最近邻所连键任意两两之间的夹角是恒定的，其值为 `arccos(-1/3)`。\n我将使用一个工具来计算这个值。\n",
+      "tool_calls": [
+        {
+          "id": "call_48c2552d4553489089ebe0fc32570afe",
+          "type": "function",
+          "function": {
+            "name": "calculate_diamond_bond_angles",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": 109.47122063449069,
+      "tool_call_id": "call_48c2552d4553489089ebe0fc32570afe"
+    },
+    {
+      "role": "assistant",
+      "content": "好的，我们来逐步分析和解答这些关于金刚石晶格几何结构的问题。\n\n(1) **键向量与尺度不变性**\n\n*   在 A 点 (0,0,0)（为方便选为原点），指向四个最近邻 B 格点的键向量可以写作：\n    *   `v1 = (a/4, a/4, a/4)`\n    *   `v2 = (a/4, -a/4, -a/4)`\n    *   `v3 = (-a/4, a/4, -a/4)`\n    *   `v4 = (-a/4, -a/4, a/4)`\n    这些向量的长度为 `L = sqrt((a/4)^2 + (a/4)^2 + (a/4)^2) = a * sqrt(3) / 4`。\n    单位化的键向量为：\n    *   `u1 = (1/√3) * (1, 1, 1)`\n    *   `u2 = (1/√3) * (1, -1, -1)`\n    *   `u3 = (1/√3) * (-1, 1, -1)`\n    *   `u4 = (1/√3) * (-1, -1, 1)`\n*   在 B 点 (a/4, a/4, a/4)，指向四个最近邻 A 格点的键向量与上述向量方向相反。例如，指向原点 (0,0,0) 的向量是 `(-a/4, -a/4, -a/4)`。其单位向量为 `(1/√3) * (-1, -1, -1)`。\n*   **尺度不变性**: 在单位化过程中，晶格常数 `a` 被消去。因此，任意两条键之间的夹角仅由 `(±1, ±1, ±1)` 型方向决定，与 `a` 的具体值无关。\n\n(2) **夹角解析推导**\n\n我们可以任意选择 A 点的两条单位键向量，例如 `u = u1 = (1/√3) * (1, 1, 1)` 和 `v = u2 = (1/√3) * (1, -1, -1)`。\n它们之间的夹角 `θ` 可以通过点积 `u · v = |u||v|cos(θ)` 计算。因为 `u` 和 `v` 都是单位向量，`|u| = |v| = 1`，所以 `cos(θ) = u · v`。\n\n`cos(θ) = (1/√3) * (1, 1, 1) · (1/√3) * (1, -1, -1)`\n`cos(θ) = (1/3) * (1*1 + 1*(-1) + 1*(-1))`\n`cos(θ) = (1/3) * (1 - 1 - 1) = -1/3`\n\n因此，夹角的符号表达式为 `θ = arccos(-1/3)`。\n\n(3) **与 sp³ 理想键角比较**\n\n化学中的 sp³ 杂化轨道形成的理想四面体键角 `θ_sp3` 的精确值就是 `arccos(-1/3)`。因此，金刚石晶格中的实际键角与理想键角没有差异：\n\n`Δθ = |θ - θ_sp3| = |arccos(-1/3) - arccos(-1/3)| = 0`\n\n(4) **对称性与夹角不变性**\n\n*   **子晶格选择**: 从 B 点出发的键向量是 A 点对应键向量的相反向量。设从 A 点出发的两条键为 `u` 和 `v`，则从 B 点出发的对应两条键为 `-u` 和 `-v`。它们之间的夹角 `θ'` 满足 `cos(θ') = (-u) · (-v) = u · v = cos(θ)`。因此，夹角不变。\n*   **旋转不变性**: 点积运算在坐标旋转下是不变的。对于一个旋转矩阵 `R`，它是一个正交矩阵，满足 `R^T R = I` (单位矩阵)。旋转后的向量为 `u' = Ru` 和 `v' = Rv`。它们的新点积为 `u' · v' = (Ru)^T (Rv) = u^T R^T R v = u^T I v = u^T v = u · v`。因为点积不变，所以夹角也不变。\n\n(5) **三维几何描述**\n\n在金刚石晶格中，每一个碳原子都与它周围的四个最近邻原子形成化学键。这个结构在三维空间中形成了一个正四面体，中心原子位于四面体的几何中心，而四个最近邻原子则分别位于四面体的四个顶点。由于正四面体具有高度的对称性，从中心到任意两个顶点的连线（即化学键）所形成的夹角都是完全相同的。\n\n(6) **总结**\n\n某格点与其四个最近邻所连键任意两两之间的夹角是恒定的，其符号表达式为 **`arccos(-1/3)`**，约等于 **109.47°**。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": \"[字符串]\",\n  \"(2)\": \"[字符串]\",\n  \"(3)\": \"[字符串]\",\n  \"(4)\": \"[字符串]\",\n  \"(5)\": \"[字符串]\",\n  \"(6)\": \"[字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)\": \"A点单位键向量为 u1=(1/√3)(1,1,1), u2=(1/√3)(1,-1,-1), u3=(1/√3)(-1,1,-1), u4=(1/√3)(-1,-1,1)。B点向量方向相反。由于单位化消除了晶格常数 a，键角具有尺度不变性。\",\n  \"(2)\": \"任选两单位向量 u=(1/√3)(1,1,1) 和 v=(1/√3)(1,-1,-1)，其点积 u·v = (1/3)(1-1-1) = -1/3。因此，cosθ = -1/3，夹角 θ = arccos(-1/3) ≈ 109.47°。\",\n  \"(3)\": \"理想 sp3 键角 θ_sp3 = arccos(-1/3)。与(2)中计算的夹角 θ 比较，差异 Δθ = |θ - θ_sp3| = 0。\",\n  \"(4)\": \"夹角不变性源于点积的性质：1) 不同子晶格的键向量为 (-u) 和 (-v)，其点积 (-u)·(-v) = u·v，夹角不变。2) 旋转操作 R 是正交变换，点积 (Ru)·(Rv) = u·v，夹角不变。\",\n  \"(5)\": \"每个原子位于一个正四面体的中心，其四个最近邻位于四面体的四个顶点。由于正四面体的高度对称性，从中心到任意两个顶点的连线所形成的夹角（即键角）是完全相等的。\",\n  \"(6)\": \"任意两键之间的夹角为 arccos(-1/3)，约等于 109.47°。\"\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "image_path": [
+      "filtered_images/132698973.jpg"
+    ],
+    "solution_steps": [
+      "从金刚石晶格四面体最近邻方向出发进行几何分析，得出键间角为arccos(-1/3)",
+      "调用 calculate_diamond_bond_angles() 进行数值验证并获得标准数值",
+      "核对结果(≈109.47°)并记录"
+    ],
+    "tool_expected": [
+      "calculate_diamond_bond_angles"
+    ],
+    "golden_answer": [
+      {
+        "(1)": "A 点四条单位化键向量可取：±号组合为 1/√3(1,1,1), 1/√3(1,−1,−1), 1/√3(−1,1,−1), 1/√3(−1,−1,1)。B 点四条单位化键向量为上述向量的相反数。尺度不变性：将 (±a/4, ±a/4, ±a/4) 归一化后方向与上述一致，夹角与 a 无关。",
+        "(2)": "cosθ = −1/3，θ = arccos(−1/3)。",
+        "(3)": "记(2)结果为 Θ₂，则 Δθ = |Θ₂ − θ_sp3|。",
+        "(4)": "取任意两条单位键向量 u, v 于 A 或 B，施加 R 后得 u′ = Ru, v′ = Rv，有 u′·v′ = u·v，故旋转前后夹角相同；于不同子晶格取向量亦满足相同点积，故夹角与(2)一致，即 θ′ = Θ₂。",
+        "(5)": "四条单位向量指向单位球上正四面体的四个顶点，任意两向量间夹角相等，体现四面体对称与等角性。",
+        "(6)": "θ = arccos(−1/3)。"
+      }
+    ],
+    "original_question_id": "13",
+    "test_type": "refined",
+    "topic_protocol_scope": "凝聚态物理",
+    "with_all_tools": true
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "test_type": "refined",
+    "original_question_id": "13",
+    "subject_topic_key": "物理科学::凝聚态物理"
+  },
+  "answer_template": {
+    "(1)": "[字符串]",
+    "(2)": "[字符串]",
+    "(3)": "[字符串]",
+    "(4)": "[字符串]",
+    "(5)": "[字符串]",
+    "(6)": "[字符串]"
+  },
+  "golden_standard": {
+    "(1)": "A 点四条单位化键向量可取：±号组合为 1/√3(1,1,1), 1/√3(1,−1,−1), 1/√3(−1,1,−1), 1/√3(−1,−1,1)。B 点四条单位化键向量为上述向量的相反数。尺度不变性：将 (±a/4, ±a/4, ±a/4) 归一化后方向与上述一致，夹角与 a 无关。",
+    "(2)": "cosθ = −1/3，θ = arccos(−1/3)。",
+    "(3)": "记(2)结果为 Θ₂，则 Δθ = |Θ₂ − θ_sp3|。",
+    "(4)": "取任意两条单位键向量 u, v 于 A 或 B，施加 R 后得 u′ = Ru, v′ = Rv，有 u′·v′ = u·v，故旋转前后夹角相同；于不同子晶格取向量亦满足相同点积，故夹角与(2)一致，即 θ′ = Θ₂。",
+    "(5)": "四条单位向量指向单位球上正四面体的四个顶点，任意两向量间夹角相等，体现四面体对称与等角性。",
+    "(6)": "θ = arccos(−1/3)。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": "A点单位键向量为 u1=(1/√3)(1,1,1), u2=(1/√3)(1,-1,-1), u3=(1/√3)(-1,1,-1), u4=(1/√3)(-1,-1,1)。B点向量方向相反。由于单位化消除了晶格常数 a，键角具有尺度不变性。",
+    "(2)": "任选两单位向量 u=(1/√3)(1,1,1) 和 v=(1/√3)(1,-1,-1)，其点积 u·v = (1/3)(1-1-1) = -1/3。因此，cosθ = -1/3，夹角 θ = arccos(-1/3) ≈ 109.47°。",
+    "(3)": "理想 sp3 键角 θ_sp3 = arccos(-1/3)。与(2)中计算的夹角 θ 比较，差异 Δθ = |θ - θ_sp3| = 0。",
+    "(4)": "夹角不变性源于点积的性质：1) 不同子晶格的键向量为 (-u) 和 (-v)，其点积 (-u)·(-v) = u·v，夹角不变。2) 旋转操作 R 是正交变换，点积 (Ru)·(Rv) = u·v，夹角不变。",
+    "(5)": "每个原子位于一个正四面体的中心，其四个最近邻位于四面体的四个顶点。由于正四面体的高度对称性，从中心到任意两个顶点的连线所形成的夹角（即键角）是完全相等的。",
+    "(6)": "任意两键之间的夹角为 arccos(-1/3)，约等于 109.47°。"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)\": \"A点单位键向量为 u1=(1/√3)(1,1,1), u2=(1/√3)(1,-1,-1), u3=(1/√3)(-1,1,-1), u4=(1/√3)(-1,-1,1)。B点向量方向相反。由于单位化消除了晶格常数 a，键角具有尺度不变性。\",\n  \"(2)\": \"任选两单位向量 u=(1/√3)(1,1,1) 和 v=(1/√3)(1,-1,-1)，其点积 u·v = (1/3)(1-1-1) = -1/3。因此，cosθ = -1/3，夹角 θ = arccos(-1/3) ≈ 109.47°。\",\n  \"(3)\": \"理想 sp3 键角 θ_sp3 = arccos(-1/3)。与(2)中计算的夹角 θ 比较，差异 Δθ = |θ - θ_sp3| = 0。\",\n  \"(4)\": \"夹角不变性源于点积的性质：1) 不同子晶格的键向量为 (-u) 和 (-v)，其点积 (-u)·(-v) = u·v，夹角不变。2) 旋转操作 R 是正交变换，点积 (Ru)·(Rv) = u·v，夹角不变。\",\n  \"(5)\": \"每个原子位于一个正四面体的中心，其四个最近邻位于四面体的四个顶点。由于正四面体的高度对称性，从中心到任意两个顶点的连线所形成的夹角（即键角）是完全相等的。\",\n  \"(6)\": \"任意两键之间的夹角为 arccos(-1/3)，约等于 109.47°。\"\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)\": \"A点单位键向量为 u1=(1/√3)(1,1,1), u2=(1/√3)(1,-1,-1), u3=(1/√3)(-1,1,-1), u4=(1/√3)(-1,-1,1)。B点向量方向相反。由于单位化消除了晶格常数 a，键角具有尺度不变性。\",\n  \"(2)\": \"任选两单位向量 u=(1/√3)(1,1,1) 和 v=(1/√3)(1,-1,-1)，其点积 u·v = (1/3)(1-1-1) = -1/3。因此，cosθ = -1/3，夹角 θ = arccos(-1/3) ≈ 109.47°。\",\n  \"(3)\": \"理想 sp3 键角 θ_sp3 = arccos(-1/3)。与(2)中计算的夹角 θ 比较，差异 Δθ = |θ - θ_sp3| = 0。\",\n  \"(4)\": \"夹角不变性源于点积的性质：1) 不同子晶格的键向量为 (-u) 和 (-v)，其点积 (-u)·(-v) = u·v，夹角不变。2) 旋转操作 R 是正交变换，点积 (Ru)·(Rv) = u·v，夹角不变。\",\n  \"(5)\": \"每个原子位于一个正四面体的中心，其四个最近邻位于四面体的四个顶点。由于正四面体的高度对称性，从中心到任意两个顶点的连线所形成的夹角（即键角）是完全相等的。\",\n  \"(6)\": \"任意两键之间的夹角为 arccos(-1/3)，约等于 109.47°。\"\n}\n```"
+  },
+  "evaluation_score": 1.0,
+  "evaluation_summary": "匹配字段: 6/6 (得分: 100.00%)",
+  "evaluation_details": {
+    "(1)": {
+      "path": "(1)",
+      "expected": "A 点四条单位化键向量可取：±号组合为 1/√3(1,1,1), 1/√3(1,−1,−1), 1/√3(−1,1,−1), 1/√3(−1,−1,1)。B 点四条单位化键向量为上述向量的相反数。尺度不变性：将 (±a/4, ±a/4, ±a/4) 归一化后方向与上述一致，夹角与 a 无关。",
+      "actual": "A点单位键向量为 u1=(1/√3)(1,1,1), u2=(1/√3)(1,-1,-1), u3=(1/√3)(-1,1,-1), u4=(1/√3)(-1,-1,1)。B点向量方向相反。由于单位化消除了晶格常数 a，键角具有尺度不变性。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2)": {
+      "path": "(2)",
+      "expected": "cosθ = −1/3，θ = arccos(−1/3)。",
+      "actual": "任选两单位向量 u=(1/√3)(1,1,1) 和 v=(1/√3)(1,-1,-1)，其点积 u·v = (1/3)(1-1-1) = -1/3。因此，cosθ = -1/3，夹角 θ = arccos(-1/3) ≈ 109.47°。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)": {
+      "path": "(3)",
+      "expected": "记(2)结果为 Θ₂，则 Δθ = |Θ₂ − θ_sp3|。",
+      "actual": "理想 sp3 键角 θ_sp3 = arccos(-1/3)。与(2)中计算的夹角 θ 比较，差异 Δθ = |θ - θ_sp3| = 0。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)": {
+      "path": "(4)",
+      "expected": "取任意两条单位键向量 u, v 于 A 或 B，施加 R 后得 u′ = Ru, v′ = Rv，有 u′·v′ = u·v，故旋转前后夹角相同；于不同子晶格取向量亦满足相同点积，故夹角与(2)一致，即 θ′ = Θ₂。",
+      "actual": "夹角不变性源于点积的性质：1) 不同子晶格的键向量为 (-u) 和 (-v)，其点积 (-u)·(-v) = u·v，夹角不变。2) 旋转操作 R 是正交变换，点积 (Ru)·(Rv) = u·v，夹角不变。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5)": {
+      "path": "(5)",
+      "expected": "四条单位向量指向单位球上正四面体的四个顶点，任意两向量间夹角相等，体现四面体对称与等角性。",
+      "actual": "每个原子位于一个正四面体的中心，其四个最近邻位于四面体的四个顶点。由于正四面体的高度对称性，从中心到任意两个顶点的连线所形成的夹角（即键角）是完全相等的。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6)": {
+      "path": "(6)",
+      "expected": "θ = arccos(−1/3)。",
+      "actual": "任意两键之间的夹角为 arccos(-1/3)，约等于 109.47°。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "mode_folder": "with_all_tools",
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 1.0,
+    "0_75": 1.0,
+    "0_100": 1.0
+  }
+}

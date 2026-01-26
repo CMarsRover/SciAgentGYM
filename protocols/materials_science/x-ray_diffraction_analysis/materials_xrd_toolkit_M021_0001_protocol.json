@@ -1,0 +1,533 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "bragg_law_d_spacing",
+            "description": "根据Bragg定律计算晶面间距 d = λ / (2sinθ)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta": {
+                        "type": "number",
+                        "description": "衍射角2θ（度），范围10-120°"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长（Å），默认Cu Kα=1.5406 Å"
+                    }
+                },
+                "required": [
+                    "two_theta"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_tetragonal_lattice",
+            "description": "从单个衍射峰计算四方晶系晶格参数（需要已知Miller指数）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "d_hkl": {
+                        "type": "number",
+                        "description": "测量的晶面间距（Å）"
+                    },
+                    "h": {
+                        "type": "integer",
+                        "description": "Miller指数h"
+                    },
+                    "k": {
+                        "type": "integer",
+                        "description": "Miller指数k"
+                    },
+                    "l": {
+                        "type": "integer",
+                        "description": "Miller指数l"
+                    },
+                    "initial_a": {
+                        "type": "number",
+                        "description": "a轴初始猜测值（Å），默认4.5"
+                    },
+                    "initial_c": {
+                        "type": "number",
+                        "description": "c轴初始猜测值（Å），默认3.0"
+                    }
+                },
+                "required": [
+                    "d_hkl",
+                    "h",
+                    "k",
+                    "l"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "assign_miller_indices_tetragonal",
+            "description": "为给定d-spacing分配可能的Miller指数（四方晶系），通过遍历(hkl)组合寻找最优匹配。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "d_spacing": {
+                        "type": "number",
+                        "description": "实验测量的晶面间距（Å）"
+                    },
+                    "a": {
+                        "type": "number",
+                        "description": "四方晶系a轴参数（Å）"
+                    },
+                    "c": {
+                        "type": "number",
+                        "description": "四方晶系c轴参数（Å）"
+                    },
+                    "max_index": {
+                        "type": "integer",
+                        "description": "Miller指数搜索上限，默认3"
+                    }
+                },
+                "required": [
+                    "d_spacing",
+                    "a",
+                    "c"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_xrd_peaks",
+            "description": "自动检测XRD图谱中的衍射峰位置，基于峰的突出度和最小间距筛选。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "2θ角度数组（度）"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应的衍射强度数组"
+                    },
+                    "prominence": {
+                        "type": "number",
+                        "description": "峰的最小突出度（相对强度），默认5.0"
+                    },
+                    "min_distance": {
+                        "type": "integer",
+                        "description": "峰之间的最小距离（数据点数），默认5"
+                    }
+                },
+                "required": [
+                    "two_theta",
+                    "intensity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fetch_structure_from_mp",
+            "description": "从Materials Project数据库获取晶体结构信息。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_id": {
+                        "type": "string",
+                        "description": "Materials Project ID（如'mp-856'）"
+                    },
+                    "api_key": {
+                        "type": "string",
+                        "description": "MP API密钥；若未提供将尝试从环境变量MP_API_KEY读取"
+                    }
+                },
+                "required": [
+                    "material_id"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "refine_tetragonal_lattice_multiPeak",
+            "description": "使用多个衍射峰联合精修四方晶系晶格参数（最小二乘拟合）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "two_theta": {
+                                    "type": "number",
+                                    "description": "峰的2θ角度（度）"
+                                },
+                                "hkl": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    },
+                                    "minItems": 3,
+                                    "maxItems": 3,
+                                    "description": "Miller指数(h,k,l)，长度为3"
+                                }
+                            },
+                            "required": [
+                                "two_theta",
+                                "hkl"
+                            ]
+                        },
+                        "description": "峰数据列表，每个元素为{'two_theta': float, 'hkl': (h,k,l)}"
+                    },
+                    "initial_a": {
+                        "type": "number",
+                        "description": "a轴初始值（Å），默认4.5"
+                    },
+                    "initial_c": {
+                        "type": "number",
+                        "description": "c轴初始值（Å），默认3.0"
+                    }
+                },
+                "required": [
+                    "peak_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "identify_phase_from_xrd",
+            "description": "从XRD图谱识别晶相，通过实验峰位与候选相参考峰位匹配计算得分。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "实验2θ数据"
+                    },
+                    "intensity_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "实验强度数据"
+                    },
+                    "candidate_phases": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "相名称"
+                                },
+                                "space_group": {
+                                    "type": "string",
+                                    "description": "空间群"
+                                },
+                                "lattice": {
+                                    "type": "object",
+                                    "properties": {
+                                        "a": {
+                                            "type": "number",
+                                            "description": "a轴参数（Å）"
+                                        },
+                                        "c": {
+                                            "type": "number",
+                                            "description": "c轴参数（Å）"
+                                        }
+                                    },
+                                    "additionalProperties": {
+                                        "type": "number"
+                                    },
+                                    "description": "晶格参数（如四方系包含a、c）"
+                                },
+                                "reference_peaks": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "two_theta": {
+                                                "type": "number",
+                                                "description": "理论峰位2θ（度）"
+                                            },
+                                            "hkl": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                },
+                                                "minItems": 3,
+                                                "maxItems": 3,
+                                                "description": "Miller指数(h,k,l)"
+                                            },
+                                            "intensity": {
+                                                "type": "number",
+                                                "description": "相对强度"
+                                            }
+                                        },
+                                        "required": [
+                                            "two_theta"
+                                        ]
+                                    },
+                                    "description": "候选相参考峰列表"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "reference_peaks"
+                            ]
+                        },
+                        "description": "候选相列表"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "峰位匹配容差（度），默认0.2"
+                    }
+                },
+                "required": [
+                    "two_theta_list",
+                    "intensity_list",
+                    "candidate_phases"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "complete_xrd_analysis",
+            "description": "完整的XRD分析流程：从峰位到晶格参数再到相鉴定并生成分析报告。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_assignments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "two_theta": {
+                                    "type": "number",
+                                    "description": "峰的2θ角度（度）"
+                                },
+                                "hkl": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    },
+                                    "minItems": 3,
+                                    "maxItems": 3,
+                                    "description": "Miller指数(h,k,l)，长度为3"
+                                }
+                            },
+                            "required": [
+                                "two_theta",
+                                "hkl"
+                            ]
+                        },
+                        "description": "峰数据列表，格式[{'two_theta': float, 'hkl': (h,k,l)}]"
+                    },
+                    "phase_name": {
+                        "type": "string",
+                        "description": "相名称，默认'Unknown'"
+                    },
+                    "crystal_system": {
+                        "type": "string",
+                        "description": "晶系类型，默认'tetragonal'，当前支持：tetragonal、cubic、orthorhombic"
+                    }
+                },
+                "required": [
+                    "peak_assignments"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_xrd_pattern",
+            "description": "绘制XRD衍射图谱并标注峰位，可保存为图片文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "2θ角度列表（度）"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度列表"
+                    },
+                    "peak_labels": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "position": {
+                                    "type": "number",
+                                    "description": "峰位置2θ（度）"
+                                },
+                                "label": {
+                                    "type": "string",
+                                    "description": "峰标注文本（如'(hkl)'）"
+                                }
+                            },
+                            "required": [
+                                "position",
+                                "label"
+                            ]
+                        },
+                        "description": "峰标注列表，格式[{'position': 2θ, 'label': '(hkl)'}]"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "图片保存目录"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不含扩展名），默认自动生成"
+                    }
+                },
+                "required": [
+                    "two_theta",
+                    "intensity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_crystal_structure_2d",
+            "description": "绘制晶格参数示意图（2D投影），以简化的ab面展示四方晶胞。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_params": {
+                        "type": "object",
+                        "properties": {
+                            "a": {
+                                "type": "number",
+                                "description": "a轴长度（Å）"
+                            },
+                            "b": {
+                                "type": "number",
+                                "description": "b轴长度（Å）"
+                            },
+                            "c": {
+                                "type": "number",
+                                "description": "c轴长度（Å）"
+                            },
+                            "alpha": {
+                                "type": "number",
+                                "description": "α角（度）"
+                            },
+                            "beta": {
+                                "type": "number",
+                                "description": "β角（度）"
+                            },
+                            "gamma": {
+                                "type": "number",
+                                "description": "γ角（度）"
+                            },
+                            "a_angstrom": {
+                                "type": "number",
+                                "description": "a轴长度（Å），可替代'a'"
+                            },
+                            "c_angstrom": {
+                                "type": "number",
+                                "description": "c轴长度（Å），可替代'c'"
+                            }
+                        },
+                        "additionalProperties": {
+                            "type": "number"
+                        },
+                        "description": "晶格参数字典{'a','b','c','alpha','beta','gamma'}；也可包含a_angstrom/c_angstrom等字段"
+                    },
+                    "phase_name": {
+                        "type": "string",
+                        "description": "相名称"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "图片保存目录"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不含扩展名），默认自动生成"
+                    }
+                },
+                "required": [
+                    "lattice_params",
+                    "phase_name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+    }
+]

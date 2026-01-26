@@ -1,0 +1,35 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_w2_for_equal_absorption",
+            "description": "计算场#2的频率w2，使得吸收概率相等。对于相等的最大吸收，两个场必须与各自的跃迁共振，且拉比频率应相等（或吸收截面相等）。关键洞察：斯塔克效应根据m值对2p态产生不同的移位。对于圆偏振，频率必须匹配斯塔克移位后的2p(m=±1)跃迁。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "E1": {
+                        "type": "number",
+                        "description": "场#1的振幅，单位：V/m"
+                    },
+                    "E2": {
+                        "type": "number",
+                        "description": "场#2的振幅，单位：V/m"
+                    },
+                    "E0_SI": {
+                        "type": "number",
+                        "description": "直流电场振幅，单位：V/m"
+                    }
+                },
+                "required": [
+                    "E1",
+                    "E2",
+                    "E0_SI"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py"
+        }
+    }
+]

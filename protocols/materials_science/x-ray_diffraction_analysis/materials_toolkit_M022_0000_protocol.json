@@ -1,0 +1,295 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_scherrer_grain_size",
+            "description": "用Scherrer方程计算平均晶粒尺寸。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak_2theta_deg": {
+                        "type": "number",
+                        "description": "峰位2θ（度），范围0-180"
+                    },
+                    "fwhm_deg": {
+                        "type": "number",
+                        "description": "测得FWHM（度），>0"
+                    },
+                    "wavelength_nm": {
+                        "type": "number",
+                        "description": "X射线波长（nm），如Cu Kα=0.15406"
+                    },
+                    "shape_factor": {
+                        "type": "number",
+                        "description": "形状因子K，通常0.89-1.0"
+                    },
+                    "instrument_fwhm_deg": {
+                        "type": "number",
+                        "description": "仪器展宽FWHM（度），默认0"
+                    }
+                },
+                "required": [
+                    "peak_2theta_deg",
+                    "fwhm_deg"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_strongest_peak",
+            "description": "从XRD数据中识别最强峰（返回峰位与强度）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_deg": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "2θ（度）列表"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应强度（a.u.）列表"
+                    }
+                },
+                "required": [
+                    "two_theta_deg",
+                    "intensity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fetch_structure",
+            "description": "从本地CIF或Materials Project获取pymatgen.Structure。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "结构来源；如'./Si.cif'或'MP-ID:mp-149'或'FORMULA:Si'"
+                    }
+                },
+                "required": [
+                    "identifier"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_xrd",
+            "description": "通过pymatgen模拟XRD图谱。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure_json": {
+                        "type": "object",
+                        "description": "pymatgen.Structure的字典表示（来自fetch_structure）"
+                    },
+                    "wavelength_nm": {
+                        "type": "number",
+                        "description": "X射线波长（nm）"
+                    },
+                    "two_theta_min": {
+                        "type": "number",
+                        "description": "2θ最小值（度）"
+                    },
+                    "two_theta_max": {
+                        "type": "number",
+                        "description": "2θ最大值（度）"
+                    }
+                },
+                "required": [
+                    "structure_json"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fetch_property_from_database",
+            "description": "从mendeleev获取元素性质数据。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "元素符号，例如'Cu'"
+                    },
+                    "property_name": {
+                        "type": "string",
+                        "description": "要查询的属性名，例如'density'或'atomic_radius'"
+                    }
+                },
+                "required": [
+                    "identifier",
+                    "property_name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "construct_tight_binding_hamiltonian",
+            "description": "构建一维紧束缚哈密顿量的稀疏矩阵（CSR格式）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "n_sites": {
+                        "type": "integer",
+                        "description": "格点数，整数且>=2"
+                    },
+                    "hopping_energy": {
+                        "type": "number",
+                        "description": "跳跃能量t（eV）"
+                    },
+                    "on_site_energy": {
+                        "type": "number",
+                        "description": "在位能ε（eV）"
+                    },
+                    "periodic": {
+                        "type": "boolean",
+                        "description": "是否周期边界条件"
+                    },
+                    "save_name": {
+                        "type": "string",
+                        "description": "保存文件名"
+                    }
+                },
+                "required": [
+                    "n_sites",
+                    "hopping_energy"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "estimate_grain_size_from_xrd",
+            "description": "组合流程：识别最强峰→Scherrer估算晶粒尺寸。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_deg": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "2θ列表（度）"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度列表（a.u.）"
+                    },
+                    "fwhm_deg": {
+                        "type": "number",
+                        "description": "对应最强峰的FWHM（度）"
+                    },
+                    "instrument_fwhm_deg": {
+                        "type": "number",
+                        "description": "仪器展宽FWHM（度）"
+                    },
+                    "wavelength_nm": {
+                        "type": "number",
+                        "description": "波长（nm）"
+                    },
+                    "shape_factor": {
+                        "type": "number",
+                        "description": "形状因子K"
+                    }
+                },
+                "required": [
+                    "two_theta_deg",
+                    "intensity",
+                    "fwhm_deg"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_xrd_pattern",
+            "description": "可视化XRD衍射图谱（Plotly图）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta_deg": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "2θ列表（度）"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度列表（a.u.）"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "标题"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "保存文件名，默认自动生成"
+                    }
+                },
+                "required": [
+                    "two_theta_deg",
+                    "intensity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+    }
+]

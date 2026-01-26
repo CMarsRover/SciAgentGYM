@@ -1,0 +1,25 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "consistency_equation",
+            "description": "自洽性方程：从 K 和 P 计算 a，然后验证开普勒第三定律。返回计算的周期与输入周期的差值（应为0）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "P_seconds": {
+                        "type": "number",
+                        "description": "输入的轨道周期，单位：秒"
+                    }
+                },
+                "required": [
+                    "P_seconds"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/astronomy_toolkit_12.py"
+        }
+    }
+]

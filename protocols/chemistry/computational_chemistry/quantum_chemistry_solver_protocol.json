@@ -1,0 +1,49 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_molecular_properties",
+            "description": "分析分子性质",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "molecule_spec": {
+                        "type": "string",
+                        "description": "分子规格，可以是原子坐标列表或XYZ文件路径"
+                    },
+                    "basis": {
+                        "type": "string",
+                        "description": "基组名称，默认为'cc-pvdz'"
+                    },
+                    "charge": {
+                        "type": "integer",
+                        "description": "分子电荷，默认为0"
+                    },
+                    "spin": {
+                        "type": "integer",
+                        "description": "自旋多重度减1，默认为0（单重态）"
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "SCF计算方法，可选'RHF'（限制性Hartree-Fock）或'DFT'（密度泛函理论），默认为'RHF'"
+                    },
+                    "xc": {
+                        "type": "string",
+                        "description": "DFT计算中使用的交换关联泛函，默认为None"
+                    },
+                    "grid_level": {
+                        "type": "integer",
+                        "description": "DFT计算中的网格精度，默认为3"
+                    }
+                },
+                "required": [
+                    "molecule_spec"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/quantum_chemistry_solver.py"
+        }
+    }
+]

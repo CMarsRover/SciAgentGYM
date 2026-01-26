@@ -1,0 +1,316 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "ideal_gas_state",
+            "description": "计算理想气体状态方程的温度",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "P": {
+                        "type": "number",
+                        "description": "压力，单位：Pa"
+                    },
+                    "V": {
+                        "type": "number",
+                        "description": "体积，单位：m³"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "P",
+                    "V"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "isothermal_process",
+            "description": "计算等温过程中的压力",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "V": {
+                        "type": "number",
+                        "description": "体积，单位：m³"
+                    },
+                    "T": {
+                        "type": "number",
+                        "description": "温度，单位：K"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "V",
+                    "T"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "isochoric_process",
+            "description": "计算等容过程中的压力",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "T": {
+                        "type": "number",
+                        "description": "温度，单位：K"
+                    },
+                    "V": {
+                        "type": "number",
+                        "description": "体积，单位：m³"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "T",
+                    "V"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "isobaric_process",
+            "description": "计算等压过程中的温度",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "V": {
+                        "type": "number",
+                        "description": "体积，单位：m³"
+                    },
+                    "P": {
+                        "type": "number",
+                        "description": "压力，单位：Pa"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "V",
+                    "P"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_work_heat",
+            "description": "计算热力学过程中的功和热量",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "process_type": {
+                        "type": "string",
+                        "description": "过程类型，可选值：'isothermal', 'isochoric', 'isobaric', 'adiabatic'"
+                    },
+                    "initial_state": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "初始状态 (P, V, T)，单位分别为：Pa, m³, K"
+                    },
+                    "final_state": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "终止状态 (P, V, T)，单位分别为：Pa, m³, K"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "process_type",
+                    "initial_state",
+                    "final_state"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_cycle_efficiency",
+            "description": "计算热力学循环的效率",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "states": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "循环中各状态点 [(P1, V1, T1), (P2, V2, T2), ...]，单位分别为：Pa, m³, K"
+                    },
+                    "processes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "各过程类型 ['isothermal', 'isochoric', ...]"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "states",
+                    "processes"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_thermodynamic_cycle",
+            "description": "求解由两条等容线和两条等压线构成的循环过程中状态b的温度",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "T1": {
+                        "type": "number",
+                        "description": "状态a的温度，单位：K"
+                    },
+                    "T3": {
+                        "type": "number",
+                        "description": "状态c的温度，单位：K"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "T1",
+                    "T3"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_thermodynamic_cycle",
+            "description": "绘制热力学循环的P-V图",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "T1": {
+                        "type": "number",
+                        "description": "状态a的温度，单位：K"
+                    },
+                    "T3": {
+                        "type": "number",
+                        "description": "状态c的温度，单位：K"
+                    },
+                    "n": {
+                        "type": "number",
+                        "description": "物质的量，默认为1 mol"
+                    },
+                    "R": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    }
+                },
+                "required": [
+                    "T1",
+                    "T3"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_215.py"
+        }
+    }
+]

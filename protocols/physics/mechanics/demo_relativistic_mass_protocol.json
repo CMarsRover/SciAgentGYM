@@ -1,0 +1,130 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of demonstration functions for illustrating physics concepts including relativistic mass, force-acceleration ratio, and data visualization; each function is designed to showcase core physical principles through computational examples.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "demo_relativistic_mass",
+        "description": "Demonstrates the calculation of relativistic mass as a function of velocity, illustrating how mass increases with speed according to special relativity.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "返回相对论质量计算的结果",
+        "properties": {
+          "velocity": {
+            "type": "number",
+            "description": "物体的速度（单位：m/s）"
+          },
+          "rest_mass": {
+            "type": "number",
+            "description": "物体的静止质量（单位：kg）"
+          },
+          "relativistic_mass": {
+            "type": "number",
+            "description": "物体的相对论质量（单位：kg）"
+          },
+          "gamma": {
+            "type": "number",
+            "description": "洛伦兹因子"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/demo_relativistic_mass.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "demo_force_acceleration_ratio",
+        "description": "Demonstrates the ratio between applied force and resulting acceleration, highlighting inertial behavior and potential relativistic or non-ideal effects.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "返回力与加速度比值的计算结果",
+        "properties": {
+          "force": {
+            "type": "number",
+            "description": "施加的力（单位：N）"
+          },
+          "acceleration": {
+            "type": "number",
+            "description": "产生的加速度（单位：m/s²）"
+          },
+          "mass": {
+            "type": "number",
+            "description": "物体的质量（单位：kg）"
+          },
+          "ratio": {
+            "type": "number",
+            "description": "力与加速度的比值（理论上等于质量）"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/demo_relativistic_mass.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "demo_visualization",
+        "description": "Demonstrates data visualization techniques for physical quantities, such as plotting relativistic mass or force-acceleration relationships over a range of values.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "返回可视化演示的相关信息",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "可视化图表的标题"
+          },
+          "data_points": {
+            "type": "array",
+            "description": "用于可视化的数据点列表",
+            "items": {
+              "type": "number"
+            }
+          },
+          "x_label": {
+            "type": "string",
+            "description": "X轴标签"
+          },
+          "y_label": {
+            "type": "string",
+            "description": "Y轴标签"
+          },
+          "plot_type": {
+            "type": "string",
+            "description": "图表类型（如 line, scatter, bar 等）"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/demo_relativistic_mass.py"
+      }
+    }
+  ]
+}

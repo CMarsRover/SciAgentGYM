@@ -1,0 +1,34 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_dilution_optimization",
+            "description": "绘制稀释倍数优化曲线，展示不同COD值对应的推荐稀释倍数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "cod_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "COD范围 (mg/L)，形式为(cod_min, cod_max)"
+                    },
+                    "num_points": {
+                        "type": "integer",
+                        "description": "曲线采样点数，默认为50"
+                    }
+                },
+                "required": [
+                    "cod_range"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/environmental_chemistry_toolkit_claude_654.py"
+        }
+    }
+]

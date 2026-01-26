@@ -1,0 +1,254 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "construct_hamiltonian",
+            "description": "构建量子多体系统的哈密顿量矩阵（稀疏格式）。该函数用于构建一维或多维量子系统的哈密顿量，支持自定义相互作用和势能项。基于紧束缚模型(tight-binding model)的理论框架。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "system_size": {
+                        "description": "系统尺寸，如(Nx, Ny)表示二维晶格，(N,)表示一维链；允许直接传单个整数N",
+                        "oneOf": [
+                            {
+                                "type": "array",
+                                "items": { "type": "integer" }
+                            },
+                            { "type": "integer" }
+                        ]
+                    },
+                    "interaction_matrix": {
+                        "description": "相互作用矩阵/标量，描述粒子间的相互作用强度；一维可用标量或一维数组，二维建议用二维数组",
+                        "oneOf": [
+                            { "type": "number" },
+                            { "type": "array", "items": { "type": "number" } },
+                            { "type": "array", "items": { "type": "array", "items": { "type": "number" } } }
+                        ]
+                    },
+                    "potential": {
+                        "type": "object",
+                        "description": "外部势能场，可以是数组或函数"
+                    },
+                    "periodic": {
+                        "type": "boolean",
+                        "description": "是否使用周期性边界条件，默认为False"
+                    }
+                },
+                "required": [
+                    "system_size",
+                    "interaction_matrix"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/condensed_matter_tools_4179.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_eigensystem",
+            "description": "求解哈密顿量的本征值和本征态。使用稀疏矩阵方法高效求解大型哈密顿量的低能本征态，适用于量子多体系统的基态和激发态计算。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "hamiltonian": {
+                        "type": "object",
+                        "description": "系统的哈密顿量（稀疏矩阵格式）"
+                    },
+                    "k": {
+                        "type": "integer",
+                        "description": "需要计算的本征值数量，默认为6"
+                    },
+                    "which": {
+                        "type": "string",
+                        "description": "指定计算哪些本征值：'SA' - 代数值最小的k个本征值（默认）；'LA' - 代数值最大的k个本征值；'SM' - 绝对值最小的k个本征值；'LM' - 绝对值最大的k个本征值"
+                    }
+                },
+                "required": [
+                    "hamiltonian"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/condensed_matter_tools_4179.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_density_matrix",
+            "description": "计算量子态的密度矩阵或约化密度矩阵。可用于计算纯态的密度矩阵，或通过部分迹运算得到子系统的约化密度矩阵，是量子纠缠和量子信息研究的基础工具。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "eigenvector": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "量子态的向量表示"
+                    },
+                    "trace_subsystem": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "需要追踪的子系统维度，如果为None则计算完整密度矩阵"
+                    }
+                },
+                "required": [
+                    "eigenvector"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/condensed_matter_tools_4179.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "monte_carlo_ising",
+            "description": "使用Metropolis算法进行二维Ising模型的蒙特卡洛模拟。实现经典的Metropolis算法模拟二维Ising模型的热力学行为，可用于研究相变、临界现象和标度行为。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_size": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "晶格尺寸，如(L, L)表示LxL的二维方格"
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "系统温度，单位为J/kB"
+                    },
+                    "num_steps": {
+                        "type": "integer",
+                        "description": "蒙特卡洛步数"
+                    },
+                    "J": {
+                        "type": "number",
+                        "description": "自旋间相互作用强度，J>0表示铁磁性，默认为1.0"
+                    }
+                },
+                "required": [
+                    "lattice_size",
+                    "temperature",
+                    "num_steps"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/condensed_matter_tools_4179.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_phase_diagram",
+            "description": "绘制相变图，展示物理量随温度的变化。可视化相变过程中物理量的变化，帮助识别临界点和相变行为。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "temp_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "温度范围数组"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "每个温度点的模拟结果字典列表"
+                    },
+                    "observable": {
+                        "type": "string",
+                        "description": "要绘制的物理量，可选值：'specific_heat', 'susceptibility', 'avg_energy', 'avg_magnetization'，默认为'specific_heat'"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题，如果为None则自动生成"
+                    }
+                },
+                "required": [
+                    "temp_range",
+                    "results"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/condensed_matter_tools_4179.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_lattice",
+            "description": "可视化二维晶格构型。用于展示Ising模型的自旋构型，帮助直观理解系统状态。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "二维晶格数组，值为+1或-1"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题，如果为None则使用默认标题"
+                    }
+                },
+                "required": [
+                    "lattice"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_correlation_function",
+            "description": "计算二维Ising模型的自旋关联函数。关联函数描述了不同距离自旋之间的相关性，是研究临界现象的重要工具。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "二维晶格数组，值为+1或-1"
+                    },
+                    "max_distance": {
+                        "type": "integer",
+                        "description": "计算关联函数的最大距离，默认为晶格尺寸的一半"
+                    }
+                },
+                "required": [
+                    "lattice"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/condensed_matter_tools_4179.py"
+        }
+    }
+]

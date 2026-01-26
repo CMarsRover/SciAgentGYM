@@ -1,0 +1,351 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of utility functions for visualizing solutions to variational problems, dynamical system trajectories, phase portraits, energy landscapes, and 3D surfaces, primarily for scientific and mathematical analysis.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_solution",
+        "description": "Plots the solution of a variational problem using provided solution data.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "solution": {
+              "type": "object",
+              "description": "解的数据字典"
+            },
+            "title": {
+              "type": "string",
+              "description": "图表标题"
+            },
+            "figsize": {
+              "type": "integer",
+              "description": "图表大小"
+            },
+            "save_path": {
+              "type": "string",
+              "description": "保存路径"
+            }
+          },
+          "required": [
+            "solution",
+            "title",
+            "figsize",
+            "save_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "绘制变分问题的解并返回图表信息",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "绘图是否成功"
+          },
+          "title": {
+            "type": "string",
+            "description": "图表标题"
+          },
+          "save_path": {
+            "type": "string",
+            "description": "图表保存路径，如果未保存则为null"
+          },
+          "message": {
+            "type": "string",
+            "description": "附加信息，如错误信息或成功提示"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/plotting.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_trajectory",
+        "description": "Visualizes the trajectory of a dynamic system or particle motion in 2D space.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "trajectory": {
+              "type": "object",
+              "description": "轨迹数据"
+            },
+            "title": {
+              "type": "string",
+              "description": "图表标题"
+            },
+            "figsize": {
+              "type": "integer",
+              "description": "图表大小"
+            },
+            "save_path": {
+              "type": "string",
+              "description": "保存路径"
+            }
+          },
+          "required": [
+            "trajectory",
+            "title",
+            "figsize",
+            "save_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "绘制运动轨迹并返回图表信息",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "绘图是否成功"
+          },
+          "title": {
+            "type": "string",
+            "description": "图表标题"
+          },
+          "save_path": {
+            "type": "string",
+            "description": "图表保存路径，如果未保存则为null"
+          },
+          "message": {
+            "type": "string",
+            "description": "附加信息，如错误信息或成功提示"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/plotting.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_surface",
+        "description": "Generates a 3D surface plot from coordinate grids and corresponding z-values.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "array",
+              "description": "x坐标网格"
+            },
+            "y": {
+              "type": "array",
+              "description": "y坐标网格"
+            },
+            "z": {
+              "type": "array",
+              "description": "z坐标值"
+            },
+            "title": {
+              "type": "string",
+              "description": "图表标题"
+            },
+            "figsize": {
+              "type": "integer",
+              "description": "图表大小"
+            },
+            "save_path": {
+              "type": "string",
+              "description": "保存路径"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z",
+            "title",
+            "figsize",
+            "save_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "绘制3D曲面图并返回图表信息",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "绘图是否成功"
+          },
+          "title": {
+            "type": "string",
+            "description": "图表标题"
+          },
+          "save_path": {
+            "type": "string",
+            "description": "图表保存路径，如果未保存则为null"
+          },
+          "message": {
+            "type": "string",
+            "description": "附加信息，如错误信息或成功提示"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/plotting.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_phase_portrait",
+        "description": "Plots the phase portrait of a dynamical system by sampling vector field over a grid.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "system_func": {
+              "type": "string",
+              "description": "系统函数"
+            },
+            "x_range": {
+              "type": "number",
+              "description": "x范围"
+            },
+            "y_range": {
+              "type": "number",
+              "description": "y范围"
+            },
+            "n_points": {
+              "type": "integer",
+              "description": "网格点数"
+            },
+            "title": {
+              "type": "string",
+              "description": "图表标题"
+            },
+            "figsize": {
+              "type": "integer",
+              "description": "图表大小"
+            },
+            "save_path": {
+              "type": "string",
+              "description": "保存路径"
+            }
+          },
+          "required": [
+            "system_func",
+            "x_range",
+            "y_range",
+            "n_points",
+            "title",
+            "figsize",
+            "save_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "绘制相图并返回图表信息",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "绘图是否成功"
+          },
+          "title": {
+            "type": "string",
+            "description": "图表标题"
+          },
+          "save_path": {
+            "type": "string",
+            "description": "图表保存路径，如果未保存则为null"
+          },
+          "message": {
+            "type": "string",
+            "description": "附加信息，如错误信息或成功提示"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/plotting.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_energy_landscape",
+        "description": "Visualizes the energy landscape of a system by evaluating an energy function over a 2D domain.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "energy_func": {
+              "type": "string",
+              "description": "能量函数"
+            },
+            "x_range": {
+              "type": "number",
+              "description": "x范围"
+            },
+            "y_range": {
+              "type": "number",
+              "description": "y范围"
+            },
+            "n_points": {
+              "type": "integer",
+              "description": "网格点数"
+            },
+            "title": {
+              "type": "string",
+              "description": "图表标题"
+            },
+            "figsize": {
+              "type": "integer",
+              "description": "图表大小"
+            },
+            "save_path": {
+              "type": "string",
+              "description": "保存路径"
+            }
+          },
+          "required": [
+            "energy_func",
+            "x_range",
+            "y_range",
+            "n_points",
+            "title",
+            "figsize",
+            "save_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "绘制能量景观并返回图表信息",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "绘图是否成功"
+          },
+          "title": {
+            "type": "string",
+            "description": "图表标题"
+          },
+          "save_path": {
+            "type": "string",
+            "description": "图表保存路径，如果未保存则为null"
+          },
+          "message": {
+            "type": "string",
+            "description": "附加信息，如错误信息或成功提示"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/plotting.py"
+      }
+    }
+  ]
+}

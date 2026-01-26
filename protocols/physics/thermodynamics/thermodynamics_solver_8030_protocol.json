@@ -1,0 +1,195 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_internal_energy_change",
+            "description": "计算热力学系统内能变化，基于热力学第一定律。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "heat_flow": {
+                        "type": "number",
+                        "description": "流入系统的热量，单位为焦耳(J)。正值表示热量流入系统，负值表示热量流出系统。"
+                    },
+                    "work_done": {
+                        "type": "number",
+                        "description": "对系统做的功，单位为焦耳(J)。正值表示对系统做功，负值表示系统对外做功。"
+                    }
+                },
+                "required": [
+                    "heat_flow",
+                    "work_done"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_8030.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_work_pv_path",
+            "description": "计算PV图上路径的功。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "p_values": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "压力值数组，单位为帕斯卡(Pa)"
+                    },
+                    "v_values": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "体积值数组，单位为立方米(m³)"
+                    }
+                },
+                "required": [
+                    "p_values",
+                    "v_values"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_8030.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_ideal_gas_process",
+            "description": "模拟理想气体的热力学过程，计算热量、功和内能变化。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "process_type": {
+                        "type": "string",
+                        "description": "过程类型，可选值: 'isothermal'(等温), 'isobaric'(等压), 'isochoric'(等容), 'adiabatic'(绝热)"
+                    },
+                    "initial_state": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "初始状态，格式为(p, v, t)，分别表示压力(Pa)、体积(m³)和温度(K)"
+                    },
+                    "final_state": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "最终状态，格式为(p, v, t)，分别表示压力(Pa)、体积(m³)和温度(K)，注意：根据过程类型，某些参数可能会被重新计算"
+                    },
+                    "gas_constant": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    },
+                    "moles": {
+                        "type": "number",
+                        "description": "气体的摩尔数，默认为1.0 mol"
+                    }
+                },
+                "required": [
+                    "process_type",
+                    "initial_state",
+                    "final_state"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_8030.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_cyclic_process",
+            "description": "分析PV图上的循环过程，计算总热量、总功和总内能变化。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "vertices": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "description": "循环的顶点列表，每个顶点是一个(p, v, t)元组，表示压力、体积和温度，如果温度未知，可以设为None"
+                    },
+                    "process_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "每段路径的过程类型列表，可选值包括：'isothermal', 'isobaric', 'isochoric', 'adiabatic'，如果为None，则默认所有路径为一般过程"
+                    }
+                },
+                "required": [
+                    "vertices"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_8030.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_pv_diagram",
+            "description": "可视化PV图，显示热力学过程路径。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "vertices": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "description": "路径的顶点列表，每个顶点是一个(p, v)或(p, v, t)元组"
+                    },
+                    "process_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "每段路径的过程类型列表"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图像的路径，如果为None则不保存"
+                    },
+                    "show_work": {
+                        "type": "boolean",
+                        "description": "是否显示功的计算结果"
+                    }
+                },
+                "required": [
+                    "vertices"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamics_solver_8030.py"
+        }
+    }
+]

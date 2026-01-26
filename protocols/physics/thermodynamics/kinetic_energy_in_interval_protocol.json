@@ -1,0 +1,168 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of utility functions for analyzing and visualizing the Maxwell-Boltzmann kinetic energy distribution, computing kinetic energy integrals, and performing related mathematical operations in physical chemistry or statistical mechanics contexts.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "KineticEnergyIntegral",
+        "description": "计算指定速度区间内的分子动能积分。基于Maxwell-Boltzmann分布计算指定速度区间内分子的总动能，包括精确积分计算和近似方法验证，同时计算该区间内的分子数比例和平均动能。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "v1": {
+              "type": "number",
+              "description": "速度区间下限，单位为m/s"
+            },
+            "v2": {
+              "type": "number",
+              "description": "速度区间上限，单位为m/s"
+            },
+            "m": {
+              "type": "number",
+              "description": "分子质量，单位为kg，默认为28个原子质量单位"
+            },
+            "T": {
+              "type": "number",
+              "description": "温度，单位为K，默认为300K"
+            },
+            "N": {
+              "type": "number",
+              "description": "总分子数，默认为阿伏伽德罗常数"
+            },
+            "k": {
+              "type": "number",
+              "description": "玻尔兹曼常数，单位为J/K，默认为1.38e-23"
+            },
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True"
+            },
+            "precision": {
+              "type": "integer",
+              "description": "数值显示精度，默认为2位小数"
+            }
+          },
+          "required": [
+            "v1",
+            "v2"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "包含动能积分分析结果的字典，包含N_ratio、N_interval、E_avg、total_E、relative_error等参数",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "包含以下键值对的计算结果字典：N_ratio(区间内分子数比例)、N_interval(区间内分子数)、E_avg(区间内总平均动能J)、total_E(精确积分总动能J)、relative_error(近似方法与精确方法的相对误差百分比)"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/kinetic_energy_in_interval/kinetic_energy_in_interval.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "visual_func_mb_distribution_and_integral",
+        "description": "生成Maxwell-Boltzmann分布和动能积分的可视化图表。创建动能密度分布图，显示指定速度区间内的积分区域，用于直观理解Maxwell-Boltzmann分布和动能积分计算过程。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "v1": {
+              "type": "number",
+              "description": "速度区间下限，单位为m/s"
+            },
+            "v2": {
+              "type": "number",
+              "description": "速度区间上限，单位为m/s"
+            },
+            "m": {
+              "type": "number",
+              "description": "分子质量，单位为kg，默认为28个原子质量单位"
+            },
+            "T": {
+              "type": "number",
+              "description": "温度，单位为K，默认为300K"
+            },
+            "N": {
+              "type": "number",
+              "description": "总分子数，默认为阿伏伽德罗常数"
+            },
+            "k": {
+              "type": "number",
+              "description": "玻尔兹曼常数，单位为J/K，默认为1.38e-23"
+            },
+            "figsize": {
+              "type": "array",
+              "description": "图表尺寸，默认为[10, 6]"
+            },
+            "v_max": {
+              "type": "number",
+              "description": "速度显示上限，单位为m/s，默认为2000"
+            },
+            "n_points": {
+              "type": "integer",
+              "description": "绘图点数，默认为500"
+            }
+          },
+          "required": [
+            "v1",
+            "v2"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "显示图表",
+        "properties": {
+          "result": {
+            "type": "null",
+            "description": "无返回值，显示图表"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/kinetic_energy_in_interval/kinetic_energy_in_interval.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "math_func_mb_kinetic_integral",
+        "description": "计算Maxwell-Boltzmann动能积分的数学表达式。使用符号计算推导Maxwell-Boltzmann分布下的动能积分数学表达式，展示理论推导过程和不定积分结果。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "verbose": {
+              "type": "boolean",
+              "description": "是否显示详细输出，默认为True。控制是否打印数学表达式和积分结果"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "动能积分被积函数的符号表达式",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "动能积分被积函数的符号表达式"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/kinetic_energy_in_interval/kinetic_energy_in_interval.py"
+      }
+    }
+  ]
+}

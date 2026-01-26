@@ -1,0 +1,94 @@
+{
+  "analysis_parameters": {
+    "allow_shift": true,
+    "tolerance": 0.5
+  },
+  "composite_peaks": {
+    "intensity": [
+      100,
+      50,
+      10,
+      42,
+      20,
+      12,
+      36,
+      3,
+      10,
+      9,
+      16
+    ],
+    "two_theta": [
+      26,
+      30,
+      32,
+      38,
+      42,
+      48,
+      55,
+      58,
+      65,
+      78,
+      85
+    ]
+  },
+  "identified_phases": [
+    {
+      "intensity": [
+        100,
+        39,
+        39,
+        10,
+        17
+      ],
+      "name": "YSF",
+      "peaks_2theta": [
+        32,
+        38,
+        55,
+        65,
+        78
+      ],
+      "score": 0.3535
+    },
+    {
+      "intensity": [
+        100,
+        42,
+        36,
+        36,
+        9,
+        16
+      ],
+      "name": "Ag2O",
+      "peaks_2theta": [
+        32,
+        38,
+        55,
+        65,
+        78,
+        85
+      ],
+      "score": 0.3135
+    },
+    {
+      "intensity": [
+        100,
+        53,
+        48,
+        11,
+        21,
+        17
+      ],
+      "name": "AcOF",
+      "peaks_2theta": [
+        30,
+        42,
+        48,
+        52,
+        76,
+        82
+      ],
+      "score": 0.1521
+    }
+  ]
+}

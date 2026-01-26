@@ -1,0 +1,26 @@
+================================================================================
+HYDROGEN ATOM DIPOLE TRANSITION ANALYSIS REPORT
+================================================================================
+
+Initial State: |3,0,0⟩ (3s)
+Final State:   |1,0,0⟩ (1s)
+Energy Change: ΔE = -12.0889 eV
+
+--------------------------------------------------------------------------------
+SELECTION RULES CHECK
+--------------------------------------------------------------------------------
+Dipole Selection Rules:
+  • Δl = ±1 (angular momentum must change by 1)
+  • Δm = 0, ±1 (magnetic quantum number change)
+  • Δn: no restriction
+
+Direct Transition Check:
+  Δl = 0 (required: ±1)
+  Δm = 0 (required: 0, ±1)
+  ✗ Direct transition FORBIDDEN
+  → Two-step transition required
+
+--------------------------------------------------------------------------------
+TWO-STEP TRANSITION PATHS (Total: 3)
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,699 @@
+{
+  "id": "30_ref_0",
+  "query": "已知三种位置异构体（对/间/邻位）及其阴离子态的SMILES如下（用于结构与电荷核查）：中性态：para: CC(C)Cc1ccc(cc1)C(C)C(=O)O；meta: CC(C)Cc1cc(ccc1)C(C)C(=O)O；ortho: CC(C)Cc1c(cccc1)C(C)C(=O)O。阴离子态：para_anion: CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]；meta_anion: CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]；ortho_anion: CC(C)Cc1c(cccc1)C(C)C(=O)[O-]。已给能量数据（单位均为kcal/mol）：多嵌入-同力场(MMFF)候选能量：E_para_candidates = [98.72, 99.05, 98.88]，E_meta_candidates = [99.31, 99.15, 99.47]，E_ortho_candidates = [100.84, 100.51, 100.72]；一致性阈值（候选极差阈值）：0.5；选择规则：若某异构体候选能量的极差(max−min) ≤ 0.5，则取该异构体的最小值作为其MMFF最终能量；若任一异构体候选极差 > 0.5，则判定一致性失败并回退到basic嵌入（本题仅需报告是否触发回退，无需提供basic数值）。交叉力场(UFF)能量：E_para_uff = 112.34，E_meta_uff = 112.98，E_ortho_uff = 114.05。阴离子态MMFF能量：E_para_anion_mmff = 95.20，E_meta_anion_mmff = 95.83，E_ortho_anion_mmff = 96.91。要求：A) 依据上述选择规则给出三者的MMFF最终能量，并计算ΔE_total_MMFF = |E_para − E_meta| + |E_meta − E_ortho| + |E_ortho − E_para|与三者能量的总体标准差σ_MMFF（数值均保留两位小数，单位kcal/mol）。B) 以UFF能量计算ΔE_total_UFF与σ_UFF（总体标准差，保留两位小数，单位kcal/mol）。C) 用MMFF最终能量检验三角恒等：ΔE_total_MMFF 是否等于 2 × (max(E) − min(E))，报告“通过/不通过”。D) 说明是否触发回退到basic嵌入（给出触发条件与本题执行情况）。E) 比较中性与阴离子态（MMFF）每个异构体的能量差ΔE(neutral−anion)（保留两位小数，单位kcal/mol），并简述对构象稳定性的影响（相对排序与分散度变化）。F) 列出上述SMILES作为对/间/邻位及电荷态的2D/3D结构核查依据。除明确要求给出数值的小问外，其余采用文字说明。",
+  "query_data": {
+    "id": "30_ref_0",
+    "original_id": 30,
+    "refined_index": 0,
+    "question": "已知三种位置异构体（对/间/邻位）及其阴离子态的SMILES如下（用于结构与电荷核查）：中性态：para: CC(C)Cc1ccc(cc1)C(C)C(=O)O；meta: CC(C)Cc1cc(ccc1)C(C)C(=O)O；ortho: CC(C)Cc1c(cccc1)C(C)C(=O)O。阴离子态：para_anion: CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]；meta_anion: CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]；ortho_anion: CC(C)Cc1c(cccc1)C(C)C(=O)[O-]。已给能量数据（单位均为kcal/mol）：多嵌入-同力场(MMFF)候选能量：E_para_candidates = [98.72, 99.05, 98.88]，E_meta_candidates = [99.31, 99.15, 99.47]，E_ortho_candidates = [100.84, 100.51, 100.72]；一致性阈值（候选极差阈值）：0.5；选择规则：若某异构体候选能量的极差(max−min) ≤ 0.5，则取该异构体的最小值作为其MMFF最终能量；若任一异构体候选极差 > 0.5，则判定一致性失败并回退到basic嵌入（本题仅需报告是否触发回退，无需提供basic数值）。交叉力场(UFF)能量：E_para_uff = 112.34，E_meta_uff = 112.98，E_ortho_uff = 114.05。阴离子态MMFF能量：E_para_anion_mmff = 95.20，E_meta_anion_mmff = 95.83，E_ortho_anion_mmff = 96.91。要求：A) 依据上述选择规则给出三者的MMFF最终能量，并计算ΔE_total_MMFF = |E_para − E_meta| + |E_meta − E_ortho| + |E_ortho − E_para|与三者能量的总体标准差σ_MMFF（数值均保留两位小数，单位kcal/mol）。B) 以UFF能量计算ΔE_total_UFF与σ_UFF（总体标准差，保留两位小数，单位kcal/mol）。C) 用MMFF最终能量检验三角恒等：ΔE_total_MMFF 是否等于 2 × (max(E) − min(E))，报告“通过/不通过”。D) 说明是否触发回退到basic嵌入（给出触发条件与本题执行情况）。E) 比较中性与阴离子态（MMFF）每个异构体的能量差ΔE(neutral−anion)（保留两位小数，单位kcal/mol），并简述对构象稳定性的影响（相对排序与分散度变化）。F) 列出上述SMILES作为对/间/邻位及电荷态的2D/3D结构核查依据。除明确要求给出数值的小问外，其余采用文字说明。",
+    "answer": "{'A_MMFF': {'E_para_mmff': '98.72 kcal/mol', 'E_meta_mmff': '99.15 kcal/mol', 'E_ortho_mmff': '100.51 kcal/mol', 'DeltaE_total_MMFF': '3.58 kcal/mol', 'sigma_MMFF': '0.76 kcal/mol'}, 'B_UFF': {'DeltaE_total_UFF': '3.42 kcal/mol', 'sigma_UFF': '0.71 kcal/mol'}, 'C_triangle_identity_MMFF': '通过', 'D_fallback_basic_embedding': {'触发条件': '任一异构体的候选能量极差 > 0.5 kcal/mol 时触发回退', '本题执行情况': '未触发'}, 'E_neutral_vs_anion_MMFF': {'DeltaE_neutral_minus_anion': {'para': '3.52 kcal/mol', 'meta': '3.32 kcal/mol', 'ortho': '3.60 kcal/mol'}, '稳定性影响': '去质子化整体降低各异构体能量，且对/间/邻位的相对稳定性排序保持不变（para 最稳，其次 meta，邻位最不稳）；能量分散度略有降低。'}, 'F_SMILES_for_verification': {'neutral': {'para': 'CC(C)Cc1ccc(cc1)C(C)C(=O)O', 'meta': 'CC(C)Cc1cc(ccc1)C(C)C(=O)O', 'ortho': 'CC(C)Cc1c(cccc1)C(C)C(=O)O'}, 'anion': {'para': 'CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]', 'meta': 'CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]', 'ortho': 'CC(C)Cc1c(cccc1)C(C)C(=O)[O-]'}}}",
+    "metadata": {
+      "subject": "化学科学",
+      "topic": "计算化学",
+      "image_path": [],
+      "solution_steps": [
+        "定义三个位置异构体的SMILES结构：para (CC(C)Cc1ccc(cc1)C(C)C(=O)O), meta (CC(C)Cc1cccc(c1)C(C)C(=O)O), ortho (CC(C)Cc1ccccc1C(C)C(=O)O)",
+        "调用 chem_visualizer 生成三个异构体的2D和3D可视化图像",
+        "对每个异构体调用 mol_analyzer_generate_3d(smiles, method='ETKDGv3') 生成3D坐标",
+        "对每个异构体调用 optimize_geometry(smiles, method='ETKDGv3', force_field='MMFF', max_iters=200) 进行能量优化",
+        "获取三个异构体的优化能量：E_para=24.07 kcal/mol, E_meta=24.28 kcal/mol, E_ortho=27.74 kcal/mol",
+        "计算两两能量差：|E_para - E_meta|=0.21, |E_meta - E_ortho|=3.46, |E_ortho - E_para|=3.67",
+        "计算总构象能量差异：ΔE_total = 0.21 + 3.46 + 3.67 = 7.35 kcal/mol",
+        "计算标准差：σ = 2.06 kcal/mol"
+      ],
+      "tool_expected": [
+        "chem_visualizer",
+        "mol_analyzer_generate_3d",
+        "optimize_geometry"
+      ],
+      "golden_answer": [
+        {
+          "A_MMFF": {
+            "E_para_mmff": "98.72 kcal/mol",
+            "E_meta_mmff": "99.15 kcal/mol",
+            "E_ortho_mmff": "100.51 kcal/mol",
+            "DeltaE_total_MMFF": "3.58 kcal/mol",
+            "sigma_MMFF": "0.76 kcal/mol"
+          },
+          "B_UFF": {
+            "DeltaE_total_UFF": "3.42 kcal/mol",
+            "sigma_UFF": "0.71 kcal/mol"
+          },
+          "C_triangle_identity_MMFF": "通过",
+          "D_fallback_basic_embedding": {
+            "触发条件": "任一异构体的候选能量极差 > 0.5 kcal/mol 时触发回退",
+            "本题执行情况": "未触发"
+          },
+          "E_neutral_vs_anion_MMFF": {
+            "DeltaE_neutral_minus_anion": {
+              "para": "3.52 kcal/mol",
+              "meta": "3.32 kcal/mol",
+              "ortho": "3.60 kcal/mol"
+            },
+            "稳定性影响": "去质子化整体降低各异构体能量，且对/间/邻位的相对稳定性排序保持不变（para 最稳，其次 meta，邻位最不稳）；能量分散度略有降低。"
+          },
+          "F_SMILES_for_verification": {
+            "neutral": {
+              "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+              "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)O",
+              "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)O"
+            },
+            "anion": {
+              "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]",
+              "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]",
+              "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)[O-]"
+            }
+          }
+        }
+      ],
+      "original_question_id": "30",
+      "test_type": "refined",
+      "topic_protocol_scope": "计算化学",
+      "with_all_tools": true
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "chem_visualizer",
+          "description": "分子可视化工具，支持批量生成分子的2D结构图和3D结构图。直接生成图片文件到当前目录。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "molecules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "分子名称"
+                    },
+                    "smiles": {
+                      "type": "string",
+                      "description": "分子的SMILES字符串"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "smiles"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "分子列表，每个元素包含分子名称和对应的SMILES字符串。例如: [{'name': 'ethanol', 'smiles': 'CCO'}, {'name': 'benzene', 'smiles': 'c1ccccc1'}]"
+              }
+            },
+            "required": [
+              "molecules"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_visualize.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "mol_analyzer_generate_3d",
+          "description": "从SMILES字符串生成分子的3D构象。基于RDKit的嵌入算法生成分子的三维坐标。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示字符串，或化学名称（会自动转换），例如: 'CCO', 'c1ccccc1', 'aspirin'"
+              },
+              "method": {
+                "type": "string",
+                "description": "3D坐标生成方法：'ETKDG'（标准ETKDG方法）、'ETKDGv3'（改进的ETKDGv3方法，推荐）、'basic'（基本嵌入方法）",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              }
+            },
+            "required": [
+              "smiles",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "optimize_geometry",
+          "description": "分子几何优化工具（能量最小化）。基于分子力场进行能量最小化，优化分子的三维几何构型。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示字符串，或化学名称（会自动转换），例如: 'CCO', 'c1ccccc1', 'aspirin'"
+              },
+              "method": {
+                "type": "string",
+                "description": "3D坐标生成方法：'ETKDG'（标准ETKDG方法）、'ETKDGv3'（改进的ETKDGv3方法，推荐）、'basic'（基本嵌入方法）",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              },
+              "force_field": {
+                "type": "string",
+                "description": "力场类型，默认为'MMFF'。'MMFF'：MMFF94力场，适用于大多数有机分子，精度较高；'UFF'：通用力场，适用范围更广但精度稍低",
+                "enum": [
+                  "MMFF",
+                  "UFF"
+                ]
+              },
+              "max_iters": {
+                "type": "integer",
+                "description": "能量最小化的最大迭代次数，默认200次"
+              }
+            },
+            "required": [
+              "smiles",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_3d_properties",
+          "description": "计算分子的3D几何性质和形状描述符。基于主惯性矩分析分子的三维形状特征。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示字符串，或化学名称（会自动转换），例如: 'CCO', 'c1ccccc1', 'aspirin'"
+              },
+              "method": {
+                "type": "string",
+                "description": "3D坐标生成方法：'ETKDG'（标准ETKDG方法）、'ETKDGv3'（改进的ETKDGv3方法，推荐）、'basic'（基本嵌入方法）",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              },
+              "conf_id": {
+                "type": "integer",
+                "description": "构象ID，默认为0（第一个构象）"
+              }
+            },
+            "required": [
+              "smiles",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "generate_multiple_conformers_with_optimization",
+          "description": "为分子生成多个构象并进行能量优化。集成工具函数，用于处理需要多构象分析的场景。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示字符串，例如: 'C1CCCCC1'（环己烷）、'CCCCCCCC'（辛烷）"
+              },
+              "num_confs": {
+                "type": "integer",
+                "description": "要生成的构象数量，默认为10"
+              },
+              "method": {
+                "type": "string",
+                "description": "3D坐标生成方法，默认'ETKDGv3'：'ETKDG'（标准ETKDG方法）、'ETKDGv3'（改进版本，推荐）、'basic'（基本嵌入方法）",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              },
+              "force_field": {
+                "type": "string",
+                "description": "力场类型，默认'MMFF'。'MMFF'：MMFF94力场，适用于大多数有机分子；'UFF'：通用力场，适用范围更广",
+                "enum": [
+                  "MMFF",
+                  "UFF"
+                ]
+              },
+              "max_iters": {
+                "type": "integer",
+                "description": "能量优化的最大迭代次数，默认200"
+              }
+            },
+            "required": [
+              "smiles"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "已知三种位置异构体（对/间/邻位）及其阴离子态的SMILES如下（用于结构与电荷核查）：中性态：para: CC(C)Cc1ccc(cc1)C(C)C(=O)O；meta: CC(C)Cc1cc(ccc1)C(C)C(=O)O；ortho: CC(C)Cc1c(cccc1)C(C)C(=O)O。阴离子态：para_anion: CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]；meta_anion: CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]；ortho_anion: CC(C)Cc1c(cccc1)C(C)C(=O)[O-]。已给能量数据（单位均为kcal/mol）：多嵌入-同力场(MMFF)候选能量：E_para_candidates = [98.72, 99.05, 98.88]，E_meta_candidates = [99.31, 99.15, 99.47]，E_ortho_candidates = [100.84, 100.51, 100.72]；一致性阈值（候选极差阈值）：0.5；选择规则：若某异构体候选能量的极差(max−min) ≤ 0.5，则取该异构体的最小值作为其MMFF最终能量；若任一异构体候选极差 > 0.5，则判定一致性失败并回退到basic嵌入（本题仅需报告是否触发回退，无需提供basic数值）。交叉力场(UFF)能量：E_para_uff = 112.34，E_meta_uff = 112.98，E_ortho_uff = 114.05。阴离子态MMFF能量：E_para_anion_mmff = 95.20，E_meta_anion_mmff = 95.83，E_ortho_anion_mmff = 96.91。要求：A) 依据上述选择规则给出三者的MMFF最终能量，并计算ΔE_total_MMFF = |E_para − E_meta| + |E_meta − E_ortho| + |E_ortho − E_para|与三者能量的总体标准差σ_MMFF（数值均保留两位小数，单位kcal/mol）。B) 以UFF能量计算ΔE_total_UFF与σ_UFF（总体标准差，保留两位小数，单位kcal/mol）。C) 用MMFF最终能量检验三角恒等：ΔE_total_MMFF 是否等于 2 × (max(E) − min(E))，报告“通过/不通过”。D) 说明是否触发回退到basic嵌入（给出触发条件与本题执行情况）。E) 比较中性与阴离子态（MMFF）每个异构体的能量差ΔE(neutral−anion)（保留两位小数，单位kcal/mol），并简述对构象稳定性的影响（相对排序与分散度变化）。F) 列出上述SMILES作为对/间/邻位及电荷态的2D/3D结构核查依据。除明确要求给出数值的小问外，其余采用文字说明。",
+      "final_answer": {
+        "A_MMFF": {
+          "E_para_mmff": "98.72 kcal/mol",
+          "E_meta_mmff": "99.15 kcal/mol",
+          "E_ortho_mmff": "100.51 kcal/mol",
+          "DeltaE_total_MMFF": "3.58 kcal/mol",
+          "sigma_MMFF": "0.76 kcal/mol"
+        },
+        "B_UFF": {
+          "DeltaE_total_UFF": "3.42 kcal/mol",
+          "sigma_UFF": "0.71 kcal/mol"
+        },
+        "C_triangle_identity_MMFF": "通过",
+        "D_fallback_basic_embedding": {
+          "触发条件": "任一异构体的候选能量极差 > 0.5 kcal/mol 时触发回退",
+          "本题执行情况": "未触发"
+        },
+        "E_neutral_vs_anion_MMFF": {
+          "DeltaE_neutral_minus_anion": {
+            "para": "3.52 kcal/mol",
+            "meta": "3.32 kcal/mol",
+            "ortho": "3.60 kcal/mol"
+          },
+          "稳定性影响": "去质子化整体降低各异构体能量，且对/间/邻位的相对稳定性排序保持不变（para 最稳，其次 meta，邻位最不稳）；能量分散度略有降低。"
+        },
+        "F_SMILES_for_verification": {
+          "neutral": {
+            "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+            "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)O",
+            "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)O"
+          },
+          "anion": {
+            "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]",
+            "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]",
+            "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)[O-]"
+          }
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "化学科学",
+      "topic": "计算化学",
+      "test_type": "refined",
+      "original_question_id": "30",
+      "subject_topic_key": "化学科学::计算化学"
+    }
+  },
+  "model": "gpt-5",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "已知三种位置异构体（对/间/邻位）及其阴离子态的SMILES如下（用于结构与电荷核查）：中性态：para: CC(C)Cc1ccc(cc1)C(C)C(=O)O；meta: CC(C)Cc1cc(ccc1)C(C)C(=O)O；ortho: CC(C)Cc1c(cccc1)C(C)C(=O)O。阴离子态：para_anion: CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]；meta_anion: CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]；ortho_anion: CC(C)Cc1c(cccc1)C(C)C(=O)[O-]。已给能量数据（单位均为kcal/mol）：多嵌入-同力场(MMFF)候选能量：E_para_candidates = [98.72, 99.05, 98.88]，E_meta_candidates = [99.31, 99.15, 99.47]，E_ortho_candidates = [100.84, 100.51, 100.72]；一致性阈值（候选极差阈值）：0.5；选择规则：若某异构体候选能量的极差(max−min) ≤ 0.5，则取该异构体的最小值作为其MMFF最终能量；若任一异构体候选极差 > 0.5，则判定一致性失败并回退到basic嵌入（本题仅需报告是否触发回退，无需提供basic数值）。交叉力场(UFF)能量：E_para_uff = 112.34，E_meta_uff = 112.98，E_ortho_uff = 114.05。阴离子态MMFF能量：E_para_anion_mmff = 95.20，E_meta_anion_mmff = 95.83，E_ortho_anion_mmff = 96.91。要求：A) 依据上述选择规则给出三者的MMFF最终能量，并计算ΔE_total_MMFF = |E_para − E_meta| + |E_meta − E_ortho| + |E_ortho − E_para|与三者能量的总体标准差σ_MMFF（数值均保留两位小数，单位kcal/mol）。B) 以UFF能量计算ΔE_total_UFF与σ_UFF（总体标准差，保留两位小数，单位kcal/mol）。C) 用MMFF最终能量检验三角恒等：ΔE_total_MMFF 是否等于 2 × (max(E) − min(E))，报告“通过/不通过”。D) 说明是否触发回退到basic嵌入（给出触发条件与本题执行情况）。E) 比较中性与阴离子态（MMFF）每个异构体的能量差ΔE(neutral−anion)（保留两位小数，单位kcal/mol），并简述对构象稳定性的影响（相对排序与分散度变化）。F) 列出上述SMILES作为对/间/邻位及电荷态的2D/3D结构核查依据。除明确要求给出数值的小问外，其余采用文字说明。"
+    },
+    {
+      "role": "assistant",
+      "content": "A) MMFF最终能量与分散度\n- 选择规则检查：各异构体候选极差均≤0.5（para: 0.33；meta: 0.32；ortho: 0.33），因此取各列表的最小值为最终MMFF能量。\n- MMFF最终能量（kcal/mol）：para = 98.72；meta = 99.15；ortho = 100.51\n- ΔE_total_MMFF = |98.72 − 99.15| + |99.15 − 100.51| + |100.51 − 98.72| = 3.58 kcal/mol\n- σ_MMFF（总体标准差）= 0.76 kcal/mol\n\nB) UFF分散度\n- UFF能量（kcal/mol）：para = 112.34；meta = 112.98；ortho = 114.05\n- ΔE_total_UFF = |112.34 − 112.98| + |112.98 − 114.05| + |114.05 − 112.34| = 3.42 kcal/mol\n- σ_UFF（总体标准差）= 0.71 kcal/mol\n\nC) 三角恒等检验（MMFF）\n- 检验结果：通过。ΔE_total_MMFF = 3.58 等于 2 × (max − min) = 2 × (100.51 − 98.72) = 3.58。\n\nD) 是否触发回退到basic嵌入\n- 触发条件：任一异构体的候选能量极差（max−min）> 0.5。\n- 本题执行情况：未触发回退。三者极差均≤0.5。\n\nE) 中性与阴离子态能量差及稳定性影响（MMFF）\n- ΔE(neutral−anion)（kcal/mol）：para = 3.52；meta = 3.32；ortho = 3.60\n- 影响说明：阴离子态相对中性态整体更稳定约3.3–3.6 kcal/mol；三者的相对稳定性排序在两种电荷态下均为 para > meta > ortho（即能量：para最低、ortho最高）；分散度在阴离子态略有收敛（相较中性态的差异稍小），显示去质子化对整体稳定性具有更均衡的提升。\n\nF) 2D/3D结构核查的SMILES依据\n- 中性态：\n  - 对位（para）：CC(C)Cc1ccc(cc1)C(C)C(=O)O\n  - 间位（meta）：CC(C)Cc1cc(ccc1)C(C)C(=O)O\n  - 邻位（ortho）：CC(C)Cc1c(cccc1)C(C)C(=O)O\n- 阴离子态：\n  - 对位（para_anion）：CC(C)Cc1ccc(cc1)C(C)C(=O)[O−]\n  - 间位（meta_anion）：CC(C)Cc1cc(ccc1)C(C)C(=O)[O−]\n  - 邻位（ortho_anion）：CC(C)Cc1c(cccc1)C(C)C(=O)[O−]"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"A_MMFF\": {\n    \"E_para_mmff\": \"[字符串]\",\n    \"E_meta_mmff\": \"[字符串]\",\n    \"E_ortho_mmff\": \"[字符串]\",\n    \"DeltaE_total_MMFF\": \"[字符串]\",\n    \"sigma_MMFF\": \"[字符串]\"\n  },\n  \"B_UFF\": {\n    \"DeltaE_total_UFF\": \"[字符串]\",\n    \"sigma_UFF\": \"[字符串]\"\n  },\n  \"C_triangle_identity_MMFF\": \"[字符串]\",\n  \"D_fallback_basic_embedding\": {\n    \"触发条件\": \"[字符串]\",\n    \"本题执行情况\": \"[字符串]\"\n  },\n  \"E_neutral_vs_anion_MMFF\": {\n    \"DeltaE_neutral_minus_anion\": {\n      \"para\": \"[字符串]\",\n      \"meta\": \"[字符串]\",\n      \"ortho\": \"[字符串]\"\n    },\n    \"稳定性影响\": \"[字符串]\"\n  },\n  \"F_SMILES_for_verification\": {\n    \"neutral\": {\n      \"para\": \"[字符串]\",\n      \"meta\": \"[字符串]\",\n      \"ortho\": \"[字符串]\"\n    },\n    \"anion\": {\n      \"para\": \"[数学方程字符串]\",\n      \"meta\": \"[数学方程字符串]\",\n      \"ortho\": \"[数学方程字符串]\"\n    }\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"A_MMFF\": {\n    \"E_para_mmff\": 98.72,\n    \"E_meta_mmff\": 99.15,\n    \"E_ortho_mmff\": 100.51,\n    \"DeltaE_total_MMFF\": 3.58,\n    \"sigma_MMFF\": 0.76\n  },\n  \"B_UFF\": {\n    \"DeltaE_total_UFF\": 3.42,\n    \"sigma_UFF\": 0.71\n  },\n  \"C_triangle_identity_MMFF\": \"通过\",\n  \"D_fallback_basic_embedding\": {\n    \"触发条件\": \"任一异构体候选能量的极差（max−min）> 0.5 时回退到 basic 嵌入\",\n    \"本题执行情况\": \"未触发；para、meta、ortho 的候选极差分别为 0.33、0.32、0.33，均≤0.5\"\n  },\n  \"E_neutral_vs_anion_MMFF\": {\n    \"DeltaE_neutral_minus_anion\": {\n      \"para\": 3.52,\n      \"meta\": 3.32,\n      \"ortho\": 3.60\n    },\n    \"稳定性影响\": \"阴离子态相对中性态整体更稳定约 3.3–3.6 kcal/mol；两种电荷态下相对稳定性排序一致（para 最稳定、meta 次之、ortho 最不稳定）；中性态的能量分散度略大，去质子化使差异略收敛。\"\n  },\n  \"F_SMILES_for_verification\": {\n    \"neutral\": {\n      \"para\": \"CC(C)Cc1ccc(cc1)C(C)C(=O)O\",\n      \"meta\": \"CC(C)Cc1cc(ccc1)C(C)C(=O)O\",\n      \"ortho\": \"CC(C)Cc1c(cccc1)C(C)C(=O)O\"\n    },\n    \"anion\": {\n      \"para\": \"CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]\",\n      \"meta\": \"CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]\",\n      \"ortho\": \"CC(C)Cc1c(cccc1)C(C)C(=O)[O-]\"\n    }\n  }\n}"
+    }
+  ],
+  "metadata": {
+    "subject": "化学科学",
+    "topic": "计算化学",
+    "image_path": [],
+    "solution_steps": [
+      "定义三个位置异构体的SMILES结构：para (CC(C)Cc1ccc(cc1)C(C)C(=O)O), meta (CC(C)Cc1cccc(c1)C(C)C(=O)O), ortho (CC(C)Cc1ccccc1C(C)C(=O)O)",
+      "调用 chem_visualizer 生成三个异构体的2D和3D可视化图像",
+      "对每个异构体调用 mol_analyzer_generate_3d(smiles, method='ETKDGv3') 生成3D坐标",
+      "对每个异构体调用 optimize_geometry(smiles, method='ETKDGv3', force_field='MMFF', max_iters=200) 进行能量优化",
+      "获取三个异构体的优化能量：E_para=24.07 kcal/mol, E_meta=24.28 kcal/mol, E_ortho=27.74 kcal/mol",
+      "计算两两能量差：|E_para - E_meta|=0.21, |E_meta - E_ortho|=3.46, |E_ortho - E_para|=3.67",
+      "计算总构象能量差异：ΔE_total = 0.21 + 3.46 + 3.67 = 7.35 kcal/mol",
+      "计算标准差：σ = 2.06 kcal/mol"
+    ],
+    "tool_expected": [
+      "chem_visualizer",
+      "mol_analyzer_generate_3d",
+      "optimize_geometry"
+    ],
+    "golden_answer": [
+      {
+        "A_MMFF": {
+          "E_para_mmff": "98.72 kcal/mol",
+          "E_meta_mmff": "99.15 kcal/mol",
+          "E_ortho_mmff": "100.51 kcal/mol",
+          "DeltaE_total_MMFF": "3.58 kcal/mol",
+          "sigma_MMFF": "0.76 kcal/mol"
+        },
+        "B_UFF": {
+          "DeltaE_total_UFF": "3.42 kcal/mol",
+          "sigma_UFF": "0.71 kcal/mol"
+        },
+        "C_triangle_identity_MMFF": "通过",
+        "D_fallback_basic_embedding": {
+          "触发条件": "任一异构体的候选能量极差 > 0.5 kcal/mol 时触发回退",
+          "本题执行情况": "未触发"
+        },
+        "E_neutral_vs_anion_MMFF": {
+          "DeltaE_neutral_minus_anion": {
+            "para": "3.52 kcal/mol",
+            "meta": "3.32 kcal/mol",
+            "ortho": "3.60 kcal/mol"
+          },
+          "稳定性影响": "去质子化整体降低各异构体能量，且对/间/邻位的相对稳定性排序保持不变（para 最稳，其次 meta，邻位最不稳）；能量分散度略有降低。"
+        },
+        "F_SMILES_for_verification": {
+          "neutral": {
+            "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+            "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)O",
+            "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)O"
+          },
+          "anion": {
+            "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]",
+            "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]",
+            "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)[O-]"
+          }
+        }
+      }
+    ],
+    "original_question_id": "30",
+    "test_type": "refined",
+    "topic_protocol_scope": "计算化学",
+    "with_all_tools": true
+  },
+  "metadata_summary": {
+    "subject": "化学科学",
+    "topic": "计算化学",
+    "test_type": "refined",
+    "original_question_id": "30",
+    "subject_topic_key": "化学科学::计算化学"
+  },
+  "answer_template": {
+    "A_MMFF": {
+      "E_para_mmff": "[字符串]",
+      "E_meta_mmff": "[字符串]",
+      "E_ortho_mmff": "[字符串]",
+      "DeltaE_total_MMFF": "[字符串]",
+      "sigma_MMFF": "[字符串]"
+    },
+    "B_UFF": {
+      "DeltaE_total_UFF": "[字符串]",
+      "sigma_UFF": "[字符串]"
+    },
+    "C_triangle_identity_MMFF": "[字符串]",
+    "D_fallback_basic_embedding": {
+      "触发条件": "[字符串]",
+      "本题执行情况": "[字符串]"
+    },
+    "E_neutral_vs_anion_MMFF": {
+      "DeltaE_neutral_minus_anion": {
+        "para": "[字符串]",
+        "meta": "[字符串]",
+        "ortho": "[字符串]"
+      },
+      "稳定性影响": "[字符串]"
+    },
+    "F_SMILES_for_verification": {
+      "neutral": {
+        "para": "[字符串]",
+        "meta": "[字符串]",
+        "ortho": "[字符串]"
+      },
+      "anion": {
+        "para": "[数学方程字符串]",
+        "meta": "[数学方程字符串]",
+        "ortho": "[数学方程字符串]"
+      }
+    }
+  },
+  "golden_standard": {
+    "A_MMFF": {
+      "E_para_mmff": "98.72 kcal/mol",
+      "E_meta_mmff": "99.15 kcal/mol",
+      "E_ortho_mmff": "100.51 kcal/mol",
+      "DeltaE_total_MMFF": "3.58 kcal/mol",
+      "sigma_MMFF": "0.76 kcal/mol"
+    },
+    "B_UFF": {
+      "DeltaE_total_UFF": "3.42 kcal/mol",
+      "sigma_UFF": "0.71 kcal/mol"
+    },
+    "C_triangle_identity_MMFF": "通过",
+    "D_fallback_basic_embedding": {
+      "触发条件": "任一异构体的候选能量极差 > 0.5 kcal/mol 时触发回退",
+      "本题执行情况": "未触发"
+    },
+    "E_neutral_vs_anion_MMFF": {
+      "DeltaE_neutral_minus_anion": {
+        "para": "3.52 kcal/mol",
+        "meta": "3.32 kcal/mol",
+        "ortho": "3.60 kcal/mol"
+      },
+      "稳定性影响": "去质子化整体降低各异构体能量，且对/间/邻位的相对稳定性排序保持不变（para 最稳，其次 meta，邻位最不稳）；能量分散度略有降低。"
+    },
+    "F_SMILES_for_verification": {
+      "neutral": {
+        "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+        "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)O",
+        "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)O"
+      },
+      "anion": {
+        "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]",
+        "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]",
+        "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)[O-]"
+      }
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "A_MMFF": {
+      "E_para_mmff": 98.72,
+      "E_meta_mmff": 99.15,
+      "E_ortho_mmff": 100.51,
+      "DeltaE_total_MMFF": 3.58,
+      "sigma_MMFF": 0.76
+    },
+    "B_UFF": {
+      "DeltaE_total_UFF": 3.42,
+      "sigma_UFF": 0.71
+    },
+    "C_triangle_identity_MMFF": "通过",
+    "D_fallback_basic_embedding": {
+      "触发条件": "任一异构体候选能量的极差（max−min）> 0.5 时回退到 basic 嵌入",
+      "本题执行情况": "未触发；para、meta、ortho 的候选极差分别为 0.33、0.32、0.33，均≤0.5"
+    },
+    "E_neutral_vs_anion_MMFF": {
+      "DeltaE_neutral_minus_anion": {
+        "para": 3.52,
+        "meta": 3.32,
+        "ortho": 3.6
+      },
+      "稳定性影响": "阴离子态相对中性态整体更稳定约 3.3–3.6 kcal/mol；两种电荷态下相对稳定性排序一致（para 最稳定、meta 次之、ortho 最不稳定）；中性态的能量分散度略大，去质子化使差异略收敛。"
+    },
+    "F_SMILES_for_verification": {
+      "neutral": {
+        "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+        "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)O",
+        "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)O"
+      },
+      "anion": {
+        "para": "CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]",
+        "meta": "CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]",
+        "ortho": "CC(C)Cc1c(cccc1)C(C)C(=O)[O-]"
+      }
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "{\n  \"A_MMFF\": {\n    \"E_para_mmff\": 98.72,\n    \"E_meta_mmff\": 99.15,\n    \"E_ortho_mmff\": 100.51,\n    \"DeltaE_total_MMFF\": 3.58,\n    \"sigma_MMFF\": 0.76\n  },\n  \"B_UFF\": {\n    \"DeltaE_total_UFF\": 3.42,\n    \"sigma_UFF\": 0.71\n  },\n  \"C_triangle_identity_MMFF\": \"通过\",\n  \"D_fallback_basic_embedding\": {\n    \"触发条件\": \"任一异构体候选能量的极差（max−min）> 0.5 时回退到 basic 嵌入\",\n    \"本题执行情况\": \"未触发；para、meta、ortho 的候选极差分别为 0.33、0.32、0.33，均≤0.5\"\n  },\n  \"E_neutral_vs_anion_MMFF\": {\n    \"DeltaE_neutral_minus_anion\": {\n      \"para\": 3.52,\n      \"meta\": 3.32,\n      \"ortho\": 3.60\n    },\n    \"稳定性影响\": \"阴离子态相对中性态整体更稳定约 3.3–3.6 kcal/mol；两种电荷态下相对稳定性排序一致（para 最稳定、meta 次之、ortho 最不稳定）；中性态的能量分散度略大，去质子化使差异略收敛。\"\n  },\n  \"F_SMILES_for_verification\": {\n    \"neutral\": {\n      \"para\": \"CC(C)Cc1ccc(cc1)C(C)C(=O)O\",\n      \"meta\": \"CC(C)Cc1cc(ccc1)C(C)C(=O)O\",\n      \"ortho\": \"CC(C)Cc1c(cccc1)C(C)C(=O)O\"\n    },\n    \"anion\": {\n      \"para\": \"CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]\",\n      \"meta\": \"CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]\",\n      \"ortho\": \"CC(C)Cc1c(cccc1)C(C)C(=O)[O-]\"\n    }\n  }\n}",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "{\n  \"A_MMFF\": {\n    \"E_para_mmff\": 98.72,\n    \"E_meta_mmff\": 99.15,\n    \"E_ortho_mmff\": 100.51,\n    \"DeltaE_total_MMFF\": 3.58,\n    \"sigma_MMFF\": 0.76\n  },\n  \"B_UFF\": {\n    \"DeltaE_total_UFF\": 3.42,\n    \"sigma_UFF\": 0.71\n  },\n  \"C_triangle_identity_MMFF\": \"通过\",\n  \"D_fallback_basic_embedding\": {\n    \"触发条件\": \"任一异构体候选能量的极差（max−min）> 0.5 时回退到 basic 嵌入\",\n    \"本题执行情况\": \"未触发；para、meta、ortho 的候选极差分别为 0.33、0.32、0.33，均≤0.5\"\n  },\n  \"E_neutral_vs_anion_MMFF\": {\n    \"DeltaE_neutral_minus_anion\": {\n      \"para\": 3.52,\n      \"meta\": 3.32,\n      \"ortho\": 3.60\n    },\n    \"稳定性影响\": \"阴离子态相对中性态整体更稳定约 3.3–3.6 kcal/mol；两种电荷态下相对稳定性排序一致（para 最稳定、meta 次之、ortho 最不稳定）；中性态的能量分散度略大，去质子化使差异略收敛。\"\n  },\n  \"F_SMILES_for_verification\": {\n    \"neutral\": {\n      \"para\": \"CC(C)Cc1ccc(cc1)C(C)C(=O)O\",\n      \"meta\": \"CC(C)Cc1cc(ccc1)C(C)C(=O)O\",\n      \"ortho\": \"CC(C)Cc1c(cccc1)C(C)C(=O)O\"\n    },\n    \"anion\": {\n      \"para\": \"CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]\",\n      \"meta\": \"CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]\",\n      \"ortho\": \"CC(C)Cc1c(cccc1)C(C)C(=O)[O-]\"\n    }\n  }\n}"
+  },
+  "evaluation_score": 1.0,
+  "evaluation_summary": "匹配字段: 20/20 (得分: 100.00%)",
+  "evaluation_details": {
+    "A_MMFF.E_para_mmff": {
+      "path": "A_MMFF.E_para_mmff",
+      "expected": "98.72 kcal/mol",
+      "actual": 98.72,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "A_MMFF.E_meta_mmff": {
+      "path": "A_MMFF.E_meta_mmff",
+      "expected": "99.15 kcal/mol",
+      "actual": 99.15,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "A_MMFF.E_ortho_mmff": {
+      "path": "A_MMFF.E_ortho_mmff",
+      "expected": "100.51 kcal/mol",
+      "actual": 100.51,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "A_MMFF.DeltaE_total_MMFF": {
+      "path": "A_MMFF.DeltaE_total_MMFF",
+      "expected": "3.58 kcal/mol",
+      "actual": 3.58,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "A_MMFF.sigma_MMFF": {
+      "path": "A_MMFF.sigma_MMFF",
+      "expected": "0.76 kcal/mol",
+      "actual": 0.76,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "B_UFF.DeltaE_total_UFF": {
+      "path": "B_UFF.DeltaE_total_UFF",
+      "expected": "3.42 kcal/mol",
+      "actual": 3.42,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "B_UFF.sigma_UFF": {
+      "path": "B_UFF.sigma_UFF",
+      "expected": "0.71 kcal/mol",
+      "actual": 0.71,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "C_triangle_identity_MMFF": {
+      "path": "C_triangle_identity_MMFF",
+      "expected": "通过",
+      "actual": "通过",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "D_fallback_basic_embedding.触发条件": {
+      "path": "D_fallback_basic_embedding.触发条件",
+      "expected": "任一异构体的候选能量极差 > 0.5 kcal/mol 时触发回退",
+      "actual": "任一异构体候选能量的极差（max−min）> 0.5 时回退到 basic 嵌入",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "D_fallback_basic_embedding.本题执行情况": {
+      "path": "D_fallback_basic_embedding.本题执行情况",
+      "expected": "未触发",
+      "actual": "未触发；para、meta、ortho 的候选极差分别为 0.33、0.32、0.33，均≤0.5",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "E_neutral_vs_anion_MMFF.DeltaE_neutral_minus_anion.para": {
+      "path": "E_neutral_vs_anion_MMFF.DeltaE_neutral_minus_anion.para",
+      "expected": "3.52 kcal/mol",
+      "actual": 3.52,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "E_neutral_vs_anion_MMFF.DeltaE_neutral_minus_anion.meta": {
+      "path": "E_neutral_vs_anion_MMFF.DeltaE_neutral_minus_anion.meta",
+      "expected": "3.32 kcal/mol",
+      "actual": 3.32,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "E_neutral_vs_anion_MMFF.DeltaE_neutral_minus_anion.ortho": {
+      "path": "E_neutral_vs_anion_MMFF.DeltaE_neutral_minus_anion.ortho",
+      "expected": "3.60 kcal/mol",
+      "actual": 3.6,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "E_neutral_vs_anion_MMFF.稳定性影响": {
+      "path": "E_neutral_vs_anion_MMFF.稳定性影响",
+      "expected": "去质子化整体降低各异构体能量，且对/间/邻位的相对稳定性排序保持不变（para 最稳，其次 meta，邻位最不稳）；能量分散度略有降低。",
+      "actual": "阴离子态相对中性态整体更稳定约 3.3–3.6 kcal/mol；两种电荷态下相对稳定性排序一致（para 最稳定、meta 次之、ortho 最不稳定）；中性态的能量分散度略大，去质子化使差异略收敛。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "F_SMILES_for_verification.neutral.para": {
+      "path": "F_SMILES_for_verification.neutral.para",
+      "expected": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+      "actual": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F_SMILES_for_verification.neutral.meta": {
+      "path": "F_SMILES_for_verification.neutral.meta",
+      "expected": "CC(C)Cc1cc(ccc1)C(C)C(=O)O",
+      "actual": "CC(C)Cc1cc(ccc1)C(C)C(=O)O",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F_SMILES_for_verification.neutral.ortho": {
+      "path": "F_SMILES_for_verification.neutral.ortho",
+      "expected": "CC(C)Cc1c(cccc1)C(C)C(=O)O",
+      "actual": "CC(C)Cc1c(cccc1)C(C)C(=O)O",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F_SMILES_for_verification.anion.para": {
+      "path": "F_SMILES_for_verification.anion.para",
+      "expected": "CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]",
+      "actual": "CC(C)Cc1ccc(cc1)C(C)C(=O)[O-]",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F_SMILES_for_verification.anion.meta": {
+      "path": "F_SMILES_for_verification.anion.meta",
+      "expected": "CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]",
+      "actual": "CC(C)Cc1cc(ccc1)C(C)C(=O)[O-]",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "F_SMILES_for_verification.anion.ortho": {
+      "path": "F_SMILES_for_verification.anion.ortho",
+      "expected": "CC(C)Cc1c(cccc1)C(C)C(=O)[O-]",
+      "actual": "CC(C)Cc1c(cccc1)C(C)C(=O)[O-]",
+      "status": "match",
+      "match_type": "exact"
+    }
+  },
+  "mode_folder": "with_all_tools",
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 1.0,
+    "0_75": 1.0,
+    "0_100": 1.0
+  }
+}

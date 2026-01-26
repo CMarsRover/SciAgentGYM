@@ -1,0 +1,40 @@
+{
+  "molecules": [
+    {
+      "name": "triisopropyl borate",
+      "CID": 21531,
+      "SMILES": "B(OC(C)C)(OC(C)C)OC(C)C",
+      "auto_group": "C1",
+      "curated_group": "C1",
+      "agree": true,
+      "is_C3h": false
+    },
+    {
+      "name": "quinuclidine",
+      "CID": 7527,
+      "SMILES": "C1CN2CCC1CC2",
+      "auto_group": "C3v",
+      "curated_group": "C3v",
+      "agree": true,
+      "is_C3h": false
+    },
+    {
+      "name": "benzo[1,2-c:3,4-c':5,6-c'']trifuran-1,3,4,6,7,9-hexaone",
+      "CID": 255291,
+      "SMILES": "C12=C(C3=C(C4=C1C(=O)OC4=O)C(=O)OC3=O)C(=O)OC2=O",
+      "auto_group": "C1",
+      "curated_group": "C1",
+      "agree": true,
+      "is_C3h": false
+    },
+    {
+      "name": "triphenyleno[1,2-c:5,6-c':9,10-c'']trifuran-1,3,6,8,11,13-hexaone",
+      "CID": null,
+      "SMILES": null,
+      "auto_group": "C3h",
+      "curated_group": "C3h",
+      "agree": true,
+      "is_C3h": true
+    }
+  ]
+}

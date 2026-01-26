@@ -1,0 +1,263 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "save_mid_result",
+            "description": "将中间结果保存为JSON到./mid_result/{subject}/{filename}.json。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "学科类别，必须是以下之一：physics、chemistry、materials、astronomy、geography。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不含扩展名）。"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "要保存的JSON数据对象（可序列化）。"
+                    }
+                },
+                "required": [
+                    "subject",
+                    "filename",
+                    "data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "load_file",
+            "description": "通用文件加载器，当前仅支持JSON文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "文件路径（目前仅支持.json）。"
+                    }
+                },
+                "required": [
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "complement_contact_angle",
+            "description": "计算接触角的互补角：θ_complement = 180° - θ。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "angle_deg": {
+                        "type": "number",
+                        "description": "原始接触角（单位：度），应在(0, 180)之间。"
+                    }
+                },
+                "required": [
+                    "angle_deg"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "transform_dynamic_air_from_bubble",
+            "description": "将囚禁气泡（在水中）的推进/后退接触角映射为空气中水滴的推进/后退角：θ_A(air)=180-θ_R(bubble)，θ_R(air)=180-θ_A(bubble)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "adv_bubble": {
+                        "type": "number",
+                        "description": "囚禁气泡推进角（度），应在(0, 180)之间。"
+                    },
+                    "rec_bubble": {
+                        "type": "number",
+                        "description": "囚禁气泡后退角（度），应在(0, 180)之间。"
+                    }
+                },
+                "required": [
+                    "adv_bubble",
+                    "rec_bubble"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "estimate_dynamic_from_static_air",
+            "description": "给定空气中静态接触角，基于本地数据库的典型滞后曲线（最近邻）估计推进/后退角。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "static_air": {
+                        "type": "number",
+                        "description": "空气中静态接触角（度），应在(0, 180)之间。"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "本地SQLite数据库文件路径。"
+                    }
+                },
+                "required": [
+                    "static_air",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "pubchem_fetch_compound",
+            "description": "通过pubchempy从PubChem获取化合物信息（返回CID、IUPAC名称、分子式及部分同义词）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "化合物标识符，可为名称（如“water”）或CID字符串（如“962”）。"
+                    }
+                },
+                "required": [
+                    "identifier"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "estimate_air_dynamic_from_captive_bubble",
+            "description": "端到端估计：将囚禁气泡接触角转换为空气中静态角（互补），再用本地数据库估计推进/后退角，并保存中间结果。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "bubble_angle": {
+                        "type": "number",
+                        "description": "囚禁气泡接触角（度），应在(0, 180)之间。"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "本地SQLite数据库文件路径。"
+                    }
+                },
+                "required": [
+                    "bubble_angle",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "derive_air_dynamic_from_bubble_dynamic",
+            "description": "将气泡推进/后退角转换为空气中水滴的推进/后退角，并保存中间结果。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "adv_bubble": {
+                        "type": "number",
+                        "description": "囚禁气泡推进角（度），应在(0, 180)之间。"
+                    },
+                    "rec_bubble": {
+                        "type": "number",
+                        "description": "囚禁气泡后退角（度），应在(0, 180)之间。"
+                    }
+                },
+                "required": [
+                    "adv_bubble",
+                    "rec_bubble"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_contact_angles",
+            "description": "绘制接触角柱状图（支持键：static_air、advancing_air、receding_air），并保存为PNG图片到./tool_images/{filename}.png。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "angles": {
+                        "type": "object",
+                        "description": "包含要绘制的接触角数据的字典；键可包括static_air、advancing_air、receding_air，对应的值为度数。",
+                        "properties": {
+                            "static_air": {
+                                "type": "number",
+                                "description": "空气中静态接触角（度）。"
+                            },
+                            "advancing_air": {
+                                "type": "number",
+                                "description": "空气中推进接触角（度）。"
+                            },
+                            "receding_air": {
+                                "type": "number",
+                                "description": "空气中后退接触角（度）。"
+                            }
+                        }
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "输出图片文件名（不含扩展名）。"
+                    }
+                },
+                "required": [
+                    "angles",
+                    "title",
+                    "filename"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "unknown_path.py"
+        }
+    }
+]

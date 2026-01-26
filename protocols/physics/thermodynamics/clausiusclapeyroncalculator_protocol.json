@@ -1,0 +1,308 @@
+{
+  "class_name": "ClausiusClapeyronCalculator",
+  "description": "A utility class for performing thermodynamic calculations using the Clausius-Clapeyron equation to estimate temperature or pressure during phase transitions such as vaporization or sublimation. It supports both direct computation and visualization of the phase equilibrium curve.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "clausius_clapeyron_temperature",
+        "description": "基于克劳修斯-克拉佩龙方程计算温度。根据已知的参考压力和温度，以及目标压力，计算对应的温度。适用于相变过程（如汽化、升华）的温度计算。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "P1": {
+              "type": "number",
+              "description": "参考压力，单位为Pa。已知温度T1对应的压力"
+            },
+            "T1": {
+              "type": "number",
+              "description": "参考温度，单位为K。已知压力P1对应的温度"
+            },
+            "P2": {
+              "type": "number",
+              "description": "目标压力，单位为Pa。需要计算对应温度的压力"
+            },
+            "delta_H_vap": {
+              "type": "number",
+              "description": "摩尔汽化焓，单位为J/mol。相变过程的焓变"
+            },
+            "R": {
+              "type": "number",
+              "description": "气体常数，默认为8.314 J/(mol·K)"
+            }
+          },
+          "required": [
+            "P1",
+            "T1",
+            "P2",
+            "delta_H_vap"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "目标温度，单位为K。压力P2对应的温度",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "目标温度，单位为K。压力P2对应的温度"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/clausius_clapeyron_temperature/clausius_clapeyron_temperature.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "clausius_clapeyron_pressure",
+        "description": "基于克劳修斯-克拉佩龙方程计算压力。根据已知的参考压力和温度，以及目标温度，计算对应的压力。适用于相变过程（如汽化、升华）的压力计算。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "P1": {
+              "type": "number",
+              "description": "参考压力，单位为Pa。已知温度T1对应的压力"
+            },
+            "T1": {
+              "type": "number",
+              "description": "参考温度，单位为K。已知压力P1对应的温度"
+            },
+            "T2": {
+              "type": "number",
+              "description": "目标温度，单位为K。需要计算对应压力的温度"
+            },
+            "delta_H_vap": {
+              "type": "number",
+              "description": "摩尔汽化焓，单位为J/mol。相变过程的焓变"
+            },
+            "R": {
+              "type": "number",
+              "description": "气体常数，默认为8.314 J/(mol·K)"
+            }
+          },
+          "required": [
+            "P1",
+            "T1",
+            "T2",
+            "delta_H_vap"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "目标压力，单位为Pa。温度T2对应的压力",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "目标压力，单位为Pa。温度T2对应的压力"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/clausius_clapeyron_temperature/clausius_clapeyron_temperature.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_clausius_clapeyron",
+        "description": "绘制Clausius-Clapeyron方程的饱和蒸气压曲线。创建包含两个子图的综合图表：1. 压力-温度关系图（P vs T）；2. 线性化图（lnP vs 1/T），用于验证Clausius-Clapeyron方程的线性关系。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "P1": {
+              "type": "number",
+              "description": "参考压力，单位为Pa"
+            },
+            "T1": {
+              "type": "number",
+              "description": "参考温度，单位为K"
+            },
+            "delta_H_vap": {
+              "type": "number",
+              "description": "摩尔汽化焓，单位为J/mol"
+            },
+            "T_range": {
+              "type": "array",
+              "description": "温度范围，格式为[T_min, T_max]，单位为K"
+            },
+            "P_range": {
+              "type": "array",
+              "description": "压力范围，格式为[P_min, P_max]，单位为Pa"
+            },
+            "substance_name": {
+              "type": "string",
+              "description": "物质名称，用于图表标签，默认为\"Substance\""
+            },
+            "point_highlight": {
+              "type": "array",
+              "description": "高亮显示的点，格式为[P, T]，单位为[Pa, K]"
+            },
+            "figsize": {
+              "type": "array",
+              "description": "图表尺寸，默认为[10, 6]"
+            },
+            "R": {
+              "type": "number",
+              "description": "气体常数，默认为8.314 J/(mol·K)"
+            },
+            "n_points": {
+              "type": "integer",
+              "description": "绘图点数，默认为200"
+            },
+            "temp_margin": {
+              "type": "number",
+              "description": "温度范围扩展边距，默认为10K"
+            },
+            "pressure_limit": {
+              "type": "number",
+              "description": "压力上限，用于过滤异常值，默认为1e7 Pa"
+            }
+          },
+          "required": [
+            "P1",
+            "T1",
+            "delta_H_vap"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "显示图表",
+        "properties": {
+          "result": {
+            "type": "null",
+            "description": "无返回值，显示图表"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/clausius_clapeyron_temperature/clausius_clapeyron_temperature.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_temperature",
+        "description": "根据压力计算对应的温度。使用Clausius-Clapeyron方程，根据给定的压力计算对应的饱和温度。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pressure": {
+              "type": "number",
+              "description": "目标压力，单位为Pa"
+            }
+          },
+          "required": [
+            "pressure"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "对应的饱和温度，单位为K",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "对应的饱和温度，单位为K"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/clausius_clapeyron_temperature/clausius_clapeyron_temperature.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_pressure",
+        "description": "根据温度计算对应的压力。使用Clausius-Clapeyron方程，根据给定的温度计算对应的饱和蒸气压。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "temperature": {
+              "type": "number",
+              "description": "目标温度，单位为K"
+            }
+          },
+          "required": [
+            "temperature"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "对应的饱和蒸气压，单位为Pa",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "对应的饱和蒸气压，单位为Pa"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/clausius_clapeyron_temperature/clausius_clapeyron_temperature.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "visualize",
+        "description": "可视化Clausius-Clapeyron方程曲线。生成包含压力-温度关系和线性化图表的综合可视化。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "P_range": {
+              "type": "array",
+              "description": "压力范围，格式为[P_min, P_max]，单位为Pa"
+            },
+            "T_range": {
+              "type": "array",
+              "description": "温度范围，格式为[T_min, T_max]，单位为K"
+            },
+            "highlight_pressure": {
+              "type": "number",
+              "description": "需要高亮显示的压力值，单位为Pa"
+            },
+            "figsize": {
+              "type": "array",
+              "description": "图表尺寸，默认为[10, 6]"
+            },
+            "substance_name": {
+              "type": "string",
+              "description": "物质名称，用于图表标签"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "显示图表",
+        "properties": {
+          "result": {
+            "type": "null",
+            "description": "无返回值，显示图表"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/clausius_clapeyron_temperature/clausius_clapeyron_temperature.py"
+      }
+    }
+  ]
+}

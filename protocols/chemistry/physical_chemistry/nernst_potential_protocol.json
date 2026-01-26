@@ -1,0 +1,288 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of tools for analyzing cathode reactions in electrochemical systems, including thermodynamic potential calculation, ion concentration modeling, hydrogen evolution assessment, and result visualization and export.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "export_results_to_csv",
+        "description": "将阴极反应分析结果导出为CSV文件。将analyze_cathode_reaction函数的分析结果导出为两个CSV文件：1. 详细反应数据文件：包含所有反应的详细信息；2. 摘要信息文件：包含分析结果的总结信息。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "object",
+              "description": "阴极反应分析结果字典，包含以下键值对：all_reactions(所有反应的详细信息列表)、dominant_reaction(主导反应信息)、reaction_type(反应类型)、temperature(温度K)、pH(溶液pH值)、E_cathode(阴极电位V)、electrode(电极类型)、remaining_concentration(剩余离子浓度)"
+            },
+            "csv_path": {
+              "type": "string",
+              "description": "输出CSV文件路径，会自动生成对应的摘要文件"
+            }
+          },
+          "required": [
+            "result",
+            "csv_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of export_results_to_csv function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/nernst_potential/nernst_potential.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "nernst_potential",
+        "description": "计算Nernst电位。根据Nernst方程计算电化学反应的平衡电位，考虑反应物和产物的活度以及温度的影响。用于预测电化学反应在不同条件下的电位变化。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "E0": {
+              "type": "number",
+              "description": "标准电极电位，单位为V（相对于标准氢电极SHE）"
+            },
+            "n": {
+              "type": "integer",
+              "description": "参与反应的电子数"
+            },
+            "a_oxidized": {
+              "type": "number",
+              "description": "氧化态物质的活度（通常用浓度近似）"
+            },
+            "a_reduced": {
+              "type": "number",
+              "description": "还原态物质的活度，默认为1（纯固体或标准状态）"
+            },
+            "T": {
+              "type": "number",
+              "description": "温度，单位为K，默认为298.15K（25°C）"
+            }
+          },
+          "required": [
+            "E0",
+            "n",
+            "a_oxidized"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "计算得到的Nernst电位，单位为V",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "计算得到的Nernst电位，单位为V"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/nernst_potential/nernst_potential.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "hydrogen_evolution_potential",
+        "description": "计算析氢反应电位。计算在不同pH值和温度下析氢反应(HER)的电位，考虑过电位的影响。析氢反应是电化学中重要的竞争反应，影响金属离子的电沉积过程。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pH": {
+              "type": "number",
+              "description": "溶液的pH值，影响H+离子浓度"
+            },
+            "T": {
+              "type": "number",
+              "description": "温度，单位为K，默认为298.15K（25°C）"
+            },
+            "overpotential": {
+              "type": "number",
+              "description": "析氢反应的过电位，单位为V，默认为0.0V。不同电极材料具有不同的析氢过电位"
+            }
+          },
+          "required": [
+            "pH"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "析氢反应的有效电位，单位为V（相对于SHE），考虑过电位后的实际析氢电位",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "析氢反应的有效电位，单位为V（相对于SHE）"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/nernst_potential/nernst_potential.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_remaining_concentration",
+        "description": "计算电沉积后的剩余离子浓度。根据施加的电位和电化学参数，计算电沉积反应达到平衡时的剩余离子浓度。用于预测电沉积过程的完成程度和离子去除效率。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "E_applied": {
+              "type": "number",
+              "description": "施加的阴极电位，单位为V（相对于SHE）"
+            },
+            "E0": {
+              "type": "number",
+              "description": "标准电极电位，单位为V"
+            },
+            "n": {
+              "type": "integer",
+              "description": "参与反应的电子数"
+            },
+            "T": {
+              "type": "number",
+              "description": "温度，单位为K，默认为298.15K（25°C）"
+            },
+            "overpotential": {
+              "type": "number",
+              "description": "过电位，单位为V，默认为0.0V。考虑电极材料对反应动力学的影响"
+            }
+          },
+          "required": [
+            "E_applied",
+            "E0",
+            "n"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "剩余离子浓度，单位为mol/kg，最小值限制为1e-20以防止数值下溢",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "剩余离子浓度，单位为mol/kg"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/nernst_potential/nernst_potential.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "analyze_cathode_reaction",
+        "description": "分析阴极反应优先级和离子沉积行为。综合分析多离子体系中的阴极反应，确定主导反应类型，计算各离子的沉积电位，预测剩余离子浓度，并考虑析氢反应的竞争影响。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ions": {
+              "type": "array",
+              "description": "离子信息列表，每个元素为字典，包含以下键值对：name(离子名称)、E0(标准电极电位V)、n(参与反应的电子数)、c0(初始离子浓度mol/kg)、product(还原产物)、overpotential(该离子的过电位V)"
+            },
+            "pH": {
+              "type": "number",
+              "description": "溶液的pH值"
+            },
+            "T": {
+              "type": "number",
+              "description": "温度，单位为°C或K（自动判断）"
+            },
+            "E_cathode": {
+              "type": "number",
+              "description": "施加的阴极电位，单位为V（相对于SHE）"
+            },
+            "overpotentials": {
+              "type": "object",
+              "description": "不同电极材料的析氢过电位字典，键为电极类型，值为过电位(V)"
+            },
+            "electrode_type": {
+              "type": "string",
+              "description": "电极材料类型，如'Pt', 'Cu', 'Ni'等"
+            }
+          },
+          "required": [
+            "ions",
+            "pH",
+            "T",
+            "E_cathode",
+            "overpotentials",
+            "electrode_type"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "分析结果字典，包含所有反应信息、主导反应、反应类型、剩余浓度等",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "分析结果字典，包含以下键值对：all_reactions(所有反应的详细信息列表)、dominant_reaction(主导反应信息)、reaction_type(反应类型)、remaining_concentration(剩余离子浓度)、temperature(温度K)、pH(pH值)、E_cathode(阴极电位)、electrode(电极类型)"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/nernst_potential/nernst_potential.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_cathode_analysis",
+        "description": "可视化阴极反应分析结果。生成阴极反应分析的图表，展示各反应的热力学电位、有效电位和过电位，标注施加电位和主导反应，并打印分析结果摘要。",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "object",
+              "description": "阴极反应分析结果字典，包含以下键值对：all_reactions(所有反应的详细信息列表)、dominant_reaction(主导反应信息)、temperature(温度K)、pH(pH值)、E_cathode(阴极电位)、electrode(电极类型)、remaining_concentration(剩余离子浓度)"
+            },
+            "title": {
+              "type": "string",
+              "description": "图表标题，默认为'Cathode Reaction Analysis'"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "显示图表并打印分析结果到控制台",
+        "properties": {
+          "result": {
+            "type": "null",
+            "description": "无返回值，显示图表并打印分析结果到控制台"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/nernst_potential/nernst_potential.py"
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "bond_counts": {
+    "C-H": 22,
+    "C-C": 9,
+    "C=C": 2
+  },
+  "condensed": "(CH3)2C=CH-CH2-CH(CH3)-CH2-CH=C(CH3)2"
+}

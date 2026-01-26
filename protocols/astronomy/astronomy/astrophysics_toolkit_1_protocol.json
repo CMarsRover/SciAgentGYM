@@ -1,0 +1,33 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_binary_orbit",
+            "description": "可视化双星系统的轨道运动，生成双星轨道的2D轨迹图和径向速度曲线图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "orbit_data": {
+                        "type": "object",
+                        "description": "轨道数据字典，包含time_array_years、star1_x_au、star1_y_au、star2_x_au、star2_y_au、rv1_km_s、rv2_km_s等键"
+                    },
+                    "system_name": {
+                        "type": "string",
+                        "description": "系统名称，用于图表标题，默认为'Binary System'"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "保存目录，默认为'./tool_images/'"
+                    }
+                },
+                "required": [
+                    "orbit_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/astrophysics_toolkit_1.py"
+        }
+    }
+]

@@ -1,0 +1,1297 @@
+{
+  "id": 45,
+  "query": "Anderson localization describes spatial localization of wavefunctions in disordered potentials. Consider 1D tight-binding model with random potential: $H = -t\\sum_i (c_i^\\dagger c_{i+1} + h.c.) + \\sum_i \\epsilon_i n_i$ where $\\epsilon_i$ uniformly distributed in $[-W/2, W/2]$, $W$ is disorder strength. 1. Fix $t=1$, $N=100$, scan disorder $W = 0, 1, 2, 4, 8$; 2. For each $W$, average over 10 random disorder realizations; 3. Calculate localization length $\\xi$ for states near band center ($E \\approx 0$); 4. Calculate inverse participation ratio IPR $= \\sum_i |\\psi_i|^4$ (localized: IPR $\\sim O(1)$, extended: IPR $\\sim 1/L$); 5. Report average IPR at $W=4$ (6 decimals). Note: This problem demonstrates 1977 Nobel laureate Anderson's localization theory.",
+  "query_data": {
+    "id": 45,
+    "filename": "failed_questions_CM022_condensed_matter.json",
+    "question": "Anderson localization describes spatial localization of wavefunctions in disordered potentials. Consider 1D tight-binding model with random potential: $H = -t\\sum_i (c_i^\\dagger c_{i+1} + h.c.) + \\sum_i \\epsilon_i n_i$ where $\\epsilon_i$ uniformly distributed in $[-W/2, W/2]$, $W$ is disorder strength. 1. Fix $t=1$, $N=100$, scan disorder $W = 0, 1, 2, 4, 8$; 2. For each $W$, average over 10 random disorder realizations; 3. Calculate localization length $\\xi$ for states near band center ($E \\approx 0$); 4. Calculate inverse participation ratio IPR $= \\sum_i |\\psi_i|^4$ (localized: IPR $\\sim O(1)$, extended: IPR $\\sim 1/L$); 5. Report average IPR at $W=4$ (6 decimals). Note: This problem demonstrates 1977 Nobel laureate Anderson's localization theory.",
+    "answer": "0.141579",
+    "metadata": {
+      "subject": "Physics",
+      "topic": "Condensed Matter Physics",
+      "image_path": [],
+      "solution_steps": [
+        "理解Anderson局域化理论：在无序势场中，电子波函数会发生空间局域化（1977年诺贝尔奖）",
+        "设置系统参数：N=100个格点，跃迁积分t=1.0，开边界条件（OBC）",
+        "定义无序强度扫描范围：W = [0.0, 1.0, 2.0, 4.0, 8.0]，每个W使用10个随机样本",
+        "对每个W值，调用 analyze_localization_disorder_average 进行无序平均分析",
+        "该函数内部会：(1) 调用 construct_anderson_hamiltonian_1d 构建含随机势的哈密顿量；(2) 求解本征态；(3) 计算每个本征态的 IPR；(4) 对多个样本求平均",
+        "计算逆参与率 IPR = ∑ᵢ|ψᵢ|⁴，判断局域化程度：扩展态 IPR~1/N≈0.01，局域态 IPR~O(1)",
+        "提取W=4时的结果：平均IPR=0.141579，标准差=0.060541",
+        "物理解释：参与率PR=1/IPR≈7.06，表示波函数有效分布在约7个格点上（占总数的7.1%），显著局域化",
+        "生成可视化：绘制IPR随W的变化曲线和不同W下的波函数空间分布"
+      ],
+      "tool_expected": [
+        "analyze_localization_disorder_average",
+        "construct_anderson_hamiltonian_1d",
+        "calculate_inverse_participation_ratio"
+      ],
+      "golden_answer": [
+        {
+          "call": "analyze_localization_disorder_average",
+          "inputs": {
+            "N": 100,
+            "t": 1.0,
+            "disorder_strengths": [
+              0.0,
+              1.0,
+              2.0,
+              4.0,
+              8.0
+            ],
+            "num_samples": 10,
+            "energy_window": null,
+            "periodic": false
+          },
+          "output": {
+            "disorder_strengths": [
+              0.0,
+              1.0,
+              2.0,
+              4.0,
+              8.0
+            ],
+            "mean_ipr": [
+              0.014851,
+              0.024256,
+              0.050739,
+              0.141579,
+              0.360025
+            ],
+            "std_ipr": [
+              0.0,
+              0.007593,
+              0.025094,
+              0.060541,
+              0.152296
+            ],
+            "mean_pr": [
+              67.33,
+              43.96,
+              23.92,
+              8.44,
+              3.34
+            ],
+            "num_states_analyzed": [
+              240,
+              240,
+              240,
+              240,
+              240
+            ]
+          },
+          "units": {
+            "t": "eV (normalized to 1)",
+            "W": "eV"
+          }
+        },
+        {
+          "call": "construct_anderson_hamiltonian_1d",
+          "description": "内部调用，为每个样本构建随机势哈密顿量",
+          "inputs": {
+            "N": 100,
+            "t": 1.0,
+            "disorder_strength": "W (变化)",
+            "periodic": false,
+            "seed": "随机"
+          }
+        },
+        {
+          "call": "calculate_inverse_participation_ratio",
+          "description": "对每个本征态计算IPR",
+          "formula": "IPR = ∑ᵢ|ψᵢ|⁴"
+        },
+        {
+          "calculation": "W=4_results",
+          "W_4_analysis": {
+            "mean_IPR": 0.141579,
+            "std_IPR": 0.060541,
+            "mean_PR": 8.44,
+            "interpretation": "波函数有效分布在约7-8个格点上，占总格点数的8.4%，显著局域化"
+          }
+        },
+        {
+          "visualization": "anderson_localization_plots",
+          "images_saved": [
+            "./images/CM022_anderson_localization_results.png",
+            "./images/CM022_wavefunction_examples.png"
+          ],
+          "description": "第一张图展示IPR随无序强度W的变化（含误差棒）、参与率PR、归一化参与率等；第二张图展示不同W下的典型波函数空间分布"
+        },
+        {
+          "physical_interpretation": {
+            "W_0": "IPR=0.014851≈1/N，完全扩展态",
+            "W_4": "IPR=0.141579>>1/N，中等局域化，相比W=0局域化增强9.5倍",
+            "W_8": "IPR=0.360025，强局域化",
+            "Nobel_Prize": "1977年Philip W. Anderson因'对磁性和无序系统电子结构的基础性理论研究'获诺贝尔物理学奖"
+          }
+        }
+      ],
+      "original_question_id": "CM022"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_localization_disorder_average",
+          "description": "对多个无序样本进行平均分析。Anderson局域化研究的标准方法。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "N": {
+                "type": "integer",
+                "description": "系统格点数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分"
+              },
+              "disorder_strengths": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "无序强度列表（W值），例如 [0,1,2,4,8]"
+              },
+              "num_samples": {
+                "type": "integer",
+                "description": "样本数量，默认100"
+              },
+              "energy_window": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "能量窗口 [E_min, E_max]，可选"
+              },
+              "periodic": {
+                "type": "boolean",
+                "description": "是否使用周期性边界条件，默认False"
+              }
+            },
+            "required": [
+              "N",
+              "t",
+              "disorder_strengths"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/disorder_localization.py",
+          "resolved_file_path": "toolkits/physics/condensed_matter_physics/disorder_localization.py",
+          "resolved_dir": "toolkits/physics/condensed_matter_physics"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "construct_anderson_hamiltonian_1d",
+          "description": "构建一维Anderson模型哈密顿量。用于研究无序系统中的局域化现象。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "N": {
+                "type": "integer",
+                "description": "系统格点数"
+              },
+              "t": {
+                "type": "number",
+                "description": "跃迁积分（hopping amplitude），默认1.0"
+              },
+              "disorder_strength": {
+                "type": "number",
+                "description": "无序强度W（随机势的范围），默认0.0"
+              },
+              "periodic": {
+                "type": "boolean",
+                "description": "是否使用周期性边界条件，默认False"
+              },
+              "seed": {
+                "type": "integer",
+                "description": "随机数种子，用于可重复性"
+              }
+            },
+            "required": [
+              "N"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/disorder_localization.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_inverse_participation_ratio",
+          "description": "计算逆参与率（IPR）。用于判断波函数的局域化程度。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "wavefunction": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "波函数（本征态），一维数组"
+              }
+            },
+            "required": [
+              "wavefunction"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/condensed_matter_tools/disorder_localization.py"
+        }
+      }
+    ],
+    "augmented_versions": [
+      {
+        "augmented_question": "在一维紧束缚Anderson模型 H = -t∑_i (c_i^† c_{i+1} + h.c.) + ∑_i ε_i n_i 中，随机势 ε_i ~ U[-W/2, W/2]。设 t=1、系统尺寸 N=100。对能量窗口 E≈0（具体取 E∈[-0.1,0.1]）与周期/开边界两种边界条件，工具已给出以下数值（平均于10个无序样本，并对窗口内的本征态取样平均）：\n- 周期边界（PBC）E∈[-0.1,0.1]：W∈{0,1,2,4,8} 对应的 IPR 均值 mean_ipr = [0.02, 0.01870241, 0.03725009, 0.11957577, 0.32866371]；标准差 std_ipr = [4.9065e-18, 0.00230727, 0.01435714, 0.05176387, 0.11492042]；PR 均值 mean_pr = [50.0, 54.22267563, 30.89475644, 9.96830042, 3.45340475]；窗口内样本数 num_states = [20, 30, 30, 33, 21]。\n- 开边界（OBC）E∈[-0.1,0.1]：mean_ipr = [0.01485149, 0.02342063, 0.04667754, 0.12407996, 0.33159208]；std_ipr = [6.1332e-18, 0.00616187, 0.02507022, 0.05744975, 0.11694438]；mean_pr = [67.33333333, 45.45677967, 27.41009842, 9.70968631, 3.44060618]；num_states = [40, 30, 28, 35, 20]。\n- 另给能量更宽窗口（PBC，E∈[-0.628,0.628]）的统计：mean_ipr = [0.01545455, 0.02069217, 0.04066461, 0.12902057, 0.35510011]；std_ipr = [0.0014374, 0.0036271, 0.01606776, 0.05115722, 0.1450236]；mean_pr = [65.15151515, 49.6459316, 28.24616387, 9.07387368, 3.37964039]；num_states = [220, 204, 199, 200, 155]。\n- 校准用样例波函数（8个连续站点等幅归一，其他为零）之 IPR=0.125（工具复算一致）。\n定义与约定：\n1) IPR = ∑_i |ψ_i|^4；PR = 1/IPR（逐态定义；但对均值层面 mean_pr ≠ 1/mean_ipr）。\n2) 近带中心态的局域长度以 PR 估计：ξ ≈ mean_pr/2（1D指数型局域的标准近似，PR≈2ξ）。误差条用 delta-method 从 IPR 的样本标准差传播到 PR 再到 ξ：记 μ=mean_ipr、σ=std_ipr、n=num_states，则 s_PR ≈ σ/μ^2，mean(PR) 的标准误差为 s_PR/√n，进而 δξ ≈ (1/2)·s_PR/√n。\n3) 有限尺寸标度采用 IPR(N) ≈ a/N + b：W=0 期望 b≈0 且 IPR·N≈常数；W>0 时 IPR_∞≈b，可用 b≈1/mean_pr 估计，其不确定度由 δPR 传播：δb≈(δPR)/(mean_pr)^2。\n4) 能量分辨在 W=4 时，定义“带中心”窗口为 [-0.1,0.1]，“带边”窗口在较宽能窗 [-0.628,0.628] 中的补集部分（去除中心窗），用加权差分计算带边的均值。\n请完成：\nA) 报告 W=4、N=100、PBC、E≈0 处的平均 IPR（保留6位小数）。\nB) 给出各 W 在 E≈0 的平均局域长度谱 ξ 及 1σ 误差条，分别对 PBC 与 OBC；并报告 Δξ=ξ_PBC−ξ_OBC 与 ΔIPR=mean_ipr(PBC)−mean_ipr(OBC)。\nC) 有限尺寸标度：\n   C1) 用 PBC 宽能窗（W=0）验证 IPR·N≈常数，并给出观测常数。\n   C2) 用 PBC E≈0 数据估计 W∈{1,2,4,8} 的 IPR_∞≈1/mean_pr 及其不确定度。\nD) W=4 的能量分辨：给出中心窗与带边窗的 IPR(E) 与 ξ(E)，并报告比值 ξ_center/ξ_edge。\nE) 报告 W=4 在 E≈0 的 IPR 分布统计（均值/中位数/标准差/偏度/峰度），并简述分布形态；由于仅有均值与标准差，允许用对数正态近似由 (均值, 方差) 反推（给出所用公式）。\nF) 给出交叉验证结论：\n   - 扩展态一致性检验（W=0 的 IPR·N 是否近常数）通过/失败标志与量化依据；\n   - 周期/开边界在 W≥2 时的一致性（Δξ、ΔIPR 是否较小）判定与诊断说明。",
+        "final_answer": {
+          "W4_N100_PBC_center_mean_IPR_6dec": 0.119576,
+          "xi_at_E0": {
+            "PBC": {
+              "W0": {
+                "xi": 25.0,
+                "err_1sigma": 0.0
+              },
+              "W1": {
+                "xi": 27.111337815,
+                "err_1sigma": 0.602
+              },
+              "W2": {
+                "xi": 15.44737822,
+                "err_1sigma": 0.946
+              },
+              "W4": {
+                "xi": 4.98415021,
+                "err_1sigma": 0.315
+              },
+              "W8": {
+                "xi": 1.726702375,
+                "err_1sigma": 0.116
+              }
+            },
+            "OBC": {
+              "W0": {
+                "xi": 33.666666665,
+                "err_1sigma": 0.0
+              },
+              "W1": {
+                "xi": 22.728389835,
+                "err_1sigma": 1.027
+              },
+              "W2": {
+                "xi": 13.70504921,
+                "err_1sigma": 1.087
+              },
+              "W4": {
+                "xi": 4.854843155,
+                "err_1sigma": 0.315
+              },
+              "W8": {
+                "xi": 1.72030309,
+                "err_1sigma": 0.119
+              }
+            },
+            "Delta": {
+              "W0": {
+                "Delta_xi": -8.666666665,
+                "Delta_IPR": 0.00514851
+              },
+              "W1": {
+                "Delta_xi": 4.38294798,
+                "Delta_IPR": -0.00471822
+              },
+              "W2": {
+                "Delta_xi": 1.74232901,
+                "Delta_IPR": -0.00942745
+              },
+              "W4": {
+                "Delta_xi": 0.129307055,
+                "Delta_IPR": -0.00450419
+              },
+              "W8": {
+                "Delta_xi": 0.006399285,
+                "Delta_IPR": -0.00292837
+              }
+            }
+          },
+          "finite_size_scaling": {
+            "W0_PBC_wide_window_IPR_times_N": 1.545455,
+            "IPR_infty_estimates_PBC_E0": {
+              "W1": {
+                "IPR_infty": 0.01844,
+                "uncertainty": 0.00041
+              },
+              "W2": {
+                "IPR_infty": 0.03238,
+                "uncertainty": 0.00198
+              },
+              "W4": {
+                "IPR_infty": 0.10032,
+                "uncertainty": 0.00634
+              },
+              "W8": {
+                "IPR_infty": 0.28952,
+                "uncertainty": 0.0195
+              }
+            }
+          },
+          "energy_resolved_W4": {
+            "center_window": {
+              "mean_IPR": 0.11957577,
+              "xi": 4.98415021
+            },
+            "edge_window_in_wide_band": {
+              "mean_IPR": 0.1308869,
+              "xi": 4.44856
+            },
+            "xi_center_over_xi_edge": 1.1203
+          },
+          "W4_IPR_distribution_E0": {
+            "mean": 0.11957577,
+            "median_est_lognormal": 0.1099,
+            "std": 0.05176387,
+            "skewness_est_lognormal": 1.378,
+            "excess_kurtosis_est_lognormal": 3.562,
+            "shape_comment": "分布右偏，近似对数正态；与局域态稀疏与幅度涨落的预期一致。"
+          },
+          "cross_validation": {
+            "extended_state_consistency": {
+              "status": "通过",
+              "evidence": "W=0（PBC，宽窗）IPR·N=1.545≈常数，接近standing-wave理论值≈1.5"
+            },
+            "boundary_consistency_for_W>=2": {
+              "status": "通过",
+              "evidence": "W=2,4,8 的 ΔIPR 与 Δξ 相对量级小（例如 W=4: ΔIPR≈-0.0045，Δξ≈0.129）"
+            },
+            "notes": "W=0 下 PBC 与 OBC 的差异主要源于简并与驻波/行波基的选择，不影响扩展态常数检验结论。"
+          }
+        },
+        "solution_outline": [
+          "将题干给定的工具输出作为唯一数据来源；所有数值计算在这些均值/标准差/样本数基础上完成。",
+          "A) 直接读取 PBC、W=4、E∈[-0.1,0.1] 的 mean_ipr 并四舍五入到6位小数。",
+          "B) 用 ξ≈mean_pr/2 计算各 W 的 ξ_PBC 与 ξ_OBC；用 delta-method 从 IPR 标准差传播到 PR（s_PR≈σ/μ^2），再到 ξ 的标准误差 δξ≈(1/2)·s_PR/√n；计算 Δξ 与 ΔIPR。",
+          "C1) 用 PBC 宽能窗 W=0 的 mean_ipr 乘以 N=100，验证 IPR·N≈常数并给出数值。",
+          "C2) 用 IPR_∞≈1/mean_pr 估计 W∈{1,2,4,8} 的热力学极限；不确定度由 δPR 传播：δIPR_∞≈(δPR)/(mean_pr)^2，且 δPR≈σ/(μ^2√n)。",
+          "D) W=4 能量分辨：中心窗的均值取自窄窗；带边窗均值由宽窗总和扣除中心窗总和再除以剩余态数（分别对 IPR 和 PR），再由 PR/2 得 ξ；给出 ξ_center/ξ_edge。",
+          "E) IPR 分布统计：给出均值 m、标准差 s；用对数正态近似由 m,s 反求 μ,σ（μ=ln(m)−(1/2)ln(1+s^2/m^2)，σ^2=ln(1+s^2/m^2)），得中位数 median=e^μ，偏度 γ1=(e^{σ^2}+2)√(e^{σ^2}−1)，超额峰度 κ_ex=e^{4σ^2}+2e^{3σ^2}+3e^{2σ^2}−6；讨论右偏形态与近似对数正态性。",
+          "F) 交叉验证：\n   - 扩展态一致性：检查 W=0 的 IPR·N 是否约常数并接近理论 standing-wave 常数~1.5。\n   - 边界一致性：对 W≥2 检查 Δξ、ΔIPR 是否显著小于对应量级，给出定量判断。"
+        ],
+        "verification": "核对步骤：\n1) A项：直接读取工具记录 step_6/step_7 中 W=4、PBC、E∈[-0.1,0.1] 的 mean_ipr=0.11957577，四舍五入至6位小数为0.119576。\n2) B项：用 ξ=mean_pr/2 逐项计算（来自 step_1 与 step_2 的 mean_pr）；误差条以 δξ≈(1/2)·[std_ipr/(mean_ipr^2√n)] 计算（n取 num_states_analyzed）。ΔIPR 由两边界 mean_ipr 之差得到；Δξ 由对应 ξ 相减得到。\n3) C1：从 step_8 读 W=0、PBC、宽窗 mean_ipr=0.01545455，乘以 N=100 得 1.545455。\n4) C2：IPR_∞≈1/mean_pr（PBC、E≈0）并用 δIPR_∞≈(δPR)/(mean_pr)^2，δPR≈std_ipr/(mean_ipr^2√n) 传播得到不确定度。\n5) D项：中心窗均值直接取自 step_6/step_7；带边窗均值用加权差分：mean_edge_IPR = (200×0.12902057 − 33×0.11957577)/167；mean_edge_PR = (200×9.07387368 − 33×9.96830042)/167；再由 ξ=edge_PR/2 得到 ξ_edge，并计算 ξ_center/ξ_edge。\n6) E项：用 m=0.11957577、s=0.05176387 反演对数正态参数：σ^2=ln(1+s^2/m^2)，μ=ln(m)−σ^2/2；median=e^μ，偏度与超额峰度按标准公式计算；检查分布右偏性与对数正态一致性。\n7) F项：扩展态一致性以 C1 的常数性为依据；边界一致性以 B项的 ΔIPR、Δξ 的量级判断。"
+      }
+    ],
+    "refined_versions": [
+      {
+        "refined_question": "一维紧束缚 Anderson 模型：H = -t∑_i (c_i^† c_{i+1} + h.c.) + ∑_i ε_i n_i，随机势 ε_i ~ U[-W/2, W/2]，t=1。系统尺寸 N=100。能量窗口近带中心 E∈[-0.1,0.1]，宽窗 E∈[-0.628,0.628]。已知对 W∈{0,1,2,4,8} 的统计数据（跨样本与窗口内本征态的平均）：\n- 周期边界（PBC），E∈[-0.1,0.1]：mean_ipr = [0.02, 0.01870241, 0.03725009, 0.11957577, 0.32866371]；std_ipr = [4.9065e-18, 0.00230727, 0.01435714, 0.05176387, 0.11492042]；mean_pr = [50.0, 54.22267563, 30.89475644, 9.96830042, 3.45340475]；num_states = [20, 30, 30, 33, 21]。\n- 开边界（OBC），E∈[-0.1,0.1]：mean_ipr = [0.01485149, 0.02342063, 0.04667754, 0.12407996, 0.33159208]；std_ipr = [6.1332e-18, 0.00616187, 0.02507022, 0.05744975, 0.11694438]；mean_pr = [67.33333333, 45.45677967, 27.41009842, 9.70968631, 3.44060618]；num_states = [40, 30, 28, 35, 20]。\n- PBC 宽能窗 E∈[-0.628,0.628]：mean_ipr = [0.01545455, 0.02069217, 0.04066461, 0.12902057, 0.35510011]；std_ipr = [0.0014374, 0.0036271, 0.01606776, 0.05115722, 0.1450236]；mean_pr = [65.15151515, 49.6459316, 28.24616387, 9.07387368, 3.37964039]；num_states = [220, 204, 199, 200, 155]。\n定义与约定：\n1) IPR = ∑_i |ψ_i|^4；PR = 1/IPR（逐态定义；均值层面 mean_pr ≠ 1/mean_ipr）。\n2) 近带中心态的局域长度估计：ξ ≈ mean_pr/2。误差传播：记 μ=mean_ipr、σ=std_ipr、n=num_states，取 s_PR ≈ σ/μ^2，mean(PR) 的标准误差为 s_PR/√n，故 δξ ≈ (1/2)·s_PR/√n。\n3) 有限尺寸标度：IPR(N) ≈ a/N + b。W>0 时 IPR_∞≈b，可用 b≈1/mean_pr 估计，其不确定度由 δPR 传播：δb≈(δPR)/(mean_pr)^2，δPR 同上。\n4) W=4 的能量分辨：中心窗为 [-0.1,0.1]；带边窗为宽窗中的补集（去除中心窗），其均值按样本数加权得到。\n单位说明：IPR、PR 无量纲；ξ 以站点数计。\n请完成并按指定精度给出数值：\nA) 报告 W=4、N=100、PBC、E≈0 的平均 IPR（保留6位小数）。\nB) 给出各 W 在 E≈0 的平均局域长度 ξ 及 1σ 误差条，分别对 PBC 与 OBC；并报告 Δξ=ξ_PBC−ξ_OBC（保留3位小数）与 ΔIPR=mean_ipr(PBC)−mean_ipr(OBC)（保留6位小数）。\nC) 有限尺寸标度：\n   C1) 用 PBC 宽能窗（W=0）计算 IPR·N，并给出该常数（保留6位小数）。\n   C2) 用 PBC E≈0 数据给出 W∈{1,2,4,8} 的 IPR_∞≈1/mean_pr 及其不确定度（IPR_∞ 保留5位小数；不确定度保留3位小数）。\nD) W=4 的能量分辨：给出中心窗与带边窗的 IPR(E)（保留6位小数）与 ξ(E)（保留3位小数），并报告比值 ξ_center/ξ_edge（保留4位小数）。\nE) 报告 W=4 在 E≈0 的 IPR 分布统计（均值、标准差保留6位小数；中位数保留4位小数；偏度与峰度的超额值各保留3位小数），并用对数正态近似由 (均值 μ, 方差 v) 反推：令 s^2 = ln(1+v/μ^2)、m = ln(μ) − s^2/2，median = exp(m)、skewness = [exp(s^2)+2]·sqrt(exp(s^2)−1)、excess kurtosis = exp(4s^2)+2exp(3s^2)+3exp(2s^2)−6；简述分布形态。\nF) 给出交叉验证结论：\n   - 扩展态一致性检验（W=0 的 IPR·N 是否近常数）通过/失败标志与量化依据（简述）。\n   - 周期/开边界在 W≥2 时的一致性（Δξ、ΔIPR 是否较小）判定与诊断说明（简述）。",
+        "final_answer": {
+          "A": "0.119576 (无量纲)",
+          "B": {
+            "PBC": {
+              "W0": {
+                "xi": "25.000 (site)",
+                "err_1sigma": "0.000 (site)"
+              },
+              "W1": {
+                "xi": "27.111 (site)",
+                "err_1sigma": "0.602 (site)"
+              },
+              "W2": {
+                "xi": "15.447 (site)",
+                "err_1sigma": "0.946 (site)"
+              },
+              "W4": {
+                "xi": "4.984 (site)",
+                "err_1sigma": "0.315 (site)"
+              },
+              "W8": {
+                "xi": "1.727 (site)",
+                "err_1sigma": "0.116 (site)"
+              }
+            },
+            "OBC": {
+              "W0": {
+                "xi": "33.667 (site)",
+                "err_1sigma": "0.000 (site)"
+              },
+              "W1": {
+                "xi": "22.728 (site)",
+                "err_1sigma": "1.027 (site)"
+              },
+              "W2": {
+                "xi": "13.705 (site)",
+                "err_1sigma": "1.087 (site)"
+              },
+              "W4": {
+                "xi": "4.855 (site)",
+                "err_1sigma": "0.315 (site)"
+              },
+              "W8": {
+                "xi": "1.720 (site)",
+                "err_1sigma": "0.119 (site)"
+              }
+            },
+            "Delta": {
+              "W0": {
+                "Delta_xi": "-8.667 (site)",
+                "Delta_IPR": "0.005149"
+              },
+              "W1": {
+                "Delta_xi": "4.383 (site)",
+                "Delta_IPR": "-0.004718"
+              },
+              "W2": {
+                "Delta_xi": "1.742 (site)",
+                "Delta_IPR": "-0.009427"
+              },
+              "W4": {
+                "Delta_xi": "0.129 (site)",
+                "Delta_IPR": "-0.004504"
+              },
+              "W8": {
+                "Delta_xi": "0.006 (site)",
+                "Delta_IPR": "-0.002928"
+              }
+            }
+          },
+          "C1": "1.545455 (无量纲)",
+          "C2": {
+            "W1": {
+              "IPR_infty": "0.01844 (无量纲)",
+              "uncertainty": "0.00041 (无量纲)"
+            },
+            "W2": {
+              "IPR_infty": "0.03238 (无量纲)",
+              "uncertainty": "0.00198 (无量纲)"
+            },
+            "W4": {
+              "IPR_infty": "0.10032 (无量纲)",
+              "uncertainty": "0.00634 (无量纲)"
+            },
+            "W8": {
+              "IPR_infty": "0.28952 (无量纲)",
+              "uncertainty": "0.01950 (无量纲)"
+            }
+          },
+          "D": {
+            "center_window": {
+              "mean_IPR": "0.119576 (无量纲)",
+              "xi": "4.984 (site)"
+            },
+            "edge_window": {
+              "mean_IPR": "0.130887 (无量纲)",
+              "xi": "4.449 (site)"
+            },
+            "xi_center_over_xi_edge": "1.1203 (无量纲)"
+          },
+          "E": {
+            "mean": "0.119576 (无量纲)",
+            "std": "0.051764 (无量纲)",
+            "median_est_lognormal": "0.1099 (无量纲)",
+            "skewness_est_lognormal": "1.378",
+            "excess_kurtosis_est_lognormal": "3.562",
+            "formulas_used": {
+              "s2": "s^2 = ln(1 + v/μ^2)",
+              "m": "m = ln(μ) − s^2/2",
+              "median": "median = exp(m)",
+              "skewness": "skewness = [exp(s^2)+2]·sqrt(exp(s^2)−1)",
+              "excess_kurtosis": "excess kurtosis = exp(4s^2)+2exp(3s^2)+3exp(2s^2)−6"
+            },
+            "shape_comment": "分布右偏，近似对数正态。"
+          },
+          "F": {
+            "extended_state_consistency": {
+              "status": "通过",
+              "evidence": "W=0（PBC，宽窗）下 IPR·N 为近常数，符合扩展态驻波/行波的规模关系。"
+            },
+            "boundary_consistency_for_W_ge_2": {
+              "status": "通过",
+              "evidence": "W≥2 时 PBC 与 OBC 的 Δξ 与 ΔIPR 较小，边界条件对近带中心局域程度影响弱。"
+            }
+          }
+        }
+      }
+    ],
+    "metadata_summary": {
+      "subject": "Physics",
+      "topic": "Condensed Matter Physics",
+      "original_question_id": "CM022",
+      "subject_topic_key": "Physics::Condensed Matter Physics"
+    }
+  },
+  "model": "gpt-5",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": "Anderson localization describes spatial localization of wavefunctions in disordered potentials. Consider 1D tight-binding model with random potential: $H = -t\\sum_i (c_i^\\dagger c_{i+1} + h.c.) + \\sum_i \\epsilon_i n_i$ where $\\epsilon_i$ uniformly distributed in $[-W/2, W/2]$, $W$ is disorder strength. 1. Fix $t=1$, $N=100$, scan disorder $W = 0, 1, 2, 4, 8$; 2. For each $W$, average over 10 random disorder realizations; 3. Calculate localization length $\\xi$ for states near band center ($E \\approx 0$); 4. Calculate inverse participation ratio IPR $= \\sum_i |\\psi_i|^4$ (localized: IPR $\\sim O(1)$, extended: IPR $\\sim 1/L$); 5. Report average IPR at $W=4$ (6 decimals). Note: This problem demonstrates 1977 Nobel laureate Anderson's localization theory."
+    },
+    {
+      "role": "assistant",
+      "content": "[阶段 1: 规划]\nPlan:\n\n1. 使用 analyze_localization_disorder_average 工具，对 N=100、t=1 的 1D Anderson 模型在无序强度 W ∈ {0,1,2,4,8} 上进行扫描。\n2. 设定能量窗口围绕带中心 E≈0（例如 [-0.2, 0.2]），并对每个 W 进行 10 个无序样本的平均。\n3. 从工具返回结果中提取：带中心附近本征态的平均局域化长度 ξ(W) 与 IPR(W)。\n4. 汇总并解读 ξ 与 IPR 随 W 的变化趋势。\n5. 按要求给出 W=4 时的平均 IPR（保留 6 位小数）。\n\n[阶段 2: 执行]\nThought: 我处于计划的第1步与第2步。需要调用平均分析工具，对给定 W 列表与能量窗口进行统计，从而得到带中心的局域化长度与 IPR 的平均值。\nAction: 请你在这一步发出工具调用",
+      "tool_calls": [
+        {
+          "id": "call_NWPV1vjcmAZTwykcCoUezUJx",
+          "type": "function",
+          "function": {
+            "name": "analyze_localization_disorder_average",
+            "arguments": "{\"N\": 100, \"disorder_strengths\": [0, 1, 2, 4, 8], \"energy_window\": [-0.2, 0.2], \"num_samples\": 10, \"periodic\": false, \"t\": 1}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "disorder_strengths": [
+          0,
+          1,
+          2,
+          4,
+          8
+        ],
+        "mean_ipr": [
+          0.014851485148514846,
+          0.023386665271621497,
+          0.043707980428243455,
+          0.13494965672868273,
+          0.3493144547758794
+        ],
+        "std_ipr": [
+          5.967381519637389e-18,
+          0.006533672180233984,
+          0.0217000710621029,
+          0.06111049236196371,
+          0.13670523277657032
+        ],
+        "mean_pr": [
+          67.33333333333336,
+          45.69469468584755,
+          28.1423427201143,
+          9.085473264454487,
+          3.337250277967141
+        ],
+        "num_states_analyzed": [
+          60,
+          62,
+          63,
+          69,
+          43
+        ]
+      },
+      "tool_call_id": "call_NWPV1vjcmAZTwykcCoUezUJx"
+    },
+    {
+      "role": "assistant",
+      "content": "[阶段 1: 规划]\nPlan:\n\n1. 用 analyze_localization_disorder_average 工具对 N=100、t=1、W∈{0,1,2,4,8} 的 1D Anderson 模型，在带中心能量窗 E∈[-0.2,0.2] 进行统计，样本数为10。\n2. 从返回结果提取各 W 在带中心的平均 IPR，并用近似关系 ξ ≈ 1/(2·IPR) 估计局域化长度。\n3. 汇总 ξ(W) 与 IPR(W) 的趋势，并按要求给出 W=4 的平均 IPR（保留 6 位小数）。\n\n[阶段 2: 执行]\nThought: 我处于计划第1-2步，工具已返回在带中心的平均 IPR 等统计量。接下来用 ξ ≈ 1/(2·IPR) 估算各 W 的局域化长度，并整理结果；最后按要求报告 W=4 的平均 IPR（6位小数）。\nObservation: {\"disorder_strengths\":[0,1,2,4,8],\"mean_ipr\":[0.014851485148514846,0.023386665271621497,0.043707980428243455,0.13494965672868273,0.3493144547758794],\"std_ipr\":[5.967381519637389e-18,0.006533672180233984,0.0217000710621029,0.06111049236196371,0.13670523277657032],\"mean_pr\":[67.33333333333336,45.69469468584755,28.1423427201143,9.085473264454487,3.337250277967141],\"num_states_analyzed\":[60,62,63,69,43]}\nThought: 基于 mean IPR 计算 ξ ≈ 1/(2·IPR)：\n- W=0: IPR=0.0148515 → ξ≈33.667（但在无序为0时应为延展态，ξ 实际上发散，此值仅为有限尺寸估计）\n- W=1: IPR=0.0233867 → ξ≈21.379\n- W=2: IPR=0.0437080 → ξ≈11.440\n- W=4: IPR=0.1349497 → ξ≈3.705\n- W=8: IPR=0.3493145 → ξ≈1.432\n我已获得所有需要的信息，可以给出最终答案。\nFinal Answer:\n- 带中心平均 IPR（随 W 增大而增大，表征更强局域化）：\n  - W=0: 0.0148515\n  - W=1: 0.0233867\n  - W=2: 0.0437080\n  - W=4: 0.1349497\n  - W=8: 0.3493145\n\n- 由 ξ ≈ 1/(2·IPR) 估计的带中心局域化长度：\n  - W=0: ξ≈33.667（无序为0时应为延展态，ξ→∞；该值为有限尺寸下的数值估计）\n  - W=1: ξ≈21.379\n  - W=2: ξ≈11.440\n  - W=4: ξ≈3.705\n  - W=8: ξ≈1.432\n\n- 按要求报告：W=4 时的平均 IPR（6 位小数）= 0.134950\n\n说明：上述趋势符合 1D Anderson 局域化图景（任意非零无序均导致有限 ξ，且随 W 增大 ξ 减小、IPR 增大）。在弱无序极限，解析近似给出 E≈0 处 ξ ∝ 1/W^2；有限尺寸与能窗选择会使数值结果与解析近似存在偏差。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"call\": \"[字符串]\",\n  \"inputs\": {\n    \"N\": \"[数值]\",\n    \"t\": \"[数值]\",\n    \"disorder_strengths\": \"[5个数值的数组]\",\n    \"num_samples\": \"[数值]\",\n    \"energy_window\": \"[待填充]\",\n    \"periodic\": \"[布尔值]\"\n  },\n  \"output\": {\n    \"disorder_strengths\": \"[5个数值的数组]\",\n    \"mean_ipr\": \"[5个数值的数组]\",\n    \"std_ipr\": \"[5个数值的数组]\",\n    \"mean_pr\": \"[5个数值的数组]\",\n    \"num_states_analyzed\": \"[5个数值的数组]\"\n  },\n  \"units\": {\n    \"t\": \"[字符串]\",\n    \"W\": \"[字符串]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"call\": \"analyze_localization_disorder_average\",\n  \"inputs\": {\n    \"N\": 100.000,\n    \"t\": 1.000,\n    \"disorder_strengths\": [0.000, 1.000, 2.000, 4.000, 8.000],\n    \"num_samples\": 10.000,\n    \"energy_window\": [-0.200, 0.200],\n    \"periodic\": false\n  },\n  \"output\": {\n    \"disorder_strengths\": [0.000, 1.000, 2.000, 4.000, 8.000],\n    \"mean_ipr\": [0.015, 0.023, 0.044, 0.135, 0.349],\n    \"std_ipr\": [0.000, 0.007, 0.022, 0.061, 0.137],\n    \"mean_pr\": [67.333, 45.695, 28.142, 9.085, 3.337],\n    \"num_states_analyzed\": [60.000, 62.000, 63.000, 69.000, 43.000]\n  },\n  \"units\": {\n    \"t\": \"能量单位（跃迁幅度，设置为1）\",\n    \"W\": \"能量单位（与t相同）\"\n  }\n}"
+    }
+  ],
+  "metadata": {
+    "subject": "Physics",
+    "topic": "Condensed Matter Physics",
+    "image_path": [],
+    "solution_steps": [
+      "理解Anderson局域化理论：在无序势场中，电子波函数会发生空间局域化（1977年诺贝尔奖）",
+      "设置系统参数：N=100个格点，跃迁积分t=1.0，开边界条件（OBC）",
+      "定义无序强度扫描范围：W = [0.0, 1.0, 2.0, 4.0, 8.0]，每个W使用10个随机样本",
+      "对每个W值，调用 analyze_localization_disorder_average 进行无序平均分析",
+      "该函数内部会：(1) 调用 construct_anderson_hamiltonian_1d 构建含随机势的哈密顿量；(2) 求解本征态；(3) 计算每个本征态的 IPR；(4) 对多个样本求平均",
+      "计算逆参与率 IPR = ∑ᵢ|ψᵢ|⁴，判断局域化程度：扩展态 IPR~1/N≈0.01，局域态 IPR~O(1)",
+      "提取W=4时的结果：平均IPR=0.141579，标准差=0.060541",
+      "物理解释：参与率PR=1/IPR≈7.06，表示波函数有效分布在约7个格点上（占总数的7.1%），显著局域化",
+      "生成可视化：绘制IPR随W的变化曲线和不同W下的波函数空间分布"
+    ],
+    "tool_expected": [
+      "analyze_localization_disorder_average",
+      "construct_anderson_hamiltonian_1d",
+      "calculate_inverse_participation_ratio"
+    ],
+    "golden_answer": [
+      {
+        "call": "analyze_localization_disorder_average",
+        "inputs": {
+          "N": 100,
+          "t": 1.0,
+          "disorder_strengths": [
+            0.0,
+            1.0,
+            2.0,
+            4.0,
+            8.0
+          ],
+          "num_samples": 10,
+          "energy_window": null,
+          "periodic": false
+        },
+        "output": {
+          "disorder_strengths": [
+            0.0,
+            1.0,
+            2.0,
+            4.0,
+            8.0
+          ],
+          "mean_ipr": [
+            0.014851,
+            0.024256,
+            0.050739,
+            0.141579,
+            0.360025
+          ],
+          "std_ipr": [
+            0.0,
+            0.007593,
+            0.025094,
+            0.060541,
+            0.152296
+          ],
+          "mean_pr": [
+            67.33,
+            43.96,
+            23.92,
+            8.44,
+            3.34
+          ],
+          "num_states_analyzed": [
+            240,
+            240,
+            240,
+            240,
+            240
+          ]
+        },
+        "units": {
+          "t": "eV (normalized to 1)",
+          "W": "eV"
+        }
+      },
+      {
+        "call": "construct_anderson_hamiltonian_1d",
+        "description": "内部调用，为每个样本构建随机势哈密顿量",
+        "inputs": {
+          "N": 100,
+          "t": 1.0,
+          "disorder_strength": "W (变化)",
+          "periodic": false,
+          "seed": "随机"
+        }
+      },
+      {
+        "call": "calculate_inverse_participation_ratio",
+        "description": "对每个本征态计算IPR",
+        "formula": "IPR = ∑ᵢ|ψᵢ|⁴"
+      },
+      {
+        "calculation": "W=4_results",
+        "W_4_analysis": {
+          "mean_IPR": 0.141579,
+          "std_IPR": 0.060541,
+          "mean_PR": 8.44,
+          "interpretation": "波函数有效分布在约7-8个格点上，占总格点数的8.4%，显著局域化"
+        }
+      },
+      {
+        "visualization": "anderson_localization_plots",
+        "images_saved": [
+          "./images/CM022_anderson_localization_results.png",
+          "./images/CM022_wavefunction_examples.png"
+        ],
+        "description": "第一张图展示IPR随无序强度W的变化（含误差棒）、参与率PR、归一化参与率等；第二张图展示不同W下的典型波函数空间分布"
+      },
+      {
+        "physical_interpretation": {
+          "W_0": "IPR=0.014851≈1/N，完全扩展态",
+          "W_4": "IPR=0.141579>>1/N，中等局域化，相比W=0局域化增强9.5倍",
+          "W_8": "IPR=0.360025，强局域化",
+          "Nobel_Prize": "1977年Philip W. Anderson因'对磁性和无序系统电子结构的基础性理论研究'获诺贝尔物理学奖"
+        }
+      }
+    ],
+    "original_question_id": "CM022"
+  },
+  "metadata_summary": {
+    "subject": "Physics",
+    "topic": "Condensed Matter Physics",
+    "original_question_id": "CM022",
+    "subject_topic_key": "Physics::Condensed Matter Physics"
+  },
+  "answer_template": {
+    "call": "[字符串]",
+    "inputs": {
+      "N": "[数值]",
+      "t": "[数值]",
+      "disorder_strengths": "[5个数值的数组]",
+      "num_samples": "[数值]",
+      "energy_window": "[待填充]",
+      "periodic": "[布尔值]"
+    },
+    "output": {
+      "disorder_strengths": "[5个数值的数组]",
+      "mean_ipr": "[5个数值的数组]",
+      "std_ipr": "[5个数值的数组]",
+      "mean_pr": "[5个数值的数组]",
+      "num_states_analyzed": "[5个数值的数组]"
+    },
+    "units": {
+      "t": "[字符串]",
+      "W": "[字符串]"
+    }
+  },
+  "golden_standard": {
+    "call": "analyze_localization_disorder_average",
+    "inputs": {
+      "N": 100,
+      "t": 1.0,
+      "disorder_strengths": [
+        0.0,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "num_samples": 10,
+      "energy_window": null,
+      "periodic": false
+    },
+    "output": {
+      "disorder_strengths": [
+        0.0,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "mean_ipr": [
+        0.014851,
+        0.024256,
+        0.050739,
+        0.141579,
+        0.360025
+      ],
+      "std_ipr": [
+        0.0,
+        0.007593,
+        0.025094,
+        0.060541,
+        0.152296
+      ],
+      "mean_pr": [
+        67.33,
+        43.96,
+        23.92,
+        8.44,
+        3.34
+      ],
+      "num_states_analyzed": [
+        240,
+        240,
+        240,
+        240,
+        240
+      ]
+    },
+    "units": {
+      "t": "eV (normalized to 1)",
+      "W": "eV"
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "call": "analyze_localization_disorder_average",
+    "inputs": {
+      "N": 100.0,
+      "t": 1.0,
+      "disorder_strengths": [
+        0.0,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "num_samples": 10.0,
+      "energy_window": [
+        -0.2,
+        0.2
+      ],
+      "periodic": false
+    },
+    "output": {
+      "disorder_strengths": [
+        0.0,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "mean_ipr": [
+        0.015,
+        0.023,
+        0.044,
+        0.135,
+        0.349
+      ],
+      "std_ipr": [
+        0.0,
+        0.007,
+        0.022,
+        0.061,
+        0.137
+      ],
+      "mean_pr": [
+        67.333,
+        45.695,
+        28.142,
+        9.085,
+        3.337
+      ],
+      "num_states_analyzed": [
+        60.0,
+        62.0,
+        63.0,
+        69.0,
+        43.0
+      ]
+    },
+    "units": {
+      "t": "能量单位（跃迁幅度，设置为1）",
+      "W": "能量单位（与t相同）"
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "{\n  \"call\": \"analyze_localization_disorder_average\",\n  \"inputs\": {\n    \"N\": 100.000,\n    \"t\": 1.000,\n    \"disorder_strengths\": [0.000, 1.000, 2.000, 4.000, 8.000],\n    \"num_samples\": 10.000,\n    \"energy_window\": [-0.200, 0.200],\n    \"periodic\": false\n  },\n  \"output\": {\n    \"disorder_strengths\": [0.000, 1.000, 2.000, 4.000, 8.000],\n    \"mean_ipr\": [0.015, 0.023, 0.044, 0.135, 0.349],\n    \"std_ipr\": [0.000, 0.007, 0.022, 0.061, 0.137],\n    \"mean_pr\": [67.333, 45.695, 28.142, 9.085, 3.337],\n    \"num_states_analyzed\": [60.000, 62.000, 63.000, 69.000, 43.000]\n  },\n  \"units\": {\n    \"t\": \"能量单位（跃迁幅度，设置为1）\",\n    \"W\": \"能量单位（与t相同）\"\n  }\n}",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "{\n  \"call\": \"analyze_localization_disorder_average\",\n  \"inputs\": {\n    \"N\": 100.000,\n    \"t\": 1.000,\n    \"disorder_strengths\": [0.000, 1.000, 2.000, 4.000, 8.000],\n    \"num_samples\": 10.000,\n    \"energy_window\": [-0.200, 0.200],\n    \"periodic\": false\n  },\n  \"output\": {\n    \"disorder_strengths\": [0.000, 1.000, 2.000, 4.000, 8.000],\n    \"mean_ipr\": [0.015, 0.023, 0.044, 0.135, 0.349],\n    \"std_ipr\": [0.000, 0.007, 0.022, 0.061, 0.137],\n    \"mean_pr\": [67.333, 45.695, 28.142, 9.085, 3.337],\n    \"num_states_analyzed\": [60.000, 62.000, 63.000, 69.000, 43.000]\n  },\n  \"units\": {\n    \"t\": \"能量单位（跃迁幅度，设置为1）\",\n    \"W\": \"能量单位（与t相同）\"\n  }\n}"
+  },
+  "evaluation_score": 0.7631578947368421,
+  "evaluation_summary": "匹配字段: 29/38 (得分: 76.32%)",
+  "evaluation_details": {
+    "call": {
+      "path": "call",
+      "expected": "analyze_localization_disorder_average",
+      "actual": "analyze_localization_disorder_average",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.N": {
+      "path": "inputs.N",
+      "expected": 100,
+      "actual": 100.0,
+      "expected_num": 100.0,
+      "actual_num": 100.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.t": {
+      "path": "inputs.t",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.disorder_strengths[0]": {
+      "path": "inputs.disorder_strengths[0]",
+      "expected": 0.0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.disorder_strengths[1]": {
+      "path": "inputs.disorder_strengths[1]",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.disorder_strengths[2]": {
+      "path": "inputs.disorder_strengths[2]",
+      "expected": 2.0,
+      "actual": 2.0,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.disorder_strengths[3]": {
+      "path": "inputs.disorder_strengths[3]",
+      "expected": 4.0,
+      "actual": 4.0,
+      "expected_num": 4.0,
+      "actual_num": 4.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.disorder_strengths[4]": {
+      "path": "inputs.disorder_strengths[4]",
+      "expected": 8.0,
+      "actual": 8.0,
+      "expected_num": 8.0,
+      "actual_num": 8.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.num_samples": {
+      "path": "inputs.num_samples",
+      "expected": 10,
+      "actual": 10.0,
+      "expected_num": 10.0,
+      "actual_num": 10.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "inputs.energy_window": {
+      "path": "inputs.energy_window",
+      "expected": null,
+      "actual": [
+        -0.2,
+        0.2
+      ],
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "inputs.periodic": {
+      "path": "inputs.periodic",
+      "expected": false,
+      "actual": false,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "output.disorder_strengths[0]": {
+      "path": "output.disorder_strengths[0]",
+      "expected": 0.0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "output.disorder_strengths[1]": {
+      "path": "output.disorder_strengths[1]",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "output.disorder_strengths[2]": {
+      "path": "output.disorder_strengths[2]",
+      "expected": 2.0,
+      "actual": 2.0,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "output.disorder_strengths[3]": {
+      "path": "output.disorder_strengths[3]",
+      "expected": 4.0,
+      "actual": 4.0,
+      "expected_num": 4.0,
+      "actual_num": 4.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "output.disorder_strengths[4]": {
+      "path": "output.disorder_strengths[4]",
+      "expected": 8.0,
+      "actual": 8.0,
+      "expected_num": 8.0,
+      "actual_num": 8.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "output.mean_ipr[0]": {
+      "path": "output.mean_ipr[0]",
+      "expected": 0.014851,
+      "actual": 0.015,
+      "expected_num": 0.014851,
+      "actual_num": 0.015,
+      "expected_rounded": 0.01,
+      "actual_rounded": 0.01,
+      "error": 0.00014899999999999983,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "output.mean_ipr[1]": {
+      "path": "output.mean_ipr[1]",
+      "expected": 0.024256,
+      "actual": 0.023,
+      "expected_num": 0.024256,
+      "actual_num": 0.023,
+      "expected_rounded": 0.02,
+      "actual_rounded": 0.02,
+      "error": 0.0012560000000000002,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "output.mean_ipr[2]": {
+      "path": "output.mean_ipr[2]",
+      "expected": 0.050739,
+      "actual": 0.044,
+      "expected_num": 0.050739,
+      "actual_num": 0.044,
+      "expected_rounded": 0.05,
+      "actual_rounded": 0.04,
+      "absolute_error": 0.006739000000000002,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "output.mean_ipr[3]": {
+      "path": "output.mean_ipr[3]",
+      "expected": 0.141579,
+      "actual": 0.135,
+      "expected_num": 0.141579,
+      "actual_num": 0.135,
+      "expected_rounded": 0.14,
+      "actual_rounded": 0.14,
+      "error": 0.0065790000000000015,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "output.mean_ipr[4]": {
+      "path": "output.mean_ipr[4]",
+      "expected": 0.360025,
+      "actual": 0.349,
+      "expected_num": 0.360025,
+      "actual_num": 0.349,
+      "expected_rounded": 0.36,
+      "actual_rounded": 0.35,
+      "absolute_error": 0.011025000000000007,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "output.std_ipr[0]": {
+      "path": "output.std_ipr[0]",
+      "expected": 0.0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "output.std_ipr[1]": {
+      "path": "output.std_ipr[1]",
+      "expected": 0.007593,
+      "actual": 0.007,
+      "expected_num": 0.007593,
+      "actual_num": 0.007,
+      "expected_rounded": 0.01,
+      "actual_rounded": 0.01,
+      "error": 0.0005929999999999998,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "output.std_ipr[2]": {
+      "path": "output.std_ipr[2]",
+      "expected": 0.025094,
+      "actual": 0.022,
+      "expected_num": 0.025094,
+      "actual_num": 0.022,
+      "expected_rounded": 0.03,
+      "actual_rounded": 0.02,
+      "absolute_error": 0.003094000000000003,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "output.std_ipr[3]": {
+      "path": "output.std_ipr[3]",
+      "expected": 0.060541,
+      "actual": 0.061,
+      "expected_num": 0.060541,
+      "actual_num": 0.061,
+      "expected_rounded": 0.06,
+      "actual_rounded": 0.06,
+      "error": 0.0004590000000000011,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "output.std_ipr[4]": {
+      "path": "output.std_ipr[4]",
+      "expected": 0.152296,
+      "actual": 0.137,
+      "expected_num": 0.152296,
+      "actual_num": 0.137,
+      "expected_rounded": 0.15,
+      "actual_rounded": 0.14,
+      "absolute_error": 0.015295999999999976,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "output.mean_pr[0]": {
+      "path": "output.mean_pr[0]",
+      "expected": 67.33,
+      "actual": 67.333,
+      "expected_num": 67.33,
+      "actual_num": 67.333,
+      "expected_rounded": 67.33,
+      "actual_rounded": 67.33,
+      "error": 0.0030000000000001137,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "output.mean_pr[1]": {
+      "path": "output.mean_pr[1]",
+      "expected": 43.96,
+      "actual": 45.695,
+      "expected_num": 43.96,
+      "actual_num": 45.695,
+      "expected_rounded": 43.96,
+      "actual_rounded": 45.7,
+      "relative_error": 0.03946769790718834,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "output.mean_pr[2]": {
+      "path": "output.mean_pr[2]",
+      "expected": 23.92,
+      "actual": 28.142,
+      "expected_num": 23.92,
+      "actual_num": 28.142,
+      "expected_rounded": 23.92,
+      "actual_rounded": 28.14,
+      "relative_error": 0.17650501672240793,
+      "absolute_error": 4.221999999999998,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "output.mean_pr[3]": {
+      "path": "output.mean_pr[3]",
+      "expected": 8.44,
+      "actual": 9.085,
+      "expected_num": 8.44,
+      "actual_num": 9.085,
+      "expected_rounded": 8.44,
+      "actual_rounded": 9.09,
+      "relative_error": 0.07642180094786746,
+      "absolute_error": 0.6450000000000014,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "output.mean_pr[4]": {
+      "path": "output.mean_pr[4]",
+      "expected": 3.34,
+      "actual": 3.337,
+      "expected_num": 3.34,
+      "actual_num": 3.337,
+      "expected_rounded": 3.34,
+      "actual_rounded": 3.34,
+      "error": 0.0029999999999996696,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "output.num_states_analyzed[0]": {
+      "path": "output.num_states_analyzed[0]",
+      "expected": 240,
+      "actual": 60.0,
+      "expected_num": 240.0,
+      "actual_num": 60.0,
+      "expected_rounded": 240.0,
+      "actual_rounded": 60.0,
+      "relative_error": 0.75,
+      "absolute_error": 180.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "output.num_states_analyzed[1]": {
+      "path": "output.num_states_analyzed[1]",
+      "expected": 240,
+      "actual": 62.0,
+      "expected_num": 240.0,
+      "actual_num": 62.0,
+      "expected_rounded": 240.0,
+      "actual_rounded": 62.0,
+      "relative_error": 0.7416666666666667,
+      "absolute_error": 178.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "output.num_states_analyzed[2]": {
+      "path": "output.num_states_analyzed[2]",
+      "expected": 240,
+      "actual": 63.0,
+      "expected_num": 240.0,
+      "actual_num": 63.0,
+      "expected_rounded": 240.0,
+      "actual_rounded": 63.0,
+      "relative_error": 0.7375,
+      "absolute_error": 177.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "output.num_states_analyzed[3]": {
+      "path": "output.num_states_analyzed[3]",
+      "expected": 240,
+      "actual": 69.0,
+      "expected_num": 240.0,
+      "actual_num": 69.0,
+      "expected_rounded": 240.0,
+      "actual_rounded": 69.0,
+      "relative_error": 0.7125,
+      "absolute_error": 171.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "output.num_states_analyzed[4]": {
+      "path": "output.num_states_analyzed[4]",
+      "expected": 240,
+      "actual": 43.0,
+      "expected_num": 240.0,
+      "actual_num": 43.0,
+      "expected_rounded": 240.0,
+      "actual_rounded": 43.0,
+      "relative_error": 0.8208333333333333,
+      "absolute_error": 197.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "units.t": {
+      "path": "units.t",
+      "expected": "eV (normalized to 1)",
+      "actual": "能量单位（跃迁幅度，设置为1）",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "units.W": {
+      "path": "units.W",
+      "expected": "eV",
+      "actual": "能量单位（与t相同）",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "mode_folder": "with_tools_react"
+}

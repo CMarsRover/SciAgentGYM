@@ -1,0 +1,1176 @@
+{
+  "id": 41,
+  "query": "A ligand binds to a deep beta-barrel cleft of an enzyme. Based on the 2.5 Angstrom resolution of the X-ray diffraction crystal structure, the amino acids in contact with the ligand at the active site seem to be H34, T48, S62, and G128. You would like to perform PCR mutagenesis of the enzyme's sequence to verify the mechanism of the ligand-receptor binding. Which of the point mutations below will most likely affect the ligand-receptor interaction?",
+  "query_data": {
+    "id": 41,
+    "filename": "gpqa_cellbio_24_full.json",
+    "question": "A ligand binds to a deep beta-barrel cleft of an enzyme. Based on the 2.5 Angstrom resolution of the X-ray diffraction crystal structure, the amino acids in contact with the ligand at the active site seem to be H34, T48, S62, and G128. You would like to perform PCR mutagenesis of the enzyme's sequence to verify the mechanism of the ligand-receptor binding. Which of the point mutations below will most likely affect the ligand-receptor interaction?",
+    "answer": "142A -> G",
+    "metadata": {
+      "subject": "Life Science",
+      "topic": "Structural Biology",
+      "image_path": null,
+      "tool_expected": [
+        "analyze_active_site_composition",
+        "calculate_mutation_effect_score",
+        "predict_mutation_binding_impact",
+        "create_binding_site_summary_plot"
+      ],
+      "golden_answer": {
+        "analyze_active_site_composition": {
+          "call": "analyze_active_site_composition",
+          "inputs": {
+            "residues": [
+              "H",
+              "T",
+              "S",
+              "G"
+            ],
+            "positions": [
+              34,
+              48,
+              62,
+              128
+            ]
+          },
+          "output": {
+            "result": {
+              "residue_analysis": [
+                {
+                  "residue": "H",
+                  "position": 34,
+                  "binding_importance": 70,
+                  "key_interactions": []
+                },
+                {
+                  "residue": "T",
+                  "position": 48,
+                  "binding_importance": 50,
+                  "key_interactions": []
+                },
+                {
+                  "residue": "S",
+                  "position": 62,
+                  "binding_importance": 50,
+                  "key_interactions": []
+                },
+                {
+                  "residue": "G",
+                  "position": 128,
+                  "binding_importance": 0,
+                  "key_interactions": []
+                }
+              ],
+              "total_importance_score": 170,
+              "type_distribution": {
+                "basic": 1,
+                "polar": 2,
+                "nonpolar": 1
+              },
+              "site_characteristics": {
+                "polar_residues": 3,
+                "nonpolar_residues": 1,
+                "charged_residues": 1
+              }
+            },
+            "metadata": {
+              "analysis_type": "active_site_composition",
+              "residue_count": 4
+            }
+          }
+        },
+        "calculate_mutation_effect_score": {
+          "call": "calculate_mutation_effect_score",
+          "inputs": {
+            "original": "A",
+            "mutant": "G"
+          },
+          "output": {
+            "result": {
+              "effect_score": 16.7,
+              "volume_change": 28.5,
+              "hydrophobicity_change": 2.2,
+              "charge_change": 0,
+              "h_bond_change": 0
+            },
+            "metadata": {
+              "mutation": "A->G",
+              "interpretation": "low_impact"
+            }
+          }
+        },
+        "predict_mutation_binding_impact": {
+          "call": "predict_mutation_binding_impact",
+          "inputs": {
+            "original_residues": [
+              "H",
+              "T",
+              "S",
+              "G"
+            ],
+            "positions": [
+              34,
+              48,
+              62,
+              128
+            ],
+            "test_mutations": [
+              "A->G",
+              "A->V",
+              "A->D"
+            ]
+          },
+          "output": {
+            "result": {
+              "original_site_analysis": {
+                "residue_analysis": [
+                  {
+                    "residue": "H",
+                    "position": 34,
+                    "binding_importance": 70,
+                    "key_interactions": []
+                  },
+                  {
+                    "residue": "T",
+                    "position": 48,
+                    "binding_importance": 50,
+                    "key_interactions": []
+                  },
+                  {
+                    "residue": "S",
+                    "position": 62,
+                    "binding_importance": 50,
+                    "key_interactions": []
+                  },
+                  {
+                    "residue": "G",
+                    "position": 128,
+                    "binding_importance": 0,
+                    "key_interactions": []
+                  }
+                ],
+                "total_importance_score": 170,
+                "type_distribution": {
+                  "basic": 1,
+                  "polar": 2,
+                  "nonpolar": 1
+                },
+                "site_characteristics": {
+                  "polar_residues": 3,
+                  "nonpolar_residues": 1,
+                  "charged_residues": 1
+                }
+              },
+              "mutation_predictions": [
+                {
+                  "mutation": "A->G",
+                  "predicted_impact": "mild_disruption",
+                  "effect_score": 16.7,
+                  "key_changes": {
+                    "effect_score": 16.7,
+                    "volume_change": 28.5,
+                    "hydrophobicity_change": 2.2,
+                    "charge_change": 0,
+                    "h_bond_change": 0
+                  }
+                },
+                {
+                  "mutation": "A->V",
+                  "predicted_impact": "mild_disruption",
+                  "effect_score": 22.28,
+                  "key_changes": {
+                    "effect_score": 22.28,
+                    "volume_change": 51.4,
+                    "hydrophobicity_change": 2.4,
+                    "charge_change": 0,
+                    "h_bond_change": 0
+                  }
+                },
+                {
+                  "mutation": "A->D",
+                  "predicted_impact": "severe_disruption",
+                  "effect_score": 100,
+                  "key_changes": {
+                    "effect_score": 100,
+                    "volume_change": 22.5,
+                    "hydrophobicity_change": 5.3,
+                    "charge_change": 1,
+                    "h_bond_change": 1
+                  }
+                }
+              ],
+              "recommended_mutation": "A->D"
+            },
+            "metadata": {
+              "prediction_method": "physicochemical_analysis",
+              "confidence": "medium"
+            }
+          }
+        },
+        "create_binding_site_summary_plot": {
+          "call": "create_binding_site_summary_plot",
+          "inputs": {
+            "active_site_residues": [
+              "H",
+              "T",
+              "S",
+              "G"
+            ],
+            "positions": [
+              34,
+              48,
+              62,
+              128
+            ],
+            "test_mutations": [
+              "A->G",
+              "A->V",
+              "A->D"
+            ]
+          },
+          "output": {
+            "result": "./tool_images/binding_site_summary.png",
+            "metadata": {
+              "file_type": "png",
+              "analysis_components": 4,
+              "active_site_residues": 4
+            }
+          }
+        }
+      },
+      "original_question_id": "24",
+      "_dataset_filename": "refine_merged_single_questions.json"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_mutation_effect_score",
+          "description": "计算突变对蛋白质性质的影响评分",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "original": {
+                "type": "string",
+                "description": "原始氨基酸单字母代码"
+              },
+              "mutant": {
+                "type": "string",
+                "description": "突变后氨基酸单字母代码"
+              }
+            },
+            "required": [
+              "original",
+              "mutant"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_claude_24.py",
+          "resolved_file_path": "toolkits/life_science/structural_biology/structural_biology_toolkit_claude_24.py",
+          "resolved_dir": "toolkits/life_science/structural_biology"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_active_site_composition",
+          "description": "分析活性位点的氨基酸组成",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "residues": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "氨基酸单字母代码列表"
+              },
+              "positions": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "对应的位置列表"
+              }
+            },
+            "required": [
+              "residues",
+              "positions"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_claude_24.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "predict_mutation_binding_impact",
+          "description": "预测突变对配体结合的影响",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "original_residues": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "原始活性位点氨基酸列表"
+              },
+              "positions": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "对应的位置列表"
+              },
+              "test_mutations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "测试突变列表，格式为'A->G'"
+              }
+            },
+            "required": [
+              "original_residues",
+              "positions",
+              "test_mutations"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_claude_24.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "create_binding_site_summary_plot",
+          "description": "创建结合位点分析总结图",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "active_site_residues": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "活性位点氨基酸列表"
+              },
+              "positions": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "对应的位置列表"
+              },
+              "test_mutations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "测试突变列表，格式为'A->G'"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存路径，可选参数"
+              }
+            },
+            "required": [
+              "active_site_residues",
+              "positions",
+              "test_mutations"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_claude_24.py"
+        }
+      }
+    ],
+    "augmented_versions": [
+      {
+        "augmented_question": "结构生物学-活性位点定点突变设计与双算法交叉验证。背景：一个配体结合在某酶的深部β-桶沟槽，2.5 Å分辨率的X射线晶体结构显示与配体接触的氨基酸为H34、T48、S62、G128。基于自动化工具的输出（已固定如下），请完成突变面板的定量评估、交叉一致性验证与最终实验方案选择，并给出可复核的数值结果与路径。已知数据：1) 活性位点组成（step 1 analyze_active_site_composition）：H34 binding_importance=70；T48=50；S62=50；G128=0。位点类型分布：basic=1, polar=2, nonpolar=1；site_characteristics：polar_residues=3, nonpolar_residues=1, charged_residues=1。2) 算法A（steps 2–5 calculate_mutation_effect_score）对4个突变给出effect_score与理化变化：H->A: effect_score=100, volume_change=64.6, hydrophobicity_change=5.0, charge_change=0.1, h_bond_change=1；T->V: 100, 23.9, 4.9, 0, 1；S->A: 100, 0.4, 2.6, 0, 1；G->P: 16.52, 52.6, 1.2, 0, 0。3) 算法B（step 6 predict_mutation_binding_impact）对8个突变给出impact预测与impact_score（记为impact_score_B，工具字段名为effect_score）及理化变化：H->A: severe_disruption, 100, ΔV=64.6, Δhydro=5.0, Δcharge=0.1, ΔHbond=1；H->K: severe_disruption, 100, 15.4, 0.7, 0.9, 0；T->V: severe_disruption, 100, 23.9, 4.9, 0, 1；T->S: minimal_impact, 5.92, 27.1, 0.1, 0, 0；S->A: severe_disruption, 100, 0.4, 2.6, 0, 1；S->T: minimal_impact, 5.92, 27.1, 0.1, 0, 0；G->P: mild_disruption, 16.52, 52.6, 1.2, 0, 0；G->A: mild_disruption, 16.7, 28.5, 2.2, 0, 0。4) 可视化文件已生成：traces_dependency/llm_traces/artifacts/41_case_41_sample_1_step8_create_binding_site_summary_plot.png。任务：- 用上述固定数值完成一个8突变面板，列出每个突变的binding_importance、算法A的effect_score（若无则填NA）、算法B的impact_score_B与predicted_impact及其理化变化。- 按以下规则生成ranked_list（高到低）：首先按impact_score_B降序；若分数相同，则按该突变所对应原始残基的binding_importance降序；若仍相同，则按算法B的volume_change降序；若仍相同，则按突变字符串字典序升序。- 做双算法一致性校验：仅在两算法都有分数的4个突变上比较，定义分类阈值用于将算法A的effect_score离散为类别：severe(≥80), mild(10–<80), minimal(<10)；当|effect_score_A−impact_score_B|≤0.5且类别一致，记为一致。计算agreement_rate=一致个数/4，并给出consistency_report（逐项列出差异与匹配）。预设阈值0.8，低于则简述原因；高于则说明通过。- 在不致显著失稳的前提下选择“最可能影响配体结合”的单点突变consensus_top_hit：限定条件为predicted_impact=severe_disruption且算法B的volume_change≤10（作为“结构扰动较小”的操作阈值），给出化学/结构学依据与其在ranked_list中的名次。- 选择一个“最小影响”的保守突变作为阴性对照（建议T->S或G->A），并说明理由。- 输出plot_path与summary_table（可将你整理的面板另存为CSV，路径可使用：traces_dependency/llm_traces/artifacts/41_case_41_sample_1_summary_table.csv）。- 附：为共识Top突变提供PCR点突变引物设计要点（目标密码子、避免引入限制性位点、Tm/GC范围建议）。请基于以上给定数据与规则作答，结果需可由第三方直接复核。",
+        "final_answer": {
+          "panel_results": [
+            {
+              "mutation": "H34A",
+              "position": 34,
+              "original": "H",
+              "mutant": "A",
+              "binding_importance": 70,
+              "effect_score_A": 100,
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 64.6,
+              "hydrophobicity_change_B": 5.0,
+              "charge_change_B": 0.1,
+              "h_bond_change_B": 1
+            },
+            {
+              "mutation": "H34K",
+              "position": 34,
+              "original": "H",
+              "mutant": "K",
+              "binding_importance": 70,
+              "effect_score_A": "NA",
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 15.4,
+              "hydrophobicity_change_B": 0.7,
+              "charge_change_B": 0.9,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "T48V",
+              "position": 48,
+              "original": "T",
+              "mutant": "V",
+              "binding_importance": 50,
+              "effect_score_A": 100,
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 23.9,
+              "hydrophobicity_change_B": 4.9,
+              "charge_change_B": 0,
+              "h_bond_change_B": 1
+            },
+            {
+              "mutation": "T48S",
+              "position": 48,
+              "original": "T",
+              "mutant": "S",
+              "binding_importance": 50,
+              "effect_score_A": "NA",
+              "impact_score_B": 5.92,
+              "predicted_impact_B": "minimal_impact",
+              "volume_change_B": 27.1,
+              "hydrophobicity_change_B": 0.1,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "S62A",
+              "position": 62,
+              "original": "S",
+              "mutant": "A",
+              "binding_importance": 50,
+              "effect_score_A": 100,
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 0.4,
+              "hydrophobicity_change_B": 2.6,
+              "charge_change_B": 0,
+              "h_bond_change_B": 1
+            },
+            {
+              "mutation": "S62T",
+              "position": 62,
+              "original": "S",
+              "mutant": "T",
+              "binding_importance": 50,
+              "effect_score_A": "NA",
+              "impact_score_B": 5.92,
+              "predicted_impact_B": "minimal_impact",
+              "volume_change_B": 27.1,
+              "hydrophobicity_change_B": 0.1,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "G128P",
+              "position": 128,
+              "original": "G",
+              "mutant": "P",
+              "binding_importance": 0,
+              "effect_score_A": 16.52,
+              "impact_score_B": 16.52,
+              "predicted_impact_B": "mild_disruption",
+              "volume_change_B": 52.6,
+              "hydrophobicity_change_B": 1.2,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "G128A",
+              "position": 128,
+              "original": "G",
+              "mutant": "A",
+              "binding_importance": 0,
+              "effect_score_A": "NA",
+              "impact_score_B": 16.7,
+              "predicted_impact_B": "mild_disruption",
+              "volume_change_B": 28.5,
+              "hydrophobicity_change_B": 2.2,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            }
+          ],
+          "ranked_list": [
+            "H34A",
+            "H34K",
+            "T48V",
+            "S62A",
+            "G128A",
+            "G128P",
+            "S62T",
+            "T48S"
+          ],
+          "consistency_report": {
+            "overlap_mutations": [
+              {
+                "mutation": "H34A",
+                "effect_score_A": 100,
+                "impact_score_B": 100,
+                "category_A": "severe",
+                "category_B": "severe_disruption",
+                "numeric_diff": 0,
+                "match": true
+              },
+              {
+                "mutation": "T48V",
+                "effect_score_A": 100,
+                "impact_score_B": 100,
+                "category_A": "severe",
+                "category_B": "severe_disruption",
+                "numeric_diff": 0,
+                "match": true
+              },
+              {
+                "mutation": "S62A",
+                "effect_score_A": 100,
+                "impact_score_B": 100,
+                "category_A": "severe",
+                "category_B": "severe_disruption",
+                "numeric_diff": 0,
+                "match": true
+              },
+              {
+                "mutation": "G128P",
+                "effect_score_A": 16.52,
+                "impact_score_B": 16.52,
+                "category_A": "mild",
+                "category_B": "mild_disruption",
+                "numeric_diff": 0,
+                "match": true
+              }
+            ],
+            "classification_thresholds": {
+              "severe": ">=80",
+              "mild": "10-<80",
+              "minimal": "<10"
+            },
+            "agreement_rate": 1.0,
+            "agreement_threshold": 0.8,
+            "status": "pass",
+            "notes": "两算法在4个重叠突变上的数值与类别完全一致；无矛盾项。"
+          },
+          "consensus_top_hit": {
+            "mutation": "S62A",
+            "ranking_position": 4,
+            "binding_importance": 50,
+            "impact_score_B": 100,
+            "predicted_impact_B": "severe_disruption",
+            "volume_change_B": 0.4,
+            "justification": "在所有被判定为severe_disruption的突变中，S62A的体积变化最小(0.4)，符合不致显著失稳的操作阈值(volume_change≤10)，同时去除羟基可直接破坏潜在的配体-氢键。相比H34A/H34K与T48V，S62A对整体折叠扰动更小而仍大幅影响结合。"
+          },
+          "negative_control": {
+            "mutation": "T48S",
+            "ranking_position": 8,
+            "impact_score_B": 5.92,
+            "predicted_impact_B": "minimal_impact",
+            "reason": "保守替换(羟基保留)，预测为最小影响，适合作为阴性对照以排除PCR与表达系统对活性读数的影响。"
+          },
+          "pcr_design": {
+            "target_mutation": "S62A",
+            "codon_change_recommendation": {
+              "Ser_codon_examples": [
+                "TCT",
+                "TCC",
+                "TCA",
+                "TCG",
+                "AGC",
+                "AGT"
+              ],
+              "Ala_codon_choice": "GCC",
+              "note": "将编码S62的原始密码子改为GCC以得到Ala；确保仅改变目标密码子，避免改变相邻氨基酸。"
+            },
+            "primer_guidelines": [
+              "引物长度25–35 nt，突变密码子置于引物中央，左右各保留≥10–15 nt完全匹配序列。",
+              "目标Tm 60–72°C，正反向引物Tm相差≤2°C；GC含量40–60%。",
+              "避免在引物内引入或消除限制性位点（除非有意为之）；检查二聚体与发卡结构。",
+              "使用高保真聚合酶并对模板进行DpnI消化去除甲基化母体质粒。",
+              "若需提高克隆筛选效率，可在不改变氨基酸的情况下引入沉默突变以创建/破坏筛选位点（可选）。"
+            ]
+          },
+          "plot_path": "traces_dependency/llm_traces/artifacts/41_case_41_sample_1_step8_create_binding_site_summary_plot.png",
+          "summary_table": "traces_dependency/llm_traces/artifacts/41_case_41_sample_1_summary_table.csv"
+        },
+        "solution_outline": [
+          "整理活性位点与两算法输出，建立8突变面板，补齐binding_importance并标注算法A缺失项为NA。",
+          "依据题设排序规则（impact_score_B降序；再按binding_importance；再按volume_change；再字典序）生成ranked_list。",
+          "对两算法共有的4个突变，按阈值将算法A分数映射为类别，与算法B的predicted_impact比较，同时检查数值差≤0.5，计算agreement_rate并生成consistency_report。",
+          "在所有predicted_impact为severe_disruption的突变中筛选volume_change≤10者，选出consensus_top_hit并阐明理由与名次。",
+          "在predicted_impact为minimal_impact的突变中选取一个作为阴性对照并说明理由。",
+          "给出可视化路径与汇总表路径；提供针对共识Top突变的PCR引物设计要点（密码子、Tm、GC、突变位点置中等）。"
+        ],
+        "verification": "第三方可按以下方式复核：1) 面板数值核对：逐条比对本答案中的各突变impact_score_B、predicted_impact_B、理化变化与题干给定的step 6数据；对H34A、T48V、S62A、G128P再比对算法A的effect_score与理化变化与steps 2–5数据，应数值一致。2) 排名复现：以impact_score_B降序；分数相同按binding_importance降序；仍同按volume_change_B降序；仍同按突变字符串字典序升序，生成的顺序应为[H34A, H34K, T48V, S62A, G128A, G128P, S62T, T48S]。3) 一致性率：对4个重叠突变，按阈值(severe≥80, mild 10–<80, minimal<10)将算法A分数映射为类别，与算法B的predicted_impact比较，并检查|A−B|≤0.5：4/4匹配，agreement_rate=1.0≥0.8，判定通过。4) 共识Top突变条件核查：在B判定为severe_disruption者中，筛选volume_change≤10；仅S62A(0.4)满足，故其为consensus_top_hit。5) 阴性对照：选择predicted_impact为minimal_impact者，T48S(5.92)满足。6) 可视化：可打开plot_path核对包含的突变与分数概览；将本答案“panel_results”另存为CSV至提供的summary_table路径，可直接作为复核基表。"
+      }
+    ],
+    "refined_versions": [
+      {
+        "refined_question": "结构生物学—配体结合位点定点突变面板量化与双算法一致性评估。背景：某酶活性位点位于深部β-桶沟槽；与配体接触的残基与位置为 H34、T48、S62、G128。已知数据（均为给定无单位数值）：1) 位点binding_importance：H34=70，T48=50，S62=50，G128=0。2) 算法A对下列突变给出effect_score与理化变化：H->A: effect_score=100, volume_change=64.6, hydrophobicity_change=5.0, charge_change=0.1, h_bond_change=1；T->V: 100, 23.9, 4.9, 0, 1；S->A: 100, 0.4, 2.6, 0, 1；G->P: 16.52, 52.6, 1.2, 0, 0。3) 算法B对8个突变给出：predicted_impact、impact_score_B与理化变化：H->A: severe_disruption, 100, ΔV=64.6, Δhydro=5.0, Δcharge=0.1, ΔHbond=1；H->K: severe_disruption, 100, 15.4, 0.7, 0.9, 0；T->V: severe_disruption, 100, 23.9, 4.9, 0, 1；T->S: minimal_impact, 5.92, 27.1, 0.1, 0, 0；S->A: severe_disruption, 100, 0.4, 2.6, 0, 1；S->T: minimal_impact, 5.92, 27.1, 0.1, 0, 0；G->P: mild_disruption, 16.52, 52.6, 1.2, 0, 0；G->A: mild_disruption, 16.7, 28.5, 2.2, 0, 0。任务：\n(1) 基于上述固定数据，完成8突变面板：对每个突变给出mutation标识、binding_importance、算法A的effect_score（若无则标NA）、算法B的impact_score_B、predicted_impact及其ΔV、Δhydro、Δcharge、ΔHbond。\n(2) 生成ranked_list（高到低）：先按impact_score_B降序；若并列，则按该突变对应原始残基的binding_importance降序；若仍并列，则按算法B的volume_change降序；若仍并列，则按突变字符串字典序升序。\n(3) 做双算法一致性校验：仅比较两算法都有分数的4个突变。将算法A的effect_score按阈值分为severe(≥80)、mild(10–<80)、minimal(<10)；当|effect_score_A−impact_score_B|≤0.5且类别一致，记为一致。给出：逐项一致/不一致记录、agreement_rate=一致个数/4；阈值为0.8，给出结论。\n(4) 在predicted_impact=severe_disruption且算法B的volume_change≤10的限定下，选出“最可能影响配体结合”的单点突变consensus_top_hit，说明化学/结构学依据，并给出其在(2) ranked_list中的名次。\n(5) 选一个“最小影响”的保守突变作为阴性对照（建议T->S或G->A），并说明理由。\n结果以数值直接给出；保留与原始数据相同的小数位；比例/比率类结果保留三位有效数字；所有字段视为给定无单位值。",
+        "final_answer": {
+          "(1) panel_results": [
+            {
+              "mutation": "H34A",
+              "binding_importance": 70,
+              "effect_score_A": 100,
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 64.6,
+              "hydrophobicity_change_B": 5.0,
+              "charge_change_B": 0.1,
+              "h_bond_change_B": 1
+            },
+            {
+              "mutation": "H34K",
+              "binding_importance": 70,
+              "effect_score_A": "NA",
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 15.4,
+              "hydrophobicity_change_B": 0.7,
+              "charge_change_B": 0.9,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "T48V",
+              "binding_importance": 50,
+              "effect_score_A": 100,
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 23.9,
+              "hydrophobicity_change_B": 4.9,
+              "charge_change_B": 0,
+              "h_bond_change_B": 1
+            },
+            {
+              "mutation": "T48S",
+              "binding_importance": 50,
+              "effect_score_A": "NA",
+              "impact_score_B": 5.92,
+              "predicted_impact_B": "minimal_impact",
+              "volume_change_B": 27.1,
+              "hydrophobicity_change_B": 0.1,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "S62A",
+              "binding_importance": 50,
+              "effect_score_A": 100,
+              "impact_score_B": 100,
+              "predicted_impact_B": "severe_disruption",
+              "volume_change_B": 0.4,
+              "hydrophobicity_change_B": 2.6,
+              "charge_change_B": 0,
+              "h_bond_change_B": 1
+            },
+            {
+              "mutation": "S62T",
+              "binding_importance": 50,
+              "effect_score_A": "NA",
+              "impact_score_B": 5.92,
+              "predicted_impact_B": "minimal_impact",
+              "volume_change_B": 27.1,
+              "hydrophobicity_change_B": 0.1,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "G128P",
+              "binding_importance": 0,
+              "effect_score_A": 16.52,
+              "impact_score_B": 16.52,
+              "predicted_impact_B": "mild_disruption",
+              "volume_change_B": 52.6,
+              "hydrophobicity_change_B": 1.2,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            },
+            {
+              "mutation": "G128A",
+              "binding_importance": 0,
+              "effect_score_A": "NA",
+              "impact_score_B": 16.7,
+              "predicted_impact_B": "mild_disruption",
+              "volume_change_B": 28.5,
+              "hydrophobicity_change_B": 2.2,
+              "charge_change_B": 0,
+              "h_bond_change_B": 0
+            }
+          ],
+          "(2) ranked_list": [
+            "H34A",
+            "H34K",
+            "T48V",
+            "S62A",
+            "G128A",
+            "G128P",
+            "S62T",
+            "T48S"
+          ],
+          "(3) consistency_report": {
+            "overlap_mutations": [
+              {
+                "mutation": "H34A",
+                "category_A": "severe",
+                "category_B": "severe_disruption",
+                "numeric_diff": 0,
+                "match": true
+              },
+              {
+                "mutation": "T48V",
+                "category_A": "severe",
+                "category_B": "severe_disruption",
+                "numeric_diff": 0,
+                "match": true
+              },
+              {
+                "mutation": "S62A",
+                "category_A": "severe",
+                "category_B": "severe_disruption",
+                "numeric_diff": 0,
+                "match": true
+              },
+              {
+                "mutation": "G128P",
+                "category_A": "mild",
+                "category_B": "mild_disruption",
+                "numeric_diff": 0,
+                "match": true
+              }
+            ],
+            "classification_thresholds": {
+              "severe": ">=80",
+              "mild": "10–<80",
+              "minimal": "<10"
+            },
+            "agreement_rate": 1.0,
+            "agreement_threshold": 0.8,
+            "status": "pass",
+            "notes": "4/4 数值差异在阈值内且类别一致。"
+          },
+          "(4) consensus_top_hit": {
+            "mutation": "S62A",
+            "ranking_position": 4,
+            "predicted_impact_B": "severe_disruption",
+            "volume_change_B": 0.4,
+            "justification": "在满足severe_disruption且体积变化≤10的候选中，S62A体积变化最小；去除侧链羟基削弱/消除配体相关氢键，同时保持较低构象扰动，预期对结合影响显著而对整体稳定性影响较小。"
+          },
+          "(5) negative_control": {
+            "mutation": "T48S",
+            "predicted_impact_B": "minimal_impact",
+            "reason": "保守替换（保留羟基），算法B预测影响最小，适合作为阴性对照。"
+          }
+        }
+      }
+    ],
+    "metadata_summary": {
+      "subject": "Life Science",
+      "topic": "Structural Biology",
+      "original_question_id": "24",
+      "subject_topic_key": "Life Science::Structural Biology"
+    }
+  },
+  "model": "glm-4.6v",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": "A ligand binds to a deep beta-barrel cleft of an enzyme. Based on the 2.5 Angstrom resolution of the X-ray diffraction crystal structure, the amino acids in contact with the ligand at the active site seem to be H34, T48, S62, and G128. You would like to perform PCR mutagenesis of the enzyme's sequence to verify the mechanism of the ligand-receptor binding. Which of the point mutations below will most likely affect the ligand-receptor interaction?\nYou should strictly respond in this exact format and answer the question in its original language:\n###Answer###\n{The final answer wrapped in LaTeX boxed format $\\boxed{}$}"
+    },
+    {
+      "role": "assistant",
+      "content": "\n**[阶段 1: 规划]**\nPlan:\n\n1. 确定与配体接触的原始氨基酸及其位置：H34、T48、S62、G128\n2. 选择一些合理的点突变进行测试，包括：\n   - H34 -> A（组氨酸到丙氨酸，去除咪唑侧链）\n   - T48 -> A（苏氨酸到丙氨酸，去除羟基）\n   - S62 -> A（丝氨酸到丙氨酸，去除羟基）\n   - G128 -> A（甘氨酸到丙氨酸，增加侧链）\n3. 使用 `predict_mutation_binding_impact` 工具分析这些突变对配体结合的影响\n4. 基于分析结果确定哪种突变最可能影响配体-受体相互作用\n",
+      "tool_calls": [
+        {
+          "id": "call_-7977315744693167070",
+          "type": "function",
+          "function": {
+            "name": "predict_mutation_binding_impact",
+            "arguments": "{\"original_residues\": [\"H\", \"T\", \"S\", \"G\"], \"positions\": [34, 48, 62, 128], \"test_mutations\": [\"H->A\", \"T->A\", \"S->A\", \"G->A\"]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "original_site_analysis": {
+            "residue_analysis": [
+              {
+                "residue": "H",
+                "position": 34,
+                "binding_importance": 70,
+                "key_interactions": []
+              },
+              {
+                "residue": "T",
+                "position": 48,
+                "binding_importance": 50,
+                "key_interactions": []
+              },
+              {
+                "residue": "S",
+                "position": 62,
+                "binding_importance": 50,
+                "key_interactions": []
+              },
+              {
+                "residue": "G",
+                "position": 128,
+                "binding_importance": 0,
+                "key_interactions": []
+              }
+            ],
+            "total_importance_score": 170,
+            "type_distribution": {
+              "basic": 1,
+              "polar": 2,
+              "nonpolar": 1
+            },
+            "site_characteristics": {
+              "polar_residues": 3,
+              "nonpolar_residues": 1,
+              "charged_residues": 1
+            }
+          },
+          "mutation_predictions": [
+            {
+              "mutation": "H->A",
+              "predicted_impact": "severe_disruption",
+              "effect_score": 100,
+              "key_changes": {
+                "effect_score": 100,
+                "volume_change": 64.6,
+                "hydrophobicity_change": 5.0,
+                "charge_change": 0.1,
+                "h_bond_change": 1
+              }
+            },
+            {
+              "mutation": "T->A",
+              "predicted_impact": "severe_disruption",
+              "effect_score": 100,
+              "key_changes": {
+                "effect_score": 100,
+                "volume_change": 27.5,
+                "hydrophobicity_change": 2.5,
+                "charge_change": 0,
+                "h_bond_change": 1
+              }
+            },
+            {
+              "mutation": "S->A",
+              "predicted_impact": "severe_disruption",
+              "effect_score": 100,
+              "key_changes": {
+                "effect_score": 100,
+                "volume_change": 0.4,
+                "hydrophobicity_change": 2.6,
+                "charge_change": 0,
+                "h_bond_change": 1
+              }
+            },
+            {
+              "mutation": "G->A",
+              "predicted_impact": "mild_disruption",
+              "effect_score": 16.7,
+              "key_changes": {
+                "effect_score": 16.7,
+                "volume_change": 28.5,
+                "hydrophobicity_change": 2.2,
+                "charge_change": 0,
+                "h_bond_change": 0
+              }
+            }
+          ],
+          "recommended_mutation": "H->A"
+        },
+        "metadata": {
+          "prediction_method": "physicochemical_analysis",
+          "confidence": "medium"
+        }
+      },
+      "tool_call_id": "call_-7977315744693167070"
+    },
+    {
+      "role": "assistant",
+      "content": "\nThought: 基于工具返回的结果，我需要分析每种突变对配体结合的影响。从结果可以看出，H34->A突变预测为\"severe_disruption\"（严重破坏），效应得分为100，这是所有测试突变中最高的。原始位点分析显示H34的结合重要性为70（最高），而其他残基如T48和S62的结合重要性为50，G128仅为0。工具明确推荐H34->A作为最可能影响配体结合的突变。因此，H34->A突变最可能影响配体-受体相互作用。\nFinal Answer: $\\boxed{\\text{H34->A}}$"
+    }
+  ],
+  "metadata": {
+    "subject": "Life Science",
+    "topic": "Structural Biology",
+    "image_path": null,
+    "tool_expected": [
+      "analyze_active_site_composition",
+      "calculate_mutation_effect_score",
+      "predict_mutation_binding_impact",
+      "create_binding_site_summary_plot"
+    ],
+    "golden_answer": {
+      "analyze_active_site_composition": {
+        "call": "analyze_active_site_composition",
+        "inputs": {
+          "residues": [
+            "H",
+            "T",
+            "S",
+            "G"
+          ],
+          "positions": [
+            34,
+            48,
+            62,
+            128
+          ]
+        },
+        "output": {
+          "result": {
+            "residue_analysis": [
+              {
+                "residue": "H",
+                "position": 34,
+                "binding_importance": 70,
+                "key_interactions": []
+              },
+              {
+                "residue": "T",
+                "position": 48,
+                "binding_importance": 50,
+                "key_interactions": []
+              },
+              {
+                "residue": "S",
+                "position": 62,
+                "binding_importance": 50,
+                "key_interactions": []
+              },
+              {
+                "residue": "G",
+                "position": 128,
+                "binding_importance": 0,
+                "key_interactions": []
+              }
+            ],
+            "total_importance_score": 170,
+            "type_distribution": {
+              "basic": 1,
+              "polar": 2,
+              "nonpolar": 1
+            },
+            "site_characteristics": {
+              "polar_residues": 3,
+              "nonpolar_residues": 1,
+              "charged_residues": 1
+            }
+          },
+          "metadata": {
+            "analysis_type": "active_site_composition",
+            "residue_count": 4
+          }
+        }
+      },
+      "calculate_mutation_effect_score": {
+        "call": "calculate_mutation_effect_score",
+        "inputs": {
+          "original": "A",
+          "mutant": "G"
+        },
+        "output": {
+          "result": {
+            "effect_score": 16.7,
+            "volume_change": 28.5,
+            "hydrophobicity_change": 2.2,
+            "charge_change": 0,
+            "h_bond_change": 0
+          },
+          "metadata": {
+            "mutation": "A->G",
+            "interpretation": "low_impact"
+          }
+        }
+      },
+      "predict_mutation_binding_impact": {
+        "call": "predict_mutation_binding_impact",
+        "inputs": {
+          "original_residues": [
+            "H",
+            "T",
+            "S",
+            "G"
+          ],
+          "positions": [
+            34,
+            48,
+            62,
+            128
+          ],
+          "test_mutations": [
+            "A->G",
+            "A->V",
+            "A->D"
+          ]
+        },
+        "output": {
+          "result": {
+            "original_site_analysis": {
+              "residue_analysis": [
+                {
+                  "residue": "H",
+                  "position": 34,
+                  "binding_importance": 70,
+                  "key_interactions": []
+                },
+                {
+                  "residue": "T",
+                  "position": 48,
+                  "binding_importance": 50,
+                  "key_interactions": []
+                },
+                {
+                  "residue": "S",
+                  "position": 62,
+                  "binding_importance": 50,
+                  "key_interactions": []
+                },
+                {
+                  "residue": "G",
+                  "position": 128,
+                  "binding_importance": 0,
+                  "key_interactions": []
+                }
+              ],
+              "total_importance_score": 170,
+              "type_distribution": {
+                "basic": 1,
+                "polar": 2,
+                "nonpolar": 1
+              },
+              "site_characteristics": {
+                "polar_residues": 3,
+                "nonpolar_residues": 1,
+                "charged_residues": 1
+              }
+            },
+            "mutation_predictions": [
+              {
+                "mutation": "A->G",
+                "predicted_impact": "mild_disruption",
+                "effect_score": 16.7,
+                "key_changes": {
+                  "effect_score": 16.7,
+                  "volume_change": 28.5,
+                  "hydrophobicity_change": 2.2,
+                  "charge_change": 0,
+                  "h_bond_change": 0
+                }
+              },
+              {
+                "mutation": "A->V",
+                "predicted_impact": "mild_disruption",
+                "effect_score": 22.28,
+                "key_changes": {
+                  "effect_score": 22.28,
+                  "volume_change": 51.4,
+                  "hydrophobicity_change": 2.4,
+                  "charge_change": 0,
+                  "h_bond_change": 0
+                }
+              },
+              {
+                "mutation": "A->D",
+                "predicted_impact": "severe_disruption",
+                "effect_score": 100,
+                "key_changes": {
+                  "effect_score": 100,
+                  "volume_change": 22.5,
+                  "hydrophobicity_change": 5.3,
+                  "charge_change": 1,
+                  "h_bond_change": 1
+                }
+              }
+            ],
+            "recommended_mutation": "A->D"
+          },
+          "metadata": {
+            "prediction_method": "physicochemical_analysis",
+            "confidence": "medium"
+          }
+        }
+      },
+      "create_binding_site_summary_plot": {
+        "call": "create_binding_site_summary_plot",
+        "inputs": {
+          "active_site_residues": [
+            "H",
+            "T",
+            "S",
+            "G"
+          ],
+          "positions": [
+            34,
+            48,
+            62,
+            128
+          ],
+          "test_mutations": [
+            "A->G",
+            "A->V",
+            "A->D"
+          ]
+        },
+        "output": {
+          "result": "./tool_images/binding_site_summary.png",
+          "metadata": {
+            "file_type": "png",
+            "analysis_components": 4,
+            "active_site_residues": 4
+          }
+        }
+      }
+    },
+    "original_question_id": "24",
+    "_dataset_filename": "refine_merged_single_questions.json"
+  },
+  "metadata_summary": {
+    "subject": "Life Science",
+    "topic": "Structural Biology",
+    "original_question_id": "24",
+    "subject_topic_key": "Life Science::Structural Biology"
+  },
+  "expected_format": "free_text",
+  "model_raw_answer": "\nThought: 基于工具返回的结果，我需要分析每种突变对配体结合的影响。从结果可以看出，H34->A突变预测为\"severe_disruption\"（严重破坏），效应得分为100，这是所有测试突变中最高的。原始位点分析显示H34的结合重要性为70（最高），而其他残基如T48和S62的结合重要性为50，G128仅为0。工具明确推荐H34->A作为最可能影响配体结合的突变。因此，H34->A突变最可能影响配体-受体相互作用。\nFinal Answer: $\\boxed{\\text{H34->A}}$",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "\nThought: 基于工具返回的结果，我需要分析每种突变对配体结合的影响。从结果可以看出，H34->A突变预测为\"severe_disruption\"（严重破坏），效应得分为100，这是所有测试突变中最高的。原始位点分析显示H34的结合重要性为70（最高），而其他残基如T48和S62的结合重要性为50，G128仅为0。工具明确推荐H34->A作为最可能影响配体结合的突变。因此，H34->A突变最可能影响配体-受体相互作用。\nFinal Answer: $\\boxed{\\text{H34->A}}$"
+  },
+  "mode_folder": "with_tools_react"
+}

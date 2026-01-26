@@ -1,0 +1,329 @@
+{
+  "class_name": "Unknown",
+  "description": "获取或创建分配系数计算器实例",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "calculate_ionization_fraction",
+        "description": "计算给定 pH 条件下的电离度",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pH": {
+              "type": "number",
+              "description": "水相 pH 值"
+            },
+            "pKa": {
+              "type": "string",
+              "description": "酸性基团的 pKa，或由多个 pKa 组成的列表/元组"
+            },
+            "temperature": {
+              "type": "number",
+              "description": "温度(K)"
+            }
+          },
+          "required": [
+            "pH",
+            "pKa",
+            "temperature"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of calculate_ionization_fraction function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "/Users/yangyajie/Desktop/code/scidata_analysis/output/tools/PartitionCoefficient/partition_coefficient_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "calculate_apparent_logP",
+        "description": "计算考虑电离的表观 logP",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "logP_neutral": {
+              "type": "number",
+              "description": "中性分子的 logP"
+            },
+            "pH": {
+              "type": "number",
+              "description": "水相 pH"
+            },
+            "pKa": {
+              "type": "number",
+              "description": "酸性(或碱性)基团的 pKa"
+            }
+          },
+          "required": [
+            "logP_neutral",
+            "pH",
+            "pKa"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of calculate_apparent_logP function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "/Users/yangyajie/Desktop/code/scidata_analysis/output/tools/PartitionCoefficient/partition_coefficient_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "calculate_distribution_coefficient",
+        "description": "由表观 logP 计算分配系数 K",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "logP_app": {
+              "type": "number",
+              "description": "表观 logP"
+            },
+            "temperature": {
+              "type": "number",
+              "description": "温度(K)，此处仅为接口统一保留"
+            }
+          },
+          "required": [
+            "logP_app",
+            "temperature"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of calculate_distribution_coefficient function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "/Users/yangyajie/Desktop/code/scidata_analysis/output/tools/PartitionCoefficient/partition_coefficient_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "predict_logP_from_structure",
+        "description": "基于 RDKit 从 SMILES 预测中性 logP（Crippen logP）",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "smiles": {
+              "type": "string",
+              "description": ""
+            },
+            "temperature": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "smiles",
+            "temperature"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of predict_logP_from_structure function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "/Users/yangyajie/Desktop/code/scidata_analysis/output/tools/PartitionCoefficient/partition_coefficient_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "analyze_partition_mechanism",
+        "description": "分析在两相体系中的分配偏好与分子机制",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "compound_name": {
+              "type": "string",
+              "description": ""
+            },
+            "smiles": {
+              "type": "string",
+              "description": ""
+            },
+            "logP_app": {
+              "type": "number",
+              "description": ""
+            },
+            "pH": {
+              "type": "number",
+              "description": ""
+            },
+            "pKa": {
+              "type": "number",
+              "description": ""
+            },
+            "temperature": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "compound_name",
+            "smiles",
+            "logP_app",
+            "pH",
+            "pKa",
+            "temperature"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of analyze_partition_mechanism function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "/Users/yangyajie/Desktop/code/scidata_analysis/output/tools/PartitionCoefficient/partition_coefficient_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "visualize_pH_logP_profile",
+        "description": "生成 pH-logP 曲线的 Matplotlib Figure（不直接展示）",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "logP_neutral": {
+              "type": "number",
+              "description": ""
+            },
+            "pKa": {
+              "type": "number",
+              "description": ""
+            },
+            "pH_range": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "logP_neutral",
+            "pKa",
+            "pH_range"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of visualize_pH_logP_profile function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "/Users/yangyajie/Desktop/code/scidata_analysis/output/tools/PartitionCoefficient/partition_coefficient_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_partition_problem",
+        "description": "综合求解单一酸/碱基团体系的分配问题，返回关键结果字典",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "compound": {
+              "type": "string",
+              "description": ""
+            },
+            "smiles": {
+              "type": "string",
+              "description": ""
+            },
+            "logP_neutral": {
+              "type": "number",
+              "description": ""
+            },
+            "pKa": {
+              "type": "number",
+              "description": ""
+            },
+            "pH": {
+              "type": "number",
+              "description": ""
+            }
+          },
+          "required": [
+            "compound",
+            "smiles",
+            "logP_neutral",
+            "pKa",
+            "pH"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of solve_partition_problem function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "/Users/yangyajie/Desktop/code/scidata_analysis/output/tools/PartitionCoefficient/partition_coefficient_func_expose.py"
+      }
+    }
+  ]
+}

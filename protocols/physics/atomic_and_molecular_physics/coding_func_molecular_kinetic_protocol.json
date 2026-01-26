@@ -1,0 +1,18 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "math_func_planewave_kinetic_expression",
+            "description": "计算并打印平面波动能在倒格子空间的数学表达式。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/coding_func_molecular_kinetic.py"
+        }
+    }
+]

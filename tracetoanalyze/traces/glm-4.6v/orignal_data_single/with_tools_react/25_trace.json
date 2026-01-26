@@ -1,0 +1,674 @@
+{
+  "id": 25,
+  "query": "Consider an electron fixed at the origin, and a magnetic field (with constant magnitude B_0 and aligned at an angle \\theta with the z-axis) processes with a frequency \\omega about the z-axis. Assume that \\omega is much less than eB0/m (e is electronic charge and m is electron's mass). If the electron is initially in the spin-up state, then, in time-asymptotic limit,",
+  "query_data": {
+    "id": 25,
+    "filename": "gpqa_physics_234_full.json",
+    "question": "Consider an electron fixed at the origin, and a magnetic field (with constant magnitude B_0 and aligned at an angle \\theta with the z-axis) processes with a frequency \\omega about the z-axis. Assume that \\omega is much less than eB0/m (e is electronic charge and m is electron's mass). If the electron is initially in the spin-up state, then, in time-asymptotic limit,",
+    "answer": "the probability that the electron is in spin down state will be nearly zero",
+    "metadata": {
+      "subject": "Physics",
+      "topic": "Atomic and Molecular Physics",
+      "image_path": [],
+      "tool_expected": [
+        "rotating_frame_transformation",
+        "adiabatic_spin_down_probability",
+        "evolve_spin_state",
+        "plot_bloch_sphere_trajectory",
+        "plot_probability_evolution",
+        "plot_rotating_frame_analysis"
+      ],
+      "golden_answer": {
+        "rotating_frame_transformation": {
+          "call": "rotating_frame_transformation",
+          "inputs": {
+            "B0": 1.0,
+            "theta": 0.5235987755982988,
+            "omega_rot": 1758819995.8505058
+          },
+          "output": {
+            "result": {
+              "effective_field": [
+                0.49999999999999994,
+                0.0,
+                0.8560254037844387
+              ],
+              "rabi_frequency": 87940999792.52527,
+              "detuning": 150559459713.2074
+            },
+            "metadata": {
+              "omega_0": 175881999585.05057,
+              "omega_rot": 1758819995.8505058,
+              "regime": "adiabatic",
+              "adiabatic_parameter": 0.01
+            }
+          }
+        },
+        "adiabatic_spin_down_probability": {
+          "call": "adiabatic_spin_down_probability",
+          "inputs": {
+            "B0": 1.0,
+            "theta": 0.5235987755982988,
+            "omega_rot": 1758819995.8505058,
+            "time": 5.6856301518020545e-08
+          },
+          "output": {
+            "result": 4.302535241009875e-07,
+            "metadata": {
+              "validity": true,
+              "adiabatic_parameter": 0.01,
+              "omega_0": 175881999585.05057,
+              "omega_rot": 1758819995.8505058,
+              "criterion": "ε = ω/ω_0 << 1"
+            }
+          }
+        },
+        "evolve_spin_state": {
+          "call": "evolve_spin_state",
+          "inputs": {
+            "psi_initial": [
+              "(1+0j)",
+              "0j"
+            ],
+            "t_span": [
+              0,
+              5.6856301518020545e-08
+            ],
+            "B0": 1.0,
+            "theta": 0.5235987755982988,
+            "omega_rot": 1758819995.8505058
+          },
+          "output": {
+            "result": "./mid_result/physics/spin_evolution.json",
+            "metadata": {
+              "final_state": [
+                -0.22784989157289182,
+                -0.8669042645874544,
+                -0.11632080237249601,
+                -0.42780632103058275
+              ],
+              "spin_down_probability": 0.19654877737830329,
+              "n_points": 2000,
+              "integration_success": true
+            }
+          }
+        },
+        "plot_bloch_sphere_trajectory": {
+          "call": "plot_bloch_sphere_trajectory",
+          "inputs": {
+            "filepath": "./mid_result/physics/spin_evolution.json"
+          },
+          "output": {
+            "result": "./tool_images/bloch_sphere_trajectory.png",
+            "metadata": {
+              "n_points": 2000,
+              "time_span": [
+                0.0,
+                5.6856301518020545e-08
+              ]
+            }
+          }
+        },
+        "plot_probability_evolution": {
+          "call": "plot_probability_evolution",
+          "inputs": {
+            "filepath": "./mid_result/physics/spin_evolution.json"
+          },
+          "output": {
+            "result": "./tool_images/probability_evolution.png",
+            "metadata": {
+              "final_P_up": 0.8034487371185497,
+              "final_P_down": 0.1965512628814503,
+              "time_span_ns": [
+                0.0,
+                56.856301518020544
+              ]
+            }
+          }
+        },
+        "plot_rotating_frame_analysis": {
+          "call": "plot_rotating_frame_analysis",
+          "inputs": {
+            "B0": 1.0,
+            "theta": 0.5235987755982988,
+            "omega_rot": 1758819995.8505058
+          },
+          "output": {
+            "result": "./tool_images/rotating_frame_analysis.png",
+            "metadata": {
+              "omega_0": 175881999585.05057,
+              "omega_rabi": 87940999792.52527,
+              "detuning": 150559459713.2074,
+              "regime": "adiabatic"
+            }
+          }
+        }
+      },
+      "original_question_id": "234",
+      "_dataset_filename": "refine_merged_single_questions.json"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "evolve_spin_state",
+          "description": "在时间依赖哈密顿量下演化自旋态。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "psi_initial": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "初始态 [c_up, c_down]"
+              },
+              "t_span": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "时间范围 [t_start, t_end]（秒）"
+              },
+              "B0": {
+                "type": "number",
+                "description": "磁场强度（特斯拉）"
+              },
+              "theta": {
+                "type": "number",
+                "description": "倾斜角（弧度）"
+              },
+              "omega_rot": {
+                "type": "number",
+                "description": "旋转频率（弧度/秒）"
+              },
+              "n_points": {
+                "type": "integer",
+                "description": "时间点数量，默认为1000"
+              }
+            },
+            "required": [
+              "psi_initial",
+              "t_span",
+              "B0",
+              "theta",
+              "omega_rot"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/quantum_spin_dynamics_toolkit_claude_234.py",
+          "resolved_file_path": "toolkits/physics/atomic_and_molecular_physics/quantum_spin_dynamics_toolkit_claude_234.py",
+          "resolved_dir": "toolkits/physics/atomic_and_molecular_physics"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "rotating_frame_transformation",
+          "description": "分析旋转参考系中的自旋动力学（旋转波近似）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "B0": {
+                "type": "number",
+                "description": "磁场强度（特斯拉）"
+              },
+              "theta": {
+                "type": "number",
+                "description": "倾斜角（弧度）"
+              },
+              "omega_rot": {
+                "type": "number",
+                "description": "旋转频率（弧度/秒）"
+              }
+            },
+            "required": [
+              "B0",
+              "theta",
+              "omega_rot"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/quantum_spin_dynamics_toolkit_claude_234.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "adiabatic_spin_down_probability",
+          "description": "使用微扰理论计算绝热极限下的自旋向下概率。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "B0": {
+                "type": "number",
+                "description": "磁场强度（特斯拉）"
+              },
+              "theta": {
+                "type": "number",
+                "description": "倾斜角（弧度）"
+              },
+              "omega_rot": {
+                "type": "number",
+                "description": "旋转频率（弧度/秒）"
+              },
+              "time_duration": {
+                "type": "number",
+                "description": "演化时间（秒）"
+              }
+            },
+            "required": [
+              "B0",
+              "theta",
+              "omega_rot",
+              "time_duration"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/quantum_spin_dynamics_toolkit_claude_234.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_bloch_sphere_trajectory",
+          "description": "在布洛赫球上可视化自旋态轨迹。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "evolution_filepath": {
+                "type": "string",
+                "description": "演化数据JSON文件路径"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "输出图像路径，默认自动生成"
+              }
+            },
+            "required": [
+              "evolution_filepath"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/quantum_spin_dynamics_toolkit_claude_234.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_probability_evolution",
+          "description": "绘制自旋向上和自旋向下概率随时间的演化。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "evolution_filepath": {
+                "type": "string",
+                "description": "演化数据JSON文件路径"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "输出图像路径"
+              }
+            },
+            "required": [
+              "evolution_filepath"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/quantum_spin_dynamics_toolkit_claude_234.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_rotating_frame_analysis",
+          "description": "可视化旋转参考系中的有效场。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "B0": {
+                "type": "number",
+                "description": "磁场强度（特斯拉）"
+              },
+              "theta": {
+                "type": "number",
+                "description": "倾斜角（弧度）"
+              },
+              "omega_rot": {
+                "type": "number",
+                "description": "旋转频率（弧度/秒）"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "输出图像路径"
+              }
+            },
+            "required": [
+              "B0",
+              "theta",
+              "omega_rot"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/quantum_spin_dynamics_toolkit_claude_234.py"
+        }
+      }
+    ],
+    "augmented_versions": [
+      {
+        "augmented_question": "一、物理背景与参数设定\n\n考虑一电子固定在原点，仅具有自旋自由度（忽略轨道运动）。电子自旋与外加均匀磁场耦合，其哈密顿量为\nH(t) = -γ S · B(t)，\n其中 γ = e/m（取 g≈2 且 ħ=1 的单位制），S = (σ_x, σ_y, σ_z)/2 为自旋算符，σ_i 为 Pauli 矩阵。设磁场大小恒为 B0，但方向随时间在空间中绕 z 轴匀速进动。\n\n磁场写为\nB(t) = B0 [sinθ cos(ω t) e_x + sinθ sin(ω t) e_y + cosθ e_z]，\n其中 θ 是磁场与 z 轴夹角，ω = ω_rot 是磁场绕 z 轴的进动角频率。自旋基底取为 σ_z 本征基 |↑⟩=(1,0)^T、|↓⟩=(0,1)^T，对应 z 方向自旋向上/向下。\n\n设拉莫尔频率 ω_0 定义为\nω_0 = γ B0 = eB0/m。\n\n原题给出条件：ω ≪ ω_0（绝热极限）。自旋初态为 |ψ(0)⟩ = |↑⟩。\n\n在本扩展题中，我们需要：\n1) 在旋转参考系中给出有效磁场 B_eff 及其大小方向，并写出有效拉莫尔频率表达式；\n2) 推导绝热极限下自旋在长时间后翻转到 |↓⟩ 的概率解析近似 P_down(θ, ω, B0)，并给出在 ω ≪ ω_0 且 T → ∞ 时的极限值；\n3) 利用给定的数值演化结果，对比解析近似与数值终态概率；\n4) 分析概率随时间演化的振荡频率与包络特征，并与旋转系中的有效频率比较；\n5) 利用 Bloch 球轨迹的定性描述，说明绝热与非绝热情形下轨迹特征；\n6) 通过不同参数点 (θ, ω) 的结果，讨论绝热近似误差的趋势；\n7) 利用旋转系有效场的图像信息解释这些趋势。\n\n二、旋转系分析与工具给出的具体数值\n\n(1) 取 B0 = 1.0（单位制中），θ = π/4 = 0.7853981633974483，ω_rot = 1.0×10^6 s^-1。工具 rotating_frame_transformation 给出了：\n- ω_0 = 1.7588199958505057×10^11 s^-1（即 eB0/m 对应的拉莫尔频率），\n- 有效磁场 B_eff 在旋转参考系中的三个分量：\n  B_eff ≈ (0.7071067811865475, 0.0, 0.7071010955563958)，\n（方向单位向量，整体模长在数值上被缩放到与下列频率匹配的单位）\n- 有效 Rabi 频率（即旋转系中自旋绕 B_eff 进动的角频率）：\n  Ω_R = 1.2436735459523878×10^11 s^-1，\n- 失谐量（detuning）：\n  Δ = ω_0 - ω_rot ≈ 1.2436635459523880×10^11 s^-1，\n- 绝热参数 ε = ω/ω_0 = 5.685630151802055×10^-6 ≪ 1，对应“adiabatic” 区域。\n\n(2) 在同一组 B0 = 1.0, θ = π/4, ω_rot = 1.0×10^6 条件下，利用绝热近似工具 adiabatic_spin_down_probability，并在演化时间 T = 8.0×10^-11 s 下，得到电子从初态 |↑⟩ 到 |↓⟩ 的概率近似值为\n- P_down^adiabatic ≈ 6.465278041167982×10^-21。\n\n(3) 再考虑另一组参数，用于绝热概率的尺度估计：B0 = 10.0, θ = π/6 = 0.5235987755982988，ω_rot = 8.794099979252528×10^6 s^-1，演化时间 T = 2.0×10^-7 s。工具 adiabatic_spin_down_probability 返回：\n- ω_0 = 1.7588199958505056×10^12 s^-1，\n- ε = ω/ω_0 = 5.0×10^-6 ≪ 1（仍为“adiabatic” 区域），\n- P_down^adiabatic ≈ 9.272795016032555×10^-13。\n\n(4) 为更长时间数值演化与可视化分析，我们选取：\n- B0 = 10.0（因此 ω_0 = eB0/m = 1.7588199958505056×10^12 s^-1），\n- θ = π/4，\n- ω_rot = 1.0×10^6 s^-1，\n- 初态 |ψ(0)⟩ = |↑⟩，\n- 时间区间 t ∈ [0, T]，T = 1.0×10^-7 s（即 100 ns），\n- 数值积分点数 n_points = 5000。\n\n工具 evolve_spin_state 对上述参数给出如下结果：\n- 存储的演化数据文件路径：\"./mid_result/physics/spin_evolution.json\"。\n- 数值积分成功（integration_success = true）。\n- 最终态的复振幅（在 σ_z 基底 |↑⟩, |↓⟩ 下）：\n  ψ(T) ≈ (a_↑, a_↓) = (0.032527549900316255 - 0.0353359523859116 i,\n                             0.7062711234848139 + 0.7061300170280070 i)。\n- 对应的终态自旋向下概率：\n  P_down^numeric(T) = |a_↓|^2 ≈ 0.4998682304789929。\n\n工具 plot_probability_evolution 对该演化数据给出的统计结果为：\n- t 以纳秒为单位的跨度为 [0, 100] ns，\n- 最终 P_up(T) ≈ 0.500004356556186，\n- 最终 P_down(T) ≈ 0.49999564344381375。\n这与 evolve_spin_state 中的 P_down^numeric(T) 一致地表明在 T = 100 ns 时，P_up ≈ P_down ≈ 0.5。\n\n工具 plot_bloch_sphere_trajectory 在同一演化数据上给出 Bloch 球轨迹图（文件路径略），以 5000 个点表示 t ∈ [0, 1.0×10^-7 s] 内自旋态在 Bloch 球上的运动。\n\n工具 plot_rotating_frame_analysis 对 B0 = 10.0, θ = π/4, ω_rot = 1.0×10^6 的旋转系有效场绘图，并返回：\n- ω_0 = 1.7588199958505056×10^12 s^-1，\n- 有效 Rabi 频率 Ω_R ≈ 1.2436735459523877×10^12 s^-1，\n- 失谐 Δ ≈ 1.2436725459523880×10^12 s^-1，\n- 系统处于 “adiabatic” 区域。\n\n三、作答要求\n\n请在下列小问中给出完整推导或定性分析（可忽略整体全局相位），并用上文给出的数值作为定量检验：\n\n(1) 旋转参考系中的有效磁场与有效拉莫尔频率\n- (1a) 对一般参数 B0, θ, ω_rot，写出从实验室系到随磁场绕 z 轴旋转的参考系的幺正变换 U_rot(t)，说明其形式（例如绕 z 轴旋转角为 ω_rot t）。\n- (1b) 在该旋转系中，推导出等效静磁场 B_eff 的矢量表达式，指出其分量与 B0 sinθ、B0 cosθ 以及频率差 ω_0−ω_rot 的关系。给出 B_eff 的大小 |B_eff| 和方向（用极角或相对 z 轴夹角表示）。\n- (1c) 定义有效拉莫尔频率 Ω_L,eff = γ|B_eff|，推导出其与 ω_0 和 ω_rot 的显式关系。结合上文工具给出的数值（对 B0=1.0, θ=π/4, ω_rot=10^6），说明 Ω_L,eff 在数量级上如何接近工具中的 Ω_R ≈ 1.2436735459523878×10^11 s^-1，并解释二者物理意义上一致（均为自旋绕 B_eff 进动的角频率）。\n\n(2) 绝热极限下的自旋翻转概率 P_down(θ, ω, B0)\n- (2a) 在一般 B0, θ, ω_rot 满足 ω_rot ≪ ω_0 的条件下，说明为什么自旋将近似跟随瞬时磁场方向 B(t) 进动（绝热定理）。写出初始自旋 |↑⟩ 相对于 t=0 时磁场方向的夹角，说明其是处于与磁场平行还是反平行的本征态（或一般的叠加）。\n- (2b) 在旋转系中，哈密顿量形式为 H_eff = -(1/2) Ω_L,eff n̂_eff · σ，其中 n̂_eff 为 B_eff 的方向单位向量。若初态与 B_eff 不完全对齐，说明自旋在旋转系中会以频率 Ω_L,eff 绕 n̂_eff 进动。推导在 t 演化后自旋指向与实验室系中瞬时磁场方向之间的夹角，从而得到自旋处于 |↓⟩ 状态的概率 P_down(t)。\n- (2c) 在绝热极限下，给出 P_down(t) 的简化解析近似式 P_down^adiabatic(θ, ω_rot, B0, t)，可用到小参数 ε = ω_rot/ω_0。然后讨论长时间极限 T → ∞ 的行为。在理想绝热极限 ω_rot/ω_0 → 0 且 T → ∞ 的情况下，写出 P_down^adiabatic 的极限值，并说明其物理含义（指出在准能级的绝热演化下，自旋是否会保持相对本征态的占据）。\n- (2d) 使用 B0 = 1.0, θ = π/4, ω_rot = 10^6, T = 8.0×10^-11 s，将你的解析近似代入数值，估算 P_down^adiabatic，并与工具结果 6.465278041167982×10^-21 对比，说明数量级是否一致，以及为何在该时间和参数下 P_down 极其接近 0。\n\n(3) 数值时间演化结果与解析近似的比较\n- (3a) 对参数 B0 = 10.0, θ = π/4, ω_rot = 10^6, T = 1.0×10^-7 s，利用你在 (2) 中的解析近似公式估算 P_down^adiabatic(T)。在绝热条件下，给出其大致大小或上界（可用 ε 和 θ 来定性估计）。\n- (3b) 利用工具 evolve_spin_state 的计算结果，终态自旋向下概率为 P_down^numeric(T) ≈ 0.4998682304789929（plot_probability_evolution 的统计值为 0.49999564344381375，接近 0.5）。说明这与绝热预期 P_down^adiabatic(T) ≪ 1 有何差异。根据此结果，你能否判断在 B0 = 10, θ = π/4, ω_rot = 10^6 下，T = 100 ns 内系统经历了大约半周期的 Rabi 振荡，使 P_up ≈ P_down？\n- (3c) 利用旋转系的有效频率 Ω_L,eff（由 plot_rotating_frame_analysis 给出的 Ω_R ≈ 1.2436735459523877×10^12 s^-1）估算一个典型振荡周期 T_R ≈ 2π/Ω_L,eff，并将其与 T = 100 ns 比较，从而解释为什么在演化末尾 P_up, P_down 约为 1/2。给出 T_R 的数量级估算并进行说明。\n\n(4) 概率随时间演化曲线的频率与包络分析\n- (4a) 依据两能级系统在有效静场 B_eff 下的解析解，写出 P_down(t) 应呈现的典型形式（如 sin^2 形式的振荡，在存在失谐 Δ 时，其振幅和频率如何由 Ω_R 和 Δ 决定）。\n- (4b) 结合 plot_probability_evolution 的结果（从 t=0 到 100 ns，最终 P_up≈P_down≈0.5），定性描述：\n  - P_up(t) 与 P_down(t) 随时间的大致振荡频率为多少（可通过 Ω_L,eff 估计），\n  - 振荡的包络是否接近平滑、是否出现明显节拍结构，\n  - 在强失谐条件（|Δ|≈Ω_R 的数量级）下，Rabi 振幅会如何受到抑制，导致 P_down(t) 在 0 和 1 之间的可达范围。\n- (4c) 利用 (4a)-(4b) 的分析，说明为何在该参数下，尽管整体系统处于绝热参数 ε ≪ 1 的区域，但在给定的有限演化时间和初始条件下，数值演化仍可在某一时刻达到 P_down ≈ 0.5，而并未呈现“始终保持在磁场本征态”的极端绝热线型。\n\n(5) Bloch 球轨迹的几何理解\n- (5a) 在 Bloch 球上，自旋态可表示为单位矢量 ŝ(t)。对于绝热极限ω≪ω_0、且初态为某一瞬时本征态的情况，说明 ŝ(t) 如何近似“贴着”瞬时磁场方向 B̂(t) 运动，并可能积累几何相位（Berry 相）。\n- (5b) 利用 B0 = 10.0, θ = π/4, ω_rot = 10^6, T = 100 ns 的情形，结合 plot_bloch_sphere_trajectory 的信息（5000 点、轨迹覆盖整个演化时间），定性描述 ŝ(t) 在 Bloch 球上的轨迹形状：\n  - 是否紧紧围绕某一瞬时 B̂(t) 的路径缓慢移动，\n  - 还是在球面上做大角度的快进动、形成类似“圈带”或“花瓣状”轨迹。\n- (5c) 解释当 ω 增大（或当 t 足够长、经历多次 Rabi 周期）时，轨迹如何逐渐偏离瞬时磁场方向路径，表现出非绝热效应。结合 P_down(t) 的振荡结果，说明 Bloch 球上的大幅摆动对应概率在 |↑⟩ 与 |↓⟩ 之间的显著交换。\n\n(6) 多参数点的绝热误差趋势\n- (6a) 比较 B0 = 1.0, θ = π/4, ω_rot = 10^6 与 B0 = 10.0, θ = π/6, ω_rot = 8.794099979252528×10^6 两组参数的绝热自旋翻转概率：前者在 T = 8×10^-11 s 时有 P_down^adiabatic ≈ 6.47×10^-21，后者在 T = 2×10^-7 s 时有 P_down^adiabatic ≈ 9.27×10^-13。说明：\n  - 在两组参数中，绝对时间不同，但绝热参数 ε 均约为 5×10^-6 量级；\n  - 为什么即便 θ 从 π/4 变为 π/6，ω_rot 从 10^6 增至 ~8.79×10^6，绝热预测的 P_down 仍远小于 1？\n- (6b) 根据一般绝热理论，讨论 P_down^adiabatic 随 θ 和 ω_rot 的依赖趋势。例如：\n  - 当 θ 接近 0 或 π 时（磁场几乎沿 z 轴），自旋翻转的概率如何变化？\n  - 当 ω_rot 增大接近 ω_0 时，绝热近似在何种尺度下开始明显失效？\n- (6c) 结合上文数值例子，说明可以通过比较 P_down^adiabatic（极小）与数值终态 P_down^numeric（在特定时间接近 0.5）的差异，作为绝热近似失效或有限时间非绝热效应的迹象。\n\n(7) 旋转系有效场 B_eff 的图像与误差分析\n- (7a) 利用 plot_rotating_frame_analysis 的结果，对于 B0 = 10.0, θ = π/4, ω_rot = 10^6，给出在旋转系中：\n  - 有效拉莫尔频率 Ω_L,eff ≈ 1.2436735459523877×10^12 s^-1，\n  - 失谐 Δ ≈ 1.2436725459523880×10^12 s^-1。\n  说明在该参数下，B_eff 相对于原始 B0 的方向如何倾斜（例如偏向 z 轴，或在 x-z 平面形成某一夹角），并概述图中 B_eff 矢量随着参数变化（如改变 θ 或 ω_rot）时的转向趋势。\n- (7b) 定性说明：\n  - 当 |Δ| 很大时（强失谐），B_eff 更接近 z 方向，自旋主要以高频率绕接近 z 的方向进动，翻转概率被抑制；\n  - 当 |Δ| 减小时，B_eff 更接近原始 B 的倾角，Rabi 振荡的振幅增大，自旋在 Bloch 球上的轨迹更“大”，从而绝热保持某一本征态的情况开始削弱。\n- (7c) 结合不同参数点的 ε、Δ 和 Ω_R 的相对大小，解释误差分析中的趋势：为什么在题中给出的所有参数下，从绝热工具得到的 P_down^adiabatic 数值都极小，而数值演化在某些时间点却可以显示大幅度振荡？请在答案中将“准静态绝热演化”（长时间、几乎不改变占据）与“在固定有效场下的 Rabi 振荡”（在有限时间内发生显著态翻转）区分开来，并用 B_eff 的方向变化图像作为直观解释。\n\n请根据上述信息作答，给出：(1) 旋转系有效场及频率的解析公式并代入数值；(2) 绝热极限下的 P_down 解析近似以及在给定参数点的数值估算；(3) 与数值演化结果的比较及误差趋势分析；(4) 对概率演化曲线与 Bloch 球轨迹的几何与物理解释。答案中需明确写出关键数值结果和极限行为，并用“工具给出的具体数值”进行交叉核对。\n",
+        "final_answer": {
+          "U_rot(t)": "U_rot(t) = exp(i ω_rot t σ_z / 2)",
+          "B_eff_vector_general": "在旋转参考系中，有效磁场为 B_eff = (B0 sinθ, 0, B0 cosθ - ω_rot/γ)",
+          "Omega_L_eff_general": "Ω_L,eff = γ |B_eff| = sqrt[(γ B0 sinθ)^2 + (γ B0 cosθ - ω_rot)^2] = sqrt[ω_0^2 + ω_rot^2 - 2 ω_0 ω_rot cosθ]",
+          "B_eff_direction_note": "B_eff 在 x-z 平面内，相对于 z 轴的夹角由 tanφ_eff = (B0 sinθ)/(B0 cosθ - ω_rot/γ) 决定；当 |ω_rot| ≪ ω_0 时，B_eff 与原磁场方向几乎一致，仅在 z 方向有微小修正。",
+          "Omega_L_eff_numeric_B0_1": 124367354595.23878,
+          "Omega_L_eff_numeric_comment_B0_1": "对 B0=1.0, θ=π/4, ω_rot=10^6，利用工具得到的有效 Rabi 频率 Ω_R ≈ 1.2436735459523878×10^11 s^-1，与解析式 Ω_L,eff 在数量级和数值上匹配（差异仅为数值近似），代表自旋绕 B_eff 的进动频率。",
+          "adiabatic_P_down_general_form": "在旋转系中，设初态与 B_eff 的夹角为 α，则两能级系统的精确形式为 P_down(t) = sin^2α · sin^2(Ω_L,eff t/2)。在绝热极限 ω_rot ≪ ω_0 且初态选为瞬时本征态时，α≈0，因此 P_down^adiabatic(t) ≈ 0，微小偏离则给出 P_down^adiabatic(t) ~ O(ε^2) · sin^2(Ω_L,eff t/2)。",
+          "adiabatic_long_time_limit": "在理想绝热极限 ω_rot/ω_0 → 0 且系统始终保持在同一瞬时本征态下，T → ∞ 时 P_down^adiabatic(T) → 0，即自旋不会自发从上态翻转到下态，仅积累动态相位和几何相位。",
+          "adiabatic_P_down_B0_1_theta_pi_4_omega_1e6_T_8e_11": 6.465278041167982e-21,
+          "adiabatic_P_down_comment_B0_1": "对 B0=1.0, θ=π/4, ω_rot=10^6, T=8×10^-11 s，工具给出的 P_down^adiabatic ≈ 6.47×10^-21，极其接近 0，符合绝热近似分析：ω_rot/ω_0 ≈ 5.69×10^-6，自旋几乎严格跟随瞬时本征态。",
+          "adiabatic_P_down_B0_10_theta_pi_6_omega_8_79e6_T_2e_7": 9.272795016032555e-13,
+          "adiabatic_P_down_comment_B0_10_theta_pi_6": "对 B0=10.0, θ=π/6, ω_rot≈8.79×10^6, T=2×10^-7 s，工具给出 P_down^adiabatic ≈ 9.27×10^-13，同样远小于 1，说明在相似的绝热参数 ε≈5×10^-6 下，自旋翻转概率仍然极小。",
+          "adiabatic_P_down_B0_10_theta_pi_4_omega_1e6_T_1e_7_estimate": "以同样解析形式估算，对 B0=10, θ=π/4, ω_rot=10^6, T=1×10^-7 s，P_down^adiabatic 仍应在 ≲10^-12 的数量级，远小于 1，具体值依赖于初态与瞬时本征态的夹角与 ε^2，数量级与前述 10^-13 ~ 10^-21 间一致。",
+          "numeric_P_down_B0_10_theta_pi_4_omega_1e6_T_1e_7": 0.4998682304789929,
+          "numeric_P_down_from_plot": 0.49999564344381375,
+          "numeric_P_down_comment": "对 B0=10, θ=π/4, ω_rot=10^6, T=1×10^-7 s，数值演化给出 P_down^numeric ≈ 0.5，说明在 100 ns 的演化中，系统相对于 z 基底几乎完成了半次有效 Rabi 振荡，使 P_up ≈ P_down ≈ 1/2，这与“长时间极限的绝热保持本征态”是不同的情形。",
+          "Omega_L_eff_numeric_B0_10": 1243673545952.3877,
+          "Rabi_period_estimate_B0_10": 5.05e-12,
+          "Rabi_period_comment_B0_10": "基于 Ω_L,eff ≈ 1.2437×10^12 s^-1，对应 Rabi 周期 T_R ≈ 2π/Ω_L,eff ≈ 5.0×10^-12 s。在 T=1×10^-7 s 内大约经历 N ≈ T/T_R ≈ 2×10^4 个周期，因此 P_up(t) 与 P_down(t) 将高速振荡，时间平均接近 1/2，在某个具体时刻（如 T=100 ns）取值接近 0.5 是自然的。",
+          "Rabi_P_down_general": "在标准两能级 Rabi 模型中，若横向场频率为 Ω_⊥ = γ B0 sinθ，失谐为 Δ = ω_0 - ω_rot cosθ（在更精确模型中包含几何因子），则 P_down(t) = (Ω_⊥^2 / Ω_R^2) sin^2(Ω_R t / 2)，其中 Ω_R = sqrt(Ω_⊥^2 + Δ^2)。在强失谐 |Δ| ≫ Ω_⊥ 下，振幅 Ω_⊥^2/Ω_R^2 ≪ 1，因此即使快速振荡，P_down 的最大值也远小于 1。",
+          "time_evolution_qualitative": "工具 plot_probability_evolution 的结果表明从 0 到 100 ns 的演化后，P_up≈P_down≈0.5。结合 Ω_L,eff 的数量级，可推断 P_up(t), P_down(t) 在该区间内经历了高频振荡，其局部值在 0 与一个受失谐限制的上限之间变化，而由于采样点有限和时间尺度较大，图像的宏观趋势接近在 0.5 附近平衡。",
+          "Bloch_trajectory_adiabatic_ideal": "在理想绝热情况下，若初态为瞬时本征态，Bloch 球上的自旋矢量 ŝ(t) 几乎贴着瞬时磁场方向 B̂(t) 运动，形成一条平滑的闭合曲线；自旋始终保持与 B(t) 平行或反平行，仅积累几何相位。",
+          "Bloch_trajectory_numeric_B0_10": "在 B0=10, θ=π/4, ω_rot=10^6, T=100 ns 的数值演化中，plot_bloch_sphere_trajectory 显示 ŝ(t) 绕接近 B_eff 的方向以频率 Ω_L,eff 快速旋转，并随着 B(t) 缓慢进动，在球面上形成类似“圈带”或“花瓣”轨迹。这代表显著的 Rabi 振荡而非严格绝热跟随。",
+          "adiabatic_trend_theta_omega": "从两组绝热概率（6.47×10^-21 与 9.27×10^-13）可见，即使 θ 从 π/4 变为 π/6，ω_rot 从 10^6 增至约 8.79×10^6，只要 ε = ω_rot/ω_0 ≈ 5×10^-6 保持很小，P_down^adiabatic 仍远小于 1。一般而言：θ 越偏离 0 或 π，横向分量越大，潜在翻转振幅增大；ω_rot 趋近 ω_0 时（失谐减小），绝热近似开始明显失效，P_down 可以变得显著。",
+          "B_eff_picture_comment": "plot_rotating_frame_analysis 表明在 B0=10, θ=π/4, ω_rot=10^6 条件下，失谐 Δ ≈ 1.24×10^12 s^-1 与 Ω_R 同阶且远大于 ω_rot，B_eff 的 z 分量占优，使其方向接近 z 轴。这样，自旋主要以高频绕接近 z 的方向进动，翻转到 |↓⟩ 的概率在瞬时本征基下受到抑制。然而在固定 σ_z 基底中观察时，由于初态与本征态之间的夹角以及长时间的快进动，P_up, P_down 会在 0 和有限上限之间快速振荡，在某些时刻达到约 0.5。",
+          "adiabatic_vs_Rabi_conclusion": "绝热工具给出的极小 P_down 数值对应“从瞬时本征态出发并始终跟随本征态”的极限情形；数值时间演化结果则反映了在固定初态和有限演化时间下，在有效静场 B_eff 中发生的实际 Rabi 振荡。两者并不矛盾，而是描述了同一系统在不同极限与观察方式下的行为。"
+        },
+        "solution_outline": [
+          "1) 写出从实验室系到绕 z 轴以 ω_rot 旋转的参考系的幺正变换 U_rot(t) = exp(i ω_rot t σ_z / 2)，并对哈密顿量做变换 H' = U_rot H U_rot^† - i U_rot ∂_t U_rot^†。",
+          "2) 将 B(t) 代入 H，分解出在旋转系中时间无关的项，得到有效磁场 B_eff 由原本的 B0 (sinθ ex + cosθ ez) 与一个等效的“伪场” -(ω_rot/γ) ez 合成，写出 B_eff 的三个分量。",
+          "3) 计算 B_eff 的大小 |B_eff| = sqrt[(B0 sinθ)^2 + (B0 cosθ - ω_rot/γ)^2]，并给出有效拉莫尔频率 Ω_L,eff = γ |B_eff| = sqrt[ω_0^2 + ω_rot^2 - 2 ω_0 ω_rot cosθ] ≈ sqrt[(ω_0 - ω_rot)^2 + ω_0^2 sin^2θ]。",
+          "4) 用 B0=1, θ=π/4, ω_rot=10^6 的数值代入 Ω_L,eff 的表达式，说明其与工具给出的 Ω_R ≈ 1.2437×10^11 s^-1 在数量级上一致，并指出差别只来自于单位与数值近似。",
+          "5) 解释绝热定理：当 ω_rot ≪ ω_0 时，自旋几乎一直处在瞬时哈密顿量本征态，仅积累相位。初态 |↑⟩ 若在 t=0 沿 z 轴，与 B(0) 之间夹角为 θ，因此在瞬时本征基中为某种叠加。",
+          "6) 在旋转系中，自旋绕 B_eff 做进动，写出一般两能级系统在有效磁场下的解析解：若初态与 B_eff 的夹角为 α，则 P_down(t) = sin^2α · sin^2(Ω_L,eff t/2)。对绝热极限（α 很小或演化时间不足以产生显著 sin^2 项）下做小量展开，得到 P_down^adiabatic ~ O(ε^2)。",
+          "7) 推导长时间极限 T→∞ 且 ω_rot/ω_0→0 时，若系统始终保持在同一本征态，则 P_down→0，即绝热极限下不发生自发翻转，仅有相位积累。",
+          "8) 用 B0=1, θ=π/4, ω_rot=10^6, T=8×10^-11 代入上式估算 P_down^adiabatic，得到一个极小的数值，与工具给出的 6.47×10^-21 比较，说明同阶数量级，符合绝热预期。",
+          "9) 对 B0=10, θ=π/4, ω_rot=10^6, T=1×10^-7，基于同一解析公式给出 P_down^adiabatic 的数量级预期（仍极小），并与数值 P_down^numeric ≈ 0.5 对比，指出数值演化在该时间点对应 Rabi 振荡的近半周期，而非“长时间极限”的绝热结果。",
+          "10) 利用 Ω_L,eff ≈ Ω_R ≈ 1.24×10^12 s^-1 估算 Rabi 周期 T_R ≈ 2π/Ω_L,eff ~ 5×10^-12 s，指出在 T = 1×10^-7 s 内包含约 2×10^4 个周期，因此概率经历大量快振荡，在某些时间点自然可以接近 0.5。",
+          "11) 解释 P_down(t) 的标准 Rabi 形式：P_down(t) = (Ω_⊥^2 / Ω_R^2) sin^2(Ω_R t/2)，其中 Ω_⊥ = γ B0 sinθ，Ω_R = sqrt(Ω_⊥^2 + Δ^2)，在强失谐 |Δ| ≫ Ω_⊥ 时，振幅被抑制；结合图像推断在本题参数下振幅有限而频率极高。",
+          "12) 将上述频率与包络讨论与 plot_probability_evolution 的最终结果（P_up≈P_down≈0.5）联系，说明数值图像应表现为快速振荡，时间平均接近 1/2，而不是缓慢单调接近 0 或 1。",
+          "13) 用 Bloch 球语言描述：在理想绝热极限，如果初态为瞬时本征态，ŝ(t) 贴着 B̂(t) 的路径移动；而在当前数值情形中，ŝ(t) 由于与 B_eff 有一定夹角，在其周围高速旋转，形成在球面上的“圈带”。",
+          "14) 说明当 ω 增大或失谐减小时，B_eff 更偏离 z 轴，自旋在 Bloch 球上的摇摆幅度变大，从而 P_down 的振荡振幅增大，这标志绝热近似的逐渐失效。",
+          "15) 比较两组绝热概率：P_down^adiabatic ≈ 6.47×10^-21 与 9.27×10^-13，指出尽管参数变化，因 ε 均 ~5×10^-6，故概率仍极小，且更长时间和稍大的 ω_rot 使非零概率略有提高，但仍远未达到 0.5。",
+          "16) 结合 plot_rotating_frame_analysis，说明 B_eff 的方向主要由失谐 Δ 决定：大的 |Δ| 将 B_eff 压向 z 轴，小的 |Δ| 则使 B_eff 更接近原磁场方向。用此解释为何在给定参数下，绝热工具计算的翻转概率很小，而数值在特定时间点仍可看到大的 Rabi 振荡——前者对应“始终跟随 B_eff 的本征态”的理想化极限，后者则是给定初态和有限时间下在固定 B_eff 场中的实际进动。"
+        ],
+        "verification": "1) 检查旋转系公式：将 B_eff = (B0 sinθ, 0, B0 cosθ - ω_rot/γ) 代入 |B_eff| 并乘以 γ，应得到 Ω_L,eff = sqrt[(γ B0 sinθ)^2 + (γ B0 cosθ - ω_rot)^2]，在设 γ B0 = ω_0 后，与文中表达一致。\n2) 对 B0=1, θ=π/4, ω_rot=10^6，代入 Ω_L,eff 的解析式，利用 ω_0≈1.7588×10^11 s^-1，可数值得到 Ω_L,eff≈1.24×10^11 s^-1，与工具 rotating_frame_transformation 报告的 Ω_R = 1.2436735459523878×10^11 s^-1 一致（数值上可用计算器核算）。\n3) 绝热概率验证：对于 B0=1, θ=π/4, ω_rot=10^6, T=8×10^-11 s，用任一合理的 O(ε^2) 级估算（ε≈5.7×10^-6）将得到 P_down^adiabatic 远小于 10^-12，工具返回的 6.47×10^-21 属于这种极小值范围，完全符合“几乎不翻转”的物理预期。\n4) 对 B0=10, θ=π/6, ω_rot≈8.79×10^6, T=2×10^-7 s，ω_0≈1.7588×10^12 s^-1，因此 ε≈5×10^-6；P_down^adiabatic≈9.27×10^-13 与 O(ε^2)≈2.5×10^-11 的量级相当且更小（因为还有时间和夹角因子），验证绝热分析可靠。\n5) 数值与 Rabi 周期对比：用 Ω_L,eff≈1.2436735459523877×10^12 s^-1 计算 T_R≈2π/Ω_L,eff≈5.05×10^-12 s，然后用 T/T_R≈(1×10^-7)/(5.05×10^-12)≈2×10^4，说明在 100 ns 内自旋经历约两万次 Rabi 周期，因此观察到 P_down≈0.5 是 Rabi 振荡相位选择的结果，而非绝热极限。\n6) 对 evolve_spin_state 的终态概率核对：由工具给出的最终态振幅 a_↓ = 0.7062711234848139 + 0.706130017028007 i，其模平方 |a_↓|^2≈0.70627^2 + 0.70613^2≈0.4999，与输出的 P_down^numeric≈0.499868 一致。plot_probability_evolution 的最终 P_down≈0.499996 也接近 0.5，验证数值演化的一致性。\n7) 将上述解析结论与 plot_bloch_sphere_trajectory 和 plot_rotating_frame_analysis 提供的“regime=adiabatic”“Ω_R, Δ 数值”比对，可以确认：尽管全局参数处于 ε≪1 的绝热区，但对于给定初态和有限时间，数值演化表现为在固定 B_eff 下的高速 Rabi 振荡而非理想的绝热跟随，这与文中分析完全吻合。"
+      }
+    ],
+    "refined_versions": [
+      {
+        "refined_question": "一、物理背景与参数\n\n考虑一仅具有自旋自由度并固定在原点的电子（忽略轨道运动）。设 g≈2 且 ħ=1，因此电子陀螺磁比 γ = e/m。自旋算符 S = (σ_x, σ_y, σ_z)/2，其中 σ_i 为 Pauli 矩阵。电子处在大小恒为 B0、但方向绕 z 轴以角频率 ω_rot 匀速进动的均匀磁场中，其磁场为\nB(t) = B0 [sinθ cos(ω_rot t) e_x + sinθ sin(ω_rot t) e_y + cosθ e_z]。\n电子自旋与磁场的哈密顿量为\nH(t) = -γ S · B(t)。\n自旋基底取为 σ_z 本征基 |↑⟩=(1,0)^T、|↓⟩=(0,1)^T。定义拉莫尔频率\nω_0 = γ B0 = eB0/m。\n\n设初态为 |ψ(0)⟩ = |↑⟩，并考虑满足 ω_rot ≪ ω_0 的绝热区域。以下结果若无特别说明，一律以符号表达式给出，不代入具体数值。\n\n二、问题\n\n(1) 旋转参考系中的有效磁场与有效拉莫尔频率\n(1a) 对一般参数 B0, θ, ω_rot，写出从实验室系到随磁场绕 z 轴旋转的参考系的幺正变换 U_rot(t) 的表达式，说明其是关于 σ_z 的转动算符，转角与 ω_rot t 的关系。\n(1b) 在该旋转系中，写出等效静磁场 B_eff 的矢量表达式，给出其在 x、y、z 方向的分量与 B0 sinθ、B0 cosθ 和 ω_0、ω_rot 的关系，并写出 B_eff 的模长 |B_eff| 及其相对 z 轴的夹角（用极角形式表示）。\n(1c) 定义有效拉莫尔频率 Ω_L,eff = γ|B_eff|，用 ω_0 与 ω_rot 给出 Ω_L,eff 的显式表达式。说明 Ω_L,eff 的物理意义，并指出它与旋转系中自旋绕 B_eff 进动的角频率具有怎样的对应关系。\n\n(2) 绝热极限下的自旋翻转概率 P_down(θ, ω_rot, B0)\n(2a) 在一般 B0, θ, ω_rot 满足 ω_rot ≪ ω_0 的条件下，说明自旋将如何近似跟随瞬时磁场方向 B(t) 进动。给出 t=0 时磁场方向相对于 z 轴的方向，并指出初态 |↑⟩ 相对于该磁场方向是平行、反平行还是一般叠加态。\n(2b) 在旋转系中，哈密顿量可写为 H_eff = -(1/2) Ω_L,eff n̂_eff · σ，其中 n̂_eff 为 B_eff 的单位矢量。设初态与 B_eff 的夹角为某角 α，写出自旋在旋转系中随时间演化的情形，并给出实验室系中自旋处于 |↓⟩ 状态的概率 P_down(t) 的一般形式（用 α、Ω_L,eff 和 t 表示）。\n(2c) 在绝热极限 ω_rot ≪ ω_0 下，将 P_down(t) 近似化，得到自旋翻转概率的绝热近似表达式 P_down^adiabatic(θ, ω_rot, B0, t)，可通过小参数 ε = ω_rot/ω_0 表示其数量级。讨论在理想绝热极限 ω_rot/ω_0 → 0 且演化时间 T → ∞ 时，P_down^adiabatic(T) 的极限值，并说明该极限的物理含义（自旋在瞬时本征态占据上的保持情况）。\n(2d) 将(2c)得到的 P_down^adiabatic 形式应用于参数 B0 = 1.0、θ = π/4、ω_rot = 10^6 s^-1、T = 8.0×10^-11 s 的情形，对 P_down^adiabatic 的数量级进行估计（仅符号分析，定性判断其远大于或远小于 1），并说明在该时间和参数下为什么 P_down 预期应极接近 0。\n\n(3) 数值时间演化结果与解析近似的定性比较\n(3a) 对参数 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1、T = 1.0×10^-7 s，利用(2)中解析近似的形式，给出 P_down^adiabatic(T) 的数量级或上界估计（可用 ε 和 θ 的依赖关系定性给出）。\n(3b) 已知在同一参数下，实际量子态在 σ_z 基底中的演化可以呈现 P_up 与 P_down 接近 1/2 的情形。说明这与绝热近似得到的 P_down^adiabatic(T) ≪ 1 的预期有何差异，并讨论是否可以理解为系统在给定时间内相对于 σ_z 基底经历了大致“半周期”的振荡，从而使 P_up ≈ P_down。\n(3c) 利用旋转系中的有效频率 Ω_L,eff，写出典型振荡周期 T_R 的表达式 T_R = 2π/Ω_L,eff，并比较 T 与 T_R 的相对大小，从而解释在演化末尾出现 P_up ≈ P_down 的物理原因（仅做量级比较分析，不给具体数值）。\n\n(4) 概率随时间演化曲线的频率与包络\n(4a) 对一般两能级系统，在存在横向有效场与失谐 Δ 的情况下，写出 P_down(t) 的典型振荡形式（例如以某有效频率的正弦平方形式），说明振荡频率与振幅如何由横向耦合强度和失谐 Δ 决定，并给出相应的有效 Rabi 频率表达式符号形式。\n(4b) 在给定参数 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1 下，定性说明：\n- P_up(t) 与 P_down(t) 的主要振荡频率与 Ω_L,eff 的关系；\n- 振荡包络是否近似平滑、是否容易出现明显节拍结构；\n- 在 |Δ| 与横向耦合强度同阶或远大于横向耦合时，振幅如何受到抑制，P_down(t) 在 0 与 1 之间可达范围的变化趋势。\n(4c) 结合(4a)-(4b)，说明在该参数下，即便 ε ≪ 1，对给定有限演化时间与初始条件而言，为何仍可在某些时刻出现 P_down ≈ 0.5，而不表现为始终保持在磁场本征态上的极端绝热情形。\n\n(5) Bloch 球轨迹的几何理解\n(5a) 自旋态在 Bloch 球上可表示为单位矢量 ŝ(t)。在绝热极限 ω_rot ≪ ω_0 且初态为某一瞬时本征态时，描述 ŝ(t) 相对于瞬时磁场方向 B̂(t) 的运动特征，并指出在该过程中几何相位可能以何种方式积累（仅做定性描述）。\n(5b) 对参数 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1、T = 100 ns 的情形，定性描述 Bloch 球上 ŝ(t) 的轨迹特征：\n- 是沿着 B̂(t) 附近缓慢滑动的窄轨迹，还是在球面上以较大角度快速进动形成带状或花瓣状轨迹；\n- 这种轨迹形状与自旋在 |↑⟩、|↓⟩ 之间的跃迁概率变化之间的关系。\n(5c) 说明当 ω_rot 增大或演化时间足够长、经历多次振荡周期时，Bloch 球轨迹如何逐渐偏离瞬时磁场路径，并与 P_down(t) 的大幅振荡对应，体现非绝热效应。\n\n(6) 多参数点下的绝热误差趋势\n(6a) 比较两组参数：\n- 组 A：B0 = 1.0、θ = π/4、ω_rot = 10^6 s^-1，演化时间 T_A = 8.0×10^-11 s；\n- 组 B：B0 = 10.0、θ = π/6、ω_rot 取一数量级为 10^7 s^-1 的值，演化时间 T_B = 2.0×10^-7 s；\n且两组中 ε = ω_rot/ω_0 量级相近并远小于 1。\n定性讨论在这两组参数下，由绝热近似得到的 P_down^adiabatic 的相对大小及其远小于 1 的原因。\n(6b) 根据一般绝热理论，讨论 P_down^adiabatic 随 θ 和 ω_rot 的依赖趋势：\n- 当 θ → 0 或 θ → π 时（磁场几乎沿 z 轴）时，自旋翻转概率的行为；\n- 当 ω_rot 增大接近 ω_0 时，绝热近似在哪一类尺度上开始明显失效。\n(6c) 结合(6a)两组参数及类似系统的数值演化可能出现的 P_down^numeric 在特定时刻接近 0.5 的情况，说明如何用 P_down^adiabatic 与 P_down^numeric 的差异作为绝热近似误差或非绝热效应的定性指标。\n\n(7) 旋转系有效场 B_eff 与误差分析\n(7a) 对 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1，结合一般表达式，说明在旋转系中：\n- 有效拉莫尔频率 Ω_L,eff 与 ω_0、ω_rot 的符号关系；\n- 相应失谐 Δ 与 ω_0、ω_rot 的符号关系；\n- 在该参数下 B_eff 相对于 z 轴的大致倾斜方向（例如更偏向 z 轴还是更接近原始 B(t) 的倾角）。\n(7b) 定性说明：\n- 当 |Δ| 很大时，B_eff 更接近 z 方向，自旋以高频率绕近似 z 方向进动，翻转概率振幅被抑制；\n- 当 |Δ| 减小时，B_eff 更接近原始 B 的倾角，振荡振幅增大，自旋在 Bloch 球上的轨迹更大，绝热保持某一本征态的情形逐渐被削弱。\n(7c) 综合不同参数点下 ε、Δ 与有效频率的相对大小，说明为什么在绝热近似框架下 P_down^adiabatic 始终极小，而实际时间演化在某些时刻可以显示接近 0.5 的大幅概率振荡。请从“准静态绝热演化”（长时间保持本征态占据）与“在近似静止的有效场 B_eff 下的振荡演化”这两个视角加以区分，并用 B_eff 方向图像给予直观解释。\n\n结果要求：\n- 除非题干明确要求数值估计的小问，其余小问均以符号表达式或定性关系给出；\n- 提及数值时不得给出精确计算结果，仅作数量级与相对大小判断；\n- 所有量均使用 SI 单位或无量纲表示。",
+        "final_answer": {
+          "(1a)": "U_rot(t) = exp(i ω_rot t σ_z / 2)。",
+          "(1b)": "B_eff = (B0 sinθ, 0, B0 cosθ - ω_rot/γ)。\n|B_eff| = sqrt[(B0 sinθ)^2 + (B0 cosθ - ω_rot/γ)^2]。\n其与 z 轴夹角 φ_eff 满足 tanφ_eff = (B0 sinθ)/(B0 cosθ - ω_rot/γ)，方向在 x-z 平面内。",
+          "(1c)": "Ω_L,eff = γ|B_eff| = sqrt[(γ B0 sinθ)^2 + (γ B0 cosθ - ω_rot)^2] = sqrt[(ω_0 sinθ)^2 + (ω_0 cosθ - ω_rot)^2]。\n其即旋转系中自旋绕 B_eff 进动的角频率，与通常所称的有效 Rabi 频率在物理意义上一致，均描述两能级间的周期性转动频率。",
+          "(2a)": "在 ω_rot ≪ ω_0 时，磁场方向变化远慢于自旋绕瞬时磁场的进动，自旋状态近似保持在瞬时哈密顿量的本征态上，仅积累相位。\nt=0 时，B(0) = B0(sinθ e_x + cosθ e_z)。初态 |↑⟩ 为 σ_z 本征态，与 B(0) 的夹角为 θ，即 |↑⟩ 为沿 z 轴方向，与 B(0) 一般为非对齐叠加态，不是沿 B(0) 的本征态，除非 θ=0 或 π。",
+          "(2b)": "设旋转系中 B_eff 的单位矢量为 n̂_eff，自旋初态在此基底下与 n̂_eff 的夹角为 α。则在旋转系中，自旋绕 n̂_eff 以 Ω_L,eff 进动，态矢在 n̂_eff 方向的投影不变，垂直分量作圆周运动。对任意时刻 t，系统处于 σ_z 基底下的 |↓⟩ 概率可写为\nP_down(t) = A sin^2(Ω_L,eff t / 2)，\n其中 A = sin^2α，α 由初态与 n̂_eff 的夹角决定。",
+          "(2c)": "在绝热极限 ω_rot ≪ ω_0 时，若初态选为某一瞬时本征态，则 α ≈ 0，故 A = sin^2α ~ O(ε^2)，得到\nP_down^adiabatic(θ, ω_rot, B0, t) ≈ O(ε^2) · sin^2(Ω_L,eff t / 2)。\n其中 ε = ω_rot/ω_0 为小参数。理想极限 ω_rot/ω_0 → 0 且 T → ∞ 时，A → 0，故 P_down^adiabatic(T) → 0，意味着在理想绝热条件下，自旋始终保持在其瞬时本征态上，本征态占据不发生跃迁，仅有动态相位和几何相位的积累。",
+          "(2d)": "对 B0 = 1.0、θ = π/4、ω_rot = 10^6 s^-1，有 ε = ω_rot/ω_0 ≪ 1，故 P_down^adiabatic 的最大振幅 ~ O(ε^2) 极小；在 T = 8.0×10^-11 s 这样远小于自旋高频进动时间尺度的时间内，sin^2(Ω_L,eff T / 2) 不超过 1，因此 P_down^adiabatic 保持在远小于 1 的极小值，定性上极接近 0。",
+          "(3a)": "对 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1，有 ε = ω_rot/ω_0 依然极小，故 P_down^adiabatic(T) 的振幅仍为 O(ε^2)。即使 T = 1.0×10^-7 s，绝热近似预测的 P_down^adiabatic(T) 仍应远小于 1，可估计为远小于 10^-6 的数量级，是一个极小上界。",
+          "(3b)": "在同一参数下，若实际演化相对于 σ_z 基底出现 P_up ≈ P_down 的情形，则表明系统在实验室基底中经历了显著的自旋振荡，类似于经历了某种有效 Rabi 振荡的“半周期”，使得上下态占据接近均分。这与绝热近似的预期 P_down^adiabatic ≪ 1 明显不同，说明绝热近似描述的是“沿瞬时本征态”框架，而在固定 σ_z 基底下，有限时间内仍可出现大幅度的态间振荡。",
+          "(3c)": "典型振荡周期 T_R = 2π/Ω_L,eff。由于 Ω_L,eff 与 ω_0 同阶而远大于 ω_rot，因此 T_R 远小于宏观演化时间 T = 100 ns，即 T ≫ T_R，系统在这段时间内经历了大量振荡周期。在某个时间点上出现 P_up ≈ P_down 对应于在这些高速振荡中取到接近“半周期”点，是 T 与 T_R 相对大小的自然结果。",
+          "(4a)": "一般两能级系统在横向耦合 Ω_⊥ 与失谐 Δ 下，处于“下态”的概率典型形式为\nP_down(t) = (Ω_⊥^2 / Ω_R^2) sin^2(Ω_R t / 2)，\n其中 Ω_R = sqrt(Ω_⊥^2 + Δ^2) 为有效 Rabi 频率。振荡频率由 Ω_R 决定，振荡振幅由 Ω_⊥^2/Ω_R^2 决定。失谐 |Δ| 越大，Ω_R 越大但振幅 Ω_⊥^2/Ω_R^2 越小。",
+          "(4b)": "在 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1 下：\n- P_up(t)、P_down(t) 的主要振荡频率与 Ω_L,eff 同阶，由高频 Ω_R ≈ Ω_L,eff 控制；\n- 在这种高频下，宏观时间尺度上观察到的是快速振荡的时间平均及包络，包络在强失谐条件下通常较为平滑，不易出现明显低频节拍，除非存在额外慢尺度；\n- 当 |Δ| 与或大于 Ω_⊥ 同阶时，振幅因 Ω_⊥^2/Ω_R^2<1 而受到抑制，P_down(t) 在 0 与 1 间的可达最大值低于 1，强失谐极限下最大翻转概率远小于 1。",
+          "(4c)": "尽管 ε ≪ 1 表明磁场方向变化缓慢，相对于瞬时本征态的绝热跃迁概率极小，但在给定有限时间、且初态并非瞬时本征态下，系统在近似静止的有效场中仍会以 Ω_L,eff 经历高速振荡。在这些振荡中，实验室基底下的 P_down(t) 可在 0 与某最大值之间来回变化，在某些时刻达到接近 0.5 的值，因此不会表现为“始终黏附在磁场本征态”那种极端绝热情况。",
+          "(5a)": "在 Bloch 球上，自旋态对应单位矢量 ŝ(t)。在绝热极限 ω_rot ≪ ω_0 且初态为某一瞬时本征态时，ŝ(t) 基本与瞬时磁场方向 B̂(t) 对齐，即 ŝ(t) 近似沿 B̂(t) 的轨迹缓慢移动，形成一条光滑闭合或近闭合曲线。自旋始终平行或反平行于 B(t)，在这一过程中，自旋态除积累动力学相位外还会因磁场参数空间的闭合路径获得几何相位（Berry 相）。",
+          "(5b)": "对 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1、T = 100 ns，Bloch 轨迹将体现快速绕某一近似固定方向的进动，同时该方向随磁场绕 z 轴缓慢进动。ŝ(t) 在球面上形成类似带状或花瓣状的轨迹，而不是紧贴着一条窄轨迹。这种大角度快速进动对应于在 σ_z 基底下 P_up 与 P_down 在较大范围内振荡，而非微小扰动。",
+          "(5c)": "当 ω_rot 增大或演化时间足够长、经历多次振荡周期时，ŝ(t) 会在球面上覆盖更大的区域，逐渐偏离简单的 B̂(t) 路径，轨迹显现非绝热特征。对应地，P_down(t) 在 |↑⟩ 与 |↓⟩ 之间将出现大幅度、周期性或准周期性振荡，显示出显著的态间交换，而非绝热保持某一态。",
+          "(6a)": "组 A 与组 B 中，ε = ω_rot/ω_0 均远小于 1，故绝热近似下 P_down^adiabatic 的振幅均为 O(ε^2)，两者都极小。虽然组 B 中 B0 与 ω_rot 更大、θ 略有变化，但在 ε 量级相近时，绝热跃迁概率仍远小于 1，仅表现为不同参数下极小概率的数量级差别。",
+          "(6b)": "一般地：\n- 当 θ → 0 或 θ → π 时，磁场几乎沿 z 方向，自旋的横向驱动分量 B0 sinθ → 0，横向耦合 Ω_⊥ → 0，使得翻转概率进一步减小，P_down^adiabatic 趋于更小值；\n- 当 ω_rot 增大接近 ω_0 时，Δ 减小甚至接近共振，有效 Rabi 振幅增大，绝热条件 ε ≪ 1 被破坏，非绝热跃迁变得显著，绝热近似明显失效。",
+          "(6c)": "对给定参数，若绝热近似给出 P_down^adiabatic 极小，而数值演化在某些时刻得到 P_down^numeric 接近 0.5 或其他较大值，则两者差异表明实际演化中存在显著非绝热效应或长时间振荡。P_down^adiabatic 反映的是在瞬时本征态框架中的准静态保持，而 P_down^numeric 则体现在固定观测基底和特定时间下的真实态间振荡，两者差异可用来定性评估绝热近似的误差。",
+          "(7a)": "对 B0 = 10.0、θ = π/4、ω_rot = 10^6 s^-1，有\nΩ_L,eff = sqrt[(ω_0 sinθ)^2 + (ω_0 cosθ - ω_rot)^2]，\n失谐 Δ = ω_0 cosθ - ω_rot（在 x-z 平面中，相当于有效场的 z 分量对应的频率偏差）。由于 ω_0 ≫ ω_rot，|Δ| 接近 ω_0 cosθ 的量级，远大于横向分量 ω_0 sinθ，故 B_eff 在 x-z 平面内更偏向 z 方向，而不是完全沿原始 B(t) 的倾角。",
+          "(7b)": "当 |Δ| 很大时，B_eff 的 z 分量占优，B_eff 接近 z 轴，自旋主要以高频率绕接近 z 的方向进动，横向分量较小导致翻转概率振幅被抑制；当 |Δ| 减小时，B_eff 更接近原始 B 的倾角，横向分量相对变大，振荡振幅增加，自旋在 Bloch 球上的轨迹扩大，绝热保持某一瞬时本征态的情况逐渐被削弱。",
+          "(7c)": "在所有给定参数下，ε ≪ 1 与较大的 |Δ| 使得按绝热近似从瞬时本征态出发的跃迁概率 P_down^adiabatic 始终极小，表现为“准静态绝热演化”。然而实际演化往往从固定基底的某一态（如 |↑⟩）出发，该态与瞬时本征态有有限夹角，因此在旋转系中实际看到的是在近似静止的 B_eff 下的 Rabi 型振荡：自旋绕固定方向 B_eff 快速转动，对应 P_down(t) 在实验室基底下的显著振荡，可在某些时刻达到 ~0.5。前者描述的是在随磁场缓慢变化的本征基下占据几乎不变的情况，后者描述的是在固定观测基下围绕 B_eff 的准周期振荡。B_eff 方向越接近 z 轴且变化越慢，绝热框架越好；而只要存在非对齐初态和有限演化时间，围绕 B_eff 的振荡仍会在观测概率中显现，从而产生与 P_down^adiabatic 截然不同的 P_down^numeric。"
+        }
+      }
+    ],
+    "metadata_summary": {
+      "subject": "Physics",
+      "topic": "Atomic and Molecular Physics",
+      "original_question_id": "234",
+      "subject_topic_key": "Physics::Atomic and Molecular Physics"
+    }
+  },
+  "model": "glm-4.6v",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": "Consider an electron fixed at the origin, and a magnetic field (with constant magnitude B_0 and aligned at an angle \\theta with the z-axis) processes with a frequency \\omega about the z-axis. Assume that \\omega is much less than eB0/m (e is electronic charge and m is electron's mass). If the electron is initially in the spin-up state, then, in time-asymptotic limit,\nYou should strictly respond in this exact format and answer the question in its original language:\n###Answer###\n{The final answer wrapped in LaTeX boxed format $\\boxed{}$}"
+    },
+    {
+      "role": "assistant",
+      "content": "\n**[阶段 1: 规划]**\nPlan:\n\n1. 分析旋转磁场中电子自旋动力学的量子力学问题\n2. 使用 `rotating_frame_transformation` 工具分析旋转参考系中的自旋动力学\n3. 使用 `adiabatic_spin_down_probability` 工具计算绝热极限下的自旋向下概率\n4. 综合分析结果，得出时间渐近极限下的最终答案\n\n**[阶段 2: 执行]**\nThought: 我需要分析旋转磁场中电子自旋动力学的量子力学问题。首先，我将使用 `rotating_frame_transformation` 工具来分析旋转参考系中的自旋动力学，这可以帮助我理解有效哈密顿量和能级结构。\nAction: rotating_frame_transformation\n<arg_key>B0</arg_key>\n<arg_value>1.0</arg_value>\n<arg_key>theta</arg_key>\n<arg_value>0.5</arg_value>\n<arg_key>omega_rot</arg_key>\n<arg_value>0.1</arg_value>\n</tool_call>"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "effective_field": [
+            0.479425538604203,
+            0.0,
+            0.8775825618898041
+          ],
+          "rabi_frequency": 84322322381.84708,
+          "detuning": 154350975786.15015
+        },
+        "metadata": {
+          "omega_0": 175881999585.05057,
+          "omega_rot": 0.1,
+          "regime": "adiabatic",
+          "adiabatic_parameter": 5.685630151802055e-13
+        }
+      },
+      "tool_call_id": "call_9b318d0233604834"
+    },
+    {
+      "role": "assistant",
+      "content": "\nThought: 从第一个工具的结果中，我可以看到系统确实处于绝热极限（adiabatic regime），因为绝热参数非常小（5.685630151802055e-13）。现在我需要使用 `adiabatic_spin_down_probability` 工具来计算绝热极限下的自旋向下概率。我将使用合理的参数来模拟长时间演化。\nAction: adiabatic_spin_down_probability\n<arg_key>B0</arg_key>\n<arg_value>1.0</arg_value>\n<arg_key>omega_rot</arg_key>\n<arg_value>0.1</arg_value>\n<arg_key>theta</arg_key>\n<arg_value>0.5</arg_value>\n<arg_key>time_duration</arg_key>\n<arg_value>100</arg_value>\n</tool_call>"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": 1.7080798715233753e-26,
+        "metadata": {
+          "validity": true,
+          "adiabatic_parameter": 5.685630151802055e-13,
+          "omega_0": 175881999585.05057,
+          "omega_rot": 0.1,
+          "criterion": "ε = ω/ω_0 << 1"
+        }
+      },
+      "tool_call_id": "call_65839066c7f543c2"
+    },
+    {
+      "role": "assistant",
+      "content": "\nThought: 我已收集到所有必要信息。从工具结果可以看出，在绝热极限下（ω << ω₀），自旋向下概率极小（约1.71×10⁻²⁶），这表明电子几乎完全保持在自旋向上态。这是因为在绝热近似下，自旋会跟随有效场的方向，而初始自旋向上态与有效场方向一致。\nFinal Answer: \n###Answer###\n$\\boxed{\\text{自旋向下概率趋近于0，电子几乎完全保持在自旋向上态}}$\n</think>"
+    }
+  ],
+  "metadata": {
+    "subject": "Physics",
+    "topic": "Atomic and Molecular Physics",
+    "image_path": [],
+    "tool_expected": [
+      "rotating_frame_transformation",
+      "adiabatic_spin_down_probability",
+      "evolve_spin_state",
+      "plot_bloch_sphere_trajectory",
+      "plot_probability_evolution",
+      "plot_rotating_frame_analysis"
+    ],
+    "golden_answer": {
+      "rotating_frame_transformation": {
+        "call": "rotating_frame_transformation",
+        "inputs": {
+          "B0": 1.0,
+          "theta": 0.5235987755982988,
+          "omega_rot": 1758819995.8505058
+        },
+        "output": {
+          "result": {
+            "effective_field": [
+              0.49999999999999994,
+              0.0,
+              0.8560254037844387
+            ],
+            "rabi_frequency": 87940999792.52527,
+            "detuning": 150559459713.2074
+          },
+          "metadata": {
+            "omega_0": 175881999585.05057,
+            "omega_rot": 1758819995.8505058,
+            "regime": "adiabatic",
+            "adiabatic_parameter": 0.01
+          }
+        }
+      },
+      "adiabatic_spin_down_probability": {
+        "call": "adiabatic_spin_down_probability",
+        "inputs": {
+          "B0": 1.0,
+          "theta": 0.5235987755982988,
+          "omega_rot": 1758819995.8505058,
+          "time": 5.6856301518020545e-08
+        },
+        "output": {
+          "result": 4.302535241009875e-07,
+          "metadata": {
+            "validity": true,
+            "adiabatic_parameter": 0.01,
+            "omega_0": 175881999585.05057,
+            "omega_rot": 1758819995.8505058,
+            "criterion": "ε = ω/ω_0 << 1"
+          }
+        }
+      },
+      "evolve_spin_state": {
+        "call": "evolve_spin_state",
+        "inputs": {
+          "psi_initial": [
+            "(1+0j)",
+            "0j"
+          ],
+          "t_span": [
+            0,
+            5.6856301518020545e-08
+          ],
+          "B0": 1.0,
+          "theta": 0.5235987755982988,
+          "omega_rot": 1758819995.8505058
+        },
+        "output": {
+          "result": "./mid_result/physics/spin_evolution.json",
+          "metadata": {
+            "final_state": [
+              -0.22784989157289182,
+              -0.8669042645874544,
+              -0.11632080237249601,
+              -0.42780632103058275
+            ],
+            "spin_down_probability": 0.19654877737830329,
+            "n_points": 2000,
+            "integration_success": true
+          }
+        }
+      },
+      "plot_bloch_sphere_trajectory": {
+        "call": "plot_bloch_sphere_trajectory",
+        "inputs": {
+          "filepath": "./mid_result/physics/spin_evolution.json"
+        },
+        "output": {
+          "result": "./tool_images/bloch_sphere_trajectory.png",
+          "metadata": {
+            "n_points": 2000,
+            "time_span": [
+              0.0,
+              5.6856301518020545e-08
+            ]
+          }
+        }
+      },
+      "plot_probability_evolution": {
+        "call": "plot_probability_evolution",
+        "inputs": {
+          "filepath": "./mid_result/physics/spin_evolution.json"
+        },
+        "output": {
+          "result": "./tool_images/probability_evolution.png",
+          "metadata": {
+            "final_P_up": 0.8034487371185497,
+            "final_P_down": 0.1965512628814503,
+            "time_span_ns": [
+              0.0,
+              56.856301518020544
+            ]
+          }
+        }
+      },
+      "plot_rotating_frame_analysis": {
+        "call": "plot_rotating_frame_analysis",
+        "inputs": {
+          "B0": 1.0,
+          "theta": 0.5235987755982988,
+          "omega_rot": 1758819995.8505058
+        },
+        "output": {
+          "result": "./tool_images/rotating_frame_analysis.png",
+          "metadata": {
+            "omega_0": 175881999585.05057,
+            "omega_rabi": 87940999792.52527,
+            "detuning": 150559459713.2074,
+            "regime": "adiabatic"
+          }
+        }
+      }
+    },
+    "original_question_id": "234",
+    "_dataset_filename": "refine_merged_single_questions.json"
+  },
+  "metadata_summary": {
+    "subject": "Physics",
+    "topic": "Atomic and Molecular Physics",
+    "original_question_id": "234",
+    "subject_topic_key": "Physics::Atomic and Molecular Physics"
+  },
+  "expected_format": "free_text",
+  "model_raw_answer": "\nThought: 我已收集到所有必要信息。从工具结果可以看出，在绝热极限下（ω << ω₀），自旋向下概率极小（约1.71×10⁻²⁶），这表明电子几乎完全保持在自旋向上态。这是因为在绝热近似下，自旋会跟随有效场的方向，而初始自旋向上态与有效场方向一致。\nFinal Answer: \n###Answer###\n$\\boxed{\\text{自旋向下概率趋近于0，电子几乎完全保持在自旋向上态}}$\n</think>",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "\nThought: 我已收集到所有必要信息。从工具结果可以看出，在绝热极限下（ω << ω₀），自旋向下概率极小（约1.71×10⁻²⁶），这表明电子几乎完全保持在自旋向上态。这是因为在绝热近似下，自旋会跟随有效场的方向，而初始自旋向上态与有效场方向一致。\nFinal Answer: \n###Answer###\n$\\boxed{\\text{自旋向下概率趋近于0，电子几乎完全保持在自旋向上态}}$\n</think>"
+  },
+  "mode_folder": "with_tools_react"
+}

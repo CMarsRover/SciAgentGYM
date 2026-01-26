@@ -1,0 +1,920 @@
+{
+  "class_name": "Unknown",
+  "description": "获取或创建计算器实例",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "optical_path_difference",
+        "description": "计算光程差（支持斜入射）",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率，通常为空气=1.0"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "thickness",
+            "wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of optical_path_difference function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "interference_condition",
+        "description": "计算干涉条件（增强版）",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "thickness",
+            "wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of interference_condition function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "min_thickness_for_constructive_reflection",
+        "description": "计算反射光相长干涉的最小厚度（考虑半波损失）",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of min_thickness_for_constructive_reflection function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "min_thickness_for_constructive_transmission",
+        "description": "计算透射光相长干涉的最小厚度",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of min_thickness_for_constructive_transmission function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "min_antireflection_thickness",
+        "description": "计算最小增透厚度（λ/4n）",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "wavelength",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of min_antireflection_thickness function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "wavelength_for_constructive",
+        "description": "计算相长干涉的波长",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "order": {
+              "type": "number",
+              "description": "干涉级次，默认为1"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "thickness",
+            "order",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of wavelength_for_constructive function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "is_constructive",
+        "description": "判断是否为相长干涉",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "thickness",
+            "wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of is_constructive function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "is_destructive",
+        "description": "判断是否为相消干涉",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "thickness",
+            "wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of is_destructive function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "reflectance_spectrum",
+        "description": "计算反射光谱",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "wavelength_range": {
+              "type": "number",
+              "description": "波长范围，单位：纳米 (nm)，默认(400, 700)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            },
+            "num_points": {
+              "type": "number",
+              "description": "计算点数，默认300"
+            }
+          },
+          "required": [
+            "thickness",
+            "wavelength_range",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate",
+            "num_points"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of reflectance_spectrum function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "predict_color",
+        "description": "预测薄膜颜色",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "thickness",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of predict_color function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_thickness_symbolically",
+        "description": "使用符号计算求解厚度",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "interference": {
+              "type": "string",
+              "description": "干涉类型，可选\"constructive\"或\"destructive\"，默认\"destructive\""
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "wavelength",
+            "interference",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of solve_thickness_symbolically function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find_optimal_thickness",
+        "description": "数值优化求解最优厚度",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "target_wavelength": {
+              "type": "number",
+              "description": "目标波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "target_wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of find_optimal_thickness function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_complete_problem",
+        "description": "综合求解薄膜干涉问题",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "wavelength",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of solve_complete_problem function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_intensity_vs_thickness",
+        "description": "绘制强度随厚度的变化",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "wavelength": {
+              "type": "number",
+              "description": "波长，单位：纳米 (nm)"
+            },
+            "max_thickness": {
+              "type": "number",
+              "description": "最大厚度，单位：纳米 (nm)，默认1000"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            },
+            "num_points": {
+              "type": "number",
+              "description": "计算点数，默认500"
+            }
+          },
+          "required": [
+            "wavelength",
+            "max_thickness",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate",
+            "num_points"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_intensity_vs_thickness function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_reflectance_spectrum",
+        "description": "绘制反射光谱",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness": {
+              "type": "number",
+              "description": "薄膜厚度，单位：纳米 (nm)"
+            },
+            "wavelength_range": {
+              "type": "number",
+              "description": "波长范围，单位：纳米 (nm)，默认(400, 700)"
+            },
+            "angle": {
+              "type": "number",
+              "description": "入射角，单位：度，默认0为垂直入射"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            },
+            "title": {
+              "type": "string",
+              "description": "图表标题，默认\"反射光谱\""
+            }
+          },
+          "required": [
+            "thickness",
+            "wavelength_range",
+            "angle",
+            "n_air",
+            "n_film",
+            "n_substrate",
+            "title"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_reflectance_spectrum function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_thickness_wavelength_heatmap",
+        "description": "绘制厚度-波长热图",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "thickness_range": {
+              "type": "number",
+              "description": "厚度范围，单位：纳米 (nm)，默认(0, 1000)"
+            },
+            "wavelength_range": {
+              "type": "number",
+              "description": "波长范围，单位：纳米 (nm)，默认(400, 700)"
+            },
+            "n_air": {
+              "type": "number",
+              "description": "入射介质折射率"
+            },
+            "n_film": {
+              "type": "number",
+              "description": "薄膜折射率"
+            },
+            "n_substrate": {
+              "type": "number",
+              "description": "基底折射率"
+            }
+          },
+          "required": [
+            "thickness_range",
+            "wavelength_range",
+            "n_air",
+            "n_film",
+            "n_substrate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "Return value of plot_thickness_wavelength_heatmap function",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Function execution result"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/ThinFilmInterference/thin_film_func_expose.py"
+      }
+    }
+  ]
+}

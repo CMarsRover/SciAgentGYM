@@ -1,0 +1,38 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_stellar_distance",
+            "description": "计算恒星距离的完整流程（考虑星际消光）",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m_obs": {
+                        "type": "number",
+                        "description": "观测视星等（mag）"
+                    },
+                    "M_abs": {
+                        "type": "number",
+                        "description": "绝对星等（mag）"
+                    },
+                    "e_bv": {
+                        "type": "number",
+                        "description": "B-V色余（mag），默认0"
+                    },
+                    "rv": {
+                        "type": "number",
+                        "description": "消光比值，默认3.1"
+                    }
+                },
+                "required": [
+                    "m_obs",
+                    "M_abs"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/astronomy_toolkit_5.py"
+        }
+    }
+]

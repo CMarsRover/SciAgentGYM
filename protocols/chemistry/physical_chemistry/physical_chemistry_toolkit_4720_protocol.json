@@ -1,0 +1,252 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "ideal_gas_calculation",
+            "description": "理想气体状态方程计算工具，可以计算压力、体积、温度、物质的量中的任意一个，给定其他三个参数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pressure": {
+                        "type": "number",
+                        "description": "气体压力，单位由units['P']指定，默认为Pa"
+                    },
+                    "volume": {
+                        "type": "number",
+                        "description": "气体体积，单位由units['V']指定，默认为m³"
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "气体温度，单位由units['T']指定，默认为K"
+                    },
+                    "gas_constant": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "物质的量，单位由units['n']指定，默认为mol"
+                    },
+                    "units": {
+                        "type": "object",
+                        "description": "各参数的单位，支持常见单位转换",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "pressure",
+                    "volume",
+                    "temperature"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/physical_chemistry_toolkit_4720.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "reaction_kinetics_solver",
+            "description": "求解化学反应动力学微分方程，模拟反应物浓度随时间的变化。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "rate_constants": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "反应速率常数，如果temperature_dependent=True，则忽略此参数"
+                    },
+                    "initial_concentrations": {
+                        "type": "object",
+                        "description": "各物质的初始浓度 (mol/L)",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    },
+                    "time_span": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "求解的时间范围 (s)，如 (0, 1000)"
+                    },
+                    "reaction_model": {
+                        "type": "object",
+                        "description": "自定义反应模型函数，接收参数 (t, y, k)，其中t为时间，y为浓度向量，k为速率常数"
+                    },
+                    "temperature_dependent": {
+                        "type": "boolean",
+                        "description": "是否考虑温度对反应速率的影响，默认为False"
+                    },
+                    "activation_energies": {
+                        "type": "object",
+                        "description": "各反应的活化能 (J/mol)，当temperature_dependent=True时需要",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    },
+                    "pre_exponential_factors": {
+                        "type": "object",
+                        "description": "各反应的指前因子，当temperature_dependent=True时需要",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "反应温度 (K)，当temperature_dependent=True时使用"
+                    }
+                },
+                "required": [
+                    "rate_constants",
+                    "initial_concentrations",
+                    "time_span"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/physical_chemistry_toolkit_4720.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "quantum_energy_levels",
+            "description": "计算量子系统的能级。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "system_type": {
+                        "type": "string",
+                        "description": "量子系统类型，可选值：'particle_in_box', 'harmonic_oscillator', 'hydrogen_atom'"
+                    },
+                    "parameters": {
+                        "type": "object",
+                        "description": "系统参数，根据system_type不同而不同",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    },
+                    "n_levels": {
+                        "type": "integer",
+                        "description": "计算的能级数量，默认为5"
+                    }
+                },
+                "required": [
+                    "system_type",
+                    "parameters"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/physical_chemistry_toolkit_4720.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "thermodynamic_properties",
+            "description": "计算热力学系统的基本性质。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "temperature": {
+                        "type": "number",
+                        "description": "系统温度 (K)"
+                    },
+                    "pressure": {
+                        "type": "number",
+                        "description": "系统压力 (Pa)"
+                    },
+                    "volume": {
+                        "type": "number",
+                        "description": "系统体积 (m³)，如果为None且is_ideal_gas=True，将使用理想气体状态方程计算"
+                    },
+                    "moles": {
+                        "type": "number",
+                        "description": "物质的量 (mol)，默认为1.0"
+                    },
+                    "gas_constant": {
+                        "type": "number",
+                        "description": "气体常数，默认为8.314 J/(mol·K)"
+                    },
+                    "is_ideal_gas": {
+                        "type": "boolean",
+                        "description": "是否将系统视为理想气体，默认为True"
+                    },
+                    "van_der_waals_params": {
+                        "type": "object",
+                        "description": "范德华参数，当is_ideal_gas=False时使用，格式为{'a': a值, 'b': b值}",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "required": [
+                    "temperature",
+                    "pressure"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/physical_chemistry_toolkit_4720.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "phase_equilibrium_calculator",
+            "description": "计算多组分系统的相平衡。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "components": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "组分列表，每个组分为一个字典，包含名称、摩尔分数和Antoine方程系数"
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "系统温度 (K)"
+                    },
+                    "pressure": {
+                        "type": "number",
+                        "description": "系统压力 (Pa)，默认为1个标准大气压"
+                    },
+                    "interaction_parameters": {
+                        "type": "object",
+                        "description": "组分间相互作用参数，用于非理想溶液模型",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "计算方法，可选值：'raoult'（拉乌尔定律）, 'modified_raoult'（修正的拉乌尔定律）"
+                    }
+                },
+                "required": [
+                    "components",
+                    "temperature"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/physical_chemistry_toolkit_4720.py"
+        }
+    }
+]

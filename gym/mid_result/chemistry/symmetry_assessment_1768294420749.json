@@ -1,0 +1,11 @@
+{
+  "name": "quinuclidine",
+  "smiles": "C1CN2CCC1CC2",
+  "point_group": "C1",
+  "features": {
+    "has_c3_axis": false,
+    "has_sigma_h": false,
+    "has_c2_perp_axes": false,
+    "planarity_rms": 1.1679473816503707
+  }
+}

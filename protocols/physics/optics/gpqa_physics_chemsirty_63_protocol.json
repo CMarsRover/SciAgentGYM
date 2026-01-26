@@ -1,0 +1,377 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "ensure_dirs",
+            "description": "确保中间结果和图像目录存在。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "save_mid_result",
+            "description": "保存中间结果为JSON文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "学科标签（'physics'/'chemistry'/'materials'等）"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "JSON可序列化的中间结果数据"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不包含路径）"
+                    }
+                },
+                "required": [
+                    "subject",
+                    "data",
+                    "filename"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "build_local_color_db",
+            "description": "构建本地SQLite数据库，包含可见光颜色范围和互补色。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "数据库文件路径"
+                    }
+                },
+                "required": [
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "eV_to_nm",
+            "description": "将能量(eV)换算为波长(nm)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "energy_eV": {
+                        "type": "number",
+                        "description": "能量，单位eV，必须为正且有限"
+                    }
+                },
+                "required": [
+                    "energy_eV"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "nm_to_eV",
+            "description": "将波长(nm)换算为能量(eV)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wavelength_nm": {
+                        "type": "number",
+                        "description": "波长，单位nm，必须为正且有限"
+                    }
+                },
+                "required": [
+                    "wavelength_nm"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "wavelength_to_color_db",
+            "description": "根据本地DB查询波长对应的颜色区间。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wavelength_nm": {
+                        "type": "number",
+                        "description": "波长，单位nm"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "颜色数据库路径"
+                    }
+                },
+                "required": [
+                    "wavelength_nm",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "color_complement_db",
+            "description": "查询颜色的互补色。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "color_name": {
+                        "type": "string",
+                        "description": "颜色名称（如Red/Blue等）"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "颜色数据库路径"
+                    }
+                },
+                "required": [
+                    "color_name",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_photon_parameters",
+            "description": "计算光子的基础参数：波长(nm)、频率(Hz)、波数(cm^-1)、能量(J)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "energy_eV": {
+                        "type": "number",
+                        "description": "光子能量，单位eV，必须为正且有限"
+                    }
+                },
+                "required": [
+                    "energy_eV"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "load_file",
+            "description": "通用文件解析函数：支持json/txt/csv。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "file_path": {
+                        "type": "string",
+                        "description": "文件路径（支持.json/.txt/.csv）"
+                    }
+                },
+                "required": [
+                    "file_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "google_search_tool",
+            "description": "Google检索工具占位：本题不需要外部检索。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "检索查询语句"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "infer_absorbed_color_from_emission_energy",
+            "description": "根据发射能量推断被吸收颜色（利用互补色关系）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "energy_eV": {
+                        "type": "number",
+                        "description": "发射能量，单位eV"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "颜色数据库路径"
+                    }
+                },
+                "required": [
+                    "energy_eV",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "estimate_emission_energy_from_absorbed_color",
+            "description": "从吸收颜色估计发射能量（考虑典型Stokes位移）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "absorbed_color": {
+                        "type": "string",
+                        "description": "吸收颜色名称（如Red/Green等）"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "颜色数据库路径"
+                    },
+                    "stokes_shift_eV": {
+                        "type": "number",
+                        "description": "Stokes位移，单位eV，默认为0.15"
+                    }
+                },
+                "required": [
+                    "absorbed_color",
+                    "db_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "sweep_energy_to_colors",
+            "description": "对一组能量进行批量计算并保存CSV，列：energy_eV,wavelength_nm,emission_color,absorbed_color。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "energies_eV": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "能量列表，单位eV"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "颜色数据库路径"
+                    },
+                    "csv_path": {
+                        "type": "string",
+                        "description": "输出CSV文件路径"
+                    }
+                },
+                "required": [
+                    "energies_eV",
+                    "db_path",
+                    "csv_path"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_visible_spectrum_with_markers",
+            "description": "绘制可见光谱区间并标注指定波长的位置，生成图像文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "markers_nm": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "需标注的波长列表，单位nm（正且有限）"
+                    },
+                    "db_path": {
+                        "type": "string",
+                        "description": "颜色数据库路径"
+                    },
+                    "filepath": {
+                        "type": "string",
+                        "description": "输出图片文件路径"
+                    }
+                },
+                "required": [
+                    "markers_nm",
+                    "db_path",
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/gpqa_physics_chemsirty_63.py"
+        }
+    }
+]

@@ -1,0 +1,25 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "smiles_to_element_composition",
+            "description": "从SMILES获取元素组成信息。将SMILES字符串转换为分子式，然后解析出各元素的个数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "smiles": {
+                        "type": "string",
+                        "description": "分子的SMILES字符串，例如: 'CCO', 'c1ccccc1', 'CC(=O)Oc1ccccc1C(=O)O'"
+                    }
+                },
+                "required": [
+                    "smiles"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/py_smiles.py"
+        }
+    }
+]

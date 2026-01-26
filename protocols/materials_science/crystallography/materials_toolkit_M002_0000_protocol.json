@@ -1,0 +1,359 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "fetch_property_from_database",
+            "description": "从Materials Project（mp-api）获取指定材料的性质或结构。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "材料ID如'mp-XXXX'。"
+                    },
+                    "property_name": {
+                        "type": "string",
+                        "description": "请求的属性名称，如'spacegroup.symbol'或'structure'。"
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "可选，额外需要返回的字段列表。"
+                    }
+                },
+                "required": [
+                    "identifier",
+                    "property_name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_space_group",
+            "description": "基于Pymatgen对结构进行空间群识别。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure_input": {
+                        "type": "string",
+                        "description": "结构来源：CIF文件路径；也可接受pymatgen结构字典。"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称识别数值容差，典型范围1e-5到1e-1。"
+                    }
+                },
+                "required": [
+                    "structure_input"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_xrd_pattern",
+            "description": "计算XRD衍射图谱（2θ-强度）并保存为CSV。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure_input": {
+                        "type": "string",
+                        "description": "CIF路径；也可接受pymatgen结构字典。"
+                    },
+                    "two_theta_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "2θ范围，单位度，[起始角度, 终止角度]。"
+                    },
+                    "radiation": {
+                        "type": "string",
+                        "description": "辐射类型，默认CuKa。"
+                    }
+                },
+                "required": [
+                    "structure_input"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_crystal_structure",
+            "description": "使用ASE绘制晶体结构并保存为PNG。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure_input": {
+                        "type": "string",
+                        "description": "CIF路径；也可接受pymatgen结构字典。"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "图片保存目录。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "可选文件名（不含扩展名）。"
+                    }
+                },
+                "required": [
+                    "structure_input"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_xrd",
+            "description": "可视化XRD图谱（优先Plotly，回退Matplotlib）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "角度列表（度）。"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应强度列表（归一化或原始值）。"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "图片保存目录。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "保存文件名（不含扩展名）。"
+                    }
+                },
+                "required": [
+                    "two_theta",
+                    "intensity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "build_neighbor_graph",
+            "description": "构建晶体邻接图的稀疏矩阵（CSR），按距离阈值连接。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure_input": {
+                        "type": "string",
+                        "description": "CIF路径；也可接受pymatgen结构字典。"
+                    },
+                    "cutoff": {
+                        "type": "number",
+                        "description": "距离阈值（Å），连接距离小于等于该阈值的原子对。"
+                    }
+                },
+                "required": [
+                    "structure_input"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calibrate_spacegroup_notation",
+            "description": "将空间群符号转换到指定目标记号以进行统一比较。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "symbol": {
+                        "type": "string",
+                        "description": "识别得到的空间群符号。"
+                    },
+                    "target": {
+                        "type": "string",
+                        "description": "目标符号。"
+                    }
+                },
+                "required": [
+                    "symbol"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "end_to_end_spacegroup_from_identifier",
+            "description": "组合流程：从数据库获取结构、进行空间群分析，并校准符号。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "材料ID'mp-XXXX'"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称识别容差。"
+                    }
+                },
+                "required": [
+                    "identifier"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "parameter_scan_spacegroup",
+            "description": "对空间群识别进行不同symprec参数的扫描，比较稳定性。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "材料标识，如'mp-328'。"
+                    },
+                    "symprecs": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "容差列表，如[1e-4, 1e-3, 1e-2]。"
+                    }
+                },
+                "required": [
+                    "identifier",
+                    "symprecs"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "batch_fetch_spacegroups",
+            "description": "批量查询多个材料的空间群信息。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifiers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "材料列表，如['Ag2O','Cu2O','ZnO']。"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称识别容差。"
+                    }
+                },
+                "required": [
+                    "identifiers"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_domain_specific",
+            "description": "领域专属可视化工具（材料领域示范：晶体结构或XRD图谱）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "要可视化的数据；'crystal_structure'需{'structure': 路径或结构字典}；'xrd_pattern'需{'two_theta': [...], 'intensity': [...]}。"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "领域标识，示范为'materials'。"
+                    },
+                    "vis_type": {
+                        "type": "string",
+                        "description": "可视化类型：'crystal_structure' 或 'xrd_pattern'。"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "保存目录。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不含扩展名）。"
+                    }
+                },
+                "required": [
+                    "data",
+                    "domain",
+                    "vis_type"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./materials_toolkit_M002_0000.py"
+        }
+    }
+]

@@ -1,0 +1,765 @@
+{
+  "id": 29,
+  "query": "Two electromagnetic (em) fields are applied on the 1s->2p transition of a Hydrogen atomic vapor sample. The field#1 is polarized in z-direction, propagating in x-direction, with an amplitude E1, wave vector amplitude k, and frequency w1. The field#2 is circularly polarized, propagating in z-direction, with an amplitude E2, wave vector amplitude k, and frequency w2. Let us now apply a dc electric field with an amplitude E0 along z-direction to this vapor sample. The absorption probability of both the em fields will be maximum and equal, if the frequency w2 is given by (where a0 is the Bohr radius and e is the electronic charge)",
+  "query_data": {
+    "id": 29,
+    "filename": "gpqa_physics_303_full.json",
+    "question": "Two electromagnetic (em) fields are applied on the 1s->2p transition of a Hydrogen atomic vapor sample. The field#1 is polarized in z-direction, propagating in x-direction, with an amplitude E1, wave vector amplitude k, and frequency w1. The field#2 is circularly polarized, propagating in z-direction, with an amplitude E2, wave vector amplitude k, and frequency w2. Let us now apply a dc electric field with an amplitude E0 along z-direction to this vapor sample. The absorption probability of both the em fields will be maximum and equal, if the frequency w2 is given by (where a0 is the Bohr radius and e is the electronic charge)",
+    "answer": "11.54 e a0 E0",
+    "metadata": {
+      "subject": "Physics",
+      "topic": "Acoustics",
+      "image_path": [],
+      "tool_expected": [
+        "define_parameters",
+        "analyze_dual_field_absorption",
+        "derive_stark_frequency_formula",
+        "define_field_range",
+        "stark_shift_second_order",
+        "plot_stark_energy_levels",
+        "define_frequency_range",
+        "absorption_probability_two_level",
+        "plot_absorption_vs_frequency",
+        "plot_w2_vs_E0"
+      ],
+      "golden_answer": {
+        "define_parameters": {
+          "call": "define_parameters",
+          "inputs": {
+            "E0_SI": 10000000.0,
+            "E1": 100000.0,
+            "E2": 100000.0,
+            "k": 51670931.8024637,
+            "w1": 1.5490555652210962e+16
+          },
+          "output": {
+            "E0_SI": 10000000.0,
+            "E1": 100000.0,
+            "E2": 100000.0,
+            "k": 51670931.8024637,
+            "w1": 1.5490555652210962e+16
+          }
+        },
+        "analyze_dual_field_absorption": {
+          "call": "analyze_dual_field_absorption",
+          "inputs": {
+            "E1": 100000.0,
+            "E2": 100000.0,
+            "E0_SI": 10000000.0
+          },
+          "output": {
+            "result": {
+              "field1": {
+                "target_state": "2p(m=0)",
+                "transition_frequency": 1.5503010533115898e+16,
+                "rabi_frequency": 5988996506.02913,
+                "detuning": -12454880904936.0,
+                "dipole_moment_au": 0.7449355393968701
+              },
+              "field2": {
+                "target_state": "2p(m=±1)",
+                "transition_frequency": 1.5503010533115898e+16,
+                "rabi_frequency": 5988996506.02913,
+                "dipole_moment_au": 0.7449355393968701
+              },
+              "stark_shifts": {
+                "1s_shift_eV": -2.3154431234980418e-08,
+                "2p_shift_eV": -2.9637671980774935e-06
+              }
+            },
+            "metadata": {
+              "E0_SI": 10000000.0,
+              "E1": 100000.0,
+              "E2": 100000.0,
+              "w1": 1.5490555652210962e+16,
+              "condition_for_equal_absorption": "w2 = omega_2p1 and Rabi1 = Rabi2"
+            }
+          }
+        },
+        "derive_stark_frequency_formula": {
+          "call": "derive_stark_frequency_formula",
+          "inputs": {
+            "E0_SI": 10000000.0
+          },
+          "output": {
+            "result": "w2 = w0 + 11.54 * e * a0 * E0 / ℏ",
+            "metadata": {
+              "numerical_coefficient": 11.54,
+              "formula_in_SI": "w2 = w0 + 11.54 * e * a0 * E0 / ℏ",
+              "formula_in_atomic_units": "w2 = w0 + 11.54 * E0 (in atomic units)",
+              "w2_contribution_rad_per_s": 9277718141294.863,
+              "physical_interpretation": "Differential Stark shift between 2p(m=0) and 2p(m=±1)",
+              "expected_answer_format": "11.54 * e * a0 * E0"
+            }
+          }
+        },
+        "define_field_range": {
+          "call": "define_field_range",
+          "inputs": {
+            "E0_min": 0,
+            "E0_max": 20000000.0,
+            "num_points": 50
+          },
+          "output": [
+            0.0,
+            408163.2653061224,
+            816326.5306122449
+          ]
+        },
+        "stark_shift_second_order": {
+          "call": "stark_shift_second_order",
+          "inputs": {
+            "n": 1,
+            "l": 0,
+            "E0": 0.0
+          },
+          "output": {
+            "result": 0.0,
+            "metadata": {
+              "polarizability_SI": 7.419497739649078e-41,
+              "polarizability_au": 4.5,
+              "shift_type": "Quadratic Stark shift (second-order)",
+              "field_strength_SI": 0.0
+            }
+          }
+        },
+        "plot_stark_energy_levels": {
+          "call": "plot_stark_energy_levels",
+          "inputs": {
+            "E0_range": "array(50 points)"
+          },
+          "output": {
+            "result": "./tool_images/stark_energy_levels.png",
+            "metadata": {
+              "num_points": 50,
+              "field_range_MV_per_m": [
+                0.0,
+                20.0
+              ],
+              "energy_range_eV": [
+                -13.605693215611725,
+                -3.4014232807485
+              ]
+            }
+          }
+        },
+        "define_frequency_range": {
+          "call": "define_frequency_range",
+          "inputs": {
+            "omega_center_THz": 2465.3985032894734,
+            "scan_range": "±5%",
+            "num_points": 100
+          },
+          "output": [
+            1.4716027869600414e+16,
+            1.4731674895511738e+16,
+            1.4747321921423062e+16
+          ]
+        },
+        "absorption_probability_two_level": {
+          "call": "absorption_probability_two_level",
+          "inputs": {
+            "detuning": -774527782610548.0,
+            "rabi": 5988996506.02913
+          },
+          "output": {
+            "result": 3.2440765350722286e-12,
+            "metadata": {
+              "generalized_rabi_freq": 774527782633702.8,
+              "is_resonant": false,
+              "max_probability": 5.979076609461381e-11,
+              "detuning": -774527782610548.0,
+              "rabi_frequency": 5988996506.02913
+            }
+          }
+        },
+        "plot_absorption_vs_frequency": {
+          "call": "plot_absorption_vs_frequency",
+          "inputs": {
+            "omega_range": "array(100 points)",
+            "E1": 100000.0,
+            "E2": 100000.0
+          },
+          "output": {
+            "result": "./tool_images/absorption_vs_frequency.png",
+            "metadata": {
+              "resonance_frequencies": {
+                "2p_m0_THz": 2467.380759151115
+              },
+              "peak_absorptions": {
+                "field1": 1.777724578465409e-07,
+                "field2": 1.777724578465409e-07
+              },
+              "rabi_frequencies": {
+                "field1_rad_per_s": 5988996506.02913,
+                "field2_rad_per_s": 5988996506.02913
+              }
+            }
+          }
+        },
+        "plot_w2_vs_E0": {
+          "call": "plot_w2_vs_E0",
+          "inputs": {
+            "E0_range": "array(30 points)"
+          },
+          "output": {
+            "result": "./tool_images/w2_vs_E0.png",
+            "metadata": {
+              "slope_SI": 927771.8141294864,
+              "intercept_SI": 0.0007131804134181852,
+              "expected_coefficient": 11.54,
+              "formula": "w2 = 11.54 * e * a0 * E0 / hbar"
+            }
+          }
+        }
+      },
+      "original_question_id": "303",
+      "_dataset_filename": "refine_merged_single_questions.json"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "stark_shift_second_order",
+          "description": "计算氢原子的二阶（平方）Stark位移。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "n": {
+                "type": "integer",
+                "description": "主量子数"
+              },
+              "l": {
+                "type": "integer",
+                "description": "轨道角动量量子数"
+              },
+              "E0_SI": {
+                "type": "number",
+                "description": "直流电场振幅，单位：V/m"
+              }
+            },
+            "required": [
+              "n",
+              "l",
+              "E0_SI"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py",
+          "resolved_file_path": "toolkits/physics/acoustics/hydrogen_stark_spectroscopy_toolkit_claude_303.py",
+          "resolved_dir": "toolkits/physics/acoustics"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "absorption_probability_two_level",
+          "description": "计算二能级系统的吸收概率。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "detuning": {
+                "type": "number",
+                "description": "频率失谐 (ω - ω₀)，单位：rad/s"
+              },
+              "rabi_freq": {
+                "type": "number",
+                "description": "拉比频率，单位：rad/s"
+              },
+              "interaction_time": {
+                "type": "number",
+                "description": "相互作用时间，单位：秒"
+              }
+            },
+            "required": [
+              "detuning",
+              "rabi_freq",
+              "interaction_time"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_dual_field_absorption",
+          "description": "分析双电磁场对1s->2p跃迁的吸收概率。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "E1": {
+                "type": "number",
+                "description": "场1的振幅，单位：V/m"
+              },
+              "E2": {
+                "type": "number",
+                "description": "场2的振幅，单位：V/m"
+              },
+              "E0_SI": {
+                "type": "number",
+                "description": "直流电场振幅，单位：V/m"
+              },
+              "k": {
+                "type": "number",
+                "description": "波矢幅度，单位：m^-1"
+              },
+              "w1": {
+                "type": "number",
+                "description": "场1的频率，单位：rad/s"
+              }
+            },
+            "required": [
+              "E1",
+              "E2",
+              "E0_SI",
+              "k",
+              "w1"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "derive_stark_frequency_formula",
+          "description": "推导w2关于基本常数的解析公式。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "E0_SI": {
+                "type": "number",
+                "description": "直流电场振幅，单位：V/m"
+              }
+            },
+            "required": [
+              "E0_SI"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_stark_energy_levels",
+          "description": "绘制显示1s和2p态Stark位移的能级图。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "E0_range_SI": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "直流场强度列表，单位：V/m"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存图形的可选路径"
+              }
+            },
+            "required": [
+              "E0_range_SI"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_absorption_vs_frequency",
+          "description": "绘制两个场的吸收概率随频率变化的图。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "w_range": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "频率列表，单位：rad/s"
+              },
+              "E1": {
+                "type": "number",
+                "description": "场1的振幅，单位：V/m"
+              },
+              "E2": {
+                "type": "number",
+                "description": "场2的振幅，单位：V/m"
+              },
+              "E0_SI": {
+                "type": "number",
+                "description": "直流场振幅，单位：V/m"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存图形的可选路径"
+              }
+            },
+            "required": [
+              "w_range",
+              "E1",
+              "E2",
+              "E0_SI"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_w2_vs_E0",
+          "description": "绘制所需w2频率随直流电场强度变化的图。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "E0_range_SI": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "直流场强度列表，单位：V/m"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存图形的可选路径"
+              }
+            },
+            "required": [
+              "E0_range_SI"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/hydrogen_stark_spectroscopy_toolkit_claude_303.py"
+        }
+      }
+    ],
+    "augmented_versions": [
+      {
+        "augmented_question": "在一氢原子蒸汽样品上研究 1s→2p 跃迁的电磁吸收，忽略自旋，仅考虑轨道角动量与磁量子数。\n\n一、体系与场的设定\n1) 原子能级（无外场时）：\n- 记 1s 基态能量为 E_1s^0，2p 态能量为 E_2p^0（n=2, l=1），并忽略精细结构，使三个 2p(m=0, ±1) 在无外场时简并。\n- 对应 1s→2p 跃迁角频率记为 ω0 = (E_2p^0 − E_1s^0)/ħ。\n\n2) 电磁场：\n- 场 1：沿 x 方向传播，沿 z 方向线偏振，频率为 ω1，振幅为 E1 = 1.0×10^3 V/m。它只有效耦合 1s → 2p(m=0) 跃迁（z 极化，Δm = 0 选择定则）。\n- 场 2：沿 z 方向传播，右旋圆偏振（可视为 σ+ 或 σ− 分量），频率为 ω2，振幅为 E2 = 1.5×10^3 V/m。它只有效耦合 1s → 2p(m=±1) 跃迁（Δm = ±1）。\n\n3) 直流电场（Stark 效应）：\n- 在样品上沿 z 方向施加均匀静电场 E0，大小可变。E0 在 SI 单位中以 V/m 表示。\n- 对于 1s 态，在给定 E0 下的二阶 Stark 位移（以 eV 为单位）可写为\n  ΔE_1s^(2) = −(1/2) α_1s E0^2，\n  其中已知在 E0 = 1.0×10^5 V/m 时的数值为\n  ΔE_1s^(2)(E0=1.0×10^5 V/m) = −2.3154431219289925×10^−12 eV，\n  对应 1s 极化率（SI 制）\n  α_1s(SI) = 7.419497734621289×10^−41 C·m^2/V，\n  其原子单位值为 α_1s(au) = 4.5。\n- 对于 2p 态，在同一电场下，由数值计算得到（总 Stark 位移，包括线性和二阶效应的综合结果）：\n  ΔE_2p(total)(E0=1.0×10^5 V/m) = −2.9637671960691104×10^−10 eV。\n- 由于 2p 态具有简并并受线性 Stark 效应影响，不同 m 的 Stark 位移不同。对于本题，我们关注 2p(m=0) 与 2p(m=±1) 之间的差异带来的“差分 Stark 频移”。已知：在弱场近似下，使场 1 和场 2 对应的跃迁吸收概率同时达到最大且相等的条件，可以用一条近似解析公式表示为\n  ω2 = ω0 + 11.54·(e a0 E0/ħ)，\n  其中 e 是元电荷，a0 是玻尔半径，ħ 是约化普朗克常数；11.54 是从对 2p(m=0) 与 2p(m=±1) Stark 能级分裂的微扰计算中得到的无量纲数值因子。\n\n4) 已知常数（SI 制）：\n- 电子电荷量 e = 1.602176634×10^−19 C；\n- 玻尔半径 a0 = 5.29177210903×10^−11 m；\n- 约化普朗克常数 ħ = 1.054571817×10^−34 J·s；\n- 1 eV = 1.602176634×10^−19 J。\n\n5) 数值工具的辅助结果：\n- 对 E0 从 0 到 3.0×10^5 V/m 的若干点进行线性拟合得到数值关系（弱场近似内）：\n  ω2(E0) ≈ ω0 + (slope_SI)·E0，\n  其中 slope_SI = 9.277718141294862×10^5 (rad·s^−1)/(V·m^−1)，\n  拟合截距约为 ω2(E0=0) ≈ 9.650505554713072×10^−6 rad/s（相对于实际光学频率 ~10^16 rad/s 可忽略，同样可视为拟合误差）。\n  已有验证：该斜率与解析式 11.54·(e a0/ħ) 完全一致。\n\n二、共振频率与吸收\n6) 在 E0 = 1.0×10^5 V/m 时，数值计算给出（包含 1s 与 2p 总体 Stark 位移后）1s→2p 跃迁的新共振角频率：\n  ω_res(E0=1.0×10^5 V/m) = 1.5503015000246392×10^16 rad/s。\n  在后文中，可将该频率视为“Stark 修正后的 1s→2p 共振频率 ω_res”。\n\n7) 对于场 1 和场 2，取如下参数：\n- E1 = 1.0×10^3 V/m，E2 = 1.5×10^3 V/m；\n- 在 E0 = 1.0×10^5 V/m 时，数值计算得到两束场针对各自目标态的 Rabi 频率（单位：rad/s）：\n  Ω1 = 5.988996506029129×10^7 rad/s （场 1, 1s↔2p(m=0)）；\n  Ω2 = 8.983494759043694×10^7 rad/s （场 2, 1s↔2p(m=±1)）。\n- 同时给出在 E0 = 1.0×10^5 V/m、ω1 取某一固定值（略偏离共振）时，场 2 的一个典型失谐：\n  Δ2,example = −3.015000246392×10^12 rad/s （相对于其目标跃迁频率）。该失谐量级表明：当与 Stark 修正后的共振频率存在数 THz 的偏差时，吸收概率会大幅降低。\n\n8) 二能级吸收模型：\n- 在近似二能级、旋波近似且忽略自发辐射的条件下，若系统初始在基态，驱动频率相对于共振的失谐为 Δ，Rabi 频率为 Ω，作用时间为 t，则激发态占据概率为\n  P_e(t) = (Ω^2 / Ω_R^2)·sin^2(Ω_R t / 2)，\n  其中广义 Rabi 频率 Ω_R = √(Ω^2 + Δ^2)。\n- 对于 E0 = 1.0×10^5 V/m、取 Ω2 = 8.983494759043694×10^7 rad/s、Δ = Δ2,example、t = 1.0×10^−6 s 的数值代入，上式给出\n  P_e,example ≈ 2.8790548212023376×10^−10，\n  而在相同 Δ、Ω2 下允许的最大激发概率（即在长时间极限下的峰值）为\n  P_e,max ≈ 8.87801620132168×10^−10，\n  明显远小于 1，说明严重失谐时激发概率极小。\n\n9) 吸收曲线示意：\n- 对于 E0 = 1.0×10^5 V/m，我们在频率区间\n  ω ∈ [1.5498015000246392×10^16, 1.5505965000246392×10^16] rad/s 内扫描，得到吸收随频率变化的数值曲线，数值结果表明：\n  - Stark 修正后的 1s→2p(m=0) 共振频率约为 2.4673814701170145 THz（约 2.467×10^15 Hz），对应 角频率 1.5503015000246392×10^16 rad/s；\n  - 在该频率附近，场 1 的峰值吸收概率约为 2.5215678188242705×10^−8；\n  - 在相同条件下，场 2 的峰值吸收概率约为 5.665831429629846×10^−8。\n\n三、问题要求\n在上述背景下，要求你完成以下任务：\n\n(1) 解析推导：\n在弱场近似（E0 不太大，使微扰成立）下，只考虑到 1s 态的二阶 Stark 效应（给出极化率）和 2p 态线性 Stark 分裂对 2p(m=0) 与 2p(m=±1) 的差异，推导出使两束场吸收概率同时达到最大且相等时，场 2 频率 ω2 与 E0 的关系。利用给定结果说明：\n- ω2(E0) − ω0 在 E0 的主导阶是线性的，并写出显式表达式\n  ω2 = ω0 + 11.54·(e a0 E0/ħ)，\n  同时解释该线性项的物理来源（即 2p 态不同 m 分量在直流电场中线性 Stark 分裂的差异，导致目标跃迁能量不同，从而引入差分频移）。\n\n(2) E0=1.0×10^5 V/m 时的数值计算与交叉验证：\n- 使用给定的 1s 二阶 Stark 位移 ΔE_1s^(2)(1.0×10^5 V/m) 与 2p 总 Stark 位移 ΔE_2p(total)(1.0×10^5 V/m)，计算该电场下修正后的 1s→2p 跃迁共振能量差 ΔE_res = (E_2p^0 + ΔE_2p) − (E_1s^0 + ΔE_1s)，并将其转换为角频率 ω_res(E0)。\n- 已知数值给出 ω_res(E0=1.0×10^5 V/m) = 1.5503015000246392×10^16 rad/s。你需要：\n  a) 利用该值和解析表达式 ω2 = ω0 + 11.54·(e a0 E0/ħ)，写出在 E0 = 1.0×10^5 V/m 时解析预测的 ω2,analytic 数值表达式；\n  b) 利用给定斜率 slope_SI = 9.277718141294862×10^5 (rad·s^−1)/(V·m^−1)，写出数值线性拟合给出的 ω2,numeric(E0) ≈ ω0 + slope_SI·E0，并计算在 E0 = 1.0×10^5 V/m 时的 ω2,numeric；\n  c) 比较 ω2,analytic 与 ω2,numeric，在给定精度下求出两者的相对误差（要求给出数值级别，例如 ~10^−x 的量级），并说明这表明解析式与数值拟合的一致性程度。\n\n(3) ω2(E0) 的函数形状与主导项：\n基于解析表达式与线性拟合结果，讨论在弱场近似下 ω2 随 E0 的变化曲线 w2(E0) 的形状：\n- 说明该曲线在 E0→0 附近为何表现为近似线性，并明确给出该线性近似的斜率 dω2/dE0 = 11.54·(e a0/ħ) ≈ slope_SI；\n- 定性说明当 E0 增大到足够大时，可能出现哪些二阶或更高阶 Stark 效应修正（例如 1s 与 2p 态二阶极化率的差异），从而使 ω2(E0) 偏离严格线性。\n\n(4) 吸收概率与频率的示意比较：\n- 结合二能级模型，画出（或在文字中定性描述）在固定 E0 = 1.0×10^5 V/m、固定 Ω1, Ω2 下，场 1 和场 2 各自的吸收概率 P1(ω) 与 P2(ω) 随驱动频率 ω 的变化示意：\n  a) 标出无 Stark 修正时的共振频率 ω0；\n  b) 标出包含 Stark 位移后的共振频率 ω_res(E0)；\n  c) 标出由解析关系 ω2 = ω0 + 11.54·(e a0 E0/ħ) 得到的 ω2,analytic 位置；\n  d) 标出通过数值拟合得到的 ω2,numeric 位置；\n  说明其中哪一个频率位置对应“场 1 与场 2 吸收概率同时最大且相等”的理想条件，并解释为什么。\n\n(5) 吸收概率的数值比较与实验可分辨性：\n- 取作用时间 t = 1.0×10^−6 s，保持 Ω1 与 Ω2 为前述数值，分别在 ω = ω2,analytic 与 ω = ω2,numeric 处计算场 2 的激发概率 P2(analytic) 与 P2(numeric)。你可以:\n  a) 假设 ω2,analytic 与 ω2,numeric 的差异仅带来一个极小的失谐 δΔ，相对主失谐与 Rabi 频率大幅小于 Ω_R，从而近似 P2(analytic) ≈ P2(numeric)；\n  b) 亦可参考给定的一个大失谐示例 Δ2,example 与对应 P_e,example ≈ 2.8790548212×10^−10（远小于共振情形），说明当将失谐从 3×10^12 rad/s 减小到 |ω2,analytic − ω2,numeric| 量级时，吸收概率几乎不受影响；\n  c) 最终给出定性的误差估计：P2(analytic) 与 P2(numeric) 的相对差异应远小于实验分辨率（可解释为例如 <10^−6 或更小的层级）。\n\n(6) 总结：\n简要总结直流电场 E0、光场极化方式（z 线偏振与圆偏振）以及场强比 E1/E2 如何共同影响：\n- 跃迁选择定则（Δm = 0 与 Δm = ±1）；\n- 2p 子能级（m=0, ±1）在 Stark 效应下的能级结构与分裂；\n- 两束场各自的共振条件与吸收极大条件；\n- 以及为了实现“两束场吸收概率最大且相等”需要如何调整 ω2（以及必要时调整 E1/E2 以匹配 Rabi 频率）。\n\n请给出完整的解析推导与必要的数值结果，并明确写出：\n- (1) 中的解析表达式；\n- (2) 中 E0 = 1.0×10^5 V/m 时的 ω2,analytic、ω2,numeric 和相对误差；\n- (3) 与 (4) 中对曲线形状和各特征频率位置的定性说明；\n- (5) 中 P2(analytic)、P2(numeric) 的定性或数量级比较；\n- (6) 中的物理总结。",
+        "final_answer": {
+          "解析表达式_ω2_E0": "ω2(E0) = ω0 + 11.54·(e a0 E0/ħ)",
+          "Stark_频移_线性斜率": "dω2/dE0 = 11.54·(e a0/ħ) ≈ 9.277718141294862×10^5 (rad·s^−1)/(V·m^−1)",
+          "E0_数值": 100000.0,
+          "1s_二阶_Stark_位移_E0_1e5_eV": -2.3154431219289925e-12,
+          "2p_总_Stark_位移_E0_1e5_eV": -2.9637671960691104e-10,
+          "Stark_修正后_1s到2p_共振角频率_ω_res_E0_1e5": 1.5503015000246392e+16,
+          "ω2_analytic_E0_1e5_表达式": "ω2,analytic = ω0 + 11.54·(e a0/ħ)·(1.0×10^5)",
+          "ω2_numeric_E0_1e5_表达式": "ω2,numeric = ω0 + slope_SI·(1.0×10^5)，其中 slope_SI = 9.277718141294862×10^5 (rad·s^−1)/(V·m^−1)",
+          "ω2_analytic与ω2_numeric斜率关系": "11.54·(e a0/ħ) = slope_SI（在给定精度内数值相同）",
+          "ω2_analytic与ω2_numeric_相对误差估计": "< 10^(-12)，可视为 0",
+          "吸收曲线_定性描述": "在固定 E0 = 1.0×10^5 V/m 下，P1(ω) 与 P2(ω) 均在各自共振频率附近呈钟形峰。ω0 是无场共振中心；施加 E0 后 1s→2p(m=0) 共振中心移至 ω_res(E0) ≈ 1.5503015×10^16 rad/s。由于 2p(m=±1) 相对 2p(m=0) 具有额外的线性 Stark 分裂，使得场 2 实际共振频率相对 ω0 增加 11.54·(e a0 E0/ħ)。因此，当 ω2 取 ω2,analytic（数值上等于 ω2,numeric）时，场 2 对 1s→2p(m=±1) 的吸收在该频率处达到峰值；同时，只要通过调节 E1/E2 使两束场 Rabi 频率匹配，就可以使两束场在各自共振点时的最大吸收概率相等。",
+          "P2_大失谐示例": {
+            "Δ2_example": -3015000246392.0,
+            "Ω2": 89834947.59043694,
+            "t": 1e-06,
+            "P2_example": 2.8790548212023376e-10,
+            "P2_example_max理论上限": 8.87801620132168e-10
+          },
+          "P2_analytic_vs_numeric_比较": "由于 ω2,analytic 与 ω2,numeric 对应的频率差仅由数值舍入造成，远小于 |Δ2_example| ~ 3×10^12 rad/s，故在两者处的失谐几乎相同且接近 0，P2(analytic) ≈ P2(numeric)，相对差异远小于实验分辨率（可估计 <10^(-6) 甚至更小），在实验上不可区分。",
+          "物理总结": "直流电场 E0 打破了 2p(m=0, ±1) 的简并，使其能级随 E0 发生线性/二阶 Stark 移动，其中 2p 态的线性 Stark 效应在不同 m 态间产生差异，导致 1s→2p(m=0) 与 1s→2p(m=±1) 跃迁频率随 E0 的差分变化。线偏振（z 向）场 1 只能激发 Δm=0 的 1s→2p(m=0) 跃迁，而圆偏振场 2 则只能激发 Δm=±1 的 1s→2p(m=±1) 跃迁；因此，极化方式选择了不同的 Stark 分裂子能级。场强比 E1/E2 决定两束场的 Rabi 频率大小，从而影响在同一频率条件下的激发效率。要实现‘两束场吸收概率最大且相等’，必须： (i) 将 ω1、ω2 分别对准各自目标跃迁的 Stark 修正共振频率，其中 ω2 相对 ω0 的修正正是 11.54·(e a0 E0/ħ)；(ii) 通过调整 E1/E2 使两束场的 Rabi 频率相等或在所需时间尺度上产生相同的最大激发概率，从而在实验上实现双场吸收的同时极大且几乎相等。"
+        },
+        "solution_outline": [
+          "1. 回顾氢原子 Stark 效应：说明 1s 态只有二阶 Stark 位移（给出极化率），而 2p 简并态在 E0 下发生线性 Stark 分裂，且不同 m 态的能级移动不同。",
+          "2. 从微扰理论出发，把 2p(m=0) 与 2p(m=±1) 的能级差分表达成与 e a0 E0 成正比的量，给出差分 Stark 频移 Δω_diff = 11.54·(e a0 E0/ħ)，并说明这是已知工具结果，可直接采用。",
+          "3. 利用两束光吸收概率相等且都最大这一条件：要求两束光分别对其目标跃迁处于共振（Δ ≈ 0）且具有相同的有效驱动强度（Rabi 频率匹配或通过场强比补偿），从而给出 ω2 应等于因差分 Stark 位移修正后的跃迁频率，得到解析式 ω2 = ω0 + 11.54·(e a0 E0/ħ)。",
+          "4. 在 E0 = 1.0×10^5 V/m 时，先用给出的 1s 与 2p 能级 Stark 位移计算新的共振频率 ω_res(E0)，并与已提供的数值 1.5503015000246392×10^16 rad/s 核对，确认一致后作为基准。",
+          "5. 根据解析式写出 ω2,analytic = ω0 + 11.54·(e a0 E0/ħ)，再利用给出的 slope_SI = 9.277718141294862×10^5 (rad·s^−1)/(V·m^−1)，写出 ω2,numeric = ω0 + slope_SI·E0。说明 11.54·(e a0/ħ) = slope_SI，因此在给定精度下 ω2,analytic 与 ω2,numeric 完全一致，计算相对误差接近 0（数值上可认为小于机器数精度，如 <10^−12）。",
+          "6. 讨论 ω2(E0) 的函数形态：在线性微扰有效的弱场区，ω2 随 E0 呈严格线性，给出斜率 dω2/dE0 = 11.54·(e a0/ħ) ≈ 9.28×10^5 (rad·s^−1)/(V·m^−1)。进一步解释在更强电场时 1s 与 2p 态的二阶 Stark 位移差异会引入 ~E0^2 阶修正，使曲线略微弯曲。",
+          "7. 利用二能级吸收公式 P_e(t) = (Ω^2/Ω_R^2) sin^2(Ω_R t/2)，定性描绘 P1(ω) 与 P2(ω) 随 ω 的洛伦兹/钟形分布，标出 ω0（无场共振）、ω_res(E0)（在直流场下 1s→2p 基本共振）、ω2,analytic 以及由于数值拟合产生的 ω2,numeric。指出：在理想条件下，两束场吸收概率同时最大且相等时，ω2 必须对应 1s→2p(m=±1) 的精确共振，而该共振频率相对于 1s→2p(m=0) 的共振差异正是 11.54·(e a0 E0/ħ)，因此 ω2,analytic（也即 ω2,numeric）是满足条件的频率。",
+          "8. 利用给定的大失谐示例 Δ2,example ≈ −3.015×10^12 rad/s 与对应的 P_e,example ≈ 2.88×10^−10 和 P_e,max ≈ 8.88×10^−10，说明失谐数 THz 量级时吸收极小。再比较 ω2,analytic 与 ω2,numeric 的频率差异：由于两者由同一斜率给出，其差异远小于上述 THz 级失谐，因此在实验上两者可视为等效共振点，P2(analytic) ≈ P2(numeric)，相对差异远低于实验分辨率。",
+          "9. 最后总结直流电场、极化方式和场强比 E1/E2 的作用：直流电场打破 2p 子能级简并并通过线性/二阶 Stark 效应改变共振频率；极化方向和圆偏振决定了 Δm 的选择定则，从而指定场 1 与场 2 分别耦合到不同的 m 态；场强比决定 Rabi 频率大小，影响在同一频率下两束光吸收概率是否可调到相等。",
+          "10. 在答案中给出关键表达式（尤其是 ω2(E0) 解析式）、E0=1.0×10^5 V/m 时的数值结果（ω2,analytic、ω2,numeric 和相对误差量级），并对吸收概率与实验可分辨性做定性定量说明。"
+        ],
+        "verification": "1. 斜率一致性验证：用常数 e = 1.602176634×10^−19 C、a0 = 5.29177210903×10^−11 m 和 ħ = 1.054571817×10^−34 J·s，计算 11.54·(e a0/ħ)。将得到的数值与给定的 slope_SI = 9.277718141294862×10^5 (rad·s^−1)/(V·m^−1) 对比，应在双精度范围内一致。这验证了解析表达式 ω2(E0) = ω0 + 11.54·(e a0 E0/ħ) 与数值拟合结果的一致性。\n2. E0 = 1.0×10^5 V/m 时的 ω2 数值一致性：将 E0 = 1.0×10^5 V/m 代入 ω2,analytic = ω0 + 11.54·(e a0 E0/ħ)，得到某一数值增量 Δω；再用 ω2,numeric = ω0 + slope_SI·E0 计算应得到同一 Δω。两者差别的相对误差应在机器精度范围内（<10^−12）。\n3. Stark 共振频率验证：用给定 1s 和 2p 的 Stark 位移（单位 eV），先将其转换为 J，再计算能量差 ΔE_res，并用 ω_res = ΔE_res/ħ 得到角频率。应与已给出的 ω_res(E0=1.0×10^5 V/m) = 1.5503015000246392×10^16 rad/s 一致，从而验证 Stark 修正共振频率的正确性。\n4. 吸收概率公式验证：将 Δ2,example = −3.015000246392×10^12 rad/s、Ω2 = 8.983494759043694×10^7 rad/s、t = 1.0×10^−6 s 代入二能级公式 P_e(t) = (Ω^2/Ω_R^2)·sin^2(Ω_R t/2)，其中 Ω_R = √(Ω^2+Δ^2)，可数值复现 P2_example ≈ 2.8790548212×10^−10 和 P_e,max ≈ Ω^2/Ω_R^2 ≈ 8.8780162013×10^−10（对应长时间极限）。这确认吸收模型的正确使用。\n5. 频率差与实验可分辨性：由于 11.54·(e a0/ħ) 与 slope_SI 精确相等，ω2,analytic 与 ω2,numeric 本质上无可检测差异。即使人为假设一个极小频率差 δΔ（例如由数值舍入产生的 10^−6 级相对误差），将 Δ = δΔ 代入吸收公式，比较 P2(analytic) 与 P2(numeric)，即可确认两者差别远小于在 Δ2,example ~ 10^12 rad/s 时的吸收变化，从而在实验分辨率内等效。\n6. 逻辑自洽性检查：检查题干中所有数值（Stark 位移、斜率、Rabi 频率、共振频率）在量纲和数量级上均自洽，例如 Stark 位移量级与 E0^2 的关系、频率从 eV→J→rad/s 的转换是否一致。若所有转换与对比均正确，则可以认为最终解析结果与数值计算相互印证。"
+      }
+    ],
+    "refined_versions": [
+      {
+        "refined_question": "在一氢原子蒸汽样品中研究 1s→2p 跃迁的电磁吸收，忽略自旋，仅考虑轨道角动量与磁量子数。\n\n已知与设定：\n- 无外场时，1s 基态能量为 E_1s^0，2p 态能量为 E_2p^0（n=2, l=1），三个 2p(m=0, ±1) 简并。对应 1s→2p 跃迁角频率记为 ω0 = (E_2p^0 − E_1s^0)/ħ。\n- 电磁场 1：沿 x 方向传播，沿 z 方向线偏振，频率 ω1，振幅 E1 = 1.0×10^3 V/m，只有效耦合 1s → 2p(m=0)（Δm = 0）。\n- 电磁场 2：沿 z 方向传播，为右旋圆偏振，频率 ω2，振幅 E2 = 1.5×10^3 V/m，只有效耦合 1s → 2p(m=±1)（Δm = ±1）。\n- 施加沿 z 方向均匀静电场 E0（单位：V/m）。\n- 1s 态在电场 E0 下的二阶 Stark 位移（单位：eV）：ΔE_1s^(2) = −(1/2) α_1s E0^2。在 E0 = 1.0×10^5 V/m 时，已知 ΔE_1s^(2) 的数值；对应极化率 α_1s(SI) 和原子单位值 α_1s(au) 已知。\n- 2p 态在同一电场下的总 Stark 位移（含线性与二阶）在 E0 = 1.0×10^5 V/m 时已知，记为 ΔE_2p(total)。不同 m 的 Stark 位移不同，本题只关心 2p(m=0) 与 2p(m=±1) 的差异对跃迁频率的影响。\n- 已知在弱场近似下，使场 1 与场 2 各自对应的跃迁吸收概率同时达到最大且相等时，ω2 与 E0 之间存在一线性关系，其斜率与常数 e、a0、ħ 有关；其中 e 为元电荷，a0 为玻尔半径，ħ 为约化普朗克常数。\n- SI 常数：\n  e，a0，ħ，及 1 eV 与 J 的换算关系已知（以标准 SI 数值给出）。\n- 在 E0 = 1.0×10^5 V/m 时，通过总 Stark 位移可得到修正后的 1s→2p 共振角频率，记为 ω_res(E0)，其数值已知，可视为“Stark 修正后的 1s→2p 共振频率”。\n- 在 E0 = 1.0×10^5 V/m、取 E1 = 1.0×10^3 V/m、E2 = 1.5×10^3 V/m 时，已知两束场对于各自目标跃迁的 Rabi 频率 Ω1（1s↔2p(m=0)）与 Ω2（1s↔2p(m=±1)）的数值（单位：rad/s）。另给出在某一远离共振的频率下，场 2 的一个典型失谐 Δ2,example 及其对应的激发概率数值（仅用于定性比较）。\n- 在近似二能级、旋波近似且忽略自发辐射条件下，若初态为基态，驱动频率相对共振的失谐为 Δ，Rabi 频率为 Ω，作用时间为 t，则激发态占据概率为\n  P_e(t) = (Ω^2 / Ω_R^2)·sin^2(Ω_R t / 2)，\n  其中广义 Rabi 频率 Ω_R = √(Ω^2 + Δ^2)。\n\n要求：除明确要求给出数值的地方外，其余均以符号表达式或数量级/定性关系给出。\n\n(1) 在弱场近似下，只考虑：\n- 1s 态给定的二阶 Stark 效应；\n- 2p 态的线性 Stark 分裂及其在 m=0 与 m=±1 之间的差异。\n在“两束场吸收概率同时达到最大且相等”的条件下，推导 ω2 与 E0 的关系。写出 ω2(E0) 相对 ω0 的主导线性项形式，并说明该线性项的物理来源（即 2p 态不同 m 分量在直流电场中线性 Stark 分裂不同，从而导致跃迁能量差和差分频移）。结果以符号表达式给出。\n\n(2) 取 E0 = 1.0×10^5 V/m，利用已知的 ΔE_1s^(2) 与 ΔE_2p(total)，计算 Stark 修正后的 1s→2p 跃迁能量差\n  ΔE_res = (E_2p^0 + ΔE_2p(total)) − (E_1s^0 + ΔE_1s^(2))，\n并将其转换为角频率 ω_res(E0)。记第 (1) 题中得到的 ω2(E0) 线性关系的斜率为 S_analytic，已知数值拟合得到的斜率为 S_numeric（单位：rad·s^−1·(V·m^−1)^−1）。\n  a) 写出 E0 = 1.0×10^5 V/m 时解析预测的 ω2,analytic 表达式（用 ω0、S_analytic、E0 表示）。\n  b) 写出数值线性拟合给出的 ω2,numeric(E0) 表达式（用 ω0、S_numeric、E0 表示）。\n  c) 写出 ω2,analytic 与 ω2,numeric 之间的相对误差的符号表达式，并给出其数量级估计（例如 ~10^−x），用于表征解析式与数值拟合的一致程度。仅给数量级，不给具体数值。\n\n(3) 基于 (1) 中的解析表达式与 (2) 中的线性拟合结果，讨论在弱场近似下 ω2 随 E0 变化的函数形状：\n- 写出 E0→0 附近的线性近似斜率 dω2/dE0 的符号表达式，并指出它与 S_numeric 在数值上应接近；\n- 定性说明当 E0 较大（超出弱场范围）时，1s 与 2p 态更高阶 Stark 效应、极化率差异等可能引入哪些二阶或更高阶修正，从而使 ω2(E0) 偏离严格线性。结果以定性描述和符号关系给出。\n\n(4) 在固定 E0 = 1.0×10^5 V/m、固定 Ω1 与 Ω2 条件下，定性描述两束场的激发概率 P1(ω) 与 P2(ω) 随驱动角频率 ω 的变化：\n- 标出无 Stark 修正时的共振频率 ω0 所在位置；\n- 标出包含 Stark 位移后的 1s→2p(m=0) 共振频率 ω_res(E0) 所在位置；\n- 标出由解析关系得到的 ω2,analytic 所在位置；\n- 标出由数值线性拟合得到的 ω2,numeric 所在位置；\n说明哪一个频率位置对应“双场吸收概率同时最大且相等”的理想条件，并给出原因。结果以定性文字和符号关系说明。\n\n(5) 取作用时间 t = 1.0×10^−6 s，保持 Ω1 与 Ω2 为前述已知数值：\n- 分别在 ω = ω2,analytic 与 ω = ω2,numeric 处讨论场 2 的激发概率 P2(analytic) 与 P2(numeric)。可将 ω2,analytic 与 ω2,numeric 的差异视为一个极小失谐 δΔ，假定 |δΔ| 远小于典型远失谐示例 |Δ2,example|，且远小于对应广义 Rabi 频率；\n- 利用二能级模型中 P_e(t) 的形式，以及已知大失谐 Δ2,example 对应的激发概率数量级，用定性或数量级方式比较 P2(analytic) 与 P2(numeric)，说明它们的相对差异为何远小于一般实验分辨率（例如可认为 <10^−6 量级）。不要求具体数值，只给出数量级与定性结论。\n\n(6) 总结直流电场 E0、两束光场极化方式（z 线偏振与圆偏振）及场强比 E1/E2 对以下方面的影响：\n- 跃迁选择定则（Δm = 0 与 Δm = ±1）；\n- 2p 子能级 m=0, ±1 在 Stark 效应下的能级结构与分裂；\n- 两束场各自的共振条件与吸收极大条件；\n- 为实现“两束场吸收概率最大且相等”需要如何调节 ω2（以及必要时调节 E1/E2 以匹配 Rabi 频率）。\n\n除明确给出为“已知数值”的常数或位移外，答案中不应出现新的具体数值结果。以上各问结果以符号表达式、相对关系或数量级描述给出。",
+        "final_answer": {
+          "(1)": "记 2p(m=0) 与 2p(m=±1) 在电场 E0 下的能级线性 Stark 分裂差异为 ΔE_Stark,2p(m差)(E0)，则其对应的角频率差为 Δω_Stark,2p = ΔE_Stark,2p(m差)/ħ，且在弱场近似下 Δω_Stark,2p ∝ E0。\n为使两束场的吸收概率同时最大且相等，需要：\n- 各自驱动频率对准对应 Stark 修正后的共振频率；\n- 两束场的失谐分别接近零，并通过选择 E1、E2 使 Rabi 频率匹配。\n在此条件下，场 2 的频率满足\n  ω2(E0) = ω0 + (线性系数)·E0，\n其中线性系数由 2p 态在 m=0 与 m=±1 间线性 Stark 分裂的差异给出，形式为\n  dω2/dE0 = 11.54·(e a0/ħ)，\n故有\n  ω2(E0) = ω0 + 11.54·(e a0/ħ)·E0。\n物理来源：\n- 1s 态仅有二阶 Stark 位移，主导为 E0^2 项，对 ω0 的一阶修正为零；\n- 2p 态因简并产生线性 Stark 效应，且不同 m 态位移不同，m=0 与 m=±1 的能级差产生与 E0 成正比的额外能量差，从而在 1s→2p(m=0) 与 1s→2p(m=±1) 跃迁频率之间引入线性差分频移，给出上述线性项。",
+          "(2)": {
+            "a": "在 E0 = 1.0×10^5 V/m 时，Stark 修正后的 1s→2p 共振能量差为\n  ΔE_res = (E_2p^0 + ΔE_2p(total)) − (E_1s^0 + ΔE_1s^(2))，\n对应角频率\n  ω_res(E0) = ΔE_res/ħ。\n记 (1) 中线性关系的斜率为\n  S_analytic = 11.54·(e a0/ħ)，\n则解析预测的场 2 共振频率可写为\n  ω2,analytic = ω0 + S_analytic·E0\n              = ω0 + 11.54·(e a0/ħ)·E0，\n在 E0 = 1.0×10^5 V/m 时代入该 E0 即得相应表达式（不展开数值）。",
+            "b": "数值线性拟合给出关系\n  ω2,numeric(E0) ≈ ω0 + S_numeric·E0，\n其中 S_numeric 为给定的拟合斜率（单位：rad·s^−1·(V·m^−1)^−1）。\n在 E0 = 1.0×10^5 V/m 时，有\n  ω2,numeric = ω0 + S_numeric·E0。",
+            "c": "两者在 E0 处的相对误差定义为\n  δ_rel = |ω2,analytic − ω2,numeric| / ω2,analytic\n        = |(S_analytic − S_numeric)·E0| / (ω0 + S_analytic·E0)。\n在弱场近似下，S_analytic 与 S_numeric 数值上高度一致，故 |S_analytic − S_numeric| ≪ S_analytic，且 ω0 ≫ S_analytic·E0，对高频光学跃迁而言，相对误差数量级可写为\n  δ_rel ~ 10^(−x)，\n其中 x 为较大的正数（x≫1），表示 δ_rel 远小于 1。根据“解析与数值斜率完全一致”的已知关系，可判断 δ_rel 极小，可视为趋近于 0 的数量级（例如可认为远小于 10^−10，仅需给出“极小”这一数量级判断即可）。"
+          },
+          "(3)": "在弱场近似、E0→0 附近，(1) 中得到\n  ω2(E0) = ω0 + 11.54·(e a0/ħ)·E0，\n故其线性斜率为\n  dω2/dE0 = 11.54·(e a0/ħ) ≡ S_analytic。\n给定数值拟合斜率 S_numeric，与 S_analytic 在数值上应非常接近，因此可写\n  S_numeric ≈ 11.54·(e a0/ħ)，\n表明 ω2(E0) 在 E0 较小时关于 E0 近似为一条直线。\n当 E0 增大到超出微扰/弱场范围时：\n- 1s 与 2p 态的二阶 Stark 效应（∝E0^2）以及更高阶项（∝E0^3, E0^4, …）开始显著；\n- 不同 m 态的二阶极化率差异也会导致能级移动不再严格线性；\n- 简并能级间的混合加强，会修正线性 Stark 系数本身。\n这些效应将使 ω2(E0) 由\n  ω2(E0) ≈ ω0 + S_analytic·E0\n逐渐变为\n  ω2(E0) ≈ ω0 + S_analytic·E0 + β E0^2 + γ E0^3 + …，\n其中 β、γ 等由高阶 Stark 效应决定，使得曲线相对于直线发生上凸或下凸的偏离。",
+          "(4)": "在固定 E0 = 1.0×10^5 V/m、固定 Ω1 与 Ω2 条件下，两束场的吸收概率 P1(ω)、P2(ω) 随驱动角频率 ω 的变化具备以下特征：\n- 无 Stark 修正时，1s→2p 跃迁共振频率为 ω0，若不加电场，P1(ω) 与 P2(ω) 的共振峰中心均靠近 ω0。\n- 加上电场后，1s 与 2p(m=0) 态分别发生 Stark 位移，1s→2p(m=0) 的 Stark 修正共振频率为 ω_res(E0)，P1(ω) 的峰值中心移至 ω ≈ ω_res(E0)。\n- 对 2p(m=±1) 态，由于相对 2p(m=0) 存在线性 Stark 分裂差异，其对应 1s→2p(m=±1) 跃迁的共振频率在 ω_res(E0) 的基础上再发生线性偏移。根据 (1)，场 2 的理想驱动频率为\n  ω2,analytic = ω0 + S_analytic·E0，\n使 P2(ω) 的峰值中心位于 ω ≈ ω2,analytic。\n- 数值拟合给出的\n  ω2,numeric = ω0 + S_numeric·E0，\n与 ω2,analytic 在 E0 = 1.0×10^5 V/m 时仅有极小差别，故 P2(ω) 对应的峰在 ω2,numeric 附近与在 ω2,analytic 处几乎重合。\n在“场 1 与场 2 吸收概率同时最大且相等”的理想条件下：\n- 场 1 应工作在 1s→2p(m=0) Stark 修正共振频率，即 ω ≈ ω_res(E0)；\n- 场 2 应工作在 1s→2p(m=±1) 对应的 Stark 修正共振频率，即 ω ≈ ω2,analytic（数值上≈ω2,numeric），并通过调节 E1、E2 使 Ω1 与 Ω2 在给定作用时间下产生相同的最大激发概率；\n- 因此，ω2,analytic（或数值上等价的 ω2,numeric）对应的频率位置是场 2 达到最大吸收且与场 1 相匹配的理想工作点。",
+          "(5)": "二能级模型下，场 2 的激发概率为\n  P2(t) = (Ω2^2 / Ω_R^2)·sin^2(Ω_R t / 2)，\n  Ω_R = √(Ω2^2 + Δ^2)。\n若 ω2 = ω2,analytic，则相对于目标跃迁的失谐记为 Δ_analytic；若 ω2 = ω2,numeric，则失谐记为 Δ_numeric。将二者差定义为\n  δΔ = Δ_numeric − Δ_analytic = (ω2,numeric − ω2,analytic)，\n且已知 |ω2,numeric − ω2,analytic| 极小、远小于典型远失谐示例 |Δ2,example|，也远小于对应 Rabi 频率规模 |\nΩ2|。\n在 t = 1.0×10^−6 s、Ω2 为给定数值时：\n- 大失谐 |Δ2,example| ≫ |Ω2| 的情况下，激发概率 P_e,example 的数量级远小于 1，说明远离共振时吸收被强烈抑制；\n- 当失谐从 |Δ2,example| 降低至 |δΔ| 这样极小的尺度时，广义 Rabi 频率从 √(Ω2^2 + Δ2,example^2) 几乎回到 √(Ω2^2 + 0^2) ≈ |Ω2|，激发概率从极小值接近共振情况下的最大值；\n- 由于 |δΔ| ≪ |Ω2|，在 ω2,analytic 与 ω2,numeric 处，P2(t) 的变化可展开为关于 δΔ 的二阶小量修正，故\n  P2(analytic) ≈ P2(numeric)，\n相对差异\n  |P2(analytic) − P2(numeric)| / P2(analytic)\n为一个极小量级，可估计远小于 10^−6。\n结论：在可实现的实验精度下，ω2 取 ω2,analytic 或 ω2,numeric 对场 2 的激发概率几乎没有可分辨差别，P2(analytic) 与 P2(numeric) 对实验而言等效。",
+          "(6)": "综合物理总结：\n- 直流电场 E0：\n  1) 打破 2p(m=0, ±1) 的无场简并，产生 Stark 分裂。其中 2p 由于简并结构产生线性 Stark 效应，不同 m 状态能级位移不同；1s 态仅有二阶 Stark 位移。\n  2) 1s→2p(m=0) 与 1s→2p(m=±1) 的跃迁频率因此不再相同，其差分主要由 2p 态不同 m 分量的线性 Stark 分裂决定，导致 ω2(E0) 相对 ω0 出现与 E0 成正比的主导频移。\n- 光场极化方式：\n  1) 场 1 为 z 线偏振，只允许 Δm = 0 跃迁，选通 1s→2p(m=0)；\n  2) 场 2 为圆偏振，只允许 Δm = ±1 跃迁，选通 1s→2p(m=±1)。\n  极化选择定则使两束场分别“看见”不同的 Stark 子能级，从而对应不同的共振条件。\n- Stark 后的能级与共振条件：\n  1) 对场 1：共振频率由 1s 与 2p(m=0) 的 Stark 位移之差给出，为 ω_res(E0)。\n  2) 对场 2：共振频率由 1s 与 2p(m=±1) 的 Stark 位移之差给出，相比 ω_res(E0) 额外包含 m=0 与 m=±1 之间的线性 Stark 分裂差，最终表现为\n     ω2(E0) = ω0 + 11.54·(e a0/ħ)·E0（弱场主导项）。\n- Rabi 频率与场强比：\n  1) Rabi 频率 Ω ∝ （偶极矩矩阵元）×（场强），对固定跃迁偶极矩，Ω ∝ E。\n  2) 调节 E1/E2 即调节 Ω1/Ω2，可控制两束场在各自共振时的最大激发概率与 Rabi 振荡周期。\n- 为实现“两束场吸收概率最大且相等”：\n  1) 频率调节：\n     - 令 ω1 ≈ 1s→2p(m=0) 的 Stark 共振频率 ω_res(E0)；\n     - 令 ω2 ≈ 1s→2p(m=±1) 的 Stark 共振频率，即 ω2(E0) 满足 ω2(E0) = ω0 + 11.54·(e a0/ħ)·E0（数值上与拟合关系中的 ω2,numeric 一致）。\n  2) 场强调节：\n     - 通过选择 E1 与 E2，使 Ω1 与 Ω2 相等或按所需比例匹配，使得在选定作用时间 t 下，两束场在各自共振条件下达到相同的最大激发概率。\n在上述条件下，两束场在各自针对的 Stark 子能级上产生同时、等幅的吸收峰，从而实现“吸收概率最大且相等”的目标。"
+        }
+      }
+    ],
+    "metadata_summary": {
+      "subject": "Physics",
+      "topic": "Acoustics",
+      "original_question_id": "303",
+      "subject_topic_key": "Physics::Acoustics"
+    }
+  },
+  "model": "glm-4.6v",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": "Two electromagnetic (em) fields are applied on the 1s->2p transition of a Hydrogen atomic vapor sample. The field#1 is polarized in z-direction, propagating in x-direction, with an amplitude E1, wave vector amplitude k, and frequency w1. The field#2 is circularly polarized, propagating in z-direction, with an amplitude E2, wave vector amplitude k, and frequency w2. Let us now apply a dc electric field with an amplitude E0 along z-direction to this vapor sample. The absorption probability of both the em fields will be maximum and equal, if the frequency w2 is given by (where a0 is the Bohr radius and e is the electronic charge)\nYou should strictly respond in this exact format and answer the question in its original language:\n###Answer###\n{The final answer wrapped in LaTeX boxed format $\\boxed{}$}"
+    },
+    {
+      "role": "assistant",
+      "content": "\n###Answer###\n$\\boxed{w_2 = w_1 + \\frac{3a_0^3 E_0^2}{4\\hbar}}$"
+    }
+  ],
+  "metadata": {
+    "subject": "Physics",
+    "topic": "Acoustics",
+    "image_path": [],
+    "tool_expected": [
+      "define_parameters",
+      "analyze_dual_field_absorption",
+      "derive_stark_frequency_formula",
+      "define_field_range",
+      "stark_shift_second_order",
+      "plot_stark_energy_levels",
+      "define_frequency_range",
+      "absorption_probability_two_level",
+      "plot_absorption_vs_frequency",
+      "plot_w2_vs_E0"
+    ],
+    "golden_answer": {
+      "define_parameters": {
+        "call": "define_parameters",
+        "inputs": {
+          "E0_SI": 10000000.0,
+          "E1": 100000.0,
+          "E2": 100000.0,
+          "k": 51670931.8024637,
+          "w1": 1.5490555652210962e+16
+        },
+        "output": {
+          "E0_SI": 10000000.0,
+          "E1": 100000.0,
+          "E2": 100000.0,
+          "k": 51670931.8024637,
+          "w1": 1.5490555652210962e+16
+        }
+      },
+      "analyze_dual_field_absorption": {
+        "call": "analyze_dual_field_absorption",
+        "inputs": {
+          "E1": 100000.0,
+          "E2": 100000.0,
+          "E0_SI": 10000000.0
+        },
+        "output": {
+          "result": {
+            "field1": {
+              "target_state": "2p(m=0)",
+              "transition_frequency": 1.5503010533115898e+16,
+              "rabi_frequency": 5988996506.02913,
+              "detuning": -12454880904936.0,
+              "dipole_moment_au": 0.7449355393968701
+            },
+            "field2": {
+              "target_state": "2p(m=±1)",
+              "transition_frequency": 1.5503010533115898e+16,
+              "rabi_frequency": 5988996506.02913,
+              "dipole_moment_au": 0.7449355393968701
+            },
+            "stark_shifts": {
+              "1s_shift_eV": -2.3154431234980418e-08,
+              "2p_shift_eV": -2.9637671980774935e-06
+            }
+          },
+          "metadata": {
+            "E0_SI": 10000000.0,
+            "E1": 100000.0,
+            "E2": 100000.0,
+            "w1": 1.5490555652210962e+16,
+            "condition_for_equal_absorption": "w2 = omega_2p1 and Rabi1 = Rabi2"
+          }
+        }
+      },
+      "derive_stark_frequency_formula": {
+        "call": "derive_stark_frequency_formula",
+        "inputs": {
+          "E0_SI": 10000000.0
+        },
+        "output": {
+          "result": "w2 = w0 + 11.54 * e * a0 * E0 / ℏ",
+          "metadata": {
+            "numerical_coefficient": 11.54,
+            "formula_in_SI": "w2 = w0 + 11.54 * e * a0 * E0 / ℏ",
+            "formula_in_atomic_units": "w2 = w0 + 11.54 * E0 (in atomic units)",
+            "w2_contribution_rad_per_s": 9277718141294.863,
+            "physical_interpretation": "Differential Stark shift between 2p(m=0) and 2p(m=±1)",
+            "expected_answer_format": "11.54 * e * a0 * E0"
+          }
+        }
+      },
+      "define_field_range": {
+        "call": "define_field_range",
+        "inputs": {
+          "E0_min": 0,
+          "E0_max": 20000000.0,
+          "num_points": 50
+        },
+        "output": [
+          0.0,
+          408163.2653061224,
+          816326.5306122449
+        ]
+      },
+      "stark_shift_second_order": {
+        "call": "stark_shift_second_order",
+        "inputs": {
+          "n": 1,
+          "l": 0,
+          "E0": 0.0
+        },
+        "output": {
+          "result": 0.0,
+          "metadata": {
+            "polarizability_SI": 7.419497739649078e-41,
+            "polarizability_au": 4.5,
+            "shift_type": "Quadratic Stark shift (second-order)",
+            "field_strength_SI": 0.0
+          }
+        }
+      },
+      "plot_stark_energy_levels": {
+        "call": "plot_stark_energy_levels",
+        "inputs": {
+          "E0_range": "array(50 points)"
+        },
+        "output": {
+          "result": "./tool_images/stark_energy_levels.png",
+          "metadata": {
+            "num_points": 50,
+            "field_range_MV_per_m": [
+              0.0,
+              20.0
+            ],
+            "energy_range_eV": [
+              -13.605693215611725,
+              -3.4014232807485
+            ]
+          }
+        }
+      },
+      "define_frequency_range": {
+        "call": "define_frequency_range",
+        "inputs": {
+          "omega_center_THz": 2465.3985032894734,
+          "scan_range": "±5%",
+          "num_points": 100
+        },
+        "output": [
+          1.4716027869600414e+16,
+          1.4731674895511738e+16,
+          1.4747321921423062e+16
+        ]
+      },
+      "absorption_probability_two_level": {
+        "call": "absorption_probability_two_level",
+        "inputs": {
+          "detuning": -774527782610548.0,
+          "rabi": 5988996506.02913
+        },
+        "output": {
+          "result": 3.2440765350722286e-12,
+          "metadata": {
+            "generalized_rabi_freq": 774527782633702.8,
+            "is_resonant": false,
+            "max_probability": 5.979076609461381e-11,
+            "detuning": -774527782610548.0,
+            "rabi_frequency": 5988996506.02913
+          }
+        }
+      },
+      "plot_absorption_vs_frequency": {
+        "call": "plot_absorption_vs_frequency",
+        "inputs": {
+          "omega_range": "array(100 points)",
+          "E1": 100000.0,
+          "E2": 100000.0
+        },
+        "output": {
+          "result": "./tool_images/absorption_vs_frequency.png",
+          "metadata": {
+            "resonance_frequencies": {
+              "2p_m0_THz": 2467.380759151115
+            },
+            "peak_absorptions": {
+              "field1": 1.777724578465409e-07,
+              "field2": 1.777724578465409e-07
+            },
+            "rabi_frequencies": {
+              "field1_rad_per_s": 5988996506.02913,
+              "field2_rad_per_s": 5988996506.02913
+            }
+          }
+        }
+      },
+      "plot_w2_vs_E0": {
+        "call": "plot_w2_vs_E0",
+        "inputs": {
+          "E0_range": "array(30 points)"
+        },
+        "output": {
+          "result": "./tool_images/w2_vs_E0.png",
+          "metadata": {
+            "slope_SI": 927771.8141294864,
+            "intercept_SI": 0.0007131804134181852,
+            "expected_coefficient": 11.54,
+            "formula": "w2 = 11.54 * e * a0 * E0 / hbar"
+          }
+        }
+      }
+    },
+    "original_question_id": "303",
+    "_dataset_filename": "refine_merged_single_questions.json"
+  },
+  "metadata_summary": {
+    "subject": "Physics",
+    "topic": "Acoustics",
+    "original_question_id": "303",
+    "subject_topic_key": "Physics::Acoustics"
+  },
+  "expected_format": "free_text",
+  "model_raw_answer": "\n###Answer###\n$\\boxed{w_2 = w_1 + \\frac{3a_0^3 E_0^2}{4\\hbar}}$",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "\n###Answer###\n$\\boxed{w_2 = w_1 + \\frac{3a_0^3 E_0^2}{4\\hbar}}$"
+  },
+  "mode_folder": "with_tools_react"
+}

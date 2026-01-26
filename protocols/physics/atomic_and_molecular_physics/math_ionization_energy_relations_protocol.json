@@ -1,0 +1,42 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "visual_func",
+            "description": "生成电离能分析的可视化图表。创建包含两个子图的综合分析图表：1. 能级图显示原子的能量状态和电离能；2. 屏蔽效应示意图展示核电荷屏蔽和有效核电荷的概念。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "results": {
+                        "type": "object",
+                        "description": "电离能分析结果字典，包含I1、I2、E_total、Z、Z_eff、sigma等参数"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "图表保存路径，默认为None。如果提供路径，图表将保存为文件"
+                    },
+                    "figsize": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "图表尺寸，默认为(14, 6)。控制图表的宽度和高度"
+                    },
+                    "dpi": {
+                        "type": "integer",
+                        "description": "图像分辨率，默认为150。控制保存图像的质量"
+                    }
+                },
+                "required": [
+                    "results"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/math_ionization_energy_relations.py"
+        }
+    }
+]

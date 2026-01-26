@@ -1,0 +1,40 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "fit_func",
+            "description": "二次函数拟合模型，计算 a*x^2 + b*x + c。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "x": {
+                        "type": "number",
+                        "description": "自变量x的值"
+                    },
+                    "a": {
+                        "type": "number",
+                        "description": "二次项系数"
+                    },
+                    "b": {
+                        "type": "number",
+                        "description": "一次项系数"
+                    },
+                    "c": {
+                        "type": "number",
+                        "description": "常数项"
+                    }
+                },
+                "required": [
+                    "x",
+                    "a",
+                    "b",
+                    "c"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/analytical_chemistry_tools_15080.py"
+        }
+    }
+]

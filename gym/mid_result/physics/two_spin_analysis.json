@@ -1,0 +1,162 @@
+{
+  "basis_states": [
+    "αα",
+    "αβ",
+    "βα",
+    "ββ"
+  ],
+  "quantum_numbers": [
+    [
+      0.5,
+      0.5
+    ],
+    [
+      0.5,
+      -0.5
+    ],
+    [
+      -0.5,
+      0.5
+    ],
+    [
+      -0.5,
+      -0.5
+    ]
+  ],
+  "hamiltonian": [
+    [
+      -2.8209604169230595e-25,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      -1.9195280409570112e-30,
+      -1.2142831378887375e-30,
+      0.0
+    ],
+    [
+      0.0,
+      -1.2142831378887375e-30,
+      -5.0903823482046375e-31,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      2.820984702585817e-25
+    ]
+  ],
+  "energy_levels": [
+    -2.8209604169230595e-25,
+    -2.6185102962447833e-30,
+    1.8994402046730908e-31,
+    2.820984702585817e-25
+  ],
+  "allowed_transitions": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "transition_details": [
+    {
+      "initial_state": [
+        0.5,
+        0.5
+      ],
+      "final_state": [
+        0.5,
+        -0.5
+      ],
+      "initial_index": 0,
+      "final_index": 1,
+      "allowed": true,
+      "type": "single_quantum"
+    },
+    {
+      "initial_state": [
+        0.5,
+        0.5
+      ],
+      "final_state": [
+        -0.5,
+        0.5
+      ],
+      "initial_index": 0,
+      "final_index": 2,
+      "allowed": true,
+      "type": "single_quantum"
+    },
+    {
+      "initial_state": [
+        0.5,
+        0.5
+      ],
+      "final_state": [
+        -0.5,
+        -0.5
+      ],
+      "initial_index": 0,
+      "final_index": 3,
+      "allowed": false,
+      "type": "forbidden"
+    },
+    {
+      "initial_state": [
+        0.5,
+        -0.5
+      ],
+      "final_state": [
+        -0.5,
+        0.5
+      ],
+      "initial_index": 1,
+      "final_index": 2,
+      "allowed": false,
+      "type": "forbidden"
+    },
+    {
+      "initial_state": [
+        0.5,
+        -0.5
+      ],
+      "final_state": [
+        -0.5,
+        -0.5
+      ],
+      "initial_index": 1,
+      "final_index": 3,
+      "allowed": true,
+      "type": "single_quantum"
+    },
+    {
+      "initial_state": [
+        -0.5,
+        0.5
+      ],
+      "final_state": [
+        -0.5,
+        -0.5
+      ],
+      "initial_index": 2,
+      "final_index": 3,
+      "allowed": true,
+      "type": "single_quantum"
+    }
+  ]
+}

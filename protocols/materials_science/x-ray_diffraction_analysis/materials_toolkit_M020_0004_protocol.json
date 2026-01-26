@@ -1,0 +1,327 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "save_json_data",
+            "description": "将字典数据保存为JSON文件，统一保存在./mid_result/materials目录。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（不含路径），如 'peaks.json'"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "需要保存的数据字典（可JSON序列化）"
+                    }
+                },
+                "required": [
+                    "filename",
+                    "data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_element_properties",
+            "description": "获取元素基础物性（优先来自mendeleev数据库，缺失时返回基础后备数据）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "symbol": {
+                        "type": "string",
+                        "description": "元素符号，如 'Ag'、'O'、'B'、'As'"
+                    }
+                },
+                "required": [
+                    "symbol"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_xrd_from_structure",
+            "description": "用pymatgen从结构文件或材料ID生成XRD图谱，返回峰位与相对强度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "结构来源标识；当source='cif'时为CIF文件路径；当source='mp'时为材料ID（如'mp-1234'）"
+                    },
+                    "wavelength": {
+                        "type": "number",
+                        "description": "X射线波长（Å），默认1.5406（Cu Kα）"
+                    },
+                    "two_theta_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "2θ范围 (min_deg, max_deg)"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "结构来源类型：'cif' 或 'mp'"
+                    }
+                },
+                "required": [
+                    "identifier"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "normalize_intensity",
+            "description": "将强度数组归一化到最大值为100。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数组（非负数值列表）"
+                    }
+                },
+                "required": [
+                    "intensity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "peak_matching_score",
+            "description": "计算候选相与观测峰的匹配得分，可选整体角度漂移校准并给出最佳漂移。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "observed_2theta": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "观测峰位数组（单位：度）"
+                    },
+                    "candidate_2theta": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "候选材料峰位数组（单位：度）"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "峰位匹配容差（度），默认0.25"
+                    },
+                    "allow_shift": {
+                        "type": "boolean",
+                        "description": "是否允许整体角度漂移优化，默认True"
+                    },
+                    "max_shift": {
+                        "type": "number",
+                        "description": "允许的最大漂移范围（度），默认1.0"
+                    }
+                },
+                "required": [
+                    "observed_2theta",
+                    "candidate_2theta"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "identify_phases_by_matching",
+            "description": "从候选参考中识别最可能的晶相，基于峰匹配与可选的强度加权和漂移校准。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "observed_2theta": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "观测峰位（度）"
+                    },
+                    "observed_intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "观测相对强度（可选，用于强度加权）"
+                    },
+                    "candidate_refs": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "参考相名称"
+                                },
+                                "peaks_2theta": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "description": "参考峰位数组（度）"
+                                },
+                                "intensity": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "description": "参考相对强度数组"
+                                }
+                            }
+                        },
+                        "description": "候选参考列表，每个包含{name, peaks_2theta, intensity}"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "峰位匹配容差（度），默认0.25"
+                    },
+                    "allow_shift": {
+                        "type": "boolean",
+                        "description": "是否允许整体角度漂移优化，默认True"
+                    }
+                },
+                "required": [
+                    "observed_2theta",
+                    "candidate_refs"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "merge_patterns",
+            "description": "将多个参考图谱合成为混合谱（线性叠加后归一化）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "patterns": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "two_theta": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "description": "峰位数组（度）"
+                                },
+                                "intensity": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "description": "对应相对强度数组"
+                                }
+                            }
+                        },
+                        "description": "待合成的参考图谱列表，每个包含{'two_theta','intensity'}"
+                    }
+                },
+                "required": [
+                    "patterns"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_xrd_pattern",
+            "description": "绘制并保存XRD图谱（可叠加多条曲线），自动保存到./tool_images目录。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "patterns": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                                "two_theta": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "description": "峰位数组（度）"
+                                },
+                                "intensity": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "description": "对应相对强度数组"
+                                }
+                            }
+                        },
+                        "description": "曲线字典，形如 {'Composite': {'two_theta': [...], 'intensity': [...]}, 'Ag2O': {...}}"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图标题"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "自定义文件名（不含路径和扩展名），默认根据标题自动生成"
+                    }
+                },
+                "required": [
+                    "patterns",
+                    "title"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+    }
+]

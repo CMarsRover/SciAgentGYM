@@ -1,0 +1,1556 @@
+{
+  "id": "79_ref_0",
+  "query": "某材料在三种不同温度下的均匀成核自由能曲线 ΔG(r) 已给出。对每条曲线在 ΔG 的极大值处读取 r* 与 ΔG*，读数不确定度为 ±5%。给定中心读数及范围：\n- 曲线 A：r*_A = 10.0 nm（[9.5, 10.5] nm），ΔG*_A = 100 × 10^-19 J（[95, 105] × 10^-19 J）\n- 曲线 B：r*_B = 9.8 nm（[9.31, 10.29] nm），ΔG*_B = 98 × 10^-19 J（[93.1, 102.9] × 10^-19 J）\n- 曲线 C：r*_C = 8.0 nm（[7.6, 8.4] nm），ΔG*_C = 70 × 10^-19 J（[66.5, 73.5] × 10^-19 J）\n读数方法：在每条 ΔG–r 曲线的极大点读取 r 值为 r*，对应的 ΔG 值为 ΔG*；误差按刻度读数的 ±5% 计。已知：同一材料且界面能近似不变时，温度越高（过冷度越小），r* 与 ΔG* 越大；经典成核模型下 ΔG* ∝ r*^2（γ 近似不变时）。\n任务：\n(1) 明确哪条曲线温度最高、哪条最低，并给出由高到低的排序（以中心读数判定）。\n(2) 给出三条曲线的 r* 与 ΔG* 数值（含单位）及其 ±5% 范围；简述读数方法（可引用上文）。\n(3) 分别对 AB、AC、BC 做成对比较：比较 r* 与 ΔG* 的大小关系并判断是否一致；以曲线 C 为基准做无量纲化 r~ 与 G~，检验归一化后顺序是否改变；在各自 ±5% 范围内取对排序最不利的读数组合检验是否发生排序翻转；如有翻转，给出导致翻转的边界读数组合；如无翻转，说明对 ±5% 误差稳健。\n(4) 物理一致性检验：对每一对 (i,j) 计算 R_G = ΔG*_i/ΔG*_j 与 R_r2 = (r*_i/r*_j)^2，并给出残差 ε = (R_G − R_r2)/R_r2（百分比表示），据此评述是否满足 ΔG* ∝ r*^2 的假设。\n数值与单位要求：除(2)中的已给读数外，其余计算结果以数值给出；有效数字 3–4 位；百分比保留 2 位小数；r* 用 nm，ΔG* 用 10^-19 J；比值与归一化为无量纲。",
+  "query_data": {
+    "id": "79_ref_0",
+    "original_id": 79,
+    "refined_index": 0,
+    "question": "某材料在三种不同温度下的均匀成核自由能曲线 ΔG(r) 已给出。对每条曲线在 ΔG 的极大值处读取 r* 与 ΔG*，读数不确定度为 ±5%。给定中心读数及范围：\n- 曲线 A：r*_A = 10.0 nm（[9.5, 10.5] nm），ΔG*_A = 100 × 10^-19 J（[95, 105] × 10^-19 J）\n- 曲线 B：r*_B = 9.8 nm（[9.31, 10.29] nm），ΔG*_B = 98 × 10^-19 J（[93.1, 102.9] × 10^-19 J）\n- 曲线 C：r*_C = 8.0 nm（[7.6, 8.4] nm），ΔG*_C = 70 × 10^-19 J（[66.5, 73.5] × 10^-19 J）\n读数方法：在每条 ΔG–r 曲线的极大点读取 r 值为 r*，对应的 ΔG 值为 ΔG*；误差按刻度读数的 ±5% 计。已知：同一材料且界面能近似不变时，温度越高（过冷度越小），r* 与 ΔG* 越大；经典成核模型下 ΔG* ∝ r*^2（γ 近似不变时）。\n任务：\n(1) 明确哪条曲线温度最高、哪条最低，并给出由高到低的排序（以中心读数判定）。\n(2) 给出三条曲线的 r* 与 ΔG* 数值（含单位）及其 ±5% 范围；简述读数方法（可引用上文）。\n(3) 分别对 AB、AC、BC 做成对比较：比较 r* 与 ΔG* 的大小关系并判断是否一致；以曲线 C 为基准做无量纲化 r~ 与 G~，检验归一化后顺序是否改变；在各自 ±5% 范围内取对排序最不利的读数组合检验是否发生排序翻转；如有翻转，给出导致翻转的边界读数组合；如无翻转，说明对 ±5% 误差稳健。\n(4) 物理一致性检验：对每一对 (i,j) 计算 R_G = ΔG*_i/ΔG*_j 与 R_r2 = (r*_i/r*_j)^2，并给出残差 ε = (R_G − R_r2)/R_r2（百分比表示），据此评述是否满足 ΔG* ∝ r*^2 的假设。\n数值与单位要求：除(2)中的已给读数外，其余计算结果以数值给出；有效数字 3–4 位；百分比保留 2 位小数；r* 用 nm，ΔG* 用 10^-19 J；比值与归一化为无量纲。",
+    "answer": "{'(1) 温度排序': {'最高温': 'A', '最低温': 'C', '由高到低': ['A', 'B', 'C']}, '(2) 读数与单位': {'A': {'r*': '10.0 nm', 'r*范围': '[9.5, 10.5] nm', 'ΔG*': '100 × 10^-19 J', 'ΔG*范围': '[95, 105] × 10^-19 J'}, 'B': {'r*': '9.8 nm', 'r*范围': '[9.31, 10.29] nm', 'ΔG*': '98 × 10^-19 J', 'ΔG*范围': '[93.1, 102.9] × 10^-19 J'}, 'C': {'r*': '8.0 nm', 'r*范围': '[7.6, 8.4] nm', 'ΔG*': '70 × 10^-19 J', 'ΔG*范围': '[66.5, 73.5] × 10^-19 J'}, '读数方法': '在每条 ΔG–r 曲线的极大点读取 r 为 r*，对应 ΔG 为 ΔG*；读数误差按 ±5% 估计。'}, '(3) 比较、归一化与鲁棒性': {'成对比较（中心读数）': {'AB': {'r*': 'A > B', 'ΔG*': 'A > B', '一致': '是'}, 'AC': {'r*': 'A > C', 'ΔG*': 'A > C', '一致': '是'}, 'BC': {'r*': 'B > C', 'ΔG*': 'B > C', '一致': '是'}}, '一致性统计': '3/3', '归一化（以 C 为基准）': {'r~': {'A': 1.25, 'B': 1.225, 'C': 1.0}, 'G~': {'A': 1.429, 'B': 1.4, 'C': 1.0}, '归一化后顺序': {'按 r~': ['A', 'B', 'C'], '按 G~': ['A', 'B', 'C']}}, '鲁棒性分析（±5%）': {'无翻转对': ['A–C', 'B–C'], '可能翻转对': ['A–B'], '导致翻转的边界读数组合（示例）': {'AB（r*）': {'A取最小': '9.5 nm', 'B取最大': '10.29 nm', '结果': 'B 的 r* > A'}, 'AB（ΔG*）': {'A取最小': '95 × 10^-19 J', 'B取最大': '102.9 × 10^-19 J', '结果': 'B 的 ΔG* > A'}}, 'AC最不利组合': {'A取最小': {'r*': '9.5 nm', 'ΔG*': '95 × 10^-19 J'}, 'C取最大': {'r*': '8.4 nm', 'ΔG*': '73.5 × 10^-19 J'}, '结果': 'A 仍 > C（无翻转）'}, 'BC最不利组合': {'B取最小': {'r*': '9.31 nm', 'ΔG*': '93.1 × 10^-19 J'}, 'C取最大': {'r*': '8.4 nm', 'ΔG*': '73.5 × 10^-19 J'}, '结果': 'B 仍 > C（无翻转）'}, '结论': '中心读数排序 A > B > C；±5% 下最低温始终为 C；最高温在 A 与 B 之间可能翻转。'}}, '(4) 物理一致性检验（ΔG* ∝ r*^2）': {'定义': 'R_G = ΔG*_i/ΔG*_j, R_r2 = (r*_i/r*_j)^2, ε = (R_G − R_r2)/R_r2', '结果': [{'对': 'A/B', 'R_G': 1.0204, 'R_r2': 1.0412, 'ε': '-2.00%'}, {'对': 'A/C', 'R_G': 1.429, 'R_r2': 1.563, 'ε': '-8.57%'}, {'对': 'B/C', 'R_G': 1.4, 'R_r2': 1.501, 'ε': '-6.70%'}], '评述': '残差为数百分点量级，整体近似满足 ΔG* ∝ r*^2，存在轻微系统性偏小。'}}",
+    "metadata": {
+      "subject": "Materials Science",
+      "topic": "Diagram Analysis",
+      "image_path": [
+        "r_bench/images/00658.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "identify_temperature_order"
+      ],
+      "golden_answer": [
+        {
+          "(1) 温度排序": {
+            "最高温": "A",
+            "最低温": "C",
+            "由高到低": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "(2) 读数与单位": {
+            "A": {
+              "r*": "10.0 nm",
+              "r*范围": "[9.5, 10.5] nm",
+              "ΔG*": "100 × 10^-19 J",
+              "ΔG*范围": "[95, 105] × 10^-19 J"
+            },
+            "B": {
+              "r*": "9.8 nm",
+              "r*范围": "[9.31, 10.29] nm",
+              "ΔG*": "98 × 10^-19 J",
+              "ΔG*范围": "[93.1, 102.9] × 10^-19 J"
+            },
+            "C": {
+              "r*": "8.0 nm",
+              "r*范围": "[7.6, 8.4] nm",
+              "ΔG*": "70 × 10^-19 J",
+              "ΔG*范围": "[66.5, 73.5] × 10^-19 J"
+            },
+            "读数方法": "在每条 ΔG–r 曲线的极大点读取 r 为 r*，对应 ΔG 为 ΔG*；读数误差按 ±5% 估计。"
+          },
+          "(3) 比较、归一化与鲁棒性": {
+            "成对比较（中心读数）": {
+              "AB": {
+                "r*": "A > B",
+                "ΔG*": "A > B",
+                "一致": "是"
+              },
+              "AC": {
+                "r*": "A > C",
+                "ΔG*": "A > C",
+                "一致": "是"
+              },
+              "BC": {
+                "r*": "B > C",
+                "ΔG*": "B > C",
+                "一致": "是"
+              }
+            },
+            "一致性统计": "3/3",
+            "归一化（以 C 为基准）": {
+              "r~": {
+                "A": 1.25,
+                "B": 1.225,
+                "C": 1.0
+              },
+              "G~": {
+                "A": 1.429,
+                "B": 1.4,
+                "C": 1.0
+              },
+              "归一化后顺序": {
+                "按 r~": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "按 G~": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "鲁棒性分析（±5%）": {
+              "无翻转对": [
+                "A–C",
+                "B–C"
+              ],
+              "可能翻转对": [
+                "A–B"
+              ],
+              "导致翻转的边界读数组合（示例）": {
+                "AB（r*）": {
+                  "A取最小": "9.5 nm",
+                  "B取最大": "10.29 nm",
+                  "结果": "B 的 r* > A"
+                },
+                "AB（ΔG*）": {
+                  "A取最小": "95 × 10^-19 J",
+                  "B取最大": "102.9 × 10^-19 J",
+                  "结果": "B 的 ΔG* > A"
+                }
+              },
+              "AC最不利组合": {
+                "A取最小": {
+                  "r*": "9.5 nm",
+                  "ΔG*": "95 × 10^-19 J"
+                },
+                "C取最大": {
+                  "r*": "8.4 nm",
+                  "ΔG*": "73.5 × 10^-19 J"
+                },
+                "结果": "A 仍 > C（无翻转）"
+              },
+              "BC最不利组合": {
+                "B取最小": {
+                  "r*": "9.31 nm",
+                  "ΔG*": "93.1 × 10^-19 J"
+                },
+                "C取最大": {
+                  "r*": "8.4 nm",
+                  "ΔG*": "73.5 × 10^-19 J"
+                },
+                "结果": "B 仍 > C（无翻转）"
+              },
+              "结论": "中心读数排序 A > B > C；±5% 下最低温始终为 C；最高温在 A 与 B 之间可能翻转。"
+            }
+          },
+          "(4) 物理一致性检验（ΔG* ∝ r*^2）": {
+            "定义": "R_G = ΔG*_i/ΔG*_j, R_r2 = (r*_i/r*_j)^2, ε = (R_G − R_r2)/R_r2",
+            "结果": [
+              {
+                "对": "A/B",
+                "R_G": 1.0204,
+                "R_r2": 1.0412,
+                "ε": "-2.00%"
+              },
+              {
+                "对": "A/C",
+                "R_G": 1.429,
+                "R_r2": 1.563,
+                "ε": "-8.57%"
+              },
+              {
+                "对": "B/C",
+                "R_G": 1.4,
+                "R_r2": 1.501,
+                "ε": "-6.70%"
+              }
+            ],
+            "评述": "残差为数百分点量级，整体近似满足 ΔG* ∝ r*^2，存在轻微系统性偏小。"
+          }
+        }
+      ],
+      "original_question_id": "79",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "identify_temperature_order",
+          "description": "根据曲线特征识别温度高低顺序",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "curve_characteristics": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "曲线特征列表，每个元素包含label、has_critical_point、r_critical、delta_g_critical等字段"
+              }
+            },
+            "required": [
+              "curve_characteristics"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/nucleation_thermodynamics_toolkit_claude_659.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "某材料在三种不同温度下的均匀成核自由能曲线 ΔG(r) 已给出。对每条曲线在 ΔG 的极大值处读取 r* 与 ΔG*，读数不确定度为 ±5%。给定中心读数及范围：\n- 曲线 A：r*_A = 10.0 nm（[9.5, 10.5] nm），ΔG*_A = 100 × 10^-19 J（[95, 105] × 10^-19 J）\n- 曲线 B：r*_B = 9.8 nm（[9.31, 10.29] nm），ΔG*_B = 98 × 10^-19 J（[93.1, 102.9] × 10^-19 J）\n- 曲线 C：r*_C = 8.0 nm（[7.6, 8.4] nm），ΔG*_C = 70 × 10^-19 J（[66.5, 73.5] × 10^-19 J）\n读数方法：在每条 ΔG–r 曲线的极大点读取 r 值为 r*，对应的 ΔG 值为 ΔG*；误差按刻度读数的 ±5% 计。已知：同一材料且界面能近似不变时，温度越高（过冷度越小），r* 与 ΔG* 越大；经典成核模型下 ΔG* ∝ r*^2（γ 近似不变时）。\n任务：\n(1) 明确哪条曲线温度最高、哪条最低，并给出由高到低的排序（以中心读数判定）。\n(2) 给出三条曲线的 r* 与 ΔG* 数值（含单位）及其 ±5% 范围；简述读数方法（可引用上文）。\n(3) 分别对 AB、AC、BC 做成对比较：比较 r* 与 ΔG* 的大小关系并判断是否一致；以曲线 C 为基准做无量纲化 r~ 与 G~，检验归一化后顺序是否改变；在各自 ±5% 范围内取对排序最不利的读数组合检验是否发生排序翻转；如有翻转，给出导致翻转的边界读数组合；如无翻转，说明对 ±5% 误差稳健。\n(4) 物理一致性检验：对每一对 (i,j) 计算 R_G = ΔG*_i/ΔG*_j 与 R_r2 = (r*_i/r*_j)^2，并给出残差 ε = (R_G − R_r2)/R_r2（百分比表示），据此评述是否满足 ΔG* ∝ r*^2 的假设。\n数值与单位要求：除(2)中的已给读数外，其余计算结果以数值给出；有效数字 3–4 位；百分比保留 2 位小数；r* 用 nm，ΔG* 用 10^-19 J；比值与归一化为无量纲。",
+      "final_answer": {
+        "(1) 温度排序": {
+          "最高温": "A",
+          "最低温": "C",
+          "由高到低": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "(2) 读数与单位": {
+          "A": {
+            "r*": "10.0 nm",
+            "r*范围": "[9.5, 10.5] nm",
+            "ΔG*": "100 × 10^-19 J",
+            "ΔG*范围": "[95, 105] × 10^-19 J"
+          },
+          "B": {
+            "r*": "9.8 nm",
+            "r*范围": "[9.31, 10.29] nm",
+            "ΔG*": "98 × 10^-19 J",
+            "ΔG*范围": "[93.1, 102.9] × 10^-19 J"
+          },
+          "C": {
+            "r*": "8.0 nm",
+            "r*范围": "[7.6, 8.4] nm",
+            "ΔG*": "70 × 10^-19 J",
+            "ΔG*范围": "[66.5, 73.5] × 10^-19 J"
+          },
+          "读数方法": "在每条 ΔG–r 曲线的极大点读取 r 为 r*，对应 ΔG 为 ΔG*；读数误差按 ±5% 估计。"
+        },
+        "(3) 比较、归一化与鲁棒性": {
+          "成对比较（中心读数）": {
+            "AB": {
+              "r*": "A > B",
+              "ΔG*": "A > B",
+              "一致": "是"
+            },
+            "AC": {
+              "r*": "A > C",
+              "ΔG*": "A > C",
+              "一致": "是"
+            },
+            "BC": {
+              "r*": "B > C",
+              "ΔG*": "B > C",
+              "一致": "是"
+            }
+          },
+          "一致性统计": "3/3",
+          "归一化（以 C 为基准）": {
+            "r~": {
+              "A": 1.25,
+              "B": 1.225,
+              "C": 1.0
+            },
+            "G~": {
+              "A": 1.429,
+              "B": 1.4,
+              "C": 1.0
+            },
+            "归一化后顺序": {
+              "按 r~": [
+                "A",
+                "B",
+                "C"
+              ],
+              "按 G~": [
+                "A",
+                "B",
+                "C"
+              ]
+            }
+          },
+          "鲁棒性分析（±5%）": {
+            "无翻转对": [
+              "A–C",
+              "B–C"
+            ],
+            "可能翻转对": [
+              "A–B"
+            ],
+            "导致翻转的边界读数组合（示例）": {
+              "AB（r*）": {
+                "A取最小": "9.5 nm",
+                "B取最大": "10.29 nm",
+                "结果": "B 的 r* > A"
+              },
+              "AB（ΔG*）": {
+                "A取最小": "95 × 10^-19 J",
+                "B取最大": "102.9 × 10^-19 J",
+                "结果": "B 的 ΔG* > A"
+              }
+            },
+            "AC最不利组合": {
+              "A取最小": {
+                "r*": "9.5 nm",
+                "ΔG*": "95 × 10^-19 J"
+              },
+              "C取最大": {
+                "r*": "8.4 nm",
+                "ΔG*": "73.5 × 10^-19 J"
+              },
+              "结果": "A 仍 > C（无翻转）"
+            },
+            "BC最不利组合": {
+              "B取最小": {
+                "r*": "9.31 nm",
+                "ΔG*": "93.1 × 10^-19 J"
+              },
+              "C取最大": {
+                "r*": "8.4 nm",
+                "ΔG*": "73.5 × 10^-19 J"
+              },
+              "结果": "B 仍 > C（无翻转）"
+            },
+            "结论": "中心读数排序 A > B > C；±5% 下最低温始终为 C；最高温在 A 与 B 之间可能翻转。"
+          }
+        },
+        "(4) 物理一致性检验（ΔG* ∝ r*^2）": {
+          "定义": "R_G = ΔG*_i/ΔG*_j, R_r2 = (r*_i/r*_j)^2, ε = (R_G − R_r2)/R_r2",
+          "结果": [
+            {
+              "对": "A/B",
+              "R_G": 1.0204,
+              "R_r2": 1.0412,
+              "ε": "-2.00%"
+            },
+            {
+              "对": "A/C",
+              "R_G": 1.429,
+              "R_r2": 1.563,
+              "ε": "-8.57%"
+            },
+            {
+              "对": "B/C",
+              "R_G": 1.4,
+              "R_r2": 1.501,
+              "ε": "-6.70%"
+            }
+          ],
+          "评述": "残差为数百分点量级，整体近似满足 ΔG* ∝ r*^2，存在轻微系统性偏小。"
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "Materials Science",
+      "topic": "Diagram Analysis",
+      "test_type": "refined",
+      "original_question_id": "79",
+      "subject_topic_key": "Materials Science::Diagram Analysis"
+    }
+  },
+  "model": "gemini-2.5-pro-thinking-2048",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "某材料在三种不同温度下的均匀成核自由能曲线 ΔG(r) 已给出。对每条曲线在 ΔG 的极大值处读取 r* 与 ΔG*，读数不确定度为 ±5%。给定中心读数及范围：\n- 曲线 A：r*_A = 10.0 nm（[9.5, 10.5] nm），ΔG*_A = 100 × 10^-19 J（[95, 105] × 10^-19 J）\n- 曲线 B：r*_B = 9.8 nm（[9.31, 10.29] nm），ΔG*_B = 98 × 10^-19 J（[93.1, 102.9] × 10^-19 J）\n- 曲线 C：r*_C = 8.0 nm（[7.6, 8.4] nm），ΔG*_C = 70 × 10^-19 J（[66.5, 73.5] × 10^-19 J）\n读数方法：在每条 ΔG–r 曲线的极大点读取 r 值为 r*，对应的 ΔG 值为 ΔG*；误差按刻度读数的 ±5% 计。已知：同一材料且界面能近似不变时，温度越高（过冷度越小），r* 与 ΔG* 越大；经典成核模型下 ΔG* ∝ r*^2（γ 近似不变时）。\n任务：\n(1) 明确哪条曲线温度最高、哪条最低，并给出由高到低的排序（以中心读数判定）。\n(2) 给出三条曲线的 r* 与 ΔG* 数值（含单位）及其 ±5% 范围；简述读数方法（可引用上文）。\n(3) 分别对 AB、AC、BC 做成对比较：比较 r* 与 ΔG* 的大小关系并判断是否一致；以曲线 C 为基准做无量纲化 r~ 与 G~，检验归一化后顺序是否改变；在各自 ±5% 范围内取对排序最不利的读数组合检验是否发生排序翻转；如有翻转，给出导致翻转的边界读数组合；如无翻转，说明对 ±5% 误差稳健。\n(4) 物理一致性检验：对每一对 (i,j) 计算 R_G = ΔG*_i/ΔG*_j 与 R_r2 = (r*_i/r*_j)^2，并给出残差 ε = (R_G − R_r2)/R_r2（百分比表示），据此评述是否满足 ΔG* ∝ r*^2 的假设。\n数值与单位要求：除(2)中的已给读数外，其余计算结果以数值给出；有效数字 3–4 位；百分比保留 2 位小数；r* 用 nm，ΔG* 用 10^-19 J；比值与归一化为无量纲。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/png;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "[阶段 1: 规划]\nPlan:\n\n1. **分析输入数据与物理原理**: 首先，分析题目给出的三条曲线 A, B, C 的中心读数 (r*, ΔG*)。理解核心物理原理：对于同一材料，在界面能近似不变的情况下，成核温度越高（即过冷度越小），形成临界晶核所需的半径 (r*) 和能量势垒 (ΔG*) 就越大。同时，注意到经典成核理论预测 ΔG* ∝ r*²。\n2. **确定温度排序 (任务 1)**: 基于上述物理原理，比较曲线 A, B, C 的 r* 和 ΔG* 中心读数值。r* 和 ΔG* 值最大的曲线对应最高温度，值最小的曲线对应最低温度。为了确保逻辑的严谨性，将使用 `identify_temperature_order` 工具来形式化地确认这个排序。\n3. **整理并呈现数据 (任务 2)**: 将题目中给出的 r* 和 ΔG* 的中心读数及其 ±5% 的不确定度范围，按照要求的格式进行整理和呈现。同时，简要说明读数方法。\n4. **进行成对比较与稳健性检验 (任务 3)**:\n    - **大小关系比较**: 对 AB、AC、BC 三个组合，分别比较它们的 r* 与 ΔG* 中心值的大小关系，判断排序是否一致。\n    - **无量纲化**: 以曲线 C 的值为基准，计算 A 和 B 的归一化 r~ 和 G~ 值，并检验排序是否与原始值一致。\n    - **误差分析**: 对每个组合，考虑 ±5% 的误差。找出可能导致排序翻转的“最不利组合”（例如，比较 A 和 B 时，取 A 的下限值和 B 的上限值），检验在此极端情况下，原始的排序是否仍然成立。如果发生翻转，明确指出导致翻转的边界条件。\n5. **检验物理模型一致性 (任务 4)**:\n    - **计算比值**: 对于 AB、AC、BC 三个组合 (i, j)，分别计算能量比 R_G = ΔG*_i/ΔG*_j 和半径平方比 R_r2 = (r*_i/r*_j)²。\n    - **计算残差**: 根据上述比值，计算相对残差 ε = |R_G - R_r2| / R_r2，以百分比形式表示。\n    - **评述**: 基于残差的大小，评述 ΔG* ∝ r*² 这一物理假设在给定数据下的符合程度。\n6. **综合与总结**: 综合以上所有分析结果，形成最终的、结构清晰的回答。\n\n[阶段 2: 执行]\nThought: 我将从计划的第二步开始，使用 `identify_temperature_order` 工具来根据中心读数确定温度的高低顺序。我需要将曲线 A, B, C 的标签、r* 和 ΔG* 值以及它们都具有临界点这一信息传递给工具。\nAction:",
+      "tool_calls": [
+        {
+          "id": "call_a2ac5b1578274572809d558cda42415c",
+          "type": "function",
+          "function": {
+            "name": "identify_temperature_order",
+            "arguments": "{\"curve_characteristics\":[{\"delta_g_critical\":100,\"has_critical_point\":true,\"label\":\"A\",\"r_critical\":10},{\"delta_g_critical\":98,\"has_critical_point\":true,\"label\":\"B\",\"r_critical\":9.8},{\"delta_g_critical\":70,\"has_critical_point\":true,\"label\":\"C\",\"r_critical\":8}]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "highest": "A",
+          "lowest": "C"
+        },
+        "metadata": {
+          "num_curves": 3,
+          "num_with_critical": 3,
+          "num_without_critical": 0,
+          "reasoning": {
+            "highest": "临界能垒最大（过冷度最小）",
+            "lowest": "临界能垒最小（过冷度最大）"
+          },
+          "description": "温度高低顺序识别"
+        }
+      },
+      "tool_call_id": "call_a2ac5b1578274572809d558cda42415c"
+    },
+    {
+      "role": "assistant",
+      "content": "Thought: 我已经收到了 `identify_temperature_order` 工具的返回结果。该结果确认了曲线A对应最高温度，曲线C对应最低温度。这与我基于物理原理的初步判断一致。现在，我将继续执行计划的其余部分，这些部分不依赖于外部工具，而是基于计算和逻辑推理。我将整合所有信息，按照任务要求分点回答。\n我已收集到所有必要信息，现在可以生成最终答案了。\nFinal Answer:\n### 最终答案\n\n#### (1) 曲线温度排序\n\n根据经典成核理论，对于同一种材料，当界面能近似不变时，成核温度越高（即过冷度越小），临界晶核半径 $r^*$ 与成核自由能垒 $\\Delta G^*$ 也越大。基于给定的中心读数：\n\n- 曲线 A: $r^*_A = 10.0$ nm, $\\Delta G^*_A = 100 \\times 10^{-19}$ J\n- 曲线 B: $r^*_B = 9.8$ nm, $\\Delta G^*_B = 98 \\times 10^{-19}$ J\n- 曲线 C: $r^*_C = 8.0$ nm, $\\Delta G^*_C = 70 \\times 10^{-19}$ J\n\n比较可知，$r^*_A > r^*_B > r^*_C$ 且 $\\Delta G^*_A > \\Delta G^*_B > \\Delta G^*_C$。因此，**曲线 A 代表最高温度，曲线 C 代表最低温度**。\n\n由高到低的温度排序为：**A > B > C**。\n\n---\n\n#### (2) $r^*$ 与 $\\Delta G^*$ 的数值及读数方法\n\n**读数方法**：\n如题目所述，对于每一条 $\\Delta G–r$ 曲线，在其极大值点（临界点）读取横坐标 $r$ 作为临界晶核半径 $r^*$，并读取对应的纵坐标 $\\Delta G$ 作为临界自由能垒 $\\Delta G^*$。误差范围根据刻度读数的 $\\pm 5\\%$ 计算。\n\n**数值与范围**：\n- **曲线 A**:\n  - $r^*_A = 10.0$ nm (范围: [9.5, 10.5] nm)\n  - $\\Delta G^*_A = 100 \\times 10^{-19}$ J (范围: [95, 105] $\\times 10^{-19}$ J)\n- **曲线 B**:\n  - $r^*_B = 9.8$ nm (范围: [9.31, 10.29] nm)\n  - $\\Delta G^*_B = 98 \\times 10^{-19}$ J (范围: [93.1, 102.9] $\\times 10^{-19}$ J)\n- **曲线 C**:\n  - $r^*_C = 8.0$ nm (范围: [7.6, 8.4] nm)\n  - $\\Delta G^*_C = 70 \\times 10^{-19}$ J (范围: [66.5, 73.5] $\\times 10^{-19}$ J)\n\n---\n\n#### (3) 成对比较与稳健性检验\n\n**中心值比较**:\n- **AB 对**: $r^*_A (10.0) > r^*_B (9.8)$ 且 $\\Delta G^*_A (100) > \\Delta G^*_B (98)$。大小关系一致。\n- **AC 对**: $r^*_A (10.0) > r^*_C (8.0)$ 且 $\\Delta G^*_A (100) > \\Delta G^*_C (70)$。大小关系一致。\n- **BC 对**: $r^*_B (9.8) > r^*_C (8.0)$ 且 $\\Delta G^*_B (98) > \\Delta G^*_C (70)$。大小关系一致。\n\n**无量纲化检验 (以 C 为基准)**:\n- $r_C = 8.0$, $\\Delta G_C = 70$\n- **曲线 A**: $\\tilde{r}_A = r^*_A/r^*_C = 10.0/8.0 = 1.250$; $\\tilde{G}_A = \\Delta G^*_A/\\Delta G^*_C = 100/70 \\approx 1.429$\n- **曲线 B**: $\\tilde{r}_B = r^*_B/r^*_C = 9.8/8.0 = 1.225$; $\\tilde{G}_B = \\Delta G^*_B/\\Delta G^*_C = 98/70 = 1.400$\n归一化后，$\\tilde{r}_A > \\tilde{r}_B > 1$ 且 $\\tilde{G}_A > \\tilde{G}_B > 1$。排序未改变。\n\n**$\\pm 5\\%$ 误差范围内的稳健性检验**:\n- **AB 对**:\n  - 最不利组合：$r^*_{A,min} = 9.5$ nm, $r^*_{B,max} = 10.29$ nm。此时 $r^*_{A,min} < r^*_{B,max}$，**发生排序翻转**。\n  - 翻转边界：当 $r^*_A(1-0.05) = r^*_B(1+0.05)$，即 $0.95 r^*_A = 1.05 r^*_B$。代入中心值 $0.95 \\times 10.0 = 9.5$ 和 $1.05 \\times 9.8 = 10.29$。\n  - 结论：对于 $r^*$，排序在 $\\pm 5\\%$ 误差下**不稳健**。\n  - 对于 $\\Delta G^*$：$G^*_{A,min} = 95$, $G^*_{B,max} = 102.9$。同样 $G^*_{A,min} < G^*_{B,max}$，**发生排序翻转**。\n- **AC 对**:\n  - 最不利组合：$r^*_{A,min} = 9.5$ nm, $r^*_{C,max} = 8.4$ nm。$r^*_{A,min} > r^*_{C,max}$。\n  - 最不利组合：$G^*_{A,min} = 95$, $G^*_{C,max} = 73.5$。$G^*_{A,min} > G^*_{C,max}$。\n  - 结论：排序**稳健**，在 $\\pm 5\\%$ 误差范围内不发生翻转。\n- **BC 对**:\n  - 最不利组合：$r^*_{B,min} = 9.31$ nm, $r^*_{C,max} = 8.4$ nm。$r^*_{B,min} > r^*_{C,max}$。\n  - 最不利组合：$G^*_{B,min} = 93.1$, $G^*_{C,max} = 73.5$。$G^*_{B,min} > G^*_{C,max}$。\n  - 结论：排序**稳健**，在 $\\pm 5\\%$ 误差范围内不发生翻转。\n\n---\n\n#### (4) 物理一致性检验 ($\\Delta G^* \\propto (r^*)^2$)\n\n我们计算比值 $R_G = \\Delta G^*_i/\\Delta G^*_j$ 和 $R_{r2} = (r^*_i/r^*_j)^2$，并计算相对残差 $\\varepsilon = |R_G - R_{r2}| / R_{r2}$。\n\n- **AB 对 (i=A, j=B)**:\n  - $R_G = 100 / 98 \\approx 1.0204$\n  - $R_{r2} = (10.0 / 9.8)^2 \\approx 1.0412$\n  - $\\varepsilon = |1.0204 - 1.0412| / 1.0412 \\approx 0.0200 = \\bf{2.00\\%}$\n- **AC 对 (i=A, j=C)**:\n  - $R_G = 100 / 70 \\approx 1.4286$\n  - $R_{r2} = (10.0 / 8.0)^2 = 1.5625$\n  - $\\varepsilon = |1.4286 - 1.5625| / 1.5625 \\approx 0.0857 = \\bf{8.57\\%}$\n- **BC 对 (i=B, j=C)**:\n  - $R_G = 98 / 70 = 1.4000$\n  - $R_{r2} = (9.8 / 8.0)^2 = 1.5006$\n  - $\\varepsilon = |1.4000 - 1.5006| / 1.5006 \\approx 0.0670 = \\bf{6.70\\%}$\n\n**评述**:\n- AB 对的残差最小 (2.00%)，表明在温度相近时（A和B），$\\Delta G^* \\propto (r^*)^2$ 的关系符合得较好。\n- AC 对和 BC 对的残差较大 (8.57% 和 6.70%)，说明当温度差异较大时（与C比较），实验数据与经典模型的 $\\Delta G^* \\propto (r^*)^2$ 假设偏离更明显。这可能是因为在较大温度范围内，界面能 $\\gamma$ 不再是常数，或者经典模型本身存在局限性。总体而言，该假设在给定数据下只是一个近似描述。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1) 温度排序\": {\n    \"最高温\": \"[字符串]\",\n    \"最低温\": \"[字符串]\",\n    \"由高到低\": \"[3个字符串的数组]\"\n  },\n  \"(2) 读数与单位\": {\n    \"A\": {\n      \"r*\": \"[字符串]\",\n      \"r*范围\": \"[字符串]\",\n      \"ΔG*\": \"[字符串]\",\n      \"ΔG*范围\": \"[字符串]\"\n    },\n    \"B\": {\n      \"r*\": \"[字符串]\",\n      \"r*范围\": \"[字符串]\",\n      \"ΔG*\": \"[字符串]\",\n      \"ΔG*范围\": \"[字符串]\"\n    },\n    \"C\": {\n      \"r*\": \"[字符串]\",\n      \"r*范围\": \"[字符串]\",\n      \"ΔG*\": \"[字符串]\",\n      \"ΔG*范围\": \"[字符串]\"\n    },\n    \"读数方法\": \"[字符串]\"\n  },\n  \"(3) 比较、归一化与鲁棒性\": {\n    \"成对比较（中心读数）\": {\n      \"AB\": {\n        \"r*\": \"[字符串]\",\n        \"ΔG*\": \"[字符串]\",\n        \"一致\": \"[字符串]\"\n      },\n      \"AC\": {\n        \"r*\": \"[字符串]\",\n        \"ΔG*\": \"[字符串]\",\n        \"一致\": \"[字符串]\"\n      },\n      \"BC\": {\n        \"r*\": \"[字符串]\",\n        \"ΔG*\": \"[字符串]\",\n        \"一致\": \"[字符串]\"\n      }\n    },\n    \"一致性统计\": \"[字符串]\",\n    \"归一化（以 C 为基准）\": {\n      \"r~\": {\n        \"A\": \"[数值]\",\n        \"B\": \"[数值]\",\n        \"C\": \"[数值]\"\n      },\n      \"G~\": {\n        \"A\": \"[数值]\",\n        \"B\": \"[数值]\",\n        \"C\": \"[数值]\"\n      },\n      \"归一化后顺序\": {\n        \"按 r~\": \"[3个字符串的数组]\",\n        \"按 G~\": \"[3个字符串的数组]\"\n      }\n    },\n    \"鲁棒性分析（±5%）\": {\n      \"无翻转对\": \"[2个字符串的数组]\",\n      \"可能翻转对\": \"[1个字符串的数组]\",\n      \"导致翻转的边界读数组合（示例）\": {\n        \"AB（r*）\": {\n          \"A取最小\": \"[字符串]\",\n          \"B取最大\": \"[字符串]\",\n          \"结果\": \"[字符串]\"\n        },\n        \"AB（ΔG*）\": {\n          \"A取最小\": \"[字符串]\",\n          \"B取最大\": \"[字符串]\",\n          \"结果\": \"[字符串]\"\n        }\n      },\n      \"AC最不利组合\": {\n        \"A取最小\": {\n          \"r*\": \"[字符串]\",\n          \"ΔG*\": \"[字符串]\"\n        },\n        \"C取最大\": {\n          \"r*\": \"[字符串]\",\n          \"ΔG*\": \"[字符串]\"\n        },\n        \"结果\": \"[字符串]\"\n      },\n      \"BC最不利组合\": {\n        \"B取最小\": {\n          \"r*\": \"[字符串]\",\n          \"ΔG*\": \"[字符串]\"\n        },\n        \"C取最大\": {\n          \"r*\": \"[字符串]\",\n          \"ΔG*\": \"[字符串]\"\n        },\n        \"结果\": \"[字符串]\"\n      },\n      \"结论\": \"[字符串]\"\n    }\n  },\n  \"(4) 物理一致性检验（ΔG* ∝ r*^2）\": {\n    \"定义\": \"[数学方程字符串]\",\n    \"结果\": [\n      {\n        \"对\": \"[字符串]\",\n        \"R_G\": \"[数值]\",\n        \"R_r2\": \"[数值]\",\n        \"ε\": \"[字符串]\"\n      }\n    ],\n    \"评述\": \"[字符串]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1) 温度排序\": {\n    \"最高温\": \"A\",\n    \"最低温\": \"C\",\n    \"由高到低\": [\n      \"A\",\n      \"B\",\n      \"C\"\n    ]\n  },\n  \"(2) 读数与单位\": {\n    \"A\": {\n      \"r*\": \"10.0 nm\",\n      \"r*范围\": \"[9.5, 10.5] nm\",\n      \"ΔG*\": \"100e-19 J\",\n      \"ΔG*范围\": \"[95, 105]e-19 J\"\n    },\n    \"B\": {\n      \"r*\": \"9.8 nm\",\n      \"r*范围\": \"[9.31, 10.29] nm\",\n      \"ΔG*\": \"98e-19 J\",\n      \"ΔG*范围\": \"[93.1, 102.9]e-19 J\"\n    },\n    \"C\": {\n      \"r*\": \"8.0 nm\",\n      \"r*范围\": \"[7.6, 8.4] nm\",\n      \"ΔG*\": \"70e-19 J\",\n      \"ΔG*范围\": \"[66.5, 73.5]e-19 J\"\n    },\n    \"读数方法\": \"在ΔG–r曲线的极大值点读取r*和ΔG*，误差按±5%计。\"\n  },\n  \"(3) 比较、归一化与鲁棒性\": {\n    \"成对比较（中心读数）\": {\n      \"AB\": {\n        \"r*\": \"A > B\",\n        \"ΔG*\": \"A > B\",\n        \"一致\": \"是\"\n      },\n      \"AC\": {\n        \"r*\": \"A > C\",\n        \"ΔG*\": \"A > C\",\n        \"一致\": \"是\"\n      },\n      \"BC\": {\n        \"r*\": \"B > C\",\n        \"ΔG*\": \"B > C\",\n        \"一致\": \"是\"\n      }\n    },\n    \"一致性统计\": \"所有对在中心读数下大小关系一致\",\n    \"归一化（以 C 为基准）\": {\n      \"r~\": {\n        \"A\": 1.25,\n        \"B\": 1.225,\n        \"C\": 1.0\n      },\n      \"G~\": {\n        \"A\": 1.429,\n        \"B\": 1.4,\n        \"C\": 1.0\n      },\n      \"归一化后顺序\": {\n        \"按 r~\": [\n          \"A\",\n          \"B\",\n          \"C\"\n        ],\n        \"按 G~\": [\n          \"A\",\n          \"B\",\n          \"C\"\n        ]\n      }\n    },\n    \"鲁棒性分析（±5%）\": {\n      \"无翻转对\": [\n        \"AC\",\n        \"BC\"\n      ],\n      \"可能翻转对\": [\n        \"AB\"\n      ],\n      \"导致翻转的边界读数组合（示例）\": {\n        \"AB（r*）\": {\n          \"A取最小\": \"9.5 nm\",\n          \"B取最大\": \"10.29 nm\",\n          \"结果\": \"A < B, 发生翻转\"\n        },\n        \"AB（ΔG*）\": {\n          \"A取最小\": \"95e-19 J\",\n          \"B取最大\": \"102.9e-19 J\",\n          \"结果\": \"A < B, 发生翻转\"\n        }\n      },\n      \"AC最不利组合\": {\n        \"A取最小\": {\n          \"r*\": \"9.5 nm\",\n          \"ΔG*\": \"95e-19 J\"\n        },\n        \"C取最大\": {\n          \"r*\": \"8.4 nm\",\n          \"ΔG*\": \"73.5e-19 J\"\n        },\n        \"结果\": \"A > C, 未翻转\"\n      },\n      \"BC最不利组合\": {\n        \"B取最小\": {\n          \"r*\": \"9.31 nm\",\n          \"ΔG*\": \"93.1e-19 J\"\n        },\n        \"C取最大\": {\n          \"r*\": \"8.4 nm\",\n          \"ΔG*\": \"73.5e-19 J\"\n        },\n        \"结果\": \"B > C, 未翻转\"\n      },\n      \"结论\": \"AB对的排序在±5%误差下不稳健，AC和BC对稳健\"\n    }\n  },\n  \"(4) 物理一致性检验（ΔG* ∝ r*^2）\": {\n    \"定义\": \"ε = |(ΔG*_i/ΔG*_j) - (r*_i/r*_j)^2| / (r*_i/r*_j)^2\",\n    \"结果\": [\n      {\n        \"对\": \"AB\",\n        \"R_G\": 1.02,\n        \"R_r2\": 1.041,\n        \"ε\": \"2.00%\"\n      },\n      {\n        \"对\": \"AC\",\n        \"R_G\": 1.429,\n        \"R_r2\": 1.563,\n        \"ε\": \"8.57%\"\n      },\n      {\n        \"对\": \"BC\",\n        \"R_G\": 1.4,\n        \"R_r2\": 1.501,\n        \"ε\": \"6.70%\"\n      }\n    ],\n    \"评述\": \"AB对残差最小(2.00%)，符合较好。AC和BC对残差较大(>6%)，表明温差大时与模型偏离更明显，可能因界面能非恒定。\"\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "Materials Science",
+    "topic": "Diagram Analysis",
+    "image_path": [
+      "r_bench/images/00658.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "identify_temperature_order"
+    ],
+    "golden_answer": [
+      {
+        "(1) 温度排序": {
+          "最高温": "A",
+          "最低温": "C",
+          "由高到低": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "(2) 读数与单位": {
+          "A": {
+            "r*": "10.0 nm",
+            "r*范围": "[9.5, 10.5] nm",
+            "ΔG*": "100 × 10^-19 J",
+            "ΔG*范围": "[95, 105] × 10^-19 J"
+          },
+          "B": {
+            "r*": "9.8 nm",
+            "r*范围": "[9.31, 10.29] nm",
+            "ΔG*": "98 × 10^-19 J",
+            "ΔG*范围": "[93.1, 102.9] × 10^-19 J"
+          },
+          "C": {
+            "r*": "8.0 nm",
+            "r*范围": "[7.6, 8.4] nm",
+            "ΔG*": "70 × 10^-19 J",
+            "ΔG*范围": "[66.5, 73.5] × 10^-19 J"
+          },
+          "读数方法": "在每条 ΔG–r 曲线的极大点读取 r 为 r*，对应 ΔG 为 ΔG*；读数误差按 ±5% 估计。"
+        },
+        "(3) 比较、归一化与鲁棒性": {
+          "成对比较（中心读数）": {
+            "AB": {
+              "r*": "A > B",
+              "ΔG*": "A > B",
+              "一致": "是"
+            },
+            "AC": {
+              "r*": "A > C",
+              "ΔG*": "A > C",
+              "一致": "是"
+            },
+            "BC": {
+              "r*": "B > C",
+              "ΔG*": "B > C",
+              "一致": "是"
+            }
+          },
+          "一致性统计": "3/3",
+          "归一化（以 C 为基准）": {
+            "r~": {
+              "A": 1.25,
+              "B": 1.225,
+              "C": 1.0
+            },
+            "G~": {
+              "A": 1.429,
+              "B": 1.4,
+              "C": 1.0
+            },
+            "归一化后顺序": {
+              "按 r~": [
+                "A",
+                "B",
+                "C"
+              ],
+              "按 G~": [
+                "A",
+                "B",
+                "C"
+              ]
+            }
+          },
+          "鲁棒性分析（±5%）": {
+            "无翻转对": [
+              "A–C",
+              "B–C"
+            ],
+            "可能翻转对": [
+              "A–B"
+            ],
+            "导致翻转的边界读数组合（示例）": {
+              "AB（r*）": {
+                "A取最小": "9.5 nm",
+                "B取最大": "10.29 nm",
+                "结果": "B 的 r* > A"
+              },
+              "AB（ΔG*）": {
+                "A取最小": "95 × 10^-19 J",
+                "B取最大": "102.9 × 10^-19 J",
+                "结果": "B 的 ΔG* > A"
+              }
+            },
+            "AC最不利组合": {
+              "A取最小": {
+                "r*": "9.5 nm",
+                "ΔG*": "95 × 10^-19 J"
+              },
+              "C取最大": {
+                "r*": "8.4 nm",
+                "ΔG*": "73.5 × 10^-19 J"
+              },
+              "结果": "A 仍 > C（无翻转）"
+            },
+            "BC最不利组合": {
+              "B取最小": {
+                "r*": "9.31 nm",
+                "ΔG*": "93.1 × 10^-19 J"
+              },
+              "C取最大": {
+                "r*": "8.4 nm",
+                "ΔG*": "73.5 × 10^-19 J"
+              },
+              "结果": "B 仍 > C（无翻转）"
+            },
+            "结论": "中心读数排序 A > B > C；±5% 下最低温始终为 C；最高温在 A 与 B 之间可能翻转。"
+          }
+        },
+        "(4) 物理一致性检验（ΔG* ∝ r*^2）": {
+          "定义": "R_G = ΔG*_i/ΔG*_j, R_r2 = (r*_i/r*_j)^2, ε = (R_G − R_r2)/R_r2",
+          "结果": [
+            {
+              "对": "A/B",
+              "R_G": 1.0204,
+              "R_r2": 1.0412,
+              "ε": "-2.00%"
+            },
+            {
+              "对": "A/C",
+              "R_G": 1.429,
+              "R_r2": 1.563,
+              "ε": "-8.57%"
+            },
+            {
+              "对": "B/C",
+              "R_G": 1.4,
+              "R_r2": 1.501,
+              "ε": "-6.70%"
+            }
+          ],
+          "评述": "残差为数百分点量级，整体近似满足 ΔG* ∝ r*^2，存在轻微系统性偏小。"
+        }
+      }
+    ],
+    "original_question_id": "79",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+  },
+  "metadata_summary": {
+    "subject": "Materials Science",
+    "topic": "Diagram Analysis",
+    "test_type": "refined",
+    "original_question_id": "79",
+    "subject_topic_key": "Materials Science::Diagram Analysis"
+  },
+  "answer_template": {
+    "(1) 温度排序": {
+      "最高温": "[字符串]",
+      "最低温": "[字符串]",
+      "由高到低": "[3个字符串的数组]"
+    },
+    "(2) 读数与单位": {
+      "A": {
+        "r*": "[字符串]",
+        "r*范围": "[字符串]",
+        "ΔG*": "[字符串]",
+        "ΔG*范围": "[字符串]"
+      },
+      "B": {
+        "r*": "[字符串]",
+        "r*范围": "[字符串]",
+        "ΔG*": "[字符串]",
+        "ΔG*范围": "[字符串]"
+      },
+      "C": {
+        "r*": "[字符串]",
+        "r*范围": "[字符串]",
+        "ΔG*": "[字符串]",
+        "ΔG*范围": "[字符串]"
+      },
+      "读数方法": "[字符串]"
+    },
+    "(3) 比较、归一化与鲁棒性": {
+      "成对比较（中心读数）": {
+        "AB": {
+          "r*": "[字符串]",
+          "ΔG*": "[字符串]",
+          "一致": "[字符串]"
+        },
+        "AC": {
+          "r*": "[字符串]",
+          "ΔG*": "[字符串]",
+          "一致": "[字符串]"
+        },
+        "BC": {
+          "r*": "[字符串]",
+          "ΔG*": "[字符串]",
+          "一致": "[字符串]"
+        }
+      },
+      "一致性统计": "[字符串]",
+      "归一化（以 C 为基准）": {
+        "r~": {
+          "A": "[数值]",
+          "B": "[数值]",
+          "C": "[数值]"
+        },
+        "G~": {
+          "A": "[数值]",
+          "B": "[数值]",
+          "C": "[数值]"
+        },
+        "归一化后顺序": {
+          "按 r~": "[3个字符串的数组]",
+          "按 G~": "[3个字符串的数组]"
+        }
+      },
+      "鲁棒性分析（±5%）": {
+        "无翻转对": "[2个字符串的数组]",
+        "可能翻转对": "[1个字符串的数组]",
+        "导致翻转的边界读数组合（示例）": {
+          "AB（r*）": {
+            "A取最小": "[字符串]",
+            "B取最大": "[字符串]",
+            "结果": "[字符串]"
+          },
+          "AB（ΔG*）": {
+            "A取最小": "[字符串]",
+            "B取最大": "[字符串]",
+            "结果": "[字符串]"
+          }
+        },
+        "AC最不利组合": {
+          "A取最小": {
+            "r*": "[字符串]",
+            "ΔG*": "[字符串]"
+          },
+          "C取最大": {
+            "r*": "[字符串]",
+            "ΔG*": "[字符串]"
+          },
+          "结果": "[字符串]"
+        },
+        "BC最不利组合": {
+          "B取最小": {
+            "r*": "[字符串]",
+            "ΔG*": "[字符串]"
+          },
+          "C取最大": {
+            "r*": "[字符串]",
+            "ΔG*": "[字符串]"
+          },
+          "结果": "[字符串]"
+        },
+        "结论": "[字符串]"
+      }
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）": {
+      "定义": "[数学方程字符串]",
+      "结果": [
+        {
+          "对": "[字符串]",
+          "R_G": "[数值]",
+          "R_r2": "[数值]",
+          "ε": "[字符串]"
+        }
+      ],
+      "评述": "[字符串]"
+    }
+  },
+  "golden_standard": {
+    "(1) 温度排序": {
+      "最高温": "A",
+      "最低温": "C",
+      "由高到低": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "(2) 读数与单位": {
+      "A": {
+        "r*": "10.0 nm",
+        "r*范围": "[9.5, 10.5] nm",
+        "ΔG*": "100 × 10^-19 J",
+        "ΔG*范围": "[95, 105] × 10^-19 J"
+      },
+      "B": {
+        "r*": "9.8 nm",
+        "r*范围": "[9.31, 10.29] nm",
+        "ΔG*": "98 × 10^-19 J",
+        "ΔG*范围": "[93.1, 102.9] × 10^-19 J"
+      },
+      "C": {
+        "r*": "8.0 nm",
+        "r*范围": "[7.6, 8.4] nm",
+        "ΔG*": "70 × 10^-19 J",
+        "ΔG*范围": "[66.5, 73.5] × 10^-19 J"
+      },
+      "读数方法": "在每条 ΔG–r 曲线的极大点读取 r 为 r*，对应 ΔG 为 ΔG*；读数误差按 ±5% 估计。"
+    },
+    "(3) 比较、归一化与鲁棒性": {
+      "成对比较（中心读数）": {
+        "AB": {
+          "r*": "A > B",
+          "ΔG*": "A > B",
+          "一致": "是"
+        },
+        "AC": {
+          "r*": "A > C",
+          "ΔG*": "A > C",
+          "一致": "是"
+        },
+        "BC": {
+          "r*": "B > C",
+          "ΔG*": "B > C",
+          "一致": "是"
+        }
+      },
+      "一致性统计": "3/3",
+      "归一化（以 C 为基准）": {
+        "r~": {
+          "A": 1.25,
+          "B": 1.225,
+          "C": 1.0
+        },
+        "G~": {
+          "A": 1.429,
+          "B": 1.4,
+          "C": 1.0
+        },
+        "归一化后顺序": {
+          "按 r~": [
+            "A",
+            "B",
+            "C"
+          ],
+          "按 G~": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      },
+      "鲁棒性分析（±5%）": {
+        "无翻转对": [
+          "A–C",
+          "B–C"
+        ],
+        "可能翻转对": [
+          "A–B"
+        ],
+        "导致翻转的边界读数组合（示例）": {
+          "AB（r*）": {
+            "A取最小": "9.5 nm",
+            "B取最大": "10.29 nm",
+            "结果": "B 的 r* > A"
+          },
+          "AB（ΔG*）": {
+            "A取最小": "95 × 10^-19 J",
+            "B取最大": "102.9 × 10^-19 J",
+            "结果": "B 的 ΔG* > A"
+          }
+        },
+        "AC最不利组合": {
+          "A取最小": {
+            "r*": "9.5 nm",
+            "ΔG*": "95 × 10^-19 J"
+          },
+          "C取最大": {
+            "r*": "8.4 nm",
+            "ΔG*": "73.5 × 10^-19 J"
+          },
+          "结果": "A 仍 > C（无翻转）"
+        },
+        "BC最不利组合": {
+          "B取最小": {
+            "r*": "9.31 nm",
+            "ΔG*": "93.1 × 10^-19 J"
+          },
+          "C取最大": {
+            "r*": "8.4 nm",
+            "ΔG*": "73.5 × 10^-19 J"
+          },
+          "结果": "B 仍 > C（无翻转）"
+        },
+        "结论": "中心读数排序 A > B > C；±5% 下最低温始终为 C；最高温在 A 与 B 之间可能翻转。"
+      }
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）": {
+      "定义": "R_G = ΔG*_i/ΔG*_j, R_r2 = (r*_i/r*_j)^2, ε = (R_G − R_r2)/R_r2",
+      "结果": [
+        {
+          "对": "A/B",
+          "R_G": 1.0204,
+          "R_r2": 1.0412,
+          "ε": "-2.00%"
+        },
+        {
+          "对": "A/C",
+          "R_G": 1.429,
+          "R_r2": 1.563,
+          "ε": "-8.57%"
+        },
+        {
+          "对": "B/C",
+          "R_G": 1.4,
+          "R_r2": 1.501,
+          "ε": "-6.70%"
+        }
+      ],
+      "评述": "残差为数百分点量级，整体近似满足 ΔG* ∝ r*^2，存在轻微系统性偏小。"
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1) 温度排序": {
+      "最高温": "A",
+      "最低温": "C",
+      "由高到低": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "(2) 读数与单位": {
+      "A": {
+        "r*": "10.0 nm",
+        "r*范围": "[9.5, 10.5] nm",
+        "ΔG*": "100e-19 J",
+        "ΔG*范围": "[95, 105]e-19 J"
+      },
+      "B": {
+        "r*": "9.8 nm",
+        "r*范围": "[9.31, 10.29] nm",
+        "ΔG*": "98e-19 J",
+        "ΔG*范围": "[93.1, 102.9]e-19 J"
+      },
+      "C": {
+        "r*": "8.0 nm",
+        "r*范围": "[7.6, 8.4] nm",
+        "ΔG*": "70e-19 J",
+        "ΔG*范围": "[66.5, 73.5]e-19 J"
+      },
+      "读数方法": "在ΔG–r曲线的极大值点读取r*和ΔG*，误差按±5%计。"
+    },
+    "(3) 比较、归一化与鲁棒性": {
+      "成对比较（中心读数）": {
+        "AB": {
+          "r*": "A > B",
+          "ΔG*": "A > B",
+          "一致": "是"
+        },
+        "AC": {
+          "r*": "A > C",
+          "ΔG*": "A > C",
+          "一致": "是"
+        },
+        "BC": {
+          "r*": "B > C",
+          "ΔG*": "B > C",
+          "一致": "是"
+        }
+      },
+      "一致性统计": "所有对在中心读数下大小关系一致",
+      "归一化（以 C 为基准）": {
+        "r~": {
+          "A": 1.25,
+          "B": 1.225,
+          "C": 1.0
+        },
+        "G~": {
+          "A": 1.429,
+          "B": 1.4,
+          "C": 1.0
+        },
+        "归一化后顺序": {
+          "按 r~": [
+            "A",
+            "B",
+            "C"
+          ],
+          "按 G~": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      },
+      "鲁棒性分析（±5%）": {
+        "无翻转对": [
+          "AC",
+          "BC"
+        ],
+        "可能翻转对": [
+          "AB"
+        ],
+        "导致翻转的边界读数组合（示例）": {
+          "AB（r*）": {
+            "A取最小": "9.5 nm",
+            "B取最大": "10.29 nm",
+            "结果": "A < B, 发生翻转"
+          },
+          "AB（ΔG*）": {
+            "A取最小": "95e-19 J",
+            "B取最大": "102.9e-19 J",
+            "结果": "A < B, 发生翻转"
+          }
+        },
+        "AC最不利组合": {
+          "A取最小": {
+            "r*": "9.5 nm",
+            "ΔG*": "95e-19 J"
+          },
+          "C取最大": {
+            "r*": "8.4 nm",
+            "ΔG*": "73.5e-19 J"
+          },
+          "结果": "A > C, 未翻转"
+        },
+        "BC最不利组合": {
+          "B取最小": {
+            "r*": "9.31 nm",
+            "ΔG*": "93.1e-19 J"
+          },
+          "C取最大": {
+            "r*": "8.4 nm",
+            "ΔG*": "73.5e-19 J"
+          },
+          "结果": "B > C, 未翻转"
+        },
+        "结论": "AB对的排序在±5%误差下不稳健，AC和BC对稳健"
+      }
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）": {
+      "定义": "ε = |(ΔG*_i/ΔG*_j) - (r*_i/r*_j)^2| / (r*_i/r*_j)^2",
+      "结果": [
+        {
+          "对": "AB",
+          "R_G": 1.02,
+          "R_r2": 1.041,
+          "ε": "2.00%"
+        },
+        {
+          "对": "AC",
+          "R_G": 1.429,
+          "R_r2": 1.563,
+          "ε": "8.57%"
+        },
+        {
+          "对": "BC",
+          "R_G": 1.4,
+          "R_r2": 1.501,
+          "ε": "6.70%"
+        }
+      ],
+      "评述": "AB对残差最小(2.00%)，符合较好。AC和BC对残差较大(>6%)，表明温差大时与模型偏离更明显，可能因界面能非恒定。"
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1) 温度排序\": {\n    \"最高温\": \"A\",\n    \"最低温\": \"C\",\n    \"由高到低\": [\n      \"A\",\n      \"B\",\n      \"C\"\n    ]\n  },\n  \"(2) 读数与单位\": {\n    \"A\": {\n      \"r*\": \"10.0 nm\",\n      \"r*范围\": \"[9.5, 10.5] nm\",\n      \"ΔG*\": \"100e-19 J\",\n      \"ΔG*范围\": \"[95, 105]e-19 J\"\n    },\n    \"B\": {\n      \"r*\": \"9.8 nm\",\n      \"r*范围\": \"[9.31, 10.29] nm\",\n      \"ΔG*\": \"98e-19 J\",\n      \"ΔG*范围\": \"[93.1, 102.9]e-19 J\"\n    },\n    \"C\": {\n      \"r*\": \"8.0 nm\",\n      \"r*范围\": \"[7.6, 8.4] nm\",\n      \"ΔG*\": \"70e-19 J\",\n      \"ΔG*范围\": \"[66.5, 73.5]e-19 J\"\n    },\n    \"读数方法\": \"在ΔG–r曲线的极大值点读取r*和ΔG*，误差按±5%计。\"\n  },\n  \"(3) 比较、归一化与鲁棒性\": {\n    \"成对比较（中心读数）\": {\n      \"AB\": {\n        \"r*\": \"A > B\",\n        \"ΔG*\": \"A > B\",\n        \"一致\": \"是\"\n      },\n      \"AC\": {\n        \"r*\": \"A > C\",\n        \"ΔG*\": \"A > C\",\n        \"一致\": \"是\"\n      },\n      \"BC\": {\n        \"r*\": \"B > C\",\n        \"ΔG*\": \"B > C\",\n        \"一致\": \"是\"\n      }\n    },\n    \"一致性统计\": \"所有对在中心读数下大小关系一致\",\n    \"归一化（以 C 为基准）\": {\n      \"r~\": {\n        \"A\": 1.25,\n        \"B\": 1.225,\n        \"C\": 1.0\n      },\n      \"G~\": {\n        \"A\": 1.429,\n        \"B\": 1.4,\n        \"C\": 1.0\n      },\n      \"归一化后顺序\": {\n        \"按 r~\": [\n          \"A\",\n          \"B\",\n          \"C\"\n        ],\n        \"按 G~\": [\n          \"A\",\n          \"B\",\n          \"C\"\n        ]\n      }\n    },\n    \"鲁棒性分析（±5%）\": {\n      \"无翻转对\": [\n        \"AC\",\n        \"BC\"\n      ],\n      \"可能翻转对\": [\n        \"AB\"\n      ],\n      \"导致翻转的边界读数组合（示例）\": {\n        \"AB（r*）\": {\n          \"A取最小\": \"9.5 nm\",\n          \"B取最大\": \"10.29 nm\",\n          \"结果\": \"A < B, 发生翻转\"\n        },\n        \"AB（ΔG*）\": {\n          \"A取最小\": \"95e-19 J\",\n          \"B取最大\": \"102.9e-19 J\",\n          \"结果\": \"A < B, 发生翻转\"\n        }\n      },\n      \"AC最不利组合\": {\n        \"A取最小\": {\n          \"r*\": \"9.5 nm\",\n          \"ΔG*\": \"95e-19 J\"\n        },\n        \"C取最大\": {\n          \"r*\": \"8.4 nm\",\n          \"ΔG*\": \"73.5e-19 J\"\n        },\n        \"结果\": \"A > C, 未翻转\"\n      },\n      \"BC最不利组合\": {\n        \"B取最小\": {\n          \"r*\": \"9.31 nm\",\n          \"ΔG*\": \"93.1e-19 J\"\n        },\n        \"C取最大\": {\n          \"r*\": \"8.4 nm\",\n          \"ΔG*\": \"73.5e-19 J\"\n        },\n        \"结果\": \"B > C, 未翻转\"\n      },\n      \"结论\": \"AB对的排序在±5%误差下不稳健，AC和BC对稳健\"\n    }\n  },\n  \"(4) 物理一致性检验（ΔG* ∝ r*^2）\": {\n    \"定义\": \"ε = |(ΔG*_i/ΔG*_j) - (r*_i/r*_j)^2| / (r*_i/r*_j)^2\",\n    \"结果\": [\n      {\n        \"对\": \"AB\",\n        \"R_G\": 1.02,\n        \"R_r2\": 1.041,\n        \"ε\": \"2.00%\"\n      },\n      {\n        \"对\": \"AC\",\n        \"R_G\": 1.429,\n        \"R_r2\": 1.563,\n        \"ε\": \"8.57%\"\n      },\n      {\n        \"对\": \"BC\",\n        \"R_G\": 1.4,\n        \"R_r2\": 1.501,\n        \"ε\": \"6.70%\"\n      }\n    ],\n    \"评述\": \"AB对残差最小(2.00%)，符合较好。AC和BC对残差较大(>6%)，表明温差大时与模型偏离更明显，可能因界面能非恒定。\"\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1) 温度排序\": {\n    \"最高温\": \"A\",\n    \"最低温\": \"C\",\n    \"由高到低\": [\n      \"A\",\n      \"B\",\n      \"C\"\n    ]\n  },\n  \"(2) 读数与单位\": {\n    \"A\": {\n      \"r*\": \"10.0 nm\",\n      \"r*范围\": \"[9.5, 10.5] nm\",\n      \"ΔG*\": \"100e-19 J\",\n      \"ΔG*范围\": \"[95, 105]e-19 J\"\n    },\n    \"B\": {\n      \"r*\": \"9.8 nm\",\n      \"r*范围\": \"[9.31, 10.29] nm\",\n      \"ΔG*\": \"98e-19 J\",\n      \"ΔG*范围\": \"[93.1, 102.9]e-19 J\"\n    },\n    \"C\": {\n      \"r*\": \"8.0 nm\",\n      \"r*范围\": \"[7.6, 8.4] nm\",\n      \"ΔG*\": \"70e-19 J\",\n      \"ΔG*范围\": \"[66.5, 73.5]e-19 J\"\n    },\n    \"读数方法\": \"在ΔG–r曲线的极大值点读取r*和ΔG*，误差按±5%计。\"\n  },\n  \"(3) 比较、归一化与鲁棒性\": {\n    \"成对比较（中心读数）\": {\n      \"AB\": {\n        \"r*\": \"A > B\",\n        \"ΔG*\": \"A > B\",\n        \"一致\": \"是\"\n      },\n      \"AC\": {\n        \"r*\": \"A > C\",\n        \"ΔG*\": \"A > C\",\n        \"一致\": \"是\"\n      },\n      \"BC\": {\n        \"r*\": \"B > C\",\n        \"ΔG*\": \"B > C\",\n        \"一致\": \"是\"\n      }\n    },\n    \"一致性统计\": \"所有对在中心读数下大小关系一致\",\n    \"归一化（以 C 为基准）\": {\n      \"r~\": {\n        \"A\": 1.25,\n        \"B\": 1.225,\n        \"C\": 1.0\n      },\n      \"G~\": {\n        \"A\": 1.429,\n        \"B\": 1.4,\n        \"C\": 1.0\n      },\n      \"归一化后顺序\": {\n        \"按 r~\": [\n          \"A\",\n          \"B\",\n          \"C\"\n        ],\n        \"按 G~\": [\n          \"A\",\n          \"B\",\n          \"C\"\n        ]\n      }\n    },\n    \"鲁棒性分析（±5%）\": {\n      \"无翻转对\": [\n        \"AC\",\n        \"BC\"\n      ],\n      \"可能翻转对\": [\n        \"AB\"\n      ],\n      \"导致翻转的边界读数组合（示例）\": {\n        \"AB（r*）\": {\n          \"A取最小\": \"9.5 nm\",\n          \"B取最大\": \"10.29 nm\",\n          \"结果\": \"A < B, 发生翻转\"\n        },\n        \"AB（ΔG*）\": {\n          \"A取最小\": \"95e-19 J\",\n          \"B取最大\": \"102.9e-19 J\",\n          \"结果\": \"A < B, 发生翻转\"\n        }\n      },\n      \"AC最不利组合\": {\n        \"A取最小\": {\n          \"r*\": \"9.5 nm\",\n          \"ΔG*\": \"95e-19 J\"\n        },\n        \"C取最大\": {\n          \"r*\": \"8.4 nm\",\n          \"ΔG*\": \"73.5e-19 J\"\n        },\n        \"结果\": \"A > C, 未翻转\"\n      },\n      \"BC最不利组合\": {\n        \"B取最小\": {\n          \"r*\": \"9.31 nm\",\n          \"ΔG*\": \"93.1e-19 J\"\n        },\n        \"C取最大\": {\n          \"r*\": \"8.4 nm\",\n          \"ΔG*\": \"73.5e-19 J\"\n        },\n        \"结果\": \"B > C, 未翻转\"\n      },\n      \"结论\": \"AB对的排序在±5%误差下不稳健，AC和BC对稳健\"\n    }\n  },\n  \"(4) 物理一致性检验（ΔG* ∝ r*^2）\": {\n    \"定义\": \"ε = |(ΔG*_i/ΔG*_j) - (r*_i/r*_j)^2| / (r*_i/r*_j)^2\",\n    \"结果\": [\n      {\n        \"对\": \"AB\",\n        \"R_G\": 1.02,\n        \"R_r2\": 1.041,\n        \"ε\": \"2.00%\"\n      },\n      {\n        \"对\": \"AC\",\n        \"R_G\": 1.429,\n        \"R_r2\": 1.563,\n        \"ε\": \"8.57%\"\n      },\n      {\n        \"对\": \"BC\",\n        \"R_G\": 1.4,\n        \"R_r2\": 1.501,\n        \"ε\": \"6.70%\"\n      }\n    ],\n    \"评述\": \"AB对残差最小(2.00%)，符合较好。AC和BC对残差较大(>6%)，表明温差大时与模型偏离更明显，可能因界面能非恒定。\"\n  }\n}\n```"
+  },
+  "evaluation_score": 0.918918918918919,
+  "evaluation_summary": "匹配字段: 68/74 (得分: 91.89%)",
+  "evaluation_details": {
+    "(1) 温度排序.最高温": {
+      "path": "(1) 温度排序.最高温",
+      "expected": "A",
+      "actual": "A",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 温度排序.最低温": {
+      "path": "(1) 温度排序.最低温",
+      "expected": "C",
+      "actual": "C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 温度排序.由高到低[0]": {
+      "path": "(1) 温度排序.由高到低[0]",
+      "expected": "A",
+      "actual": "A",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 温度排序.由高到低[1]": {
+      "path": "(1) 温度排序.由高到低[1]",
+      "expected": "B",
+      "actual": "B",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 温度排序.由高到低[2]": {
+      "path": "(1) 温度排序.由高到低[2]",
+      "expected": "C",
+      "actual": "C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 读数与单位.A.r*": {
+      "path": "(2) 读数与单位.A.r*",
+      "expected": "10.0 nm",
+      "actual": "10.0 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 读数与单位.A.r*范围": {
+      "path": "(2) 读数与单位.A.r*范围",
+      "expected": "[9.5, 10.5] nm",
+      "actual": "[9.5, 10.5] nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 读数与单位.A.ΔG*": {
+      "path": "(2) 读数与单位.A.ΔG*",
+      "expected": "100 × 10^-19 J",
+      "actual": "100e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 读数与单位.A.ΔG*范围": {
+      "path": "(2) 读数与单位.A.ΔG*范围",
+      "expected": "[95, 105] × 10^-19 J",
+      "actual": "[95, 105]e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 读数与单位.B.r*": {
+      "path": "(2) 读数与单位.B.r*",
+      "expected": "9.8 nm",
+      "actual": "9.8 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 读数与单位.B.r*范围": {
+      "path": "(2) 读数与单位.B.r*范围",
+      "expected": "[9.31, 10.29] nm",
+      "actual": "[9.31, 10.29] nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 读数与单位.B.ΔG*": {
+      "path": "(2) 读数与单位.B.ΔG*",
+      "expected": "98 × 10^-19 J",
+      "actual": "98e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 读数与单位.B.ΔG*范围": {
+      "path": "(2) 读数与单位.B.ΔG*范围",
+      "expected": "[93.1, 102.9] × 10^-19 J",
+      "actual": "[93.1, 102.9]e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 读数与单位.C.r*": {
+      "path": "(2) 读数与单位.C.r*",
+      "expected": "8.0 nm",
+      "actual": "8.0 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 读数与单位.C.r*范围": {
+      "path": "(2) 读数与单位.C.r*范围",
+      "expected": "[7.6, 8.4] nm",
+      "actual": "[7.6, 8.4] nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 读数与单位.C.ΔG*": {
+      "path": "(2) 读数与单位.C.ΔG*",
+      "expected": "70 × 10^-19 J",
+      "actual": "70e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 读数与单位.C.ΔG*范围": {
+      "path": "(2) 读数与单位.C.ΔG*范围",
+      "expected": "[66.5, 73.5] × 10^-19 J",
+      "actual": "[66.5, 73.5]e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 读数与单位.读数方法": {
+      "path": "(2) 读数与单位.读数方法",
+      "expected": "在每条 ΔG–r 曲线的极大点读取 r 为 r*，对应 ΔG 为 ΔG*；读数误差按 ±5% 估计。",
+      "actual": "在ΔG–r曲线的极大值点读取r*和ΔG*，误差按±5%计。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AB.r*": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AB.r*",
+      "expected": "A > B",
+      "actual": "A > B",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AB.ΔG*": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AB.ΔG*",
+      "expected": "A > B",
+      "actual": "A > B",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AB.一致": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AB.一致",
+      "expected": "是",
+      "actual": "是",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AC.r*": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AC.r*",
+      "expected": "A > C",
+      "actual": "A > C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AC.ΔG*": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AC.ΔG*",
+      "expected": "A > C",
+      "actual": "A > C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AC.一致": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.AC.一致",
+      "expected": "是",
+      "actual": "是",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.BC.r*": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.BC.r*",
+      "expected": "B > C",
+      "actual": "B > C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.BC.ΔG*": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.BC.ΔG*",
+      "expected": "B > C",
+      "actual": "B > C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.BC.一致": {
+      "path": "(3) 比较、归一化与鲁棒性.成对比较（中心读数）.BC.一致",
+      "expected": "是",
+      "actual": "是",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.一致性统计": {
+      "path": "(3) 比较、归一化与鲁棒性.一致性统计",
+      "expected": "3/3",
+      "actual": "所有对在中心读数下大小关系一致",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.r~.A": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.r~.A",
+      "expected": 1.25,
+      "actual": 1.25,
+      "expected_num": 1.25,
+      "actual_num": 1.25,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.r~.B": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.r~.B",
+      "expected": 1.225,
+      "actual": 1.225,
+      "expected_num": 1.225,
+      "actual_num": 1.225,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.r~.C": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.r~.C",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.G~.A": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.G~.A",
+      "expected": 1.429,
+      "actual": 1.429,
+      "expected_num": 1.429,
+      "actual_num": 1.429,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.G~.B": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.G~.B",
+      "expected": 1.4,
+      "actual": 1.4,
+      "expected_num": 1.4,
+      "actual_num": 1.4,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.G~.C": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.G~.C",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 r~[0]": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 r~[0]",
+      "expected": "A",
+      "actual": "A",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 r~[1]": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 r~[1]",
+      "expected": "B",
+      "actual": "B",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 r~[2]": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 r~[2]",
+      "expected": "C",
+      "actual": "C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 G~[0]": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 G~[0]",
+      "expected": "A",
+      "actual": "A",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 G~[1]": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 G~[1]",
+      "expected": "B",
+      "actual": "B",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 G~[2]": {
+      "path": "(3) 比较、归一化与鲁棒性.归一化（以 C 为基准）.归一化后顺序.按 G~[2]",
+      "expected": "C",
+      "actual": "C",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.无翻转对[0]": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.无翻转对[0]",
+      "expected": "A–C",
+      "actual": "AC",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.无翻转对[1]": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.无翻转对[1]",
+      "expected": "B–C",
+      "actual": "BC",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.可能翻转对[0]": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.可能翻转对[0]",
+      "expected": "A–B",
+      "actual": "AB",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（r*）.A取最小": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（r*）.A取最小",
+      "expected": "9.5 nm",
+      "actual": "9.5 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（r*）.B取最大": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（r*）.B取最大",
+      "expected": "10.29 nm",
+      "actual": "10.29 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（r*）.结果": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（r*）.结果",
+      "expected": "B 的 r* > A",
+      "actual": "A < B, 发生翻转",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（ΔG*）.A取最小": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（ΔG*）.A取最小",
+      "expected": "95 × 10^-19 J",
+      "actual": "95e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（ΔG*）.B取最大": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（ΔG*）.B取最大",
+      "expected": "102.9 × 10^-19 J",
+      "actual": "102.9e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（ΔG*）.结果": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.导致翻转的边界读数组合（示例）.AB（ΔG*）.结果",
+      "expected": "B 的 ΔG* > A",
+      "actual": "A < B, 发生翻转",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.A取最小.r*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.A取最小.r*",
+      "expected": "9.5 nm",
+      "actual": "9.5 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.A取最小.ΔG*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.A取最小.ΔG*",
+      "expected": "95 × 10^-19 J",
+      "actual": "95e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.C取最大.r*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.C取最大.r*",
+      "expected": "8.4 nm",
+      "actual": "8.4 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.C取最大.ΔG*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.C取最大.ΔG*",
+      "expected": "73.5 × 10^-19 J",
+      "actual": "73.5e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.结果": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.AC最不利组合.结果",
+      "expected": "A 仍 > C（无翻转）",
+      "actual": "A > C, 未翻转",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.B取最小.r*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.B取最小.r*",
+      "expected": "9.31 nm",
+      "actual": "9.31 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.B取最小.ΔG*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.B取最小.ΔG*",
+      "expected": "93.1 × 10^-19 J",
+      "actual": "93.1e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.C取最大.r*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.C取最大.r*",
+      "expected": "8.4 nm",
+      "actual": "8.4 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.C取最大.ΔG*": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.C取最大.ΔG*",
+      "expected": "73.5 × 10^-19 J",
+      "actual": "73.5e-19 J",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.结果": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.BC最不利组合.结果",
+      "expected": "B 仍 > C（无翻转）",
+      "actual": "B > C, 未翻转",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.结论": {
+      "path": "(3) 比较、归一化与鲁棒性.鲁棒性分析（±5%）.结论",
+      "expected": "中心读数排序 A > B > C；±5% 下最低温始终为 C；最高温在 A 与 B 之间可能翻转。",
+      "actual": "AB对的排序在±5%误差下不稳健，AC和BC对稳健",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.定义": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.定义",
+      "expected": "R_G = ΔG*_i/ΔG*_j, R_r2 = (r*_i/r*_j)^2, ε = (R_G − R_r2)/R_r2",
+      "actual": "ε = |(ΔG*_i/ΔG*_j) - (r*_i/r*_j)^2| / (r*_i/r*_j)^2",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].对": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].对",
+      "expected": "A/B",
+      "actual": "AB",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].R_G": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].R_G",
+      "expected": 1.0204,
+      "actual": 1.02,
+      "expected_num": 1.0204,
+      "actual_num": 1.02,
+      "expected_rounded": 1.02,
+      "actual_rounded": 1.02,
+      "error": 0.00039999999999995595,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].R_r2": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].R_r2",
+      "expected": 1.0412,
+      "actual": 1.041,
+      "expected_num": 1.0412,
+      "actual_num": 1.041,
+      "expected_rounded": 1.04,
+      "actual_rounded": 1.04,
+      "error": 0.00019999999999997797,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].ε": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[0].ε",
+      "expected": "-2.00%",
+      "actual": "2.00%",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].对": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].对",
+      "expected": "A/C",
+      "actual": "AC",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].R_G": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].R_G",
+      "expected": 1.429,
+      "actual": 1.429,
+      "expected_num": 1.429,
+      "actual_num": 1.429,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].R_r2": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].R_r2",
+      "expected": 1.563,
+      "actual": 1.563,
+      "expected_num": 1.563,
+      "actual_num": 1.563,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].ε": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[1].ε",
+      "expected": "-8.57%",
+      "actual": "8.57%",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].对": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].对",
+      "expected": "B/C",
+      "actual": "BC",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].R_G": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].R_G",
+      "expected": 1.4,
+      "actual": 1.4,
+      "expected_num": 1.4,
+      "actual_num": 1.4,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].R_r2": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].R_r2",
+      "expected": 1.501,
+      "actual": 1.501,
+      "expected_num": 1.501,
+      "actual_num": 1.501,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].ε": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.结果[2].ε",
+      "expected": "-6.70%",
+      "actual": "6.70%",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 物理一致性检验（ΔG* ∝ r*^2）.评述": {
+      "path": "(4) 物理一致性检验（ΔG* ∝ r*^2）.评述",
+      "expected": "残差为数百分点量级，整体近似满足 ΔG* ∝ r*^2，存在轻微系统性偏小。",
+      "actual": "AB对残差最小(2.00%)，符合较好。AC和BC对残差较大(>6%)，表明温差大时与模型偏离更明显，可能因界面能非恒定。",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "mode_folder": "with_tools_react"
+}

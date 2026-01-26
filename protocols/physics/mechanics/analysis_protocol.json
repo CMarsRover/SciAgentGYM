@@ -1,0 +1,259 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of utility functions for analyzing solutions to variational problems, including energy computation, oscillation fitting, equilibrium detection, phase space analysis, and comprehensive solution assessment across multiple analysis types.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "analyze_solution",
+        "description": "Performs a comprehensive analysis of a solution to a variational problem based on the specified analysis type.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "solution": {
+              "type": "object",
+              "description": "解的数据"
+            },
+            "analysis_type": {
+              "type": "string",
+              "description": "分析类型"
+            }
+          },
+          "required": [
+            "solution",
+            "analysis_type"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "分析结果",
+        "properties": {
+          "solution": {
+            "type": "object",
+            "description": "解的数据"
+          },
+          "analysis_type": {
+            "type": "string",
+            "description": "分析类型"
+          },
+          "result": {
+            "type": "object",
+            "description": "具体的分析结果"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/analysis.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "compute_energy",
+        "description": "Calculates the time series of energy values from a trajectory using a user-defined Lagrangian function.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "trajectory": {
+              "type": "object",
+              "description": "轨迹数据"
+            },
+            "lagrangian_func": {
+              "type": "string",
+              "description": "拉格朗日函数"
+            }
+          },
+          "required": [
+            "trajectory",
+            "lagrangian_func"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "能量时间序列",
+        "properties": {
+          "trajectory": {
+            "type": "object",
+            "description": "轨迹数据"
+          },
+          "lagrangian_func": {
+            "type": "object",
+            "description": "拉格朗日函数"
+          },
+          "energy": {
+            "type": "array",
+            "description": "计算得到的能量时间序列",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/analysis.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fit_oscillation",
+        "description": "Fits an oscillatory model to a specified coordinate in the trajectory to extract amplitude, frequency, and phase.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "trajectory": {
+              "type": "object",
+              "description": "轨迹数据"
+            },
+            "coord": {
+              "type": "string",
+              "description": "坐标名称"
+            }
+          },
+          "required": [
+            "trajectory",
+            "coord"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "拟合结果",
+        "properties": {
+          "trajectory": {
+            "type": "object",
+            "description": "轨迹数据"
+          },
+          "coord": {
+            "type": "string",
+            "description": "坐标名称"
+          },
+          "amplitude": {
+            "type": "number",
+            "description": "振荡振幅"
+          },
+          "frequency": {
+            "type": "number",
+            "description": "振荡频率"
+          },
+          "phase": {
+            "type": "number",
+            "description": "振荡相位"
+          },
+          "offset": {
+            "type": "number",
+            "description": "振荡偏移量"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/analysis.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "detect_equilibrium_points",
+        "description": "Identifies equilibrium points in the trajectory where system variables remain within a given tolerance.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "trajectory": {
+              "type": "object",
+              "description": "轨迹数据"
+            },
+            "tolerance": {
+              "type": "number",
+              "description": "容差"
+            }
+          },
+          "required": [
+            "trajectory",
+            "tolerance"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "平衡点列表",
+        "properties": {
+          "trajectory": {
+            "type": "object",
+            "description": "轨迹数据"
+          },
+          "tolerance": {
+            "type": "number",
+            "description": "容差"
+          },
+          "equilibrium_points": {
+            "type": "array",
+            "description": "检测到的平衡点",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/analysis.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "compute_phase_space_volume",
+        "description": "Estimates the volume occupied by the trajectory in phase space over a specified time window.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "trajectory": {
+              "type": "object",
+              "description": "轨迹数据"
+            },
+            "time_window": {
+              "type": "string",
+              "description": "时间窗口"
+            }
+          },
+          "required": [
+            "trajectory",
+            "time_window"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "相空间体积",
+        "properties": {
+          "trajectory": {
+            "type": "object",
+            "description": "轨迹数据"
+          },
+          "time_window": {
+            "type": "number",
+            "description": "时间窗口"
+          },
+          "volume": {
+            "type": "number",
+            "description": "计算得到的相空间体积"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/variational_calculus/utils/analysis.py"
+      }
+    }
+  ]
+}

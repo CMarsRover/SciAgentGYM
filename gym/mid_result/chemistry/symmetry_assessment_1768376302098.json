@@ -1,0 +1,11 @@
+{
+  "name": "triisopropyl borate",
+  "smiles": "B(OC(C)C)(OC(C)C)OC(C)C",
+  "point_group": "C1",
+  "features": {
+    "has_c3_axis": false,
+    "has_sigma_h": false,
+    "has_c2_perp_axes": false,
+    "provenance": "curated_literature_heuristic"
+  }
+}

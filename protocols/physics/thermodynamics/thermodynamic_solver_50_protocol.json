@@ -1,0 +1,198 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "ideal_gas_expansion",
+            "description": "计算理想气体绝热自由膨胀过程的最终状态和热力学参数。在绝热自由膨胀过程中，气体从初始体积膨胀到更大体积，系统不与外界交换热量(绝热)，且不对外做功(自由膨胀)。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "p0": {
+                        "type": "number",
+                        "description": "初始压强，单位：Pa"
+                    },
+                    "V_ratio": {
+                        "type": "number",
+                        "description": "膨胀后体积与初始体积的比值，默认为2.0"
+                    },
+                    "gamma": {
+                        "type": "number",
+                        "description": "气体的绝热指数(Cp/Cv)，默认为1.4(双原子分子)"
+                    }
+                },
+                "required": [
+                    "p0"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamic_solver_50.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "rankine_cycle_efficiency",
+            "description": "计算理想朗肯循环的热效率和关键状态点参数。朗肯循环是蒸汽动力装置的理想热力循环，包括等熵压缩、等压加热、等熵膨胀和等压冷凝四个过程。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "T_high": {
+                        "type": "number",
+                        "description": "锅炉出口蒸汽温度，单位：K"
+                    },
+                    "P_high": {
+                        "type": "number",
+                        "description": "锅炉出口蒸汽压力，单位：Pa"
+                    },
+                    "P_low": {
+                        "type": "number",
+                        "description": "冷凝器压力，单位：Pa"
+                    },
+                    "fluid": {
+                        "type": "string",
+                        "description": "工质名称，默认为'Water'"
+                    },
+                    "eta_turbine": {
+                        "type": "number",
+                        "description": "汽轮机等熵效率，范围[0,1]，默认为1.0(理想)"
+                    },
+                    "eta_pump": {
+                        "type": "number",
+                        "description": "泵的等熵效率，范围[0,1]，默认为1.0(理想)"
+                    }
+                },
+                "required": [
+                    "T_high",
+                    "P_high",
+                    "P_low"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamic_solver_50.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "heat_diffusion_solver",
+            "description": "求解一维热传导方程的数值解。使用有限差分法求解一维非稳态热传导方程：ρc_p(∂T/∂t) = k(∂²T/∂x²)",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "L": {
+                        "type": "number",
+                        "description": "计算域长度，单位：m"
+                    },
+                    "nx": {
+                        "type": "integer",
+                        "description": "空间网格点数"
+                    },
+                    "T_left": {
+                        "type": "number",
+                        "description": "左边界温度，单位：K"
+                    },
+                    "T_right": {
+                        "type": "number",
+                        "description": "右边界温度，单位：K"
+                    },
+                    "k": {
+                        "type": "number",
+                        "description": "热导率，单位：W/(m·K)"
+                    },
+                    "rho": {
+                        "type": "number",
+                        "description": "密度，单位：kg/m³"
+                    },
+                    "c_p": {
+                        "type": "number",
+                        "description": "比热容，单位：J/(kg·K)"
+                    },
+                    "t_final": {
+                        "type": "number",
+                        "description": "模拟总时间，单位：s"
+                    },
+                    "nt": {
+                        "type": "integer",
+                        "description": "时间步数"
+                    }
+                },
+                "required": [
+                    "L",
+                    "nx",
+                    "T_left",
+                    "T_right",
+                    "k",
+                    "rho",
+                    "c_p",
+                    "t_final",
+                    "nt"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamic_solver_50.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "phase_field_simulation",
+            "description": "使用相场方法模拟材料相变过程。基于Allen-Cahn方程模拟相场演化: ∂φ/∂t = D∇²φ + φ(1-φ)(φ-0.5)",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nx": {
+                        "type": "integer",
+                        "description": "x方向的网格点数"
+                    },
+                    "ny": {
+                        "type": "integer",
+                        "description": "y方向的网格点数"
+                    },
+                    "dx": {
+                        "type": "number",
+                        "description": "x方向的网格间距，单位：无量纲"
+                    },
+                    "dy": {
+                        "type": "number",
+                        "description": "y方向的网格间距，单位：无量纲"
+                    },
+                    "D": {
+                        "type": "number",
+                        "description": "扩散系数，单位：无量纲"
+                    },
+                    "time_steps": {
+                        "type": "integer",
+                        "description": "模拟的时间步数"
+                    },
+                    "dt": {
+                        "type": "number",
+                        "description": "时间步长，单位：无量纲"
+                    },
+                    "initial_radius": {
+                        "type": "number",
+                        "description": "初始相场圆形区域的半径，默认为10"
+                    }
+                },
+                "required": [
+                    "nx",
+                    "ny",
+                    "dx",
+                    "dy",
+                    "D",
+                    "time_steps",
+                    "dt"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/thermodynamic_solver_50.py"
+        }
+    }
+]

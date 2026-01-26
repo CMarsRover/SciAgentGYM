@@ -1,0 +1,446 @@
+{
+  "id": 40,
+  "query": "\"Scientist aims to analyze 200 nucleotides that are surrounding rs113993960 and got four results. Which of the following represents the correct 200 nucleotides that are surrounding rs113993960?\"",
+  "query_data": {
+    "id": 40,
+    "filename": "gpqa_cellbio_22_full.json",
+    "question": "\"Scientist aims to analyze 200 nucleotides that are surrounding rs113993960 and got four results. Which of the following represents the correct 200 nucleotides that are surrounding rs113993960?\"",
+    "answer": "5'GATGATAATT GGAGGCAAGT GAATCCTGAG CGTGATTTGA\nTAATGACCTA ATAATGATGG GTTTTATTTC CAGACTTCAC\nTTCTAATGGT GATTATGGGA GAACTGGAGC CTTCAGAGGG\nTAAAATTAAG CACAGTGGAA GAATTTCATT CTGTTCTCAG\nTTTTCCTGGA TTATGCCTGG CACCATTAAA GAAAATATCA\n\n3'TGGTGTTTCC TATGATGAAT ATAGATACAG AAGCGTCATC\nAAAGCATGCC AACTAGAAGA GGTAAGAAAC TATGTGAAAA\nCTTTTTGATT ATGCATATGA ACCCTTCACA CTACCCAAAT\nTATATATTTG GCTCCATATT CAATCGGTTA GTCTACATAT\nATTTATGTTT CCTCTATGGG TAAGCTACTG TGAATGGATC",
+    "metadata": {
+      "subject": "Life Science",
+      "topic": "Cell Biology",
+      "image_path": null,
+      "tool_expected": [
+        "fetch_snp_from_ncbi",
+        "extract_surrounding_nucleotides",
+        "format_sequence_with_spacing",
+        "save_sequence_to_file"
+      ],
+      "golden_answer": {
+        "fetch_snp_from_ncbi": {
+          "call": "fetch_snp_from_ncbi",
+          "inputs": {
+            "rs_id": "rs113993960"
+          },
+          "output": {
+            "result": {
+              "rs_id": "rs113993960",
+              "chromosome": null,
+              "position": null,
+              "alleles": [],
+              "gene": null
+            },
+            "metadata": {
+              "source": "NCBI_dbSNP",
+              "api_version": "eutils",
+              "timestamp": "current"
+            }
+          }
+        },
+        "extract_surrounding_nucleotides": {
+          "call": "extract_surrounding_nucleotides",
+          "inputs": {
+            "rs_id": "rs113993960",
+            "target_length": 200
+          },
+          "output": {
+            "result": {
+              "rs_id": "rs113993960",
+              "sequence": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT",
+              "length": 200,
+              "snp_position_in_sequence": 100,
+              "chromosome": "7",
+              "genomic_position": 117559591
+            },
+            "metadata": {
+              "target_length": 200,
+              "actual_length": 200,
+              "source": "Ensembl",
+              "genome_build": "GRCh38"
+            }
+          }
+        },
+        "format_sequence_with_spacing": {
+          "call": "format_sequence_with_spacing",
+          "inputs": {
+            "sequence": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT"
+          },
+          "output": {
+            "result": "ACTGGAGCCT TCAGAGGGTA AAATTAAGCA CAGTGGAAGA\nATTTCATTCT GTTCTCAGTT TTCCTGGATT ATGCCTGGCA\nCCATTAAAGA AAATATCATC TTTGGTGTTT CCTATGATGA\nATATAGATAC AGAAGCGTCA TCAAAGCATG CCAACTAGAA\nGAGGTAAGAA ACTATGTGAA AACTTTTTGA TTATGCATAT",
+            "metadata": {
+              "original_length": 200,
+              "formatted_lines": 5,
+              "group_size": 10
+            }
+          }
+        },
+        "save_sequence_to_file": {
+          "call": "save_sequence_to_file",
+          "inputs": {
+            "sequence_data": {
+              "rs_id": "rs113993960",
+              "sequence": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT",
+              "formatted_sequence": "ACTGGAGCCT TCAGAGGGTA AAATTAAGCA CAGTGGAAGA\nATTTCATTCT GTTCTCAGTT TTCCTGGATT ATGCCTGGCA\nCCATTAAAGA AAATATCATC TTTGGTGTTT CCTATGATGA\nATATAGATAC AGAAGCGTCA TCAAAGCATG CCAACTAGAA\nGAGGTAAGAA ACTATGTGAA AACTTTTTGA TTATGCATAT"
+            },
+            "filename": "rs113993960_200bp.txt"
+          },
+          "output": {
+            "result": "./mid_result/bioinformatics/rs113993960_200bp.txt",
+            "metadata": {
+              "file_type": "text",
+              "size": 304,
+              "encoding": "utf-8"
+            }
+          }
+        }
+      },
+      "original_question_id": "22",
+      "_dataset_filename": "refine_merged_single_questions.json"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "fetch_snp_from_ncbi",
+          "description": "从NCBI dbSNP获取SNP基本信息",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "rs_id": {
+                "type": "string",
+                "description": "SNP的rs编号 (如 'rs113993960')"
+              }
+            },
+            "required": [
+              "rs_id"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/bioinformatics_snp_toolkit_claude_22.py",
+          "resolved_file_path": "toolkits/life_science/cell_biology/bioinformatics_snp_toolkit_claude_22.py",
+          "resolved_dir": "toolkits/life_science/cell_biology"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "format_sequence_with_spacing",
+          "description": "格式化DNA序列，添加空格和换行",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "DNA序列字符串"
+              },
+              "line_length": {
+                "type": "integer",
+                "description": "每行字符数"
+              },
+              "group_size": {
+                "type": "integer",
+                "description": "每组字符数"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/bioinformatics_snp_toolkit_claude_22.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "extract_surrounding_nucleotides",
+          "description": "提取SNP周围指定长度的核苷酸序列",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "rs_id": {
+                "type": "string",
+                "description": "SNP的rs编号"
+              },
+              "target_length": {
+                "type": "integer",
+                "description": "目标序列长度"
+              }
+            },
+            "required": [
+              "rs_id"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/bioinformatics_snp_toolkit_claude_22.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "save_sequence_to_file",
+          "description": "保存序列数据到文件",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence_data": {
+                "type": "object",
+                "description": "序列数据字典"
+              },
+              "filename": {
+                "type": "string",
+                "description": "输出文件名"
+              }
+            },
+            "required": [
+              "sequence_data",
+              "filename"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/bioinformatics_snp_toolkit_claude_22.py"
+        }
+      }
+    ],
+    "augmented_versions": [
+      {
+        "augmented_question": "科学家希望在 GRCh38 装配、正链参考序列上分析 rs113993960（变异类型：3bp 删除）。已使用同一数据源（Ensembl，GRCh38）对该位点提取了以变异为中心的 100/200/1000 nt 三种窗口序列，并记录了变异在各窗口中的中心索引（采用 0-based 索引）。提取结果如下：\n- 染色体: 7；基因组位置: 117559591（GRCh38）；链向: +；变异类型: deletion；缺失长度: 3\n- 100 nt 窗口（snp_position_in_sequence=50）:\n  GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG\n- 200 nt 窗口（snp_position_in_sequence=100）:\n  ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT\n- 1000 nt 窗口（snp_position_in_sequence=500）:\n  ATTAATATAGTTAAAGCACATAGAACAGCACTCGACACAGAGTGAGCACTTGGCAACTGTTAGCTGTTACTAACCTTTCCCATTCTTC CTCCAAACCTATTCCAACTATCTGAATCATGTGCCCCTTCTCTGTGAACCTCTATCATAATACTTGTCACACTGTATTGTAATTGTCTCTTTTACTTTCCCTTGTATCTTTTGTGCATAGCAGAGTACCTGAAACAGGAAGTATTTTAAATATTTTGAATCAAATGAGTTAATAGAATCTTTACAAATAAGAATATACACTTCTGCTTAGGATGATAATTGGAGGCAAGTGAATCCTGAGCGTGATTTGATAATGACCTAATAATGATGGGTTTTATTTCCAGACTTCACTTCTAATGGTGATTATGGGAGAACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATATGAACCCTTCACACTACCCAAATTATATATTTGGCTCCATATTCAATCGGTTAGTCTACATATATTTATGTTTCCTCTATGGGTAAGCTACTGTGAATGGATCAATTAATAAAACACATGACCTATGCTTTAAGAAGCTTGCAAACACATGAAATAAATGCAATTTATTTTTTAAATAATGGGTTCATTTGATCACAATAAATGCATTTTATGAAATGGTGAGAATTTTGTTCACTCATTAGTGAGACAAACGTCCTCAATGGTTATTTATATGGCATGCATATAAGTGATATGTGGTATCTTTTTAAAAGATACCACAAAATATGCAT TTTAAAAATATACTCCAAAAATTATTAAGATTATTTTAATAATTTTAATAATACTATAGCCTAATGGAATG\n- dbSNP 左右各 50 bp 侧翼（来自工具保存的包文件）：\n  左 50: GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATC\n  右 50: TTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG\n- 已生成的格式化输出：\n  · 200 nt（每 10 bp 分组，50 bp 换行）：\n    ACTGGAGCCT TCAGAGGGTA AAATTAAGCA CAGTGGAAGA\n    ATTTCATTCT GTTCTCAGTT TTCCTGGATT ATGCCTGGCA\n    CCATTAAAGA AAATATCATC TTTGGTGTTT CCTATGATGA\n    ATATAGATAC AGAAGCGTCA TCAAAGCATG CCAACTAGAA\n    GAGGTAAGAA ACTATGTGAA AACTTTTTGA TTATGCATAT\n  · 100 nt（50/50 分两行）：\n    GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATC\n    TTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG\n- 已保存的打包文件路径：./mid_result/bioinformatics/rs113993960_context_package.json\n- 目标校验清单文件（建议路径）：./mid_result/bioinformatics/rs113993960_verification_manifest.json\n请完成：\n1) 给出正确的 200 nt 序列（GRCh38 正链）并标注变异在该序列中的中心索引（0-based）。\n2) 提供 100 nt 与 1000 nt 序列作为证据材料。\n3) 提交 200 nt 的 10bp 分组/50bp 换行版本，以及 100 nt 的 50/50 分组版本。\n4) 根据下述断言清单逐一给出通过/失败结果：\n   a. 长度一致：len(seq200)=200；len(seq100)=100。\n   b. 子串关系：seq200[50:150] == seq100。\n   c. 子串关系：seq1000[400:600] == seq200。\n   d. 子串关系：seq1000[450:550] == seq100。\n   e. 唯一性：seq1000.count(seq200) == 1。\n   f. 字符集合法性：set(seq200) ⊆ {A,C,G,T,N}。\n   g. dbSNP 左/右 50 bp 匹配：seq100 的前 50/后 50 等于给定的 dbSNP 左/右侧翼。\n5) 给出可复核的文件路径（打包文件与校验清单文件）。",
+        "final_answer": {
+          "assembly": "GRCh38",
+          "strand": "+",
+          "chromosome": "7",
+          "genomic_position": 117559591,
+          "variant_type": "deletion",
+          "variant_length_bp": 3,
+          "seq200_grch38_plus": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT",
+          "center_idx_200_0_based": 100,
+          "seq100": "GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG",
+          "center_idx_100_0_based": 50,
+          "seq1000": "ATTAATATAGTTAAAGCACATAGAACAGCACTCGACACAGAGTGAGCACTTGGCAACTGTTAGCTGTTACTAACCTTTCCCATTCTTCCTCCAAACCTATTCCAACTATCTGAATCATGTGCCCCTTCTCTGTGAACCTCTATCATAATACTTGTCACACTGTATTGTAATTGTCTCTTTTACTTTCCCTTGTATCTTTTGTGCATAGCAGAGTACCTGAAACAGGAAGTATTTTAAATATTTTGAATCAAATGAGTTAATAGAATCTTTACAAATAAGAATATACACTTCTGCTTAGGATGATAATTGGAGGCAAGTGAATCCTGAGCGTGATTTGATAATGACCTAATAATGATGGGTTTTATTTCCAGACTTCACTTCTAATGGTGATTATGGGAGAACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATATGAACCCTTCACACTACCCAAATTATATATTTGGCTCCATATTCAATCGGTTAGTCTACATATATTTATGTTTCCTCTATGGGTAAG TACTGTGAATGGATCAATTAATAAAACACATGACCTATGCTTTAAGAAGCTTGCAAACACATGAAATAAATGCAATTTATTTTTTAAATAATGGGTTCATTTGATCACAATAAATGCATTTTATGAAATGGTGAGAATTTTGTTCACTCATTAGTGAGACAAACGTCCTCAATGGTTATTTATATGGCATGCATATAAGTGATATGTGGTATCTTTTTAAAAGATACCACAAAATATGCATCTTTAAAAATATACTCCAAAAATTATTAAGATTATTTTAATAATTTTAATAATACTATAGCCTAATGGAATG",
+          "center_idx_1000_0_based": 500,
+          "dbsnp_left50": "GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATC",
+          "dbsnp_right50": "TTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG",
+          "fmt_seq200_10bp_groups_50bp_wrap": "ACTGGAGCCT TCAGAGGGTA AAATTAAGCA CAGTGGAAGA\nATTTCATTCT GTTCTCAGTT TTCCTGGATT ATGC TGGCA\nCCATTAAAGA AAATATCATC TTTGGTGTTT CCTATGATGA\nATATAGATAC AGAAGCGTCA TCAAAGCATG CCAACTAGAA\nGAGGTAAGAA ACTATGTGAA AACTTTTTGA TTATGCATAT",
+          "fmt_seq100_50_50": "GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATC\nTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG",
+          "package_path": "./mid_result/bioinformatics/rs113993960_context_package.json",
+          "verification_manifest_path": "./mid_result/bioinformatics/rs113993960_verification_manifest.json",
+          "checks": {
+            "length_seq200_is_200": "pass",
+            "length_seq100_is_100": "pass",
+            "seq200_slice_50_150_equals_seq100": "pass",
+            "seq1000_slice_400_600_equals_seq200": "pass",
+            "seq1000_slice_450_550_equals_seq100": "pass",
+            "unique_count_seq200_in_seq1000_is_1": "pass",
+            "charset_seq200_in_ACGTN": "pass",
+            "dbsnp_flanks_match_seq100_prefix_suffix": "pass"
+          }
+        },
+        "solution_outline": [
+          "明确采用 GRCh38 正链与 0-based 中心索引；使用给定三种窗口序列和中心索引。",
+          "用长度检查确认 100/200/1000 nt 序列长度分别为 100/200/1000。",
+          "验证子串关系：从 200 nt 序列的索引 [50:150] 应获得 100 nt 序列；从 1000 nt 的 [400:600] 与 [450:550] 应分别获得 200 nt 与 100 nt 序列。",
+          "将 200 nt 序列在 1000 nt 序列中计数，确认唯一性为 1。",
+          "校验 100 nt 的前 50 和后 50 与给定的 dbSNP 左右 50 bp 完全匹配。",
+          "检查 200 nt 序列字符是否仅由 A/C/G/T/N 构成。",
+          "给出格式化后的 200 nt（10bp 分组、50bp 换行）与 100 nt（50/50 分行），并列出各断言的通过/失败结果。",
+          "列出可复核的文件路径：打包 JSON（已成功保存）与校验清单 JSON（建议保存路径）。"
+        ],
+        "verification": "按断言逐项核对：1) 计数字符串长度，确认 len(seq200)=200、len(seq100)=100。2) 用 0-based 切片比对：seq200[50:150] 应与 seq100 完全相同；seq1000[400:600] 应与 seq200 相同；seq1000[450:550] 应与 seq100 相同。3) 统计 seq1000.count(seq200) 应等于 1。4) 校验字符集合 set(seq200) 子集于 {A,C,G,T,N}。5) 比对 100 nt 的前 50 与后 50 是否分别等于给定的 dbSNP 左 50 和右 50。上述检查均应返回通过。可用任意脚本语言（如 Python）直接对本答案给出的裸序列执行切片与比较操作。为复核文件，读取 ./mid_result/bioinformatics/rs113993960_context_package.json 获取相同序列与元信息；将本答案中的断言与结果写入 ./mid_result/bioinformatics/rs113993960_verification_manifest.json 后再次执行可重复得到一致结论。"
+      }
+    ],
+    "refined_versions": [
+      {
+        "refined_question": "背景：在人类基因组装配 GRCh38、染色体 7、正链（+）上，基因组位置 117559591 处存在一处 3 bp deletion。现提供以该变异为中心的窗口序列及其在各窗口中的中心索引（0-based）：\n- 100 nt 窗口（中心索引=50）：\n  GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG\n- 200 nt 窗口（中心索引=100）：\n  ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT\n- 1000 nt 窗口（中心索引=500）：\n  ATTAATATAGTTAAAGCACATAGAACAGCACTCGACACAGAGTGAGCACTTGGCAACTGTTAGCTGTTACTAACCTTTCCCATTCTTCCTCCAAACCTATTCCAACTATCTGAATCATGTGCCCCTTCTCTGTGAACCTCTATCATAATACTTGTCACACTGTATTGTAATTGTCTCTTTTACTTTCCCTTGTATCTTTTGTGCATAGCAGAGTACCTGAAACAGGAAGTATTTTAAATATTTTGAATCAAATGAGTTAATAGAATCTTTACAAATAAGAATATACACTTCTGCTTAGGATGATAATTGGAGGCAAGTGAATC TGAGCGTGATTTGATAATGACCTAATAATGATGGGTTTTATTTCCAGACTTCACTTCTAATGGTGATTATGGGAGAACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATATGAACCCTTCACACTACCCAAATTATATATTTGGCTCCATATTCAATCGGTTAGTCTACATATATTTATGTTTCCTCTATGGGTAAGCTACTGTGAATGGATCAATTAATAAAACACATGACCTATGCTTTAAGAAGCTTGCAAACACATGAAATAAATGCAATTTATTTTTTAAATAATGGGTTCATTTGATCACAATAAATGCATTTTATGAAATGGTGAGAATTTTGTTCACTCATTAGTGAGACAAACGTCCTCAATGGTTATTTATATGGCATGCATATAAGTGATATGTGGTATCTTTTTAAAAGATACCACAAAATATGCATCTTTAAAAATATACTCCAAAAATTATTAAGATTATTTTAATAATTTTAATAATACTATAGCCTAATGGAATG\n- dbSNP 左右各 50 bp 侧翼：\n  左 50：GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATC\n  右 50：TTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG\n任务：\n1) 给出 200 nt 序列（GRCh38 正链）并标注该序列中变异的中心索引（0-based）。\n2) 提供 100 nt 与 1000 nt 序列作为证据材料。\n3) 提交 200 nt 的 10 bp 分组/50 bp 换行版本，以及 100 nt 的 50/50 分组版本。\n4) 针对下列断言逐一给出“通过/失败”结论：\n   a) 长度一致：len(seq200)=200；len(seq100)=100。\n   b) 子串关系：seq200[50:150] == seq100。\n   c) 子串关系：seq1000[400:600] == seq200。\n   d) 子串关系：seq1000[450:550] == seq100。\n   e) 唯一性：seq1000.count(seq200) == 1。\n   f) 字符集合法性：set(seq200) ⊆ {A,C,G,T,N}。\n   g) dbSNP 左/右 50 bp 匹配：seq100 的前 50/后 50 分别等于给定侧翼。\n5) 给出可复核的文件路径（打包文件与校验清单文件）。\n结果以字符序列、0-based 索引与通过/失败判定给出。",
+        "final_answer": {
+          "seq200": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT",
+          "center_idx_200_0_based": 100,
+          "seq100": "GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG",
+          "seq1000": "ATTAATATAGTTAAAGCACATAGAACAGCACTCGACACAGAGTGAGCACTTGGCAACTGTTAGCTGTTACTAACCTTTCCCATTCTTCCTCCAAACCTATTCCAACTATCTGAATCATGTGCCC TCTGTGAACCTCTATCATAATACTTGTCACACTGTATTGTAATTGTCTCTTTTACTTTCCCTTGTATCTTTTGTGCATAGCAGAGTACCTGAAACAGGAAGTATTTTAAATATTTTGAATCAAATGAGTTAATAGAATCTTTACAAATAAGAATATACACTTCTGCTTAGGATGATAATTGGAGGCAAGTGAATCCTGAGCGTGATTTGATAATGACCTAATAATGATGGGTTTTATTTCCAGACTTCACTTCTAATGGTGATTATGGGAGAACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATATGAACC TCACACTACCCAAATTATATATTTGGCTCCATATTCAATCGGTTAGTCTACATATATTTATGTTTCCTCTATGGGTAAGCTACTGTGAATGGATCAATTAATAAAACACATGACCTATGCTTTAAGAAGCTTGCAAACACATGAAATAAATGCAATTTATTTTTTAAATAATGGGTTCATTTGATCACAATAAATGCATTTTATGAAATGGTGAGAATTTTGTTCACTCATTAGTGAGACAAACGTCCTCAATGGTTATTTATATGGCATGCATATAAGTGATATGTGGTATCTTTTTAAAAGATACCACAAAATATGCATCTTTAAAAATATACTCCAAAAATTATTAAGATTATTTTAATAATTTTAATAATACTATAGCCTAATGGAATG",
+          "fmt_seq200_10bp_groups_50bp_wrap": "ACTGGAGCCT TCAGAGGGTA AAATTAAGCA CAGTGGAAGA ATTTCATTCT\nGTTCTCAGTT TTCCTGGATT ATGCCTGGCA CCATTAAAGA AAATATCATC\nTTTGGTGTTT CCTATGATGA ATATAGATAC AGAAGCGTCA TCAAAGCATG\nCCAACTAGAA GAGGTAAGAA ACTATGTGAA AACTTTTTGA TTATGCATAT",
+          "fmt_seq100_50_50": "GTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATC\nTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATG",
+          "checks": {
+            "a_length_seq200_eq_200_and_seq100_eq_100": "pass",
+            "b_seq200_50_150_eq_seq100": "pass",
+            "c_seq1000_400_600_eq_seq200": "pass",
+            "d_seq1000_450_550_eq_seq100": "pass",
+            "e_unique_count_seq200_in_seq1000_is_1": "pass",
+            "f_charset_seq200_in_ACGTN": "pass",
+            "g_dbsnp_flanks_match_seq100_prefix_suffix": "pass"
+          },
+          "package_path": "./mid_result/bioinformatics/rs113993960_context_package.json",
+          "verification_manifest_path": "./mid_result/bioinformatics/rs113993960_verification_manifest.json"
+        }
+      }
+    ],
+    "metadata_summary": {
+      "subject": "Life Science",
+      "topic": "Cell Biology",
+      "original_question_id": "22",
+      "subject_topic_key": "Life Science::Cell Biology"
+    }
+  },
+  "model": "glm-4.6v",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": "\"Scientist aims to analyze 200 nucleotides that are surrounding rs113993960 and got four results. Which of the following represents the correct 200 nucleotides that are surrounding rs113993960?\"\nYou should strictly respond in this exact format and answer the question in its original language:\n###Answer###\n{The final answer wrapped in LaTeX boxed format $\\boxed{}$}"
+    },
+    {
+      "role": "assistant",
+      "content": "\n**[阶段 1: 规划]**\nPlan:\n\n1. 使用extract_surrounding_nucleotides工具获取rs113993960周围200个核苷酸的序列\n2. 获取到序列后，由于用户没有提供四个具体的结果选项，我将提供正确的序列作为答案\n3. 将正确的序列用LaTeX boxed格式呈现\n",
+      "tool_calls": [
+        {
+          "id": "call_-7979450377803454295",
+          "type": "function",
+          "function": {
+            "name": "extract_surrounding_nucleotides",
+            "arguments": "{\"rs_id\": \"rs113993960\", \"target_length\": 200}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "rs_id": "rs113993960",
+          "sequence": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT",
+          "length": 200,
+          "snp_position_in_sequence": 100,
+          "chromosome": "7",
+          "genomic_position": 117559591
+        },
+        "metadata": {
+          "target_length": 200,
+          "actual_length": 200,
+          "source": "Ensembl",
+          "genome_build": "GRCh38"
+        }
+      },
+      "tool_call_id": "call_-7979450377803454295"
+    },
+    {
+      "role": "assistant",
+      "content": "\nThought: 我已经成功获取了rs113993960周围200个核苷酸的序列。根据工具返回的结果，正确的序列是：ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT。这个序列长度为200个核苷酸，SNP位置在序列的第100位。现在我可以提供最终答案。\nFinal Answer: ###Answer###\n$\\boxed{\\text{ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT}}$"
+    }
+  ],
+  "metadata": {
+    "subject": "Life Science",
+    "topic": "Cell Biology",
+    "image_path": null,
+    "tool_expected": [
+      "fetch_snp_from_ncbi",
+      "extract_surrounding_nucleotides",
+      "format_sequence_with_spacing",
+      "save_sequence_to_file"
+    ],
+    "golden_answer": {
+      "fetch_snp_from_ncbi": {
+        "call": "fetch_snp_from_ncbi",
+        "inputs": {
+          "rs_id": "rs113993960"
+        },
+        "output": {
+          "result": {
+            "rs_id": "rs113993960",
+            "chromosome": null,
+            "position": null,
+            "alleles": [],
+            "gene": null
+          },
+          "metadata": {
+            "source": "NCBI_dbSNP",
+            "api_version": "eutils",
+            "timestamp": "current"
+          }
+        }
+      },
+      "extract_surrounding_nucleotides": {
+        "call": "extract_surrounding_nucleotides",
+        "inputs": {
+          "rs_id": "rs113993960",
+          "target_length": 200
+        },
+        "output": {
+          "result": {
+            "rs_id": "rs113993960",
+            "sequence": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT",
+            "length": 200,
+            "snp_position_in_sequence": 100,
+            "chromosome": "7",
+            "genomic_position": 117559591
+          },
+          "metadata": {
+            "target_length": 200,
+            "actual_length": 200,
+            "source": "Ensembl",
+            "genome_build": "GRCh38"
+          }
+        }
+      },
+      "format_sequence_with_spacing": {
+        "call": "format_sequence_with_spacing",
+        "inputs": {
+          "sequence": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT"
+        },
+        "output": {
+          "result": "ACTGGAGCCT TCAGAGGGTA AAATTAAGCA CAGTGGAAGA\nATTTCATTCT GTTCTCAGTT TTCCTGGATT ATGCCTGGCA\nCCATTAAAGA AAATATCATC TTTGGTGTTT CCTATGATGA\nATATAGATAC AGAAGCGTCA TCAAAGCATG CCAACTAGAA\nGAGGTAAGAA ACTATGTGAA AACTTTTTGA TTATGCATAT",
+          "metadata": {
+            "original_length": 200,
+            "formatted_lines": 5,
+            "group_size": 10
+          }
+        }
+      },
+      "save_sequence_to_file": {
+        "call": "save_sequence_to_file",
+        "inputs": {
+          "sequence_data": {
+            "rs_id": "rs113993960",
+            "sequence": "ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT",
+            "formatted_sequence": "ACTGGAGCCT TCAGAGGGTA AAATTAAGCA CAGTGGAAGA\nATTTCATTCT GTTCTCAGTT TTCCTGGATT ATGCCTGGCA\nCCATTAAAGA AAATATCATC TTTGGTGTTT CCTATGATGA\nATATAGATAC AGAAGCGTCA TCAAAGCATG CCAACTAGAA\nGAGGTAAGAA ACTATGTGAA AACTTTTTGA TTATGCATAT"
+          },
+          "filename": "rs113993960_200bp.txt"
+        },
+        "output": {
+          "result": "./mid_result/bioinformatics/rs113993960_200bp.txt",
+          "metadata": {
+            "file_type": "text",
+            "size": 304,
+            "encoding": "utf-8"
+          }
+        }
+      }
+    },
+    "original_question_id": "22",
+    "_dataset_filename": "refine_merged_single_questions.json"
+  },
+  "metadata_summary": {
+    "subject": "Life Science",
+    "topic": "Cell Biology",
+    "original_question_id": "22",
+    "subject_topic_key": "Life Science::Cell Biology"
+  },
+  "expected_format": "free_text",
+  "model_raw_answer": "\nThought: 我已经成功获取了rs113993960周围200个核苷酸的序列。根据工具返回的结果，正确的序列是：ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT。这个序列长度为200个核苷酸，SNP位置在序列的第100位。现在我可以提供最终答案。\nFinal Answer: ###Answer###\n$\\boxed{\\text{ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT}}$",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "\nThought: 我已经成功获取了rs113993960周围200个核苷酸的序列。根据工具返回的结果，正确的序列是：ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT。这个序列长度为200个核苷酸，SNP位置在序列的第100位。现在我可以提供最终答案。\nFinal Answer: ###Answer###\n$\\boxed{\\text{ACTGGAGCCTTCAGAGGGTAAAATTAAGCACAGTGGAAGAATTTCATTCTGTTCTCAGTTTTCCTGGATTATGCCTGGCACCATTAAAGAAAATATCATCTTTGGTGTTTCCTATGATGAATATAGATACAGAAGCGTCATCAAAGCATGCCAACTAGAAGAGGTAAGAAACTATGTGAAAACTTTTTGATTATGCATAT}}$"
+  },
+  "mode_folder": "with_tools_react"
+}

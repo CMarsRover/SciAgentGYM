@@ -1,0 +1,206 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_load_distribution",
+            "description": "计算复合材料系统中的载荷分布和最大安全载荷。该函数基于材料的弹性模量、横截面积、长度和最大允许应力，计算复合材料系统中各组件的载荷分布，并确定整个系统的最大安全载荷。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "areas": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件的横截面积，单位为 mm²"
+                    },
+                    "elastic_moduli": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件的弹性模量，单位为 N/mm²"
+                    },
+                    "lengths": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件的长度，单位为 mm"
+                    },
+                    "max_stresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件的最大允许应力，单位为 N/mm²"
+                    }
+                },
+                "required": [
+                    "areas",
+                    "elastic_moduli",
+                    "lengths",
+                    "max_stresses"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/composite_material_solver_17911.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "quantum_state_energy_solver",
+            "description": "求解量子系统的能量本征值和本征态。该函数用于计算给定哈密顿量的能量本征值和本征态，适用于凝聚态物理中的量子多体系统模拟。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "hamiltonian": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "description": "系统的哈密顿量矩阵，应为厄米矩阵"
+                    },
+                    "num_states": {
+                        "type": "integer",
+                        "description": "需要计算的能量本征态数量，默认为5"
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "求解方法，可选 'exact'（精确对角化）或 'lanczos'（Lanczos算法），默认为'exact'"
+                    }
+                },
+                "required": [
+                    "hamiltonian"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/composite_material_solver_17911.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_load_distribution",
+            "description": "可视化复合材料系统中的载荷分布和应力状态。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "materials": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "材料名称列表"
+                    },
+                    "areas": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件的横截面积，单位为 mm²"
+                    },
+                    "loads": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件承受的载荷，单位为 N"
+                    },
+                    "stresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件的应力，单位为 N/mm²"
+                    },
+                    "max_stresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各组件的最大允许应力，单位为 N/mm²"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "图像保存的文件名，如果为None则不保存"
+                    }
+                },
+                "required": [
+                    "materials",
+                    "areas",
+                    "loads",
+                    "stresses",
+                    "max_stresses"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/composite_material_solver_17911.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_quantum_states",
+            "description": "可视化量子系统的能级和波函数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "eigenvalues": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "能量本征值数组"
+                    },
+                    "eigenstates": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "description": "本征态矩阵，每列为一个本征态"
+                    },
+                    "potential": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "势能函数或势能数组"
+                    },
+                    "x_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "空间坐标范围，如果为None则使用默认范围"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "图像保存的文件名，如果为None则不保存"
+                    }
+                },
+                "required": [
+                    "eigenvalues",
+                    "eigenstates"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/composite_material_solver_17911.py"
+        }
+    }
+]

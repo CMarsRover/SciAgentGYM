@@ -1,0 +1,25 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "load_json_file",
+            "description": "加载并解析JSON文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "JSON文件的路径"
+                    }
+                },
+                "required": [
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/waste_calorific_value_toolkit_claude_650.py"
+        }
+    }
+]

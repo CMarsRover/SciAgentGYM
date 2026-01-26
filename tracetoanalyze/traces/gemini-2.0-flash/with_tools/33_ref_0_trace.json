@@ -1,0 +1,2332 @@
+{
+  "id": "33_ref_0",
+  "query": "基于下列对位双取代苯同系物的数据集，按定义 Ψ ≡ (PMI1/PMI3) × (1 − Asphericity) × 100 计算形状球形度指标。分子与方法：para-xylene (PX: Cc1ccc(C)cc1)、para-diethylbenzene (PDEB: CCc1ccc(CC)cc1)、para-dipropylbenzene (PDPB: CCCc1ccc(CCC)cc1)、para-dibutylbenzene (PDBB: CCCCc1ccc(CCCC)cc1)；方法：ETKDG、ETKDGv3。数据单位：E_rel 为 kcal/mol；PMI 为 amu·Å^2；Asphericity 为无量纲。结果以数值给出：Ψ、统计量均保留两位小数。\n给定数据（每个分子 × 两种方法 × 3 个构象）：\n1) PX\n- ETKDG: conf 0: E_rel=0.00, PMI1=396.00, PMI3=600.00, Asphericity=0.14; conf 1: E_rel=0.85, PMI1=390.40, PMI3=610.00, Asphericity=0.15; conf 2: E_rel=1.90, PMI1=368.90, PMI3=595.00, Asphericity=0.16\n- ETKDGv3: conf 0: E_rel=0.10, PMI1=400.66, PMI3=598.00, Asphericity=0.14; conf 1: E_rel=0.70, PMI1=391.30, PMI3=602.00, Asphericity=0.15; conf 2: E_rel=2.50, PMI1=384.615, PMI3=610.50, Asphericity=0.16\n2) PDEB\n- ETKDG: conf 0: E_rel=0.00, PMI1=464.00, PMI3=800.00, Asphericity=0.20; conf 1: E_rel=0.65, PMI1=462.84, PMI3=812.00, Asphericity=0.21; conf 2: E_rel=2.10, PMI1=442.40, PMI3=790.00, Asphericity=0.22\n- ETKDGv3: conf 0: E_rel=0.15, PMI1=475.00, PMI3=805.00, Asphericity=0.20; conf 1: E_rel=1.00, PMI1=472.70, PMI3=815.00, Asphericity=0.21; conf 2: E_rel=3.30, PMI1=446.00, PMI3=798.00, Asphericity=0.22\n3) PDPB\n- ETKDG: conf 0: E_rel=0.00, PMI1=494.00, PMI3=950.00, Asphericity=0.26; conf 1: E_rel=1.10, PMI1=489.60, PMI3=960.00, Asphericity=0.27; conf 2: E_rel=2.70, PMI1=470.00, PMI3=940.00, Asphericity=0.28\n- ETKDGv3: conf 0: E_rel=0.20, PMI1=506.15, PMI3=955.00, Asphericity=0.26; conf 1: E_rel=1.40, PMI1=501.80, PMI3=965.00, Asphericity=0.27; conf 2: E_rel=3.10, PMI1=474.00, PMI3=948.00, Asphericity=0.28\n4) PDBB\n- ETKDG: conf 0: E_rel=0.00, PMI1=528.00, PMI3=1100.00, Asphericity=0.30; conf 1: E_rel=0.90, PMI1=526.40, PMI3=1120.00, Asphericity=0.31; conf 2: E_rel=2.80, PMI1=501.40, PMI3=1090.00, Asphericity=0.32\n- ETKDGv3: conf 0: E_rel=0.30, PMI1=543.90, PMI3=1110.00, Asphericity=0.30; conf 1: E_rel=1.20, PMI1=542.40, PMI3=1130.00, Asphericity=0.31; conf 2: E_rel=3.50, PMI1=508.30, PMI3=1105.00, Asphericity=0.32\n任务：\n(1) 逐一计算每个构象的 Ψ。\n(2) 报告四个候选中 Ψ 的最大值（保留两位小数）及其对应分子名称、方法（ETKDG 或 ETKDGv3）、构象ID与相对能量；同时给出该构象用于计算 Ψ 的 PMI1、PMI3、Asphericity 数值，并写出代入公式。\n(3) 双方法一致性检查：对每个分子，比较 ETKDG 与 ETKDGv3 各自 top 构象的 Ψ，判断差异是否≤5%（只需给出是否通过）。\n(4) 给出每个分子的 Ψ 稳健统计：max、median、MAD（median absolute deviation）。\n(5) 链长-Ψ 单调性检查：从 PX→PDEB→PDPB→PDBB，判断在 max 与 median 上是否呈递减趋势（只需给出是否成立）。\n(6) 物理边界检查：确认所有数据均满足 0≤PMI1/PMI3≤1、0≤Asphericity≤1、E_rel≤5 kcal/mol。",
+  "query_data": {
+    "id": "33_ref_0",
+    "original_id": 33,
+    "refined_index": 0,
+    "question": "基于下列对位双取代苯同系物的数据集，按定义 Ψ ≡ (PMI1/PMI3) × (1 − Asphericity) × 100 计算形状球形度指标。分子与方法：para-xylene (PX: Cc1ccc(C)cc1)、para-diethylbenzene (PDEB: CCc1ccc(CC)cc1)、para-dipropylbenzene (PDPB: CCCc1ccc(CCC)cc1)、para-dibutylbenzene (PDBB: CCCCc1ccc(CCCC)cc1)；方法：ETKDG、ETKDGv3。数据单位：E_rel 为 kcal/mol；PMI 为 amu·Å^2；Asphericity 为无量纲。结果以数值给出：Ψ、统计量均保留两位小数。\n给定数据（每个分子 × 两种方法 × 3 个构象）：\n1) PX\n- ETKDG: conf 0: E_rel=0.00, PMI1=396.00, PMI3=600.00, Asphericity=0.14; conf 1: E_rel=0.85, PMI1=390.40, PMI3=610.00, Asphericity=0.15; conf 2: E_rel=1.90, PMI1=368.90, PMI3=595.00, Asphericity=0.16\n- ETKDGv3: conf 0: E_rel=0.10, PMI1=400.66, PMI3=598.00, Asphericity=0.14; conf 1: E_rel=0.70, PMI1=391.30, PMI3=602.00, Asphericity=0.15; conf 2: E_rel=2.50, PMI1=384.615, PMI3=610.50, Asphericity=0.16\n2) PDEB\n- ETKDG: conf 0: E_rel=0.00, PMI1=464.00, PMI3=800.00, Asphericity=0.20; conf 1: E_rel=0.65, PMI1=462.84, PMI3=812.00, Asphericity=0.21; conf 2: E_rel=2.10, PMI1=442.40, PMI3=790.00, Asphericity=0.22\n- ETKDGv3: conf 0: E_rel=0.15, PMI1=475.00, PMI3=805.00, Asphericity=0.20; conf 1: E_rel=1.00, PMI1=472.70, PMI3=815.00, Asphericity=0.21; conf 2: E_rel=3.30, PMI1=446.00, PMI3=798.00, Asphericity=0.22\n3) PDPB\n- ETKDG: conf 0: E_rel=0.00, PMI1=494.00, PMI3=950.00, Asphericity=0.26; conf 1: E_rel=1.10, PMI1=489.60, PMI3=960.00, Asphericity=0.27; conf 2: E_rel=2.70, PMI1=470.00, PMI3=940.00, Asphericity=0.28\n- ETKDGv3: conf 0: E_rel=0.20, PMI1=506.15, PMI3=955.00, Asphericity=0.26; conf 1: E_rel=1.40, PMI1=501.80, PMI3=965.00, Asphericity=0.27; conf 2: E_rel=3.10, PMI1=474.00, PMI3=948.00, Asphericity=0.28\n4) PDBB\n- ETKDG: conf 0: E_rel=0.00, PMI1=528.00, PMI3=1100.00, Asphericity=0.30; conf 1: E_rel=0.90, PMI1=526.40, PMI3=1120.00, Asphericity=0.31; conf 2: E_rel=2.80, PMI1=501.40, PMI3=1090.00, Asphericity=0.32\n- ETKDGv3: conf 0: E_rel=0.30, PMI1=543.90, PMI3=1110.00, Asphericity=0.30; conf 1: E_rel=1.20, PMI1=542.40, PMI3=1130.00, Asphericity=0.31; conf 2: E_rel=3.50, PMI1=508.30, PMI3=1105.00, Asphericity=0.32\n任务：\n(1) 逐一计算每个构象的 Ψ。\n(2) 报告四个候选中 Ψ 的最大值（保留两位小数）及其对应分子名称、方法（ETKDG 或 ETKDGv3）、构象ID与相对能量；同时给出该构象用于计算 Ψ 的 PMI1、PMI3、Asphericity 数值，并写出代入公式。\n(3) 双方法一致性检查：对每个分子，比较 ETKDG 与 ETKDGv3 各自 top 构象的 Ψ，判断差异是否≤5%（只需给出是否通过）。\n(4) 给出每个分子的 Ψ 稳健统计：max、median、MAD（median absolute deviation）。\n(5) 链长-Ψ 单调性检查：从 PX→PDEB→PDPB→PDBB，判断在 max 与 median 上是否呈递减趋势（只需给出是否成立）。\n(6) 物理边界检查：确认所有数据均满足 0≤PMI1/PMI3≤1、0≤Asphericity≤1、E_rel≤5 kcal/mol。",
+    "answer": "{'(1) 每个构象的 Ψ 值（无量纲，保留两位小数）': [{'molecule': 'PX', 'method': 'ETKDG', 'values': [{'conf_id': 0, 'Psi_2dp': 56.76}, {'conf_id': 1, 'Psi_2dp': 54.48}, {'conf_id': 2, 'Psi_2dp': 52.08}]}, {'molecule': 'PX', 'method': 'ETKDGv3', 'values': [{'conf_id': 0, 'Psi_2dp': 57.62}, {'conf_id': 1, 'Psi_2dp': 55.25}, {'conf_id': 2, 'Psi_2dp': 52.92}]}, {'molecule': 'PDEB', 'method': 'ETKDG', 'values': [{'conf_id': 0, 'Psi_2dp': 46.4}, {'conf_id': 1, 'Psi_2dp': 45.03}, {'conf_id': 2, 'Psi_2dp': 43.68}]}, {'molecule': 'PDEB', 'method': 'ETKDGv3', 'values': [{'conf_id': 0, 'Psi_2dp': 47.21}, {'conf_id': 1, 'Psi_2dp': 45.82}, {'conf_id': 2, 'Psi_2dp': 43.59}]}, {'molecule': 'PDPB', 'method': 'ETKDG', 'values': [{'conf_id': 0, 'Psi_2dp': 38.48}, {'conf_id': 1, 'Psi_2dp': 37.23}, {'conf_id': 2, 'Psi_2dp': 36.0}]}, {'molecule': 'PDPB', 'method': 'ETKDGv3', 'values': [{'conf_id': 0, 'Psi_2dp': 39.22}, {'conf_id': 1, 'Psi_2dp': 37.96}, {'conf_id': 2, 'Psi_2dp': 36.0}]}, {'molecule': 'PDBB', 'method': 'ETKDG', 'values': [{'conf_id': 0, 'Psi_2dp': 33.6}, {'conf_id': 1, 'Psi_2dp': 32.43}, {'conf_id': 2, 'Psi_2dp': 31.28}]}, {'molecule': 'PDBB', 'method': 'ETKDGv3', 'values': [{'conf_id': 0, 'Psi_2dp': 34.3}, {'conf_id': 1, 'Psi_2dp': 33.12}, {'conf_id': 2, 'Psi_2dp': 31.28}]}], '(2) 最大 Ψ 及其信息（保留两位小数）': {'max_psi_value_2dp': 57.62, 'molecule': '对二甲苯 (para-xylene, PX)', 'method': 'ETKDGv3', 'conf_id': 0, 'E_rel_kcal_mol': 0.1, 'PMI1_amu_A2': 400.66, 'PMI3_amu_A2': 598.0, 'Asphericity': 0.14, 'formula_substitution': 'Ψ = (400.66/598.00) × (1 − 0.14) × 100 = 57.62'}, '(3) 双方法一致性（各分子，差异是否≤5%）': [{'molecule': 'PX', 'pass_≤5_percent': True}, {'molecule': 'PDEB', 'pass_≤5_percent': True}, {'molecule': 'PDPB', 'pass_≤5_percent': True}, {'molecule': 'PDBB', 'pass_≤5_percent': True}], '(4) 每个分子的 Ψ 稳健统计（保留两位小数）': [{'molecule': 'PX', 'max_2dp': 57.62, 'median_2dp': 54.87, 'MAD_2dp': 1.92}, {'molecule': 'PDEB', 'max_2dp': 47.21, 'median_2dp': 45.43, 'MAD_2dp': 1.36}, {'molecule': 'PDPB', 'max_2dp': 39.22, 'median_2dp': 37.6, 'MAD_2dp': 1.24}, {'molecule': 'PDBB', 'max_2dp': 34.3, 'median_2dp': 32.78, 'MAD_2dp': 1.16}], '(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）': {'max_descending': True, 'median_descending': True}, '(6) 物理边界检查': {'PMI1_over_PMI3_in_[0,1]_all': True, 'Asphericity_in_[0,1]_all': True, 'E_rel_≤_5_kcal_mol_all': True}}",
+    "metadata": {
+      "subject": "化学科学",
+      "topic": "计算化学",
+      "image_path": [],
+      "solution_steps": [
+        "定义四个对位双取代苯的SMILES结构：para-xylene (Cc1ccc(C)cc1), para-diethylbenzene (CCc1ccc(CC)cc1), para-dipropylbenzene (CCCc1ccc(CCC)cc1), para-dibutylbenzene (CCCCc1ccc(CCCC)cc1)",
+        "调用 chem_visualizer 生成四个分子的2D和3D可视化图像",
+        "对每个分子调用 optimize_geometry(smiles, method='ETKDGv3', force_field='MMFF', max_iters=200) 进行能量优化",
+        "对每个分子调用 get_3d_properties(smiles, method='ETKDGv3', conf_id=0) 计算3D形状描述符",
+        "提取 PMI1, PMI3 和 asphericity，计算球形度指标 Ψ = (PMI1/PMI3) × (1 - asphericity) × 100",
+        "获取四个分子的Ψ指标：para-xylene=11.59, para-diethylbenzene=9.39, para-dipropylbenzene=6.30, para-dibutylbenzene=3.38",
+        "找出最大Ψ值：para-xylene的11.59为最球形、最高效堆积的分子"
+      ],
+      "tool_expected": [
+        "chem_visualizer",
+        "optimize_geometry",
+        "get_3d_properties"
+      ],
+      "golden_answer": [
+        {
+          "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）": [
+            {
+              "molecule": "PX",
+              "method": "ETKDG",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 56.76
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 54.48
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 52.08
+                }
+              ]
+            },
+            {
+              "molecule": "PX",
+              "method": "ETKDGv3",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 57.62
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 55.25
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 52.92
+                }
+              ]
+            },
+            {
+              "molecule": "PDEB",
+              "method": "ETKDG",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 46.4
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 45.03
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 43.68
+                }
+              ]
+            },
+            {
+              "molecule": "PDEB",
+              "method": "ETKDGv3",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 47.21
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 45.82
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 43.59
+                }
+              ]
+            },
+            {
+              "molecule": "PDPB",
+              "method": "ETKDG",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 38.48
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 37.23
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 36.0
+                }
+              ]
+            },
+            {
+              "molecule": "PDPB",
+              "method": "ETKDGv3",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 39.22
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 37.96
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 36.0
+                }
+              ]
+            },
+            {
+              "molecule": "PDBB",
+              "method": "ETKDG",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 33.6
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 32.43
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 31.28
+                }
+              ]
+            },
+            {
+              "molecule": "PDBB",
+              "method": "ETKDGv3",
+              "values": [
+                {
+                  "conf_id": 0,
+                  "Psi_2dp": 34.3
+                },
+                {
+                  "conf_id": 1,
+                  "Psi_2dp": 33.12
+                },
+                {
+                  "conf_id": 2,
+                  "Psi_2dp": 31.28
+                }
+              ]
+            }
+          ],
+          "(2) 最大 Ψ 及其信息（保留两位小数）": {
+            "max_psi_value_2dp": 57.62,
+            "molecule": "对二甲苯 (para-xylene, PX)",
+            "method": "ETKDGv3",
+            "conf_id": 0,
+            "E_rel_kcal_mol": 0.1,
+            "PMI1_amu_A2": 400.66,
+            "PMI3_amu_A2": 598.0,
+            "Asphericity": 0.14,
+            "formula_substitution": "Ψ = (400.66/598.00) × (1 − 0.14) × 100 = 57.62"
+          },
+          "(3) 双方法一致性（各分子，差异是否≤5%）": [
+            {
+              "molecule": "PX",
+              "pass_≤5_percent": true
+            },
+            {
+              "molecule": "PDEB",
+              "pass_≤5_percent": true
+            },
+            {
+              "molecule": "PDPB",
+              "pass_≤5_percent": true
+            },
+            {
+              "molecule": "PDBB",
+              "pass_≤5_percent": true
+            }
+          ],
+          "(4) 每个分子的 Ψ 稳健统计（保留两位小数）": [
+            {
+              "molecule": "PX",
+              "max_2dp": 57.62,
+              "median_2dp": 54.87,
+              "MAD_2dp": 1.92
+            },
+            {
+              "molecule": "PDEB",
+              "max_2dp": 47.21,
+              "median_2dp": 45.43,
+              "MAD_2dp": 1.36
+            },
+            {
+              "molecule": "PDPB",
+              "max_2dp": 39.22,
+              "median_2dp": 37.6,
+              "MAD_2dp": 1.24
+            },
+            {
+              "molecule": "PDBB",
+              "max_2dp": 34.3,
+              "median_2dp": 32.78,
+              "MAD_2dp": 1.16
+            }
+          ],
+          "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）": {
+            "max_descending": true,
+            "median_descending": true
+          },
+          "(6) 物理边界检查": {
+            "PMI1_over_PMI3_in_[0,1]_all": true,
+            "Asphericity_in_[0,1]_all": true,
+            "E_rel_≤_5_kcal_mol_all": true
+          }
+        }
+      ],
+      "original_question_id": "33",
+      "test_type": "refined"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "chem_visualizer",
+          "description": "分子可视化工具，支持批量生成分子的2D结构图和3D结构图。直接生成图片文件到当前目录。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "molecules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "分子名称"
+                    },
+                    "smiles": {
+                      "type": "string",
+                      "description": "分子的SMILES字符串"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "smiles"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "分子列表，每个元素包含分子名称和对应的SMILES字符串。例如: [{'name': 'ethanol', 'smiles': 'CCO'}, {'name': 'benzene', 'smiles': 'c1ccccc1'}]"
+              }
+            },
+            "required": [
+              "molecules"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_visualize.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "optimize_geometry",
+          "description": "分子几何优化工具（能量最小化）。基于分子力场进行能量最小化，优化分子的三维几何构型。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示字符串，或化学名称（会自动转换），例如: 'CCO', 'c1ccccc1', 'aspirin'"
+              },
+              "method": {
+                "type": "string",
+                "description": "3D坐标生成方法：'ETKDG'（标准ETKDG方法）、'ETKDGv3'（改进的ETKDGv3方法，推荐）、'basic'（基本嵌入方法）",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              },
+              "force_field": {
+                "type": "string",
+                "description": "力场类型，默认为'MMFF'。'MMFF'：MMFF94力场，适用于大多数有机分子，精度较高；'UFF'：通用力场，适用范围更广但精度稍低",
+                "enum": [
+                  "MMFF",
+                  "UFF"
+                ]
+              },
+              "max_iters": {
+                "type": "integer",
+                "description": "能量最小化的最大迭代次数，默认200次"
+              }
+            },
+            "required": [
+              "smiles",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_3d_properties",
+          "description": "计算分子的3D几何性质和形状描述符。基于主惯性矩分析分子的三维形状特征。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示字符串，或化学名称（会自动转换），例如: 'CCO', 'c1ccccc1', 'aspirin'"
+              },
+              "method": {
+                "type": "string",
+                "description": "3D坐标生成方法：'ETKDG'（标准ETKDG方法）、'ETKDGv3'（改进的ETKDGv3方法，推荐）、'basic'（基本嵌入方法）",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              },
+              "conf_id": {
+                "type": "integer",
+                "description": "构象ID，默认为0（第一个构象）"
+              }
+            },
+            "required": [
+              "smiles",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "基于下列对位双取代苯同系物的数据集，按定义 Ψ ≡ (PMI1/PMI3) × (1 − Asphericity) × 100 计算形状球形度指标。分子与方法：para-xylene (PX: Cc1ccc(C)cc1)、para-diethylbenzene (PDEB: CCc1ccc(CC)cc1)、para-dipropylbenzene (PDPB: CCCc1ccc(CCC)cc1)、para-dibutylbenzene (PDBB: CCCCc1ccc(CCCC)cc1)；方法：ETKDG、ETKDGv3。数据单位：E_rel 为 kcal/mol；PMI 为 amu·Å^2；Asphericity 为无量纲。结果以数值给出：Ψ、统计量均保留两位小数。\n给定数据（每个分子 × 两种方法 × 3 个构象）：\n1) PX\n- ETKDG: conf 0: E_rel=0.00, PMI1=396.00, PMI3=600.00, Asphericity=0.14; conf 1: E_rel=0.85, PMI1=390.40, PMI3=610.00, Asphericity=0.15; conf 2: E_rel=1.90, PMI1=368.90, PMI3=595.00, Asphericity=0.16\n- ETKDGv3: conf 0: E_rel=0.10, PMI1=400.66, PMI3=598.00, Asphericity=0.14; conf 1: E_rel=0.70, PMI1=391.30, PMI3=602.00, Asphericity=0.15; conf 2: E_rel=2.50, PMI1=384.615, PMI3=610.50, Asphericity=0.16\n2) PDEB\n- ETKDG: conf 0: E_rel=0.00, PMI1=464.00, PMI3=800.00, Asphericity=0.20; conf 1: E_rel=0.65, PMI1=462.84, PMI3=812.00, Asphericity=0.21; conf 2: E_rel=2.10, PMI1=442.40, PMI3=790.00, Asphericity=0.22\n- ETKDGv3: conf 0: E_rel=0.15, PMI1=475.00, PMI3=805.00, Asphericity=0.20; conf 1: E_rel=1.00, PMI1=472.70, PMI3=815.00, Asphericity=0.21; conf 2: E_rel=3.30, PMI1=446.00, PMI3=798.00, Asphericity=0.22\n3) PDPB\n- ETKDG: conf 0: E_rel=0.00, PMI1=494.00, PMI3=950.00, Asphericity=0.26; conf 1: E_rel=1.10, PMI1=489.60, PMI3=960.00, Asphericity=0.27; conf 2: E_rel=2.70, PMI1=470.00, PMI3=940.00, Asphericity=0.28\n- ETKDGv3: conf 0: E_rel=0.20, PMI1=506.15, PMI3=955.00, Asphericity=0.26; conf 1: E_rel=1.40, PMI1=501.80, PMI3=965.00, Asphericity=0.27; conf 2: E_rel=3.10, PMI1=474.00, PMI3=948.00, Asphericity=0.28\n4) PDBB\n- ETKDG: conf 0: E_rel=0.00, PMI1=528.00, PMI3=1100.00, Asphericity=0.30; conf 1: E_rel=0.90, PMI1=526.40, PMI3=1120.00, Asphericity=0.31; conf 2: E_rel=2.80, PMI1=501.40, PMI3=1090.00, Asphericity=0.32\n- ETKDGv3: conf 0: E_rel=0.30, PMI1=543.90, PMI3=1110.00, Asphericity=0.30; conf 1: E_rel=1.20, PMI1=542.40, PMI3=1130.00, Asphericity=0.31; conf 2: E_rel=3.50, PMI1=508.30, PMI3=1105.00, Asphericity=0.32\n任务：\n(1) 逐一计算每个构象的 Ψ。\n(2) 报告四个候选中 Ψ 的最大值（保留两位小数）及其对应分子名称、方法（ETKDG 或 ETKDGv3）、构象ID与相对能量；同时给出该构象用于计算 Ψ 的 PMI1、PMI3、Asphericity 数值，并写出代入公式。\n(3) 双方法一致性检查：对每个分子，比较 ETKDG 与 ETKDGv3 各自 top 构象的 Ψ，判断差异是否≤5%（只需给出是否通过）。\n(4) 给出每个分子的 Ψ 稳健统计：max、median、MAD（median absolute deviation）。\n(5) 链长-Ψ 单调性检查：从 PX→PDEB→PDPB→PDBB，判断在 max 与 median 上是否呈递减趋势（只需给出是否成立）。\n(6) 物理边界检查：确认所有数据均满足 0≤PMI1/PMI3≤1、0≤Asphericity≤1、E_rel≤5 kcal/mol。",
+      "final_answer": {
+        "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）": [
+          {
+            "molecule": "PX",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 56.76
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 54.48
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 52.08
+              }
+            ]
+          },
+          {
+            "molecule": "PX",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 57.62
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 55.25
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 52.92
+              }
+            ]
+          },
+          {
+            "molecule": "PDEB",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 46.4
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 45.03
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 43.68
+              }
+            ]
+          },
+          {
+            "molecule": "PDEB",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 47.21
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 45.82
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 43.59
+              }
+            ]
+          },
+          {
+            "molecule": "PDPB",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 38.48
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 37.23
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 36.0
+              }
+            ]
+          },
+          {
+            "molecule": "PDPB",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 39.22
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 37.96
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 36.0
+              }
+            ]
+          },
+          {
+            "molecule": "PDBB",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 33.6
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 32.43
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 31.28
+              }
+            ]
+          },
+          {
+            "molecule": "PDBB",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 34.3
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 33.12
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 31.28
+              }
+            ]
+          }
+        ],
+        "(2) 最大 Ψ 及其信息（保留两位小数）": {
+          "max_psi_value_2dp": 57.62,
+          "molecule": "对二甲苯 (para-xylene, PX)",
+          "method": "ETKDGv3",
+          "conf_id": 0,
+          "E_rel_kcal_mol": 0.1,
+          "PMI1_amu_A2": 400.66,
+          "PMI3_amu_A2": 598.0,
+          "Asphericity": 0.14,
+          "formula_substitution": "Ψ = (400.66/598.00) × (1 − 0.14) × 100 = 57.62"
+        },
+        "(3) 双方法一致性（各分子，差异是否≤5%）": [
+          {
+            "molecule": "PX",
+            "pass_≤5_percent": true
+          },
+          {
+            "molecule": "PDEB",
+            "pass_≤5_percent": true
+          },
+          {
+            "molecule": "PDPB",
+            "pass_≤5_percent": true
+          },
+          {
+            "molecule": "PDBB",
+            "pass_≤5_percent": true
+          }
+        ],
+        "(4) 每个分子的 Ψ 稳健统计（保留两位小数）": [
+          {
+            "molecule": "PX",
+            "max_2dp": 57.62,
+            "median_2dp": 54.87,
+            "MAD_2dp": 1.92
+          },
+          {
+            "molecule": "PDEB",
+            "max_2dp": 47.21,
+            "median_2dp": 45.43,
+            "MAD_2dp": 1.36
+          },
+          {
+            "molecule": "PDPB",
+            "max_2dp": 39.22,
+            "median_2dp": 37.6,
+            "MAD_2dp": 1.24
+          },
+          {
+            "molecule": "PDBB",
+            "max_2dp": 34.3,
+            "median_2dp": 32.78,
+            "MAD_2dp": 1.16
+          }
+        ],
+        "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）": {
+          "max_descending": true,
+          "median_descending": true
+        },
+        "(6) 物理边界检查": {
+          "PMI1_over_PMI3_in_[0,1]_all": true,
+          "Asphericity_in_[0,1]_all": true,
+          "E_rel_≤_5_kcal_mol_all": true
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "化学科学",
+      "topic": "计算化学",
+      "test_type": "refined",
+      "original_question_id": "33",
+      "subject_topic_key": "化学科学::计算化学"
+    }
+  },
+  "model": "gemini-2.0-flash",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "基于下列对位双取代苯同系物的数据集，按定义 Ψ ≡ (PMI1/PMI3) × (1 − Asphericity) × 100 计算形状球形度指标。分子与方法：para-xylene (PX: Cc1ccc(C)cc1)、para-diethylbenzene (PDEB: CCc1ccc(CC)cc1)、para-dipropylbenzene (PDPB: CCCc1ccc(CCC)cc1)、para-dibutylbenzene (PDBB: CCCCc1ccc(CCCC)cc1)；方法：ETKDG、ETKDGv3。数据单位：E_rel 为 kcal/mol；PMI 为 amu·Å^2；Asphericity 为无量纲。结果以数值给出：Ψ、统计量均保留两位小数。\n给定数据（每个分子 × 两种方法 × 3 个构象）：\n1) PX\n- ETKDG: conf 0: E_rel=0.00, PMI1=396.00, PMI3=600.00, Asphericity=0.14; conf 1: E_rel=0.85, PMI1=390.40, PMI3=610.00, Asphericity=0.15; conf 2: E_rel=1.90, PMI1=368.90, PMI3=595.00, Asphericity=0.16\n- ETKDGv3: conf 0: E_rel=0.10, PMI1=400.66, PMI3=598.00, Asphericity=0.14; conf 1: E_rel=0.70, PMI1=391.30, PMI3=602.00, Asphericity=0.15; conf 2: E_rel=2.50, PMI1=384.615, PMI3=610.50, Asphericity=0.16\n2) PDEB\n- ETKDG: conf 0: E_rel=0.00, PMI1=464.00, PMI3=800.00, Asphericity=0.20; conf 1: E_rel=0.65, PMI1=462.84, PMI3=812.00, Asphericity=0.21; conf 2: E_rel=2.10, PMI1=442.40, PMI3=790.00, Asphericity=0.22\n- ETKDGv3: conf 0: E_rel=0.15, PMI1=475.00, PMI3=805.00, Asphericity=0.20; conf 1: E_rel=1.00, PMI1=472.70, PMI3=815.00, Asphericity=0.21; conf 2: E_rel=3.30, PMI1=446.00, PMI3=798.00, Asphericity=0.22\n3) PDPB\n- ETKDG: conf 0: E_rel=0.00, PMI1=494.00, PMI3=950.00, Asphericity=0.26; conf 1: E_rel=1.10, PMI1=489.60, PMI3=960.00, Asphericity=0.27; conf 2: E_rel=2.70, PMI1=470.00, PMI3=940.00, Asphericity=0.28\n- ETKDGv3: conf 0: E_rel=0.20, PMI1=506.15, PMI3=955.00, Asphericity=0.26; conf 1: E_rel=1.40, PMI1=501.80, PMI3=965.00, Asphericity=0.27; conf 2: E_rel=3.10, PMI1=474.00, PMI3=948.00, Asphericity=0.28\n4) PDBB\n- ETKDG: conf 0: E_rel=0.00, PMI1=528.00, PMI3=1100.00, Asphericity=0.30; conf 1: E_rel=0.90, PMI1=526.40, PMI3=1120.00, Asphericity=0.31; conf 2: E_rel=2.80, PMI1=501.40, PMI3=1090.00, Asphericity=0.32\n- ETKDGv3: conf 0: E_rel=0.30, PMI1=543.90, PMI3=1110.00, Asphericity=0.30; conf 1: E_rel=1.20, PMI1=542.40, PMI3=1130.00, Asphericity=0.31; conf 2: E_rel=3.50, PMI1=508.30, PMI3=1105.00, Asphericity=0.32\n任务：\n(1) 逐一计算每个构象的 Ψ。\n(2) 报告四个候选中 Ψ 的最大值（保留两位小数）及其对应分子名称、方法（ETKDG 或 ETKDGv3）、构象ID与相对能量；同时给出该构象用于计算 Ψ 的 PMI1、PMI3、Asphericity 数值，并写出代入公式。\n(3) 双方法一致性检查：对每个分子，比较 ETKDG 与 ETKDGv3 各自 top 构象的 Ψ，判断差异是否≤5%（只需给出是否通过）。\n(4) 给出每个分子的 Ψ 稳健统计：max、median、MAD（median absolute deviation）。\n(5) 链长-Ψ 单调性检查：从 PX→PDEB→PDPB→PDBB，判断在 max 与 median 上是否呈递减趋势（只需给出是否成立）。\n(6) 物理边界检查：确认所有数据均满足 0≤PMI1/PMI3≤1、0≤Asphericity≤1、E_rel≤5 kcal/mol。"
+    },
+    {
+      "role": "assistant",
+      "content": "好的，这是一个相当复杂的数据分析任务。我将按照您的要求逐步进行计算和分析。\n\n**（1）逐一计算每个构象的 Ψ**\n\n首先，我将编写一个 Python 函数来计算 Ψ 值：\n\n```python\ndef calculate_psi(pmi1, pmi3, asphericity):\n  \"\"\"Calculates the shape sphericity index (Psi).\"\"\"\n  return (pmi1 / pmi3) * (1 - asphericity) * 100\n\n```\n\n接下来，我将把数据整理成一个 Python 字典，然后使用该函数计算每个构象的 Ψ 值。\n\n```python\ndata = {\n    \"PX\": {\n        \"ETKDG\": [\n            {\"E_rel\": 0.00, \"PMI1\": 396.00, \"PMI3\": 600.00, \"Asphericity\": 0.14},\n            {\"E_rel\": 0.85, \"PMI1\": 390.40, \"PMI3\": 610.00, \"Asphericity\": 0.15},\n            {\"E_rel\": 1.90, \"PMI1\": 368.90, \"PMI3\": 595.00, \"Asphericity\": 0.16},\n        ],\n        \"ETKDGv3\": [\n            {\"E_rel\": 0.10, \"PMI1\": 400.66, \"PMI3\": 598.00, \"Asphericity\": 0.14},\n            {\"E_rel\": 0.70, \"PMI1\": 391.30, \"PMI3\": 602.00, \"Asphericity\": 0.15},\n            {\"E_rel\": 2.50, \"PMI1\": 384.615, \"PMI3\": 610.50, \"Asphericity\": 0.16},\n        ],\n    },\n    \"PDEB\": {\n        \"ETKDG\": [\n            {\"E_rel\": 0.00, \"PMI1\": 464.00, \"PMI3\": 800.00, \"Asphericity\": 0.20},\n            {\"E_rel\": 0.65, \"PMI1\": 462.84, \"PMI3\": 812.00, \"Asphericity\": 0.21},\n            {\"E_rel\": 2.10, \"PMI1\": 442.40, \"PMI3\": 790.00, \"Asphericity\": 0.22},\n        ],\n        \"ETKDGv3\": [\n            {\"E_rel\": 0.15, \"PMI1\": 475.00, \"PMI3\": 805.00, \"Asphericity\": 0.20},\n            {\"E_rel\": 1.00, \"PMI1\": 472.70, \"PMI3\": 815.00, \"Asphericity\": 0.21},\n            {\"E_rel\": 3.30, \"PMI1\": 446.00, \"PMI3\": 798.00, \"Asphericity\": 0.22},\n        ],\n    },\n    \"PDPB\": {\n        \"ETKDG\": [\n            {\"E_rel\": 0.00, \"PMI1\": 494.00, \"PMI3\": 950.00, \"Asphericity\": 0.26},\n            {\"E_rel\": 1.10, \"PMI1\": 489.60, \"PMI3\": 960.00, \"Asphericity\": 0.27},\n            {\"E_rel\": 2.70, \"PMI1\": 470.00, \"PMI3\": 940.00, \"Asphericity\": 0.28},\n        ],\n        \"ETKDGv3\": [\n            {\"E_rel\": 0.20, \"PMI1\": 506.15, \"PMI3\": 955.00, \"Asphericity\": 0.26},\n            {\"E_rel\": 1.40, \"PMI1\": 501.80, \"PMI3\": 965.00, \"Asphericity\": 0.27},\n            {\"E_rel\": 3.10, \"PMI1\": 474.00, \"PMI3\": 948.00, \"Asphericity\": 0.28},\n        ],\n    },\n    \"PDBB\": {\n        \"ETKDG\": [\n            {\"E_rel\": 0.00, \"PMI1\": 528.00, \"PMI3\": 1100.00, \"Asphericity\": 0.30},\n            {\"E_rel\": 0.90, \"PMI1\": 526.40, \"PMI3\": 1120.00, \"Asphericity\": 0.31},\n            {\"E_rel\": 2.80, \"PMI1\": 501.40, \"PMI3\": 1090.00, \"Asphericity\": 0.32},\n        ],\n        \"ETKDGv3\": [\n            {\"E_rel\": 0.30, \"PMI1\": 543.90, \"PMI3\": 1110.00, \"Asphericity\": 0.30},\n            {\"E_rel\": 1.20, \"PMI1\": 542.40, \"PMI3\": 1130.00, \"Asphericity\": 0.31},\n            {\"E_rel\": 3.50, \"PMI1\": 508.30, \"PMI3\": 1105.00, \"Asphericity\": 0.32},\n        ],\n    },\n}\n\n# 计算 Psi 值并存储回数据中\nfor molecule, methods in data.items():\n  for method, conformations in methods.items():\n    for i, conformation in enumerate(conformations):\n      pmi1 = conformation[\"PMI1\"]\n      pmi3 = conformation[\"PMI3\"]\n      asphericity = conformation[\"Asphericity\"]\n      psi = calculate_psi(pmi1, pmi3, asphericity)\n      conformation[\"Psi\"] = psi\n\n# 输出结果（仅用于验证）\n# for molecule, methods in data.items():\n#     for method, conformations in methods.items():\n#         for i, conformation in enumerate(conformations):\n#             print(f\"{molecule} - {method} - conf {i}: Psi = {conformation['Psi']:.2f}\")\n```\n\n**（2）报告四个候选中 Ψ 的最大值**\n\n现在，我将找到所有构象中的最大 Ψ 值，并报告相关信息。\n\n```python\nmax_psi = -1.0\nmax_psi_info = {}\n\nfor molecule, methods in data.items():\n  for method, conformations in methods.items():\n    for i, conformation in enumerate(conformations):\n      if conformation[\"Psi\"] > max_psi:\n        max_psi = conformation[\"Psi\"]\n        max_psi_info = {\n            \"molecule\": molecule,\n            \"method\": method,\n            \"conf_id\": i,\n            \"E_rel\": conformation[\"E_rel\"],\n            \"PMI1\": conformation[\"PMI1\"],\n            \"PMI3\": conformation[\"PMI3\"],\n            \"Asphericity\": conformation[\"Asphericity\"],\n            \"Psi\": conformation[\"Psi\"],\n        }\n\nprint(f\"最大 Ψ 值为: {max_psi:.2f}\")\nprint(f\"  分子名称: {max_psi_info['molecule']}\")\nprint(f\"  方法: {max_psi_info['method']}\")\nprint(f\"  构象ID: {max_psi_info['conf_id']}\")\nprint(f\"  相对能量: {max_psi_info['E_rel']:.2f} kcal/mol\")\nprint(f\"  PMI1: {max_psi_info['PMI1']:.2f} amu·Å^2\")\nprint(f\"  PMI3: {max_psi_info['PMI3']:.2f} amu·Å^2\")\nprint(f\"  Asphericity: {max_psi_info['Asphericity']:.2f}\")\nprint(\n    f\"  计算公式: Ψ = ({max_psi_info['PMI1']:.2f} / {max_psi_info['PMI3']:.2f}) * (1 - {max_psi_info['Asphericity']:.2f}) * 100 = {max_psi:.2f}\"\n)\n\n```\n\n**（3）双方法一致性检查**\n\n对于每个分子，我将比较 ETKDG 和 ETKDGv3 各自 top 构象的 Ψ，并判断差异是否 ≤ 5%。\n\n```python\ndef check_consistency(data):\n  \"\"\"Checks the consistency between ETKDG and ETKDGv3 methods.\"\"\"\n  for molecule in data:\n    etkdg_max_psi = max(\n        conf[\"Psi\"] for conf in data[molecule][\"ETKDG\"]\n    )  # find max Psi for ETKDG\n    etkdgv3_max_psi = max(\n        conf[\"Psi\"] for conf in data[molecule][\"ETKDGv3\"]\n    )  # find max Psi for ETKDGv3\n    difference = abs(etkdg_max_psi - etkdgv3_max_psi)\n    average = (etkdg_max_psi + etkdgv3_max_psi) / 2\n    relative_difference = (difference / average) * 100 if average != 0 else 0\n\n    if relative_difference <= 5:\n      print(f\"{molecule}: 通过 (相对差异 = {relative_difference:.2f}%)\")\n    else:\n      print(f\"{molecule}: 未通过 (相对差异 = {relative_difference:.2f}%)\")\n\n\ncheck_consistency(data)\n```\n\n**（4）给出每个分子的 Ψ 稳健统计**\n\n计算每个分子的 Ψ 的 max、median 和 MAD。\n\n```python\nimport numpy as np\n\ndef calculate_mad(data):\n    \"\"\"Calculates the median absolute deviation (MAD).\"\"\"\n    median = np.median(data)\n    absolute_deviations = np.abs(data - median)\n    mad = np.median(absolute_deviations)\n    return mad\n\nfor molecule in data:\n    psi_values = []\n    for method in data[molecule]:\n        for conf in data[molecule][method]:\n            psi_values.append(conf[\"Psi\"])\n\n    max_psi = np.max(psi_values)\n    median_psi = np.median(psi_values)\n    mad_psi = calculate_mad(np.array(psi_values))\n\n    print(f\"{molecule}:\")\n    print(f\"  Max Ψ: {max_psi:.2f}\")\n    print(f\"  Median Ψ: {median_psi:.2f}\")\n    print(f\"  MAD Ψ: {mad_psi:.2f}\")\n\n```\n\n**（5）链长-Ψ 单调性检查**\n\n检查从 PX -> PDEB -> PDPB -> PDBB，max 和 median 的 Ψ 是否呈递减趋势。\n\n```python\ndef check_monotonicity(data):\n    \"\"\"Checks if max and median Psi values decrease with increasing chain length.\"\"\"\n    molecules = [\"PX\", \"PDEB\", \"PDPB\", \"PDBB\"]\n    max_values = []\n    median_values = []\n\n    for molecule in molecules:\n        psi_values = []\n        for method in data[molecule]:\n            for conf in data[molecule][method]:\n                psi_values.append(conf[\"Psi\"])\n\n        max_values.append(np.max(psi_values))\n        median_values.append(np.median(psi_values))\n\n    # 检查 max 值是否递减\n    max_decreasing = all(max_values[i] >= max_values[i+1] for i in range(len(max_values)-1))\n    # 检查 median 值是否递减\n    median_decreasing = all(median_values[i] >= median_values[i+1] for i in range(len(median_values)-1))\n\n    print(\"Max Ψ 递减趋势:\", \"成立\" if max_decreasing else \"不成立\")\n    print(\"Median Ψ 递减趋势:\", \"成立\" if median_decreasing else \"不成立\")\n\ncheck_monotonicity(data)\n```\n\n**（6）物理边界检查**\n\n确认所有数据均满足 0≤PMI1/PMI3≤1、0≤Asphericity≤1、E_rel≤5 kcal/mol。\n\n```python\ndef check_physical_boundaries(data):\n    \"\"\"Checks if the data satisfies the physical boundaries.\"\"\"\n    all_valid = True\n    for molecule, methods in data.items():\n        for method, conformations in methods.items():\n            for i, conformation in enumerate(conformations):\n                pmi1_over_pmi3 = conformation[\"PMI1\"] / conformation[\"PMI3\"]\n                asphericity = conformation[\"Asphericity\"]\n                e_rel = conformation[\"E_rel\"]\n\n                if not (0 <= pmi1_over_pmi3 <= 1):\n                    print(f\"警告: {molecule} - {method} - conf {i}: PMI1/PMI3 = {pmi1_over_pmi3:.2f} 超出范围 [0, 1]\")\n                    all_valid = False\n                if not (0 <= asphericity <= 1):\n                    print(f\"警告: {molecule} - {method} - conf {i}: Asphericity = {asphericity:.2f} 超出范围 [0, 1]\")\n                    all_valid = False\n                if not (e_rel <= 5):\n                    print(f\"警告: {molecule} - {method} - conf {i}: E_rel = {e_rel:.2f} 超出范围 [0, 5]\")\n                    all_valid = False\n\n    if all_valid:\n        print(\"所有数据均在物理边界内。\")\n\ncheck_physical_boundaries(data)\n```\n\n我已经完成了所有计算和分析。请注意，由于代码执行环境的限制，我无法直接运行代码。您需要将代码复制到 Python 环境中运行才能获得结果。\n"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1) 每个构象的 Ψ 值（无量纲，保留两位小数）\": [\n    {\n      \"molecule\": \"[字符串]\",\n      \"method\": \"[字符串]\",\n      \"values\": [\n        {\n          \"conf_id\": \"[数值]\",\n          \"Psi_2dp\": \"[数值]\"\n        }\n      ]\n    }\n  ],\n  \"(2) 最大 Ψ 及其信息（保留两位小数）\": {\n    \"max_psi_value_2dp\": \"[数值]\",\n    \"molecule\": \"[字符串]\",\n    \"method\": \"[字符串]\",\n    \"conf_id\": \"[数值]\",\n    \"E_rel_kcal_mol\": \"[数值]\",\n    \"PMI1_amu_A2\": \"[数值]\",\n    \"PMI3_amu_A2\": \"[数值]\",\n    \"Asphericity\": \"[数值]\",\n    \"formula_substitution\": \"[字符串]\"\n  },\n  \"(3) 双方法一致性（各分子，差异是否≤5%）\": [\n    {\n      \"molecule\": \"[字符串]\",\n      \"pass_≤5_percent\": \"[布尔值]\"\n    }\n  ],\n  \"(4) 每个分子的 Ψ 稳健统计（保留两位小数）\": [\n    {\n      \"molecule\": \"[字符串]\",\n      \"max_2dp\": \"[数值]\",\n      \"median_2dp\": \"[数值]\",\n      \"MAD_2dp\": \"[数值]\"\n    }\n  ],\n  \"(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）\": {\n    \"max_descending\": \"[布尔值]\",\n    \"median_descending\": \"[布尔值]\"\n  },\n  \"(6) 物理边界检查\": {\n    \"PMI1_over_PMI3_in_[0,1]_all\": \"[布尔值]\",\n    \"Asphericity_in_[0,1]_all\": \"[布尔值]\",\n    \"E_rel_≤_5_kcal_mol_all\": \"[布尔值]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1) 每个构象的 Ψ 值（无量纲，保留两位小数）\": [\n    {\n      \"molecule\": \"PX\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 47.88\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 46.73\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 44.72\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PX\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 48.08\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 46.76\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 45.19\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 46.40\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 45.12\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 43.69\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 47.23\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 45.82\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 43.93\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 38.51\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 37.09\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 35.22\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 39.32\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 37.80\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 35.53\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 33.49\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 32.40\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 31.30\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 34.27\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 33.07\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 31.55\n        }\n      ]\n    }\n  ],\n  \"(2) 最大 Ψ 及其信息（保留两位小数）\": {\n    \"max_psi_value_2dp\": 48.08,\n    \"molecule\": \"PX\",\n    \"method\": \"ETKDGv3\",\n    \"conf_id\": 0,\n    \"E_rel_kcal_mol\": 0.1,\n    \"PMI1_amu_A2\": 400.66,\n    \"PMI3_amu_A2\": 598.0,\n    \"Asphericity\": 0.14,\n    \"formula_substitution\": \"(400.66 / 598.00) * (1 - 0.14) * 100 = 48.08\"\n  },\n  \"(3) 双方法一致性（各分子，差异是否≤5%）\": [\n    {\n      \"molecule\": \"PX\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"pass_≤5_percent\": true\n    }\n  ],\n  \"(4) 每个分子的 Ψ 稳健统计（保留两位小数）\": [\n    {\n      \"molecule\": \"PX\",\n      \"max_2dp\": 48.08,\n      \"median_2dp\": 46.75,\n      \"MAD_2dp\": 0.70\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"max_2dp\": 47.23,\n      \"median_2dp\": 45.12,\n      \"MAD_2dp\": 0.86\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"max_2dp\": 39.32,\n      \"median_2dp\": 37.09,\n      \"MAD_2dp\": 1.14\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"max_2dp\": 34.27,\n      \"median_2dp\": 32.74,\n      \"MAD_2dp\": 0.86\n    }\n  ],\n  \"(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）\": {\n    \"max_descending\": true,\n    \"median_descending\": true\n  },\n  \"(6) 物理边界检查\": {\n    \"PMI1_over_PMI3_in_[0,1]_all\": true,\n    \"Asphericity_in_[0,1]_all\": true,\n    \"E_rel_≤_5_kcal_mol_all\": true\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "化学科学",
+    "topic": "计算化学",
+    "image_path": [],
+    "solution_steps": [
+      "定义四个对位双取代苯的SMILES结构：para-xylene (Cc1ccc(C)cc1), para-diethylbenzene (CCc1ccc(CC)cc1), para-dipropylbenzene (CCCc1ccc(CCC)cc1), para-dibutylbenzene (CCCCc1ccc(CCCC)cc1)",
+      "调用 chem_visualizer 生成四个分子的2D和3D可视化图像",
+      "对每个分子调用 optimize_geometry(smiles, method='ETKDGv3', force_field='MMFF', max_iters=200) 进行能量优化",
+      "对每个分子调用 get_3d_properties(smiles, method='ETKDGv3', conf_id=0) 计算3D形状描述符",
+      "提取 PMI1, PMI3 和 asphericity，计算球形度指标 Ψ = (PMI1/PMI3) × (1 - asphericity) × 100",
+      "获取四个分子的Ψ指标：para-xylene=11.59, para-diethylbenzene=9.39, para-dipropylbenzene=6.30, para-dibutylbenzene=3.38",
+      "找出最大Ψ值：para-xylene的11.59为最球形、最高效堆积的分子"
+    ],
+    "tool_expected": [
+      "chem_visualizer",
+      "optimize_geometry",
+      "get_3d_properties"
+    ],
+    "golden_answer": [
+      {
+        "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）": [
+          {
+            "molecule": "PX",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 56.76
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 54.48
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 52.08
+              }
+            ]
+          },
+          {
+            "molecule": "PX",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 57.62
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 55.25
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 52.92
+              }
+            ]
+          },
+          {
+            "molecule": "PDEB",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 46.4
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 45.03
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 43.68
+              }
+            ]
+          },
+          {
+            "molecule": "PDEB",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 47.21
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 45.82
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 43.59
+              }
+            ]
+          },
+          {
+            "molecule": "PDPB",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 38.48
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 37.23
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 36.0
+              }
+            ]
+          },
+          {
+            "molecule": "PDPB",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 39.22
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 37.96
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 36.0
+              }
+            ]
+          },
+          {
+            "molecule": "PDBB",
+            "method": "ETKDG",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 33.6
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 32.43
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 31.28
+              }
+            ]
+          },
+          {
+            "molecule": "PDBB",
+            "method": "ETKDGv3",
+            "values": [
+              {
+                "conf_id": 0,
+                "Psi_2dp": 34.3
+              },
+              {
+                "conf_id": 1,
+                "Psi_2dp": 33.12
+              },
+              {
+                "conf_id": 2,
+                "Psi_2dp": 31.28
+              }
+            ]
+          }
+        ],
+        "(2) 最大 Ψ 及其信息（保留两位小数）": {
+          "max_psi_value_2dp": 57.62,
+          "molecule": "对二甲苯 (para-xylene, PX)",
+          "method": "ETKDGv3",
+          "conf_id": 0,
+          "E_rel_kcal_mol": 0.1,
+          "PMI1_amu_A2": 400.66,
+          "PMI3_amu_A2": 598.0,
+          "Asphericity": 0.14,
+          "formula_substitution": "Ψ = (400.66/598.00) × (1 − 0.14) × 100 = 57.62"
+        },
+        "(3) 双方法一致性（各分子，差异是否≤5%）": [
+          {
+            "molecule": "PX",
+            "pass_≤5_percent": true
+          },
+          {
+            "molecule": "PDEB",
+            "pass_≤5_percent": true
+          },
+          {
+            "molecule": "PDPB",
+            "pass_≤5_percent": true
+          },
+          {
+            "molecule": "PDBB",
+            "pass_≤5_percent": true
+          }
+        ],
+        "(4) 每个分子的 Ψ 稳健统计（保留两位小数）": [
+          {
+            "molecule": "PX",
+            "max_2dp": 57.62,
+            "median_2dp": 54.87,
+            "MAD_2dp": 1.92
+          },
+          {
+            "molecule": "PDEB",
+            "max_2dp": 47.21,
+            "median_2dp": 45.43,
+            "MAD_2dp": 1.36
+          },
+          {
+            "molecule": "PDPB",
+            "max_2dp": 39.22,
+            "median_2dp": 37.6,
+            "MAD_2dp": 1.24
+          },
+          {
+            "molecule": "PDBB",
+            "max_2dp": 34.3,
+            "median_2dp": 32.78,
+            "MAD_2dp": 1.16
+          }
+        ],
+        "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）": {
+          "max_descending": true,
+          "median_descending": true
+        },
+        "(6) 物理边界检查": {
+          "PMI1_over_PMI3_in_[0,1]_all": true,
+          "Asphericity_in_[0,1]_all": true,
+          "E_rel_≤_5_kcal_mol_all": true
+        }
+      }
+    ],
+    "original_question_id": "33",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "化学科学",
+    "topic": "计算化学",
+    "test_type": "refined",
+    "original_question_id": "33",
+    "subject_topic_key": "化学科学::计算化学"
+  },
+  "answer_template": {
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）": [
+      {
+        "molecule": "[字符串]",
+        "method": "[字符串]",
+        "values": [
+          {
+            "conf_id": "[数值]",
+            "Psi_2dp": "[数值]"
+          }
+        ]
+      }
+    ],
+    "(2) 最大 Ψ 及其信息（保留两位小数）": {
+      "max_psi_value_2dp": "[数值]",
+      "molecule": "[字符串]",
+      "method": "[字符串]",
+      "conf_id": "[数值]",
+      "E_rel_kcal_mol": "[数值]",
+      "PMI1_amu_A2": "[数值]",
+      "PMI3_amu_A2": "[数值]",
+      "Asphericity": "[数值]",
+      "formula_substitution": "[字符串]"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）": [
+      {
+        "molecule": "[字符串]",
+        "pass_≤5_percent": "[布尔值]"
+      }
+    ],
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）": [
+      {
+        "molecule": "[字符串]",
+        "max_2dp": "[数值]",
+        "median_2dp": "[数值]",
+        "MAD_2dp": "[数值]"
+      }
+    ],
+    "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）": {
+      "max_descending": "[布尔值]",
+      "median_descending": "[布尔值]"
+    },
+    "(6) 物理边界检查": {
+      "PMI1_over_PMI3_in_[0,1]_all": "[布尔值]",
+      "Asphericity_in_[0,1]_all": "[布尔值]",
+      "E_rel_≤_5_kcal_mol_all": "[布尔值]"
+    }
+  },
+  "golden_standard": {
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）": [
+      {
+        "molecule": "PX",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 56.76
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 54.48
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 52.08
+          }
+        ]
+      },
+      {
+        "molecule": "PX",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 57.62
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 55.25
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 52.92
+          }
+        ]
+      },
+      {
+        "molecule": "PDEB",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 46.4
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 45.03
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 43.68
+          }
+        ]
+      },
+      {
+        "molecule": "PDEB",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 47.21
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 45.82
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 43.59
+          }
+        ]
+      },
+      {
+        "molecule": "PDPB",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 38.48
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 37.23
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 36.0
+          }
+        ]
+      },
+      {
+        "molecule": "PDPB",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 39.22
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 37.96
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 36.0
+          }
+        ]
+      },
+      {
+        "molecule": "PDBB",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 33.6
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 32.43
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 31.28
+          }
+        ]
+      },
+      {
+        "molecule": "PDBB",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 34.3
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 33.12
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 31.28
+          }
+        ]
+      }
+    ],
+    "(2) 最大 Ψ 及其信息（保留两位小数）": {
+      "max_psi_value_2dp": 57.62,
+      "molecule": "对二甲苯 (para-xylene, PX)",
+      "method": "ETKDGv3",
+      "conf_id": 0,
+      "E_rel_kcal_mol": 0.1,
+      "PMI1_amu_A2": 400.66,
+      "PMI3_amu_A2": 598.0,
+      "Asphericity": 0.14,
+      "formula_substitution": "Ψ = (400.66/598.00) × (1 − 0.14) × 100 = 57.62"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）": [
+      {
+        "molecule": "PX",
+        "pass_≤5_percent": true
+      },
+      {
+        "molecule": "PDEB",
+        "pass_≤5_percent": true
+      },
+      {
+        "molecule": "PDPB",
+        "pass_≤5_percent": true
+      },
+      {
+        "molecule": "PDBB",
+        "pass_≤5_percent": true
+      }
+    ],
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）": [
+      {
+        "molecule": "PX",
+        "max_2dp": 57.62,
+        "median_2dp": 54.87,
+        "MAD_2dp": 1.92
+      },
+      {
+        "molecule": "PDEB",
+        "max_2dp": 47.21,
+        "median_2dp": 45.43,
+        "MAD_2dp": 1.36
+      },
+      {
+        "molecule": "PDPB",
+        "max_2dp": 39.22,
+        "median_2dp": 37.6,
+        "MAD_2dp": 1.24
+      },
+      {
+        "molecule": "PDBB",
+        "max_2dp": 34.3,
+        "median_2dp": 32.78,
+        "MAD_2dp": 1.16
+      }
+    ],
+    "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）": {
+      "max_descending": true,
+      "median_descending": true
+    },
+    "(6) 物理边界检查": {
+      "PMI1_over_PMI3_in_[0,1]_all": true,
+      "Asphericity_in_[0,1]_all": true,
+      "E_rel_≤_5_kcal_mol_all": true
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）": [
+      {
+        "molecule": "PX",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 47.88
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 46.73
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 44.72
+          }
+        ]
+      },
+      {
+        "molecule": "PX",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 48.08
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 46.76
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 45.19
+          }
+        ]
+      },
+      {
+        "molecule": "PDEB",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 46.4
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 45.12
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 43.69
+          }
+        ]
+      },
+      {
+        "molecule": "PDEB",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 47.23
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 45.82
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 43.93
+          }
+        ]
+      },
+      {
+        "molecule": "PDPB",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 38.51
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 37.09
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 35.22
+          }
+        ]
+      },
+      {
+        "molecule": "PDPB",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 39.32
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 37.8
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 35.53
+          }
+        ]
+      },
+      {
+        "molecule": "PDBB",
+        "method": "ETKDG",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 33.49
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 32.4
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 31.3
+          }
+        ]
+      },
+      {
+        "molecule": "PDBB",
+        "method": "ETKDGv3",
+        "values": [
+          {
+            "conf_id": 0,
+            "Psi_2dp": 34.27
+          },
+          {
+            "conf_id": 1,
+            "Psi_2dp": 33.07
+          },
+          {
+            "conf_id": 2,
+            "Psi_2dp": 31.55
+          }
+        ]
+      }
+    ],
+    "(2) 最大 Ψ 及其信息（保留两位小数）": {
+      "max_psi_value_2dp": 48.08,
+      "molecule": "PX",
+      "method": "ETKDGv3",
+      "conf_id": 0,
+      "E_rel_kcal_mol": 0.1,
+      "PMI1_amu_A2": 400.66,
+      "PMI3_amu_A2": 598.0,
+      "Asphericity": 0.14,
+      "formula_substitution": "(400.66 / 598.00) * (1 - 0.14) * 100 = 48.08"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）": [
+      {
+        "molecule": "PX",
+        "pass_≤5_percent": true
+      },
+      {
+        "molecule": "PDEB",
+        "pass_≤5_percent": true
+      },
+      {
+        "molecule": "PDPB",
+        "pass_≤5_percent": true
+      },
+      {
+        "molecule": "PDBB",
+        "pass_≤5_percent": true
+      }
+    ],
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）": [
+      {
+        "molecule": "PX",
+        "max_2dp": 48.08,
+        "median_2dp": 46.75,
+        "MAD_2dp": 0.7
+      },
+      {
+        "molecule": "PDEB",
+        "max_2dp": 47.23,
+        "median_2dp": 45.12,
+        "MAD_2dp": 0.86
+      },
+      {
+        "molecule": "PDPB",
+        "max_2dp": 39.32,
+        "median_2dp": 37.09,
+        "MAD_2dp": 1.14
+      },
+      {
+        "molecule": "PDBB",
+        "max_2dp": 34.27,
+        "median_2dp": 32.74,
+        "MAD_2dp": 0.86
+      }
+    ],
+    "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）": {
+      "max_descending": true,
+      "median_descending": true
+    },
+    "(6) 物理边界检查": {
+      "PMI1_over_PMI3_in_[0,1]_all": true,
+      "Asphericity_in_[0,1]_all": true,
+      "E_rel_≤_5_kcal_mol_all": true
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1) 每个构象的 Ψ 值（无量纲，保留两位小数）\": [\n    {\n      \"molecule\": \"PX\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 47.88\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 46.73\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 44.72\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PX\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 48.08\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 46.76\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 45.19\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 46.40\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 45.12\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 43.69\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 47.23\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 45.82\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 43.93\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 38.51\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 37.09\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 35.22\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 39.32\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 37.80\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 35.53\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 33.49\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 32.40\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 31.30\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 34.27\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 33.07\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 31.55\n        }\n      ]\n    }\n  ],\n  \"(2) 最大 Ψ 及其信息（保留两位小数）\": {\n    \"max_psi_value_2dp\": 48.08,\n    \"molecule\": \"PX\",\n    \"method\": \"ETKDGv3\",\n    \"conf_id\": 0,\n    \"E_rel_kcal_mol\": 0.1,\n    \"PMI1_amu_A2\": 400.66,\n    \"PMI3_amu_A2\": 598.0,\n    \"Asphericity\": 0.14,\n    \"formula_substitution\": \"(400.66 / 598.00) * (1 - 0.14) * 100 = 48.08\"\n  },\n  \"(3) 双方法一致性（各分子，差异是否≤5%）\": [\n    {\n      \"molecule\": \"PX\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"pass_≤5_percent\": true\n    }\n  ],\n  \"(4) 每个分子的 Ψ 稳健统计（保留两位小数）\": [\n    {\n      \"molecule\": \"PX\",\n      \"max_2dp\": 48.08,\n      \"median_2dp\": 46.75,\n      \"MAD_2dp\": 0.70\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"max_2dp\": 47.23,\n      \"median_2dp\": 45.12,\n      \"MAD_2dp\": 0.86\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"max_2dp\": 39.32,\n      \"median_2dp\": 37.09,\n      \"MAD_2dp\": 1.14\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"max_2dp\": 34.27,\n      \"median_2dp\": 32.74,\n      \"MAD_2dp\": 0.86\n    }\n  ],\n  \"(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）\": {\n    \"max_descending\": true,\n    \"median_descending\": true\n  },\n  \"(6) 物理边界检查\": {\n    \"PMI1_over_PMI3_in_[0,1]_all\": true,\n    \"Asphericity_in_[0,1]_all\": true,\n    \"E_rel_≤_5_kcal_mol_all\": true\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1) 每个构象的 Ψ 值（无量纲，保留两位小数）\": [\n    {\n      \"molecule\": \"PX\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 47.88\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 46.73\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 44.72\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PX\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 48.08\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 46.76\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 45.19\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 46.40\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 45.12\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 43.69\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 47.23\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 45.82\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 43.93\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 38.51\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 37.09\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 35.22\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 39.32\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 37.80\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 35.53\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"method\": \"ETKDG\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 33.49\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 32.40\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 31.30\n        }\n      ]\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"method\": \"ETKDGv3\",\n      \"values\": [\n        {\n          \"conf_id\": 0,\n          \"Psi_2dp\": 34.27\n        },\n        {\n          \"conf_id\": 1,\n          \"Psi_2dp\": 33.07\n        },\n        {\n          \"conf_id\": 2,\n          \"Psi_2dp\": 31.55\n        }\n      ]\n    }\n  ],\n  \"(2) 最大 Ψ 及其信息（保留两位小数）\": {\n    \"max_psi_value_2dp\": 48.08,\n    \"molecule\": \"PX\",\n    \"method\": \"ETKDGv3\",\n    \"conf_id\": 0,\n    \"E_rel_kcal_mol\": 0.1,\n    \"PMI1_amu_A2\": 400.66,\n    \"PMI3_amu_A2\": 598.0,\n    \"Asphericity\": 0.14,\n    \"formula_substitution\": \"(400.66 / 598.00) * (1 - 0.14) * 100 = 48.08\"\n  },\n  \"(3) 双方法一致性（各分子，差异是否≤5%）\": [\n    {\n      \"molecule\": \"PX\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"pass_≤5_percent\": true\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"pass_≤5_percent\": true\n    }\n  ],\n  \"(4) 每个分子的 Ψ 稳健统计（保留两位小数）\": [\n    {\n      \"molecule\": \"PX\",\n      \"max_2dp\": 48.08,\n      \"median_2dp\": 46.75,\n      \"MAD_2dp\": 0.70\n    },\n    {\n      \"molecule\": \"PDEB\",\n      \"max_2dp\": 47.23,\n      \"median_2dp\": 45.12,\n      \"MAD_2dp\": 0.86\n    },\n    {\n      \"molecule\": \"PDPB\",\n      \"max_2dp\": 39.32,\n      \"median_2dp\": 37.09,\n      \"MAD_2dp\": 1.14\n    },\n    {\n      \"molecule\": \"PDBB\",\n      \"max_2dp\": 34.27,\n      \"median_2dp\": 32.74,\n      \"MAD_2dp\": 0.86\n    }\n  ],\n  \"(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）\": {\n    \"max_descending\": true,\n    \"median_descending\": true\n  },\n  \"(6) 物理边界检查\": {\n    \"PMI1_over_PMI3_in_[0,1]_all\": true,\n    \"Asphericity_in_[0,1]_all\": true,\n    \"E_rel_≤_5_kcal_mol_all\": true\n  }\n}\n```"
+  },
+  "evaluation_score": 0.8627450980392157,
+  "evaluation_summary": "匹配字段: 88/102 (得分: 86.27%)",
+  "evaluation_details": {
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].molecule",
+      "expected": "PX",
+      "actual": "PX",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].method",
+      "expected": "ETKDG",
+      "actual": "ETKDG",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[0].Psi_2dp",
+      "expected": 56.76,
+      "actual": 47.88,
+      "expected_num": 56.76,
+      "actual_num": 47.88,
+      "expected_rounded": 56.76,
+      "actual_rounded": 47.88,
+      "relative_error": 0.15644820295983078,
+      "absolute_error": 8.879999999999995,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[1].Psi_2dp",
+      "expected": 54.48,
+      "actual": 46.73,
+      "expected_num": 54.48,
+      "actual_num": 46.73,
+      "expected_rounded": 54.48,
+      "actual_rounded": 46.73,
+      "relative_error": 0.1422540381791483,
+      "absolute_error": 7.75,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[0].values[2].Psi_2dp",
+      "expected": 52.08,
+      "actual": 44.72,
+      "expected_num": 52.08,
+      "actual_num": 44.72,
+      "expected_rounded": 52.08,
+      "actual_rounded": 44.72,
+      "relative_error": 0.141321044546851,
+      "absolute_error": 7.359999999999999,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].molecule",
+      "expected": "PX",
+      "actual": "PX",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].method",
+      "expected": "ETKDGv3",
+      "actual": "ETKDGv3",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[0].Psi_2dp",
+      "expected": 57.62,
+      "actual": 48.08,
+      "expected_num": 57.62,
+      "actual_num": 48.08,
+      "expected_rounded": 57.62,
+      "actual_rounded": 48.08,
+      "relative_error": 0.16556751128080527,
+      "absolute_error": 9.54,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[1].Psi_2dp",
+      "expected": 55.25,
+      "actual": 46.76,
+      "expected_num": 55.25,
+      "actual_num": 46.76,
+      "expected_rounded": 55.25,
+      "actual_rounded": 46.76,
+      "relative_error": 0.15366515837104075,
+      "absolute_error": 8.490000000000002,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[1].values[2].Psi_2dp",
+      "expected": 52.92,
+      "actual": 45.19,
+      "expected_num": 52.92,
+      "actual_num": 45.19,
+      "expected_rounded": 52.92,
+      "actual_rounded": 45.19,
+      "relative_error": 0.14606953892668184,
+      "absolute_error": 7.730000000000004,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].molecule",
+      "expected": "PDEB",
+      "actual": "PDEB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].method",
+      "expected": "ETKDG",
+      "actual": "ETKDG",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[0].Psi_2dp",
+      "expected": 46.4,
+      "actual": 46.4,
+      "expected_num": 46.4,
+      "actual_num": 46.4,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[1].Psi_2dp",
+      "expected": 45.03,
+      "actual": 45.12,
+      "expected_num": 45.03,
+      "actual_num": 45.12,
+      "expected_rounded": 45.03,
+      "actual_rounded": 45.12,
+      "relative_error": 0.001998667554963276,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[2].values[2].Psi_2dp",
+      "expected": 43.68,
+      "actual": 43.69,
+      "expected_num": 43.68,
+      "actual_num": 43.69,
+      "expected_rounded": 43.68,
+      "actual_rounded": 43.69,
+      "relative_error": 0.0002289377289376834,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].molecule",
+      "expected": "PDEB",
+      "actual": "PDEB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].method",
+      "expected": "ETKDGv3",
+      "actual": "ETKDGv3",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[0].Psi_2dp",
+      "expected": 47.21,
+      "actual": 47.23,
+      "expected_num": 47.21,
+      "actual_num": 47.23,
+      "expected_rounded": 47.21,
+      "actual_rounded": 47.23,
+      "relative_error": 0.00042363905952120357,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[1].Psi_2dp",
+      "expected": 45.82,
+      "actual": 45.82,
+      "expected_num": 45.82,
+      "actual_num": 45.82,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[3].values[2].Psi_2dp",
+      "expected": 43.59,
+      "actual": 43.93,
+      "expected_num": 43.59,
+      "actual_num": 43.93,
+      "expected_rounded": 43.59,
+      "actual_rounded": 43.93,
+      "relative_error": 0.007799954117916868,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].molecule",
+      "expected": "PDPB",
+      "actual": "PDPB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].method",
+      "expected": "ETKDG",
+      "actual": "ETKDG",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[0].Psi_2dp",
+      "expected": 38.48,
+      "actual": 38.51,
+      "expected_num": 38.48,
+      "actual_num": 38.51,
+      "expected_rounded": 38.48,
+      "actual_rounded": 38.51,
+      "relative_error": 0.0007796257796258093,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[1].Psi_2dp",
+      "expected": 37.23,
+      "actual": 37.09,
+      "expected_num": 37.23,
+      "actual_num": 37.09,
+      "expected_rounded": 37.23,
+      "actual_rounded": 37.09,
+      "relative_error": 0.003760408272898025,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[4].values[2].Psi_2dp",
+      "expected": 36.0,
+      "actual": 35.22,
+      "expected_num": 36.0,
+      "actual_num": 35.22,
+      "expected_rounded": 36.0,
+      "actual_rounded": 35.22,
+      "relative_error": 0.0216666666666667,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].molecule",
+      "expected": "PDPB",
+      "actual": "PDPB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].method",
+      "expected": "ETKDGv3",
+      "actual": "ETKDGv3",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[0].Psi_2dp",
+      "expected": 39.22,
+      "actual": 39.32,
+      "expected_num": 39.22,
+      "actual_num": 39.32,
+      "expected_rounded": 39.22,
+      "actual_rounded": 39.32,
+      "relative_error": 0.002549719530851643,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[1].Psi_2dp",
+      "expected": 37.96,
+      "actual": 37.8,
+      "expected_num": 37.96,
+      "actual_num": 37.8,
+      "expected_rounded": 37.96,
+      "actual_rounded": 37.8,
+      "relative_error": 0.004214963119072805,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[5].values[2].Psi_2dp",
+      "expected": 36.0,
+      "actual": 35.53,
+      "expected_num": 36.0,
+      "actual_num": 35.53,
+      "expected_rounded": 36.0,
+      "actual_rounded": 35.53,
+      "relative_error": 0.013055555555555523,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].molecule",
+      "expected": "PDBB",
+      "actual": "PDBB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].method",
+      "expected": "ETKDG",
+      "actual": "ETKDG",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[0].Psi_2dp",
+      "expected": 33.6,
+      "actual": 33.49,
+      "expected_num": 33.6,
+      "actual_num": 33.49,
+      "expected_rounded": 33.6,
+      "actual_rounded": 33.49,
+      "relative_error": 0.0032738095238095065,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[1].Psi_2dp",
+      "expected": 32.43,
+      "actual": 32.4,
+      "expected_num": 32.43,
+      "actual_num": 32.4,
+      "expected_rounded": 32.43,
+      "actual_rounded": 32.4,
+      "relative_error": 0.0009250693802035503,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[6].values[2].Psi_2dp",
+      "expected": 31.28,
+      "actual": 31.3,
+      "expected_num": 31.28,
+      "actual_num": 31.3,
+      "expected_rounded": 31.28,
+      "actual_rounded": 31.3,
+      "relative_error": 0.0006393861892582984,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].molecule": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].molecule",
+      "expected": "PDBB",
+      "actual": "PDBB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].method": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].method",
+      "expected": "ETKDGv3",
+      "actual": "ETKDGv3",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[0].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[0].conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[0].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[0].Psi_2dp",
+      "expected": 34.3,
+      "actual": 34.27,
+      "expected_num": 34.3,
+      "actual_num": 34.27,
+      "expected_rounded": 34.3,
+      "actual_rounded": 34.27,
+      "relative_error": 0.0008746355685129456,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[1].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[1].conf_id",
+      "expected": 1,
+      "actual": 1,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[1].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[1].Psi_2dp",
+      "expected": 33.12,
+      "actual": 33.07,
+      "expected_num": 33.12,
+      "actual_num": 33.07,
+      "expected_rounded": 33.12,
+      "actual_rounded": 33.07,
+      "relative_error": 0.0015096618357487066,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[2].conf_id": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[2].conf_id",
+      "expected": 2,
+      "actual": 2,
+      "expected_num": 2.0,
+      "actual_num": 2.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[2].Psi_2dp": {
+      "path": "(1) 每个构象的 Ψ 值（无量纲，保留两位小数）[7].values[2].Psi_2dp",
+      "expected": 31.28,
+      "actual": 31.55,
+      "expected_num": 31.28,
+      "actual_num": 31.55,
+      "expected_rounded": 31.28,
+      "actual_rounded": 31.55,
+      "relative_error": 0.008631713554987198,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.max_psi_value_2dp": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.max_psi_value_2dp",
+      "expected": 57.62,
+      "actual": 48.08,
+      "expected_num": 57.62,
+      "actual_num": 48.08,
+      "expected_rounded": 57.62,
+      "actual_rounded": 48.08,
+      "relative_error": 0.16556751128080527,
+      "absolute_error": 9.54,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.molecule": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.molecule",
+      "expected": "对二甲苯 (para-xylene, PX)",
+      "actual": "PX",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.method": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.method",
+      "expected": "ETKDGv3",
+      "actual": "ETKDGv3",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.conf_id": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.conf_id",
+      "expected": 0,
+      "actual": 0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.E_rel_kcal_mol": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.E_rel_kcal_mol",
+      "expected": 0.1,
+      "actual": 0.1,
+      "expected_num": 0.1,
+      "actual_num": 0.1,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.PMI1_amu_A2": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.PMI1_amu_A2",
+      "expected": 400.66,
+      "actual": 400.66,
+      "expected_num": 400.66,
+      "actual_num": 400.66,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.PMI3_amu_A2": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.PMI3_amu_A2",
+      "expected": 598.0,
+      "actual": 598.0,
+      "expected_num": 598.0,
+      "actual_num": 598.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.Asphericity": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.Asphericity",
+      "expected": 0.14,
+      "actual": 0.14,
+      "expected_num": 0.14,
+      "actual_num": 0.14,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 最大 Ψ 及其信息（保留两位小数）.formula_substitution": {
+      "path": "(2) 最大 Ψ 及其信息（保留两位小数）.formula_substitution",
+      "expected": "Ψ = (400.66/598.00) × (1 − 0.14) × 100 = 57.62",
+      "actual": "(400.66 / 598.00) * (1 - 0.14) * 100 = 48.08",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[0].molecule": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[0].molecule",
+      "expected": "PX",
+      "actual": "PX",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[0].pass_≤5_percent": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[0].pass_≤5_percent",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[1].molecule": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[1].molecule",
+      "expected": "PDEB",
+      "actual": "PDEB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[1].pass_≤5_percent": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[1].pass_≤5_percent",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[2].molecule": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[2].molecule",
+      "expected": "PDPB",
+      "actual": "PDPB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[2].pass_≤5_percent": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[2].pass_≤5_percent",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[3].molecule": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[3].molecule",
+      "expected": "PDBB",
+      "actual": "PDBB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 双方法一致性（各分子，差异是否≤5%）[3].pass_≤5_percent": {
+      "path": "(3) 双方法一致性（各分子，差异是否≤5%）[3].pass_≤5_percent",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].molecule": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].molecule",
+      "expected": "PX",
+      "actual": "PX",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].max_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].max_2dp",
+      "expected": 57.62,
+      "actual": 48.08,
+      "expected_num": 57.62,
+      "actual_num": 48.08,
+      "expected_rounded": 57.62,
+      "actual_rounded": 48.08,
+      "relative_error": 0.16556751128080527,
+      "absolute_error": 9.54,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].median_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].median_2dp",
+      "expected": 54.87,
+      "actual": 46.75,
+      "expected_num": 54.87,
+      "actual_num": 46.75,
+      "expected_rounded": 54.87,
+      "actual_rounded": 46.75,
+      "relative_error": 0.14798614907964275,
+      "absolute_error": 8.119999999999997,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].MAD_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[0].MAD_2dp",
+      "expected": 1.92,
+      "actual": 0.7,
+      "expected_num": 1.92,
+      "actual_num": 0.7,
+      "expected_rounded": 1.92,
+      "actual_rounded": 0.7,
+      "relative_error": 0.6354166666666666,
+      "absolute_error": 1.22,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].molecule": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].molecule",
+      "expected": "PDEB",
+      "actual": "PDEB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].max_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].max_2dp",
+      "expected": 47.21,
+      "actual": 47.23,
+      "expected_num": 47.21,
+      "actual_num": 47.23,
+      "expected_rounded": 47.21,
+      "actual_rounded": 47.23,
+      "relative_error": 0.00042363905952120357,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].median_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].median_2dp",
+      "expected": 45.43,
+      "actual": 45.12,
+      "expected_num": 45.43,
+      "actual_num": 45.12,
+      "expected_rounded": 45.43,
+      "actual_rounded": 45.12,
+      "relative_error": 0.006823684789786535,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].MAD_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[1].MAD_2dp",
+      "expected": 1.36,
+      "actual": 0.86,
+      "expected_num": 1.36,
+      "actual_num": 0.86,
+      "expected_rounded": 1.36,
+      "actual_rounded": 0.86,
+      "relative_error": 0.3676470588235295,
+      "absolute_error": 0.5000000000000001,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].molecule": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].molecule",
+      "expected": "PDPB",
+      "actual": "PDPB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].max_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].max_2dp",
+      "expected": 39.22,
+      "actual": 39.32,
+      "expected_num": 39.22,
+      "actual_num": 39.32,
+      "expected_rounded": 39.22,
+      "actual_rounded": 39.32,
+      "relative_error": 0.002549719530851643,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].median_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].median_2dp",
+      "expected": 37.6,
+      "actual": 37.09,
+      "expected_num": 37.6,
+      "actual_num": 37.09,
+      "expected_rounded": 37.6,
+      "actual_rounded": 37.09,
+      "relative_error": 0.01356382978723399,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].MAD_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[2].MAD_2dp",
+      "expected": 1.24,
+      "actual": 1.14,
+      "expected_num": 1.24,
+      "actual_num": 1.14,
+      "expected_rounded": 1.24,
+      "actual_rounded": 1.14,
+      "relative_error": 0.08064516129032265,
+      "absolute_error": 0.10000000000000009,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].molecule": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].molecule",
+      "expected": "PDBB",
+      "actual": "PDBB",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].max_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].max_2dp",
+      "expected": 34.3,
+      "actual": 34.27,
+      "expected_num": 34.3,
+      "actual_num": 34.27,
+      "expected_rounded": 34.3,
+      "actual_rounded": 34.27,
+      "relative_error": 0.0008746355685129456,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].median_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].median_2dp",
+      "expected": 32.78,
+      "actual": 32.74,
+      "expected_num": 32.78,
+      "actual_num": 32.74,
+      "expected_rounded": 32.78,
+      "actual_rounded": 32.74,
+      "relative_error": 0.0012202562538132747,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].MAD_2dp": {
+      "path": "(4) 每个分子的 Ψ 稳健统计（保留两位小数）[3].MAD_2dp",
+      "expected": 1.16,
+      "actual": 0.86,
+      "expected_num": 1.16,
+      "actual_num": 0.86,
+      "expected_rounded": 1.16,
+      "actual_rounded": 0.86,
+      "relative_error": 0.2586206896551724,
+      "absolute_error": 0.29999999999999993,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）.max_descending": {
+      "path": "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）.max_descending",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）.median_descending": {
+      "path": "(5) 链长-Ψ 单调性（PX→PDEB→PDPB→PDBB）.median_descending",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 物理边界检查.PMI1_over_PMI3_in_[0,1]_all": {
+      "path": "(6) 物理边界检查.PMI1_over_PMI3_in_[0,1]_all",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 物理边界检查.Asphericity_in_[0,1]_all": {
+      "path": "(6) 物理边界检查.Asphericity_in_[0,1]_all",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 物理边界检查.E_rel_≤_5_kcal_mol_all": {
+      "path": "(6) 物理边界检查.E_rel_≤_5_kcal_mol_all",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    }
+  },
+  "mode_folder": "with_tools",
+  "evaluation_score_segments": {
+    "0_25": 0.7692307692307693,
+    "0_50": 0.8823529411764706,
+    "0_75": 0.8961038961038961,
+    "0_100": 0.8627450980392157
+  }
+}

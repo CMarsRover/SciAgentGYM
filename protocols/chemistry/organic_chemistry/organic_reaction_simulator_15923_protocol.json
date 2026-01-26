@@ -1,0 +1,203 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_nucleophilic_substitution",
+            "description": "模拟亲核取代反应，预测反应产物、类型和能量垒。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nucleophile_smiles": {
+                        "type": "string",
+                        "description": "亲核试剂的SMILES表示"
+                    },
+                    "substrate_smiles": {
+                        "type": "string",
+                        "description": "底物的SMILES表示"
+                    },
+                    "solvent": {
+                        "type": "string",
+                        "description": "溶剂类型，如'polar'、'nonpolar'等"
+                    }
+                },
+                "required": [
+                    "nucleophile_smiles",
+                    "substrate_smiles"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/organic_reaction_simulator_15923.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "predict_hydrolysis_product",
+            "description": "预测水解反应的产物、反应机理和半衰期。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "substrate_smiles": {
+                        "type": "string",
+                        "description": "底物的SMILES表示"
+                    },
+                    "pH": {
+                        "type": "number",
+                        "description": "反应体系的pH值"
+                    }
+                },
+                "required": [
+                    "substrate_smiles"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/organic_reaction_simulator_15923.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_reaction_energy",
+            "description": "计算反应的能量变化，包括焓变、自由能变化和反应自发性。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "reactants": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "反应物的SMILES列表"
+                    },
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "产物的SMILES列表"
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "计算方法，如'DFT'、'HF'等"
+                    }
+                },
+                "required": [
+                    "reactants",
+                    "products"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/organic_reaction_simulator_15923.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_reaction_pathway",
+            "description": "可视化反应路径的能量图，生成反应坐标图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "steps": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "反应步骤的名称列表，如['反应物', '过渡态', '产物']"
+                    },
+                    "energies": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "各步骤对应的能量值列表，单位：kJ/mol"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题"
+                    },
+                    "out_path": {
+                        "type": "string",
+                        "description": "输出图片的保存路径"
+                    }
+                },
+                "required": [
+                    "steps",
+                    "energies"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/organic_reaction_simulator_15923.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "optimize_molecular_geometry",
+            "description": "优化分子几何构型，计算优化后的能量和收敛状态。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "smiles": {
+                        "type": "string",
+                        "description": "分子的SMILES表示"
+                    },
+                    "force_field": {
+                        "type": "string",
+                        "description": "力场类型，如'MMFF94'、'UFF'等"
+                    }
+                },
+                "required": [
+                    "smiles"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/organic_reaction_simulator_15923.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "predict_organic_reaction_products",
+            "description": "预测有机反应的产物、产率和主要产物。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "reactants": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "反应物的SMILES列表"
+                    },
+                    "reaction_type": {
+                        "type": "string",
+                        "description": "反应类型，如'SN2'、'E2'、'addition'等"
+                    },
+                    "conditions": {
+                        "type": "object",
+                        "description": "反应条件字典，包含温度、溶剂等参数"
+                    }
+                },
+                "required": [
+                    "reactants",
+                    "reaction_type"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/organic_reaction_simulator_15923.py"
+        }
+    }
+]

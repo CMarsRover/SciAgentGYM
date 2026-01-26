@@ -1,0 +1,13 @@
+{
+  "id": "26_ref_0",
+  "model": "gpt-4o",
+  "mode": "不使用工具",
+  "reason": "图片加载失败",
+  "timestamp": 1763976096.5786655,
+  "details": {
+    "expected_images": 1,
+    "missing_images": [
+      "filtered_question_images/147284766.jpg"
+    ]
+  }
+}

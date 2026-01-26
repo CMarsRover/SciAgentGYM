@@ -1,0 +1,58 @@
+{
+  "system1": {
+    "result": {
+      "mass_ratio_m1_m2": 0.5,
+      "separation_km": 150676440.9635039,
+      "separation_au": 1.0072097968938798,
+      "total_mass_factor": 858752738.1808338,
+      "verified_v1_km_s": 10.0,
+      "verified_v2_km_s": 5.0
+    },
+    "metadata": {
+      "period_years": 2,
+      "rv_amplitudes_km_s": [
+        10,
+        5
+      ],
+      "analysis_steps": [
+        "Step 1: Calculated mass ratio m1/m2 = 0.5000",
+        "Step 2: Calculated orbital separation a = 1.0072 AU",
+        "Step 3: Verified velocities v1=10.00 km/s, v2=5.00 km/s"
+      ],
+      "functions_called": [
+        "calculate_mass_ratio_from_rv",
+        "calculate_orbital_separation",
+        "calculate_orbital_velocity"
+      ]
+    }
+  },
+  "system2": {
+    "result": {
+      "mass_ratio_m1_m2": 0.6666666666666666,
+      "separation_km": 125563700.80291992,
+      "separation_au": 0.8393414974115665,
+      "total_mass_factor": 1987853560.6037824,
+      "verified_v1_km_s": 15.000000000000004,
+      "verified_v2_km_s": 10.0
+    },
+    "metadata": {
+      "period_years": 1,
+      "rv_amplitudes_km_s": [
+        15,
+        10
+      ],
+      "analysis_steps": [
+        "Step 1: Calculated mass ratio m1/m2 = 0.6667",
+        "Step 2: Calculated orbital separation a = 0.8393 AU",
+        "Step 3: Verified velocities v1=15.00 km/s, v2=10.00 km/s"
+      ],
+      "functions_called": [
+        "calculate_mass_ratio_from_rv",
+        "calculate_orbital_separation",
+        "calculate_orbital_velocity"
+      ]
+    }
+  },
+  "mass_ratio": 0.43199999999999994,
+  "timestamp": "2026-01-13T17:03:57.436530"
+}

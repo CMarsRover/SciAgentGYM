@@ -1,0 +1,180 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_pulley_system_acceleration",
+            "description": "计算由不可伸长绳索连接的两个质量物体组成的滑轮系统的加速度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个物体的质量(kg)，通常是悬挂的质量"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个物体的质量(kg)，通常是在表面上的质量"
+                    },
+                    "external_force": {
+                        "type": "number",
+                        "description": "施加在m2上的外力(N)。正值表示力的方向与潜在运动方向相同"
+                    },
+                    "g": {
+                        "type": "number",
+                        "description": "重力加速度(m/s²)，默认为9.8"
+                    },
+                    "angle": {
+                        "type": "number",
+                        "description": "倾斜表面的角度(度)，默认为0(水平)"
+                    },
+                    "friction_coef": {
+                        "type": "number",
+                        "description": "m2与表面之间的动摩擦系数，默认为0(无摩擦)"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "external_force"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6252.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_tension",
+            "description": "计算滑轮系统中连接两个质量的绳索的张力。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个物体的质量(kg)，通常是悬挂的质量"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个物体的质量(kg)，通常是在表面上的质量"
+                    },
+                    "acceleration": {
+                        "type": "number",
+                        "description": "系统的加速度(m/s²)"
+                    },
+                    "g": {
+                        "type": "number",
+                        "description": "重力加速度(m/s²)，默认为9.8"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "acceleration"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6252.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_pulley_system",
+            "description": "可视化滑轮系统，包括力和加速度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个物体的质量(kg)，通常是悬挂的质量"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个物体的质量(kg)，通常是在表面上的质量"
+                    },
+                    "external_force": {
+                        "type": "number",
+                        "description": "施加在m2上的外力(N)"
+                    },
+                    "acceleration": {
+                        "type": "number",
+                        "description": "计算得到的系统加速度(m/s²)"
+                    },
+                    "tension": {
+                        "type": "number",
+                        "description": "计算得到的绳索张力(N)"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图形的路径，如果为None则显示图形但不保存"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "external_force",
+                    "acceleration",
+                    "tension"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6252.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_pulley_system",
+            "description": "对滑轮系统进行完整分析。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个物体的质量(kg)，通常是悬挂的质量"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个物体的质量(kg)，通常是在表面上的质量"
+                    },
+                    "external_force": {
+                        "type": "number",
+                        "description": "施加在m2上的外力(N)"
+                    },
+                    "g": {
+                        "type": "number",
+                        "description": "重力加速度(m/s²)，默认为9.8"
+                    },
+                    "angle": {
+                        "type": "number",
+                        "description": "倾斜表面的角度(度)，默认为0(水平)"
+                    },
+                    "friction_coef": {
+                        "type": "number",
+                        "description": "m2与表面之间的动摩擦系数，默认为0(无摩擦)"
+                    },
+                    "visualize": {
+                        "type": "boolean",
+                        "description": "是否可视化系统，默认为True"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "external_force"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/pulley_system_solver_6252.py"
+        }
+    }
+]

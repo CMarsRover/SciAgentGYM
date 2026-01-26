@@ -1,0 +1,35 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_magnitude_systems",
+            "description": "比较不同星等系统下的恒星亮度。该函数展示如何处理多波段星等数据，虽然当前问题只涉及V波段，但该工具可扩展到其他波段的分析。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "stars_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "恒星数据列表，包含不同波段的星等；每个恒星为字典对象，包含name、v_mag、b_mag、r_mag等字段"
+                    },
+                    "magnitude_bands": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "要比较的波段列表，默认['V', 'B', 'R']"
+                    }
+                },
+                "required": [
+                    "stars_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/astronomy_toolkit_13.py"
+        }
+    }
+]

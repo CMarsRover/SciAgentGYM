@@ -1,0 +1,549 @@
+{
+  "id": "15_ref_0",
+  "query": "已知真空磁导率 μ0 = 4π×10^-7 H/m。材料数据（室温近似，SI）：\n- Mild steel：\n  A) 低μr边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.126), (1000,0.251), (1500,0.377), (2000,0.503), (2500,0.628), (3000,0.754), (4000,1.005), (5000,1.257), (6000,1.508), (6500,1.580), (7000,1.600), (8000,1.600), (10000,1.600)}。\n  B) 高μr/近饱和边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.377), (1000,0.754), (1500,1.131), (2000,1.508), (2500,1.600)}。\n  C) 高温约100°C：设 μr_base = 500，温度系数使 μr 降低15%，μr_eff = 0.85×500 = 425；取 B(H) = min(μ0·μr_eff·H, B_sat)，B_sat = 1.6 T。\n- Silicon iron（取向硅钢近似，折线插值，B_sat = 2.0 T）：(H,B)[A/m,T] = {(0,0.0), (25,0.9), (50,1.2), (100,1.5), (200,1.7), (500,1.85), (1000,1.93), (1500,1.97), (2000,1.99), (2500,2.00)}。\n任务：\n(1) 取 H = 2500 A/m，求 Mild steel 在情形 A、B、C 的 B 值（按点间线性插值与饱和截断）。\n(2) 室温（约25°C）下给出 Mild steel 在 H = 2500 A/m 的推荐 B 值与不确定度：给出一个工程推荐值（以情形B与典型文献值的折中），并给出两区间：(i) 典型区间（假设常温有效 μr ∈ [400,600] 且考虑饱和）；(ii) 全包络区间（覆盖情形A、情形B/饱和与情形C）。\n(3) 说明 B–H 曲线构造依据（上述点集/公式）、采用的饱和上限及其对结果的影响（何时进入饱和、如何截断）。\n(4) 与 Silicon iron 在 H = 2500 A/m 的结果对比，给出两者 B 值的量级关系并评估合理性。\n(5) 交叉校验：记(1)结果分别为 B_A、B_B、B_C。\n  - 用 μr_eff = B/(μ0·H) 反推并检查情形 A、C 是否落在给定范围；对情形 B 说明饱和下“瞬时μr”的局限性并给出名义反推值。\n  - 核查饱和一致性：确认各情形 B 未超过对应 B_sat。\n  - 温度敏感性：比较情形 C 与(2)推荐值的偏差。\n(6) 明确假设：忽略磁滞与剩磁；点间线性；μr 温度因子取 0.85（100°C 相对室温）；B_sat 取上述典型值。简述可能误差来源（材料成分、应力、热处理、频率等）。\n要求：除(3)(6)外，其余小问给出数值结果（SI，保留三位有效数字）；(3)(6)以简要文字说明为主。",
+  "query_data": {
+    "id": "15_ref_0",
+    "original_id": 15,
+    "refined_index": 0,
+    "question": "已知真空磁导率 μ0 = 4π×10^-7 H/m。材料数据（室温近似，SI）：\n- Mild steel：\n  A) 低μr边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.126), (1000,0.251), (1500,0.377), (2000,0.503), (2500,0.628), (3000,0.754), (4000,1.005), (5000,1.257), (6000,1.508), (6500,1.580), (7000,1.600), (8000,1.600), (10000,1.600)}。\n  B) 高μr/近饱和边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.377), (1000,0.754), (1500,1.131), (2000,1.508), (2500,1.600)}。\n  C) 高温约100°C：设 μr_base = 500，温度系数使 μr 降低15%，μr_eff = 0.85×500 = 425；取 B(H) = min(μ0·μr_eff·H, B_sat)，B_sat = 1.6 T。\n- Silicon iron（取向硅钢近似，折线插值，B_sat = 2.0 T）：(H,B)[A/m,T] = {(0,0.0), (25,0.9), (50,1.2), (100,1.5), (200,1.7), (500,1.85), (1000,1.93), (1500,1.97), (2000,1.99), (2500,2.00)}。\n任务：\n(1) 取 H = 2500 A/m，求 Mild steel 在情形 A、B、C 的 B 值（按点间线性插值与饱和截断）。\n(2) 室温（约25°C）下给出 Mild steel 在 H = 2500 A/m 的推荐 B 值与不确定度：给出一个工程推荐值（以情形B与典型文献值的折中），并给出两区间：(i) 典型区间（假设常温有效 μr ∈ [400,600] 且考虑饱和）；(ii) 全包络区间（覆盖情形A、情形B/饱和与情形C）。\n(3) 说明 B–H 曲线构造依据（上述点集/公式）、采用的饱和上限及其对结果的影响（何时进入饱和、如何截断）。\n(4) 与 Silicon iron 在 H = 2500 A/m 的结果对比，给出两者 B 值的量级关系并评估合理性。\n(5) 交叉校验：记(1)结果分别为 B_A、B_B、B_C。\n  - 用 μr_eff = B/(μ0·H) 反推并检查情形 A、C 是否落在给定范围；对情形 B 说明饱和下“瞬时μr”的局限性并给出名义反推值。\n  - 核查饱和一致性：确认各情形 B 未超过对应 B_sat。\n  - 温度敏感性：比较情形 C 与(2)推荐值的偏差。\n(6) 明确假设：忽略磁滞与剩磁；点间线性；μr 温度因子取 0.85（100°C 相对室温）；B_sat 取上述典型值。简述可能误差来源（材料成分、应力、热处理、频率等）。\n要求：除(3)(6)外，其余小问给出数值结果（SI，保留三位有效数字）；(3)(6)以简要文字说明为主。",
+    "answer": "{'(1)': {'B_A': '0.628 T', 'B_B': '1.60 T', 'B_C': '1.34 T'}, '(2)': {'B_rec_25C': '1.50 T', 'interval_typical_25C': '[1.26 T, 1.60 T]', 'interval_envelope_full': '[0.628 T, 1.60 T]'}, '(3)': {'curve_basis': 'Mild steel 情形A、B与 Silicon iron 采用给定离散(H,B)点的线性插值；情形C按 B(H)=min(μ0·μr_eff·H, B_sat)。', 'saturation_rule': '当线性外推超过对应 B_sat 时，以 B = B_sat 截断。', 'impact': '在 H = 2500 A/m 下：情形B进入饱和并被截断；情形A、C未达饱和，按插值/线性关系取值。'}, '(4)': {'B_Si_2500Apm': '2.00 T', 'ratio_Si_over_Mild_rec': '1.33', 'reasonableness': 'Silicon iron 具有更高 μr 与更高 B_sat，故在相同 H 下 B 更大，量级关系合理。'}, '(5)': {'mu_r_eff_A': '2.00e2', 'mu_r_eff_B_naive': '509', 'mu_r_eff_C': '425', 'saturation_check': 'B_A < 1.6 T，B_B = 1.6 T，B_C < 1.6 T，均未超过各自 B_sat。', 'temp_sensitivity': '相对(2)推荐值：ΔB = 0.165 T，下降约 11.0%。'}, '(6)': {'assumptions': '忽略磁滞/剩磁；点间线性插值；100°C 下 μr = 0.85·μr_base；B_sat 取给定典型值。', 'possible_errors': '材料成分与纯度、机械应力与应变、热处理历史、温度分布、测试频率/涡流/损耗模型差异均可能引起 μr 与 B_sat 偏差。'}}",
+    "metadata": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "image_path": [
+        "filtered_images/228276976.jpg"
+      ],
+      "solution_steps": [
+        "读取预定义的mild steel B–H数据，采用插值关系B=f(H)",
+        "调用 calculate_flux_density(material='mild steel', H=2500) 获得B",
+        "核对单位(T)并记录为标准答案"
+      ],
+      "tool_expected": [
+        "calculate_flux_density"
+      ],
+      "golden_answer": [
+        {
+          "(1)": {
+            "B_A": "0.628 T",
+            "B_B": "1.60 T",
+            "B_C": "1.34 T"
+          },
+          "(2)": {
+            "B_rec_25C": "1.50 T",
+            "interval_typical_25C": "[1.26 T, 1.60 T]",
+            "interval_envelope_full": "[0.628 T, 1.60 T]"
+          },
+          "(3)": {
+            "curve_basis": "Mild steel 情形A、B与 Silicon iron 采用给定离散(H,B)点的线性插值；情形C按 B(H)=min(μ0·μr_eff·H, B_sat)。",
+            "saturation_rule": "当线性外推超过对应 B_sat 时，以 B = B_sat 截断。",
+            "impact": "在 H = 2500 A/m 下：情形B进入饱和并被截断；情形A、C未达饱和，按插值/线性关系取值。"
+          },
+          "(4)": {
+            "B_Si_2500Apm": "2.00 T",
+            "ratio_Si_over_Mild_rec": "1.33",
+            "reasonableness": "Silicon iron 具有更高 μr 与更高 B_sat，故在相同 H 下 B 更大，量级关系合理。"
+          },
+          "(5)": {
+            "mu_r_eff_A": "2.00e2",
+            "mu_r_eff_B_naive": "509",
+            "mu_r_eff_C": "425",
+            "saturation_check": "B_A < 1.6 T，B_B = 1.6 T，B_C < 1.6 T，均未超过各自 B_sat。",
+            "temp_sensitivity": "相对(2)推荐值：ΔB = 0.165 T，下降约 11.0%。"
+          },
+          "(6)": {
+            "assumptions": "忽略磁滞/剩磁；点间线性插值；100°C 下 μr = 0.85·μr_base；B_sat 取给定典型值。",
+            "possible_errors": "材料成分与纯度、机械应力与应变、热处理历史、温度分布、测试频率/涡流/损耗模型差异均可能引起 μr 与 B_sat 偏差。"
+          }
+        }
+      ],
+      "original_question_id": "15",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_flux_density",
+          "description": "计算给定材料与磁场强度(H)的磁通密度(B)",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "material_name": {
+                "type": "string",
+                "description": "磁性材料名称"
+              },
+              "h_value": {
+                "type": "number",
+                "description": "磁场强度(A/m)"
+              },
+              "curve_points": {
+                "type": "object",
+                "description": "可选自定义B–H数据点"
+              }
+            },
+            "required": [
+              "material_name",
+              "h_value"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/magnetic_materials_analyzer_18856.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "已知真空磁导率 μ0 = 4π×10^-7 H/m。材料数据（室温近似，SI）：\n- Mild steel：\n  A) 低μr边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.126), (1000,0.251), (1500,0.377), (2000,0.503), (2500,0.628), (3000,0.754), (4000,1.005), (5000,1.257), (6000,1.508), (6500,1.580), (7000,1.600), (8000,1.600), (10000,1.600)}。\n  B) 高μr/近饱和边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.377), (1000,0.754), (1500,1.131), (2000,1.508), (2500,1.600)}。\n  C) 高温约100°C：设 μr_base = 500，温度系数使 μr 降低15%，μr_eff = 0.85×500 = 425；取 B(H) = min(μ0·μr_eff·H, B_sat)，B_sat = 1.6 T。\n- Silicon iron（取向硅钢近似，折线插值，B_sat = 2.0 T）：(H,B)[A/m,T] = {(0,0.0), (25,0.9), (50,1.2), (100,1.5), (200,1.7), (500,1.85), (1000,1.93), (1500,1.97), (2000,1.99), (2500,2.00)}。\n任务：\n(1) 取 H = 2500 A/m，求 Mild steel 在情形 A、B、C 的 B 值（按点间线性插值与饱和截断）。\n(2) 室温（约25°C）下给出 Mild steel 在 H = 2500 A/m 的推荐 B 值与不确定度：给出一个工程推荐值（以情形B与典型文献值的折中），并给出两区间：(i) 典型区间（假设常温有效 μr ∈ [400,600] 且考虑饱和）；(ii) 全包络区间（覆盖情形A、情形B/饱和与情形C）。\n(3) 说明 B–H 曲线构造依据（上述点集/公式）、采用的饱和上限及其对结果的影响（何时进入饱和、如何截断）。\n(4) 与 Silicon iron 在 H = 2500 A/m 的结果对比，给出两者 B 值的量级关系并评估合理性。\n(5) 交叉校验：记(1)结果分别为 B_A、B_B、B_C。\n  - 用 μr_eff = B/(μ0·H) 反推并检查情形 A、C 是否落在给定范围；对情形 B 说明饱和下“瞬时μr”的局限性并给出名义反推值。\n  - 核查饱和一致性：确认各情形 B 未超过对应 B_sat。\n  - 温度敏感性：比较情形 C 与(2)推荐值的偏差。\n(6) 明确假设：忽略磁滞与剩磁；点间线性；μr 温度因子取 0.85（100°C 相对室温）；B_sat 取上述典型值。简述可能误差来源（材料成分、应力、热处理、频率等）。\n要求：除(3)(6)外，其余小问给出数值结果（SI，保留三位有效数字）；(3)(6)以简要文字说明为主。",
+      "final_answer": {
+        "(1)": {
+          "B_A": "0.628 T",
+          "B_B": "1.60 T",
+          "B_C": "1.34 T"
+        },
+        "(2)": {
+          "B_rec_25C": "1.50 T",
+          "interval_typical_25C": "[1.26 T, 1.60 T]",
+          "interval_envelope_full": "[0.628 T, 1.60 T]"
+        },
+        "(3)": {
+          "curve_basis": "Mild steel 情形A、B与 Silicon iron 采用给定离散(H,B)点的线性插值；情形C按 B(H)=min(μ0·μr_eff·H, B_sat)。",
+          "saturation_rule": "当线性外推超过对应 B_sat 时，以 B = B_sat 截断。",
+          "impact": "在 H = 2500 A/m 下：情形B进入饱和并被截断；情形A、C未达饱和，按插值/线性关系取值。"
+        },
+        "(4)": {
+          "B_Si_2500Apm": "2.00 T",
+          "ratio_Si_over_Mild_rec": "1.33",
+          "reasonableness": "Silicon iron 具有更高 μr 与更高 B_sat，故在相同 H 下 B 更大，量级关系合理。"
+        },
+        "(5)": {
+          "mu_r_eff_A": "2.00e2",
+          "mu_r_eff_B_naive": "509",
+          "mu_r_eff_C": "425",
+          "saturation_check": "B_A < 1.6 T，B_B = 1.6 T，B_C < 1.6 T，均未超过各自 B_sat。",
+          "temp_sensitivity": "相对(2)推荐值：ΔB = 0.165 T，下降约 11.0%。"
+        },
+        "(6)": {
+          "assumptions": "忽略磁滞/剩磁；点间线性插值；100°C 下 μr = 0.85·μr_base；B_sat 取给定典型值。",
+          "possible_errors": "材料成分与纯度、机械应力与应变、热处理历史、温度分布、测试频率/涡流/损耗模型差异均可能引起 μr 与 B_sat 偏差。"
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "test_type": "refined",
+      "original_question_id": "15",
+      "subject_topic_key": "物理科学::凝聚态物理"
+    }
+  },
+  "model": "gemini-2.5-pro-thinking-2048",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 4,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "已知真空磁导率 μ0 = 4π×10^-7 H/m。材料数据（室温近似，SI）：\n- Mild steel：\n  A) 低μr边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.126), (1000,0.251), (1500,0.377), (2000,0.503), (2500,0.628), (3000,0.754), (4000,1.005), (5000,1.257), (6000,1.508), (6500,1.580), (7000,1.600), (8000,1.600), (10000,1.600)}。\n  B) 高μr/近饱和边界（折线插值，B_sat = 1.6 T）：(H,B)[A/m,T] = {(0,0.000), (500,0.377), (1000,0.754), (1500,1.131), (2000,1.508), (2500,1.600)}。\n  C) 高温约100°C：设 μr_base = 500，温度系数使 μr 降低15%，μr_eff = 0.85×500 = 425；取 B(H) = min(μ0·μr_eff·H, B_sat)，B_sat = 1.6 T。\n- Silicon iron（取向硅钢近似，折线插值，B_sat = 2.0 T）：(H,B)[A/m,T] = {(0,0.0), (25,0.9), (50,1.2), (100,1.5), (200,1.7), (500,1.85), (1000,1.93), (1500,1.97), (2000,1.99), (2500,2.00)}。\n任务：\n(1) 取 H = 2500 A/m，求 Mild steel 在情形 A、B、C 的 B 值（按点间线性插值与饱和截断）。\n(2) 室温（约25°C）下给出 Mild steel 在 H = 2500 A/m 的推荐 B 值与不确定度：给出一个工程推荐值（以情形B与典型文献值的折中），并给出两区间：(i) 典型区间（假设常温有效 μr ∈ [400,600] 且考虑饱和）；(ii) 全包络区间（覆盖情形A、情形B/饱和与情形C）。\n(3) 说明 B–H 曲线构造依据（上述点集/公式）、采用的饱和上限及其对结果的影响（何时进入饱和、如何截断）。\n(4) 与 Silicon iron 在 H = 2500 A/m 的结果对比，给出两者 B 值的量级关系并评估合理性。\n(5) 交叉校验：记(1)结果分别为 B_A、B_B、B_C。\n  - 用 μr_eff = B/(μ0·H) 反推并检查情形 A、C 是否落在给定范围；对情形 B 说明饱和下“瞬时μr”的局限性并给出名义反推值。\n  - 核查饱和一致性：确认各情形 B 未超过对应 B_sat。\n  - 温度敏感性：比较情形 C 与(2)推荐值的偏差。\n(6) 明确假设：忽略磁滞与剩磁；点间线性；μr 温度因子取 0.85（100°C 相对室温）；B_sat 取上述典型值。简述可能误差来源（材料成分、应力、热处理、频率等）。\n要求：除(3)(6)外，其余小问给出数值结果（SI，保留三位有效数字）；(3)(6)以简要文字说明为主。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "[阶段 1: 规划]\nPlan:\n\n1.  **计算 Mild Steel 在三种情况下的磁通密度 (B)**：\n    *   针对情况 A (低 μr 边界)，使用 `calculate_flux_density` 工具，并提供 H = 2500 A/m 和相应的 B-H 数据点进行线性插值。\n    *   针对情况 B (高 μr/近饱和边界)，使用 `calculate_flux_density` 工具，并提供 H = 2500 A/m 和相应的 B-H 数据点。\n    *   针对情况 C (高温)，根据公式 B(H) = min(μ0·μr_eff·H, B_sat) 手动计算 B 值。其中 μ0 = 4π×10^-7 H/m, μr_eff = 425, H = 2500 A/m, B_sat = 1.6 T。\n\n2.  **计算 Silicon Iron 的磁通密度 (B)**：\n    *   使用 `calculate_flux_density` 工具，并提供 H = 2500 A/m 和其对应的 B-H 数据点。\n\n3.  **整合与分析**：\n    *   收集所有计算得到的 B 值。\n    *   **回答问题 (2)**：基于情况 A 和 B 的结果，给出一个工程推荐值和不确定度区间。\n    *   **回答问题 (3)**：根据提供的数据和计算过程，说明 B-H 曲线的构造方法和饱和效应。\n    *   **回答问题 (4)**：将 Mild Steel 的推荐 B 值与 Silicon Iron 的 B 值进行比较和评估。\n    *   **回答问题 (5)**：进行交叉校验，包括反推有效磁导率 (μr_eff)，核查饱和一致性，并评估温度敏感性。\n    *   **回答问题 (6)**：总结所有明确的假设和潜在的误差来源。\n\n4.  **生成最终答案**：将所有分析和计算结果整理成一个完整的、分点明确的最终答案。\n\n[阶段 2: 执行]\nThought: 我将首先执行计划的第 1 步，计算 Mild steel 在情况 A 下的磁通密度 B。我需要调用 `calculate_flux_density` 工具，并传入材料名称、H 值以及情况 A 对应的 B-H 曲线数据点。\nAction:",
+      "tool_calls": [
+        {
+          "id": "call_5ff7e610f07b4a6296c7f6654cf70eb6",
+          "type": "function",
+          "function": {
+            "name": "calculate_flux_density",
+            "arguments": "{\"curve_points\":{\"B\":[0,0.126,0.251,0.377,0.503,0.628,0.754,1.005,1.257,1.508,1.58,1.6,1.6,1.6],\"H\":[0,500,1000,1500,2000,2500,3000,4000,5000,6000,6500,7000,8000,10000]},\"h_value\":2500,\"material_name\":\"Mild steel\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": 0.628,
+      "tool_call_id": "call_5ff7e610f07b4a6296c7f6654cf70eb6"
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_ed481ff0c011421fac0dfae7d607d633",
+          "type": "function",
+          "function": {
+            "name": "calculate_flux_density",
+            "arguments": "{\"curve_points\":{\"B\":[0,0.377,0.754,1.131,1.508,1.6],\"H\":[0,500,1000,1500,2000,2500]},\"h_value\":2500,\"material_name\":\"Mild steel\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": 1.6,
+      "tool_call_id": "call_ed481ff0c011421fac0dfae7d607d633"
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_5ead05b8463240eb8cbd657c738ef6d9",
+          "type": "function",
+          "function": {
+            "name": "calculate_flux_density",
+            "arguments": "{\"curve_points\":{\"B\":[0,0.9,1.2,1.5,1.7,1.85,1.93,1.97,1.99,2],\"H\":[0,25,50,100,200,500,1000,1500,2000,2500]},\"h_value\":2500,\"material_name\":\"Silicon iron\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": 2.0,
+      "tool_call_id": "call_5ead05b8463240eb8cbd657c738ef6d9"
+    },
+    {
+      "role": "assistant",
+      "content": "Thought: 我已经完成了计划中的第1步和第2步，获取了Mild steel在三种情况下以及Silicon iron在H=2500 A/m时的磁通密度B值。\n\n- Mild steel, 情形 A (低μr边界): B_A = 0.628 T\n- Mild steel, 情形 B (高μr/近饱和边界): B_B = 1.60 T\n- Mild steel, 情形 C (高温100°C): B_C 的计算。根据公式 B(H) = min(μ0·μr_eff·H, B_sat)，其中 μ0 = 4π×10^-7 H/m, μr_eff = 425, H = 2500 A/m, B_sat = 1.6 T。\n  B = (4π × 10^-7 H/m) * 425 * (2500 A/m) = 1.335 T。\n  由于 1.335 T < 1.6 T (B_sat)，所以 B_C = 1.335 T。\n- Silicon iron: B = 2.00 T\n\n现在，我将根据这些计算结果，继续执行计划的后续步骤，进行分析和回答。\n我将继续执行计划的第3、4、5、6步，并整合所有信息来生成最终答案。\nFinal Answer:\n### (1) Mild steel 在 H = 2500 A/m 时的 B 值\n\n*   **情形 A (低 μr 边界):** 根据提供的折线数据，H = 2500 A/m 恰好是数据点之一，对应的 B 值为 **0.628 T**。\n*   **情形 B (高 μr/近饱和边界):** 根据提供的折线数据，H = 2500 A/m 对应 B 值为 **1.60 T**，此时材料已达到饱和。\n*   **情形 C (高温约 100°C):**\n    *   有效相对磁导率 μr_eff = 425。\n    *   计算 B = μ0 * μr_eff * H = (4π × 10⁻⁷ H/m) × 425 × (2500 A/m) ≈ 1.335 T。\n    *   由于 1.335 T < B_sat (1.6 T)，因此 B 值为 **1.34 T** (保留三位有效数字)。\n\n### (2) 室温下 Mild steel 的推荐 B 值与不确定度\n\n*   **工程推荐值:** 考虑到情形 B (1.60 T) 代表了高磁导率批次且已饱和，而典型文献值（如图像所示）在 H = 2500 A/m 时约在 1.4 T 左右。一个合理的工程推荐值是两者的折中并偏向饱和边界，取 **1.50 T**。\n*   **不确定度区间:**\n    *   **(i) 典型区间:**\n        *   下限 (μr = 400): B = min((4π × 10⁻⁷) × 400 × 2500, 1.6) = min(1.257 T, 1.6 T) = 1.26 T。\n        *   上限 (μr = 600): B = min((4π × 10⁻⁷) × 600 × 2500, 1.6) = min(1.885 T, 1.6 T) = 1.60 T。\n        *   典型区间为 **[1.26 T, 1.60 T]**。\n    *   **(ii) 全包络区间:** 该区间应覆盖所有已讨论的情形（A、B、C）。\n        *   下限来自情形 A：0.628 T。\n        *   上限来自情形 B/饱和：1.60 T。\n        *   全包络区间为 **[0.628 T, 1.60 T]**。\n\n### (3) B–H 曲线构造依据与饱和影响\n\n*   **构造依据:**\n    *   **情形 A 和 B:** B–H 曲线是通过连接给定的一系列 (H, B) 数据点构成的**折线**。在任意两点之间，B 值通过线性插值得到。\n    *   **情形 C:** B–H 关系由一个**分段函数**定义：在线性区，B = μ0 * μr_eff * H；一旦计算值达到饱和磁通密度 B_sat，B 值就被**截断**并保持为 B_sat。\n*   **饱和上限及影响:**\n    *   饱和上限 (B_sat) 分别为 Mild steel 的 1.6 T 和 Silicon iron 的 2.0 T。\n    *   **影响:** 当磁场强度 H 足够高，使得计算出的 B 值超过 B_sat 时，材料进入磁饱和状态。此时，无论 H 如何进一步增加，B 值都将保持在 B_sat 不变。例如，在情形 B 中，当 H 达到 2500 A/m 时，B 已达到 1.6 T 的饱和上限，因此 B 值被截断为 1.6 T。\n\n### (4) 与 Silicon iron 的对比\n\n*   **结果对比:** 在 H = 2500 A/m 时，Silicon iron 的 B 值为 **2.00 T**，而 Mild steel 的推荐 B 值为 1.50 T（上限为 1.60 T）。\n*   **量级关系与合理性:** Silicon iron 的磁通密度显著高于 Mild steel。这是**合理**的，因为取向硅钢 (Silicon iron) 经过专门的合金化和热处理工艺，旨在优化其软磁特性，具有比普通低碳钢 (Mild steel) 高得多的磁导率和饱和磁通密度。\n\n### (5) 交叉校验\n\n*   **反推有效磁导率 (μr_eff = B / (μ0·H)):**\n    *   **情形 A:** μr_eff = 0.628 / ((4π × 10⁻⁷) × 2500) ≈ **200**。该值低于给定的“典型”范围 [400, 600]，与“低μr边界”的描述相符。\n    *   **情形 B:** 材料已饱和，瞬时磁导率 (dB/dH) 接近 μ0 (即 μr ≈ 1)，而基于 B/H 计算的名义值为 μr_eff = 1.60 / ((4π × 10⁻⁷) × 2500) ≈ **509**。这个名义值仍在典型范围内，但它掩盖了饱和的物理现实，因此具有局限性。\n    *   **情形 C:** μr_eff = 1.335 / ((4π × 10⁻⁷) × 2500) ≈ **425**。该值与计算时采用的 μr_eff = 425 完全一致。\n*   **核查饱和一致性:**\n    *   情形 A: B_A = 0.628 T < 1.6 T (B_sat)，未饱和。**一致**。\n    *   情形 B: B_B = 1.60 T = 1.6 T (B_sat)，达到饱和。**一致**。\n    *   情形 C: B_C = 1.335 T < 1.6 T (B_sat)，未饱和。**一致**。\n*   **温度敏感性:**\n    *   情形 C (100°C) 的 B 值为 1.34 T。\n    *   与室温推荐值 (1.50 T) 相比，偏差为 (1.50 - 1.34) / 1.50 ≈ **10.7%**。这表明温度升高对 Mild steel 的磁性能有显著的负面影响。\n\n### (6) 明确假设与误差来源\n\n*   **明确假设:**\n    *   忽略了磁滞回线的影响，即 B-H 曲线是单值的。\n    *   假设 B-H 关系在数据点之间是线性变化的。\n    *   假定 100°C 时的磁导率相比室温降低了 15% (因子为 0.85)。\n    *   饱和磁通密度 B_sat 是一个固定的典型值。\n*   **可能误差来源:**\n    *   **材料成分:** 钢材中碳、锰等杂质元素的微小变化会影响磁性能。\n    *   **机械应力:** 材料的拉伸或压缩应力会改变其磁导率。\n    *   **热处理历史:** 退火等热处理工艺对晶粒尺寸和磁畴结构有决定性影响。\n    *   **工作频率:** 本分析基于直流或低频磁场，在高频下涡流损耗和磁滞损耗会改变有效 B-H 关系。\n    *   **数据点精度:** 给定的 B-H 数据点本身是实验测量值，存在测量误差。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": {\n    \"B_A\": \"[字符串]\",\n    \"B_B\": \"[字符串]\",\n    \"B_C\": \"[字符串]\"\n  },\n  \"(2)\": {\n    \"B_rec_25C\": \"[字符串]\",\n    \"interval_typical_25C\": \"[字符串]\",\n    \"interval_envelope_full\": \"[字符串]\"\n  },\n  \"(3)\": {\n    \"curve_basis\": \"[字符串]\",\n    \"saturation_rule\": \"[字符串]\",\n    \"impact\": \"[字符串]\"\n  },\n  \"(4)\": {\n    \"B_Si_2500Apm\": \"[字符串]\",\n    \"ratio_Si_over_Mild_rec\": \"[字符串]\",\n    \"reasonableness\": \"[字符串]\"\n  },\n  \"(5)\": {\n    \"mu_r_eff_A\": \"[字符串]\",\n    \"mu_r_eff_B_naive\": \"[字符串]\",\n    \"mu_r_eff_C\": \"[字符串]\",\n    \"saturation_check\": \"[字符串]\",\n    \"temp_sensitivity\": \"[字符串]\"\n  },\n  \"(6)\": {\n    \"assumptions\": \"[字符串]\",\n    \"possible_errors\": \"[字符串]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)\": {\n    \"B_A\": \"0.628 T\",\n    \"B_B\": \"1.60 T\",\n    \"B_C\": \"1.34 T\"\n  },\n  \"(2)\": {\n    \"B_rec_25C\": \"1.50 T\",\n    \"interval_typical_25C\": \"[1.26 T, 1.60 T]\",\n    \"interval_envelope_full\": \"[0.628 T, 1.60 T]\"\n  },\n  \"(3)\": {\n    \"curve_basis\": \"情形A/B为给定数据点的折线插值；情形C为线性公式 B = μ0*μr_eff*H。\",\n    \"saturation_rule\": \"当计算的B值超过B_sat时，B值被截断并保持为B_sat。\",\n    \"impact\": \"饱和限制了材料能达到的最大磁通密度，如情形B在H=2500 A/m时B值被限制在1.6T。\"\n  },\n  \"(4)\": {\n    \"B_Si_2500Apm\": \"2.00 T\",\n    \"ratio_Si_over_Mild_rec\": \"1.33\",\n    \"reasonableness\": \"合理。取向硅钢是为高磁性能优化的软磁材料，其B值应显著高于普通低碳钢。\"\n  },\n  \"(5)\": {\n    \"mu_r_eff_A\": \"200\",\n    \"mu_r_eff_B_naive\": \"509\",\n    \"mu_r_eff_C\": \"425\",\n    \"saturation_check\": \"所有情形的B值均未超过各自的B_sat，或在B_sat处饱和，结果一致。\",\n    \"temp_sensitivity\": \"10.7% 偏差（100°C时B值相对室温推荐值）。\"\n  },\n  \"(6)\": {\n    \"assumptions\": \"忽略磁滞与剩磁；数据点间线性插值；固定的温度影响因子（0.85）；固定的B_sat值。\",\n    \"possible_errors\": \"材料成分差异、机械应力、热处理历史、工作频率（涡流损耗）。\"\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "image_path": [
+      "filtered_images/228276976.jpg"
+    ],
+    "solution_steps": [
+      "读取预定义的mild steel B–H数据，采用插值关系B=f(H)",
+      "调用 calculate_flux_density(material='mild steel', H=2500) 获得B",
+      "核对单位(T)并记录为标准答案"
+    ],
+    "tool_expected": [
+      "calculate_flux_density"
+    ],
+    "golden_answer": [
+      {
+        "(1)": {
+          "B_A": "0.628 T",
+          "B_B": "1.60 T",
+          "B_C": "1.34 T"
+        },
+        "(2)": {
+          "B_rec_25C": "1.50 T",
+          "interval_typical_25C": "[1.26 T, 1.60 T]",
+          "interval_envelope_full": "[0.628 T, 1.60 T]"
+        },
+        "(3)": {
+          "curve_basis": "Mild steel 情形A、B与 Silicon iron 采用给定离散(H,B)点的线性插值；情形C按 B(H)=min(μ0·μr_eff·H, B_sat)。",
+          "saturation_rule": "当线性外推超过对应 B_sat 时，以 B = B_sat 截断。",
+          "impact": "在 H = 2500 A/m 下：情形B进入饱和并被截断；情形A、C未达饱和，按插值/线性关系取值。"
+        },
+        "(4)": {
+          "B_Si_2500Apm": "2.00 T",
+          "ratio_Si_over_Mild_rec": "1.33",
+          "reasonableness": "Silicon iron 具有更高 μr 与更高 B_sat，故在相同 H 下 B 更大，量级关系合理。"
+        },
+        "(5)": {
+          "mu_r_eff_A": "2.00e2",
+          "mu_r_eff_B_naive": "509",
+          "mu_r_eff_C": "425",
+          "saturation_check": "B_A < 1.6 T，B_B = 1.6 T，B_C < 1.6 T，均未超过各自 B_sat。",
+          "temp_sensitivity": "相对(2)推荐值：ΔB = 0.165 T，下降约 11.0%。"
+        },
+        "(6)": {
+          "assumptions": "忽略磁滞/剩磁；点间线性插值；100°C 下 μr = 0.85·μr_base；B_sat 取给定典型值。",
+          "possible_errors": "材料成分与纯度、机械应力与应变、热处理历史、温度分布、测试频率/涡流/损耗模型差异均可能引起 μr 与 B_sat 偏差。"
+        }
+      }
+    ],
+    "original_question_id": "15",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "test_type": "refined",
+    "original_question_id": "15",
+    "subject_topic_key": "物理科学::凝聚态物理"
+  },
+  "answer_template": {
+    "(1)": {
+      "B_A": "[字符串]",
+      "B_B": "[字符串]",
+      "B_C": "[字符串]"
+    },
+    "(2)": {
+      "B_rec_25C": "[字符串]",
+      "interval_typical_25C": "[字符串]",
+      "interval_envelope_full": "[字符串]"
+    },
+    "(3)": {
+      "curve_basis": "[字符串]",
+      "saturation_rule": "[字符串]",
+      "impact": "[字符串]"
+    },
+    "(4)": {
+      "B_Si_2500Apm": "[字符串]",
+      "ratio_Si_over_Mild_rec": "[字符串]",
+      "reasonableness": "[字符串]"
+    },
+    "(5)": {
+      "mu_r_eff_A": "[字符串]",
+      "mu_r_eff_B_naive": "[字符串]",
+      "mu_r_eff_C": "[字符串]",
+      "saturation_check": "[字符串]",
+      "temp_sensitivity": "[字符串]"
+    },
+    "(6)": {
+      "assumptions": "[字符串]",
+      "possible_errors": "[字符串]"
+    }
+  },
+  "golden_standard": {
+    "(1)": {
+      "B_A": "0.628 T",
+      "B_B": "1.60 T",
+      "B_C": "1.34 T"
+    },
+    "(2)": {
+      "B_rec_25C": "1.50 T",
+      "interval_typical_25C": "[1.26 T, 1.60 T]",
+      "interval_envelope_full": "[0.628 T, 1.60 T]"
+    },
+    "(3)": {
+      "curve_basis": "Mild steel 情形A、B与 Silicon iron 采用给定离散(H,B)点的线性插值；情形C按 B(H)=min(μ0·μr_eff·H, B_sat)。",
+      "saturation_rule": "当线性外推超过对应 B_sat 时，以 B = B_sat 截断。",
+      "impact": "在 H = 2500 A/m 下：情形B进入饱和并被截断；情形A、C未达饱和，按插值/线性关系取值。"
+    },
+    "(4)": {
+      "B_Si_2500Apm": "2.00 T",
+      "ratio_Si_over_Mild_rec": "1.33",
+      "reasonableness": "Silicon iron 具有更高 μr 与更高 B_sat，故在相同 H 下 B 更大，量级关系合理。"
+    },
+    "(5)": {
+      "mu_r_eff_A": "2.00e2",
+      "mu_r_eff_B_naive": "509",
+      "mu_r_eff_C": "425",
+      "saturation_check": "B_A < 1.6 T，B_B = 1.6 T，B_C < 1.6 T，均未超过各自 B_sat。",
+      "temp_sensitivity": "相对(2)推荐值：ΔB = 0.165 T，下降约 11.0%。"
+    },
+    "(6)": {
+      "assumptions": "忽略磁滞/剩磁；点间线性插值；100°C 下 μr = 0.85·μr_base；B_sat 取给定典型值。",
+      "possible_errors": "材料成分与纯度、机械应力与应变、热处理历史、温度分布、测试频率/涡流/损耗模型差异均可能引起 μr 与 B_sat 偏差。"
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": {
+      "B_A": "0.628 T",
+      "B_B": "1.60 T",
+      "B_C": "1.34 T"
+    },
+    "(2)": {
+      "B_rec_25C": "1.50 T",
+      "interval_typical_25C": "[1.26 T, 1.60 T]",
+      "interval_envelope_full": "[0.628 T, 1.60 T]"
+    },
+    "(3)": {
+      "curve_basis": "情形A/B为给定数据点的折线插值；情形C为线性公式 B = μ0*μr_eff*H。",
+      "saturation_rule": "当计算的B值超过B_sat时，B值被截断并保持为B_sat。",
+      "impact": "饱和限制了材料能达到的最大磁通密度，如情形B在H=2500 A/m时B值被限制在1.6T。"
+    },
+    "(4)": {
+      "B_Si_2500Apm": "2.00 T",
+      "ratio_Si_over_Mild_rec": 1.33,
+      "reasonableness": "合理。取向硅钢是为高磁性能优化的软磁材料，其B值应显著高于普通低碳钢。"
+    },
+    "(5)": {
+      "mu_r_eff_A": 200,
+      "mu_r_eff_B_naive": 509,
+      "mu_r_eff_C": 425,
+      "saturation_check": "所有情形的B值均未超过各自的B_sat，或在B_sat处饱和，结果一致。",
+      "temp_sensitivity": "10.7% 偏差（100°C时B值相对室温推荐值）。"
+    },
+    "(6)": {
+      "assumptions": "忽略磁滞与剩磁；数据点间线性插值；固定的温度影响因子（0.85）；固定的B_sat值。",
+      "possible_errors": "材料成分差异、机械应力、热处理历史、工作频率（涡流损耗）。"
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)\": {\n    \"B_A\": \"0.628 T\",\n    \"B_B\": \"1.60 T\",\n    \"B_C\": \"1.34 T\"\n  },\n  \"(2)\": {\n    \"B_rec_25C\": \"1.50 T\",\n    \"interval_typical_25C\": \"[1.26 T, 1.60 T]\",\n    \"interval_envelope_full\": \"[0.628 T, 1.60 T]\"\n  },\n  \"(3)\": {\n    \"curve_basis\": \"情形A/B为给定数据点的折线插值；情形C为线性公式 B = μ0*μr_eff*H。\",\n    \"saturation_rule\": \"当计算的B值超过B_sat时，B值被截断并保持为B_sat。\",\n    \"impact\": \"饱和限制了材料能达到的最大磁通密度，如情形B在H=2500 A/m时B值被限制在1.6T。\"\n  },\n  \"(4)\": {\n    \"B_Si_2500Apm\": \"2.00 T\",\n    \"ratio_Si_over_Mild_rec\": \"1.33\",\n    \"reasonableness\": \"合理。取向硅钢是为高磁性能优化的软磁材料，其B值应显著高于普通低碳钢。\"\n  },\n  \"(5)\": {\n    \"mu_r_eff_A\": \"200\",\n    \"mu_r_eff_B_naive\": \"509\",\n    \"mu_r_eff_C\": \"425\",\n    \"saturation_check\": \"所有情形的B值均未超过各自的B_sat，或在B_sat处饱和，结果一致。\",\n    \"temp_sensitivity\": \"10.7% 偏差（100°C时B值相对室温推荐值）。\"\n  },\n  \"(6)\": {\n    \"assumptions\": \"忽略磁滞与剩磁；数据点间线性插值；固定的温度影响因子（0.85）；固定的B_sat值。\",\n    \"possible_errors\": \"材料成分差异、机械应力、热处理历史、工作频率（涡流损耗）。\"\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)\": {\n    \"B_A\": \"0.628 T\",\n    \"B_B\": \"1.60 T\",\n    \"B_C\": \"1.34 T\"\n  },\n  \"(2)\": {\n    \"B_rec_25C\": \"1.50 T\",\n    \"interval_typical_25C\": \"[1.26 T, 1.60 T]\",\n    \"interval_envelope_full\": \"[0.628 T, 1.60 T]\"\n  },\n  \"(3)\": {\n    \"curve_basis\": \"情形A/B为给定数据点的折线插值；情形C为线性公式 B = μ0*μr_eff*H。\",\n    \"saturation_rule\": \"当计算的B值超过B_sat时，B值被截断并保持为B_sat。\",\n    \"impact\": \"饱和限制了材料能达到的最大磁通密度，如情形B在H=2500 A/m时B值被限制在1.6T。\"\n  },\n  \"(4)\": {\n    \"B_Si_2500Apm\": \"2.00 T\",\n    \"ratio_Si_over_Mild_rec\": \"1.33\",\n    \"reasonableness\": \"合理。取向硅钢是为高磁性能优化的软磁材料，其B值应显著高于普通低碳钢。\"\n  },\n  \"(5)\": {\n    \"mu_r_eff_A\": \"200\",\n    \"mu_r_eff_B_naive\": \"509\",\n    \"mu_r_eff_C\": \"425\",\n    \"saturation_check\": \"所有情形的B值均未超过各自的B_sat，或在B_sat处饱和，结果一致。\",\n    \"temp_sensitivity\": \"10.7% 偏差（100°C时B值相对室温推荐值）。\"\n  },\n  \"(6)\": {\n    \"assumptions\": \"忽略磁滞与剩磁；数据点间线性插值；固定的温度影响因子（0.85）；固定的B_sat值。\",\n    \"possible_errors\": \"材料成分差异、机械应力、热处理历史、工作频率（涡流损耗）。\"\n  }\n}\n```"
+  },
+  "evaluation_score": 0.9473684210526315,
+  "evaluation_summary": "匹配字段: 18/19 (得分: 94.74%)",
+  "evaluation_details": {
+    "(1).B_A": {
+      "path": "(1).B_A",
+      "expected": "0.628 T",
+      "actual": "0.628 T",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).B_B": {
+      "path": "(1).B_B",
+      "expected": "1.60 T",
+      "actual": "1.60 T",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).B_C": {
+      "path": "(1).B_C",
+      "expected": "1.34 T",
+      "actual": "1.34 T",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2).B_rec_25C": {
+      "path": "(2).B_rec_25C",
+      "expected": "1.50 T",
+      "actual": "1.50 T",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2).interval_typical_25C": {
+      "path": "(2).interval_typical_25C",
+      "expected": "[1.26 T, 1.60 T]",
+      "actual": "[1.26 T, 1.60 T]",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2).interval_envelope_full": {
+      "path": "(2).interval_envelope_full",
+      "expected": "[0.628 T, 1.60 T]",
+      "actual": "[0.628 T, 1.60 T]",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3).curve_basis": {
+      "path": "(3).curve_basis",
+      "expected": "Mild steel 情形A、B与 Silicon iron 采用给定离散(H,B)点的线性插值；情形C按 B(H)=min(μ0·μr_eff·H, B_sat)。",
+      "actual": "情形A/B为给定数据点的折线插值；情形C为线性公式 B = μ0*μr_eff*H。",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3).saturation_rule": {
+      "path": "(3).saturation_rule",
+      "expected": "当线性外推超过对应 B_sat 时，以 B = B_sat 截断。",
+      "actual": "当计算的B值超过B_sat时，B值被截断并保持为B_sat。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3).impact": {
+      "path": "(3).impact",
+      "expected": "在 H = 2500 A/m 下：情形B进入饱和并被截断；情形A、C未达饱和，按插值/线性关系取值。",
+      "actual": "饱和限制了材料能达到的最大磁通密度，如情形B在H=2500 A/m时B值被限制在1.6T。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4).B_Si_2500Apm": {
+      "path": "(4).B_Si_2500Apm",
+      "expected": "2.00 T",
+      "actual": "2.00 T",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4).ratio_Si_over_Mild_rec": {
+      "path": "(4).ratio_Si_over_Mild_rec",
+      "expected": "1.33",
+      "actual": 1.33,
+      "expected_num": 1.33,
+      "actual_num": 1.33,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4).reasonableness": {
+      "path": "(4).reasonableness",
+      "expected": "Silicon iron 具有更高 μr 与更高 B_sat，故在相同 H 下 B 更大，量级关系合理。",
+      "actual": "合理。取向硅钢是为高磁性能优化的软磁材料，其B值应显著高于普通低碳钢。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5).mu_r_eff_A": {
+      "path": "(5).mu_r_eff_A",
+      "expected": "2.00e2",
+      "actual": 200,
+      "expected_num": 200.0,
+      "actual_num": 200.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5).mu_r_eff_B_naive": {
+      "path": "(5).mu_r_eff_B_naive",
+      "expected": "509",
+      "actual": 509,
+      "expected_num": 509.0,
+      "actual_num": 509.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5).mu_r_eff_C": {
+      "path": "(5).mu_r_eff_C",
+      "expected": "425",
+      "actual": 425,
+      "expected_num": 425.0,
+      "actual_num": 425.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5).saturation_check": {
+      "path": "(5).saturation_check",
+      "expected": "B_A < 1.6 T，B_B = 1.6 T，B_C < 1.6 T，均未超过各自 B_sat。",
+      "actual": "所有情形的B值均未超过各自的B_sat，或在B_sat处饱和，结果一致。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5).temp_sensitivity": {
+      "path": "(5).temp_sensitivity",
+      "expected": "相对(2)推荐值：ΔB = 0.165 T，下降约 11.0%。",
+      "actual": "10.7% 偏差（100°C时B值相对室温推荐值）。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6).assumptions": {
+      "path": "(6).assumptions",
+      "expected": "忽略磁滞/剩磁；点间线性插值；100°C 下 μr = 0.85·μr_base；B_sat 取给定典型值。",
+      "actual": "忽略磁滞与剩磁；数据点间线性插值；固定的温度影响因子（0.85）；固定的B_sat值。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6).possible_errors": {
+      "path": "(6).possible_errors",
+      "expected": "材料成分与纯度、机械应力与应变、热处理历史、温度分布、测试频率/涡流/损耗模型差异均可能引起 μr 与 B_sat 偏差。",
+      "actual": "材料成分差异、机械应力、热处理历史、工作频率（涡流损耗）。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "mode_folder": "with_tools_react"
+}

@@ -1,0 +1,646 @@
+{
+  "id": "66_ref_0",
+  "query": "一正方形五杆铰接桁架（边长 a=1.0 m）由四条边杆 AB、BC、CD、DA 和对角杆 BD 组成；各杆两端铰支，欧拉系数 K=1。材料与截面：Q235 钢，E=200 GPa，屈服强度 fy=235 MPa，圆形实心截面名义直径 d=40 mm；截面与几何参数：A=π(d/2)^2=0.0012566370614359172 m^2，I=π d^4/64=1.2566370614359172e-07 m^4，回转半径 r=0.01 m；杆长：L_side=1.0 m（AB、BC、CD、DA），L_diag=√2 m（BD）。全局安全系数 [n]_st=1.8。荷载：在结点 B 施加大小为 F 的集中力，方向沿 BD；定义“inward”为指向构架中心，“outward”为背离中心。单位外载 F=1 时的内力系数（正拉负压）：inward：AB=+0.7071067811865475，BC=+0.7071067811865475，CD=+0.7071067811865475，DA=+0.7071067811865475，BD=−1.0；outward：AB=−0.7071067811865475，BC=−0.7071067811865475，CD=−0.7071067811865475，DA=−0.7071067811865475，BD=+1.0。欧拉临界力（d=40 mm）：侧杆（L=1 m）P_cr,side=248.05021344239853 kN，对角杆 BD（L=√2 m）P_cr,BD=124.02510672119924 kN。制造负偏差 d=38 mm（−5%）时：对角杆 BD 的 P_cr,BD(−5%)=101.01922458133376 kN。任务：\n(1) 基于欧拉屈曲与 [n]_st，分别求 inward 与 outward 的结构许用外载 F_allow,stability，并给出控制杆件与控制模式。\n(2) 用 A·fy/[n]_st 进行材料强度复核：按受拉/受压分别计算各杆件的材料许用内力，并结合内力系数折算为外载限值；判断是否需要下修 (1) 的 F_allow；若需，给出新的许用外载与变化百分比。\n(3) 当 d=38 mm（−5%）且荷载方向为 inward 时，求新的 F_allow,stability，并给出相对名义直径结果（d=40 mm、inward）的衰减比例。\n(4) 在上述各方向与直径情形中取最小，给出“最终控制许可荷载”，并标注对应工况与控制杆件/模式。\n(5) 提交可核验汇总 verification_summary（JSON 或表格）：列出每一工况的 F_allow（稳定值与强度复核后的最终值）、对应 Euler 容量与材料容量拆解，并勾选布尔项“F_allow_stability 是否等于 min(Euler容量/安全系数, 材料容量/安全系数)”（按相应控制杆件折算为外载）。\n说明：所有已知量按 SI 单位；力可用 kN 表示。结果以符号表达式给出。",
+  "query_data": {
+    "id": "66_ref_0",
+    "original_id": 66,
+    "refined_index": 0,
+    "question": "一正方形五杆铰接桁架（边长 a=1.0 m）由四条边杆 AB、BC、CD、DA 和对角杆 BD 组成；各杆两端铰支，欧拉系数 K=1。材料与截面：Q235 钢，E=200 GPa，屈服强度 fy=235 MPa，圆形实心截面名义直径 d=40 mm；截面与几何参数：A=π(d/2)^2=0.0012566370614359172 m^2，I=π d^4/64=1.2566370614359172e-07 m^4，回转半径 r=0.01 m；杆长：L_side=1.0 m（AB、BC、CD、DA），L_diag=√2 m（BD）。全局安全系数 [n]_st=1.8。荷载：在结点 B 施加大小为 F 的集中力，方向沿 BD；定义“inward”为指向构架中心，“outward”为背离中心。单位外载 F=1 时的内力系数（正拉负压）：inward：AB=+0.7071067811865475，BC=+0.7071067811865475，CD=+0.7071067811865475，DA=+0.7071067811865475，BD=−1.0；outward：AB=−0.7071067811865475，BC=−0.7071067811865475，CD=−0.7071067811865475，DA=−0.7071067811865475，BD=+1.0。欧拉临界力（d=40 mm）：侧杆（L=1 m）P_cr,side=248.05021344239853 kN，对角杆 BD（L=√2 m）P_cr,BD=124.02510672119924 kN。制造负偏差 d=38 mm（−5%）时：对角杆 BD 的 P_cr,BD(−5%)=101.01922458133376 kN。任务：\n(1) 基于欧拉屈曲与 [n]_st，分别求 inward 与 outward 的结构许用外载 F_allow,stability，并给出控制杆件与控制模式。\n(2) 用 A·fy/[n]_st 进行材料强度复核：按受拉/受压分别计算各杆件的材料许用内力，并结合内力系数折算为外载限值；判断是否需要下修 (1) 的 F_allow；若需，给出新的许用外载与变化百分比。\n(3) 当 d=38 mm（−5%）且荷载方向为 inward 时，求新的 F_allow,stability，并给出相对名义直径结果（d=40 mm、inward）的衰减比例。\n(4) 在上述各方向与直径情形中取最小，给出“最终控制许可荷载”，并标注对应工况与控制杆件/模式。\n(5) 提交可核验汇总 verification_summary（JSON 或表格）：列出每一工况的 F_allow（稳定值与强度复核后的最终值）、对应 Euler 容量与材料容量拆解，并勾选布尔项“F_allow_stability 是否等于 min(Euler容量/安全系数, 材料容量/安全系数)”（按相应控制杆件折算为外载）。\n说明：所有已知量按 SI 单位；力可用 kN 表示。结果以符号表达式给出。",
+    "answer": "{'(1)': '- 记内力系数绝对值：|k_side,in|=|k_side,out|，|k_BD,in|，|k_BD,out|（由题面给定）。\\n- inward：R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )；控制杆件：BD；控制模式：屈曲。\\n- outward：R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )；控制杆件：AB（四边杆等效）；控制模式：屈曲。', '(2)': '- 材料许用内力：N_mat = A·fy/[n]_st。\\n- inward 强度限值（折算为外载）：F_mat,in = min{ N_mat/|k_BD,in|, N_mat/|k_side,in| }。\\n  最终许用：R2_in = min{ R1_in, F_mat,in }；若 R2_in < R1_in，则下修百分比 Δ_in = 1 − R2_in/R1_in；否则 Δ_in = 0。\\n- outward 强度限值：F_mat,out = min{ N_mat/|k_BD,out|, N_mat/|k_side,out| }。\\n  最终许用：R2_out = min{ R1_out, F_mat,out }；若 R2_out < R1_out，则下修百分比 Δ_out = 1 − R2_out/R1_out；否则 Δ_out = 0。', '(3)': '- inward（d=38 mm）：R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )。\\n- 相对名义直径（d=40 mm、inward）的衰减比例：η = 1 − R3/R1_in。', '(4)': '- 最终控制许可荷载：R4 = min{ R2_in, R2_out, R3 }。\\n- 对应工况与控制：\\n  • 若 R4 = R3：inward，d=38 mm；控制杆件 BD；模式：屈曲。\\n  • 若 R4 = R2_in：inward，d=40 mm；模式与控制杆件由 R2_in 的取值来源确定（屈曲对应 BD；强度对应使 F_mat,in 取到最小的杆件）。\\n  • 若 R4 = R2_out：outward，d=40 mm；模式与控制杆件由 R2_out 的取值来源确定（屈曲对应侧杆；强度对应使 F_mat,out 取到最小的杆件）。', '(5)': {'verification_summary': {'inward_d40': {'allowable_by_stability': 'R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )', 'allowable_by_material': 'F_mat,in = min{ (A·fy/[n]_st)/|k_BD,in|, (A·fy/[n]_st)/|k_side,in| }', 'F_allow_stability': 'R1_in', 'F_allow_final': 'R2_in = min{ R1_in, F_mat,in }', 'euler_capacity_internal': 'P_cr,BD(d=40)', 'material_capacity_internal': 'A·fy', 'bool_F_allow_stab_eq_min_caps': 'R1_in == min{ P_cr,BD(d=40)/[n]_st, A·fy/[n]_st }/|k_BD,in|'}, 'outward_d40': {'allowable_by_stability': 'R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )', 'allowable_by_material': 'F_mat,out = min{ (A·fy/[n]_st)/|k_BD,out|, (A·fy/[n]_st)/|k_side,out| }', 'F_allow_stability': 'R1_out', 'F_allow_final': 'R2_out = min{ R1_out, F_mat,out }', 'euler_capacity_internal': 'P_cr,side(d=40)', 'material_capacity_internal': 'A·fy', 'bool_F_allow_stab_eq_min_caps': 'R1_out == min{ P_cr,side(d=40)/[n]_st, A·fy/[n]_st }/|k_side,out|'}, 'inward_d38': {'allowable_by_stability': 'R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )', 'allowable_by_material': '—', 'F_allow_stability': 'R3', 'F_allow_final': 'R3（按题面仅做稳定性）', 'euler_capacity_internal': 'P_cr,BD(d=38)', 'material_capacity_internal': 'A·fy', 'bool_F_allow_stab_eq_min_caps': 'R3 == min{ P_cr,BD(d=38)/[n]_st, A·fy/[n]_st }/|k_BD,in|'}}}}",
+    "metadata": {
+      "subject": "Physics",
+      "topic": "structural_mechanics",
+      "image_path": [
+        "/r_bench/images/00004.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "calculate_cross_section_area",
+        "calculate_moment_of_inertia",
+        "determine_truss_allowable_load",
+        "visualize_truss_structure"
+      ],
+      "golden_answer": [
+        {
+          "(1)": "- 记内力系数绝对值：|k_side,in|=|k_side,out|，|k_BD,in|，|k_BD,out|（由题面给定）。\n- inward：R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )；控制杆件：BD；控制模式：屈曲。\n- outward：R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )；控制杆件：AB（四边杆等效）；控制模式：屈曲。",
+          "(2)": "- 材料许用内力：N_mat = A·fy/[n]_st。\n- inward 强度限值（折算为外载）：F_mat,in = min{ N_mat/|k_BD,in|, N_mat/|k_side,in| }。\n  最终许用：R2_in = min{ R1_in, F_mat,in }；若 R2_in < R1_in，则下修百分比 Δ_in = 1 − R2_in/R1_in；否则 Δ_in = 0。\n- outward 强度限值：F_mat,out = min{ N_mat/|k_BD,out|, N_mat/|k_side,out| }。\n  最终许用：R2_out = min{ R1_out, F_mat,out }；若 R2_out < R1_out，则下修百分比 Δ_out = 1 − R2_out/R1_out；否则 Δ_out = 0。",
+          "(3)": "- inward（d=38 mm）：R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )。\n- 相对名义直径（d=40 mm、inward）的衰减比例：η = 1 − R3/R1_in。",
+          "(4)": "- 最终控制许可荷载：R4 = min{ R2_in, R2_out, R3 }。\n- 对应工况与控制：\n  • 若 R4 = R3：inward，d=38 mm；控制杆件 BD；模式：屈曲。\n  • 若 R4 = R2_in：inward，d=40 mm；模式与控制杆件由 R2_in 的取值来源确定（屈曲对应 BD；强度对应使 F_mat,in 取到最小的杆件）。\n  • 若 R4 = R2_out：outward，d=40 mm；模式与控制杆件由 R2_out 的取值来源确定（屈曲对应侧杆；强度对应使 F_mat,out 取到最小的杆件）。",
+          "(5)": {
+            "verification_summary": {
+              "inward_d40": {
+                "allowable_by_stability": "R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )",
+                "allowable_by_material": "F_mat,in = min{ (A·fy/[n]_st)/|k_BD,in|, (A·fy/[n]_st)/|k_side,in| }",
+                "F_allow_stability": "R1_in",
+                "F_allow_final": "R2_in = min{ R1_in, F_mat,in }",
+                "euler_capacity_internal": "P_cr,BD(d=40)",
+                "material_capacity_internal": "A·fy",
+                "bool_F_allow_stab_eq_min_caps": "R1_in == min{ P_cr,BD(d=40)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+              },
+              "outward_d40": {
+                "allowable_by_stability": "R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )",
+                "allowable_by_material": "F_mat,out = min{ (A·fy/[n]_st)/|k_BD,out|, (A·fy/[n]_st)/|k_side,out| }",
+                "F_allow_stability": "R1_out",
+                "F_allow_final": "R2_out = min{ R1_out, F_mat,out }",
+                "euler_capacity_internal": "P_cr,side(d=40)",
+                "material_capacity_internal": "A·fy",
+                "bool_F_allow_stab_eq_min_caps": "R1_out == min{ P_cr,side(d=40)/[n]_st, A·fy/[n]_st }/|k_side,out|"
+              },
+              "inward_d38": {
+                "allowable_by_stability": "R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )",
+                "allowable_by_material": "—",
+                "F_allow_stability": "R3",
+                "F_allow_final": "R3（按题面仅做稳定性）",
+                "euler_capacity_internal": "P_cr,BD(d=38)",
+                "material_capacity_internal": "A·fy",
+                "bool_F_allow_stab_eq_min_caps": "R3 == min{ P_cr,BD(d=38)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+              }
+            }
+          }
+        }
+      ],
+      "original_question_id": "66",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_cross_section_area",
+          "description": "计算圆形截面面积",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "diameter": {
+                "type": "number",
+                "description": "直径，单位：米"
+              }
+            },
+            "required": [
+              "diameter"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_mechanics_toolkit_claude_5.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_moment_of_inertia",
+          "description": "计算圆形截面惯性矩",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "diameter": {
+                "type": "number",
+                "description": "直径，单位：米"
+              }
+            },
+            "required": [
+              "diameter"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_mechanics_toolkit_claude_5.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "determine_truss_allowable_load",
+          "description": "确定桁架结构的许用荷载（修正版）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "diameter": {
+                "type": "number",
+                "description": "杆件直径，单位：米"
+              },
+              "side_length": {
+                "type": "number",
+                "description": "边长 a，单位：米"
+              },
+              "elastic_modulus": {
+                "type": "number",
+                "description": "弹性模量，单位：帕斯卡"
+              },
+              "safety_factor": {
+                "type": "number",
+                "description": "稳定安全系数"
+              },
+              "force_direction": {
+                "type": "string",
+                "description": "力的方向，可选值：'inward'（力推向结构中心）或'outward'（力拉开结构），默认为'inward'"
+              }
+            },
+            "required": [
+              "diameter",
+              "side_length",
+              "elastic_modulus",
+              "safety_factor"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_mechanics_toolkit_claude_5.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_truss_structure",
+          "description": "可视化桁架结构及内力分布",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "side_length": {
+                "type": "number",
+                "description": "边长，单位：米"
+              },
+              "external_force": {
+                "type": "number",
+                "description": "外力大小，单位：牛顿"
+              },
+              "force_direction": {
+                "type": "string",
+                "description": "力的方向，可选值：'inward'（力推向结构中心）或'outward'（力拉开结构）"
+              },
+              "member_forces": {
+                "type": "object",
+                "description": "杆件内力字典，键为杆件名称，值为内力大小"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存路径，可选参数"
+              }
+            },
+            "required": [
+              "side_length",
+              "external_force",
+              "force_direction",
+              "member_forces"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_mechanics_toolkit_claude_5.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "一正方形五杆铰接桁架（边长 a=1.0 m）由四条边杆 AB、BC、CD、DA 和对角杆 BD 组成；各杆两端铰支，欧拉系数 K=1。材料与截面：Q235 钢，E=200 GPa，屈服强度 fy=235 MPa，圆形实心截面名义直径 d=40 mm；截面与几何参数：A=π(d/2)^2=0.0012566370614359172 m^2，I=π d^4/64=1.2566370614359172e-07 m^4，回转半径 r=0.01 m；杆长：L_side=1.0 m（AB、BC、CD、DA），L_diag=√2 m（BD）。全局安全系数 [n]_st=1.8。荷载：在结点 B 施加大小为 F 的集中力，方向沿 BD；定义“inward”为指向构架中心，“outward”为背离中心。单位外载 F=1 时的内力系数（正拉负压）：inward：AB=+0.7071067811865475，BC=+0.7071067811865475，CD=+0.7071067811865475，DA=+0.7071067811865475，BD=−1.0；outward：AB=−0.7071067811865475，BC=−0.7071067811865475，CD=−0.7071067811865475，DA=−0.7071067811865475，BD=+1.0。欧拉临界力（d=40 mm）：侧杆（L=1 m）P_cr,side=248.05021344239853 kN，对角杆 BD（L=√2 m）P_cr,BD=124.02510672119924 kN。制造负偏差 d=38 mm（−5%）时：对角杆 BD 的 P_cr,BD(−5%)=101.01922458133376 kN。任务：\n(1) 基于欧拉屈曲与 [n]_st，分别求 inward 与 outward 的结构许用外载 F_allow,stability，并给出控制杆件与控制模式。\n(2) 用 A·fy/[n]_st 进行材料强度复核：按受拉/受压分别计算各杆件的材料许用内力，并结合内力系数折算为外载限值；判断是否需要下修 (1) 的 F_allow；若需，给出新的许用外载与变化百分比。\n(3) 当 d=38 mm（−5%）且荷载方向为 inward 时，求新的 F_allow,stability，并给出相对名义直径结果（d=40 mm、inward）的衰减比例。\n(4) 在上述各方向与直径情形中取最小，给出“最终控制许可荷载”，并标注对应工况与控制杆件/模式。\n(5) 提交可核验汇总 verification_summary（JSON 或表格）：列出每一工况的 F_allow（稳定值与强度复核后的最终值）、对应 Euler 容量与材料容量拆解，并勾选布尔项“F_allow_stability 是否等于 min(Euler容量/安全系数, 材料容量/安全系数)”（按相应控制杆件折算为外载）。\n说明：所有已知量按 SI 单位；力可用 kN 表示。结果以符号表达式给出。",
+      "final_answer": {
+        "(1)": "- 记内力系数绝对值：|k_side,in|=|k_side,out|，|k_BD,in|，|k_BD,out|（由题面给定）。\n- inward：R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )；控制杆件：BD；控制模式：屈曲。\n- outward：R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )；控制杆件：AB（四边杆等效）；控制模式：屈曲。",
+        "(2)": "- 材料许用内力：N_mat = A·fy/[n]_st。\n- inward 强度限值（折算为外载）：F_mat,in = min{ N_mat/|k_BD,in|, N_mat/|k_side,in| }。\n  最终许用：R2_in = min{ R1_in, F_mat,in }；若 R2_in < R1_in，则下修百分比 Δ_in = 1 − R2_in/R1_in；否则 Δ_in = 0。\n- outward 强度限值：F_mat,out = min{ N_mat/|k_BD,out|, N_mat/|k_side,out| }。\n  最终许用：R2_out = min{ R1_out, F_mat,out }；若 R2_out < R1_out，则下修百分比 Δ_out = 1 − R2_out/R1_out；否则 Δ_out = 0。",
+        "(3)": "- inward（d=38 mm）：R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )。\n- 相对名义直径（d=40 mm、inward）的衰减比例：η = 1 − R3/R1_in。",
+        "(4)": "- 最终控制许可荷载：R4 = min{ R2_in, R2_out, R3 }。\n- 对应工况与控制：\n  • 若 R4 = R3：inward，d=38 mm；控制杆件 BD；模式：屈曲。\n  • 若 R4 = R2_in：inward，d=40 mm；模式与控制杆件由 R2_in 的取值来源确定（屈曲对应 BD；强度对应使 F_mat,in 取到最小的杆件）。\n  • 若 R4 = R2_out：outward，d=40 mm；模式与控制杆件由 R2_out 的取值来源确定（屈曲对应侧杆；强度对应使 F_mat,out 取到最小的杆件）。",
+        "(5)": {
+          "verification_summary": {
+            "inward_d40": {
+              "allowable_by_stability": "R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )",
+              "allowable_by_material": "F_mat,in = min{ (A·fy/[n]_st)/|k_BD,in|, (A·fy/[n]_st)/|k_side,in| }",
+              "F_allow_stability": "R1_in",
+              "F_allow_final": "R2_in = min{ R1_in, F_mat,in }",
+              "euler_capacity_internal": "P_cr,BD(d=40)",
+              "material_capacity_internal": "A·fy",
+              "bool_F_allow_stab_eq_min_caps": "R1_in == min{ P_cr,BD(d=40)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+            },
+            "outward_d40": {
+              "allowable_by_stability": "R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )",
+              "allowable_by_material": "F_mat,out = min{ (A·fy/[n]_st)/|k_BD,out|, (A·fy/[n]_st)/|k_side,out| }",
+              "F_allow_stability": "R1_out",
+              "F_allow_final": "R2_out = min{ R1_out, F_mat,out }",
+              "euler_capacity_internal": "P_cr,side(d=40)",
+              "material_capacity_internal": "A·fy",
+              "bool_F_allow_stab_eq_min_caps": "R1_out == min{ P_cr,side(d=40)/[n]_st, A·fy/[n]_st }/|k_side,out|"
+            },
+            "inward_d38": {
+              "allowable_by_stability": "R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )",
+              "allowable_by_material": "—",
+              "F_allow_stability": "R3",
+              "F_allow_final": "R3（按题面仅做稳定性）",
+              "euler_capacity_internal": "P_cr,BD(d=38)",
+              "material_capacity_internal": "A·fy",
+              "bool_F_allow_stab_eq_min_caps": "R3 == min{ P_cr,BD(d=38)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+            }
+          }
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "Physics",
+      "topic": "structural_mechanics",
+      "test_type": "refined",
+      "original_question_id": "66",
+      "subject_topic_key": "Physics::structural_mechanics"
+    }
+  },
+  "model": "claude-haiku-4-5-20251001-thinking",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个顶尖的 AI 科学助手，你的任务是解决来自物理、化学、生物等领域的复杂、多模态、多步骤问题。\n\n# 任务指令：两阶段方法\n\n你必须严格遵循以下两个阶段来回答问题：\n\n**阶段 1: 规划 (Planning)**\n在开始执行任何操作之前，你必须首先生成一个高阶的、分步骤的“计划”。这个计划应该概述你打算如何分解问题、使用哪些工具、以及工具之间的依赖关系。\n\n**阶段 2: 执行 (Execution)**\n在提交计划后，你将开始逐一执行。你必须严格遵循以下的 \"ReAct\" 格式 (Thought, Action, Observation)，直到你得出最终答案。\n\n---\n\n**输出格式规范**\n\n**[阶段 1: 规划]**\nPlan:\n\n1. [你的计划步骤 1，例如：分析输入图像中的分子结构]\n2. [你的计划步骤 2，例如：使用 `analyze_molecule` 工具获取 SMILES]\n3. [你的计划步骤 3，例如：将 SMILES 传入 `calculate_properties` 工具]\n4. ...\n5. [你的计划步骤 N，例如：总结所有属性并回答问题]\n\n**[阶段 2: 执行]**\nThought: [描述你当前的思考，你正处于计划的第几步，以及你为什么需要调用这个特定的工具。]\nAction: 请你在这一步发出工具调用\n\n[在你提交 Action 后，你将收到一个 Observation]\n\nObservation: [这里将由评测系统插入工具的返回结果]\n\n[然后你重复这个循环]\n\nThought: [基于上一步的 Observation，你的新思考。]\nAction: 请你在这一步发出工具调用\n\n...\n[当你收集到所有信息并准备好回答时]\n\nThought: [我已收集到所有必要信息，现在可以生成最终答案了。]\nFinal Answer: [这里是对原始问题的最终、完整回答。]"
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "一正方形五杆铰接桁架（边长 a=1.0 m）由四条边杆 AB、BC、CD、DA 和对角杆 BD 组成；各杆两端铰支，欧拉系数 K=1。材料与截面：Q235 钢，E=200 GPa，屈服强度 fy=235 MPa，圆形实心截面名义直径 d=40 mm；截面与几何参数：A=π(d/2)^2=0.0012566370614359172 m^2，I=π d^4/64=1.2566370614359172e-07 m^4，回转半径 r=0.01 m；杆长：L_side=1.0 m（AB、BC、CD、DA），L_diag=√2 m（BD）。全局安全系数 [n]_st=1.8。荷载：在结点 B 施加大小为 F 的集中力，方向沿 BD；定义“inward”为指向构架中心，“outward”为背离中心。单位外载 F=1 时的内力系数（正拉负压）：inward：AB=+0.7071067811865475，BC=+0.7071067811865475，CD=+0.7071067811865475，DA=+0.7071067811865475，BD=−1.0；outward：AB=−0.7071067811865475，BC=−0.7071067811865475，CD=−0.7071067811865475，DA=−0.7071067811865475，BD=+1.0。欧拉临界力（d=40 mm）：侧杆（L=1 m）P_cr,side=248.05021344239853 kN，对角杆 BD（L=√2 m）P_cr,BD=124.02510672119924 kN。制造负偏差 d=38 mm（−5%）时：对角杆 BD 的 P_cr,BD(−5%)=101.01922458133376 kN。任务：\n(1) 基于欧拉屈曲与 [n]_st，分别求 inward 与 outward 的结构许用外载 F_allow,stability，并给出控制杆件与控制模式。\n(2) 用 A·fy/[n]_st 进行材料强度复核：按受拉/受压分别计算各杆件的材料许用内力，并结合内力系数折算为外载限值；判断是否需要下修 (1) 的 F_allow；若需，给出新的许用外载与变化百分比。\n(3) 当 d=38 mm（−5%）且荷载方向为 inward 时，求新的 F_allow,stability，并给出相对名义直径结果（d=40 mm、inward）的衰减比例。\n(4) 在上述各方向与直径情形中取最小，给出“最终控制许可荷载”，并标注对应工况与控制杆件/模式。\n(5) 提交可核验汇总 verification_summary（JSON 或表格）：列出每一工况的 F_allow（稳定值与强度复核后的最终值）、对应 Euler 容量与材料容量拆解，并勾选布尔项“F_allow_stability 是否等于 min(Euler容量/安全系数, 材料容量/安全系数)”（按相应控制杆件折算为外载）。\n说明：所有已知量按 SI 单位；力可用 kN 表示。结果以符号表达式给出。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/png;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "# 两阶段分析方案\n\n## **[阶段 1: 规划]**\n\n**Plan:**\n\n1. **理解结构与荷载** - 分析正方形五杆桁架在结点B（沿BD方向）的集中力作用下的内力分布\n   - inward：BD杆受压(-1.0F)，四条侧杆受拉(+0.707F)\n   - outward：BD杆受拉(+1.0F)，四条侧杆受压(-0.707F)\n\n2. **计算inward工况的欧拉屈曲许用外载** \n   - BD杆控制（受压，Pcr,BD = 124.025 kN）\n   - 许用内力 = Pcr,BD / [n]_st = 124.025 / 1.8\n   - 对应外载 F_allow = 许用内力 / |系数|\n\n3. **计算outward工况的欧拉屈曲许用外载**\n   - 侧杆控制（受压，Pcr,side = 248.05 kN）\n   - 许用内力 = Pcr,side / [n]_st\n   - 对应外载 F_allow = 许用内力 / |系数|\n\n4. **材料强度复核**\n   - 计算材料许用内力：Nallow = A·fy / [n]_st\n   - 根据受拉/受压分别应用\n   - 折算各工况的外载限值，与欧拉限值比较\n\n5. **d=38 mm工况计算**\n   - 重新计算截面参数：A、I、r\n   - 重新计算侧杆的Pcr（可能需要）\n   - 使用给定的Pcr,BD(-5%) = 101.019 kN\n   - 计算新的F_allow,stability\n\n6. **综合对比与验证汇总**\n   - 列出所有工况（inward d=40mm、outward d=40mm、inward d=38mm）\n   - 每个工况列出欧拉容量、材料容量、最终许用外载\n   - 标注控制杆件与控制模式\n   - 生成JSON验证汇总表\n\n---\n\n## **[阶段 2: 执行]**\n\n### **Step 1: 计算d=40mm时的截面性质验证与材料许用内力**\n\n**Thought:** 首先需要验证截面参数，计算基础的材料许用内力。\n\n$$A_{allow,tension} = A_{allow,compression} = \\frac{A \\cdot f_y}{[n]_{st}} = \\frac{0.0012566370614359172 \\times 235 \\times 10^6}{1.8}$$\n\n$$= \\frac{295.309 \\times 10^3}{1.8} = 164.06 \\text{ kN}$$\n\n---\n\n### **Step 2: inward工况 (d=40mm) - 欧拉屈曲控制**\n\n**Thought:** inward情况下，BD杆受压，内力系数为-1.0。需要检查BD杆的屈曲。\n\n**BD杆内力分析：**\n- 单位荷载F=1时：$N_{BD} = -1.0$ kN\n- 欧拉临界力：$P_{cr,BD} = 124.025$ kN\n- 许用压力：$N_{allow,cr} = \\frac{P_{cr,BD}}{[n]_{st}} = \\frac{124.025}{1.8} = 68.9028 \\text{ kN}$\n- 对应许用外载：$F_{allow,stability,inward} = \\frac{68.9028}{1.0} = 68.9028 \\text{ kN}$\n\n**侧杆内力分析：**\n- 单位荷载F=1时：$N_{side} = +0.7071067811865475$ kN（受拉，无屈曲风险）\n- 当$F = 68.9028$ kN时：$N_{side} = 68.9028 \\times 0.7071 = 48.73 \\text{ kN}$\n- 材料许用拉力 = 164.06 kN > 48.73 kN ✓\n\n**inward工况欧拉控制：**\n- **控制杆件：BD**\n- **控制模式：欧拉屈曲（压力）**\n- **F_allow,stability (inward, d=40mm) = 68.90 kN** ✓\n\n---\n\n### **Step 3: outward工况 (d=40mm) - 欧拉屈曲控制**\n\n**Thought:** outward情况下，侧杆AB、BC、CD、DA受压，内力系数为-0.7071。需要检查侧杆的屈曲。\n\n**侧杆内力分析：**\n- 单位荷载F=1时：$N_{side} = -0.7071067811865475$ kN\n- 欧拉临界力：$P_{cr,side} = 248.05$ kN\n- 许用压力：$N_{allow,cr} = \\frac{248.05}{1.8} = 137.806 \\text{ kN}$\n- 对应许用外载：$F_{allow,stability,outward} = \\frac{137.806}{0.7071} = 194.85 \\text{ kN}$\n\n**BD杆内力分析：**\n- 单位荷载F=1时：$N_{BD} = +1.0$ kN（受拉，无屈曲风险）\n- 当$F = 194.85$ kN时：$N_{BD} = 194.85 \\times 1.0 = 194.85 \\text{ kN}$\n- 材料许用拉力 = 164.06 kN < 194.85 kN ✗\n\n**材料强度成为控制因素！**\n- 由BD杆拉力控制：$F_{allow,material} = \\frac{164.06}{1.0} = 164.06 \\text{ kN}$\n- 此时侧杆的压力：$N_{side} = 164.06 \\times 0.7071 = 115.97 \\text{ kN} < 137.806 \\text{ kN}$ ✓\n\n**outward工况最终许用外载：**\n- **欧拉容量对应外载：194.85 kN**\n- **材料容量对应外载：164.06 kN**\n- **控制：材料强度（BD杆拉力）**\n- **F_allow (outward, d=40mm) = 164.06 kN** ✓\n\n---\n\n### **Step 4: 材料强度复核（d=40mm两工况）**\n\n**Thought:** 对两个工况进行材料强度复核。\n\n| 工况 | 杆件 | 内力系数 | 材料许用值 | 对应外载限值 | 欧拉许用外载 | 最终控制 |\n|------|------|--------|---------|-----------|-----------|---------|\n| inward | BD | -1.0 | 164.06 kN(压) | 164.06 kN | 68.90 kN | **欧拉屈曲** |\n| inward | 侧杆 | +0.7071 | 164.06 kN(拉) | 231.95 kN | — | 欧拉控制 |\n| outward | BD | +1.0 | 164.06 kN(拉) | 164.06 kN | 194.85 kN | **材料强度** |\n| outward | 侧杆 | -0.7071 | 164.06 kN(压) | 231.95 kN | 137.81 kN | 欧拉控制 |\n\n**结论：**\n- inward (d=40mm)：**F_allow = 68.90 kN**（欧拉屈曲控制，BD杆压力）\n- outward (d=40mm)：**F_allow = 164.06 kN**（材料强度控制，BD杆拉力）\n\n---\n\n### **Step 5: d=38mm工况 - 计算inward的新许用外载**\n\n**Thought:** d=38mm对应-5%制造负偏差。需要重新计算截面性质。\n\n**新截面参数（d=38 mm）：**\n\n$$A_{38} = \\pi \\left(\\frac{0.038}{2}\\right)^2 = \\pi \\times (0.019)^2 = 1.13571 \\times 10^{-3} \\text{ m}^2$$\n\n$$I_{38} = \\frac{\\pi d^4}{64} = \\frac{\\pi \\times (0.038)^4}{64} = 1.0393 \\times 10^{-7} \\text{ m}^4$$\n\n$$r_{38} = \\frac{d}{4} = \\frac{0.038}{4} = 0.0095 \\text{ m}$$\n\n**材料许用内力（d=38mm）：**\n\n$$N_{allow} = \\frac{A_{38} \\cdot f_y}{[n]_{st}} = \\frac{1.13571 \\times 10^{-3} \\times 235 \\times 10^6}{1.8} = 147.84 \\text{ kN}$$\n\n**inward工况欧拉屈曲许用外载（d=38mm）：**\n\n已给出：$P_{cr,BD}(-5\\%) = 101.019$ kN\n\n$$N_{allow,cr} = \\frac{P_{cr,BD}(-5\\%)}{[n]_{st}} = \\frac{101.019}{1.8} = 56.123 \\text{ kN}$$\n\n$$F_{allow,stability,inward}(d=38mm) = \\frac{56.123}{1.0} = 56.123 \\text{ kN}$$\n\n**衰减比例（相对于d=40mm）：**\n\n$$衰减比例 = \\frac{56.123 - 68.903}{68.903} \\times 100\\% = -18.55\\%$$\n\n或表示为容量比：\n\n$$\\frac{F_{allow}(d=38mm)}{F_{allow}(d=40mm)} = \\frac{56.123}{68.903} = 0.8145 = 81.45\\%$$\n\n**衰减率 = 18.55%**\n\n**d=38mm inward工况：**\n- **F_allow,stability (inward, d=38mm) = 56.12 kN**\n- **衰减比例：18.55%（相对d=40mm）**\n\n---\n\n### **Step 6: 最终综合对比 - 确定\"最终控制许可荷载\"**\n\n**所有工况汇总：**\n\n| 工况编号 | 荷载方向 | 直径d | F_allow(稳定) | 控制杆件 | 控制模式 | 备注 |\n|---------|--------|------|-------------|--------|--------|------|\n| 1 | inward | 40mm | **68.90 kN** | BD | 欧拉屈曲 | 材料(164.06kN) > 欧拉(68.90kN) |\n| 2 | outward | 40mm | **164.06 kN** | BD | 材料强度 | 欧拉(194.85kN) > 材料(164.06kN) |\n| 3 | inward | 38mm | **56.12 kN** | BD | 欧拉屈曲 | -18.55% vs d=40mm |\n\n**最小值：**\n\n$$F_{min} = 56.12 \\text{ kN}$$\n\n**最终控制许可荷载：**\n- **F_final = 56.12 kN**\n- **对应工况：inward，d=38mm（-5%制造公差）**\n- **控制杆件：BD**\n- **控制模式：欧拉屈曲（压力）**\n\n---\n\n### **Step 7: 可核验汇总表生成**\n\n**Thought:** 现在生成完整的JSON验证汇总，包含所有工况的容量分解。\n\n```json\n{\n  \"verification_summary\": {\n    \"工况1_inward_d40mm\": {\n      \"荷载方向\": \"inward (指向中心)\",\n      \"直径\": \"d=40mm (标称)\",\n      \"F_allow_stability_kN\": 68.903,\n      \"F_allow_material_kN\": 231.95,\n      \"控制因素\": \"欧拉屈曲\",\n      \"控制杆件\": \"BD (对角杆)\",\n      \"控制模式\": \"压力屈曲\",\n      \"欧拉容量\": {\n        \"Pcr_BD_kN\": 124.025,\n        \"许用压力_kN\": 68.903,\n        \"内力系数_F\": -1.0,\n        \"对应外载_kN\": 68.903\n      },\n      \"材料容量\": {\n        \"A_m2\": 0.0012566370614359172,\n        \"fy_MPa\": 235,\n        \"n_st\": 1.8,\n        \"N_allow_kN\": 164.06,\n        \"侧杆受拉时对应外载_kN\": 231.95,\n        \"BD受压时对应外载_kN\": 164.06\n      },\n      \"最终值\": {\n        \"F_allow_kN\": 68.903,\n        \"控制机制\": \"min(欧拉/1.8, 材料/1.8) 按杆件系数折算\"\n      },\n      \"验证\": {\n        \"F_allow_equals_min_capacity\": true,\n        \"计算式\": \"min(Pcr_BD/1.8, A*fy/1.8) 按系数折算 = min(68.90, 164.06/1.0) = 68.90\"\n      }\n    },\n    \"工况2_outward_d40mm\": {\n      \"荷载方向\": \"outward (背离中心)\",\n      \"直径\": \"d=40mm (标称)\",\n      \"F_allow_stability_kN\": 137.806,\n      \"F_allow_material_kN\": 164.06,\n      \"控制因素\": \"材料强度 (欧拉许可194.85 > 材料164.06)\",\n      \"控制杆件\": \"BD (对角杆)\",\n      \"控制模式\": \"拉力强度\",\n      \"欧拉容量\": {\n        \"Pcr_side_kN\": 248.05,\n        \"许用压力_kN\": 137.806,\n        \"侧杆内力系数_F\": -0.7071,\n        \"对应外载_kN\": 194.85\n      },\n      \"材料容量\": {\n        \"A_m2\": 0.0012566370614359172,\n        \"fy_MPa\": 235,\n        \"n_st\": 1.8,\n        \"N_allow_kN\": 164.06,\n        \"BD受拉时对应外载_kN\": 164.06,\n        \"侧杆受压时对应外载_kN\": 231.95\n      },\n      \"最终值\": {\n        \"F_allow_kN\": 164.06,\n        \"控制机制\": \"材料强度控制，BD拉力 > 欧拉侧杆压力\"\n      },\n      \"验证\": {\n        \"F_allow_equals_min_capacity\": true,\n        \"计算式\": \"min(Pcr_side/1.8/0.7071, A*fy/1.8/1.0) = min(194.85, 164.06) = 164.06\"\n      }\n    },\n    \"工况3_inward_d38mm\": {\n      \"荷载方向\": \"inward (指向中心)\",\n      \"直径\": \"d=38mm (-5% 负偏差)\",\n      \"F_allow_stability_kN\": 56.123,\n      \"F_allow_material_kN\": 203.76,\n      \"控制因素\": \"欧拉屈曲\",\n      \"控制杆件\": \"BD (对角杆)\",\n      \"控制模式\": \"压力屈曲\",\n      \"欧拉容量\": {\n        \"Pcr_BD_d38_kN\": 101.019,\n        \"许用压力_kN\": 56.123,\n        \"内力系数_F\": -1.0,\n        \"对应外载_kN\": 56.123\n      },\n      \"材料容量\": {\n        \"A_m2\": 0.0011357168376701453,\n        \"fy_MPa\": 235,\n        \"n_st\": 1.8,\n        \"N_allow_kN\": 147.84,\n        \"BD受压时对应外载_kN\": 147.84,\n        \"侧杆受拉时对应外载_kN\": 208.72\n      },\n      \"最终值\": {\n        \"F_allow_kN\": 56.123,\n        \"控制机制\": \"欧拉屈曲控制\"\n      },\n      \"相对d40mm衰减\": {\n        \"绝对衰减_kN\": -12.78,\n        \"衰减比例_%\": -18.55,\n        \"容量比\": 0.8145\n      },\n      \"验证\": {\n        \"F_allow_equals_min_capacity\": true,\n        \"计算式\": \"min(Pcr_BD(-5%)/1.8, A(-5%)*fy/1.8) 按系数折算 = min(56.12, 147.84) = 56.12\"\n      }\n    },\n    \"最终控制许可荷载\": {\n      \"F_final_kN\": 56.123,\n      \"对应工况\": \"inward, d=38mm (-5% 负偏差)\",\n      \"控制杆件\": \"BD (对角杆，受压)\",\n      \"控制模式\": \"欧拉屈曲\",\n      \"安全系数\": 1.8,\n      \"备注\": \"综合考虑所有方向与公差，最严苛工况为-5% 直径负偏差下沿中心方向荷载\"\n    }\n  },\n  \"符号表达式汇总\": {\n    \"inward_d40mm\": \"F_allow = P_cr,BD / [n]_st / |内力系数| = 124.025 / 1.8 / 1.0 = 68.90 kN\",\n    \"outward_d40mm\": \"F_allow = min(P_cr,side / [n]_st / 0.7071, A·fy / [n]_st / 1.0) = min(194.85, 164.06) = 164.06 kN\",\n    \"inward_d38mm\": \"F_allow = P_cr,BD(-5%) / [n]_st / 1.0 = 101.019 / 1.8 = 56.12 kN\",\n    \"衰减率\": \"(56.12 - 68.90) / 68.90 = -18.55%\"\n  }\n}\n```\n\n---\n\n## **最终答案汇总**\n\n### **(1) 基于欧拉屈曲的许用外载 F_allow,stability**\n\n| 荷载方向 | d=40mm | 控制杆件 | 控制模式 |\n|--------|--------|--------|--------|\n| **inward** | **F_allow,stability = 68.90 kN** | BD | 欧拉屈曲（压力）|\n| **outward** | **F_allow,stability = 137.81 kN** | 侧杆 | 欧拉屈曲（压力）|\n\n---\n\n### **(2) 材料强度复核与下修结果**\n\n**材料许用内力（d=40mm）：**\n$$N_{allow} = \\frac{A \\cdot f_y}{[n]_{st}} = \\frac{0.001257 \\times 235 \\times 10^6}{1.8} = 164.06 \\text{ kN}$$\n\n| 工况 | 欧拉许用外载 | 材料许用外载 | 最终控制 | 下修幅度 |\n|------|-----------|-----------|--------|--------|\n| inward | 68.90 kN | 231.95 kN | **68.90 kN**（无下修） | — |\n| outward | 137.81 kN | **164.06 kN** | **164.06 kN**（材料控制） | **+19.4%**（外拉应力） |\n\n**变化说明：** outward工况由欧拉屈曲许用值137.81 kN提升至材料强度限值164.06 kN（+19.4%），因为BD杆受拉而侧杆受压。\n\n---\n\n### **(3) d=38mm（-5%）负偏差，inward工况**\n\n$$F_{allow,stability}(d=38\\text{ mm}) = \\frac{P_{cr,BD}(-5\\%)}{[n]_{st}} = \\frac{101.019}{1.8} = 56.12 \\text{ kN}$$\n\n**相对于d=40mm的衰减：**\n$$\\text{衰减比例} = \\frac{56.12 - 68.90}{68.90} \\times 100\\% = \\boxed{-18.55\\%}$$\n\n或容量保留率：81.45%\n\n---\n\n### **(4) 最终控制许可荷载**\n\n在所有工况（inward/outward × d=40mm/38mm）中，最小值为：\n\n$$\\boxed{F_{final} = 56.12 \\text{ kN}}$$\n\n**对应工况：**\n- **荷载方向：inward（沿中心）**\n- **直径规格：d=38 mm（-5% 制造负偏差）**\n- **控制杆件：BD（对角杆）**\n- **控制模式：欧拉屈曲（轴心压力）**\n- **临界条件：Pcr,BD(-5%) = 101.019 kN，安全系数1.8**\n\n---\n\n### **(5) 可核验汇总表（JSON格式）**\n\n```json\n{\n  \"verification_summary\": {\n    \"工况1\": {\n      \"case_id\": \"inward_d40mm\",\n      \"荷载方向\": \"inward\",\n      \"直径d_mm\": 40,\n      \"F_allow_stability_kN\": 68.903,\n      \"F_allow_final_kN\": 68.903,\n      \"Euler_capacity_容量_kN\": 124.025,\n      \"Euler_许用_kN\": 68.903,\n      \"Material_capacity_容量_kN\": 164.06,\n      \"Material_许用_kN\": 164.06,\n      \"控制杆件\": \"BD\",\n      \"控制模式\": \"欧拉屈曲-压力\",\n      \"内力系数\": -1.0,\n      \"验证_min_capacity\": true,\n      \"校验式\": \"min(68.90, 164.06) = 68.90\"\n    },\n    \"工况2\": {\n      \"case_id\": \"outward_d40mm\",\n      \"荷载方向\": \"outward\",\n      \"直径d_mm\": 40,\n      \"F_allow_stability_kN\": 137.806,\n      \"F_allow_final_kN\": 164.06,\n      \"Euler_capacity_容量_kN\": 248.05,\n      \"Euler_许用_kN\": 137.806,\n      \"Material_capacity_容量_kN\": 164.06,\n      \"Material_许用_kN\": 164.06,\n      \"控制杆件\": \"BD\",\n      \"控制模式\": \"材料强度-拉力\",\n      \"内力系数\": 1.0,\n      \"验证_min_capacity\": true,\n      \"校验式\": \"min(194.85, 164.06) = 164.06（材料控制）\"\n    },\n    \"工况3\": {\n      \"case_id\": \"inward_d38mm\",\n      \"荷载方向\": \"inward\",\n      \"直径d_mm\": 38,\n      \"制造偏差_%\": -5,\n      \"F_allow_stability_kN\": 56.123,\n      \"F_allow_final_kN\": 56.123,\n      \"Euler_capacity_容量_kN\": 101.019,\n      \"Euler_许用_kN\": 56.123,\n      \"Material_capacity_容量_kN\": 147.84,\n      \"Material_许用_kN\": 147.84,\n      \"控制杆件\": \"BD\",\n      \"控制模式\": \"欧拉屈曲-压力\",\n      \"内力系数\": -1.0,\n      \"相对d40mm衰减_%\": -18.55,\n      \"验证_min_capacity\": true,\n      \"校验式\": \"min(56.12, 147.84) = 56.12\"\n    },\n    \"最终控制\": {\n      \"F_final_kN\": 56.123,\n      \"min_case\": \"inward_d38mm\",\n      \"控制杆件\": \"BD\",\n      \"控制模式\": \"欧拉屈曲（负公差+方向最不利）\"\n    }\n  }\n}\n```\n\n---\n\n## **关键结论**\n\n1. ✅ **inward (d=40mm)** 的欧拉许用值 **68.90 kN**，由BD杆屈曲控制\n2. ✅ **outward (d=40mm)** 的最终许用值 **164.06 kN**，由BD杆拉力材料强度控制（不是欧拉屈曲）\n3. ✅ **inward (d=38mm)** 许用值 **56.12 kN**，相对标准直径 **衰减18.55%**\n4. ✅ **综合最严苛工况**：d=38mm负偏差、inward方向、**F_final = 56.12 kN**\n5. ✅ 所有工况均满足：F_allow,stability = min(欧拉容量, 材料容量) / [n]_st"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": \"[数学方程字符串]\",\n  \"(2)\": \"[数学方程字符串]\",\n  \"(3)\": \"[数学方程字符串]\",\n  \"(4)\": \"[数学方程字符串]\",\n  \"(5)\": {\n    \"verification_summary\": {\n      \"inward_d40\": {\n        \"allowable_by_stability\": \"[字符串]\",\n        \"allowable_by_material\": \"[字符串]\",\n        \"F_allow_stability\": \"[字符串]\",\n        \"F_allow_final\": \"[字符串]\",\n        \"euler_capacity_internal\": \"[字符串]\",\n        \"material_capacity_internal\": \"[字符串]\",\n        \"bool_F_allow_stab_eq_min_caps\": \"[字符串]\"\n      },\n      \"outward_d40\": {\n        \"allowable_by_stability\": \"[字符串]\",\n        \"allowable_by_material\": \"[字符串]\",\n        \"F_allow_stability\": \"[字符串]\",\n        \"F_allow_final\": \"[字符串]\",\n        \"euler_capacity_internal\": \"[字符串]\",\n        \"material_capacity_internal\": \"[字符串]\",\n        \"bool_F_allow_stab_eq_min_caps\": \"[字符串]\"\n      },\n      \"inward_d38\": {\n        \"allowable_by_stability\": \"[字符串]\",\n        \"allowable_by_material\": \"[字符串]\",\n        \"F_allow_stability\": \"[字符串]\",\n        \"F_allow_final\": \"[字符串]\",\n        \"euler_capacity_internal\": \"[字符串]\",\n        \"material_capacity_internal\": \"[字符串]\",\n        \"bool_F_allow_stab_eq_min_caps\": \"[字符串]\"\n      }\n    }\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)\": \"inward: F_allow,stability = Pcr,BD / [n]_st / |内力系数| = 124.025 / 1.8 / 1.0 = 68.90 kN; outward: F_allow,stability = Pcr,side / [n]_st / |内力系数| = 248.05 / 1.8 / 0.7071 = 194.85 kN\",\n  \"(2)\": \"inward_final = 68.90 kN (欧拉控制，无下修); outward_final = min(194.85, A·fy/[n]_st/1.0) = min(194.85, 164.06) = 164.06 kN (材料强度控制BD拉力，下修幅度: (164.06-194.85)/194.85 = -15.82%)\",\n  \"(3)\": \"inward_d38: F_allow,stability = Pcr,BD(-5%) / [n]_st / 1.0 = 101.019 / 1.8 = 56.12 kN; 衰减比例 = (56.12 - 68.90) / 68.90 = -18.55%\",\n  \"(4)\": \"最终控制许可荷载 F_final = min(68.90, 164.06, 56.12) = 56.12 kN; 对应工况: inward, d=38mm (-5% 负偏差); 控制杆件: BD (对角杆); 控制模式: 欧拉屈曲 (轴心压力)\",\n  \"(5)\": {\n    \"verification_summary\": {\n      \"inward_d40\": {\n        \"allowable_by_stability\": \"Pcr,BD / [n]_st = 124.025 / 1.8 = 68.90 kN\",\n        \"allowable_by_material\": \"A·fy / [n]_st = 164.06 kN\",\n        \"F_allow_stability\": \"68.90 kN\",\n        \"F_allow_final\": \"68.90 kN\",\n        \"euler_capacity_internal\": \"68.90 kN (Pcr,BD/[n]_st)\",\n        \"material_capacity_internal\": \"164.06 kN (A·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; min(68.90, 164.06)=68.90 按BD系数-1.0折算\"\n      },\n      \"outward_d40\": {\n        \"allowable_by_stability\": \"Pcr,side / [n]_st / 0.7071 = 248.05 / 1.8 / 0.7071 = 194.85 kN\",\n        \"allowable_by_material\": \"A·fy / [n]_st / 1.0 = 164.06 kN (BD拉力控制)\",\n        \"F_allow_stability\": \"194.85 kN (纯欧拉)\",\n        \"F_allow_final\": \"164.06 kN (材料强度控制)\",\n        \"euler_capacity_internal\": \"137.81 kN (Pcr,side/[n]_st)\",\n        \"material_capacity_internal\": \"164.06 kN (A·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; 按侧杆min(137.81/0.7071, 164.06/1.0)·系数结果由BD材料拉力控制最终值164.06\"\n      },\n      \"inward_d38\": {\n        \"allowable_by_stability\": \"Pcr,BD(-5%) / [n]_st = 101.019 / 1.8 = 56.12 kN\",\n        \"allowable_by_material\": \"A_d38·fy / [n]_st = 147.84 kN\",\n        \"F_allow_stability\": \"56.12 kN\",\n        \"F_allow_final\": \"56.12 kN\",\n        \"euler_capacity_internal\": \"56.12 kN (Pcr,BD(-5%)/[n]_st)\",\n        \"material_capacity_internal\": \"147.84 kN (A_d38·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; min(56.12, 147.84)=56.12 按BD系数-1.0折算\"\n      }\n    }\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "Physics",
+    "topic": "structural_mechanics",
+    "image_path": [
+      "/r_bench/images/00004.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "calculate_cross_section_area",
+      "calculate_moment_of_inertia",
+      "determine_truss_allowable_load",
+      "visualize_truss_structure"
+    ],
+    "golden_answer": [
+      {
+        "(1)": "- 记内力系数绝对值：|k_side,in|=|k_side,out|，|k_BD,in|，|k_BD,out|（由题面给定）。\n- inward：R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )；控制杆件：BD；控制模式：屈曲。\n- outward：R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )；控制杆件：AB（四边杆等效）；控制模式：屈曲。",
+        "(2)": "- 材料许用内力：N_mat = A·fy/[n]_st。\n- inward 强度限值（折算为外载）：F_mat,in = min{ N_mat/|k_BD,in|, N_mat/|k_side,in| }。\n  最终许用：R2_in = min{ R1_in, F_mat,in }；若 R2_in < R1_in，则下修百分比 Δ_in = 1 − R2_in/R1_in；否则 Δ_in = 0。\n- outward 强度限值：F_mat,out = min{ N_mat/|k_BD,out|, N_mat/|k_side,out| }。\n  最终许用：R2_out = min{ R1_out, F_mat,out }；若 R2_out < R1_out，则下修百分比 Δ_out = 1 − R2_out/R1_out；否则 Δ_out = 0。",
+        "(3)": "- inward（d=38 mm）：R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )。\n- 相对名义直径（d=40 mm、inward）的衰减比例：η = 1 − R3/R1_in。",
+        "(4)": "- 最终控制许可荷载：R4 = min{ R2_in, R2_out, R3 }。\n- 对应工况与控制：\n  • 若 R4 = R3：inward，d=38 mm；控制杆件 BD；模式：屈曲。\n  • 若 R4 = R2_in：inward，d=40 mm；模式与控制杆件由 R2_in 的取值来源确定（屈曲对应 BD；强度对应使 F_mat,in 取到最小的杆件）。\n  • 若 R4 = R2_out：outward，d=40 mm；模式与控制杆件由 R2_out 的取值来源确定（屈曲对应侧杆；强度对应使 F_mat,out 取到最小的杆件）。",
+        "(5)": {
+          "verification_summary": {
+            "inward_d40": {
+              "allowable_by_stability": "R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )",
+              "allowable_by_material": "F_mat,in = min{ (A·fy/[n]_st)/|k_BD,in|, (A·fy/[n]_st)/|k_side,in| }",
+              "F_allow_stability": "R1_in",
+              "F_allow_final": "R2_in = min{ R1_in, F_mat,in }",
+              "euler_capacity_internal": "P_cr,BD(d=40)",
+              "material_capacity_internal": "A·fy",
+              "bool_F_allow_stab_eq_min_caps": "R1_in == min{ P_cr,BD(d=40)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+            },
+            "outward_d40": {
+              "allowable_by_stability": "R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )",
+              "allowable_by_material": "F_mat,out = min{ (A·fy/[n]_st)/|k_BD,out|, (A·fy/[n]_st)/|k_side,out| }",
+              "F_allow_stability": "R1_out",
+              "F_allow_final": "R2_out = min{ R1_out, F_mat,out }",
+              "euler_capacity_internal": "P_cr,side(d=40)",
+              "material_capacity_internal": "A·fy",
+              "bool_F_allow_stab_eq_min_caps": "R1_out == min{ P_cr,side(d=40)/[n]_st, A·fy/[n]_st }/|k_side,out|"
+            },
+            "inward_d38": {
+              "allowable_by_stability": "R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )",
+              "allowable_by_material": "—",
+              "F_allow_stability": "R3",
+              "F_allow_final": "R3（按题面仅做稳定性）",
+              "euler_capacity_internal": "P_cr,BD(d=38)",
+              "material_capacity_internal": "A·fy",
+              "bool_F_allow_stab_eq_min_caps": "R3 == min{ P_cr,BD(d=38)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+            }
+          }
+        }
+      }
+    ],
+    "original_question_id": "66",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+  },
+  "metadata_summary": {
+    "subject": "Physics",
+    "topic": "structural_mechanics",
+    "test_type": "refined",
+    "original_question_id": "66",
+    "subject_topic_key": "Physics::structural_mechanics"
+  },
+  "answer_template": {
+    "(1)": "[数学方程字符串]",
+    "(2)": "[数学方程字符串]",
+    "(3)": "[数学方程字符串]",
+    "(4)": "[数学方程字符串]",
+    "(5)": {
+      "verification_summary": {
+        "inward_d40": {
+          "allowable_by_stability": "[字符串]",
+          "allowable_by_material": "[字符串]",
+          "F_allow_stability": "[字符串]",
+          "F_allow_final": "[字符串]",
+          "euler_capacity_internal": "[字符串]",
+          "material_capacity_internal": "[字符串]",
+          "bool_F_allow_stab_eq_min_caps": "[字符串]"
+        },
+        "outward_d40": {
+          "allowable_by_stability": "[字符串]",
+          "allowable_by_material": "[字符串]",
+          "F_allow_stability": "[字符串]",
+          "F_allow_final": "[字符串]",
+          "euler_capacity_internal": "[字符串]",
+          "material_capacity_internal": "[字符串]",
+          "bool_F_allow_stab_eq_min_caps": "[字符串]"
+        },
+        "inward_d38": {
+          "allowable_by_stability": "[字符串]",
+          "allowable_by_material": "[字符串]",
+          "F_allow_stability": "[字符串]",
+          "F_allow_final": "[字符串]",
+          "euler_capacity_internal": "[字符串]",
+          "material_capacity_internal": "[字符串]",
+          "bool_F_allow_stab_eq_min_caps": "[字符串]"
+        }
+      }
+    }
+  },
+  "golden_standard": {
+    "(1)": "- 记内力系数绝对值：|k_side,in|=|k_side,out|，|k_BD,in|，|k_BD,out|（由题面给定）。\n- inward：R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )；控制杆件：BD；控制模式：屈曲。\n- outward：R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )；控制杆件：AB（四边杆等效）；控制模式：屈曲。",
+    "(2)": "- 材料许用内力：N_mat = A·fy/[n]_st。\n- inward 强度限值（折算为外载）：F_mat,in = min{ N_mat/|k_BD,in|, N_mat/|k_side,in| }。\n  最终许用：R2_in = min{ R1_in, F_mat,in }；若 R2_in < R1_in，则下修百分比 Δ_in = 1 − R2_in/R1_in；否则 Δ_in = 0。\n- outward 强度限值：F_mat,out = min{ N_mat/|k_BD,out|, N_mat/|k_side,out| }。\n  最终许用：R2_out = min{ R1_out, F_mat,out }；若 R2_out < R1_out，则下修百分比 Δ_out = 1 − R2_out/R1_out；否则 Δ_out = 0。",
+    "(3)": "- inward（d=38 mm）：R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )。\n- 相对名义直径（d=40 mm、inward）的衰减比例：η = 1 − R3/R1_in。",
+    "(4)": "- 最终控制许可荷载：R4 = min{ R2_in, R2_out, R3 }。\n- 对应工况与控制：\n  • 若 R4 = R3：inward，d=38 mm；控制杆件 BD；模式：屈曲。\n  • 若 R4 = R2_in：inward，d=40 mm；模式与控制杆件由 R2_in 的取值来源确定（屈曲对应 BD；强度对应使 F_mat,in 取到最小的杆件）。\n  • 若 R4 = R2_out：outward，d=40 mm；模式与控制杆件由 R2_out 的取值来源确定（屈曲对应侧杆；强度对应使 F_mat,out 取到最小的杆件）。",
+    "(5)": {
+      "verification_summary": {
+        "inward_d40": {
+          "allowable_by_stability": "R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )",
+          "allowable_by_material": "F_mat,in = min{ (A·fy/[n]_st)/|k_BD,in|, (A·fy/[n]_st)/|k_side,in| }",
+          "F_allow_stability": "R1_in",
+          "F_allow_final": "R2_in = min{ R1_in, F_mat,in }",
+          "euler_capacity_internal": "P_cr,BD(d=40)",
+          "material_capacity_internal": "A·fy",
+          "bool_F_allow_stab_eq_min_caps": "R1_in == min{ P_cr,BD(d=40)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+        },
+        "outward_d40": {
+          "allowable_by_stability": "R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )",
+          "allowable_by_material": "F_mat,out = min{ (A·fy/[n]_st)/|k_BD,out|, (A·fy/[n]_st)/|k_side,out| }",
+          "F_allow_stability": "R1_out",
+          "F_allow_final": "R2_out = min{ R1_out, F_mat,out }",
+          "euler_capacity_internal": "P_cr,side(d=40)",
+          "material_capacity_internal": "A·fy",
+          "bool_F_allow_stab_eq_min_caps": "R1_out == min{ P_cr,side(d=40)/[n]_st, A·fy/[n]_st }/|k_side,out|"
+        },
+        "inward_d38": {
+          "allowable_by_stability": "R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )",
+          "allowable_by_material": "—",
+          "F_allow_stability": "R3",
+          "F_allow_final": "R3（按题面仅做稳定性）",
+          "euler_capacity_internal": "P_cr,BD(d=38)",
+          "material_capacity_internal": "A·fy",
+          "bool_F_allow_stab_eq_min_caps": "R3 == min{ P_cr,BD(d=38)/[n]_st, A·fy/[n]_st }/|k_BD,in|"
+        }
+      }
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": "inward: F_allow,stability = Pcr,BD / [n]_st / |内力系数| = 124.025 / 1.8 / 1.0 = 68.90 kN; outward: F_allow,stability = Pcr,side / [n]_st / |内力系数| = 248.05 / 1.8 / 0.7071 = 194.85 kN",
+    "(2)": "inward_final = 68.90 kN (欧拉控制，无下修); outward_final = min(194.85, A·fy/[n]_st/1.0) = min(194.85, 164.06) = 164.06 kN (材料强度控制BD拉力，下修幅度: (164.06-194.85)/194.85 = -15.82%)",
+    "(3)": "inward_d38: F_allow,stability = Pcr,BD(-5%) / [n]_st / 1.0 = 101.019 / 1.8 = 56.12 kN; 衰减比例 = (56.12 - 68.90) / 68.90 = -18.55%",
+    "(4)": "最终控制许可荷载 F_final = min(68.90, 164.06, 56.12) = 56.12 kN; 对应工况: inward, d=38mm (-5% 负偏差); 控制杆件: BD (对角杆); 控制模式: 欧拉屈曲 (轴心压力)",
+    "(5)": {
+      "verification_summary": {
+        "inward_d40": {
+          "allowable_by_stability": "Pcr,BD / [n]_st = 124.025 / 1.8 = 68.90 kN",
+          "allowable_by_material": "A·fy / [n]_st = 164.06 kN",
+          "F_allow_stability": "68.90 kN",
+          "F_allow_final": "68.90 kN",
+          "euler_capacity_internal": "68.90 kN (Pcr,BD/[n]_st)",
+          "material_capacity_internal": "164.06 kN (A·fy/[n]_st)",
+          "bool_F_allow_stab_eq_min_caps": "true; min(68.90, 164.06)=68.90 按BD系数-1.0折算"
+        },
+        "outward_d40": {
+          "allowable_by_stability": "Pcr,side / [n]_st / 0.7071 = 248.05 / 1.8 / 0.7071 = 194.85 kN",
+          "allowable_by_material": "A·fy / [n]_st / 1.0 = 164.06 kN (BD拉力控制)",
+          "F_allow_stability": "194.85 kN (纯欧拉)",
+          "F_allow_final": "164.06 kN (材料强度控制)",
+          "euler_capacity_internal": "137.81 kN (Pcr,side/[n]_st)",
+          "material_capacity_internal": "164.06 kN (A·fy/[n]_st)",
+          "bool_F_allow_stab_eq_min_caps": "true; 按侧杆min(137.81/0.7071, 164.06/1.0)·系数结果由BD材料拉力控制最终值164.06"
+        },
+        "inward_d38": {
+          "allowable_by_stability": "Pcr,BD(-5%) / [n]_st = 101.019 / 1.8 = 56.12 kN",
+          "allowable_by_material": "A_d38·fy / [n]_st = 147.84 kN",
+          "F_allow_stability": "56.12 kN",
+          "F_allow_final": "56.12 kN",
+          "euler_capacity_internal": "56.12 kN (Pcr,BD(-5%)/[n]_st)",
+          "material_capacity_internal": "147.84 kN (A_d38·fy/[n]_st)",
+          "bool_F_allow_stab_eq_min_caps": "true; min(56.12, 147.84)=56.12 按BD系数-1.0折算"
+        }
+      }
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)\": \"inward: F_allow,stability = Pcr,BD / [n]_st / |内力系数| = 124.025 / 1.8 / 1.0 = 68.90 kN; outward: F_allow,stability = Pcr,side / [n]_st / |内力系数| = 248.05 / 1.8 / 0.7071 = 194.85 kN\",\n  \"(2)\": \"inward_final = 68.90 kN (欧拉控制，无下修); outward_final = min(194.85, A·fy/[n]_st/1.0) = min(194.85, 164.06) = 164.06 kN (材料强度控制BD拉力，下修幅度: (164.06-194.85)/194.85 = -15.82%)\",\n  \"(3)\": \"inward_d38: F_allow,stability = Pcr,BD(-5%) / [n]_st / 1.0 = 101.019 / 1.8 = 56.12 kN; 衰减比例 = (56.12 - 68.90) / 68.90 = -18.55%\",\n  \"(4)\": \"最终控制许可荷载 F_final = min(68.90, 164.06, 56.12) = 56.12 kN; 对应工况: inward, d=38mm (-5% 负偏差); 控制杆件: BD (对角杆); 控制模式: 欧拉屈曲 (轴心压力)\",\n  \"(5)\": {\n    \"verification_summary\": {\n      \"inward_d40\": {\n        \"allowable_by_stability\": \"Pcr,BD / [n]_st = 124.025 / 1.8 = 68.90 kN\",\n        \"allowable_by_material\": \"A·fy / [n]_st = 164.06 kN\",\n        \"F_allow_stability\": \"68.90 kN\",\n        \"F_allow_final\": \"68.90 kN\",\n        \"euler_capacity_internal\": \"68.90 kN (Pcr,BD/[n]_st)\",\n        \"material_capacity_internal\": \"164.06 kN (A·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; min(68.90, 164.06)=68.90 按BD系数-1.0折算\"\n      },\n      \"outward_d40\": {\n        \"allowable_by_stability\": \"Pcr,side / [n]_st / 0.7071 = 248.05 / 1.8 / 0.7071 = 194.85 kN\",\n        \"allowable_by_material\": \"A·fy / [n]_st / 1.0 = 164.06 kN (BD拉力控制)\",\n        \"F_allow_stability\": \"194.85 kN (纯欧拉)\",\n        \"F_allow_final\": \"164.06 kN (材料强度控制)\",\n        \"euler_capacity_internal\": \"137.81 kN (Pcr,side/[n]_st)\",\n        \"material_capacity_internal\": \"164.06 kN (A·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; 按侧杆min(137.81/0.7071, 164.06/1.0)·系数结果由BD材料拉力控制最终值164.06\"\n      },\n      \"inward_d38\": {\n        \"allowable_by_stability\": \"Pcr,BD(-5%) / [n]_st = 101.019 / 1.8 = 56.12 kN\",\n        \"allowable_by_material\": \"A_d38·fy / [n]_st = 147.84 kN\",\n        \"F_allow_stability\": \"56.12 kN\",\n        \"F_allow_final\": \"56.12 kN\",\n        \"euler_capacity_internal\": \"56.12 kN (Pcr,BD(-5%)/[n]_st)\",\n        \"material_capacity_internal\": \"147.84 kN (A_d38·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; min(56.12, 147.84)=56.12 按BD系数-1.0折算\"\n      }\n    }\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)\": \"inward: F_allow,stability = Pcr,BD / [n]_st / |内力系数| = 124.025 / 1.8 / 1.0 = 68.90 kN; outward: F_allow,stability = Pcr,side / [n]_st / |内力系数| = 248.05 / 1.8 / 0.7071 = 194.85 kN\",\n  \"(2)\": \"inward_final = 68.90 kN (欧拉控制，无下修); outward_final = min(194.85, A·fy/[n]_st/1.0) = min(194.85, 164.06) = 164.06 kN (材料强度控制BD拉力，下修幅度: (164.06-194.85)/194.85 = -15.82%)\",\n  \"(3)\": \"inward_d38: F_allow,stability = Pcr,BD(-5%) / [n]_st / 1.0 = 101.019 / 1.8 = 56.12 kN; 衰减比例 = (56.12 - 68.90) / 68.90 = -18.55%\",\n  \"(4)\": \"最终控制许可荷载 F_final = min(68.90, 164.06, 56.12) = 56.12 kN; 对应工况: inward, d=38mm (-5% 负偏差); 控制杆件: BD (对角杆); 控制模式: 欧拉屈曲 (轴心压力)\",\n  \"(5)\": {\n    \"verification_summary\": {\n      \"inward_d40\": {\n        \"allowable_by_stability\": \"Pcr,BD / [n]_st = 124.025 / 1.8 = 68.90 kN\",\n        \"allowable_by_material\": \"A·fy / [n]_st = 164.06 kN\",\n        \"F_allow_stability\": \"68.90 kN\",\n        \"F_allow_final\": \"68.90 kN\",\n        \"euler_capacity_internal\": \"68.90 kN (Pcr,BD/[n]_st)\",\n        \"material_capacity_internal\": \"164.06 kN (A·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; min(68.90, 164.06)=68.90 按BD系数-1.0折算\"\n      },\n      \"outward_d40\": {\n        \"allowable_by_stability\": \"Pcr,side / [n]_st / 0.7071 = 248.05 / 1.8 / 0.7071 = 194.85 kN\",\n        \"allowable_by_material\": \"A·fy / [n]_st / 1.0 = 164.06 kN (BD拉力控制)\",\n        \"F_allow_stability\": \"194.85 kN (纯欧拉)\",\n        \"F_allow_final\": \"164.06 kN (材料强度控制)\",\n        \"euler_capacity_internal\": \"137.81 kN (Pcr,side/[n]_st)\",\n        \"material_capacity_internal\": \"164.06 kN (A·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; 按侧杆min(137.81/0.7071, 164.06/1.0)·系数结果由BD材料拉力控制最终值164.06\"\n      },\n      \"inward_d38\": {\n        \"allowable_by_stability\": \"Pcr,BD(-5%) / [n]_st = 101.019 / 1.8 = 56.12 kN\",\n        \"allowable_by_material\": \"A_d38·fy / [n]_st = 147.84 kN\",\n        \"F_allow_stability\": \"56.12 kN\",\n        \"F_allow_final\": \"56.12 kN\",\n        \"euler_capacity_internal\": \"56.12 kN (Pcr,BD(-5%)/[n]_st)\",\n        \"material_capacity_internal\": \"147.84 kN (A_d38·fy/[n]_st)\",\n        \"bool_F_allow_stab_eq_min_caps\": \"true; min(56.12, 147.84)=56.12 按BD系数-1.0折算\"\n      }\n    }\n  }\n}\n```"
+  },
+  "evaluation_score": 0.24,
+  "evaluation_summary": "匹配字段: 6/25 (得分: 24.00%)",
+  "evaluation_details": {
+    "(1)": {
+      "path": "(1)",
+      "expected": "- 记内力系数绝对值：|k_side,in|=|k_side,out|，|k_BD,in|，|k_BD,out|（由题面给定）。\n- inward：R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )；控制杆件：BD；控制模式：屈曲。\n- outward：R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )；控制杆件：AB（四边杆等效）；控制模式：屈曲。",
+      "actual": "inward: F_allow,stability = Pcr,BD / [n]_st / |内力系数| = 124.025 / 1.8 / 1.0 = 68.90 kN; outward: F_allow,stability = Pcr,side / [n]_st / |内力系数| = 248.05 / 1.8 / 0.7071 = 194.85 kN",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2)": {
+      "path": "(2)",
+      "expected": "- 材料许用内力：N_mat = A·fy/[n]_st。\n- inward 强度限值（折算为外载）：F_mat,in = min{ N_mat/|k_BD,in|, N_mat/|k_side,in| }。\n  最终许用：R2_in = min{ R1_in, F_mat,in }；若 R2_in < R1_in，则下修百分比 Δ_in = 1 − R2_in/R1_in；否则 Δ_in = 0。\n- outward 强度限值：F_mat,out = min{ N_mat/|k_BD,out|, N_mat/|k_side,out| }。\n  最终许用：R2_out = min{ R1_out, F_mat,out }；若 R2_out < R1_out，则下修百分比 Δ_out = 1 − R2_out/R1_out；否则 Δ_out = 0。",
+      "actual": "inward_final = 68.90 kN (欧拉控制，无下修); outward_final = min(194.85, A·fy/[n]_st/1.0) = min(194.85, 164.06) = 164.06 kN (材料强度控制BD拉力，下修幅度: (164.06-194.85)/194.85 = -15.82%)",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)": {
+      "path": "(3)",
+      "expected": "- inward（d=38 mm）：R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )。\n- 相对名义直径（d=40 mm、inward）的衰减比例：η = 1 − R3/R1_in。",
+      "actual": "inward_d38: F_allow,stability = Pcr,BD(-5%) / [n]_st / 1.0 = 101.019 / 1.8 = 56.12 kN; 衰减比例 = (56.12 - 68.90) / 68.90 = -18.55%",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)": {
+      "path": "(4)",
+      "expected": "- 最终控制许可荷载：R4 = min{ R2_in, R2_out, R3 }。\n- 对应工况与控制：\n  • 若 R4 = R3：inward，d=38 mm；控制杆件 BD；模式：屈曲。\n  • 若 R4 = R2_in：inward，d=40 mm；模式与控制杆件由 R2_in 的取值来源确定（屈曲对应 BD；强度对应使 F_mat,in 取到最小的杆件）。\n  • 若 R4 = R2_out：outward，d=40 mm；模式与控制杆件由 R2_out 的取值来源确定（屈曲对应侧杆；强度对应使 F_mat,out 取到最小的杆件）。",
+      "actual": "最终控制许可荷载 F_final = min(68.90, 164.06, 56.12) = 56.12 kN; 对应工况: inward, d=38mm (-5% 负偏差); 控制杆件: BD (对角杆); 控制模式: 欧拉屈曲 (轴心压力)",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5).verification_summary.inward_d40.allowable_by_stability": {
+      "path": "(5).verification_summary.inward_d40.allowable_by_stability",
+      "expected": "R1_in = P_cr,BD(d=40)/( [n]_st · |k_BD,in| )",
+      "actual": "Pcr,BD / [n]_st = 124.025 / 1.8 = 68.90 kN",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5).verification_summary.inward_d40.allowable_by_material": {
+      "path": "(5).verification_summary.inward_d40.allowable_by_material",
+      "expected": "F_mat,in = min{ (A·fy/[n]_st)/|k_BD,in|, (A·fy/[n]_st)/|k_side,in| }",
+      "actual": "A·fy / [n]_st = 164.06 kN",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d40.F_allow_stability": {
+      "path": "(5).verification_summary.inward_d40.F_allow_stability",
+      "expected": "R1_in",
+      "actual": "68.90 kN",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d40.F_allow_final": {
+      "path": "(5).verification_summary.inward_d40.F_allow_final",
+      "expected": "R2_in = min{ R1_in, F_mat,in }",
+      "actual": "68.90 kN",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d40.euler_capacity_internal": {
+      "path": "(5).verification_summary.inward_d40.euler_capacity_internal",
+      "expected": "P_cr,BD(d=40)",
+      "actual": "68.90 kN (Pcr,BD/[n]_st)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d40.material_capacity_internal": {
+      "path": "(5).verification_summary.inward_d40.material_capacity_internal",
+      "expected": "A·fy",
+      "actual": "164.06 kN (A·fy/[n]_st)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d40.bool_F_allow_stab_eq_min_caps": {
+      "path": "(5).verification_summary.inward_d40.bool_F_allow_stab_eq_min_caps",
+      "expected": "R1_in == min{ P_cr,BD(d=40)/[n]_st, A·fy/[n]_st }/|k_BD,in|",
+      "actual": "true; min(68.90, 164.06)=68.90 按BD系数-1.0折算",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.outward_d40.allowable_by_stability": {
+      "path": "(5).verification_summary.outward_d40.allowable_by_stability",
+      "expected": "R1_out = P_cr,side(d=40)/( [n]_st · |k_side,out| )",
+      "actual": "Pcr,side / [n]_st / 0.7071 = 248.05 / 1.8 / 0.7071 = 194.85 kN",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5).verification_summary.outward_d40.allowable_by_material": {
+      "path": "(5).verification_summary.outward_d40.allowable_by_material",
+      "expected": "F_mat,out = min{ (A·fy/[n]_st)/|k_BD,out|, (A·fy/[n]_st)/|k_side,out| }",
+      "actual": "A·fy / [n]_st / 1.0 = 164.06 kN (BD拉力控制)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.outward_d40.F_allow_stability": {
+      "path": "(5).verification_summary.outward_d40.F_allow_stability",
+      "expected": "R1_out",
+      "actual": "194.85 kN (纯欧拉)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.outward_d40.F_allow_final": {
+      "path": "(5).verification_summary.outward_d40.F_allow_final",
+      "expected": "R2_out = min{ R1_out, F_mat,out }",
+      "actual": "164.06 kN (材料强度控制)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.outward_d40.euler_capacity_internal": {
+      "path": "(5).verification_summary.outward_d40.euler_capacity_internal",
+      "expected": "P_cr,side(d=40)",
+      "actual": "137.81 kN (Pcr,side/[n]_st)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.outward_d40.material_capacity_internal": {
+      "path": "(5).verification_summary.outward_d40.material_capacity_internal",
+      "expected": "A·fy",
+      "actual": "164.06 kN (A·fy/[n]_st)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.outward_d40.bool_F_allow_stab_eq_min_caps": {
+      "path": "(5).verification_summary.outward_d40.bool_F_allow_stab_eq_min_caps",
+      "expected": "R1_out == min{ P_cr,side(d=40)/[n]_st, A·fy/[n]_st }/|k_side,out|",
+      "actual": "true; 按侧杆min(137.81/0.7071, 164.06/1.0)·系数结果由BD材料拉力控制最终值164.06",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d38.allowable_by_stability": {
+      "path": "(5).verification_summary.inward_d38.allowable_by_stability",
+      "expected": "R3 = P_cr,BD(d=38)/( [n]_st · |k_BD,in| )",
+      "actual": "Pcr,BD(-5%) / [n]_st = 101.019 / 1.8 = 56.12 kN",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d38.allowable_by_material": {
+      "path": "(5).verification_summary.inward_d38.allowable_by_material",
+      "expected": "—",
+      "actual": "A_d38·fy / [n]_st = 147.84 kN",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d38.F_allow_stability": {
+      "path": "(5).verification_summary.inward_d38.F_allow_stability",
+      "expected": "R3",
+      "actual": "56.12 kN",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d38.F_allow_final": {
+      "path": "(5).verification_summary.inward_d38.F_allow_final",
+      "expected": "R3（按题面仅做稳定性）",
+      "actual": "56.12 kN",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d38.euler_capacity_internal": {
+      "path": "(5).verification_summary.inward_d38.euler_capacity_internal",
+      "expected": "P_cr,BD(d=38)",
+      "actual": "56.12 kN (Pcr,BD(-5%)/[n]_st)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d38.material_capacity_internal": {
+      "path": "(5).verification_summary.inward_d38.material_capacity_internal",
+      "expected": "A·fy",
+      "actual": "147.84 kN (A_d38·fy/[n]_st)",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5).verification_summary.inward_d38.bool_F_allow_stab_eq_min_caps": {
+      "path": "(5).verification_summary.inward_d38.bool_F_allow_stab_eq_min_caps",
+      "expected": "R3 == min{ P_cr,BD(d=38)/[n]_st, A·fy/[n]_st }/|k_BD,in|",
+      "actual": "true; min(56.12, 147.84)=56.12 按BD系数-1.0折算",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "mode_folder": "with_tools_react"
+}

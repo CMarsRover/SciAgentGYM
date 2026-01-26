@@ -1,0 +1,54 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "create_force_diagram",
+            "description": "绘制系统受力分析图",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "container_mass": {
+                        "type": "number",
+                        "description": "容器质量 (kg)"
+                    },
+                    "water_mass": {
+                        "type": "number",
+                        "description": "水的质量 (kg)"
+                    },
+                    "hanging_mass": {
+                        "type": "number",
+                        "description": "悬挂物质量 (kg)"
+                    },
+                    "friction_force": {
+                        "type": "number",
+                        "description": "摩擦力 (N)"
+                    },
+                    "tension": {
+                        "type": "number",
+                        "description": "绳子张力 (N)"
+                    },
+                    "acceleration": {
+                        "type": "number",
+                        "description": "加速度 (m/s^2)"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存路径，默认为'./tool_images/force_diagram.png'"
+                    }
+                },
+                "required": [
+                    "container_mass",
+                    "water_mass",
+                    "hanging_mass",
+                    "friction_force",
+                    "tension",
+                    "acceleration"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+    }
+]

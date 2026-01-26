@@ -1,0 +1,188 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of utility functions designed to demonstrate and facilitate the usage of MCP and tool formats, API integration patterns, and end-to-end integration examples for automated system interoperability.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "demonstrate_mcp_usage",
+        "description": "Demonstrates the usage of MCP (Model Control Protocol) format for structured model interaction and command execution.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "演示MCP格式的使用",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "操作状态，例如 success 或 failed"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回的描述信息"
+          },
+          "data": {
+            "type": "object",
+            "description": "MCP格式演示的具体数据",
+            "properties": {}
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/usage_example.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "demonstrate_tool_usage",
+        "description": "Demonstrates the usage of tool-call format for enabling models to interact with external functions and tools.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "演示tool格式的使用",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "操作状态，例如 success 或 failed"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回的描述信息"
+          },
+          "tool_data": {
+            "type": "object",
+            "description": "工具使用演示的相关数据",
+            "properties": {}
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/usage_example.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "demonstrate_api_integration",
+        "description": "Demonstrates how to integrate with external APIs by showing request construction, authentication, and response handling patterns.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "演示API集成",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "集成状态，例如 success 或 failed"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回的集成结果描述"
+          },
+          "api_response": {
+            "type": "object",
+            "description": "模拟的API响应数据",
+            "properties": {}
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/usage_example.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_integration_example",
+        "description": "Creates a complete integration example by combining MCP, tool usage, and API calls into a cohesive workflow.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "创建集成示例",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "创建状态，例如 success 或 failed"
+          },
+          "example": {
+            "type": "object",
+            "description": "生成的集成示例内容",
+            "properties": {}
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "示例创建的时间戳"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/usage_example.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "main",
+        "description": "Entry point function that orchestrates the execution of all demonstration functions and returns the combined analysis result.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "主函数",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "执行状态，例如 success"
+          },
+          "message": {
+            "type": "string",
+            "description": "主函数执行的摘要信息"
+          },
+          "functions_executed": {
+            "type": "array",
+            "description": "已执行的函数名称列表",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/RelativisticMass/usage_example.py"
+      }
+    }
+  ]
+}

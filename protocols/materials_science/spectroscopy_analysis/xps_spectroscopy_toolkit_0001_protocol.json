@@ -1,0 +1,379 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "voigt_function",
+            "description": "Voigt函数（高斯与洛伦兹卷积）- XPS峰形的标准模型。能更准确地描述XPS峰形，因为它同时考虑了仪器展宽（高斯）和自然线宽（洛伦兹）的贡献。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "x": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数组 / eV"
+                    },
+                    "amplitude": {
+                        "type": "number",
+                        "description": "峰强度"
+                    },
+                    "center": {
+                        "type": "number",
+                        "description": "峰位中心 / eV"
+                    },
+                    "sigma": {
+                        "type": "number",
+                        "description": "高斯展宽参数 / eV（仪器分辨率）"
+                    },
+                    "gamma": {
+                        "type": "number",
+                        "description": "洛伦兹展宽参数 / eV（自然线宽）"
+                    }
+                },
+                "required": [
+                    "x",
+                    "amplitude",
+                    "center",
+                    "sigma",
+                    "gamma"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_peaks_auto",
+            "description": "自动检测XPS谱图中的峰位。使用scipy的find_peaks算法，基于峰的突出度（prominence）识别主峰，适用于信噪比较高的XPS数据。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数组 / eV，长度N"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数组 / counts，长度N"
+                    },
+                    "prominence_threshold": {
+                        "type": "number",
+                        "description": "峰突出度阈值（相对于最大强度），范围0-1，默认0.05"
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fit_single_peak",
+            "description": "对单个XPS峰进行拟合。支持高斯、洛伦兹和Voigt三种峰形模型，返回拟合参数和拟合优度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数组 / eV"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数组 / counts"
+                    },
+                    "peak_center_guess": {
+                        "type": "number",
+                        "description": "峰位初始猜测值 / eV"
+                    },
+                    "peak_type": {
+                        "type": "string",
+                        "description": "峰形类型",
+                        "enum": ["gaussian", "lorentzian", "voigt"]
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity",
+                    "peak_center_guess"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "identify_element_from_binding_energy",
+            "description": "根据结合能从数据库匹配元素和轨道。在XPS_DATABASE中搜索与给定结合能匹配的元素核心能级，考虑不同氧化态的化学位移。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "number",
+                        "description": "实验测得的结合能 / eV"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "匹配容差 / eV，默认±0.5 eV"
+                    }
+                },
+                "required": [
+                    "binding_energy"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_spin_orbit_doublet",
+            "description": "根据自旋-轨道耦合规则计算双峰参数。对于p、d、f轨道，自旋-轨道耦合导致能级分裂为j=l±1/2两个子能级，强度比由统计权重(2j+1)决定。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "peak1_be": {
+                        "type": "number",
+                        "description": "第一个峰（低结合能）的峰位 / eV"
+                    },
+                    "peak1_intensity": {
+                        "type": "number",
+                        "description": "第一个峰的强度"
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "元素符号"
+                    },
+                    "orbital": {
+                        "type": "string",
+                        "description": "轨道标识（如'4f'）"
+                    }
+                },
+                "required": [
+                    "peak1_be",
+                    "peak1_intensity",
+                    "element",
+                    "orbital"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_xps_spectrum_full",
+            "description": "完整的XPS谱图分析流程。集成峰检测、拟合、元素识别和氧化态判定的完整分析链。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数组 / eV"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数组 / counts"
+                    },
+                    "expected_element": {
+                        "type": "string",
+                        "description": "预期元素符号（可选），用于验证"
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fit_doublet_peaks",
+            "description": "拟合自旋-轨道双峰结构。同时拟合两个耦合峰，约束它们的能量分裂和强度比符合物理规律。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "结合能数组 / eV"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "强度数组 / counts"
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "元素符号"
+                    },
+                    "orbital": {
+                        "type": "string",
+                        "description": "轨道标识（如'4f'）"
+                    },
+                    "initial_guess_be": {
+                        "type": "number",
+                        "description": "低结合能峰的初始猜测 / eV"
+                    }
+                },
+                "required": [
+                    "binding_energy",
+                    "intensity",
+                    "element",
+                    "orbital",
+                    "initial_guess_be"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_oxidation_states",
+            "description": "批量比对多个样品的氧化态。从数据库查询指定元素轨道的所有氧化态参考值，与实验数据对比。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "binding_energy_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "多个样品的峰位列表 / eV"
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "元素符号"
+                    },
+                    "orbital": {
+                        "type": "string",
+                        "description": "轨道标识"
+                    }
+                },
+                "required": [
+                    "binding_energy_list",
+                    "element",
+                    "orbital"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_xps_spectrum",
+            "description": "XPS谱图专业可视化工具。生成带拟合曲线的XPS谱图、原始XPS谱图或多峰对比图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "description": "包含XPS数据的字典，必须包含：'binding_energy'（结合能数组）、'intensity'（强度数组）、'fitted_peaks'（拟合峰数据，可选）"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "固定为'materials'"
+                    },
+                    "vis_type": {
+                        "type": "string",
+                        "description": "可视化类型：'xps_fitted'（带拟合曲线的XPS谱图）、'xps_raw'（原始XPS谱图）、'peak_comparison'（多峰对比图）",
+                        "enum": ["xps_fitted", "xps_raw", "peak_comparison"]
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "保存目录，默认'./images/'"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（可选）"
+                    }
+                },
+                "required": [
+                    "data"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xps_spectroscopy_toolkit_0001.py"
+        }
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+

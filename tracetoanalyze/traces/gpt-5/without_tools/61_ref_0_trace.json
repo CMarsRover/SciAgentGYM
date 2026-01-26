@@ -1,0 +1,572 @@
+{
+  "id": "61_ref_0",
+  "query": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。",
+  "query_data": {
+    "id": "61_ref_0",
+    "original_id": 61,
+    "refined_index": 0,
+    "question": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。",
+    "answer": "{'(1)': {'strongest_peak_2theta': '38.32 deg', 'strongest_peak_intensity_zoom': '1000', 'strongest_peak_fwhm': '0.30 deg', 'instrument_fwhm': '0.10 deg', 'wavelength': '0.15406 nm', 'shape_factor_main': '0.90', 'visual_files': {'full_spectrum': 'case_61_sample_1_raw.png', 'peak_zoom': 'case_61_sample_1_peak_zoom.png'}}, '(2)': {'D_main': '29.8 nm'}, '(3)': {'D_uncorr': '18.6 nm', 'D_corr': '34.0 nm', 'D_shape_factor_interval': {'D_low': '24.1 nm', 'D_high': '34.7 nm'}}, '(4)': {'alt_strongest_peak_2theta': '38.8 deg', 'FWHM_alt': '0.333 deg', 'D_alt': '26.5 nm', 'peak_match_boolean': True, 'diff_percent': '11.0 %', 'consistency_boolean': True}, '(5)': '基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。'}",
+    "metadata": {
+      "subject": "material",
+      "topic": "",
+      "image_path": [
+        "/sfe_images/M022_mp-353-xrd_d5b5f4f9302869ae0b1d65b0eac06311.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "visualize_xrd_pattern",
+        "detect_strongest_peak",
+        "calculate_scherrer_grain_size"
+      ],
+      "golden_answer": [
+        {
+          "(1)": {
+            "strongest_peak_2theta": "38.32 deg",
+            "strongest_peak_intensity_zoom": "1000",
+            "strongest_peak_fwhm": "0.30 deg",
+            "instrument_fwhm": "0.10 deg",
+            "wavelength": "0.15406 nm",
+            "shape_factor_main": "0.90",
+            "visual_files": {
+              "full_spectrum": "case_61_sample_1_raw.png",
+              "peak_zoom": "case_61_sample_1_peak_zoom.png"
+            }
+          },
+          "(2)": {
+            "D_main": "29.8 nm"
+          },
+          "(3)": {
+            "D_uncorr": "18.6 nm",
+            "D_corr": "34.0 nm",
+            "D_shape_factor_interval": {
+              "D_low": "24.1 nm",
+              "D_high": "34.7 nm"
+            }
+          },
+          "(4)": {
+            "alt_strongest_peak_2theta": "38.8 deg",
+            "FWHM_alt": "0.333 deg",
+            "D_alt": "26.5 nm",
+            "peak_match_boolean": true,
+            "diff_percent": "11.0 %",
+            "consistency_boolean": true
+          },
+          "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+        }
+      ],
+      "original_question_id": "61",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_scherrer_grain_size",
+          "description": "用Scherrer方程计算平均晶粒尺寸。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "peak_2theta_deg": {
+                "type": "number",
+                "description": "峰位2θ（度），范围0-180"
+              },
+              "fwhm_deg": {
+                "type": "number",
+                "description": "测得FWHM（度），>0"
+              },
+              "wavelength_nm": {
+                "type": "number",
+                "description": "X射线波长（nm），如Cu Kα=0.15406"
+              },
+              "shape_factor": {
+                "type": "number",
+                "description": "形状因子K，通常0.89-1.0"
+              },
+              "instrument_fwhm_deg": {
+                "type": "number",
+                "description": "仪器展宽FWHM（度），默认0"
+              }
+            },
+            "required": [
+              "peak_2theta_deg",
+              "fwhm_deg"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "detect_strongest_peak",
+          "description": "从XRD数据中识别最强峰（返回峰位与强度）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta_deg": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "2θ（度）列表"
+              },
+              "intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "对应强度（a.u.）列表"
+              }
+            },
+            "required": [
+              "two_theta_deg",
+              "intensity"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_xrd_pattern",
+          "description": "可视化XRD衍射图谱（Plotly图）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta_deg": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "2θ列表（度）"
+              },
+              "intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "强度列表（a.u.）"
+              },
+              "title": {
+                "type": "string",
+                "description": "标题"
+              },
+              "filename": {
+                "type": "string",
+                "description": "保存文件名，默认自动生成"
+              }
+            },
+            "required": [
+              "two_theta_deg",
+              "intensity"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。",
+      "final_answer": {
+        "(1)": {
+          "strongest_peak_2theta": "38.32 deg",
+          "strongest_peak_intensity_zoom": "1000",
+          "strongest_peak_fwhm": "0.30 deg",
+          "instrument_fwhm": "0.10 deg",
+          "wavelength": "0.15406 nm",
+          "shape_factor_main": "0.90",
+          "visual_files": {
+            "full_spectrum": "case_61_sample_1_raw.png",
+            "peak_zoom": "case_61_sample_1_peak_zoom.png"
+          }
+        },
+        "(2)": {
+          "D_main": "29.8 nm"
+        },
+        "(3)": {
+          "D_uncorr": "18.6 nm",
+          "D_corr": "34.0 nm",
+          "D_shape_factor_interval": {
+            "D_low": "24.1 nm",
+            "D_high": "34.7 nm"
+          }
+        },
+        "(4)": {
+          "alt_strongest_peak_2theta": "38.8 deg",
+          "FWHM_alt": "0.333 deg",
+          "D_alt": "26.5 nm",
+          "peak_match_boolean": true,
+          "diff_percent": "11.0 %",
+          "consistency_boolean": true
+        },
+        "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+      }
+    },
+    "metadata_summary": {
+      "subject": "material",
+      "test_type": "refined",
+      "original_question_id": "61"
+    }
+  },
+  "model": "gpt-5",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。"
+    },
+    {
+      "role": "assistant",
+      "content": "**汇总**\n- 最强峰2θ: 38.32 deg\n- 峰强度: 1000\n- FWHM: 0.300 deg\n- 仪器展宽: 0.100 deg\n- 波长λ: 0.15406 nm\n- 形状因子K: 0.90\n- 可视化: `case_61_sample_1_raw.png`, `case_61_sample_1_peak_zoom.png`\n\n**主值计算**\n- D_main: 29.7 nm\n\n**参考结果**\n- D_uncorr: 18.6 nm\n- D_corr: 34.0 nm\n- D_low: 24.1 nm\n- D_high: 34.7 nm\n\n**交叉验证**\n- FWHM_alt: 0.333 deg\n- D_alt: 26.5 nm\n- peak_match_boolean: true\n- diff_percent: 10.8%\n- consistency_boolean: true\n\n**总结**\n主峰位于2θ=38.32 deg、峰强度1000、FWHM=0.300 deg（仪器展宽0.100 deg，λ=0.15406 nm，K=0.90），对应晶粒尺寸主值D_main=29.7 nm。参考计算得到未校正值18.6 nm、校正参考值34.0 nm，以及形状因子区间下/上界24.1/34.7 nm。用替代局部数据线性插值得FWHM_alt=0.333 deg，在2θ=38.8 deg处计算D_alt=26.5 nm；该峰与主数据最强峰匹配（|Δ2θ|=0.48 deg≤0.6 deg），D_alt与D_main的差异为10.8%，满足15%的判据，交叉验证一致。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": {\n    \"strongest_peak_2theta\": \"[字符串]\",\n    \"strongest_peak_intensity_zoom\": \"[字符串]\",\n    \"strongest_peak_fwhm\": \"[字符串]\",\n    \"instrument_fwhm\": \"[字符串]\",\n    \"wavelength\": \"[字符串]\",\n    \"shape_factor_main\": \"[字符串]\",\n    \"visual_files\": {\n      \"full_spectrum\": \"[字符串]\",\n      \"peak_zoom\": \"[字符串]\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": \"[字符串]\"\n  },\n  \"(3)\": {\n    \"D_uncorr\": \"[字符串]\",\n    \"D_corr\": \"[字符串]\",\n    \"D_shape_factor_interval\": {\n      \"D_low\": \"[字符串]\",\n      \"D_high\": \"[字符串]\"\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": \"[字符串]\",\n    \"FWHM_alt\": \"[字符串]\",\n    \"D_alt\": \"[字符串]\",\n    \"peak_match_boolean\": \"[布尔值]\",\n    \"diff_percent\": \"[字符串]\",\n    \"consistency_boolean\": \"[布尔值]\"\n  },\n  \"(5)\": \"[字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"(1)\": {\n    \"strongest_peak_2theta\": 38.32,\n    \"strongest_peak_intensity_zoom\": 1000.00,\n    \"strongest_peak_fwhm\": 0.30,\n    \"instrument_fwhm\": 0.10,\n    \"wavelength\": 0.154,\n    \"shape_factor_main\": 0.90,\n    \"visual_files\": {\n      \"full_spectrum\": \"case_61_sample_1_raw.png\",\n      \"peak_zoom\": \"case_61_sample_1_peak_zoom.png\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": 29.73\n  },\n  \"(3)\": {\n    \"D_uncorr\": 18.57,\n    \"D_corr\": 33.96,\n    \"D_shape_factor_interval\": {\n      \"D_low\": 24.14,\n      \"D_high\": 34.67\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": 38.80,\n    \"FWHM_alt\": 0.333,\n    \"D_alt\": 26.49,\n    \"peak_match_boolean\": true,\n    \"diff_percent\": 10.90,\n    \"consistency_boolean\": true\n  },\n  \"(5)\": \"主峰位于2θ=38.32 deg、峰强度约1000、FWHM=0.30 deg（仪器展宽0.10 deg，λ=0.154 nm，K=0.90）；仪器校正并代入Scherrer公式得晶粒尺寸主值D_main≈29.73 nm。参考结果：D_uncorr≈18.57 nm、D_corr≈33.96 nm，形状因子区间D_low≈24.14 nm与D_high≈34.67 nm。替代数据线性插值得FWHM_alt≈0.333 deg，在2θ=38.80 deg处得到D_alt≈26.49 nm；与主峰匹配（|Δ2θ|=0.48 deg≤0.60 deg），且相对差diff_percent≈10.90%，满足15%一致性判据。\"\n}"
+    }
+  ],
+  "metadata": {
+    "subject": "material",
+    "topic": "",
+    "image_path": [
+      "/sfe_images/M022_mp-353-xrd_d5b5f4f9302869ae0b1d65b0eac06311.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "visualize_xrd_pattern",
+      "detect_strongest_peak",
+      "calculate_scherrer_grain_size"
+    ],
+    "golden_answer": [
+      {
+        "(1)": {
+          "strongest_peak_2theta": "38.32 deg",
+          "strongest_peak_intensity_zoom": "1000",
+          "strongest_peak_fwhm": "0.30 deg",
+          "instrument_fwhm": "0.10 deg",
+          "wavelength": "0.15406 nm",
+          "shape_factor_main": "0.90",
+          "visual_files": {
+            "full_spectrum": "case_61_sample_1_raw.png",
+            "peak_zoom": "case_61_sample_1_peak_zoom.png"
+          }
+        },
+        "(2)": {
+          "D_main": "29.8 nm"
+        },
+        "(3)": {
+          "D_uncorr": "18.6 nm",
+          "D_corr": "34.0 nm",
+          "D_shape_factor_interval": {
+            "D_low": "24.1 nm",
+            "D_high": "34.7 nm"
+          }
+        },
+        "(4)": {
+          "alt_strongest_peak_2theta": "38.8 deg",
+          "FWHM_alt": "0.333 deg",
+          "D_alt": "26.5 nm",
+          "peak_match_boolean": true,
+          "diff_percent": "11.0 %",
+          "consistency_boolean": true
+        },
+        "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+      }
+    ],
+    "original_question_id": "61",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/traces"
+  },
+  "metadata_summary": {
+    "subject": "material",
+    "test_type": "refined",
+    "original_question_id": "61"
+  },
+  "answer_template": {
+    "(1)": {
+      "strongest_peak_2theta": "[字符串]",
+      "strongest_peak_intensity_zoom": "[字符串]",
+      "strongest_peak_fwhm": "[字符串]",
+      "instrument_fwhm": "[字符串]",
+      "wavelength": "[字符串]",
+      "shape_factor_main": "[字符串]",
+      "visual_files": {
+        "full_spectrum": "[字符串]",
+        "peak_zoom": "[字符串]"
+      }
+    },
+    "(2)": {
+      "D_main": "[字符串]"
+    },
+    "(3)": {
+      "D_uncorr": "[字符串]",
+      "D_corr": "[字符串]",
+      "D_shape_factor_interval": {
+        "D_low": "[字符串]",
+        "D_high": "[字符串]"
+      }
+    },
+    "(4)": {
+      "alt_strongest_peak_2theta": "[字符串]",
+      "FWHM_alt": "[字符串]",
+      "D_alt": "[字符串]",
+      "peak_match_boolean": "[布尔值]",
+      "diff_percent": "[字符串]",
+      "consistency_boolean": "[布尔值]"
+    },
+    "(5)": "[字符串]"
+  },
+  "golden_standard": {
+    "(1)": {
+      "strongest_peak_2theta": "38.32 deg",
+      "strongest_peak_intensity_zoom": "1000",
+      "strongest_peak_fwhm": "0.30 deg",
+      "instrument_fwhm": "0.10 deg",
+      "wavelength": "0.15406 nm",
+      "shape_factor_main": "0.90",
+      "visual_files": {
+        "full_spectrum": "case_61_sample_1_raw.png",
+        "peak_zoom": "case_61_sample_1_peak_zoom.png"
+      }
+    },
+    "(2)": {
+      "D_main": "29.8 nm"
+    },
+    "(3)": {
+      "D_uncorr": "18.6 nm",
+      "D_corr": "34.0 nm",
+      "D_shape_factor_interval": {
+        "D_low": "24.1 nm",
+        "D_high": "34.7 nm"
+      }
+    },
+    "(4)": {
+      "alt_strongest_peak_2theta": "38.8 deg",
+      "FWHM_alt": "0.333 deg",
+      "D_alt": "26.5 nm",
+      "peak_match_boolean": true,
+      "diff_percent": "11.0 %",
+      "consistency_boolean": true
+    },
+    "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": {
+      "strongest_peak_2theta": 38.32,
+      "strongest_peak_intensity_zoom": 1000.0,
+      "strongest_peak_fwhm": 0.3,
+      "instrument_fwhm": 0.1,
+      "wavelength": 0.154,
+      "shape_factor_main": 0.9,
+      "visual_files": {
+        "full_spectrum": "case_61_sample_1_raw.png",
+        "peak_zoom": "case_61_sample_1_peak_zoom.png"
+      }
+    },
+    "(2)": {
+      "D_main": 29.73
+    },
+    "(3)": {
+      "D_uncorr": 18.57,
+      "D_corr": 33.96,
+      "D_shape_factor_interval": {
+        "D_low": 24.14,
+        "D_high": 34.67
+      }
+    },
+    "(4)": {
+      "alt_strongest_peak_2theta": 38.8,
+      "FWHM_alt": 0.333,
+      "D_alt": 26.49,
+      "peak_match_boolean": true,
+      "diff_percent": 10.9,
+      "consistency_boolean": true
+    },
+    "(5)": "主峰位于2θ=38.32 deg、峰强度约1000、FWHM=0.30 deg（仪器展宽0.10 deg，λ=0.154 nm，K=0.90）；仪器校正并代入Scherrer公式得晶粒尺寸主值D_main≈29.73 nm。参考结果：D_uncorr≈18.57 nm、D_corr≈33.96 nm，形状因子区间D_low≈24.14 nm与D_high≈34.67 nm。替代数据线性插值得FWHM_alt≈0.333 deg，在2θ=38.80 deg处得到D_alt≈26.49 nm；与主峰匹配（|Δ2θ|=0.48 deg≤0.60 deg），且相对差diff_percent≈10.90%，满足15%一致性判据。"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "{\n  \"(1)\": {\n    \"strongest_peak_2theta\": 38.32,\n    \"strongest_peak_intensity_zoom\": 1000.00,\n    \"strongest_peak_fwhm\": 0.30,\n    \"instrument_fwhm\": 0.10,\n    \"wavelength\": 0.154,\n    \"shape_factor_main\": 0.90,\n    \"visual_files\": {\n      \"full_spectrum\": \"case_61_sample_1_raw.png\",\n      \"peak_zoom\": \"case_61_sample_1_peak_zoom.png\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": 29.73\n  },\n  \"(3)\": {\n    \"D_uncorr\": 18.57,\n    \"D_corr\": 33.96,\n    \"D_shape_factor_interval\": {\n      \"D_low\": 24.14,\n      \"D_high\": 34.67\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": 38.80,\n    \"FWHM_alt\": 0.333,\n    \"D_alt\": 26.49,\n    \"peak_match_boolean\": true,\n    \"diff_percent\": 10.90,\n    \"consistency_boolean\": true\n  },\n  \"(5)\": \"主峰位于2θ=38.32 deg、峰强度约1000、FWHM=0.30 deg（仪器展宽0.10 deg，λ=0.154 nm，K=0.90）；仪器校正并代入Scherrer公式得晶粒尺寸主值D_main≈29.73 nm。参考结果：D_uncorr≈18.57 nm、D_corr≈33.96 nm，形状因子区间D_low≈24.14 nm与D_high≈34.67 nm。替代数据线性插值得FWHM_alt≈0.333 deg，在2θ=38.80 deg处得到D_alt≈26.49 nm；与主峰匹配（|Δ2θ|=0.48 deg≤0.60 deg），且相对差diff_percent≈10.90%，满足15%一致性判据。\"\n}",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "{\n  \"(1)\": {\n    \"strongest_peak_2theta\": 38.32,\n    \"strongest_peak_intensity_zoom\": 1000.00,\n    \"strongest_peak_fwhm\": 0.30,\n    \"instrument_fwhm\": 0.10,\n    \"wavelength\": 0.154,\n    \"shape_factor_main\": 0.90,\n    \"visual_files\": {\n      \"full_spectrum\": \"case_61_sample_1_raw.png\",\n      \"peak_zoom\": \"case_61_sample_1_peak_zoom.png\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": 29.73\n  },\n  \"(3)\": {\n    \"D_uncorr\": 18.57,\n    \"D_corr\": 33.96,\n    \"D_shape_factor_interval\": {\n      \"D_low\": 24.14,\n      \"D_high\": 34.67\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": 38.80,\n    \"FWHM_alt\": 0.333,\n    \"D_alt\": 26.49,\n    \"peak_match_boolean\": true,\n    \"diff_percent\": 10.90,\n    \"consistency_boolean\": true\n  },\n  \"(5)\": \"主峰位于2θ=38.32 deg、峰强度约1000、FWHM=0.30 deg（仪器展宽0.10 deg，λ=0.154 nm，K=0.90）；仪器校正并代入Scherrer公式得晶粒尺寸主值D_main≈29.73 nm。参考结果：D_uncorr≈18.57 nm、D_corr≈33.96 nm，形状因子区间D_low≈24.14 nm与D_high≈34.67 nm。替代数据线性插值得FWHM_alt≈0.333 deg，在2θ=38.80 deg处得到D_alt≈26.49 nm；与主峰匹配（|Δ2θ|=0.48 deg≤0.60 deg），且相对差diff_percent≈10.90%，满足15%一致性判据。\"\n}"
+  },
+  "evaluation_score": 0.95,
+  "evaluation_summary": "匹配字段: 19/20 (得分: 95.00%)",
+  "evaluation_details": {
+    "(1).strongest_peak_2theta": {
+      "path": "(1).strongest_peak_2theta",
+      "expected": "38.32 deg",
+      "actual": 38.32,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1).strongest_peak_intensity_zoom": {
+      "path": "(1).strongest_peak_intensity_zoom",
+      "expected": "1000",
+      "actual": 1000.0,
+      "expected_num": 1000.0,
+      "actual_num": 1000.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).strongest_peak_fwhm": {
+      "path": "(1).strongest_peak_fwhm",
+      "expected": "0.30 deg",
+      "actual": 0.3,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1).instrument_fwhm": {
+      "path": "(1).instrument_fwhm",
+      "expected": "0.10 deg",
+      "actual": 0.1,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1).wavelength": {
+      "path": "(1).wavelength",
+      "expected": "0.15406 nm",
+      "actual": 0.154,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1).shape_factor_main": {
+      "path": "(1).shape_factor_main",
+      "expected": "0.90",
+      "actual": 0.9,
+      "expected_num": 0.9,
+      "actual_num": 0.9,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).visual_files.full_spectrum": {
+      "path": "(1).visual_files.full_spectrum",
+      "expected": "case_61_sample_1_raw.png",
+      "actual": "case_61_sample_1_raw.png",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).visual_files.peak_zoom": {
+      "path": "(1).visual_files.peak_zoom",
+      "expected": "case_61_sample_1_peak_zoom.png",
+      "actual": "case_61_sample_1_peak_zoom.png",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2).D_main": {
+      "path": "(2).D_main",
+      "expected": "29.8 nm",
+      "actual": 29.73,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3).D_uncorr": {
+      "path": "(3).D_uncorr",
+      "expected": "18.6 nm",
+      "actual": 18.57,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3).D_corr": {
+      "path": "(3).D_corr",
+      "expected": "34.0 nm",
+      "actual": 33.96,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3).D_shape_factor_interval.D_low": {
+      "path": "(3).D_shape_factor_interval.D_low",
+      "expected": "24.1 nm",
+      "actual": 24.14,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3).D_shape_factor_interval.D_high": {
+      "path": "(3).D_shape_factor_interval.D_high",
+      "expected": "34.7 nm",
+      "actual": 34.67,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4).alt_strongest_peak_2theta": {
+      "path": "(4).alt_strongest_peak_2theta",
+      "expected": "38.8 deg",
+      "actual": 38.8,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4).FWHM_alt": {
+      "path": "(4).FWHM_alt",
+      "expected": "0.333 deg",
+      "actual": 0.333,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4).D_alt": {
+      "path": "(4).D_alt",
+      "expected": "26.5 nm",
+      "actual": 26.49,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4).peak_match_boolean": {
+      "path": "(4).peak_match_boolean",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4).diff_percent": {
+      "path": "(4).diff_percent",
+      "expected": "11.0 %",
+      "actual": 10.9,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4).consistency_boolean": {
+      "path": "(4).consistency_boolean",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5)": {
+      "path": "(5)",
+      "expected": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。",
+      "actual": "主峰位于2θ=38.32 deg、峰强度约1000、FWHM=0.30 deg（仪器展宽0.10 deg，λ=0.154 nm，K=0.90）；仪器校正并代入Scherrer公式得晶粒尺寸主值D_main≈29.73 nm。参考结果：D_uncorr≈18.57 nm、D_corr≈33.96 nm，形状因子区间D_low≈24.14 nm与D_high≈34.67 nm。替代数据线性插值得FWHM_alt≈0.333 deg，在2θ=38.80 deg处得到D_alt≈26.49 nm；与主峰匹配（|Δ2θ|=0.48 deg≤0.60 deg），且相对差diff_percent≈10.90%，满足15%一致性判据。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "mode_folder": "without_tools",
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 1.0,
+    "0_75": 1.0,
+    "0_100": 0.95
+  }
+}

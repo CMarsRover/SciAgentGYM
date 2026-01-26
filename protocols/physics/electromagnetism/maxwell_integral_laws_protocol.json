@@ -1,0 +1,148 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of utility functions designed to analyze, match, visualize, and solve problems related to Maxwell's equations in electromagnetism. The tools support symbolic reasoning, equation-description alignment, and visual representation of electromagnetic field laws.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "maxwell_integral_laws",
+        "description": "Analyzes Maxwell's equations in integral form and extracts or derives physical laws from given electromagnetic scenarios.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "返回麦克斯韦积分定律的相关信息",
+        "properties": {
+          "laws": {
+            "type": "array",
+            "description": "包含麦克斯韦四个积分形式定律的列表"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/maxwell_integral_laws/maxwell_integral_laws.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "match_description_to_equation",
+        "description": "Matches a natural language description of an electromagnetic situation to the most appropriate Maxwell equation, returning a corresponding identifier.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "description"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "将物理描述与对应的麦克斯韦方程匹配",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "输入的物理现象描述"
+          },
+          "equation": {
+            "type": "string",
+            "description": "匹配的麦克斯韦方程的数学表达式"
+          },
+          "name": {
+            "type": "string",
+            "description": "匹配方程的名称"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/maxwell_integral_laws/maxwell_integral_laws.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "visualize_maxwell_equations",
+        "description": "Generates visual representations (e.g., field lines, flux, circulation) of Maxwell's equations based on input field configurations.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "生成麦克斯韦方程的可视化表示",
+        "properties": {
+          "visualization": {
+            "type": "string",
+            "description": "可视化结果的URL或Base64编码图像数据"
+          },
+          "format": {
+            "type": "string",
+            "description": "可视化输出的格式，如'png', 'svg', 'html'"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/maxwell_integral_laws/maxwell_integral_laws.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "solve_maxwell_questions",
+        "description": "Solves physics questions involving Maxwell's equations by reasoning through boundary conditions, symmetries, and integral forms.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "descriptions": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "required": [
+            "descriptions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "解答与麦克斯韦方程相关的物理问题",
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "输入的物理问题"
+          },
+          "answer": {
+            "type": "string",
+            "description": "问题的解答"
+          },
+          "steps": {
+            "type": "array",
+            "description": "解题步骤的列表"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/maxwell_integral_laws/maxwell_integral_laws.py"
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_parameter_sensitivity",
+            "description": "可视化参数敏感性分析。绘制亮度变化比随参数变化的曲线，用于优化观测策略。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "scan_values": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "扫描的参数值列表"
+                    },
+                    "brightness_ratios": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应的亮度比列表"
+                    },
+                    "param_name": {
+                        "type": "string",
+                        "description": "参数名称，用于标签"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "保存目录，默认为'./tool_images/'"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名，若未提供则自动生成时间戳文件名"
+                    }
+                },
+                "required": [
+                    "scan_values",
+                    "brightness_ratios",
+                    "param_name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/astronomy_toolkit_6.py"
+        }
+    }
+]

@@ -1,0 +1,18 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "example_comparison",
+            "description": "示例3：比较不同3D生成方法",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/molecule_analyzer.py"
+        }
+    }
+]

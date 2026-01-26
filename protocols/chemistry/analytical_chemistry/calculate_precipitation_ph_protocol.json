@@ -1,0 +1,55 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "ChemicalEquilibriumCalculator_separate_metals",
+            "description": "化学平衡计算器：金属离子选择性沉淀分离分析。分析Fe³⁺和Mg²⁺两种金属离子在氢氧化物沉淀中的选择性分离行为。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "conc_fe": {
+                        "type": "number",
+                        "description": "Fe³⁺离子浓度，单位为mol/L，默认为0.01"
+                    },
+                    "conc_mg": {
+                        "type": "number",
+                        "description": "Mg²⁺离子浓度，单位为mol/L，默认为0.01"
+                    },
+                    "ksp_fe": {
+                        "type": "number",
+                        "description": "Fe(OH)₃的溶度积常数，单位为(mol/L)⁴，默认为2.79e-39"
+                    },
+                    "ksp_mg": {
+                        "type": "number",
+                        "description": "Mg(OH)₂的溶度积常数，单位为(mol/L)³，默认为5.61e-12"
+                    },
+                    "stoich_fe": {
+                        "type": "integer",
+                        "description": "Fe(OH)₃中氢氧根离子的化学计量数，默认为3"
+                    },
+                    "stoich_mg": {
+                        "type": "integer",
+                        "description": "Mg(OH)₂中氢氧根离子的化学计量数，默认为2"
+                    },
+                    "visualize": {
+                        "type": "boolean",
+                        "description": "是否生成可视化图表，默认为True"
+                    },
+                    "complete_threshold": {
+                        "type": "number",
+                        "description": "完全沉淀的浓度阈值，默认为1e-5 mol/L"
+                    },
+                    "verbose": {
+                        "type": "boolean",
+                        "description": "是否显示详细输出，默认为True"
+                    }
+                },
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/calculate_precipitation_pH.py"
+        }
+    }
+]

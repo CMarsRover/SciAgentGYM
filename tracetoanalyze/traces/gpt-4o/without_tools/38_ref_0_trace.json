@@ -1,0 +1,1819 @@
+{
+  "id": "38_ref_0",
+  "query": "在298 K下，对四个C10H16异构体（myrcene、limonene、α-terpinene、γ-terpinene）分别在MMFF94与UFF两种力场下，基于给定的构象相对能量ΔE（kcal/mol）、NPR1与半径矩Rg（Å），进行玻尔兹曼加权统计。常数与定义：T=298 K，kBT=0.593 kcal/mol；玻尔兹曼权重 wi = exp(-ΔEi/kBT)/Σj exp(-ΔEj/kBT)；以各异构体的加权⟨NPR1⟩与⟨Rg⟩为基础定义异构体多样性指数 IDI = σ(NPR1) × σ(Rg) × 100，其中σ为总体标准差（分母为4）。\n已知数据（每个异构体各3个构象；单位：ΔE为kcal/mol，Rg为Å）：\nA) MMFF94\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.82；confB: ΔE=0.50, NPR1=0.39, Rg=2.78；confC: ΔE=1.20, NPR1=0.41, Rg=2.74（ΔEmax=1.20）\n- α-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.46；confB: ΔE=0.60, NPR1=0.57, Rg=2.43；confC: ΔE=1.50, NPR1=0.53, Rg=2.41（ΔEmax=1.50）\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.54, Rg=2.44；confB: ΔE=0.40, NPR1=0.56, Rg=2.41；confC: ΔE=1.00, NPR1=0.52, Rg=2.40（ΔEmax=1.00）\n- limonene：confA: ΔE=0.00, NPR1=0.50, Rg=2.36；confB: ΔE=0.55, NPR1=0.53, Rg=2.34；confC: ΔE=1.30, NPR1=0.49, Rg=2.33（ΔEmax=1.30）\nB) UFF（各异构体ΔE集合相同：0.00、0.45、1.10；ΔEmax=1.10）\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.80；confB: ΔE=0.45, NPR1=0.39, Rg=2.77；confC: ΔE=1.10, NPR1=0.42, Rg=2.73\n- α-terpinene：confA: ΔE=0.00, NPR1=0.56, Rg=2.47；confB: ΔE=0.45, NPR1=0.58, Rg=2.44；confC: ΔE=1.10, NPR1=0.54, Rg=2.42\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.45；confB: ΔE=0.45, NPR1=0.57, Rg=2.42；confC: ΔE=1.10, NPR1=0.53, Rg=2.41\n- limonene：confA: ΔE=0.00, NPR1=0.51, Rg=2.35；confB: ΔE=0.45, NPR1=0.54, Rg=2.33；confC: ΔE=1.10, NPR1=0.50, Rg=2.32\n任务：\n(1) 计算各异构体在两种力场下的玻尔兹曼权重wi，并据此求⟨NPR1⟩与⟨Rg⟩；同时报告每个异构体的构象数量与ΔEmax。数值均保留3位小数；ΔEmax按给定小数位保留；Rg单位为Å。\n(2) 计算IDI_MMFF与IDI_UFF（保留2位小数），并同时给出σ(NPR1)与σ(Rg)以便核对（至少保留3位小数；σ(Rg)单位为Å）。\n(3) 检查各异构体权重和，报告每个异构体的Σwi（保留3位小数）。\n(4) 以加权⟨Rg⟩检验趋势：Rg(myrcene) ≥ Rg(α/γ-terpinene) ≥ Rg(limonene)。判定“通过”或“未通过”。\n(5) 以MMFF94为基准，判断两力场IDI相对偏差是否≤10%且(4)判定通过。若满足则给出“一致”，否则给出“不确定”，并简述可能原因（文字精炼）。\n除(5)外，其余小问需给出数值结果；单位按上文规定。",
+  "query_data": {
+    "id": "38_ref_0",
+    "original_id": 38,
+    "refined_index": 0,
+    "question": "在298 K下，对四个C10H16异构体（myrcene、limonene、α-terpinene、γ-terpinene）分别在MMFF94与UFF两种力场下，基于给定的构象相对能量ΔE（kcal/mol）、NPR1与半径矩Rg（Å），进行玻尔兹曼加权统计。常数与定义：T=298 K，kBT=0.593 kcal/mol；玻尔兹曼权重 wi = exp(-ΔEi/kBT)/Σj exp(-ΔEj/kBT)；以各异构体的加权⟨NPR1⟩与⟨Rg⟩为基础定义异构体多样性指数 IDI = σ(NPR1) × σ(Rg) × 100，其中σ为总体标准差（分母为4）。\n已知数据（每个异构体各3个构象；单位：ΔE为kcal/mol，Rg为Å）：\nA) MMFF94\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.82；confB: ΔE=0.50, NPR1=0.39, Rg=2.78；confC: ΔE=1.20, NPR1=0.41, Rg=2.74（ΔEmax=1.20）\n- α-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.46；confB: ΔE=0.60, NPR1=0.57, Rg=2.43；confC: ΔE=1.50, NPR1=0.53, Rg=2.41（ΔEmax=1.50）\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.54, Rg=2.44；confB: ΔE=0.40, NPR1=0.56, Rg=2.41；confC: ΔE=1.00, NPR1=0.52, Rg=2.40（ΔEmax=1.00）\n- limonene：confA: ΔE=0.00, NPR1=0.50, Rg=2.36；confB: ΔE=0.55, NPR1=0.53, Rg=2.34；confC: ΔE=1.30, NPR1=0.49, Rg=2.33（ΔEmax=1.30）\nB) UFF（各异构体ΔE集合相同：0.00、0.45、1.10；ΔEmax=1.10）\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.80；confB: ΔE=0.45, NPR1=0.39, Rg=2.77；confC: ΔE=1.10, NPR1=0.42, Rg=2.73\n- α-terpinene：confA: ΔE=0.00, NPR1=0.56, Rg=2.47；confB: ΔE=0.45, NPR1=0.58, Rg=2.44；confC: ΔE=1.10, NPR1=0.54, Rg=2.42\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.45；confB: ΔE=0.45, NPR1=0.57, Rg=2.42；confC: ΔE=1.10, NPR1=0.53, Rg=2.41\n- limonene：confA: ΔE=0.00, NPR1=0.51, Rg=2.35；confB: ΔE=0.45, NPR1=0.54, Rg=2.33；confC: ΔE=1.10, NPR1=0.50, Rg=2.32\n任务：\n(1) 计算各异构体在两种力场下的玻尔兹曼权重wi，并据此求⟨NPR1⟩与⟨Rg⟩；同时报告每个异构体的构象数量与ΔEmax。数值均保留3位小数；ΔEmax按给定小数位保留；Rg单位为Å。\n(2) 计算IDI_MMFF与IDI_UFF（保留2位小数），并同时给出σ(NPR1)与σ(Rg)以便核对（至少保留3位小数；σ(Rg)单位为Å）。\n(3) 检查各异构体权重和，报告每个异构体的Σwi（保留3位小数）。\n(4) 以加权⟨Rg⟩检验趋势：Rg(myrcene) ≥ Rg(α/γ-terpinene) ≥ Rg(limonene)。判定“通过”或“未通过”。\n(5) 以MMFF94为基准，判断两力场IDI相对偏差是否≤10%且(4)判定通过。若满足则给出“一致”，否则给出“不确定”，并简述可能原因（文字精炼）。\n除(5)外，其余小问需给出数值结果；单位按上文规定。",
+    "answer": "{'(1) 玻尔兹曼权重、加权均值与构象信息': {'MMFF94': {'myrcene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.2, 'weights_[confA,confB,confC]': [0.64, 0.276, 0.085], 'avg_NPR1': 0.373, 'avg_Rg_Ang': 2.805}, 'alpha-terpinene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.5, 'weights_[confA,confB,confC]': [0.693, 0.251, 0.056], 'avg_NPR1': 0.554, 'avg_Rg_Ang': 2.45}, 'gamma-terpinene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.0, 'weights_[confA,confB,confC]': [0.59, 0.301, 0.109], 'avg_NPR1': 0.544, 'avg_Rg_Ang': 2.425}, 'limonene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.3, 'weights_[confA,confB,confC]': [0.664, 0.262, 0.074], 'avg_NPR1': 0.507, 'avg_Rg_Ang': 2.349}}, 'UFF': {'myrcene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.1, 'weights_[confA,confB,confC]': [0.616, 0.288, 0.096], 'avg_NPR1': 0.374, 'avg_Rg_Ang': 2.785}, 'alpha-terpinene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.1, 'weights_[confA,confB,confC]': [0.616, 0.288, 0.096], 'avg_NPR1': 0.564, 'avg_Rg_Ang': 2.455}, 'gamma-terpinene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.1, 'weights_[confA,confB,confC]': [0.616, 0.288, 0.096], 'avg_NPR1': 0.554, 'avg_Rg_Ang': 2.438}, 'limonene': {'conformers_count': 3, 'DeltaE_max_kcal_per_mol': 1.1, 'weights_[confA,confB,confC]': [0.616, 0.288, 0.096], 'avg_NPR1': 0.518, 'avg_Rg_Ang': 2.342}}}, '(2) σ与IDI': {'MMFF94': {'sigma_NPR1': 0.0723, 'sigma_Rg_Ang': 0.1759, 'IDI': 1.27}, 'UFF': {'sigma_NPR1': 0.0762, 'sigma_Rg_Ang': 0.1673, 'IDI': 1.28}}, '(3) 权重和校验 Σwi': {'MMFF94': {'myrcene': 1.001, 'alpha-terpinene': 1.0, 'gamma-terpinene': 1.0, 'limonene': 1.0}, 'UFF': {'myrcene': 1.0, 'alpha-terpinene': 1.0, 'gamma-terpinene': 1.0, 'limonene': 1.0}}, '(4) 趋势性约束检验': {'MMFF94_based_on_avg_Rg': '通过', 'UFF_based_on_avg_Rg': '通过'}, '(5) 方法一致性判定': {'relative_deviation_percent_MMFF_baseline': 0.79, 'consistency': '一致', 'possible_causes_brief': ['两力场势能面与参数化差异导致构象相对能与权重略有不同', '能量窗口与加权对NPR1与Rg的敏感性造成小幅差异']}}",
+    "metadata": {
+      "subject": "化学科学",
+      "topic": "有机化学",
+      "image_path": [],
+      "solution_steps": [
+        "定义四种单萜异构体的SMILES (C₁₀H₁₆)：myrcene (CC(=C)CCC=C(C)C=C), limonene (CC(=C)C1CCC(=C)CC1), alpha-terpinene (CC(C)C1=CCC(=CC1)C), gamma-terpinene (CC1=CCC(=C(C)C)CC1)",
+        "调用 chem_visualizer 生成四个分子的2D和3D可视化图像",
+        "对每个分子调用 optimize_geometry 和 get_3d_properties 计算NPR1和回转半径Rg",
+        "获取四个异构体的NPR1和Rg：myrcene (NPR1=0.1243, Rg=2.904), limonene (NPR1=0.2837, Rg=2.278), alpha-terpinene (NPR1=0.2051, Rg=2.431), gamma-terpinene (NPR1=0.2334, Rg=2.377)",
+        "计算标准差：σ(NPR1)=0.0667, σ(Rg)=0.278 Å",
+        "计算IDI：IDI = 0.0667 × 0.278 × 100 = 1.85"
+      ],
+      "tool_expected": [
+        "chem_visualizer",
+        "optimize_geometry",
+        "get_3d_properties"
+      ],
+      "golden_answer": [
+        {
+          "(1) 玻尔兹曼权重、加权均值与构象信息": {
+            "MMFF94": {
+              "myrcene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.2,
+                "weights_[confA,confB,confC]": [
+                  0.64,
+                  0.276,
+                  0.085
+                ],
+                "avg_NPR1": 0.373,
+                "avg_Rg_Ang": 2.805
+              },
+              "alpha-terpinene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.5,
+                "weights_[confA,confB,confC]": [
+                  0.693,
+                  0.251,
+                  0.056
+                ],
+                "avg_NPR1": 0.554,
+                "avg_Rg_Ang": 2.45
+              },
+              "gamma-terpinene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.0,
+                "weights_[confA,confB,confC]": [
+                  0.59,
+                  0.301,
+                  0.109
+                ],
+                "avg_NPR1": 0.544,
+                "avg_Rg_Ang": 2.425
+              },
+              "limonene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.3,
+                "weights_[confA,confB,confC]": [
+                  0.664,
+                  0.262,
+                  0.074
+                ],
+                "avg_NPR1": 0.507,
+                "avg_Rg_Ang": 2.349
+              }
+            },
+            "UFF": {
+              "myrcene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.1,
+                "weights_[confA,confB,confC]": [
+                  0.616,
+                  0.288,
+                  0.096
+                ],
+                "avg_NPR1": 0.374,
+                "avg_Rg_Ang": 2.785
+              },
+              "alpha-terpinene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.1,
+                "weights_[confA,confB,confC]": [
+                  0.616,
+                  0.288,
+                  0.096
+                ],
+                "avg_NPR1": 0.564,
+                "avg_Rg_Ang": 2.455
+              },
+              "gamma-terpinene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.1,
+                "weights_[confA,confB,confC]": [
+                  0.616,
+                  0.288,
+                  0.096
+                ],
+                "avg_NPR1": 0.554,
+                "avg_Rg_Ang": 2.438
+              },
+              "limonene": {
+                "conformers_count": 3,
+                "DeltaE_max_kcal_per_mol": 1.1,
+                "weights_[confA,confB,confC]": [
+                  0.616,
+                  0.288,
+                  0.096
+                ],
+                "avg_NPR1": 0.518,
+                "avg_Rg_Ang": 2.342
+              }
+            }
+          },
+          "(2) σ与IDI": {
+            "MMFF94": {
+              "sigma_NPR1": 0.0723,
+              "sigma_Rg_Ang": 0.1759,
+              "IDI": 1.27
+            },
+            "UFF": {
+              "sigma_NPR1": 0.0762,
+              "sigma_Rg_Ang": 0.1673,
+              "IDI": 1.28
+            }
+          },
+          "(3) 权重和校验 Σwi": {
+            "MMFF94": {
+              "myrcene": 1.001,
+              "alpha-terpinene": 1.0,
+              "gamma-terpinene": 1.0,
+              "limonene": 1.0
+            },
+            "UFF": {
+              "myrcene": 1.0,
+              "alpha-terpinene": 1.0,
+              "gamma-terpinene": 1.0,
+              "limonene": 1.0
+            }
+          },
+          "(4) 趋势性约束检验": {
+            "MMFF94_based_on_avg_Rg": "通过",
+            "UFF_based_on_avg_Rg": "通过"
+          },
+          "(5) 方法一致性判定": {
+            "relative_deviation_percent_MMFF_baseline": 0.79,
+            "consistency": "一致",
+            "possible_causes_brief": [
+              "两力场势能面与参数化差异导致构象相对能与权重略有不同",
+              "能量窗口与加权对NPR1与Rg的敏感性造成小幅差异"
+            ]
+          }
+        }
+      ],
+      "original_question_id": "38",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "chem_visualizer",
+          "description": "分子可视化工具，支持批量生成分子的2D结构图和3D结构图。直接生成图片文件到当前目录。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "molecules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "smiles": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "smiles"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "molecules"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_visualize.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "optimize_geometry",
+          "description": "分子几何优化工具（能量最小化）。基于分子力场进行能量最小化，优化分子的三维几何构型。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              },
+              "force_field": {
+                "type": "string",
+                "enum": [
+                  "MMFF",
+                  "UFF"
+                ]
+              },
+              "max_iters": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "smiles",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_3d_properties",
+          "description": "计算分子的3D几何性质和形状描述符。基于主惯性矩分析分子的三维形状特征。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "ETKDG",
+                  "ETKDGv3",
+                  "basic"
+                ]
+              },
+              "conf_id": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "smiles",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./chemistry_tools/molecule_analyzer.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "在298 K下，对四个C10H16异构体（myrcene、limonene、α-terpinene、γ-terpinene）分别在MMFF94与UFF两种力场下，基于给定的构象相对能量ΔE（kcal/mol）、NPR1与半径矩Rg（Å），进行玻尔兹曼加权统计。常数与定义：T=298 K，kBT=0.593 kcal/mol；玻尔兹曼权重 wi = exp(-ΔEi/kBT)/Σj exp(-ΔEj/kBT)；以各异构体的加权⟨NPR1⟩与⟨Rg⟩为基础定义异构体多样性指数 IDI = σ(NPR1) × σ(Rg) × 100，其中σ为总体标准差（分母为4）。\n已知数据（每个异构体各3个构象；单位：ΔE为kcal/mol，Rg为Å）：\nA) MMFF94\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.82；confB: ΔE=0.50, NPR1=0.39, Rg=2.78；confC: ΔE=1.20, NPR1=0.41, Rg=2.74（ΔEmax=1.20）\n- α-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.46；confB: ΔE=0.60, NPR1=0.57, Rg=2.43；confC: ΔE=1.50, NPR1=0.53, Rg=2.41（ΔEmax=1.50）\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.54, Rg=2.44；confB: ΔE=0.40, NPR1=0.56, Rg=2.41；confC: ΔE=1.00, NPR1=0.52, Rg=2.40（ΔEmax=1.00）\n- limonene：confA: ΔE=0.00, NPR1=0.50, Rg=2.36；confB: ΔE=0.55, NPR1=0.53, Rg=2.34；confC: ΔE=1.30, NPR1=0.49, Rg=2.33（ΔEmax=1.30）\nB) UFF（各异构体ΔE集合相同：0.00、0.45、1.10；ΔEmax=1.10）\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.80；confB: ΔE=0.45, NPR1=0.39, Rg=2.77；confC: ΔE=1.10, NPR1=0.42, Rg=2.73\n- α-terpinene：confA: ΔE=0.00, NPR1=0.56, Rg=2.47；confB: ΔE=0.45, NPR1=0.58, Rg=2.44；confC: ΔE=1.10, NPR1=0.54, Rg=2.42\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.45；confB: ΔE=0.45, NPR1=0.57, Rg=2.42；confC: ΔE=1.10, NPR1=0.53, Rg=2.41\n- limonene：confA: ΔE=0.00, NPR1=0.51, Rg=2.35；confB: ΔE=0.45, NPR1=0.54, Rg=2.33；confC: ΔE=1.10, NPR1=0.50, Rg=2.32\n任务：\n(1) 计算各异构体在两种力场下的玻尔兹曼权重wi，并据此求⟨NPR1⟩与⟨Rg⟩；同时报告每个异构体的构象数量与ΔEmax。数值均保留3位小数；ΔEmax按给定小数位保留；Rg单位为Å。\n(2) 计算IDI_MMFF与IDI_UFF（保留2位小数），并同时给出σ(NPR1)与σ(Rg)以便核对（至少保留3位小数；σ(Rg)单位为Å）。\n(3) 检查各异构体权重和，报告每个异构体的Σwi（保留3位小数）。\n(4) 以加权⟨Rg⟩检验趋势：Rg(myrcene) ≥ Rg(α/γ-terpinene) ≥ Rg(limonene)。判定“通过”或“未通过”。\n(5) 以MMFF94为基准，判断两力场IDI相对偏差是否≤10%且(4)判定通过。若满足则给出“一致”，否则给出“不确定”，并简述可能原因（文字精炼）。\n除(5)外，其余小问需给出数值结果；单位按上文规定。",
+      "final_answer": {
+        "(1) 玻尔兹曼权重、加权均值与构象信息": {
+          "MMFF94": {
+            "myrcene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.2,
+              "weights_[confA,confB,confC]": [
+                0.64,
+                0.276,
+                0.085
+              ],
+              "avg_NPR1": 0.373,
+              "avg_Rg_Ang": 2.805
+            },
+            "alpha-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.5,
+              "weights_[confA,confB,confC]": [
+                0.693,
+                0.251,
+                0.056
+              ],
+              "avg_NPR1": 0.554,
+              "avg_Rg_Ang": 2.45
+            },
+            "gamma-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.0,
+              "weights_[confA,confB,confC]": [
+                0.59,
+                0.301,
+                0.109
+              ],
+              "avg_NPR1": 0.544,
+              "avg_Rg_Ang": 2.425
+            },
+            "limonene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.3,
+              "weights_[confA,confB,confC]": [
+                0.664,
+                0.262,
+                0.074
+              ],
+              "avg_NPR1": 0.507,
+              "avg_Rg_Ang": 2.349
+            }
+          },
+          "UFF": {
+            "myrcene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.374,
+              "avg_Rg_Ang": 2.785
+            },
+            "alpha-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.564,
+              "avg_Rg_Ang": 2.455
+            },
+            "gamma-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.554,
+              "avg_Rg_Ang": 2.438
+            },
+            "limonene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.518,
+              "avg_Rg_Ang": 2.342
+            }
+          }
+        },
+        "(2) σ与IDI": {
+          "MMFF94": {
+            "sigma_NPR1": 0.0723,
+            "sigma_Rg_Ang": 0.1759,
+            "IDI": 1.27
+          },
+          "UFF": {
+            "sigma_NPR1": 0.0762,
+            "sigma_Rg_Ang": 0.1673,
+            "IDI": 1.28
+          }
+        },
+        "(3) 权重和校验 Σwi": {
+          "MMFF94": {
+            "myrcene": 1.001,
+            "alpha-terpinene": 1.0,
+            "gamma-terpinene": 1.0,
+            "limonene": 1.0
+          },
+          "UFF": {
+            "myrcene": 1.0,
+            "alpha-terpinene": 1.0,
+            "gamma-terpinene": 1.0,
+            "limonene": 1.0
+          }
+        },
+        "(4) 趋势性约束检验": {
+          "MMFF94_based_on_avg_Rg": "通过",
+          "UFF_based_on_avg_Rg": "通过"
+        },
+        "(5) 方法一致性判定": {
+          "relative_deviation_percent_MMFF_baseline": 0.79,
+          "consistency": "一致",
+          "possible_causes_brief": [
+            "两力场势能面与参数化差异导致构象相对能与权重略有不同",
+            "能量窗口与加权对NPR1与Rg的敏感性造成小幅差异"
+          ]
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "化学科学",
+      "topic": "有机化学",
+      "test_type": "refined",
+      "original_question_id": "38",
+      "subject_topic_key": "化学科学::有机化学"
+    }
+  },
+  "model": "gpt-4o",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "在298 K下，对四个C10H16异构体（myrcene、limonene、α-terpinene、γ-terpinene）分别在MMFF94与UFF两种力场下，基于给定的构象相对能量ΔE（kcal/mol）、NPR1与半径矩Rg（Å），进行玻尔兹曼加权统计。常数与定义：T=298 K，kBT=0.593 kcal/mol；玻尔兹曼权重 wi = exp(-ΔEi/kBT)/Σj exp(-ΔEj/kBT)；以各异构体的加权⟨NPR1⟩与⟨Rg⟩为基础定义异构体多样性指数 IDI = σ(NPR1) × σ(Rg) × 100，其中σ为总体标准差（分母为4）。\n已知数据（每个异构体各3个构象；单位：ΔE为kcal/mol，Rg为Å）：\nA) MMFF94\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.82；confB: ΔE=0.50, NPR1=0.39, Rg=2.78；confC: ΔE=1.20, NPR1=0.41, Rg=2.74（ΔEmax=1.20）\n- α-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.46；confB: ΔE=0.60, NPR1=0.57, Rg=2.43；confC: ΔE=1.50, NPR1=0.53, Rg=2.41（ΔEmax=1.50）\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.54, Rg=2.44；confB: ΔE=0.40, NPR1=0.56, Rg=2.41；confC: ΔE=1.00, NPR1=0.52, Rg=2.40（ΔEmax=1.00）\n- limonene：confA: ΔE=0.00, NPR1=0.50, Rg=2.36；confB: ΔE=0.55, NPR1=0.53, Rg=2.34；confC: ΔE=1.30, NPR1=0.49, Rg=2.33（ΔEmax=1.30）\nB) UFF（各异构体ΔE集合相同：0.00、0.45、1.10；ΔEmax=1.10）\n- myrcene：confA: ΔE=0.00, NPR1=0.36, Rg=2.80；confB: ΔE=0.45, NPR1=0.39, Rg=2.77；confC: ΔE=1.10, NPR1=0.42, Rg=2.73\n- α-terpinene：confA: ΔE=0.00, NPR1=0.56, Rg=2.47；confB: ΔE=0.45, NPR1=0.58, Rg=2.44；confC: ΔE=1.10, NPR1=0.54, Rg=2.42\n- γ-terpinene：confA: ΔE=0.00, NPR1=0.55, Rg=2.45；confB: ΔE=0.45, NPR1=0.57, Rg=2.42；confC: ΔE=1.10, NPR1=0.53, Rg=2.41\n- limonene：confA: ΔE=0.00, NPR1=0.51, Rg=2.35；confB: ΔE=0.45, NPR1=0.54, Rg=2.33；confC: ΔE=1.10, NPR1=0.50, Rg=2.32\n任务：\n(1) 计算各异构体在两种力场下的玻尔兹曼权重wi，并据此求⟨NPR1⟩与⟨Rg⟩；同时报告每个异构体的构象数量与ΔEmax。数值均保留3位小数；ΔEmax按给定小数位保留；Rg单位为Å。\n(2) 计算IDI_MMFF与IDI_UFF（保留2位小数），并同时给出σ(NPR1)与σ(Rg)以便核对（至少保留3位小数；σ(Rg)单位为Å）。\n(3) 检查各异构体权重和，报告每个异构体的Σwi（保留3位小数）。\n(4) 以加权⟨Rg⟩检验趋势：Rg(myrcene) ≥ Rg(α/γ-terpinene) ≥ Rg(limonene)。判定“通过”或“未通过”。\n(5) 以MMFF94为基准，判断两力场IDI相对偏差是否≤10%且(4)判定通过。若满足则给出“一致”，否则给出“不确定”，并简述可能原因（文字精炼）。\n除(5)外，其余小问需给出数值结果；单位按上文规定。"
+    },
+    {
+      "role": "assistant",
+      "content": "(1) 计算玻尔兹曼权重wi，⟨NPR1⟩与⟨Rg⟩：\n\nA) MMFF94\n\n- myrcene：\n  - confA: wi = exp(0/0.593) / Σ = 0.645\n  - confB: wi = exp(-0.50/0.593) / Σ = 0.254\n  - confC: wi = exp(-1.20/0.593) / Σ = 0.101\n  - ⟨NPR1⟩ = 0.645 * 0.36 + 0.254 * 0.39 + 0.101 * 0.41 = 0.379\n  - ⟨Rg⟩ = 0.645 * 2.82 + 0.254 * 2.78 + 0.101 * 2.74 = 2.79\n  - 构象数量: 3, ΔEmax: 1.20\n\n- α-terpinene：\n  - confA: wi = exp(0/0.593) / Σ = 0.630\n  - confB: wi = exp(-0.60/0.593) / Σ = 0.249\n  - confC: wi = exp(-1.50/0.593) / Σ = 0.121\n  - ⟨NPR1⟩ = 0.630 * 0.55 + 0.249 * 0.57 + 0.121 * 0.53 = 0.554\n  - ⟨Rg⟩ = 0.630 * 2.46 + 0.249 * 2.43 + 0.121 * 2.41 = 2.44\n  - 构象数量: 3, ΔEmax: 1.50\n\n- γ-terpinene：\n  - confA: wi = exp(0/0.593) / Σ = 0.654\n  - confB: wi = exp(-0.40/0.593) / Σ = 0.276\n  - confC: wi = exp(-1.00/0.593) / Σ = 0.070\n  - ⟨NPR1⟩ = 0.654 * 0.54 + 0.276 * 0.56 + 0.070 * 0.52 = 0.546\n  - ⟨Rg⟩ = 0.654 * 2.44 + 0.276 * 2.41 + 0.070 * 2.40 = 2.43\n  - 构象数量: 3, ΔEmax: 1.00\n\n- limonene：\n  - confA: wi = exp(0/0.593) / Σ = 0.633\n  - confB: wi = exp(-0.55/0.593) / Σ = 0.246\n  - confC: wi = exp(-1.30/0.593) / Σ = 0.121\n  - ⟨NPR1⟩ = 0.633 * 0.50 + 0.246 * 0.53 + 0.121 * 0.49 = 0.510\n  - ⟨Rg⟩ = 0.633 * 2.36 + 0.246 * 2.34 + 0.121 * 2.33 = 2.35\n  - 构象数量: 3, ΔEmax: 1.30\n\nB) UFF\n\n- myrcene：\n  - confA: wi = exp(0/0.593) / Σ = 0.637\n  - confB: wi = exp(-0.45/0.593) / Σ = 0.273\n  - confC: wi = exp(-1.10/0.593) / Σ = 0.090\n  - ⟨NPR1⟩ = 0.637 * 0.36 + 0.273 * 0.39 + 0.090 * 0.42 = 0.379\n  - ⟨Rg⟩ = 0.637 * 2.80 + 0.273 * 2.77 + 0.090 * 2.73 = 2.78\n  - 构象数量: 3, ΔEmax: 1.10\n\n- α-terpinene：\n  - confA: wi = exp(0/0.593) / Σ = 0.637\n  - confB: wi = exp(-0.45/0.593) / Σ = 0.273\n  - confC: wi = exp(-1.10/0.593) / Σ = 0.090\n  - ⟨NPR1⟩ = 0.637 * 0.56 + 0.273 * 0.58 + 0.090 * 0.54 = 0.564\n  - ⟨Rg⟩ = 0.637 * 2.47 + 0.273 * 2.44 + 0.090 * 2.42 = 2.45\n  - 构象数量: 3, ΔEmax: 1.10\n\n- γ-terpinene：\n  - confA: wi = exp(0/0.593) / Σ = 0.637\n  - confB: wi = exp(-0.45/0.593) / Σ = 0.273\n  - confC: wi = exp(-1.10/0.593) / Σ = 0.090\n  - ⟨NPR1⟩ = 0.637 * 0.55 + 0.273 * 0.57 + 0.090 * 0.53 = 0.556\n  - ⟨Rg⟩ = 0.637 * 2.45 + 0.273 * 2.42 + 0.090 * 2.41 = 2.44\n  - 构象数量: 3, ΔEmax: 1.10\n\n- limonene：\n  - confA: wi = exp(0/0.593) / Σ = 0.637\n  - confB: wi = exp(-0.45/0.593) / Σ = 0.273\n  - confC: wi = exp(-1.10/0.593) / Σ = 0.090\n  - ⟨NPR1⟩ = 0.637 * 0.51 + 0.273 * 0.54 + 0.090 * 0.50 = 0.519\n  - ⟨Rg⟩ = 0.637 * 2.35 + 0.273 * 2.33 + 0.090 * 2.32 = 2.34\n  - 构象数量: 3, ΔEmax: 1.10\n\n(2) 计算IDI_MMFF与IDI_UFF：\n\nA) MMFF94\n\n- σ(NPR1) = sqrt((Σ(wi * (NPR1i - ⟨NPR1⟩)^2))/4) = sqrt(((0.645 * (0.36-0.379)^2) + (0.254 * (0.39-0.379)^2) + (0.101 * (0.41-0.379)^2))/4) = 0.018\n- σ(Rg) = sqrt((Σ(wi * (Rgi - ⟨Rg⟩)^2))/4) = sqrt(((0.645 * (2.82-2.79)^2) + (0.254 * (2.78-2.79)^2) + (0.101 * (2.74-2.79)^2))/4) = 0.027 Å\n- IDI_MMFF = σ(NPR1) × σ(Rg) × 100 = 0.018 × 0.027 × 100 = 0.049\n\nB) UFF\n\n- σ(NPR1) = sqrt(((0.637 * (0.36-0.379)^2) + (0.273 * (0.39-0.379)^2) + (0.090 * (0.42-0.379)^2))/4) = 0.019\n- σ(Rg) = sqrt(((0.637 * (2.80-2.78)^2) + (0.273 * (2.77-2.78)^2) + (0.090 * (2.73-2.78)^2))/4) = 0.028 Å\n- IDI_UFF = σ(NPR1) × σ(Rg) × 100 = 0.019 × 0.028 × 100 = 0.053\n\n(3) 检查权重和Σwi：\n\n- myrcene (MMFF94): Σwi = 0.645 + 0.254 + 0.101 = 1.000\n- α-terpinene (MMFF94): Σwi = 0.630 + 0.249 + 0.121 = 1.000\n- γ-terpinene (MMFF94): Σwi = 0.654 + 0.276 + 0.070 = 1.000\n- limonene (MMFF94): Σwi = 0.633 + 0.246 + 0.121 = 1.000\n\n- myrcene (UFF): Σwi = 0.637 + 0.273 + 0.090 = 1.000\n- α-terpinene (UFF): Σwi = 0.637 + 0.273 + 0.090 = 1.000\n- γ-terpinene (UFF): Σwi = 0.637 + 0.273 + 0.090 = 1.000\n- limonene (UFF): Σwi = 0.637 + 0.273 + 0.090 = 1.000\n\n(4) 检验趋势：\n\n- MMFF94: Rg(myrcene) = 2.79, Rg(α-terpinene) = 2.44, Rg(γ-terpinene) = 2.43, Rg(limonene) = 2.35\n- UFF: Rg(myrcene) = 2.78, Rg(α-terpinene) = 2.45, Rg(γ-terpinene) = 2.44, Rg(limonene) = 2.34\n\n趋势检验：Rg(myrcene) ≥ Rg(α/γ-terpinene) ≥ Rg(limonene) \"通过\"\n\n(5) 判断一致性：\n\n- IDI_MMFF = 0.049, IDI_UFF = 0.053，偏差 = (0.053 - 0.049)/0.049 = 0.0816 ≈ 8.16%，≤10%\n- 趋势检验通过\n\n结论：\"一致\"\n\n可能原因：两种力场对异构体的构象能量分布较为相似，导致各异构体的结构参数加权平均接近，从而确保了相对偏差与趋势的一致性。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1) 玻尔兹曼权重、加权均值与构象信息\": {\n    \"MMFF94\": {\n      \"myrcene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      },\n      \"limonene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      }\n    },\n    \"UFF\": {\n      \"myrcene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      },\n      \"limonene\": {\n        \"conformers_count\": \"[数值]\",\n        \"DeltaE_max_kcal_per_mol\": \"[数值]\",\n        \"weights_[confA,confB,confC]\": \"[3个数值的数组]\",\n        \"avg_NPR1\": \"[数值]\",\n        \"avg_Rg_Ang\": \"[数值]\"\n      }\n    }\n  },\n  \"(2) σ与IDI\": {\n    \"MMFF94\": {\n      \"sigma_NPR1\": \"[数值]\",\n      \"sigma_Rg_Ang\": \"[数值]\",\n      \"IDI\": \"[数值]\"\n    },\n    \"UFF\": {\n      \"sigma_NPR1\": \"[数值]\",\n      \"sigma_Rg_Ang\": \"[数值]\",\n      \"IDI\": \"[数值]\"\n    }\n  },\n  \"(3) 权重和校验 Σwi\": {\n    \"MMFF94\": {\n      \"myrcene\": \"[数值]\",\n      \"alpha-terpinene\": \"[数值]\",\n      \"gamma-terpinene\": \"[数值]\",\n      \"limonene\": \"[数值]\"\n    },\n    \"UFF\": {\n      \"myrcene\": \"[数值]\",\n      \"alpha-terpinene\": \"[数值]\",\n      \"gamma-terpinene\": \"[数值]\",\n      \"limonene\": \"[数值]\"\n    }\n  },\n  \"(4) 趋势性约束检验\": {\n    \"MMFF94_based_on_avg_Rg\": \"[字符串]\",\n    \"UFF_based_on_avg_Rg\": \"[字符串]\"\n  },\n  \"(5) 方法一致性判定\": {\n    \"relative_deviation_percent_MMFF_baseline\": \"[数值]\",\n    \"consistency\": \"[字符串]\",\n    \"possible_causes_brief\": \"[2个字符串的数组]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1) 玻尔兹曼权重、加权均值与构象信息\": {\n    \"MMFF94\": {\n      \"myrcene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.20,\n        \"weights_[confA,confB,confC]\": [0.645, 0.254, 0.101],\n        \"avg_NPR1\": 0.379,\n        \"avg_Rg_Ang\": 2.79\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.50,\n        \"weights_[confA,confB,confC]\": [0.630, 0.249, 0.121],\n        \"avg_NPR1\": 0.554,\n        \"avg_Rg_Ang\": 2.44\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.00,\n        \"weights_[confA,confB,confC]\": [0.654, 0.276, 0.070],\n        \"avg_NPR1\": 0.546,\n        \"avg_Rg_Ang\": 2.43\n      },\n      \"limonene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.30,\n        \"weights_[confA,confB,confC]\": [0.633, 0.246, 0.121],\n        \"avg_NPR1\": 0.510,\n        \"avg_Rg_Ang\": 2.35\n      }\n    },\n    \"UFF\": {\n      \"myrcene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.379,\n        \"avg_Rg_Ang\": 2.78\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.564,\n        \"avg_Rg_Ang\": 2.45\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.556,\n        \"avg_Rg_Ang\": 2.44\n      },\n      \"limonene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.519,\n        \"avg_Rg_Ang\": 2.34\n      }\n    }\n  },\n  \"(2) σ与IDI\": {\n    \"MMFF94\": {\n      \"sigma_NPR1\": 0.018,\n      \"sigma_Rg_Ang\": 0.027,\n      \"IDI\": 0.049\n    },\n    \"UFF\": {\n      \"sigma_NPR1\": 0.019,\n      \"sigma_Rg_Ang\": 0.028,\n      \"IDI\": 0.053\n    }\n  },\n  \"(3) 权重和校验 Σwi\": {\n    \"MMFF94\": {\n      \"myrcene\": 1.000,\n      \"alpha-terpinene\": 1.000,\n      \"gamma-terpinene\": 1.000,\n      \"limonene\": 1.000\n    },\n    \"UFF\": {\n      \"myrcene\": 1.000,\n      \"alpha-terpinene\": 1.000,\n      \"gamma-terpinene\": 1.000,\n      \"limonene\": 1.000\n    }\n  },\n  \"(4) 趋势性约束检验\": {\n    \"MMFF94_based_on_avg_Rg\": \"通过\",\n    \"UFF_based_on_avg_Rg\": \"通过\"\n  },\n  \"(5) 方法一致性判定\": {\n    \"relative_deviation_percent_MMFF_baseline\": 8.16,\n    \"consistency\": \"一致\",\n    \"possible_causes_brief\": [\"力场相似性\", \"结构参数接近\"]\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "化学科学",
+    "topic": "有机化学",
+    "image_path": [],
+    "solution_steps": [
+      "定义四种单萜异构体的SMILES (C₁₀H₁₆)：myrcene (CC(=C)CCC=C(C)C=C), limonene (CC(=C)C1CCC(=C)CC1), alpha-terpinene (CC(C)C1=CCC(=CC1)C), gamma-terpinene (CC1=CCC(=C(C)C)CC1)",
+      "调用 chem_visualizer 生成四个分子的2D和3D可视化图像",
+      "对每个分子调用 optimize_geometry 和 get_3d_properties 计算NPR1和回转半径Rg",
+      "获取四个异构体的NPR1和Rg：myrcene (NPR1=0.1243, Rg=2.904), limonene (NPR1=0.2837, Rg=2.278), alpha-terpinene (NPR1=0.2051, Rg=2.431), gamma-terpinene (NPR1=0.2334, Rg=2.377)",
+      "计算标准差：σ(NPR1)=0.0667, σ(Rg)=0.278 Å",
+      "计算IDI：IDI = 0.0667 × 0.278 × 100 = 1.85"
+    ],
+    "tool_expected": [
+      "chem_visualizer",
+      "optimize_geometry",
+      "get_3d_properties"
+    ],
+    "golden_answer": [
+      {
+        "(1) 玻尔兹曼权重、加权均值与构象信息": {
+          "MMFF94": {
+            "myrcene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.2,
+              "weights_[confA,confB,confC]": [
+                0.64,
+                0.276,
+                0.085
+              ],
+              "avg_NPR1": 0.373,
+              "avg_Rg_Ang": 2.805
+            },
+            "alpha-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.5,
+              "weights_[confA,confB,confC]": [
+                0.693,
+                0.251,
+                0.056
+              ],
+              "avg_NPR1": 0.554,
+              "avg_Rg_Ang": 2.45
+            },
+            "gamma-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.0,
+              "weights_[confA,confB,confC]": [
+                0.59,
+                0.301,
+                0.109
+              ],
+              "avg_NPR1": 0.544,
+              "avg_Rg_Ang": 2.425
+            },
+            "limonene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.3,
+              "weights_[confA,confB,confC]": [
+                0.664,
+                0.262,
+                0.074
+              ],
+              "avg_NPR1": 0.507,
+              "avg_Rg_Ang": 2.349
+            }
+          },
+          "UFF": {
+            "myrcene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.374,
+              "avg_Rg_Ang": 2.785
+            },
+            "alpha-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.564,
+              "avg_Rg_Ang": 2.455
+            },
+            "gamma-terpinene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.554,
+              "avg_Rg_Ang": 2.438
+            },
+            "limonene": {
+              "conformers_count": 3,
+              "DeltaE_max_kcal_per_mol": 1.1,
+              "weights_[confA,confB,confC]": [
+                0.616,
+                0.288,
+                0.096
+              ],
+              "avg_NPR1": 0.518,
+              "avg_Rg_Ang": 2.342
+            }
+          }
+        },
+        "(2) σ与IDI": {
+          "MMFF94": {
+            "sigma_NPR1": 0.0723,
+            "sigma_Rg_Ang": 0.1759,
+            "IDI": 1.27
+          },
+          "UFF": {
+            "sigma_NPR1": 0.0762,
+            "sigma_Rg_Ang": 0.1673,
+            "IDI": 1.28
+          }
+        },
+        "(3) 权重和校验 Σwi": {
+          "MMFF94": {
+            "myrcene": 1.001,
+            "alpha-terpinene": 1.0,
+            "gamma-terpinene": 1.0,
+            "limonene": 1.0
+          },
+          "UFF": {
+            "myrcene": 1.0,
+            "alpha-terpinene": 1.0,
+            "gamma-terpinene": 1.0,
+            "limonene": 1.0
+          }
+        },
+        "(4) 趋势性约束检验": {
+          "MMFF94_based_on_avg_Rg": "通过",
+          "UFF_based_on_avg_Rg": "通过"
+        },
+        "(5) 方法一致性判定": {
+          "relative_deviation_percent_MMFF_baseline": 0.79,
+          "consistency": "一致",
+          "possible_causes_brief": [
+            "两力场势能面与参数化差异导致构象相对能与权重略有不同",
+            "能量窗口与加权对NPR1与Rg的敏感性造成小幅差异"
+          ]
+        }
+      }
+    ],
+    "original_question_id": "38",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+  },
+  "metadata_summary": {
+    "subject": "化学科学",
+    "topic": "有机化学",
+    "test_type": "refined",
+    "original_question_id": "38",
+    "subject_topic_key": "化学科学::有机化学"
+  },
+  "answer_template": {
+    "(1) 玻尔兹曼权重、加权均值与构象信息": {
+      "MMFF94": {
+        "myrcene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        },
+        "alpha-terpinene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        },
+        "gamma-terpinene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        },
+        "limonene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        }
+      },
+      "UFF": {
+        "myrcene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        },
+        "alpha-terpinene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        },
+        "gamma-terpinene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        },
+        "limonene": {
+          "conformers_count": "[数值]",
+          "DeltaE_max_kcal_per_mol": "[数值]",
+          "weights_[confA,confB,confC]": "[3个数值的数组]",
+          "avg_NPR1": "[数值]",
+          "avg_Rg_Ang": "[数值]"
+        }
+      }
+    },
+    "(2) σ与IDI": {
+      "MMFF94": {
+        "sigma_NPR1": "[数值]",
+        "sigma_Rg_Ang": "[数值]",
+        "IDI": "[数值]"
+      },
+      "UFF": {
+        "sigma_NPR1": "[数值]",
+        "sigma_Rg_Ang": "[数值]",
+        "IDI": "[数值]"
+      }
+    },
+    "(3) 权重和校验 Σwi": {
+      "MMFF94": {
+        "myrcene": "[数值]",
+        "alpha-terpinene": "[数值]",
+        "gamma-terpinene": "[数值]",
+        "limonene": "[数值]"
+      },
+      "UFF": {
+        "myrcene": "[数值]",
+        "alpha-terpinene": "[数值]",
+        "gamma-terpinene": "[数值]",
+        "limonene": "[数值]"
+      }
+    },
+    "(4) 趋势性约束检验": {
+      "MMFF94_based_on_avg_Rg": "[字符串]",
+      "UFF_based_on_avg_Rg": "[字符串]"
+    },
+    "(5) 方法一致性判定": {
+      "relative_deviation_percent_MMFF_baseline": "[数值]",
+      "consistency": "[字符串]",
+      "possible_causes_brief": "[2个字符串的数组]"
+    }
+  },
+  "golden_standard": {
+    "(1) 玻尔兹曼权重、加权均值与构象信息": {
+      "MMFF94": {
+        "myrcene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.2,
+          "weights_[confA,confB,confC]": [
+            0.64,
+            0.276,
+            0.085
+          ],
+          "avg_NPR1": 0.373,
+          "avg_Rg_Ang": 2.805
+        },
+        "alpha-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.5,
+          "weights_[confA,confB,confC]": [
+            0.693,
+            0.251,
+            0.056
+          ],
+          "avg_NPR1": 0.554,
+          "avg_Rg_Ang": 2.45
+        },
+        "gamma-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.0,
+          "weights_[confA,confB,confC]": [
+            0.59,
+            0.301,
+            0.109
+          ],
+          "avg_NPR1": 0.544,
+          "avg_Rg_Ang": 2.425
+        },
+        "limonene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.3,
+          "weights_[confA,confB,confC]": [
+            0.664,
+            0.262,
+            0.074
+          ],
+          "avg_NPR1": 0.507,
+          "avg_Rg_Ang": 2.349
+        }
+      },
+      "UFF": {
+        "myrcene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.616,
+            0.288,
+            0.096
+          ],
+          "avg_NPR1": 0.374,
+          "avg_Rg_Ang": 2.785
+        },
+        "alpha-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.616,
+            0.288,
+            0.096
+          ],
+          "avg_NPR1": 0.564,
+          "avg_Rg_Ang": 2.455
+        },
+        "gamma-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.616,
+            0.288,
+            0.096
+          ],
+          "avg_NPR1": 0.554,
+          "avg_Rg_Ang": 2.438
+        },
+        "limonene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.616,
+            0.288,
+            0.096
+          ],
+          "avg_NPR1": 0.518,
+          "avg_Rg_Ang": 2.342
+        }
+      }
+    },
+    "(2) σ与IDI": {
+      "MMFF94": {
+        "sigma_NPR1": 0.0723,
+        "sigma_Rg_Ang": 0.1759,
+        "IDI": 1.27
+      },
+      "UFF": {
+        "sigma_NPR1": 0.0762,
+        "sigma_Rg_Ang": 0.1673,
+        "IDI": 1.28
+      }
+    },
+    "(3) 权重和校验 Σwi": {
+      "MMFF94": {
+        "myrcene": 1.001,
+        "alpha-terpinene": 1.0,
+        "gamma-terpinene": 1.0,
+        "limonene": 1.0
+      },
+      "UFF": {
+        "myrcene": 1.0,
+        "alpha-terpinene": 1.0,
+        "gamma-terpinene": 1.0,
+        "limonene": 1.0
+      }
+    },
+    "(4) 趋势性约束检验": {
+      "MMFF94_based_on_avg_Rg": "通过",
+      "UFF_based_on_avg_Rg": "通过"
+    },
+    "(5) 方法一致性判定": {
+      "relative_deviation_percent_MMFF_baseline": 0.79,
+      "consistency": "一致",
+      "possible_causes_brief": [
+        "两力场势能面与参数化差异导致构象相对能与权重略有不同",
+        "能量窗口与加权对NPR1与Rg的敏感性造成小幅差异"
+      ]
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1) 玻尔兹曼权重、加权均值与构象信息": {
+      "MMFF94": {
+        "myrcene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.2,
+          "weights_[confA,confB,confC]": [
+            0.645,
+            0.254,
+            0.101
+          ],
+          "avg_NPR1": 0.379,
+          "avg_Rg_Ang": 2.79
+        },
+        "alpha-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.5,
+          "weights_[confA,confB,confC]": [
+            0.63,
+            0.249,
+            0.121
+          ],
+          "avg_NPR1": 0.554,
+          "avg_Rg_Ang": 2.44
+        },
+        "gamma-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.0,
+          "weights_[confA,confB,confC]": [
+            0.654,
+            0.276,
+            0.07
+          ],
+          "avg_NPR1": 0.546,
+          "avg_Rg_Ang": 2.43
+        },
+        "limonene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.3,
+          "weights_[confA,confB,confC]": [
+            0.633,
+            0.246,
+            0.121
+          ],
+          "avg_NPR1": 0.51,
+          "avg_Rg_Ang": 2.35
+        }
+      },
+      "UFF": {
+        "myrcene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.637,
+            0.273,
+            0.09
+          ],
+          "avg_NPR1": 0.379,
+          "avg_Rg_Ang": 2.78
+        },
+        "alpha-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.637,
+            0.273,
+            0.09
+          ],
+          "avg_NPR1": 0.564,
+          "avg_Rg_Ang": 2.45
+        },
+        "gamma-terpinene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.637,
+            0.273,
+            0.09
+          ],
+          "avg_NPR1": 0.556,
+          "avg_Rg_Ang": 2.44
+        },
+        "limonene": {
+          "conformers_count": 3,
+          "DeltaE_max_kcal_per_mol": 1.1,
+          "weights_[confA,confB,confC]": [
+            0.637,
+            0.273,
+            0.09
+          ],
+          "avg_NPR1": 0.519,
+          "avg_Rg_Ang": 2.34
+        }
+      }
+    },
+    "(2) σ与IDI": {
+      "MMFF94": {
+        "sigma_NPR1": 0.018,
+        "sigma_Rg_Ang": 0.027,
+        "IDI": 0.049
+      },
+      "UFF": {
+        "sigma_NPR1": 0.019,
+        "sigma_Rg_Ang": 0.028,
+        "IDI": 0.053
+      }
+    },
+    "(3) 权重和校验 Σwi": {
+      "MMFF94": {
+        "myrcene": 1.0,
+        "alpha-terpinene": 1.0,
+        "gamma-terpinene": 1.0,
+        "limonene": 1.0
+      },
+      "UFF": {
+        "myrcene": 1.0,
+        "alpha-terpinene": 1.0,
+        "gamma-terpinene": 1.0,
+        "limonene": 1.0
+      }
+    },
+    "(4) 趋势性约束检验": {
+      "MMFF94_based_on_avg_Rg": "通过",
+      "UFF_based_on_avg_Rg": "通过"
+    },
+    "(5) 方法一致性判定": {
+      "relative_deviation_percent_MMFF_baseline": 8.16,
+      "consistency": "一致",
+      "possible_causes_brief": [
+        "力场相似性",
+        "结构参数接近"
+      ]
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1) 玻尔兹曼权重、加权均值与构象信息\": {\n    \"MMFF94\": {\n      \"myrcene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.20,\n        \"weights_[confA,confB,confC]\": [0.645, 0.254, 0.101],\n        \"avg_NPR1\": 0.379,\n        \"avg_Rg_Ang\": 2.79\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.50,\n        \"weights_[confA,confB,confC]\": [0.630, 0.249, 0.121],\n        \"avg_NPR1\": 0.554,\n        \"avg_Rg_Ang\": 2.44\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.00,\n        \"weights_[confA,confB,confC]\": [0.654, 0.276, 0.070],\n        \"avg_NPR1\": 0.546,\n        \"avg_Rg_Ang\": 2.43\n      },\n      \"limonene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.30,\n        \"weights_[confA,confB,confC]\": [0.633, 0.246, 0.121],\n        \"avg_NPR1\": 0.510,\n        \"avg_Rg_Ang\": 2.35\n      }\n    },\n    \"UFF\": {\n      \"myrcene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.379,\n        \"avg_Rg_Ang\": 2.78\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.564,\n        \"avg_Rg_Ang\": 2.45\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.556,\n        \"avg_Rg_Ang\": 2.44\n      },\n      \"limonene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.519,\n        \"avg_Rg_Ang\": 2.34\n      }\n    }\n  },\n  \"(2) σ与IDI\": {\n    \"MMFF94\": {\n      \"sigma_NPR1\": 0.018,\n      \"sigma_Rg_Ang\": 0.027,\n      \"IDI\": 0.049\n    },\n    \"UFF\": {\n      \"sigma_NPR1\": 0.019,\n      \"sigma_Rg_Ang\": 0.028,\n      \"IDI\": 0.053\n    }\n  },\n  \"(3) 权重和校验 Σwi\": {\n    \"MMFF94\": {\n      \"myrcene\": 1.000,\n      \"alpha-terpinene\": 1.000,\n      \"gamma-terpinene\": 1.000,\n      \"limonene\": 1.000\n    },\n    \"UFF\": {\n      \"myrcene\": 1.000,\n      \"alpha-terpinene\": 1.000,\n      \"gamma-terpinene\": 1.000,\n      \"limonene\": 1.000\n    }\n  },\n  \"(4) 趋势性约束检验\": {\n    \"MMFF94_based_on_avg_Rg\": \"通过\",\n    \"UFF_based_on_avg_Rg\": \"通过\"\n  },\n  \"(5) 方法一致性判定\": {\n    \"relative_deviation_percent_MMFF_baseline\": 8.16,\n    \"consistency\": \"一致\",\n    \"possible_causes_brief\": [\"力场相似性\", \"结构参数接近\"]\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1) 玻尔兹曼权重、加权均值与构象信息\": {\n    \"MMFF94\": {\n      \"myrcene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.20,\n        \"weights_[confA,confB,confC]\": [0.645, 0.254, 0.101],\n        \"avg_NPR1\": 0.379,\n        \"avg_Rg_Ang\": 2.79\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.50,\n        \"weights_[confA,confB,confC]\": [0.630, 0.249, 0.121],\n        \"avg_NPR1\": 0.554,\n        \"avg_Rg_Ang\": 2.44\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.00,\n        \"weights_[confA,confB,confC]\": [0.654, 0.276, 0.070],\n        \"avg_NPR1\": 0.546,\n        \"avg_Rg_Ang\": 2.43\n      },\n      \"limonene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.30,\n        \"weights_[confA,confB,confC]\": [0.633, 0.246, 0.121],\n        \"avg_NPR1\": 0.510,\n        \"avg_Rg_Ang\": 2.35\n      }\n    },\n    \"UFF\": {\n      \"myrcene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.379,\n        \"avg_Rg_Ang\": 2.78\n      },\n      \"alpha-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.564,\n        \"avg_Rg_Ang\": 2.45\n      },\n      \"gamma-terpinene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.556,\n        \"avg_Rg_Ang\": 2.44\n      },\n      \"limonene\": {\n        \"conformers_count\": 3,\n        \"DeltaE_max_kcal_per_mol\": 1.10,\n        \"weights_[confA,confB,confC]\": [0.637, 0.273, 0.090],\n        \"avg_NPR1\": 0.519,\n        \"avg_Rg_Ang\": 2.34\n      }\n    }\n  },\n  \"(2) σ与IDI\": {\n    \"MMFF94\": {\n      \"sigma_NPR1\": 0.018,\n      \"sigma_Rg_Ang\": 0.027,\n      \"IDI\": 0.049\n    },\n    \"UFF\": {\n      \"sigma_NPR1\": 0.019,\n      \"sigma_Rg_Ang\": 0.028,\n      \"IDI\": 0.053\n    }\n  },\n  \"(3) 权重和校验 Σwi\": {\n    \"MMFF94\": {\n      \"myrcene\": 1.000,\n      \"alpha-terpinene\": 1.000,\n      \"gamma-terpinene\": 1.000,\n      \"limonene\": 1.000\n    },\n    \"UFF\": {\n      \"myrcene\": 1.000,\n      \"alpha-terpinene\": 1.000,\n      \"gamma-terpinene\": 1.000,\n      \"limonene\": 1.000\n    }\n  },\n  \"(4) 趋势性约束检验\": {\n    \"MMFF94_based_on_avg_Rg\": \"通过\",\n    \"UFF_based_on_avg_Rg\": \"通过\"\n  },\n  \"(5) 方法一致性判定\": {\n    \"relative_deviation_percent_MMFF_baseline\": 8.16,\n    \"consistency\": \"一致\",\n    \"possible_causes_brief\": [\"力场相似性\", \"结构参数接近\"]\n  }\n}\n```"
+  },
+  "evaluation_score": 0.8421052631578947,
+  "evaluation_summary": "匹配字段: 64/76 (得分: 84.21%)",
+  "evaluation_details": {
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.DeltaE_max_kcal_per_mol",
+      "expected": 1.2,
+      "actual": 1.2,
+      "expected_num": 1.2,
+      "actual_num": 1.2,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.weights_[confA,confB,confC][0]",
+      "expected": 0.64,
+      "actual": 0.645,
+      "expected_num": 0.64,
+      "actual_num": 0.645,
+      "expected_rounded": 0.64,
+      "actual_rounded": 0.65,
+      "absolute_error": 0.0050000000000000044,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.weights_[confA,confB,confC][1]",
+      "expected": 0.276,
+      "actual": 0.254,
+      "expected_num": 0.276,
+      "actual_num": 0.254,
+      "expected_rounded": 0.28,
+      "actual_rounded": 0.25,
+      "absolute_error": 0.02200000000000002,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.weights_[confA,confB,confC][2]",
+      "expected": 0.085,
+      "actual": 0.101,
+      "expected_num": 0.085,
+      "actual_num": 0.101,
+      "expected_rounded": 0.09,
+      "actual_rounded": 0.1,
+      "absolute_error": 0.016,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.avg_NPR1",
+      "expected": 0.373,
+      "actual": 0.379,
+      "expected_num": 0.373,
+      "actual_num": 0.379,
+      "expected_rounded": 0.37,
+      "actual_rounded": 0.38,
+      "absolute_error": 0.006000000000000005,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.myrcene.avg_Rg_Ang",
+      "expected": 2.805,
+      "actual": 2.79,
+      "expected_num": 2.805,
+      "actual_num": 2.79,
+      "expected_rounded": 2.81,
+      "actual_rounded": 2.79,
+      "relative_error": 0.0053475935828877445,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.DeltaE_max_kcal_per_mol",
+      "expected": 1.5,
+      "actual": 1.5,
+      "expected_num": 1.5,
+      "actual_num": 1.5,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.weights_[confA,confB,confC][0]",
+      "expected": 0.693,
+      "actual": 0.63,
+      "expected_num": 0.693,
+      "actual_num": 0.63,
+      "expected_rounded": 0.69,
+      "actual_rounded": 0.63,
+      "absolute_error": 0.06299999999999994,
+      "relative_error": 0.09090909090909084,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.weights_[confA,confB,confC][1]",
+      "expected": 0.251,
+      "actual": 0.249,
+      "expected_num": 0.251,
+      "actual_num": 0.249,
+      "expected_rounded": 0.25,
+      "actual_rounded": 0.25,
+      "error": 0.0020000000000000018,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.weights_[confA,confB,confC][2]",
+      "expected": 0.056,
+      "actual": 0.121,
+      "expected_num": 0.056,
+      "actual_num": 0.121,
+      "expected_rounded": 0.06,
+      "actual_rounded": 0.12,
+      "absolute_error": 0.065,
+      "relative_error": 1.1607142857142858,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.avg_NPR1",
+      "expected": 0.554,
+      "actual": 0.554,
+      "expected_num": 0.554,
+      "actual_num": 0.554,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.alpha-terpinene.avg_Rg_Ang",
+      "expected": 2.45,
+      "actual": 2.44,
+      "expected_num": 2.45,
+      "actual_num": 2.44,
+      "expected_rounded": 2.45,
+      "actual_rounded": 2.44,
+      "relative_error": 0.0040816326530613185,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.DeltaE_max_kcal_per_mol",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.weights_[confA,confB,confC][0]",
+      "expected": 0.59,
+      "actual": 0.654,
+      "expected_num": 0.59,
+      "actual_num": 0.654,
+      "expected_rounded": 0.59,
+      "actual_rounded": 0.65,
+      "absolute_error": 0.06400000000000006,
+      "relative_error": 0.10847457627118655,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.weights_[confA,confB,confC][1]",
+      "expected": 0.301,
+      "actual": 0.276,
+      "expected_num": 0.301,
+      "actual_num": 0.276,
+      "expected_rounded": 0.3,
+      "actual_rounded": 0.28,
+      "absolute_error": 0.024999999999999967,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.weights_[confA,confB,confC][2]",
+      "expected": 0.109,
+      "actual": 0.07,
+      "expected_num": 0.109,
+      "actual_num": 0.07,
+      "expected_rounded": 0.11,
+      "actual_rounded": 0.07,
+      "absolute_error": 0.03899999999999999,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.avg_NPR1",
+      "expected": 0.544,
+      "actual": 0.546,
+      "expected_num": 0.544,
+      "actual_num": 0.546,
+      "expected_rounded": 0.54,
+      "actual_rounded": 0.55,
+      "absolute_error": 0.0020000000000000018,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.gamma-terpinene.avg_Rg_Ang",
+      "expected": 2.425,
+      "actual": 2.43,
+      "expected_num": 2.425,
+      "actual_num": 2.43,
+      "expected_rounded": 2.42,
+      "actual_rounded": 2.43,
+      "relative_error": 0.002061855670103232,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.DeltaE_max_kcal_per_mol",
+      "expected": 1.3,
+      "actual": 1.3,
+      "expected_num": 1.3,
+      "actual_num": 1.3,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.weights_[confA,confB,confC][0]",
+      "expected": 0.664,
+      "actual": 0.633,
+      "expected_num": 0.664,
+      "actual_num": 0.633,
+      "expected_rounded": 0.66,
+      "actual_rounded": 0.63,
+      "absolute_error": 0.031000000000000028,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.weights_[confA,confB,confC][1]",
+      "expected": 0.262,
+      "actual": 0.246,
+      "expected_num": 0.262,
+      "actual_num": 0.246,
+      "expected_rounded": 0.26,
+      "actual_rounded": 0.25,
+      "absolute_error": 0.016000000000000014,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.weights_[confA,confB,confC][2]",
+      "expected": 0.074,
+      "actual": 0.121,
+      "expected_num": 0.074,
+      "actual_num": 0.121,
+      "expected_rounded": 0.07,
+      "actual_rounded": 0.12,
+      "absolute_error": 0.047,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.avg_NPR1",
+      "expected": 0.507,
+      "actual": 0.51,
+      "expected_num": 0.507,
+      "actual_num": 0.51,
+      "expected_rounded": 0.51,
+      "actual_rounded": 0.51,
+      "error": 0.0030000000000000027,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.MMFF94.limonene.avg_Rg_Ang",
+      "expected": 2.349,
+      "actual": 2.35,
+      "expected_num": 2.349,
+      "actual_num": 2.35,
+      "expected_rounded": 2.35,
+      "actual_rounded": 2.35,
+      "error": 0.0009999999999998899,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.DeltaE_max_kcal_per_mol",
+      "expected": 1.1,
+      "actual": 1.1,
+      "expected_num": 1.1,
+      "actual_num": 1.1,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.weights_[confA,confB,confC][0]",
+      "expected": 0.616,
+      "actual": 0.637,
+      "expected_num": 0.616,
+      "actual_num": 0.637,
+      "expected_rounded": 0.62,
+      "actual_rounded": 0.64,
+      "absolute_error": 0.02100000000000002,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.weights_[confA,confB,confC][1]",
+      "expected": 0.288,
+      "actual": 0.273,
+      "expected_num": 0.288,
+      "actual_num": 0.273,
+      "expected_rounded": 0.29,
+      "actual_rounded": 0.27,
+      "absolute_error": 0.014999999999999958,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.weights_[confA,confB,confC][2]",
+      "expected": 0.096,
+      "actual": 0.09,
+      "expected_num": 0.096,
+      "actual_num": 0.09,
+      "expected_rounded": 0.1,
+      "actual_rounded": 0.09,
+      "absolute_error": 0.006000000000000005,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.avg_NPR1",
+      "expected": 0.374,
+      "actual": 0.379,
+      "expected_num": 0.374,
+      "actual_num": 0.379,
+      "expected_rounded": 0.37,
+      "actual_rounded": 0.38,
+      "absolute_error": 0.0050000000000000044,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.myrcene.avg_Rg_Ang",
+      "expected": 2.785,
+      "actual": 2.78,
+      "expected_num": 2.785,
+      "actual_num": 2.78,
+      "expected_rounded": 2.79,
+      "actual_rounded": 2.78,
+      "relative_error": 0.0017953321364453634,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.DeltaE_max_kcal_per_mol",
+      "expected": 1.1,
+      "actual": 1.1,
+      "expected_num": 1.1,
+      "actual_num": 1.1,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.weights_[confA,confB,confC][0]",
+      "expected": 0.616,
+      "actual": 0.637,
+      "expected_num": 0.616,
+      "actual_num": 0.637,
+      "expected_rounded": 0.62,
+      "actual_rounded": 0.64,
+      "absolute_error": 0.02100000000000002,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.weights_[confA,confB,confC][1]",
+      "expected": 0.288,
+      "actual": 0.273,
+      "expected_num": 0.288,
+      "actual_num": 0.273,
+      "expected_rounded": 0.29,
+      "actual_rounded": 0.27,
+      "absolute_error": 0.014999999999999958,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.weights_[confA,confB,confC][2]",
+      "expected": 0.096,
+      "actual": 0.09,
+      "expected_num": 0.096,
+      "actual_num": 0.09,
+      "expected_rounded": 0.1,
+      "actual_rounded": 0.09,
+      "absolute_error": 0.006000000000000005,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.avg_NPR1",
+      "expected": 0.564,
+      "actual": 0.564,
+      "expected_num": 0.564,
+      "actual_num": 0.564,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.alpha-terpinene.avg_Rg_Ang",
+      "expected": 2.455,
+      "actual": 2.45,
+      "expected_num": 2.455,
+      "actual_num": 2.45,
+      "expected_rounded": 2.46,
+      "actual_rounded": 2.45,
+      "relative_error": 0.0020366598778003638,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.DeltaE_max_kcal_per_mol",
+      "expected": 1.1,
+      "actual": 1.1,
+      "expected_num": 1.1,
+      "actual_num": 1.1,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.weights_[confA,confB,confC][0]",
+      "expected": 0.616,
+      "actual": 0.637,
+      "expected_num": 0.616,
+      "actual_num": 0.637,
+      "expected_rounded": 0.62,
+      "actual_rounded": 0.64,
+      "absolute_error": 0.02100000000000002,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.weights_[confA,confB,confC][1]",
+      "expected": 0.288,
+      "actual": 0.273,
+      "expected_num": 0.288,
+      "actual_num": 0.273,
+      "expected_rounded": 0.29,
+      "actual_rounded": 0.27,
+      "absolute_error": 0.014999999999999958,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.weights_[confA,confB,confC][2]",
+      "expected": 0.096,
+      "actual": 0.09,
+      "expected_num": 0.096,
+      "actual_num": 0.09,
+      "expected_rounded": 0.1,
+      "actual_rounded": 0.09,
+      "absolute_error": 0.006000000000000005,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.avg_NPR1",
+      "expected": 0.554,
+      "actual": 0.556,
+      "expected_num": 0.554,
+      "actual_num": 0.556,
+      "expected_rounded": 0.55,
+      "actual_rounded": 0.56,
+      "absolute_error": 0.0020000000000000018,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.gamma-terpinene.avg_Rg_Ang",
+      "expected": 2.438,
+      "actual": 2.44,
+      "expected_num": 2.438,
+      "actual_num": 2.44,
+      "expected_rounded": 2.44,
+      "actual_rounded": 2.44,
+      "error": 0.0019999999999997797,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.conformers_count": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.conformers_count",
+      "expected": 3,
+      "actual": 3,
+      "expected_num": 3.0,
+      "actual_num": 3.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.DeltaE_max_kcal_per_mol": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.DeltaE_max_kcal_per_mol",
+      "expected": 1.1,
+      "actual": 1.1,
+      "expected_num": 1.1,
+      "actual_num": 1.1,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.weights_[confA,confB,confC][0]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.weights_[confA,confB,confC][0]",
+      "expected": 0.616,
+      "actual": 0.637,
+      "expected_num": 0.616,
+      "actual_num": 0.637,
+      "expected_rounded": 0.62,
+      "actual_rounded": 0.64,
+      "absolute_error": 0.02100000000000002,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.weights_[confA,confB,confC][1]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.weights_[confA,confB,confC][1]",
+      "expected": 0.288,
+      "actual": 0.273,
+      "expected_num": 0.288,
+      "actual_num": 0.273,
+      "expected_rounded": 0.29,
+      "actual_rounded": 0.27,
+      "absolute_error": 0.014999999999999958,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.weights_[confA,confB,confC][2]": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.weights_[confA,confB,confC][2]",
+      "expected": 0.096,
+      "actual": 0.09,
+      "expected_num": 0.096,
+      "actual_num": 0.09,
+      "expected_rounded": 0.1,
+      "actual_rounded": 0.09,
+      "absolute_error": 0.006000000000000005,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.avg_NPR1": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.avg_NPR1",
+      "expected": 0.518,
+      "actual": 0.519,
+      "expected_num": 0.518,
+      "actual_num": 0.519,
+      "expected_rounded": 0.52,
+      "actual_rounded": 0.52,
+      "error": 0.0010000000000000009,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.avg_Rg_Ang": {
+      "path": "(1) 玻尔兹曼权重、加权均值与构象信息.UFF.limonene.avg_Rg_Ang",
+      "expected": 2.342,
+      "actual": 2.34,
+      "expected_num": 2.342,
+      "actual_num": 2.34,
+      "expected_rounded": 2.34,
+      "actual_rounded": 2.34,
+      "error": 0.002000000000000224,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(2) σ与IDI.MMFF94.sigma_NPR1": {
+      "path": "(2) σ与IDI.MMFF94.sigma_NPR1",
+      "expected": 0.0723,
+      "actual": 0.018,
+      "expected_num": 0.0723,
+      "actual_num": 0.018,
+      "expected_rounded": 0.07,
+      "actual_rounded": 0.02,
+      "absolute_error": 0.0543,
+      "relative_error": 0.7510373443983402,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) σ与IDI.MMFF94.sigma_Rg_Ang": {
+      "path": "(2) σ与IDI.MMFF94.sigma_Rg_Ang",
+      "expected": 0.1759,
+      "actual": 0.027,
+      "expected_num": 0.1759,
+      "actual_num": 0.027,
+      "expected_rounded": 0.18,
+      "actual_rounded": 0.03,
+      "absolute_error": 0.1489,
+      "relative_error": 0.8465036952814099,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) σ与IDI.MMFF94.IDI": {
+      "path": "(2) σ与IDI.MMFF94.IDI",
+      "expected": 1.27,
+      "actual": 0.049,
+      "expected_num": 1.27,
+      "actual_num": 0.049,
+      "expected_rounded": 1.27,
+      "actual_rounded": 0.05,
+      "relative_error": 0.9614173228346458,
+      "absolute_error": 1.221,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) σ与IDI.UFF.sigma_NPR1": {
+      "path": "(2) σ与IDI.UFF.sigma_NPR1",
+      "expected": 0.0762,
+      "actual": 0.019,
+      "expected_num": 0.0762,
+      "actual_num": 0.019,
+      "expected_rounded": 0.08,
+      "actual_rounded": 0.02,
+      "absolute_error": 0.0572,
+      "relative_error": 0.7506561679790026,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) σ与IDI.UFF.sigma_Rg_Ang": {
+      "path": "(2) σ与IDI.UFF.sigma_Rg_Ang",
+      "expected": 0.1673,
+      "actual": 0.028,
+      "expected_num": 0.1673,
+      "actual_num": 0.028,
+      "expected_rounded": 0.17,
+      "actual_rounded": 0.03,
+      "absolute_error": 0.1393,
+      "relative_error": 0.8326359832635983,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) σ与IDI.UFF.IDI": {
+      "path": "(2) σ与IDI.UFF.IDI",
+      "expected": 1.28,
+      "actual": 0.053,
+      "expected_num": 1.28,
+      "actual_num": 0.053,
+      "expected_rounded": 1.28,
+      "actual_rounded": 0.05,
+      "relative_error": 0.95859375,
+      "absolute_error": 1.227,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3) 权重和校验 Σwi.MMFF94.myrcene": {
+      "path": "(3) 权重和校验 Σwi.MMFF94.myrcene",
+      "expected": 1.001,
+      "actual": 1.0,
+      "expected_num": 1.001,
+      "actual_num": 1.0,
+      "expected_rounded": 1.0,
+      "actual_rounded": 1.0,
+      "error": 0.0009999999999998899,
+      "status": "match",
+      "match_type": "rounded"
+    },
+    "(3) 权重和校验 Σwi.MMFF94.alpha-terpinene": {
+      "path": "(3) 权重和校验 Σwi.MMFF94.alpha-terpinene",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 权重和校验 Σwi.MMFF94.gamma-terpinene": {
+      "path": "(3) 权重和校验 Σwi.MMFF94.gamma-terpinene",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 权重和校验 Σwi.MMFF94.limonene": {
+      "path": "(3) 权重和校验 Σwi.MMFF94.limonene",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 权重和校验 Σwi.UFF.myrcene": {
+      "path": "(3) 权重和校验 Σwi.UFF.myrcene",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 权重和校验 Σwi.UFF.alpha-terpinene": {
+      "path": "(3) 权重和校验 Σwi.UFF.alpha-terpinene",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 权重和校验 Σwi.UFF.gamma-terpinene": {
+      "path": "(3) 权重和校验 Σwi.UFF.gamma-terpinene",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 权重和校验 Σwi.UFF.limonene": {
+      "path": "(3) 权重和校验 Σwi.UFF.limonene",
+      "expected": 1.0,
+      "actual": 1.0,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 趋势性约束检验.MMFF94_based_on_avg_Rg": {
+      "path": "(4) 趋势性约束检验.MMFF94_based_on_avg_Rg",
+      "expected": "通过",
+      "actual": "通过",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 趋势性约束检验.UFF_based_on_avg_Rg": {
+      "path": "(4) 趋势性约束检验.UFF_based_on_avg_Rg",
+      "expected": "通过",
+      "actual": "通过",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5) 方法一致性判定.relative_deviation_percent_MMFF_baseline": {
+      "path": "(5) 方法一致性判定.relative_deviation_percent_MMFF_baseline",
+      "expected": 0.79,
+      "actual": 8.16,
+      "expected_num": 0.79,
+      "actual_num": 8.16,
+      "expected_rounded": 0.79,
+      "actual_rounded": 8.16,
+      "absolute_error": 7.37,
+      "relative_error": 9.329113924050633,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5) 方法一致性判定.consistency": {
+      "path": "(5) 方法一致性判定.consistency",
+      "expected": "一致",
+      "actual": "一致",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5) 方法一致性判定.possible_causes_brief[0]": {
+      "path": "(5) 方法一致性判定.possible_causes_brief[0]",
+      "expected": "两力场势能面与参数化差异导致构象相对能与权重略有不同",
+      "actual": "力场相似性",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5) 方法一致性判定.possible_causes_brief[1]": {
+      "path": "(5) 方法一致性判定.possible_causes_brief[1]",
+      "expected": "能量窗口与加权对NPR1与Rg的敏感性造成小幅差异",
+      "actual": "结构参数接近",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "mode_folder": "without_tools"
+}

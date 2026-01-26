@@ -1,0 +1,13 @@
+{
+  "id": 40,
+  "model": "claude-sonnet-4-20250514",
+  "mode": "with_tools_react",
+  "reason": "图片加载失败",
+  "timestamp": 1766663478.932984,
+  "details": {
+    "expected_images": 1,
+    "missing_images": [
+      "filtered_images/132698973.jpg"
+    ]
+  }
+}

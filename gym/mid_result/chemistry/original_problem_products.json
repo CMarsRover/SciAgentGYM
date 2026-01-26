@@ -1,0 +1,35 @@
+{
+  "volumes": {
+    "A": 0.5,
+    "B": 0.5,
+    "C": 2.25
+  },
+  "gases": {
+    "A": "O2",
+    "B": "Cl2",
+    "C": "H2"
+  },
+  "products": {
+    "H2O": 1.0,
+    "HX": 1.0,
+    "H2_leftover": 1.25
+  },
+  "fractions": {
+    "products_only_mass_fractions_percent": {
+      "HX": 66.92857011730582,
+      "H2O": 33.071429882694176
+    },
+    "all_species_mass_fractions_percent": {
+      "HX": 63.96925938273122,
+      "H2O": 31.609144982717172,
+      "H2_leftover": 4.421595634551611
+    },
+    "masses": {
+      "HX": 36.458000000000006,
+      "H2O": 18.015,
+      "H2_leftover": 2.52
+    }
+  },
+  "mass_source": "mendeleev",
+  "halogen": "Cl"
+}

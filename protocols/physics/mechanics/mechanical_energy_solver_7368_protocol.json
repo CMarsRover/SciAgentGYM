@@ -1,0 +1,294 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_kinetic_energy",
+            "description": "计算物体的动能。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体的质量，单位为千克(kg)"
+                    },
+                    "velocity": {
+                        "type": "number",
+                        "description": "物体的速度，单位为米每秒(m/s)，可以是标量或向量量"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "velocity"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_gravitational_potential_energy",
+            "description": "计算物体的重力势能。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体的质量，单位为千克(kg)"
+                    },
+                    "height": {
+                        "type": "number",
+                        "description": "物体相对于参考水平面的高度，单位为米(m)"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度，单位为m/s²，默认值为9.8 m/s²"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "height"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_elastic_potential_energy",
+            "description": "计算弹簧中储存的弹性势能。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "spring_constant": {
+                        "type": "number",
+                        "description": "弹簧常数，单位为牛顿每米(N/m)"
+                    },
+                    "displacement": {
+                        "type": "number",
+                        "description": "弹簧从平衡位置的位移，单位为米(m)"
+                    }
+                },
+                "required": [
+                    "spring_constant",
+                    "displacement"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_total_mechanical_energy",
+            "description": "计算系统的总机械能。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "kinetic_energy": {
+                        "type": "number",
+                        "description": "动能，单位为焦耳(J)"
+                    },
+                    "potential_energies": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "势能列表或单个势能值，单位为焦耳(J)"
+                    }
+                },
+                "required": [
+                    "kinetic_energy",
+                    "potential_energies"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_final_velocity_conservation",
+            "description": "使用机械能守恒原理求解物体的最终速度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体的质量，单位为千克(kg)"
+                    },
+                    "initial_velocity": {
+                        "type": "number",
+                        "description": "物体的初始速度，单位为米每秒(m/s)"
+                    },
+                    "initial_height": {
+                        "type": "number",
+                        "description": "物体的初始高度，单位为米(m)"
+                    },
+                    "final_height": {
+                        "type": "number",
+                        "description": "物体的最终高度，单位为米(m)，默认为0（地面水平）"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度，单位为m/s²，默认为9.8 m/s²"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "initial_velocity",
+                    "initial_height"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_pendulum_motion",
+            "description": "使用能量守恒原理求解简单摆的运动。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "摆锤的质量，单位为千克(kg)"
+                    },
+                    "length": {
+                        "type": "number",
+                        "description": "摆的长度，单位为米(m)"
+                    },
+                    "initial_angle": {
+                        "type": "number",
+                        "description": "摆的初始角度（相对于垂直方向），单位为弧度"
+                    },
+                    "initial_angular_velocity": {
+                        "type": "number",
+                        "description": "初始角速度，单位为弧度每秒(rad/s)，默认为0"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度，单位为m/s²，默认为9.8 m/s²"
+                    },
+                    "time_points": {
+                        "type": "integer",
+                        "description": "计算的时间点数量，默认为100"
+                    },
+                    "total_time": {
+                        "type": "number",
+                        "description": "模拟的总时间，单位为秒，默认为5"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "length",
+                    "initial_angle"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_pendulum_motion",
+            "description": "可视化摆的运动及其能量组成。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "times": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "时间点数组"
+                    },
+                    "x_positions": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "摆锤的x坐标数组"
+                    },
+                    "y_positions": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "摆锤的y坐标数组"
+                    },
+                    "energies": {
+                        "type": "object",
+                        "description": "包含'kinetic'、'potential'和'total'能量数组的字典"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存可视化结果的路径，如果为None，则显示图表"
+                    }
+                },
+                "required": [
+                    "times",
+                    "x_positions",
+                    "y_positions",
+                    "energies"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_energy_conservation",
+            "description": "可视化初始状态和最终状态之间的能量守恒。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "initial_state": {
+                        "type": "object",
+                        "description": "包含初始状态信息的字典：高度、速度、质量、动能、势能、总能量"
+                    },
+                    "final_state": {
+                        "type": "object",
+                        "description": "包含最终状态信息的字典（与initial_state具有相同的键）"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存可视化结果的路径，如果为None，则显示图表"
+                    }
+                },
+                "required": [
+                    "initial_state",
+                    "final_state"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/mechanical_energy_solver_7368.py"
+        }
+    }
+]

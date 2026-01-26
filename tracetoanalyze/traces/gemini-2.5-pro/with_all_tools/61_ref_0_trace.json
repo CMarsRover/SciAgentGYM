@@ -1,0 +1,1829 @@
+{
+  "id": "61_ref_0",
+  "query": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。",
+  "query_data": {
+    "id": "61_ref_0",
+    "original_id": 61,
+    "refined_index": 0,
+    "question": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。",
+    "answer": "{'(1)': {'strongest_peak_2theta': '38.32 deg', 'strongest_peak_intensity_zoom': '1000', 'strongest_peak_fwhm': '0.30 deg', 'instrument_fwhm': '0.10 deg', 'wavelength': '0.15406 nm', 'shape_factor_main': '0.90', 'visual_files': {'full_spectrum': 'case_61_sample_1_raw.png', 'peak_zoom': 'case_61_sample_1_peak_zoom.png'}}, '(2)': {'D_main': '29.8 nm'}, '(3)': {'D_uncorr': '18.6 nm', 'D_corr': '34.0 nm', 'D_shape_factor_interval': {'D_low': '24.1 nm', 'D_high': '34.7 nm'}}, '(4)': {'alt_strongest_peak_2theta': '38.8 deg', 'FWHM_alt': '0.333 deg', 'D_alt': '26.5 nm', 'peak_match_boolean': True, 'diff_percent': '11.0 %', 'consistency_boolean': True}, '(5)': '基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。'}",
+    "metadata": {
+      "subject": "material",
+      "topic": "",
+      "image_path": [
+        "/sfe_images/M022_mp-353-xrd_d5b5f4f9302869ae0b1d65b0eac06311.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "visualize_xrd_pattern",
+        "detect_strongest_peak",
+        "calculate_scherrer_grain_size"
+      ],
+      "golden_answer": [
+        {
+          "(1)": {
+            "strongest_peak_2theta": "38.32 deg",
+            "strongest_peak_intensity_zoom": "1000",
+            "strongest_peak_fwhm": "0.30 deg",
+            "instrument_fwhm": "0.10 deg",
+            "wavelength": "0.15406 nm",
+            "shape_factor_main": "0.90",
+            "visual_files": {
+              "full_spectrum": "case_61_sample_1_raw.png",
+              "peak_zoom": "case_61_sample_1_peak_zoom.png"
+            }
+          },
+          "(2)": {
+            "D_main": "29.8 nm"
+          },
+          "(3)": {
+            "D_uncorr": "18.6 nm",
+            "D_corr": "34.0 nm",
+            "D_shape_factor_interval": {
+              "D_low": "24.1 nm",
+              "D_high": "34.7 nm"
+            }
+          },
+          "(4)": {
+            "alt_strongest_peak_2theta": "38.8 deg",
+            "FWHM_alt": "0.333 deg",
+            "D_alt": "26.5 nm",
+            "peak_match_boolean": true,
+            "diff_percent": "11.0 %",
+            "consistency_boolean": true
+          },
+          "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+        }
+      ],
+      "original_question_id": "61",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/traces",
+      "topic_protocol_scope": "其他",
+      "with_all_tools": true
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "parse_mass_spectrum_peaks",
+          "description": "解析质谱峰数据，提取显著峰。从原始m/z和强度数据中筛选出高于阈值的峰，用于后续分析。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "mz_values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "m/z值列表，范围通常0-2000"
+              },
+              "intensities": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "相对强度列表（%），范围0-100"
+              },
+              "intensity_threshold": {
+                "type": "number",
+                "description": "强度阈值（%），默认1.0，低于此值的峰被过滤"
+              }
+            },
+            "required": [
+              "mz_values",
+              "intensities"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_molecular_properties",
+          "description": "计算分子的质谱相关性质。基于SMILES字符串计算分子量、不饱和度、杂原子数等关键参数。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示，如'CCO'表示乙醇"
+              }
+            },
+            "required": [
+              "smiles"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "predict_fragmentation_pattern",
+          "description": "预测分子的碎片化模式。基于分子结构预测可能的碎片离子m/z值（简化模型）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子SMILES表示"
+              },
+              "ionization_mode": {
+                "type": "string",
+                "description": "电离模式，'EI'(电子轰击)或'CI'(化学电离)"
+              }
+            },
+            "required": [
+              "smiles"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "match_spectrum_to_structure",
+          "description": "将实验质谱与候选分子结构进行匹配。综合分析实验谱图和理论碎片，计算匹配度分数。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "mz_values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验m/z值列表"
+              },
+              "intensities": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验强度列表"
+              },
+              "candidate_smiles": {
+                "type": "string",
+                "description": "候选分子SMILES"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "m/z匹配容差（Da），默认0.5"
+              },
+              "intensity_threshold": {
+                "type": "number",
+                "description": "峰强度阈值（%），默认1.0"
+              }
+            },
+            "required": [
+              "mz_values",
+              "intensities",
+              "candidate_smiles"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "batch_structure_screening",
+          "description": "批量筛选候选分子结构。对多个候选结构进行匹配，返回排序后的结果。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "mz_values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验m/z值列表"
+              },
+              "intensities": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验强度列表"
+              },
+              "candidate_smiles_list": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "候选分子SMILES列表"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "m/z匹配容差（Da）"
+              }
+            },
+            "required": [
+              "mz_values",
+              "intensities",
+              "candidate_smiles_list"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "fetch_pdb_structure",
+          "description": "从RCSB PDB数据库下载蛋白质结构文件",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB数据库标识符，4字符代码（如'1ABC'）"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "本地保存目录，默认'./pdb_files/'"
+              }
+            },
+            "required": [
+              "pdb_id"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "count_ligand_chains",
+          "description": "统计PDB结构中的配体链数量",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_file": {
+                "type": "string",
+                "description": "PDB文件路径"
+              },
+              "remove_hydrogen": {
+                "type": "boolean",
+                "description": "是否移除氢原子，默认True"
+              }
+            },
+            "required": [
+              "pdb_file"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_structure_composition",
+          "description": "全面分析PDB结构的组成成分",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_file": {
+                "type": "string",
+                "description": "PDB文件路径"
+              },
+              "remove_hydrogen": {
+                "type": "boolean",
+                "description": "是否移除氢原子，默认True"
+              }
+            },
+            "required": [
+              "pdb_file"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "batch_analyze_pdb_structures",
+          "description": "批量分析多个PDB结构的配体链数量",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "PDB ID列表（如['1A2B', '3C4D']）"
+              },
+              "remove_hydrogen": {
+                "type": "boolean",
+                "description": "是否移除氢原子，默认True"
+              }
+            },
+            "required": [
+              "pdb_ids"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_domain_specific",
+          "description": "结构生物学专属可视化工具",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "description": "要可视化的数据（只包含基本数据类型）"
+              },
+              "domain": {
+                "type": "string",
+                "description": "领域类型 'structural_biology'"
+              },
+              "vis_type": {
+                "type": "string",
+                "description": "可视化类型：'composition_pie'(结构组成饼图)、'chain_comparison'(多结构配体链对比柱状图)、'residue_distribution'(残基类型分布图)"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "保存目录，默认'./images/'"
+              },
+              "filename": {
+                "type": "string",
+                "description": "文件名（可选）"
+              }
+            },
+            "required": [
+              "data",
+              "domain",
+              "vis_type"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "parse_rna_sequence",
+          "description": "解析RNA序列并提取基础特征，验证序列合法性并计算GC含量、长度等基本参数",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串，仅包含A/U/G/C（如'AUGCGAU'）"
+              },
+              "validate": {
+                "type": "boolean",
+                "description": "是否验证序列合法性，默认True"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "detect_base_pairs",
+          "description": "检测RNA序列中的碱基配对（简化版二级结构预测），使用动态规划算法寻找最大配对数，返回配对位置列表",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "min_stem_length": {
+                "type": "integer",
+                "description": "最小茎区长度，默认3（连续配对数）"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_structure_complexity",
+          "description": "计算RNA结构复杂度指标，基于配对模式分析结构特征：茎区数量、假结、长程相互作用等",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pairs": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "description": "碱基配对列表 [(i, j), ...]，其中 i < j"
+              },
+              "sequence_length": {
+                "type": "integer",
+                "description": "序列总长度"
+              }
+            },
+            "required": [
+              "pairs",
+              "sequence_length"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "classify_rna_type",
+          "description": "基于结构特征分类RNA类型，根据长度、茎区数量、三级结构等特征判断RNA类型（tRNA/rRNA/ribozyme/mRNA）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "structure_features": {
+                "type": "object",
+                "description": "可选的预计算结构特征（来自analyze_rna_structure）"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "predict_catalytic_activity",
+          "description": "预测RNA的催化活性可能性，基于结构复杂度、三级相互作用等特征评估是否具有催化功能（ribozyme特性）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "structure_features": {
+                "type": "object",
+                "description": "可选的预计算结构特征"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "fetch_property_from_database",
+          "description": "从Materials Project（mp-api）获取指定材料的性质或结构。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "identifier": {
+                "type": "string",
+                "description": "材料ID如'mp-XXXX'。"
+              },
+              "property_name": {
+                "type": "string",
+                "description": "请求的属性名称，如'spacegroup.symbol'或'structure'。"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "可选，额外需要返回的字段列表。"
+              }
+            },
+            "required": [
+              "identifier",
+              "property_name"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./materials_toolkit_M002_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_space_group",
+          "description": "基于Pymatgen对结构进行空间群识别。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "structure_input": {
+                "type": "string",
+                "description": "结构来源：CIF文件路径；也可接受pymatgen结构字典。"
+              },
+              "symprec": {
+                "type": "number",
+                "description": "对称识别数值容差，典型范围1e-5到1e-1。"
+              }
+            },
+            "required": [
+              "structure_input"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./materials_toolkit_M002_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calibrate_spacegroup_notation",
+          "description": "将空间群符号转换到指定目标记号以进行统一比较。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "识别得到的空间群符号。"
+              },
+              "target": {
+                "type": "string",
+                "description": "目标符号。"
+              }
+            },
+            "required": [
+              "symbol"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./materials_toolkit_M002_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "parse_band_data_from_file",
+          "description": "从文件中解析能带结构数据，支持VASP/Quantum ESPRESSO/CASTEP等常见格式。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "filepath": {
+                "type": "string",
+                "description": "能带数据文件路径"
+              },
+              "file_format": {
+                "type": "string",
+                "description": "文件格式（'vasp'，'qe'，'castep'，'auto'），默认为'auto'"
+              }
+            },
+            "required": [
+              "filepath"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "identify_vbm_cbm",
+          "description": "识别价带顶(VBM)和导带底(CBM)的位置，并计算带隙。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "energies": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "description": "能带能量数据，形状为 (n_bands × n_kpoints)"
+              },
+              "kpath": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "k点路径坐标，长度与每条能带的点数相同"
+              },
+              "fermi_energy": {
+                "type": "number",
+                "description": "费米能级(eV)，默认0.0"
+              }
+            },
+            "required": [
+              "energies",
+              "kpath"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "determine_bandgap_type",
+          "description": "判断带隙类型（直接/间接），并给出对应的高对称k点说明与k空间距离。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "vbm_info": {
+                "type": "object",
+                "description": "VBM信息字典，包含{'energy','kpoint_index','kpoint_value'}等键"
+              },
+              "cbm_info": {
+                "type": "object",
+                "description": "CBM信息字典，包含{'energy','kpoint_index','kpoint_value'}等键"
+              },
+              "labels": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "高对称点标记列表；每个元素为二元组(label: str, k_index: int)"
+              },
+              "k_tolerance": {
+                "type": "number",
+                "description": "k点位置判断容差，默认0.05"
+              }
+            },
+            "required": [
+              "vbm_info",
+              "cbm_info",
+              "labels"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "fetch_material_bandstructure_from_mp",
+          "description": "从Materials Project数据库获取材料的能带结构基础信息（带隙、是否直接带隙等）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "material_id": {
+                "type": "string",
+                "description": "Materials Project材料ID（如'mp-149'，'mp-66'）"
+              },
+              "api_key": {
+                "type": "string",
+                "description": "MP API密钥（可选，若未提供则尝试从环境变量MP_API_KEY读取）"
+              }
+            },
+            "required": [
+              "material_id"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "compare_bandgaps_batch",
+          "description": "批量对比多个材料的带隙特性，从Materials Project获取数据并统计分析。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "material_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "材料ID列表，例如['mp-149','mp-66',...]"
+              },
+              "api_key": {
+                "type": "string",
+                "description": "MP API密钥（可选）"
+              }
+            },
+            "required": [
+              "material_ids"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_optical_properties",
+          "description": "基于带隙特性估算光学性质，包括吸收边波长与激子结合能等。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bandgap": {
+                "type": "number",
+                "description": "带隙值(eV)"
+              },
+              "is_direct": {
+                "type": "boolean",
+                "description": "是否为直接带隙"
+              },
+              "effective_mass_e": {
+                "type": "number",
+                "description": "电子有效质量（以自由电子质量m0为单位），默认0.5"
+              },
+              "effective_mass_h": {
+                "type": "number",
+                "description": "空穴有效质量（以自由电子质量m0为单位），默认0.5"
+              }
+            },
+            "required": [
+              "bandgap",
+              "is_direct"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_bandstructure",
+          "description": "可视化能带结构图，支持标记VBM/CBM并保存为图片文件。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "band_data": {
+                "type": "object",
+                "description": "能带数据字典，包含'kpath'、'energies'、'labels'等键"
+              },
+              "vbm_cbm_info": {
+                "type": "object",
+                "description": "VBM/CBM信息（可选），用于图中标记"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "图片保存目录，默认'./tool_images/'"
+              },
+              "filename": {
+                "type": "string",
+                "description": "保存文件名（可选）"
+              }
+            },
+            "required": [
+              "band_data"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_bandgap_comparison",
+          "description": "可视化多个材料的带隙对比柱状图并保存为图片文件。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "materials_data": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "材料数据列表；每个元素为字典对象，包含formula、bandgap、is_direct等字段"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "图片保存目录，默认'./tool_images/'"
+              },
+              "filename": {
+                "type": "string",
+                "description": "保存文件名（可选）"
+              }
+            },
+            "required": [
+              "materials_data"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "save_json_data",
+          "description": "将字典数据保存为JSON文件，统一保存在./mid_result/materials目录。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "filename": {
+                "type": "string",
+                "description": "文件名（不含路径），如 'peaks.json'"
+              },
+              "data": {
+                "type": "object",
+                "description": "需要保存的数据字典，如XRD图谱数据（包含peaks_2theta和intensity数组）",
+                "properties": {
+                  "peaks_2theta": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "description": "XRD峰位数组（度）"
+                  },
+                  "intensity": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "description": "对应的相对强度数组"
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "filename",
+              "data"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "identify_phases_by_matching",
+          "description": "从候选参考中识别最可能的晶相，基于峰匹配与可选的强度加权和漂移校准。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "observed_2theta": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "观测峰位（度）"
+              },
+              "observed_intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "观测相对强度（可选，用于强度加权）"
+              },
+              "candidate_refs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "参考相名称"
+                    },
+                    "peaks_2theta": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "参考峰位数组（度）"
+                    },
+                    "intensity": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "参考相对强度数组"
+                    }
+                  }
+                },
+                "description": "候选参考列表，每个包含{name, peaks_2theta, intensity}"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "峰位匹配容差（度），默认0.25"
+              },
+              "allow_shift": {
+                "type": "boolean",
+                "description": "是否允许整体角度漂移优化，默认True"
+              }
+            },
+            "required": [
+              "observed_2theta",
+              "candidate_refs"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_xrd_pattern",
+          "description": "绘制并保存XRD图谱（可叠加多条曲线），自动保存到./tool_images目录。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "patterns": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "two_theta": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "峰位数组（度）"
+                    },
+                    "intensity": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "对应相对强度数组"
+                    }
+                  }
+                },
+                "description": "曲线字典，形如 {'Composite': {'two_theta': [...], 'intensity': [...]}, 'Ag2O': {...}}"
+              },
+              "title": {
+                "type": "string",
+                "description": "图标题"
+              },
+              "filename": {
+                "type": "string",
+                "description": "自定义文件名（不含路径和扩展名），默认根据标题自动生成"
+              }
+            },
+            "required": [
+              "patterns",
+              "title"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "bragg_law_d_spacing",
+          "description": "根据Bragg定律计算晶面间距 d = λ / (2sinθ)。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta": {
+                "type": "number",
+                "description": "衍射角2θ（度），范围10-120°"
+              },
+              "wavelength": {
+                "type": "number",
+                "description": "X射线波长（Å），默认Cu Kα=1.5406 Å"
+              }
+            },
+            "required": [
+              "two_theta"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_xrd_pattern",
+          "description": "绘制XRD衍射图谱并标注峰位，可保存为图片文件。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "2θ角度列表（度）"
+              },
+              "intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "强度列表"
+              },
+              "peak_labels": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "position": {
+                      "type": "number",
+                      "description": "峰位置2θ（度）"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "峰标注文本（如'(hkl)'）"
+                    }
+                  },
+                  "required": [
+                    "position",
+                    "label"
+                  ]
+                },
+                "description": "峰标注列表，格式[{'position': 2θ, 'label': '(hkl)'}]"
+              },
+              "title": {
+                "type": "string",
+                "description": "图表标题"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "图片保存目录"
+              },
+              "filename": {
+                "type": "string",
+                "description": "文件名（不含扩展名），默认自动生成"
+              }
+            },
+            "required": [
+              "two_theta",
+              "intensity"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_scherrer_grain_size",
+          "description": "用Scherrer方程计算平均晶粒尺寸。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "peak_2theta_deg": {
+                "type": "number",
+                "description": "峰位2θ（度），范围0-180"
+              },
+              "fwhm_deg": {
+                "type": "number",
+                "description": "测得FWHM（度），>0"
+              },
+              "wavelength_nm": {
+                "type": "number",
+                "description": "X射线波长（nm），如Cu Kα=0.15406"
+              },
+              "shape_factor": {
+                "type": "number",
+                "description": "形状因子K，通常0.89-1.0"
+              },
+              "instrument_fwhm_deg": {
+                "type": "number",
+                "description": "仪器展宽FWHM（度），默认0"
+              }
+            },
+            "required": [
+              "peak_2theta_deg",
+              "fwhm_deg"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "detect_strongest_peak",
+          "description": "从XRD数据中识别最强峰（返回峰位与强度）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta_deg": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "2θ（度）列表"
+              },
+              "intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "对应强度（a.u.）列表"
+              }
+            },
+            "required": [
+              "two_theta_deg",
+              "intensity"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。",
+      "final_answer": {
+        "(1)": {
+          "strongest_peak_2theta": "38.32 deg",
+          "strongest_peak_intensity_zoom": "1000",
+          "strongest_peak_fwhm": "0.30 deg",
+          "instrument_fwhm": "0.10 deg",
+          "wavelength": "0.15406 nm",
+          "shape_factor_main": "0.90",
+          "visual_files": {
+            "full_spectrum": "case_61_sample_1_raw.png",
+            "peak_zoom": "case_61_sample_1_peak_zoom.png"
+          }
+        },
+        "(2)": {
+          "D_main": "29.8 nm"
+        },
+        "(3)": {
+          "D_uncorr": "18.6 nm",
+          "D_corr": "34.0 nm",
+          "D_shape_factor_interval": {
+            "D_low": "24.1 nm",
+            "D_high": "34.7 nm"
+          }
+        },
+        "(4)": {
+          "alt_strongest_peak_2theta": "38.8 deg",
+          "FWHM_alt": "0.333 deg",
+          "D_alt": "26.5 nm",
+          "peak_match_boolean": true,
+          "diff_percent": "11.0 %",
+          "consistency_boolean": true
+        },
+        "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+      }
+    },
+    "metadata_summary": {
+      "subject": "material",
+      "test_type": "refined",
+      "original_question_id": "61"
+    }
+  },
+  "model": "gemini-2.5-pro",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 2,
+  "messages": [
+    {
+      "role": "user",
+      "content": "给定XRD数据与可视化文件名：case_61_sample_1_raw.png（全谱）与 case_61_sample_1_peak_zoom.png（最强峰放大）。已由局部放大曲线读得最强峰参数：峰位2θ=38.32°，峰强度（局部归一）为1000；半高500处线性插值得左右位置约为38.17°与38.47°，故FWHM=0.30°。已知X射线波长λ=0.15406 nm（Cu Kα），形状因子主值K=0.90，仪器展宽FWHM_inst=0.10°。Scherrer公式取 D = K·λ / (β·cosθ)，其中β为扣除仪器展宽后的FWHM（弧度），θ=2θ/2。请完成：\n(1) 汇总最强峰位置与峰强度、FWHM（度）、仪器展宽（度）、λ与K，并给出两幅可视化文件名。\n(2) 以(1)中最强峰数据，进行仪器展宽校正后代入Scherrer公式，给出晶粒尺寸主值D_main。\n(3) 计算三类参考结果：A. 未校正参考值D_uncorr（2θ=43.3°、FWHM=0.46°、K=0.90、FWHM_inst=0°）；B. 仪器校正参考值D_corr（2θ=25.3°、FWHM=0.26°、FWHM_inst=0.10°、K=0.90）；C. 形状因子区间端点D_low与D_high（下界：2θ=43.3°、FWHM=0.35°、K=0.89、FWHM_inst=0°；上界：2θ=26.6°、FWHM=0.28°、FWHM_inst=0.10°、K=1.00）。\n(4) 交叉验证：给出替代局部数据 two-theta/intensity 为[37.9°,50],[38.0°,52],[38.1°,55],[38.2°,60],[38.3°,80],[38.4°,120],[38.5°,220],[38.6°,400],[38.7°,700],[38.8°,1000],[38.9°,700],[39.0°,400],[39.1°,220],[39.2°,120],[39.3°,80],[39.4°,60],[39.5°,55],[39.6°,52],[39.7°,50]。以半高500线性插值求FWHM_alt，并在2θ=38.8°处计算替代晶粒尺寸D_alt（取K=0.90、FWHM_inst=0.10°、λ=0.15406 nm）；判断该替代数据的最强峰是否与主数据最强峰一致（以|Δ2θ|≤0.6°为一致阈值，输出peak_match_boolean）；以(2)的D_main为参照，计算diff_percent = 100%·|D_alt−D_main|/D_main，并以15%为一致性判据输出consistency_boolean。\n(5) 给出一段不使用项目符号的文字总结，概述最强峰、关键参数、各晶粒尺寸结果与交叉验证结论。\n结果以数值给出；角度用度（deg），晶粒尺寸用nm，百分比用% 表示；保留三位有效数字；布尔值用 true/false。"
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_1db4d957d42e43bcb827890d7666ea7b",
+          "type": "function",
+          "function": {
+            "name": "calculate_scherrer_grain_size",
+            "arguments": "{\"fwhm_deg\":0.3,\"instrument_fwhm_deg\":0.1,\"peak_2theta_deg\":38.32,\"shape_factor\":0.9,\"wavelength_nm\":0.15406}"
+          }
+        },
+        {
+          "id": "call_00eda5a193c846dca5362ad5e2a27701",
+          "type": "function",
+          "function": {
+            "name": "calculate_scherrer_grain_size",
+            "arguments": "{\"fwhm_deg\":0.46,\"instrument_fwhm_deg\":0,\"peak_2theta_deg\":43.3,\"shape_factor\":0.9,\"wavelength_nm\":0.15406}"
+          }
+        },
+        {
+          "id": "call_9142cc8c60694ef8be4e86e8319fa0e3",
+          "type": "function",
+          "function": {
+            "name": "calculate_scherrer_grain_size",
+            "arguments": "{\"fwhm_deg\":0.26,\"instrument_fwhm_deg\":0.1,\"peak_2theta_deg\":25.3,\"shape_factor\":0.9,\"wavelength_nm\":0.15406}"
+          }
+        },
+        {
+          "id": "call_c24c167cd75c4e3ebdc66814b3f40d94",
+          "type": "function",
+          "function": {
+            "name": "calculate_scherrer_grain_size",
+            "arguments": "{\"fwhm_deg\":0.35,\"instrument_fwhm_deg\":0,\"peak_2theta_deg\":43.3,\"shape_factor\":0.89,\"wavelength_nm\":0.15406}"
+          }
+        },
+        {
+          "id": "call_7e4a344121a7457fb4ddc9703ceb5043",
+          "type": "function",
+          "function": {
+            "name": "calculate_scherrer_grain_size",
+            "arguments": "{\"fwhm_deg\":0.28,\"instrument_fwhm_deg\":0.1,\"peak_2theta_deg\":26.6,\"shape_factor\":1,\"wavelength_nm\":0.15406}"
+          }
+        },
+        {
+          "id": "call_09d621a6b3084d088629f90dc336ad3c",
+          "type": "function",
+          "function": {
+            "name": "detect_strongest_peak",
+            "arguments": "{\"intensity\":[50,52,55,60,80,120,220,400,700,1000,700,400,220,120,80,60,55,52,50],\"two_theta_deg\":[37.9,38,38.1,38.2,38.3,38.4,38.5,38.6,38.7,38.8,38.9,39,39.1,39.2,39.3,39.4,39.5,39.6,39.7]}"
+          }
+        },
+        {
+          "id": "call_061a991367354372ac9802b390c8b5f7",
+          "type": "function",
+          "function": {
+            "name": "calculate_scherrer_grain_size",
+            "arguments": "{\"fwhm_deg\":0.333,\"instrument_fwhm_deg\":0.1,\"peak_2theta_deg\":38.8,\"shape_factor\":0.9,\"wavelength_nm\":0.15406}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "D_nm": 42.050819409951515
+        },
+        "metadata": {
+          "theta_deg": 19.16,
+          "beta_rad": 0.0034906585039886587,
+          "cos_theta": 0.944605732311469,
+          "params": {
+            "wavelength_nm": 0.15406,
+            "shape_factor": 0.9,
+            "instrument_fwhm_deg": 0.1,
+            "peak_2theta_deg": 38.32,
+            "fwhm_deg": 0.3
+          }
+        }
+      },
+      "tool_call_id": "call_1db4d957d42e43bcb827890d7666ea7b"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "D_nm": 18.580991749659272
+        },
+        "metadata": {
+          "theta_deg": 21.65,
+          "beta_rad": 0.008028514559173916,
+          "cos_theta": 0.9294548826213165,
+          "params": {
+            "wavelength_nm": 0.15406,
+            "shape_factor": 0.9,
+            "instrument_fwhm_deg": 0,
+            "peak_2theta_deg": 43.3,
+            "fwhm_deg": 0.46
+          }
+        }
+      },
+      "tool_call_id": "call_00eda5a193c846dca5362ad5e2a27701"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "D_nm": 50.88703702015313
+        },
+        "metadata": {
+          "theta_deg": 12.65,
+          "beta_rad": 0.0027925268031909274,
+          "cos_theta": 0.9757260244712084,
+          "params": {
+            "wavelength_nm": 0.15406,
+            "shape_factor": 0.9,
+            "instrument_fwhm_deg": 0.1,
+            "peak_2theta_deg": 25.3,
+            "fwhm_deg": 0.26
+          }
+        }
+      },
+      "tool_call_id": "call_9142cc8c60694ef8be4e86e8319fa0e3"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "D_nm": 24.149390547017482
+        },
+        "metadata": {
+          "theta_deg": 21.65,
+          "beta_rad": 0.006108652381980153,
+          "cos_theta": 0.9294548826213165,
+          "params": {
+            "wavelength_nm": 0.15406,
+            "shape_factor": 0.89,
+            "instrument_fwhm_deg": 0,
+            "peak_2theta_deg": 43.3,
+            "fwhm_deg": 0.35
+          }
+        }
+      },
+      "tool_call_id": "call_c24c167cd75c4e3ebdc66814b3f40d94"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "D_nm": 50.39034697242897
+        },
+        "metadata": {
+          "theta_deg": 13.3,
+          "beta_rad": 0.0031415926535897937,
+          "cos_theta": 0.9731788727770883,
+          "params": {
+            "wavelength_nm": 0.15406,
+            "shape_factor": 1,
+            "instrument_fwhm_deg": 0.1,
+            "peak_2theta_deg": 26.6,
+            "fwhm_deg": 0.28
+          }
+        }
+      },
+      "tool_call_id": "call_7e4a344121a7457fb4ddc9703ceb5043"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "peak_2theta_deg": 38.8,
+          "peak_intensity": 1000.0,
+          "index": 9
+        },
+        "metadata": {
+          "n_points": 19
+        }
+      },
+      "tool_call_id": "call_09d621a6b3084d088629f90dc336ad3c"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "D_nm": 36.14805126978519
+        },
+        "metadata": {
+          "theta_deg": 19.4,
+          "beta_rad": 0.0040666171571467884,
+          "cos_theta": 0.943222657947601,
+          "params": {
+            "wavelength_nm": 0.15406,
+            "shape_factor": 0.9,
+            "instrument_fwhm_deg": 0.1,
+            "peak_2theta_deg": 38.8,
+            "fwhm_deg": 0.333
+          }
+        }
+      },
+      "tool_call_id": "call_061a991367354372ac9802b390c8b5f7"
+    },
+    {
+      "role": "assistant",
+      "content": "(1) 关键参数汇总：\n*   最强峰位置 (2θ): 38.32 deg\n*   最强峰强度: 1000\n*   FWHM: 0.30 deg\n*   仪器展宽 (FWHM_inst): 0.10 deg\n*   波长 (λ): 0.15406 nm\n*   形状因子 (K): 0.90\n*   可视化文件名: \"case_61_sample_1_raw.png\", \"case_61_sample_1_peak_zoom.png\"\n\n(2) 晶粒尺寸主值：\n*   D_main: 42.1 nm\n\n(3) 参考晶粒尺寸：\n*   A. D_uncorr: 18.6 nm\n*   B. D_corr: 50.9 nm\n*   C. D_low: 24.2 nm, D_high: 50.4 nm\n\n(4) 交叉验证：\n*   FWHM_alt: 0.333 deg\n*   D_alt: 36.1 nm\n*   peak_match_boolean: true\n*   diff_percent: 14.0%\n*   consistency_boolean: true\n\n(5) 总结：\n分析显示，XRD图谱的最强峰位于2θ=38.32度，强度为1000，FWHM为0.30度。使用关键参数（λ=0.15406 nm, K=0.90）并校正0.10度的仪器展宽后，通过Scherrer公式计算得到主晶粒尺寸D_main为42.1 nm。三类参考计算分别给出了未校正值18.6 nm、仪器校正参考值50.9 nm以及形状因子区间对应的24.2 nm至50.4 nm。交叉验证中，替代数据的最强峰位于38.8度，与主数据峰位一致（|Δ2θ|≤0.6°），计算得到的替代晶粒尺寸D_alt为36.1 nm，与D_main的相对差异为14.0%，表明两者在15%的判据下具有一致性。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": {\n    \"strongest_peak_2theta\": \"[字符串]\",\n    \"strongest_peak_intensity_zoom\": \"[字符串]\",\n    \"strongest_peak_fwhm\": \"[字符串]\",\n    \"instrument_fwhm\": \"[字符串]\",\n    \"wavelength\": \"[字符串]\",\n    \"shape_factor_main\": \"[字符串]\",\n    \"visual_files\": {\n      \"full_spectrum\": \"[字符串]\",\n      \"peak_zoom\": \"[字符串]\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": \"[字符串]\"\n  },\n  \"(3)\": {\n    \"D_uncorr\": \"[字符串]\",\n    \"D_corr\": \"[字符串]\",\n    \"D_shape_factor_interval\": {\n      \"D_low\": \"[字符串]\",\n      \"D_high\": \"[字符串]\"\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": \"[字符串]\",\n    \"FWHM_alt\": \"[字符串]\",\n    \"D_alt\": \"[字符串]\",\n    \"peak_match_boolean\": \"[布尔值]\",\n    \"diff_percent\": \"[字符串]\",\n    \"consistency_boolean\": \"[布尔值]\"\n  },\n  \"(5)\": \"[字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)\": {\n    \"strongest_peak_2theta\": \"38.32 deg\",\n    \"strongest_peak_intensity_zoom\": \"1000 (局部归一)\",\n    \"strongest_peak_fwhm\": \"0.30 deg\",\n    \"instrument_fwhm\": \"0.10 deg\",\n    \"wavelength\": \"0.15406 nm\",\n    \"shape_factor_main\": \"0.90\",\n    \"visual_files\": {\n      \"full_spectrum\": \"case_61_sample_1_raw.png\",\n      \"peak_zoom\": \"case_61_sample_1_peak_zoom.png\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": \"42.05 nm\"\n  },\n  \"(3)\": {\n    \"D_uncorr\": \"18.58 nm\",\n    \"D_corr\": \"50.89 nm\",\n    \"D_shape_factor_interval\": {\n      \"D_low\": \"24.15 nm\",\n      \"D_high\": \"50.39 nm\"\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": \"38.80 deg\",\n    \"FWHM_alt\": \"0.333 deg\",\n    \"D_alt\": \"36.15 nm\",\n    \"peak_match_boolean\": true,\n    \"diff_percent\": \"14.03%\",\n    \"consistency_boolean\": true\n  },\n  \"(5)\": \"分析显示，XRD图谱的最强峰位于2θ=38.32度，强度为1000，FWHM为0.30度。使用关键参数（λ=0.15406 nm, K=0.90）并校正0.10度的仪器展宽后，通过Scherrer公式计算得到主晶粒尺寸D_main为42.05 nm。三类参考计算分别给出了未校正值18.58 nm、仪器校正参考值50.89 nm以及形状因子区间对应的24.15 nm至50.39 nm。交叉验证中，替代数据的最强峰位于38.80度，与主数据峰位一致，计算得到的替代晶粒尺寸D_alt为36.15 nm，与D_main的相对差异为14.03%，表明两者在15%的判据下具有一致性。\"\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "material",
+    "topic": "",
+    "image_path": [
+      "/sfe_images/M022_mp-353-xrd_d5b5f4f9302869ae0b1d65b0eac06311.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "visualize_xrd_pattern",
+      "detect_strongest_peak",
+      "calculate_scherrer_grain_size"
+    ],
+    "golden_answer": [
+      {
+        "(1)": {
+          "strongest_peak_2theta": "38.32 deg",
+          "strongest_peak_intensity_zoom": "1000",
+          "strongest_peak_fwhm": "0.30 deg",
+          "instrument_fwhm": "0.10 deg",
+          "wavelength": "0.15406 nm",
+          "shape_factor_main": "0.90",
+          "visual_files": {
+            "full_spectrum": "case_61_sample_1_raw.png",
+            "peak_zoom": "case_61_sample_1_peak_zoom.png"
+          }
+        },
+        "(2)": {
+          "D_main": "29.8 nm"
+        },
+        "(3)": {
+          "D_uncorr": "18.6 nm",
+          "D_corr": "34.0 nm",
+          "D_shape_factor_interval": {
+            "D_low": "24.1 nm",
+            "D_high": "34.7 nm"
+          }
+        },
+        "(4)": {
+          "alt_strongest_peak_2theta": "38.8 deg",
+          "FWHM_alt": "0.333 deg",
+          "D_alt": "26.5 nm",
+          "peak_match_boolean": true,
+          "diff_percent": "11.0 %",
+          "consistency_boolean": true
+        },
+        "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+      }
+    ],
+    "original_question_id": "61",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/traces",
+    "topic_protocol_scope": "其他",
+    "with_all_tools": true
+  },
+  "metadata_summary": {
+    "subject": "material",
+    "test_type": "refined",
+    "original_question_id": "61"
+  },
+  "answer_template": {
+    "(1)": {
+      "strongest_peak_2theta": "[字符串]",
+      "strongest_peak_intensity_zoom": "[字符串]",
+      "strongest_peak_fwhm": "[字符串]",
+      "instrument_fwhm": "[字符串]",
+      "wavelength": "[字符串]",
+      "shape_factor_main": "[字符串]",
+      "visual_files": {
+        "full_spectrum": "[字符串]",
+        "peak_zoom": "[字符串]"
+      }
+    },
+    "(2)": {
+      "D_main": "[字符串]"
+    },
+    "(3)": {
+      "D_uncorr": "[字符串]",
+      "D_corr": "[字符串]",
+      "D_shape_factor_interval": {
+        "D_low": "[字符串]",
+        "D_high": "[字符串]"
+      }
+    },
+    "(4)": {
+      "alt_strongest_peak_2theta": "[字符串]",
+      "FWHM_alt": "[字符串]",
+      "D_alt": "[字符串]",
+      "peak_match_boolean": "[布尔值]",
+      "diff_percent": "[字符串]",
+      "consistency_boolean": "[布尔值]"
+    },
+    "(5)": "[字符串]"
+  },
+  "golden_standard": {
+    "(1)": {
+      "strongest_peak_2theta": "38.32 deg",
+      "strongest_peak_intensity_zoom": "1000",
+      "strongest_peak_fwhm": "0.30 deg",
+      "instrument_fwhm": "0.10 deg",
+      "wavelength": "0.15406 nm",
+      "shape_factor_main": "0.90",
+      "visual_files": {
+        "full_spectrum": "case_61_sample_1_raw.png",
+        "peak_zoom": "case_61_sample_1_peak_zoom.png"
+      }
+    },
+    "(2)": {
+      "D_main": "29.8 nm"
+    },
+    "(3)": {
+      "D_uncorr": "18.6 nm",
+      "D_corr": "34.0 nm",
+      "D_shape_factor_interval": {
+        "D_low": "24.1 nm",
+        "D_high": "34.7 nm"
+      }
+    },
+    "(4)": {
+      "alt_strongest_peak_2theta": "38.8 deg",
+      "FWHM_alt": "0.333 deg",
+      "D_alt": "26.5 nm",
+      "peak_match_boolean": true,
+      "diff_percent": "11.0 %",
+      "consistency_boolean": true
+    },
+    "(5)": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": {
+      "strongest_peak_2theta": "38.32 deg",
+      "strongest_peak_intensity_zoom": "1000 (局部归一)",
+      "strongest_peak_fwhm": "0.30 deg",
+      "instrument_fwhm": "0.10 deg",
+      "wavelength": "0.15406 nm",
+      "shape_factor_main": 0.9,
+      "visual_files": {
+        "full_spectrum": "case_61_sample_1_raw.png",
+        "peak_zoom": "case_61_sample_1_peak_zoom.png"
+      }
+    },
+    "(2)": {
+      "D_main": "42.05 nm"
+    },
+    "(3)": {
+      "D_uncorr": "18.58 nm",
+      "D_corr": "50.89 nm",
+      "D_shape_factor_interval": {
+        "D_low": "24.15 nm",
+        "D_high": "50.39 nm"
+      }
+    },
+    "(4)": {
+      "alt_strongest_peak_2theta": "38.80 deg",
+      "FWHM_alt": "0.333 deg",
+      "D_alt": "36.15 nm",
+      "peak_match_boolean": true,
+      "diff_percent": "14.03%",
+      "consistency_boolean": true
+    },
+    "(5)": "分析显示，XRD图谱的最强峰位于2θ=38.32度，强度为1000，FWHM为0.30度。使用关键参数（λ=0.15406 nm, K=0.90）并校正0.10度的仪器展宽后，通过Scherrer公式计算得到主晶粒尺寸D_main为42.05 nm。三类参考计算分别给出了未校正值18.58 nm、仪器校正参考值50.89 nm以及形状因子区间对应的24.15 nm至50.39 nm。交叉验证中，替代数据的最强峰位于38.80度，与主数据峰位一致，计算得到的替代晶粒尺寸D_alt为36.15 nm，与D_main的相对差异为14.03%，表明两者在15%的判据下具有一致性。"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)\": {\n    \"strongest_peak_2theta\": \"38.32 deg\",\n    \"strongest_peak_intensity_zoom\": \"1000 (局部归一)\",\n    \"strongest_peak_fwhm\": \"0.30 deg\",\n    \"instrument_fwhm\": \"0.10 deg\",\n    \"wavelength\": \"0.15406 nm\",\n    \"shape_factor_main\": \"0.90\",\n    \"visual_files\": {\n      \"full_spectrum\": \"case_61_sample_1_raw.png\",\n      \"peak_zoom\": \"case_61_sample_1_peak_zoom.png\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": \"42.05 nm\"\n  },\n  \"(3)\": {\n    \"D_uncorr\": \"18.58 nm\",\n    \"D_corr\": \"50.89 nm\",\n    \"D_shape_factor_interval\": {\n      \"D_low\": \"24.15 nm\",\n      \"D_high\": \"50.39 nm\"\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": \"38.80 deg\",\n    \"FWHM_alt\": \"0.333 deg\",\n    \"D_alt\": \"36.15 nm\",\n    \"peak_match_boolean\": true,\n    \"diff_percent\": \"14.03%\",\n    \"consistency_boolean\": true\n  },\n  \"(5)\": \"分析显示，XRD图谱的最强峰位于2θ=38.32度，强度为1000，FWHM为0.30度。使用关键参数（λ=0.15406 nm, K=0.90）并校正0.10度的仪器展宽后，通过Scherrer公式计算得到主晶粒尺寸D_main为42.05 nm。三类参考计算分别给出了未校正值18.58 nm、仪器校正参考值50.89 nm以及形状因子区间对应的24.15 nm至50.39 nm。交叉验证中，替代数据的最强峰位于38.80度，与主数据峰位一致，计算得到的替代晶粒尺寸D_alt为36.15 nm，与D_main的相对差异为14.03%，表明两者在15%的判据下具有一致性。\"\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)\": {\n    \"strongest_peak_2theta\": \"38.32 deg\",\n    \"strongest_peak_intensity_zoom\": \"1000 (局部归一)\",\n    \"strongest_peak_fwhm\": \"0.30 deg\",\n    \"instrument_fwhm\": \"0.10 deg\",\n    \"wavelength\": \"0.15406 nm\",\n    \"shape_factor_main\": \"0.90\",\n    \"visual_files\": {\n      \"full_spectrum\": \"case_61_sample_1_raw.png\",\n      \"peak_zoom\": \"case_61_sample_1_peak_zoom.png\"\n    }\n  },\n  \"(2)\": {\n    \"D_main\": \"42.05 nm\"\n  },\n  \"(3)\": {\n    \"D_uncorr\": \"18.58 nm\",\n    \"D_corr\": \"50.89 nm\",\n    \"D_shape_factor_interval\": {\n      \"D_low\": \"24.15 nm\",\n      \"D_high\": \"50.39 nm\"\n    }\n  },\n  \"(4)\": {\n    \"alt_strongest_peak_2theta\": \"38.80 deg\",\n    \"FWHM_alt\": \"0.333 deg\",\n    \"D_alt\": \"36.15 nm\",\n    \"peak_match_boolean\": true,\n    \"diff_percent\": \"14.03%\",\n    \"consistency_boolean\": true\n  },\n  \"(5)\": \"分析显示，XRD图谱的最强峰位于2θ=38.32度，强度为1000，FWHM为0.30度。使用关键参数（λ=0.15406 nm, K=0.90）并校正0.10度的仪器展宽后，通过Scherrer公式计算得到主晶粒尺寸D_main为42.05 nm。三类参考计算分别给出了未校正值18.58 nm、仪器校正参考值50.89 nm以及形状因子区间对应的24.15 nm至50.39 nm。交叉验证中，替代数据的最强峰位于38.80度，与主数据峰位一致，计算得到的替代晶粒尺寸D_alt为36.15 nm，与D_main的相对差异为14.03%，表明两者在15%的判据下具有一致性。\"\n}\n```"
+  },
+  "evaluation_score": 0.75,
+  "evaluation_summary": "匹配字段: 15/20 (得分: 75.00%)",
+  "evaluation_details": {
+    "(1).strongest_peak_2theta": {
+      "path": "(1).strongest_peak_2theta",
+      "expected": "38.32 deg",
+      "actual": "38.32 deg",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).strongest_peak_intensity_zoom": {
+      "path": "(1).strongest_peak_intensity_zoom",
+      "expected": "1000",
+      "actual": "1000 (局部归一)",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1).strongest_peak_fwhm": {
+      "path": "(1).strongest_peak_fwhm",
+      "expected": "0.30 deg",
+      "actual": "0.30 deg",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).instrument_fwhm": {
+      "path": "(1).instrument_fwhm",
+      "expected": "0.10 deg",
+      "actual": "0.10 deg",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).wavelength": {
+      "path": "(1).wavelength",
+      "expected": "0.15406 nm",
+      "actual": "0.15406 nm",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).shape_factor_main": {
+      "path": "(1).shape_factor_main",
+      "expected": "0.90",
+      "actual": 0.9,
+      "expected_num": 0.9,
+      "actual_num": 0.9,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).visual_files.full_spectrum": {
+      "path": "(1).visual_files.full_spectrum",
+      "expected": "case_61_sample_1_raw.png",
+      "actual": "case_61_sample_1_raw.png",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1).visual_files.peak_zoom": {
+      "path": "(1).visual_files.peak_zoom",
+      "expected": "case_61_sample_1_peak_zoom.png",
+      "actual": "case_61_sample_1_peak_zoom.png",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2).D_main": {
+      "path": "(2).D_main",
+      "expected": "29.8 nm",
+      "actual": "42.05 nm",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3).D_uncorr": {
+      "path": "(3).D_uncorr",
+      "expected": "18.6 nm",
+      "actual": "18.58 nm",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3).D_corr": {
+      "path": "(3).D_corr",
+      "expected": "34.0 nm",
+      "actual": "50.89 nm",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3).D_shape_factor_interval.D_low": {
+      "path": "(3).D_shape_factor_interval.D_low",
+      "expected": "24.1 nm",
+      "actual": "24.15 nm",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3).D_shape_factor_interval.D_high": {
+      "path": "(3).D_shape_factor_interval.D_high",
+      "expected": "34.7 nm",
+      "actual": "50.39 nm",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4).alt_strongest_peak_2theta": {
+      "path": "(4).alt_strongest_peak_2theta",
+      "expected": "38.8 deg",
+      "actual": "38.80 deg",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4).FWHM_alt": {
+      "path": "(4).FWHM_alt",
+      "expected": "0.333 deg",
+      "actual": "0.333 deg",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4).D_alt": {
+      "path": "(4).D_alt",
+      "expected": "26.5 nm",
+      "actual": "36.15 nm",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4).peak_match_boolean": {
+      "path": "(4).peak_match_boolean",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4).diff_percent": {
+      "path": "(4).diff_percent",
+      "expected": "11.0 %",
+      "actual": "14.03%",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4).consistency_boolean": {
+      "path": "(4).consistency_boolean",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5)": {
+      "path": "(5)",
+      "expected": "基于给定的局部放大峰形参数与仪器展宽，按Scherrer关系得到主峰对应的晶粒尺寸D_main；作为对照，计算了未校正与仪器校正两类参考值，并结合不同形状因子与峰位选择给出[D_low, D_high]的不确定性区间。替代数据在峰位与主峰满足匹配阈值，按相同参数计算出的D_alt相对于D_main的差异百分比满足一致性判据，从而在给定波长与形状因子设定下，主结果与替代数据具有相互支撑的稳定性。",
+      "actual": "分析显示，XRD图谱的最强峰位于2θ=38.32度，强度为1000，FWHM为0.30度。使用关键参数（λ=0.15406 nm, K=0.90）并校正0.10度的仪器展宽后，通过Scherrer公式计算得到主晶粒尺寸D_main为42.05 nm。三类参考计算分别给出了未校正值18.58 nm、仪器校正参考值50.89 nm以及形状因子区间对应的24.15 nm至50.39 nm。交叉验证中，替代数据的最强峰位于38.80度，与主数据峰位一致，计算得到的替代晶粒尺寸D_alt为36.15 nm，与D_main的相对差异为14.03%，表明两者在15%的判据下具有一致性。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "mode_folder": "with_all_tools",
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 0.9,
+    "0_75": 0.8,
+    "0_100": 0.75
+  }
+}

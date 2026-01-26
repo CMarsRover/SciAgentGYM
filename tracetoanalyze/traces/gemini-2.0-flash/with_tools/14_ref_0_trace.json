@@ -1,0 +1,1339 @@
+{
+  "id": "14_ref_0",
+  "query": "一块刚性承压板由三根竖向拉杆并联支承，杆1与杆2为黄铜，杆3为钢。三杆与承压板上下两端固结，承压板受竖向集中轴向拉力F，三杆共同承载。已知：\n- 弹性模量：黄铜 E_b = 1.0×10^5 N/mm^2，钢 E_s = 2.0×10^5 N/mm^2；\n- 截面面积：A1 = A2 = A3 = 1.0 mm^2；\n- 允许正应力：黄铜 σ_b,allow = 60 N/mm^2，钢 σ_s,allow = 120 N/mm^2；\n- 可靠度分项：材料 γ_M = 1.10，荷载 γ_F = 1.05；\n- 可服务性竖向变形限值（承压板共同伸长）：δ_lim = 0.58 mm；\n- 刚性板作用下共同伸长：三杆端部位移相同为 δ，各杆应变 ε_i = δ / L_i。\n考虑四个工况（有效长度）：\n- B0：L1 = L2 = L3 = 1000.0 mm；\n- M1：L1 = 1000.0 mm，L2 = 999.5 mm，L3 = 1000.3 mm；\n- T1：L1 = 1001.8 mm，L2 = 1001.8 mm，L3 = 1002.85 mm；\n- C：L1 = 1000.449525 mm，L2 = 1001.450475 mm，L3 = 1000.6 mm。\n(1) 在四个工况下，求强度控制的最大安全载荷 F_strength、三杆应力分配与共同伸长 δ_strength；并据 δ_lim 计算服务性控制载荷 F_serv（线弹性下 F ∝ δ），给出对应应力分配与共同伸长（= δ_lim）。本小问结果给出数值，保留三位有效数字，单位用 N、mm、N/mm^2 表示。\n(2) 跨工况比较：分别指出强度控制与服务性控制的控制工况（使 F 最小的工况）。本小问结果以工况编号给出。\n(3) 可靠度设计：采用 γ_M 与 γ_F，计算各工况的设计强度承载力 R_d = F_strength/γ_M，并取最终设计安全载荷 F_design = min_over_cases(R_d/γ_F, F_serv)。给出控制工况、该工况下三杆在 F_design 下的应力与共同伸长，以及相对于 σ_allow/γ_M 与 δ_lim 的安全裕度。除工况编号外，结果以符号表达式给出。\n(4) 交叉校核：简述核对要点（内力平衡、应力限值、挠度限值、对长度与热效应的敏感性），以关系式表达。结果以符号表达式给出。",
+  "query_data": {
+    "id": "14_ref_0",
+    "original_id": 14,
+    "refined_index": 0,
+    "question": "一块刚性承压板由三根竖向拉杆并联支承，杆1与杆2为黄铜，杆3为钢。三杆与承压板上下两端固结，承压板受竖向集中轴向拉力F，三杆共同承载。已知：\n- 弹性模量：黄铜 E_b = 1.0×10^5 N/mm^2，钢 E_s = 2.0×10^5 N/mm^2；\n- 截面面积：A1 = A2 = A3 = 1.0 mm^2；\n- 允许正应力：黄铜 σ_b,allow = 60 N/mm^2，钢 σ_s,allow = 120 N/mm^2；\n- 可靠度分项：材料 γ_M = 1.10，荷载 γ_F = 1.05；\n- 可服务性竖向变形限值（承压板共同伸长）：δ_lim = 0.58 mm；\n- 刚性板作用下共同伸长：三杆端部位移相同为 δ，各杆应变 ε_i = δ / L_i。\n考虑四个工况（有效长度）：\n- B0：L1 = L2 = L3 = 1000.0 mm；\n- M1：L1 = 1000.0 mm，L2 = 999.5 mm，L3 = 1000.3 mm；\n- T1：L1 = 1001.8 mm，L2 = 1001.8 mm，L3 = 1002.85 mm；\n- C：L1 = 1000.449525 mm，L2 = 1001.450475 mm，L3 = 1000.6 mm。\n(1) 在四个工况下，求强度控制的最大安全载荷 F_strength、三杆应力分配与共同伸长 δ_strength；并据 δ_lim 计算服务性控制载荷 F_serv（线弹性下 F ∝ δ），给出对应应力分配与共同伸长（= δ_lim）。本小问结果给出数值，保留三位有效数字，单位用 N、mm、N/mm^2 表示。\n(2) 跨工况比较：分别指出强度控制与服务性控制的控制工况（使 F 最小的工况）。本小问结果以工况编号给出。\n(3) 可靠度设计：采用 γ_M 与 γ_F，计算各工况的设计强度承载力 R_d = F_strength/γ_M，并取最终设计安全载荷 F_design = min_over_cases(R_d/γ_F, F_serv)。给出控制工况、该工况下三杆在 F_design 下的应力与共同伸长，以及相对于 σ_allow/γ_M 与 δ_lim 的安全裕度。除工况编号外，结果以符号表达式给出。\n(4) 交叉校核：简述核对要点（内力平衡、应力限值、挠度限值、对长度与热效应的敏感性），以关系式表达。结果以符号表达式给出。",
+    "answer": "{'(1)_B0_strength': {'F_strength': '240 N', 'delta_strength': '0.600 mm', 'stress_distribution': {'rod1_brass': '60.0 N/mm^2', 'rod2_brass': '60.0 N/mm^2', 'rod3_steel': '120 N/mm^2'}}, '(1)_B0_serviceability': {'F_serv': '232 N', 'delta': '0.580 mm', 'stress_distribution': {'rod1_brass': '58.0 N/mm^2', 'rod2_brass': '58.0 N/mm^2', 'rod3_steel': '116 N/mm^2'}}, '(1)_M1_strength': {'F_strength': '240 N', 'delta_strength': '0.600 mm', 'stress_distribution': {'rod1_brass': '60.0 N/mm^2', 'rod2_brass': '60.0 N/mm^2', 'rod3_steel': '120 N/mm^2'}}, '(1)_M1_serviceability': {'F_serv': '232 N', 'delta': '0.580 mm', 'stress_distribution': {'rod1_brass': '58.0 N/mm^2', 'rod2_brass': '58.0 N/mm^2', 'rod3_steel': '116 N/mm^2'}}, '(1)_T1_strength': {'F_strength': '240 N', 'delta_strength': '0.601 mm', 'stress_distribution': {'rod1_brass': '60.0 N/mm^2', 'rod2_brass': '60.0 N/mm^2', 'rod3_steel': '120 N/mm^2'}}, '(1)_T1_serviceability': {'F_serv': '231 N', 'delta': '0.580 mm', 'stress_distribution': {'rod1_brass': '57.9 N/mm^2', 'rod2_brass': '57.9 N/mm^2', 'rod3_steel': '115.7 N/mm^2'}}, '(1)_C_strength': {'F_strength': '240 N', 'delta_strength': '0.600 mm', 'stress_distribution': {'rod1_brass': '60.0 N/mm^2', 'rod2_brass': '59.9 N/mm^2', 'rod3_steel': '120 N/mm^2'}}, '(1)_C_serviceability': {'F_serv': '232 N', 'delta': '0.580 mm', 'stress_distribution': {'rod1_brass': '58.0 N/mm^2', 'rod2_brass': '57.9 N/mm^2', 'rod3_steel': '116 N/mm^2'}}, '(2)_controlling_case_strength': 'M1', '(2)_controlling_case_serviceability': 'T1', '(3)_design': {'definitions': {'S_B0': '记(1)中 B0 的 F_strength', 'S_M1': '记(1)中 M1 的 F_strength', 'S_T1': '记(1)中 T1 的 F_strength', 'S_C': '记(1)中 C 的 F_strength', 'U_B0': '记(1)中 B0 的 F_serv', 'U_M1': '记(1)中 M1 的 F_serv', 'U_T1': '记(1)中 T1 的 F_serv', 'U_C': '记(1)中 C 的 F_serv'}, 'R_d_cases': {'B0': 'R_d,B0 = S_B0 / γ_M', 'M1': 'R_d,M1 = S_M1 / γ_M', 'T1': 'R_d,T1 = S_T1 / γ_M', 'C': 'R_d,C = S_C / γ_M'}, 'F_design': 'F_design = min{ R_d,B0/γ_F, R_d,M1/γ_F, R_d,T1/γ_F, R_d,C/γ_F, U_B0, U_M1, U_T1, U_C }', 'controlling_case_design': 'M1', 'stress_and_delta_at_F_design': {'scaling_relations': {'sigma_i_design': 'σ_i,design = σ_i,strength(M1) · (F_design / S_M1)', 'delta_design': 'δ_design = δ_strength(M1) · (F_design / S_M1)'}}, 'safety_margins': {'stress_allowable_design': {'brass': 'σ_b,allow/γ_M', 'steel': 'σ_s,allow/γ_M'}, 'margin_forms': {'stress_margin_each_rod': 'm_σ,i = 1 − σ_i,design / (σ_allow,i/γ_M)', 'deflection_margin': 'm_δ = 1 − δ_design / δ_lim'}}}, '(4)_cross_check': {'equilibrium': '∑(A_i E_i δ / L_i) = F；各杆轴力 N_i = A_i σ_i', 'stress_limit': 'σ_i = E_i δ / L_i ≤ σ_allow,i', 'serviceability_limit': 'δ ≤ δ_lim；F ∝ δ', 'sensitivity': '对 L_i 变化与热效应引起的有效长度变化：F = δ · ∑(A_i E_i / L_i)，δ_strength = min_i(L_i · σ_allow,i / E_i)'}}",
+    "metadata": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "image_path": [
+        "filtered_images/223834955.jpg"
+      ],
+      "solution_steps": [
+        "建立并联杆件同端位移一致条件，推导在相同位移下载荷按刚度( AE/L )比例分配",
+        "根据材料许用应力计算各杆件控制总载荷的上限，取最小者为系统最大安全载荷",
+        "调用 calculate_load_distribution 计算最大安全载荷、载荷分布、应变与应力，并核对应力不超限"
+      ],
+      "tool_expected": [
+        "calculate_load_distribution"
+      ],
+      "golden_answer": [
+        {
+          "(1)_B0_strength": {
+            "F_strength": "240 N",
+            "delta_strength": "0.600 mm",
+            "stress_distribution": {
+              "rod1_brass": "60.0 N/mm^2",
+              "rod2_brass": "60.0 N/mm^2",
+              "rod3_steel": "120 N/mm^2"
+            }
+          },
+          "(1)_B0_serviceability": {
+            "F_serv": "232 N",
+            "delta": "0.580 mm",
+            "stress_distribution": {
+              "rod1_brass": "58.0 N/mm^2",
+              "rod2_brass": "58.0 N/mm^2",
+              "rod3_steel": "116 N/mm^2"
+            }
+          },
+          "(1)_M1_strength": {
+            "F_strength": "240 N",
+            "delta_strength": "0.600 mm",
+            "stress_distribution": {
+              "rod1_brass": "60.0 N/mm^2",
+              "rod2_brass": "60.0 N/mm^2",
+              "rod3_steel": "120 N/mm^2"
+            }
+          },
+          "(1)_M1_serviceability": {
+            "F_serv": "232 N",
+            "delta": "0.580 mm",
+            "stress_distribution": {
+              "rod1_brass": "58.0 N/mm^2",
+              "rod2_brass": "58.0 N/mm^2",
+              "rod3_steel": "116 N/mm^2"
+            }
+          },
+          "(1)_T1_strength": {
+            "F_strength": "240 N",
+            "delta_strength": "0.601 mm",
+            "stress_distribution": {
+              "rod1_brass": "60.0 N/mm^2",
+              "rod2_brass": "60.0 N/mm^2",
+              "rod3_steel": "120 N/mm^2"
+            }
+          },
+          "(1)_T1_serviceability": {
+            "F_serv": "231 N",
+            "delta": "0.580 mm",
+            "stress_distribution": {
+              "rod1_brass": "57.9 N/mm^2",
+              "rod2_brass": "57.9 N/mm^2",
+              "rod3_steel": "115.7 N/mm^2"
+            }
+          },
+          "(1)_C_strength": {
+            "F_strength": "240 N",
+            "delta_strength": "0.600 mm",
+            "stress_distribution": {
+              "rod1_brass": "60.0 N/mm^2",
+              "rod2_brass": "59.9 N/mm^2",
+              "rod3_steel": "120 N/mm^2"
+            }
+          },
+          "(1)_C_serviceability": {
+            "F_serv": "232 N",
+            "delta": "0.580 mm",
+            "stress_distribution": {
+              "rod1_brass": "58.0 N/mm^2",
+              "rod2_brass": "57.9 N/mm^2",
+              "rod3_steel": "116 N/mm^2"
+            }
+          },
+          "(2)_controlling_case_strength": "M1",
+          "(2)_controlling_case_serviceability": "T1",
+          "(3)_design": {
+            "definitions": {
+              "S_B0": "记(1)中 B0 的 F_strength",
+              "S_M1": "记(1)中 M1 的 F_strength",
+              "S_T1": "记(1)中 T1 的 F_strength",
+              "S_C": "记(1)中 C 的 F_strength",
+              "U_B0": "记(1)中 B0 的 F_serv",
+              "U_M1": "记(1)中 M1 的 F_serv",
+              "U_T1": "记(1)中 T1 的 F_serv",
+              "U_C": "记(1)中 C 的 F_serv"
+            },
+            "R_d_cases": {
+              "B0": "R_d,B0 = S_B0 / γ_M",
+              "M1": "R_d,M1 = S_M1 / γ_M",
+              "T1": "R_d,T1 = S_T1 / γ_M",
+              "C": "R_d,C = S_C / γ_M"
+            },
+            "F_design": "F_design = min{ R_d,B0/γ_F, R_d,M1/γ_F, R_d,T1/γ_F, R_d,C/γ_F, U_B0, U_M1, U_T1, U_C }",
+            "controlling_case_design": "M1",
+            "stress_and_delta_at_F_design": {
+              "scaling_relations": {
+                "sigma_i_design": "σ_i,design = σ_i,strength(M1) · (F_design / S_M1)",
+                "delta_design": "δ_design = δ_strength(M1) · (F_design / S_M1)"
+              }
+            },
+            "safety_margins": {
+              "stress_allowable_design": {
+                "brass": "σ_b,allow/γ_M",
+                "steel": "σ_s,allow/γ_M"
+              },
+              "margin_forms": {
+                "stress_margin_each_rod": "m_σ,i = 1 − σ_i,design / (σ_allow,i/γ_M)",
+                "deflection_margin": "m_δ = 1 − δ_design / δ_lim"
+              }
+            }
+          },
+          "(4)_cross_check": {
+            "equilibrium": "∑(A_i E_i δ / L_i) = F；各杆轴力 N_i = A_i σ_i",
+            "stress_limit": "σ_i = E_i δ / L_i ≤ σ_allow,i",
+            "serviceability_limit": "δ ≤ δ_lim；F ∝ δ",
+            "sensitivity": "对 L_i 变化与热效应引起的有效长度变化：F = δ · ∑(A_i E_i / L_i)，δ_strength = min_i(L_i · σ_allow,i / E_i)"
+          }
+        }
+      ],
+      "original_question_id": "14",
+      "test_type": "refined"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_load_distribution",
+          "description": "计算复合材料系统中的载荷分布和最大安全载荷。该函数基于材料的弹性模量、横截面积、长度和最大允许应力，计算复合材料系统中各组件的载荷分布，并确定整个系统的最大安全载荷。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "areas": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的横截面积，单位为 mm²"
+              },
+              "elastic_moduli": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的弹性模量，单位为 N/mm²"
+              },
+              "lengths": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的长度，单位为 mm"
+              },
+              "max_stresses": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各组件的最大允许应力，单位为 N/mm²"
+              }
+            },
+            "required": [
+              "areas",
+              "elastic_moduli",
+              "lengths",
+              "max_stresses"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_material_solver_17911.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "一块刚性承压板由三根竖向拉杆并联支承，杆1与杆2为黄铜，杆3为钢。三杆与承压板上下两端固结，承压板受竖向集中轴向拉力F，三杆共同承载。已知：\n- 弹性模量：黄铜 E_b = 1.0×10^5 N/mm^2，钢 E_s = 2.0×10^5 N/mm^2；\n- 截面面积：A1 = A2 = A3 = 1.0 mm^2；\n- 允许正应力：黄铜 σ_b,allow = 60 N/mm^2，钢 σ_s,allow = 120 N/mm^2；\n- 可靠度分项：材料 γ_M = 1.10，荷载 γ_F = 1.05；\n- 可服务性竖向变形限值（承压板共同伸长）：δ_lim = 0.58 mm；\n- 刚性板作用下共同伸长：三杆端部位移相同为 δ，各杆应变 ε_i = δ / L_i。\n考虑四个工况（有效长度）：\n- B0：L1 = L2 = L3 = 1000.0 mm；\n- M1：L1 = 1000.0 mm，L2 = 999.5 mm，L3 = 1000.3 mm；\n- T1：L1 = 1001.8 mm，L2 = 1001.8 mm，L3 = 1002.85 mm；\n- C：L1 = 1000.449525 mm，L2 = 1001.450475 mm，L3 = 1000.6 mm。\n(1) 在四个工况下，求强度控制的最大安全载荷 F_strength、三杆应力分配与共同伸长 δ_strength；并据 δ_lim 计算服务性控制载荷 F_serv（线弹性下 F ∝ δ），给出对应应力分配与共同伸长（= δ_lim）。本小问结果给出数值，保留三位有效数字，单位用 N、mm、N/mm^2 表示。\n(2) 跨工况比较：分别指出强度控制与服务性控制的控制工况（使 F 最小的工况）。本小问结果以工况编号给出。\n(3) 可靠度设计：采用 γ_M 与 γ_F，计算各工况的设计强度承载力 R_d = F_strength/γ_M，并取最终设计安全载荷 F_design = min_over_cases(R_d/γ_F, F_serv)。给出控制工况、该工况下三杆在 F_design 下的应力与共同伸长，以及相对于 σ_allow/γ_M 与 δ_lim 的安全裕度。除工况编号外，结果以符号表达式给出。\n(4) 交叉校核：简述核对要点（内力平衡、应力限值、挠度限值、对长度与热效应的敏感性），以关系式表达。结果以符号表达式给出。",
+      "final_answer": {
+        "(1)_B0_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.600 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "60.0 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_B0_serviceability": {
+          "F_serv": "232 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "58.0 N/mm^2",
+            "rod2_brass": "58.0 N/mm^2",
+            "rod3_steel": "116 N/mm^2"
+          }
+        },
+        "(1)_M1_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.600 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "60.0 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_M1_serviceability": {
+          "F_serv": "232 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "58.0 N/mm^2",
+            "rod2_brass": "58.0 N/mm^2",
+            "rod3_steel": "116 N/mm^2"
+          }
+        },
+        "(1)_T1_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.601 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "60.0 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_T1_serviceability": {
+          "F_serv": "231 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "57.9 N/mm^2",
+            "rod2_brass": "57.9 N/mm^2",
+            "rod3_steel": "115.7 N/mm^2"
+          }
+        },
+        "(1)_C_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.600 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "59.9 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_C_serviceability": {
+          "F_serv": "232 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "58.0 N/mm^2",
+            "rod2_brass": "57.9 N/mm^2",
+            "rod3_steel": "116 N/mm^2"
+          }
+        },
+        "(2)_controlling_case_strength": "M1",
+        "(2)_controlling_case_serviceability": "T1",
+        "(3)_design": {
+          "definitions": {
+            "S_B0": "记(1)中 B0 的 F_strength",
+            "S_M1": "记(1)中 M1 的 F_strength",
+            "S_T1": "记(1)中 T1 的 F_strength",
+            "S_C": "记(1)中 C 的 F_strength",
+            "U_B0": "记(1)中 B0 的 F_serv",
+            "U_M1": "记(1)中 M1 的 F_serv",
+            "U_T1": "记(1)中 T1 的 F_serv",
+            "U_C": "记(1)中 C 的 F_serv"
+          },
+          "R_d_cases": {
+            "B0": "R_d,B0 = S_B0 / γ_M",
+            "M1": "R_d,M1 = S_M1 / γ_M",
+            "T1": "R_d,T1 = S_T1 / γ_M",
+            "C": "R_d,C = S_C / γ_M"
+          },
+          "F_design": "F_design = min{ R_d,B0/γ_F, R_d,M1/γ_F, R_d,T1/γ_F, R_d,C/γ_F, U_B0, U_M1, U_T1, U_C }",
+          "controlling_case_design": "M1",
+          "stress_and_delta_at_F_design": {
+            "scaling_relations": {
+              "sigma_i_design": "σ_i,design = σ_i,strength(M1) · (F_design / S_M1)",
+              "delta_design": "δ_design = δ_strength(M1) · (F_design / S_M1)"
+            }
+          },
+          "safety_margins": {
+            "stress_allowable_design": {
+              "brass": "σ_b,allow/γ_M",
+              "steel": "σ_s,allow/γ_M"
+            },
+            "margin_forms": {
+              "stress_margin_each_rod": "m_σ,i = 1 − σ_i,design / (σ_allow,i/γ_M)",
+              "deflection_margin": "m_δ = 1 − δ_design / δ_lim"
+            }
+          }
+        },
+        "(4)_cross_check": {
+          "equilibrium": "∑(A_i E_i δ / L_i) = F；各杆轴力 N_i = A_i σ_i",
+          "stress_limit": "σ_i = E_i δ / L_i ≤ σ_allow,i",
+          "serviceability_limit": "δ ≤ δ_lim；F ∝ δ",
+          "sensitivity": "对 L_i 变化与热效应引起的有效长度变化：F = δ · ∑(A_i E_i / L_i)，δ_strength = min_i(L_i · σ_allow,i / E_i)"
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "物理科学",
+      "topic": "凝聚态物理",
+      "test_type": "refined",
+      "original_question_id": "14",
+      "subject_topic_key": "物理科学::凝聚态物理"
+    }
+  },
+  "model": "gemini-2.0-flash",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "一块刚性承压板由三根竖向拉杆并联支承，杆1与杆2为黄铜，杆3为钢。三杆与承压板上下两端固结，承压板受竖向集中轴向拉力F，三杆共同承载。已知：\n- 弹性模量：黄铜 E_b = 1.0×10^5 N/mm^2，钢 E_s = 2.0×10^5 N/mm^2；\n- 截面面积：A1 = A2 = A3 = 1.0 mm^2；\n- 允许正应力：黄铜 σ_b,allow = 60 N/mm^2，钢 σ_s,allow = 120 N/mm^2；\n- 可靠度分项：材料 γ_M = 1.10，荷载 γ_F = 1.05；\n- 可服务性竖向变形限值（承压板共同伸长）：δ_lim = 0.58 mm；\n- 刚性板作用下共同伸长：三杆端部位移相同为 δ，各杆应变 ε_i = δ / L_i。\n考虑四个工况（有效长度）：\n- B0：L1 = L2 = L3 = 1000.0 mm；\n- M1：L1 = 1000.0 mm，L2 = 999.5 mm，L3 = 1000.3 mm；\n- T1：L1 = 1001.8 mm，L2 = 1001.8 mm，L3 = 1002.85 mm；\n- C：L1 = 1000.449525 mm，L2 = 1001.450475 mm，L3 = 1000.6 mm。\n(1) 在四个工况下，求强度控制的最大安全载荷 F_strength、三杆应力分配与共同伸长 δ_strength；并据 δ_lim 计算服务性控制载荷 F_serv（线弹性下 F ∝ δ），给出对应应力分配与共同伸长（= δ_lim）。本小问结果给出数值，保留三位有效数字，单位用 N、mm、N/mm^2 表示。\n(2) 跨工况比较：分别指出强度控制与服务性控制的控制工况（使 F 最小的工况）。本小问结果以工况编号给出。\n(3) 可靠度设计：采用 γ_M 与 γ_F，计算各工况的设计强度承载力 R_d = F_strength/γ_M，并取最终设计安全载荷 F_design = min_over_cases(R_d/γ_F, F_serv)。给出控制工况、该工况下三杆在 F_design 下的应力与共同伸长，以及相对于 σ_allow/γ_M 与 δ_lim 的安全裕度。除工况编号外，结果以符号表达式给出。\n(4) 交叉校核：简述核对要点（内力平衡、应力限值、挠度限值、对长度与热效应的敏感性），以关系式表达。结果以符号表达式给出。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, I will solve this problem step by step.\n\n**Part 1: Calculate the maximum safe load for each case based on strength and serviceability.**\n\nFirst, let's define the material properties and geometric parameters:\n\n*   E\\_b = 1.0e5  N/mm^2 (Brass)\n*   E\\_s = 2.0e5  N/mm^2 (Steel)\n*   A1 = A2 = A3 = 1.0  mm^2\n*   sigma\\_b\\_allow = 60  N/mm^2\n*   sigma\\_s\\_allow = 120  N/mm^2\n*   gamma\\_M = 1.10\n*   gamma\\_F = 1.05\n*   delta\\_lim = 0.58 mm\n\nNow, define the lengths for each case:\n\n*   B0: L1 = L2 = L3 = 1000.0 mm\n*   M1: L1 = 1000.0 mm, L2 = 999.5 mm, L3 = 1000.3 mm\n*   T1: L1 = 1001.8 mm, L2 = 1001.8 mm, L3 = 1002.85 mm\n*   C: L1 = 1000.449525 mm, L2 = 1001.450475 mm, L3 = 1000.6 mm\n\nFor each case, I will use the `calculate_load_distribution` function to find the maximum safe load based on the strength criteria.  Then, I will calculate the serviceability load based on the displacement limit.\n\n```python\ndef calculate_safe_load(lengths, areas, elastic_moduli, max_stresses):\n  try:\n    result = default_api.calculate_load_distribution(areas=areas, elastic_moduli=elastic_moduli, lengths=lengths, max_stresses=max_stresses)\n    return result\n  except Exception as e:\n    print(f\"Error: {e}\")\n    return None\n\n# Case B0\nlengths_B0 = [1000.0, 1000.0, 1000.0]\nareas = [1.0, 1.0, 1.0]\nelastic_moduli = [1.0e5, 1.0e5, 2.0e5]\nmax_stresses = [60.0, 60.0, 120.0]\nresult_B0 = calculate_safe_load(lengths_B0, areas, elastic_moduli, max_stresses)\nprint(f\"Case B0: {result_B0}\")\n\n# Case M1\nlengths_M1 = [1000.0, 999.5, 1000.3]\nresult_M1 = calculate_safe_load(lengths_M1, areas, elastic_moduli, max_stresses)\nprint(f\"Case M1: {result_M1}\")\n\n# Case T1\nlengths_T1 = [1001.8, 1001.8, 1002.85]\nresult_T1 = calculate_safe_load(lengths_T1, areas, elastic_moduli, max_stresses)\nprint(f\"Case T1: {result_T1}\")\n\n# Case C\nlengths_C = [1000.449525, 1001.450475, 1000.6]\nresult_C = calculate_safe_load(lengths_C, areas, elastic_moduli, max_stresses)\nprint(f\"Case C: {result_C}\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)_B0_strength\": {\n    \"F_strength\": \"[字符串]\",\n    \"delta_strength\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(1)_B0_serviceability\": {\n    \"F_serv\": \"[字符串]\",\n    \"delta\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(1)_M1_strength\": {\n    \"F_strength\": \"[字符串]\",\n    \"delta_strength\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(1)_M1_serviceability\": {\n    \"F_serv\": \"[字符串]\",\n    \"delta\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(1)_T1_strength\": {\n    \"F_strength\": \"[字符串]\",\n    \"delta_strength\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(1)_T1_serviceability\": {\n    \"F_serv\": \"[字符串]\",\n    \"delta\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(1)_C_strength\": {\n    \"F_strength\": \"[字符串]\",\n    \"delta_strength\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(1)_C_serviceability\": {\n    \"F_serv\": \"[字符串]\",\n    \"delta\": \"[字符串]\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"[字符串]\",\n      \"rod2_brass\": \"[字符串]\",\n      \"rod3_steel\": \"[字符串]\"\n    }\n  },\n  \"(2)_controlling_case_strength\": \"[字符串]\",\n  \"(2)_controlling_case_serviceability\": \"[字符串]\",\n  \"(3)_design\": {\n    \"definitions\": {\n      \"S_B0\": \"[字符串]\",\n      \"S_M1\": \"[字符串]\",\n      \"S_T1\": \"[字符串]\",\n      \"S_C\": \"[字符串]\",\n      \"U_B0\": \"[字符串]\",\n      \"U_M1\": \"[字符串]\",\n      \"U_T1\": \"[字符串]\",\n      \"U_C\": \"[字符串]\"\n    },\n    \"R_d_cases\": {\n      \"B0\": \"[字符串]\",\n      \"M1\": \"[字符串]\",\n      \"T1\": \"[字符串]\",\n      \"C\": \"[字符串]\"\n    },\n    \"F_design\": \"[字符串]\",\n    \"controlling_case_design\": \"[字符串]\",\n    \"stress_and_delta_at_F_design\": {\n      \"scaling_relations\": {\n        \"sigma_i_design\": \"[字符串]\",\n        \"delta_design\": \"[字符串]\"\n      }\n    },\n    \"safety_margins\": {\n      \"stress_allowable_design\": {\n        \"brass\": \"[字符串]\",\n        \"steel\": \"[字符串]\"\n      },\n      \"margin_forms\": {\n        \"stress_margin_each_rod\": \"[字符串]\",\n        \"deflection_margin\": \"[字符串]\"\n      }\n    }\n  },\n  \"(4)_cross_check\": {\n    \"equilibrium\": \"[字符串]\",\n    \"stress_limit\": \"[字符串]\",\n    \"serviceability_limit\": \"[字符串]\",\n    \"sensitivity\": \"[字符串]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)_B0_strength\": {\n    \"F_strength\": \"180.00\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"60.00\",\n      \"rod2_brass\": \"60.00\",\n      \"rod3_steel\": \"120.00\"\n    }\n  },\n  \"(1)_B0_serviceability\": {\n    \"F_serv\": \"580.00\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.33\",\n      \"rod2_brass\": \"193.33\",\n      \"rod3_steel\": \"386.67\"\n    }\n  },\n  \"(1)_M1_strength\": {\n    \"F_strength\": \"179.91\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"60.00\",\n      \"rod2_brass\": \"60.03\",\n      \"rod3_steel\": \"119.94\"\n    }\n  },\n  \"(1)_M1_serviceability\": {\n    \"F_serv\": \"579.71\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.24\",\n      \"rod2_brass\": \"193.44\",\n      \"rod3_steel\": \"386.47\"\n    }\n  },\n  \"(1)_T1_strength\": {\n    \"F_strength\": \"179.68\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"59.94\",\n      \"rod2_brass\": \"59.94\",\n      \"rod3_steel\": \"119.80\"\n    }\n  },\n  \"(1)_T1_serviceability\": {\n    \"F_serv\": \"578.96\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"192.99\",\n      \"rod2_brass\": \"192.99\",\n      \"rod3_steel\": \"385.97\"\n    }\n  },\n  \"(1)_C_strength\": {\n    \"F_strength\": \"179.89\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"59.99\",\n      \"rod2_brass\": \"60.06\",\n      \"rod3_steel\": \"119.93\"\n    }\n  },\n  \"(1)_C_serviceability\": {\n    \"F_serv\": \"579.65\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.22\",\n      \"rod2_brass\": \"193.46\",\n      \"rod3_steel\": \"386.43\"\n    }\n  },\n  \"(2)_controlling_case_strength\": \"T1\",\n  \"(2)_controlling_case_serviceability\": \"T1\",\n  \"(3)_design\": {\n    \"definitions\": {\n      \"S_B0\": \"F_strength(B0) / gamma_M\",\n      \"S_M1\": \"F_strength(M1) / gamma_M\",\n      \"S_T1\": \"F_strength(T1) / gamma_M\",\n      \"S_C\": \"F_strength(C) / gamma_M\",\n      \"U_B0\": \"S_B0 / gamma_F\",\n      \"U_M1\": \"S_M1 / gamma_F\",\n      \"U_T1\": \"S_T1 / gamma_F\",\n      \"U_C\": \"S_C / gamma_F\"\n    },\n    \"R_d_cases\": {\n      \"B0\": \"163.64\",\n      \"M1\": \"163.55\",\n      \"T1\": \"163.35\",\n      \"C\": \"163.54\"\n    },\n    \"F_design\": \"155.57\",\n    \"controlling_case_design\": \"T1\",\n    \"stress_and_delta_at_F_design\": {\n      \"scaling_relations\": {\n        \"sigma_i_design\": \"sigma_i_strength(T1) * (F_design / F_strength(T1))\",\n        \"delta_design\": \"delta_strength(T1) * (F_design / F_strength(T1))\"\n      }\n    },\n    \"safety_margins\": {\n      \"stress_allowable_design\": {\n        \"brass\": \"sigma_b_allow / gamma_M\",\n        \"steel\": \"sigma_s_allow / gamma_M\"\n      },\n      \"margin_forms\": {\n        \"stress_margin_each_rod\": \"(sigma_allowable_design - sigma_i_design) / sigma_allowable_design\",\n        \"deflection_margin\": \"(delta_lim - delta_design) / delta_lim\"\n      }\n    }\n  },\n  \"(4)_cross_check\": {\n    \"equilibrium\": \"F = A1*sigma1 + A2*sigma2 + A3*sigma3\",\n    \"stress_limit\": \"sigma_i <= sigma_i_allow\",\n    \"serviceability_limit\": \"delta <= delta_lim\",\n    \"sensitivity\": \"sensitivity to lengths and material properties should be checked\"\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "image_path": [
+      "filtered_images/223834955.jpg"
+    ],
+    "solution_steps": [
+      "建立并联杆件同端位移一致条件，推导在相同位移下载荷按刚度( AE/L )比例分配",
+      "根据材料许用应力计算各杆件控制总载荷的上限，取最小者为系统最大安全载荷",
+      "调用 calculate_load_distribution 计算最大安全载荷、载荷分布、应变与应力，并核对应力不超限"
+    ],
+    "tool_expected": [
+      "calculate_load_distribution"
+    ],
+    "golden_answer": [
+      {
+        "(1)_B0_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.600 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "60.0 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_B0_serviceability": {
+          "F_serv": "232 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "58.0 N/mm^2",
+            "rod2_brass": "58.0 N/mm^2",
+            "rod3_steel": "116 N/mm^2"
+          }
+        },
+        "(1)_M1_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.600 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "60.0 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_M1_serviceability": {
+          "F_serv": "232 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "58.0 N/mm^2",
+            "rod2_brass": "58.0 N/mm^2",
+            "rod3_steel": "116 N/mm^2"
+          }
+        },
+        "(1)_T1_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.601 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "60.0 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_T1_serviceability": {
+          "F_serv": "231 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "57.9 N/mm^2",
+            "rod2_brass": "57.9 N/mm^2",
+            "rod3_steel": "115.7 N/mm^2"
+          }
+        },
+        "(1)_C_strength": {
+          "F_strength": "240 N",
+          "delta_strength": "0.600 mm",
+          "stress_distribution": {
+            "rod1_brass": "60.0 N/mm^2",
+            "rod2_brass": "59.9 N/mm^2",
+            "rod3_steel": "120 N/mm^2"
+          }
+        },
+        "(1)_C_serviceability": {
+          "F_serv": "232 N",
+          "delta": "0.580 mm",
+          "stress_distribution": {
+            "rod1_brass": "58.0 N/mm^2",
+            "rod2_brass": "57.9 N/mm^2",
+            "rod3_steel": "116 N/mm^2"
+          }
+        },
+        "(2)_controlling_case_strength": "M1",
+        "(2)_controlling_case_serviceability": "T1",
+        "(3)_design": {
+          "definitions": {
+            "S_B0": "记(1)中 B0 的 F_strength",
+            "S_M1": "记(1)中 M1 的 F_strength",
+            "S_T1": "记(1)中 T1 的 F_strength",
+            "S_C": "记(1)中 C 的 F_strength",
+            "U_B0": "记(1)中 B0 的 F_serv",
+            "U_M1": "记(1)中 M1 的 F_serv",
+            "U_T1": "记(1)中 T1 的 F_serv",
+            "U_C": "记(1)中 C 的 F_serv"
+          },
+          "R_d_cases": {
+            "B0": "R_d,B0 = S_B0 / γ_M",
+            "M1": "R_d,M1 = S_M1 / γ_M",
+            "T1": "R_d,T1 = S_T1 / γ_M",
+            "C": "R_d,C = S_C / γ_M"
+          },
+          "F_design": "F_design = min{ R_d,B0/γ_F, R_d,M1/γ_F, R_d,T1/γ_F, R_d,C/γ_F, U_B0, U_M1, U_T1, U_C }",
+          "controlling_case_design": "M1",
+          "stress_and_delta_at_F_design": {
+            "scaling_relations": {
+              "sigma_i_design": "σ_i,design = σ_i,strength(M1) · (F_design / S_M1)",
+              "delta_design": "δ_design = δ_strength(M1) · (F_design / S_M1)"
+            }
+          },
+          "safety_margins": {
+            "stress_allowable_design": {
+              "brass": "σ_b,allow/γ_M",
+              "steel": "σ_s,allow/γ_M"
+            },
+            "margin_forms": {
+              "stress_margin_each_rod": "m_σ,i = 1 − σ_i,design / (σ_allow,i/γ_M)",
+              "deflection_margin": "m_δ = 1 − δ_design / δ_lim"
+            }
+          }
+        },
+        "(4)_cross_check": {
+          "equilibrium": "∑(A_i E_i δ / L_i) = F；各杆轴力 N_i = A_i σ_i",
+          "stress_limit": "σ_i = E_i δ / L_i ≤ σ_allow,i",
+          "serviceability_limit": "δ ≤ δ_lim；F ∝ δ",
+          "sensitivity": "对 L_i 变化与热效应引起的有效长度变化：F = δ · ∑(A_i E_i / L_i)，δ_strength = min_i(L_i · σ_allow,i / E_i)"
+        }
+      }
+    ],
+    "original_question_id": "14",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "凝聚态物理",
+    "test_type": "refined",
+    "original_question_id": "14",
+    "subject_topic_key": "物理科学::凝聚态物理"
+  },
+  "answer_template": {
+    "(1)_B0_strength": {
+      "F_strength": "[字符串]",
+      "delta_strength": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(1)_B0_serviceability": {
+      "F_serv": "[字符串]",
+      "delta": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(1)_M1_strength": {
+      "F_strength": "[字符串]",
+      "delta_strength": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(1)_M1_serviceability": {
+      "F_serv": "[字符串]",
+      "delta": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(1)_T1_strength": {
+      "F_strength": "[字符串]",
+      "delta_strength": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(1)_T1_serviceability": {
+      "F_serv": "[字符串]",
+      "delta": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(1)_C_strength": {
+      "F_strength": "[字符串]",
+      "delta_strength": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(1)_C_serviceability": {
+      "F_serv": "[字符串]",
+      "delta": "[字符串]",
+      "stress_distribution": {
+        "rod1_brass": "[字符串]",
+        "rod2_brass": "[字符串]",
+        "rod3_steel": "[字符串]"
+      }
+    },
+    "(2)_controlling_case_strength": "[字符串]",
+    "(2)_controlling_case_serviceability": "[字符串]",
+    "(3)_design": {
+      "definitions": {
+        "S_B0": "[字符串]",
+        "S_M1": "[字符串]",
+        "S_T1": "[字符串]",
+        "S_C": "[字符串]",
+        "U_B0": "[字符串]",
+        "U_M1": "[字符串]",
+        "U_T1": "[字符串]",
+        "U_C": "[字符串]"
+      },
+      "R_d_cases": {
+        "B0": "[字符串]",
+        "M1": "[字符串]",
+        "T1": "[字符串]",
+        "C": "[字符串]"
+      },
+      "F_design": "[字符串]",
+      "controlling_case_design": "[字符串]",
+      "stress_and_delta_at_F_design": {
+        "scaling_relations": {
+          "sigma_i_design": "[字符串]",
+          "delta_design": "[字符串]"
+        }
+      },
+      "safety_margins": {
+        "stress_allowable_design": {
+          "brass": "[字符串]",
+          "steel": "[字符串]"
+        },
+        "margin_forms": {
+          "stress_margin_each_rod": "[字符串]",
+          "deflection_margin": "[字符串]"
+        }
+      }
+    },
+    "(4)_cross_check": {
+      "equilibrium": "[字符串]",
+      "stress_limit": "[字符串]",
+      "serviceability_limit": "[字符串]",
+      "sensitivity": "[字符串]"
+    }
+  },
+  "golden_standard": {
+    "(1)_B0_strength": {
+      "F_strength": "240 N",
+      "delta_strength": "0.600 mm",
+      "stress_distribution": {
+        "rod1_brass": "60.0 N/mm^2",
+        "rod2_brass": "60.0 N/mm^2",
+        "rod3_steel": "120 N/mm^2"
+      }
+    },
+    "(1)_B0_serviceability": {
+      "F_serv": "232 N",
+      "delta": "0.580 mm",
+      "stress_distribution": {
+        "rod1_brass": "58.0 N/mm^2",
+        "rod2_brass": "58.0 N/mm^2",
+        "rod3_steel": "116 N/mm^2"
+      }
+    },
+    "(1)_M1_strength": {
+      "F_strength": "240 N",
+      "delta_strength": "0.600 mm",
+      "stress_distribution": {
+        "rod1_brass": "60.0 N/mm^2",
+        "rod2_brass": "60.0 N/mm^2",
+        "rod3_steel": "120 N/mm^2"
+      }
+    },
+    "(1)_M1_serviceability": {
+      "F_serv": "232 N",
+      "delta": "0.580 mm",
+      "stress_distribution": {
+        "rod1_brass": "58.0 N/mm^2",
+        "rod2_brass": "58.0 N/mm^2",
+        "rod3_steel": "116 N/mm^2"
+      }
+    },
+    "(1)_T1_strength": {
+      "F_strength": "240 N",
+      "delta_strength": "0.601 mm",
+      "stress_distribution": {
+        "rod1_brass": "60.0 N/mm^2",
+        "rod2_brass": "60.0 N/mm^2",
+        "rod3_steel": "120 N/mm^2"
+      }
+    },
+    "(1)_T1_serviceability": {
+      "F_serv": "231 N",
+      "delta": "0.580 mm",
+      "stress_distribution": {
+        "rod1_brass": "57.9 N/mm^2",
+        "rod2_brass": "57.9 N/mm^2",
+        "rod3_steel": "115.7 N/mm^2"
+      }
+    },
+    "(1)_C_strength": {
+      "F_strength": "240 N",
+      "delta_strength": "0.600 mm",
+      "stress_distribution": {
+        "rod1_brass": "60.0 N/mm^2",
+        "rod2_brass": "59.9 N/mm^2",
+        "rod3_steel": "120 N/mm^2"
+      }
+    },
+    "(1)_C_serviceability": {
+      "F_serv": "232 N",
+      "delta": "0.580 mm",
+      "stress_distribution": {
+        "rod1_brass": "58.0 N/mm^2",
+        "rod2_brass": "57.9 N/mm^2",
+        "rod3_steel": "116 N/mm^2"
+      }
+    },
+    "(2)_controlling_case_strength": "M1",
+    "(2)_controlling_case_serviceability": "T1",
+    "(3)_design": {
+      "definitions": {
+        "S_B0": "记(1)中 B0 的 F_strength",
+        "S_M1": "记(1)中 M1 的 F_strength",
+        "S_T1": "记(1)中 T1 的 F_strength",
+        "S_C": "记(1)中 C 的 F_strength",
+        "U_B0": "记(1)中 B0 的 F_serv",
+        "U_M1": "记(1)中 M1 的 F_serv",
+        "U_T1": "记(1)中 T1 的 F_serv",
+        "U_C": "记(1)中 C 的 F_serv"
+      },
+      "R_d_cases": {
+        "B0": "R_d,B0 = S_B0 / γ_M",
+        "M1": "R_d,M1 = S_M1 / γ_M",
+        "T1": "R_d,T1 = S_T1 / γ_M",
+        "C": "R_d,C = S_C / γ_M"
+      },
+      "F_design": "F_design = min{ R_d,B0/γ_F, R_d,M1/γ_F, R_d,T1/γ_F, R_d,C/γ_F, U_B0, U_M1, U_T1, U_C }",
+      "controlling_case_design": "M1",
+      "stress_and_delta_at_F_design": {
+        "scaling_relations": {
+          "sigma_i_design": "σ_i,design = σ_i,strength(M1) · (F_design / S_M1)",
+          "delta_design": "δ_design = δ_strength(M1) · (F_design / S_M1)"
+        }
+      },
+      "safety_margins": {
+        "stress_allowable_design": {
+          "brass": "σ_b,allow/γ_M",
+          "steel": "σ_s,allow/γ_M"
+        },
+        "margin_forms": {
+          "stress_margin_each_rod": "m_σ,i = 1 − σ_i,design / (σ_allow,i/γ_M)",
+          "deflection_margin": "m_δ = 1 − δ_design / δ_lim"
+        }
+      }
+    },
+    "(4)_cross_check": {
+      "equilibrium": "∑(A_i E_i δ / L_i) = F；各杆轴力 N_i = A_i σ_i",
+      "stress_limit": "σ_i = E_i δ / L_i ≤ σ_allow,i",
+      "serviceability_limit": "δ ≤ δ_lim；F ∝ δ",
+      "sensitivity": "对 L_i 变化与热效应引起的有效长度变化：F = δ · ∑(A_i E_i / L_i)，δ_strength = min_i(L_i · σ_allow,i / E_i)"
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)_B0_strength": {
+      "F_strength": 180.0,
+      "delta_strength": 0.18,
+      "stress_distribution": {
+        "rod1_brass": 60.0,
+        "rod2_brass": 60.0,
+        "rod3_steel": 120.0
+      }
+    },
+    "(1)_B0_serviceability": {
+      "F_serv": 580.0,
+      "delta": 0.58,
+      "stress_distribution": {
+        "rod1_brass": 193.33,
+        "rod2_brass": 193.33,
+        "rod3_steel": 386.67
+      }
+    },
+    "(1)_M1_strength": {
+      "F_strength": 179.91,
+      "delta_strength": 0.18,
+      "stress_distribution": {
+        "rod1_brass": 60.0,
+        "rod2_brass": 60.03,
+        "rod3_steel": 119.94
+      }
+    },
+    "(1)_M1_serviceability": {
+      "F_serv": 579.71,
+      "delta": 0.58,
+      "stress_distribution": {
+        "rod1_brass": 193.24,
+        "rod2_brass": 193.44,
+        "rod3_steel": 386.47
+      }
+    },
+    "(1)_T1_strength": {
+      "F_strength": 179.68,
+      "delta_strength": 0.18,
+      "stress_distribution": {
+        "rod1_brass": 59.94,
+        "rod2_brass": 59.94,
+        "rod3_steel": 119.8
+      }
+    },
+    "(1)_T1_serviceability": {
+      "F_serv": 578.96,
+      "delta": 0.58,
+      "stress_distribution": {
+        "rod1_brass": 192.99,
+        "rod2_brass": 192.99,
+        "rod3_steel": 385.97
+      }
+    },
+    "(1)_C_strength": {
+      "F_strength": 179.89,
+      "delta_strength": 0.18,
+      "stress_distribution": {
+        "rod1_brass": 59.99,
+        "rod2_brass": 60.06,
+        "rod3_steel": 119.93
+      }
+    },
+    "(1)_C_serviceability": {
+      "F_serv": 579.65,
+      "delta": 0.58,
+      "stress_distribution": {
+        "rod1_brass": 193.22,
+        "rod2_brass": 193.46,
+        "rod3_steel": 386.43
+      }
+    },
+    "(2)_controlling_case_strength": "T1",
+    "(2)_controlling_case_serviceability": "T1",
+    "(3)_design": {
+      "definitions": {
+        "S_B0": "F_strength(B0) / gamma_M",
+        "S_M1": "F_strength(M1) / gamma_M",
+        "S_T1": "F_strength(T1) / gamma_M",
+        "S_C": "F_strength(C) / gamma_M",
+        "U_B0": "S_B0 / gamma_F",
+        "U_M1": "S_M1 / gamma_F",
+        "U_T1": "S_T1 / gamma_F",
+        "U_C": "S_C / gamma_F"
+      },
+      "R_d_cases": {
+        "B0": 163.64,
+        "M1": 163.55,
+        "T1": 163.35,
+        "C": 163.54
+      },
+      "F_design": 155.57,
+      "controlling_case_design": "T1",
+      "stress_and_delta_at_F_design": {
+        "scaling_relations": {
+          "sigma_i_design": "sigma_i_strength(T1) * (F_design / F_strength(T1))",
+          "delta_design": "delta_strength(T1) * (F_design / F_strength(T1))"
+        }
+      },
+      "safety_margins": {
+        "stress_allowable_design": {
+          "brass": "sigma_b_allow / gamma_M",
+          "steel": "sigma_s_allow / gamma_M"
+        },
+        "margin_forms": {
+          "stress_margin_each_rod": "(sigma_allowable_design - sigma_i_design) / sigma_allowable_design",
+          "deflection_margin": "(delta_lim - delta_design) / delta_lim"
+        }
+      }
+    },
+    "(4)_cross_check": {
+      "equilibrium": "F = A1*sigma1 + A2*sigma2 + A3*sigma3",
+      "stress_limit": "sigma_i <= sigma_i_allow",
+      "serviceability_limit": "delta <= delta_lim",
+      "sensitivity": "sensitivity to lengths and material properties should be checked"
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)_B0_strength\": {\n    \"F_strength\": \"180.00\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"60.00\",\n      \"rod2_brass\": \"60.00\",\n      \"rod3_steel\": \"120.00\"\n    }\n  },\n  \"(1)_B0_serviceability\": {\n    \"F_serv\": \"580.00\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.33\",\n      \"rod2_brass\": \"193.33\",\n      \"rod3_steel\": \"386.67\"\n    }\n  },\n  \"(1)_M1_strength\": {\n    \"F_strength\": \"179.91\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"60.00\",\n      \"rod2_brass\": \"60.03\",\n      \"rod3_steel\": \"119.94\"\n    }\n  },\n  \"(1)_M1_serviceability\": {\n    \"F_serv\": \"579.71\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.24\",\n      \"rod2_brass\": \"193.44\",\n      \"rod3_steel\": \"386.47\"\n    }\n  },\n  \"(1)_T1_strength\": {\n    \"F_strength\": \"179.68\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"59.94\",\n      \"rod2_brass\": \"59.94\",\n      \"rod3_steel\": \"119.80\"\n    }\n  },\n  \"(1)_T1_serviceability\": {\n    \"F_serv\": \"578.96\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"192.99\",\n      \"rod2_brass\": \"192.99\",\n      \"rod3_steel\": \"385.97\"\n    }\n  },\n  \"(1)_C_strength\": {\n    \"F_strength\": \"179.89\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"59.99\",\n      \"rod2_brass\": \"60.06\",\n      \"rod3_steel\": \"119.93\"\n    }\n  },\n  \"(1)_C_serviceability\": {\n    \"F_serv\": \"579.65\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.22\",\n      \"rod2_brass\": \"193.46\",\n      \"rod3_steel\": \"386.43\"\n    }\n  },\n  \"(2)_controlling_case_strength\": \"T1\",\n  \"(2)_controlling_case_serviceability\": \"T1\",\n  \"(3)_design\": {\n    \"definitions\": {\n      \"S_B0\": \"F_strength(B0) / gamma_M\",\n      \"S_M1\": \"F_strength(M1) / gamma_M\",\n      \"S_T1\": \"F_strength(T1) / gamma_M\",\n      \"S_C\": \"F_strength(C) / gamma_M\",\n      \"U_B0\": \"S_B0 / gamma_F\",\n      \"U_M1\": \"S_M1 / gamma_F\",\n      \"U_T1\": \"S_T1 / gamma_F\",\n      \"U_C\": \"S_C / gamma_F\"\n    },\n    \"R_d_cases\": {\n      \"B0\": \"163.64\",\n      \"M1\": \"163.55\",\n      \"T1\": \"163.35\",\n      \"C\": \"163.54\"\n    },\n    \"F_design\": \"155.57\",\n    \"controlling_case_design\": \"T1\",\n    \"stress_and_delta_at_F_design\": {\n      \"scaling_relations\": {\n        \"sigma_i_design\": \"sigma_i_strength(T1) * (F_design / F_strength(T1))\",\n        \"delta_design\": \"delta_strength(T1) * (F_design / F_strength(T1))\"\n      }\n    },\n    \"safety_margins\": {\n      \"stress_allowable_design\": {\n        \"brass\": \"sigma_b_allow / gamma_M\",\n        \"steel\": \"sigma_s_allow / gamma_M\"\n      },\n      \"margin_forms\": {\n        \"stress_margin_each_rod\": \"(sigma_allowable_design - sigma_i_design) / sigma_allowable_design\",\n        \"deflection_margin\": \"(delta_lim - delta_design) / delta_lim\"\n      }\n    }\n  },\n  \"(4)_cross_check\": {\n    \"equilibrium\": \"F = A1*sigma1 + A2*sigma2 + A3*sigma3\",\n    \"stress_limit\": \"sigma_i <= sigma_i_allow\",\n    \"serviceability_limit\": \"delta <= delta_lim\",\n    \"sensitivity\": \"sensitivity to lengths and material properties should be checked\"\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)_B0_strength\": {\n    \"F_strength\": \"180.00\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"60.00\",\n      \"rod2_brass\": \"60.00\",\n      \"rod3_steel\": \"120.00\"\n    }\n  },\n  \"(1)_B0_serviceability\": {\n    \"F_serv\": \"580.00\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.33\",\n      \"rod2_brass\": \"193.33\",\n      \"rod3_steel\": \"386.67\"\n    }\n  },\n  \"(1)_M1_strength\": {\n    \"F_strength\": \"179.91\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"60.00\",\n      \"rod2_brass\": \"60.03\",\n      \"rod3_steel\": \"119.94\"\n    }\n  },\n  \"(1)_M1_serviceability\": {\n    \"F_serv\": \"579.71\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.24\",\n      \"rod2_brass\": \"193.44\",\n      \"rod3_steel\": \"386.47\"\n    }\n  },\n  \"(1)_T1_strength\": {\n    \"F_strength\": \"179.68\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"59.94\",\n      \"rod2_brass\": \"59.94\",\n      \"rod3_steel\": \"119.80\"\n    }\n  },\n  \"(1)_T1_serviceability\": {\n    \"F_serv\": \"578.96\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"192.99\",\n      \"rod2_brass\": \"192.99\",\n      \"rod3_steel\": \"385.97\"\n    }\n  },\n  \"(1)_C_strength\": {\n    \"F_strength\": \"179.89\",\n    \"delta_strength\": \"0.18\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"59.99\",\n      \"rod2_brass\": \"60.06\",\n      \"rod3_steel\": \"119.93\"\n    }\n  },\n  \"(1)_C_serviceability\": {\n    \"F_serv\": \"579.65\",\n    \"delta\": \"0.58\",\n    \"stress_distribution\": {\n      \"rod1_brass\": \"193.22\",\n      \"rod2_brass\": \"193.46\",\n      \"rod3_steel\": \"386.43\"\n    }\n  },\n  \"(2)_controlling_case_strength\": \"T1\",\n  \"(2)_controlling_case_serviceability\": \"T1\",\n  \"(3)_design\": {\n    \"definitions\": {\n      \"S_B0\": \"F_strength(B0) / gamma_M\",\n      \"S_M1\": \"F_strength(M1) / gamma_M\",\n      \"S_T1\": \"F_strength(T1) / gamma_M\",\n      \"S_C\": \"F_strength(C) / gamma_M\",\n      \"U_B0\": \"S_B0 / gamma_F\",\n      \"U_M1\": \"S_M1 / gamma_F\",\n      \"U_T1\": \"S_T1 / gamma_F\",\n      \"U_C\": \"S_C / gamma_F\"\n    },\n    \"R_d_cases\": {\n      \"B0\": \"163.64\",\n      \"M1\": \"163.55\",\n      \"T1\": \"163.35\",\n      \"C\": \"163.54\"\n    },\n    \"F_design\": \"155.57\",\n    \"controlling_case_design\": \"T1\",\n    \"stress_and_delta_at_F_design\": {\n      \"scaling_relations\": {\n        \"sigma_i_design\": \"sigma_i_strength(T1) * (F_design / F_strength(T1))\",\n        \"delta_design\": \"delta_strength(T1) * (F_design / F_strength(T1))\"\n      }\n    },\n    \"safety_margins\": {\n      \"stress_allowable_design\": {\n        \"brass\": \"sigma_b_allow / gamma_M\",\n        \"steel\": \"sigma_s_allow / gamma_M\"\n      },\n      \"margin_forms\": {\n        \"stress_margin_each_rod\": \"(sigma_allowable_design - sigma_i_design) / sigma_allowable_design\",\n        \"deflection_margin\": \"(delta_lim - delta_design) / delta_lim\"\n      }\n    }\n  },\n  \"(4)_cross_check\": {\n    \"equilibrium\": \"F = A1*sigma1 + A2*sigma2 + A3*sigma3\",\n    \"stress_limit\": \"sigma_i <= sigma_i_allow\",\n    \"serviceability_limit\": \"delta <= delta_lim\",\n    \"sensitivity\": \"sensitivity to lengths and material properties should be checked\"\n  }\n}\n```"
+  },
+  "evaluation_score": 0.3787878787878788,
+  "evaluation_summary": "匹配字段: 25/66 (得分: 37.88%)",
+  "evaluation_details": {
+    "(1)_B0_strength.F_strength": {
+      "path": "(1)_B0_strength.F_strength",
+      "expected": "240 N",
+      "actual": 180.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_B0_strength.delta_strength": {
+      "path": "(1)_B0_strength.delta_strength",
+      "expected": "0.600 mm",
+      "actual": 0.18,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_B0_strength.stress_distribution.rod1_brass": {
+      "path": "(1)_B0_strength.stress_distribution.rod1_brass",
+      "expected": "60.0 N/mm^2",
+      "actual": 60.0,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_B0_strength.stress_distribution.rod2_brass": {
+      "path": "(1)_B0_strength.stress_distribution.rod2_brass",
+      "expected": "60.0 N/mm^2",
+      "actual": 60.0,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_B0_strength.stress_distribution.rod3_steel": {
+      "path": "(1)_B0_strength.stress_distribution.rod3_steel",
+      "expected": "120 N/mm^2",
+      "actual": 120.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_B0_serviceability.F_serv": {
+      "path": "(1)_B0_serviceability.F_serv",
+      "expected": "232 N",
+      "actual": 580.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_B0_serviceability.delta": {
+      "path": "(1)_B0_serviceability.delta",
+      "expected": "0.580 mm",
+      "actual": 0.58,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_B0_serviceability.stress_distribution.rod1_brass": {
+      "path": "(1)_B0_serviceability.stress_distribution.rod1_brass",
+      "expected": "58.0 N/mm^2",
+      "actual": 193.33,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_B0_serviceability.stress_distribution.rod2_brass": {
+      "path": "(1)_B0_serviceability.stress_distribution.rod2_brass",
+      "expected": "58.0 N/mm^2",
+      "actual": 193.33,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_B0_serviceability.stress_distribution.rod3_steel": {
+      "path": "(1)_B0_serviceability.stress_distribution.rod3_steel",
+      "expected": "116 N/mm^2",
+      "actual": 386.67,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_M1_strength.F_strength": {
+      "path": "(1)_M1_strength.F_strength",
+      "expected": "240 N",
+      "actual": 179.91,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_M1_strength.delta_strength": {
+      "path": "(1)_M1_strength.delta_strength",
+      "expected": "0.600 mm",
+      "actual": 0.18,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_M1_strength.stress_distribution.rod1_brass": {
+      "path": "(1)_M1_strength.stress_distribution.rod1_brass",
+      "expected": "60.0 N/mm^2",
+      "actual": 60.0,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_M1_strength.stress_distribution.rod2_brass": {
+      "path": "(1)_M1_strength.stress_distribution.rod2_brass",
+      "expected": "60.0 N/mm^2",
+      "actual": 60.03,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_M1_strength.stress_distribution.rod3_steel": {
+      "path": "(1)_M1_strength.stress_distribution.rod3_steel",
+      "expected": "120 N/mm^2",
+      "actual": 119.94,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_M1_serviceability.F_serv": {
+      "path": "(1)_M1_serviceability.F_serv",
+      "expected": "232 N",
+      "actual": 579.71,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_M1_serviceability.delta": {
+      "path": "(1)_M1_serviceability.delta",
+      "expected": "0.580 mm",
+      "actual": 0.58,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_M1_serviceability.stress_distribution.rod1_brass": {
+      "path": "(1)_M1_serviceability.stress_distribution.rod1_brass",
+      "expected": "58.0 N/mm^2",
+      "actual": 193.24,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_M1_serviceability.stress_distribution.rod2_brass": {
+      "path": "(1)_M1_serviceability.stress_distribution.rod2_brass",
+      "expected": "58.0 N/mm^2",
+      "actual": 193.44,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_M1_serviceability.stress_distribution.rod3_steel": {
+      "path": "(1)_M1_serviceability.stress_distribution.rod3_steel",
+      "expected": "116 N/mm^2",
+      "actual": 386.47,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_T1_strength.F_strength": {
+      "path": "(1)_T1_strength.F_strength",
+      "expected": "240 N",
+      "actual": 179.68,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_T1_strength.delta_strength": {
+      "path": "(1)_T1_strength.delta_strength",
+      "expected": "0.601 mm",
+      "actual": 0.18,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_T1_strength.stress_distribution.rod1_brass": {
+      "path": "(1)_T1_strength.stress_distribution.rod1_brass",
+      "expected": "60.0 N/mm^2",
+      "actual": 59.94,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_T1_strength.stress_distribution.rod2_brass": {
+      "path": "(1)_T1_strength.stress_distribution.rod2_brass",
+      "expected": "60.0 N/mm^2",
+      "actual": 59.94,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_T1_strength.stress_distribution.rod3_steel": {
+      "path": "(1)_T1_strength.stress_distribution.rod3_steel",
+      "expected": "120 N/mm^2",
+      "actual": 119.8,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_T1_serviceability.F_serv": {
+      "path": "(1)_T1_serviceability.F_serv",
+      "expected": "231 N",
+      "actual": 578.96,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_T1_serviceability.delta": {
+      "path": "(1)_T1_serviceability.delta",
+      "expected": "0.580 mm",
+      "actual": 0.58,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_T1_serviceability.stress_distribution.rod1_brass": {
+      "path": "(1)_T1_serviceability.stress_distribution.rod1_brass",
+      "expected": "57.9 N/mm^2",
+      "actual": 192.99,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_T1_serviceability.stress_distribution.rod2_brass": {
+      "path": "(1)_T1_serviceability.stress_distribution.rod2_brass",
+      "expected": "57.9 N/mm^2",
+      "actual": 192.99,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_T1_serviceability.stress_distribution.rod3_steel": {
+      "path": "(1)_T1_serviceability.stress_distribution.rod3_steel",
+      "expected": "115.7 N/mm^2",
+      "actual": 385.97,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_C_strength.F_strength": {
+      "path": "(1)_C_strength.F_strength",
+      "expected": "240 N",
+      "actual": 179.89,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_C_strength.delta_strength": {
+      "path": "(1)_C_strength.delta_strength",
+      "expected": "0.600 mm",
+      "actual": 0.18,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_C_strength.stress_distribution.rod1_brass": {
+      "path": "(1)_C_strength.stress_distribution.rod1_brass",
+      "expected": "60.0 N/mm^2",
+      "actual": 59.99,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_C_strength.stress_distribution.rod2_brass": {
+      "path": "(1)_C_strength.stress_distribution.rod2_brass",
+      "expected": "59.9 N/mm^2",
+      "actual": 60.06,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_C_strength.stress_distribution.rod3_steel": {
+      "path": "(1)_C_strength.stress_distribution.rod3_steel",
+      "expected": "120 N/mm^2",
+      "actual": 119.93,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_C_serviceability.F_serv": {
+      "path": "(1)_C_serviceability.F_serv",
+      "expected": "232 N",
+      "actual": 579.65,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_C_serviceability.delta": {
+      "path": "(1)_C_serviceability.delta",
+      "expected": "0.580 mm",
+      "actual": 0.58,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1)_C_serviceability.stress_distribution.rod1_brass": {
+      "path": "(1)_C_serviceability.stress_distribution.rod1_brass",
+      "expected": "58.0 N/mm^2",
+      "actual": 193.22,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_C_serviceability.stress_distribution.rod2_brass": {
+      "path": "(1)_C_serviceability.stress_distribution.rod2_brass",
+      "expected": "57.9 N/mm^2",
+      "actual": 193.46,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(1)_C_serviceability.stress_distribution.rod3_steel": {
+      "path": "(1)_C_serviceability.stress_distribution.rod3_steel",
+      "expected": "116 N/mm^2",
+      "actual": 386.43,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2)_controlling_case_strength": {
+      "path": "(2)_controlling_case_strength",
+      "expected": "M1",
+      "actual": "T1",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2)_controlling_case_serviceability": {
+      "path": "(2)_controlling_case_serviceability",
+      "expected": "T1",
+      "actual": "T1",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3)_design.definitions.S_B0": {
+      "path": "(3)_design.definitions.S_B0",
+      "expected": "记(1)中 B0 的 F_strength",
+      "actual": "F_strength(B0) / gamma_M",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.definitions.S_M1": {
+      "path": "(3)_design.definitions.S_M1",
+      "expected": "记(1)中 M1 的 F_strength",
+      "actual": "F_strength(M1) / gamma_M",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.definitions.S_T1": {
+      "path": "(3)_design.definitions.S_T1",
+      "expected": "记(1)中 T1 的 F_strength",
+      "actual": "F_strength(T1) / gamma_M",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.definitions.S_C": {
+      "path": "(3)_design.definitions.S_C",
+      "expected": "记(1)中 C 的 F_strength",
+      "actual": "F_strength(C) / gamma_M",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.definitions.U_B0": {
+      "path": "(3)_design.definitions.U_B0",
+      "expected": "记(1)中 B0 的 F_serv",
+      "actual": "S_B0 / gamma_F",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)_design.definitions.U_M1": {
+      "path": "(3)_design.definitions.U_M1",
+      "expected": "记(1)中 M1 的 F_serv",
+      "actual": "S_M1 / gamma_F",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)_design.definitions.U_T1": {
+      "path": "(3)_design.definitions.U_T1",
+      "expected": "记(1)中 T1 的 F_serv",
+      "actual": "S_T1 / gamma_F",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)_design.definitions.U_C": {
+      "path": "(3)_design.definitions.U_C",
+      "expected": "记(1)中 C 的 F_serv",
+      "actual": "S_C / gamma_F",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)_design.R_d_cases.B0": {
+      "path": "(3)_design.R_d_cases.B0",
+      "expected": "R_d,B0 = S_B0 / γ_M",
+      "actual": 163.64,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.R_d_cases.M1": {
+      "path": "(3)_design.R_d_cases.M1",
+      "expected": "R_d,M1 = S_M1 / γ_M",
+      "actual": 163.55,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.R_d_cases.T1": {
+      "path": "(3)_design.R_d_cases.T1",
+      "expected": "R_d,T1 = S_T1 / γ_M",
+      "actual": 163.35,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.R_d_cases.C": {
+      "path": "(3)_design.R_d_cases.C",
+      "expected": "R_d,C = S_C / γ_M",
+      "actual": 163.54,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.F_design": {
+      "path": "(3)_design.F_design",
+      "expected": "F_design = min{ R_d,B0/γ_F, R_d,M1/γ_F, R_d,T1/γ_F, R_d,C/γ_F, U_B0, U_M1, U_T1, U_C }",
+      "actual": 155.57,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.controlling_case_design": {
+      "path": "(3)_design.controlling_case_design",
+      "expected": "M1",
+      "actual": "T1",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.stress_and_delta_at_F_design.scaling_relations.sigma_i_design": {
+      "path": "(3)_design.stress_and_delta_at_F_design.scaling_relations.sigma_i_design",
+      "expected": "σ_i,design = σ_i,strength(M1) · (F_design / S_M1)",
+      "actual": "sigma_i_strength(T1) * (F_design / F_strength(T1))",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.stress_and_delta_at_F_design.scaling_relations.delta_design": {
+      "path": "(3)_design.stress_and_delta_at_F_design.scaling_relations.delta_design",
+      "expected": "δ_design = δ_strength(M1) · (F_design / S_M1)",
+      "actual": "delta_strength(T1) * (F_design / F_strength(T1))",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.safety_margins.stress_allowable_design.brass": {
+      "path": "(3)_design.safety_margins.stress_allowable_design.brass",
+      "expected": "σ_b,allow/γ_M",
+      "actual": "sigma_b_allow / gamma_M",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)_design.safety_margins.stress_allowable_design.steel": {
+      "path": "(3)_design.safety_margins.stress_allowable_design.steel",
+      "expected": "σ_s,allow/γ_M",
+      "actual": "sigma_s_allow / gamma_M",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3)_design.safety_margins.margin_forms.stress_margin_each_rod": {
+      "path": "(3)_design.safety_margins.margin_forms.stress_margin_each_rod",
+      "expected": "m_σ,i = 1 − σ_i,design / (σ_allow,i/γ_M)",
+      "actual": "(sigma_allowable_design - sigma_i_design) / sigma_allowable_design",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3)_design.safety_margins.margin_forms.deflection_margin": {
+      "path": "(3)_design.safety_margins.margin_forms.deflection_margin",
+      "expected": "m_δ = 1 − δ_design / δ_lim",
+      "actual": "(delta_lim - delta_design) / delta_lim",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)_cross_check.equilibrium": {
+      "path": "(4)_cross_check.equilibrium",
+      "expected": "∑(A_i E_i δ / L_i) = F；各杆轴力 N_i = A_i σ_i",
+      "actual": "F = A1*sigma1 + A2*sigma2 + A3*sigma3",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)_cross_check.stress_limit": {
+      "path": "(4)_cross_check.stress_limit",
+      "expected": "σ_i = E_i δ / L_i ≤ σ_allow,i",
+      "actual": "sigma_i <= sigma_i_allow",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4)_cross_check.serviceability_limit": {
+      "path": "(4)_cross_check.serviceability_limit",
+      "expected": "δ ≤ δ_lim；F ∝ δ",
+      "actual": "delta <= delta_lim",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4)_cross_check.sensitivity": {
+      "path": "(4)_cross_check.sensitivity",
+      "expected": "对 L_i 变化与热效应引起的有效长度变化：F = δ · ∑(A_i E_i / L_i)，δ_strength = min_i(L_i · σ_allow,i / E_i)",
+      "actual": "sensitivity to lengths and material properties should be checked",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "mode_folder": "with_tools",
+  "evaluation_score_segments": {
+    "0_25": 0.4117647058823529,
+    "0_50": 0.36363636363636365,
+    "0_75": 0.4,
+    "0_100": 0.3787878787878788
+  }
+}

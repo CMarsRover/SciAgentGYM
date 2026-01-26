@@ -1,0 +1,2482 @@
+{
+  "id": "55_ref_0",
+  "query": "已知：给定蛋白质结构 PDB ID=6LU7 的三维图像（不含氢原子）。配体链定义为非聚合物链，且需过滤掉水分子（残基名 HOH/H2O）与常见金属离子（NA、K、CL、MG、CA、ZN、MN、CO、FE、CU，大小写不敏感）。提供的结构性计数数据包含三类：结构组成汇总、跨结构配体链对比计数、去氢/含氢交叉校验计数与过滤后配体链ID列表；三者可能不一致。任务：\n(1) 给出配体链数量（去除氢原子后）的整数值；\n(2) 给出配体链ID列表（按上述规则过滤水与常见金属离子）；\n(3) 给出去氢/含氢两次计数的一致性结论（可用差值或布尔一致性标记）；\n(4) 给出三类可视化产物的文件路径：结构组成饼图、跨结构配体链对比柱状图、交叉校验面板；\n(5) 若出现不一致，说明原因与采取的过滤/校正策略，并指明最终采信的数据来源。\n结果以数值与文本字符串给出；数值为整数；路径以原样字符串给出。",
+  "query_data": {
+    "id": "55_ref_0",
+    "original_id": 55,
+    "refined_index": 0,
+    "question": "已知：给定蛋白质结构 PDB ID=6LU7 的三维图像（不含氢原子）。配体链定义为非聚合物链，且需过滤掉水分子（残基名 HOH/H2O）与常见金属离子（NA、K、CL、MG、CA、ZN、MN、CO、FE、CU，大小写不敏感）。提供的结构性计数数据包含三类：结构组成汇总、跨结构配体链对比计数、去氢/含氢交叉校验计数与过滤后配体链ID列表；三者可能不一致。任务：\n(1) 给出配体链数量（去除氢原子后）的整数值；\n(2) 给出配体链ID列表（按上述规则过滤水与常见金属离子）；\n(3) 给出去氢/含氢两次计数的一致性结论（可用差值或布尔一致性标记）；\n(4) 给出三类可视化产物的文件路径：结构组成饼图、跨结构配体链对比柱状图、交叉校验面板；\n(5) 若出现不一致，说明原因与采取的过滤/校正策略，并指明最终采信的数据来源。\n结果以数值与文本字符串给出；数值为整数；路径以原样字符串给出。",
+    "answer": "{'(1)': 0, '(2)': [], '(3)': {'count_with_H': 0, 'count_without_H': 0, 'difference': 0, 'consistent': True}, '(4)': {'结构组成饼图': './images/composition_pie_main.png', '跨结构配体链对比柱状图': './images/ligand_chain_comparison.png', '交叉校验面板': './images/validation_crosscheck.png'}, '(5)': '存在不一致：跨结构对比计数与其他数据不符。采信依据：以交叉校验数据为最终来源，该数据按过滤规则（剔除水与常见金属离子）并同时给出去氢/含氢计数与链ID，且两版计数一致（差值为0）。策略：以交叉校验结果为准，弃用与其不一致的对比计数。'}",
+    "metadata": {
+      "subject": "life",
+      "topic": "",
+      "image_path": [
+        "/sfe_images/L009_0002_e3475ae3472de5584f343b1657a7b157.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "fetch_pdb_structure",
+        "count_ligand_chains",
+        "analyze_structure_composition",
+        "batch_analyze_pdb_structures",
+        "visualize_domain_specific"
+      ],
+      "golden_answer": [
+        {
+          "(1)": 0,
+          "(2)": [],
+          "(3)": {
+            "count_with_H": 0,
+            "count_without_H": 0,
+            "difference": 0,
+            "consistent": true
+          },
+          "(4)": {
+            "结构组成饼图": "./images/composition_pie_main.png",
+            "跨结构配体链对比柱状图": "./images/ligand_chain_comparison.png",
+            "交叉校验面板": "./images/validation_crosscheck.png"
+          },
+          "(5)": "存在不一致：跨结构对比计数与其他数据不符。采信依据：以交叉校验数据为最终来源，该数据按过滤规则（剔除水与常见金属离子）并同时给出去氢/含氢计数与链ID，且两版计数一致（差值为0）。策略：以交叉校验结果为准，弃用与其不一致的对比计数。"
+        }
+      ],
+      "original_question_id": "55",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/traces",
+      "topic_protocol_scope": "其他",
+      "with_all_tools": true
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "parse_mass_spectrum_peaks",
+          "description": "解析质谱峰数据，提取显著峰。从原始m/z和强度数据中筛选出高于阈值的峰，用于后续分析。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "mz_values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "m/z值列表，范围通常0-2000"
+              },
+              "intensities": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "相对强度列表（%），范围0-100"
+              },
+              "intensity_threshold": {
+                "type": "number",
+                "description": "强度阈值（%），默认1.0，低于此值的峰被过滤"
+              }
+            },
+            "required": [
+              "mz_values",
+              "intensities"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_molecular_properties",
+          "description": "计算分子的质谱相关性质。基于SMILES字符串计算分子量、不饱和度、杂原子数等关键参数。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子的SMILES表示，如'CCO'表示乙醇"
+              }
+            },
+            "required": [
+              "smiles"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "predict_fragmentation_pattern",
+          "description": "预测分子的碎片化模式。基于分子结构预测可能的碎片离子m/z值（简化模型）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "smiles": {
+                "type": "string",
+                "description": "分子SMILES表示"
+              },
+              "ionization_mode": {
+                "type": "string",
+                "description": "电离模式，'EI'(电子轰击)或'CI'(化学电离)"
+              }
+            },
+            "required": [
+              "smiles"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "match_spectrum_to_structure",
+          "description": "将实验质谱与候选分子结构进行匹配。综合分析实验谱图和理论碎片，计算匹配度分数。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "mz_values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验m/z值列表"
+              },
+              "intensities": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验强度列表"
+              },
+              "candidate_smiles": {
+                "type": "string",
+                "description": "候选分子SMILES"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "m/z匹配容差（Da），默认0.5"
+              },
+              "intensity_threshold": {
+                "type": "number",
+                "description": "峰强度阈值（%），默认1.0"
+              }
+            },
+            "required": [
+              "mz_values",
+              "intensities",
+              "candidate_smiles"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "batch_structure_screening",
+          "description": "批量筛选候选分子结构。对多个候选结构进行匹配，返回排序后的结果。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "mz_values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验m/z值列表"
+              },
+              "intensities": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "实验强度列表"
+              },
+              "candidate_smiles_list": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "候选分子SMILES列表"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "m/z匹配容差（Da）"
+              }
+            },
+            "required": [
+              "mz_values",
+              "intensities",
+              "candidate_smiles_list"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/mass_spectrometry_toolkit_0070000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "fetch_pdb_structure",
+          "description": "从RCSB PDB数据库下载蛋白质结构文件",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB数据库标识符，4字符代码（如'1ABC'）"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "本地保存目录，默认'./pdb_files/'"
+              }
+            },
+            "required": [
+              "pdb_id"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "count_ligand_chains",
+          "description": "统计PDB结构中的配体链数量",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_file": {
+                "type": "string",
+                "description": "PDB文件路径"
+              },
+              "remove_hydrogen": {
+                "type": "boolean",
+                "description": "是否移除氢原子，默认True"
+              }
+            },
+            "required": [
+              "pdb_file"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_structure_composition",
+          "description": "全面分析PDB结构的组成成分",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_file": {
+                "type": "string",
+                "description": "PDB文件路径"
+              },
+              "remove_hydrogen": {
+                "type": "boolean",
+                "description": "是否移除氢原子，默认True"
+              }
+            },
+            "required": [
+              "pdb_file"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "batch_analyze_pdb_structures",
+          "description": "批量分析多个PDB结构的配体链数量",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pdb_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "PDB ID列表（如['1A2B', '3C4D']）"
+              },
+              "remove_hydrogen": {
+                "type": "boolean",
+                "description": "是否移除氢原子，默认True"
+              }
+            },
+            "required": [
+              "pdb_ids"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_domain_specific",
+          "description": "结构生物学专属可视化工具",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "description": "要可视化的数据（只包含基本数据类型）"
+              },
+              "domain": {
+                "type": "string",
+                "description": "领域类型 'structural_biology'"
+              },
+              "vis_type": {
+                "type": "string",
+                "description": "可视化类型：'composition_pie'(结构组成饼图)、'chain_comparison'(多结构配体链对比柱状图)、'residue_distribution'(残基类型分布图)"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "保存目录，默认'./images/'"
+              },
+              "filename": {
+                "type": "string",
+                "description": "文件名（可选）"
+              }
+            },
+            "required": [
+              "data",
+              "domain",
+              "vis_type"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/structural_biology_toolkit_0002_fixed.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "parse_rna_sequence",
+          "description": "解析RNA序列并提取基础特征，验证序列合法性并计算GC含量、长度等基本参数",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串，仅包含A/U/G/C（如'AUGCGAU'）"
+              },
+              "validate": {
+                "type": "boolean",
+                "description": "是否验证序列合法性，默认True"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "detect_base_pairs",
+          "description": "检测RNA序列中的碱基配对（简化版二级结构预测），使用动态规划算法寻找最大配对数，返回配对位置列表",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "min_stem_length": {
+                "type": "integer",
+                "description": "最小茎区长度，默认3（连续配对数）"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_structure_complexity",
+          "description": "计算RNA结构复杂度指标，基于配对模式分析结构特征：茎区数量、假结、长程相互作用等",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "pairs": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "description": "碱基配对列表 [(i, j), ...]，其中 i < j"
+              },
+              "sequence_length": {
+                "type": "integer",
+                "description": "序列总长度"
+              }
+            },
+            "required": [
+              "pairs",
+              "sequence_length"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "classify_rna_type",
+          "description": "基于结构特征分类RNA类型，根据长度、茎区数量、三级结构等特征判断RNA类型（tRNA/rRNA/ribozyme/mRNA）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "structure_features": {
+                "type": "object",
+                "description": "可选的预计算结构特征（来自analyze_rna_structure）"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "predict_catalytic_activity",
+          "description": "预测RNA的催化活性可能性，基于结构复杂度、三级相互作用等特征评估是否具有催化功能（ribozyme特性）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "description": "RNA序列字符串"
+              },
+              "structure_features": {
+                "type": "object",
+                "description": "可选的预计算结构特征"
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/rna_structure_toolkit_0160002.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "fetch_property_from_database",
+          "description": "从Materials Project（mp-api）获取指定材料的性质或结构。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "identifier": {
+                "type": "string",
+                "description": "材料ID如'mp-XXXX'。"
+              },
+              "property_name": {
+                "type": "string",
+                "description": "请求的属性名称，如'spacegroup.symbol'或'structure'。"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "可选，额外需要返回的字段列表。"
+              }
+            },
+            "required": [
+              "identifier",
+              "property_name"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./materials_toolkit_M002_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_space_group",
+          "description": "基于Pymatgen对结构进行空间群识别。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "structure_input": {
+                "type": "string",
+                "description": "结构来源：CIF文件路径；也可接受pymatgen结构字典。"
+              },
+              "symprec": {
+                "type": "number",
+                "description": "对称识别数值容差，典型范围1e-5到1e-1。"
+              }
+            },
+            "required": [
+              "structure_input"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./materials_toolkit_M002_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calibrate_spacegroup_notation",
+          "description": "将空间群符号转换到指定目标记号以进行统一比较。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "识别得到的空间群符号。"
+              },
+              "target": {
+                "type": "string",
+                "description": "目标符号。"
+              }
+            },
+            "required": [
+              "symbol"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./materials_toolkit_M002_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "parse_band_data_from_file",
+          "description": "从文件中解析能带结构数据，支持VASP/Quantum ESPRESSO/CASTEP等常见格式。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "filepath": {
+                "type": "string",
+                "description": "能带数据文件路径"
+              },
+              "file_format": {
+                "type": "string",
+                "description": "文件格式（'vasp'，'qe'，'castep'，'auto'），默认为'auto'"
+              }
+            },
+            "required": [
+              "filepath"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "identify_vbm_cbm",
+          "description": "识别价带顶(VBM)和导带底(CBM)的位置，并计算带隙。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "energies": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "description": "能带能量数据，形状为 (n_bands × n_kpoints)"
+              },
+              "kpath": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "k点路径坐标，长度与每条能带的点数相同"
+              },
+              "fermi_energy": {
+                "type": "number",
+                "description": "费米能级(eV)，默认0.0"
+              }
+            },
+            "required": [
+              "energies",
+              "kpath"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "determine_bandgap_type",
+          "description": "判断带隙类型（直接/间接），并给出对应的高对称k点说明与k空间距离。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "vbm_info": {
+                "type": "object",
+                "description": "VBM信息字典，包含{'energy','kpoint_index','kpoint_value'}等键"
+              },
+              "cbm_info": {
+                "type": "object",
+                "description": "CBM信息字典，包含{'energy','kpoint_index','kpoint_value'}等键"
+              },
+              "labels": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "高对称点标记列表；每个元素为二元组(label: str, k_index: int)"
+              },
+              "k_tolerance": {
+                "type": "number",
+                "description": "k点位置判断容差，默认0.05"
+              }
+            },
+            "required": [
+              "vbm_info",
+              "cbm_info",
+              "labels"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "fetch_material_bandstructure_from_mp",
+          "description": "从Materials Project数据库获取材料的能带结构基础信息（带隙、是否直接带隙等）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "material_id": {
+                "type": "string",
+                "description": "Materials Project材料ID（如'mp-149'，'mp-66'）"
+              },
+              "api_key": {
+                "type": "string",
+                "description": "MP API密钥（可选，若未提供则尝试从环境变量MP_API_KEY读取）"
+              }
+            },
+            "required": [
+              "material_id"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "compare_bandgaps_batch",
+          "description": "批量对比多个材料的带隙特性，从Materials Project获取数据并统计分析。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "material_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "材料ID列表，例如['mp-149','mp-66',...]"
+              },
+              "api_key": {
+                "type": "string",
+                "description": "MP API密钥（可选）"
+              }
+            },
+            "required": [
+              "material_ids"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_optical_properties",
+          "description": "基于带隙特性估算光学性质，包括吸收边波长与激子结合能等。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bandgap": {
+                "type": "number",
+                "description": "带隙值(eV)"
+              },
+              "is_direct": {
+                "type": "boolean",
+                "description": "是否为直接带隙"
+              },
+              "effective_mass_e": {
+                "type": "number",
+                "description": "电子有效质量（以自由电子质量m0为单位），默认0.5"
+              },
+              "effective_mass_h": {
+                "type": "number",
+                "description": "空穴有效质量（以自由电子质量m0为单位），默认0.5"
+              }
+            },
+            "required": [
+              "bandgap",
+              "is_direct"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_bandstructure",
+          "description": "可视化能带结构图，支持标记VBM/CBM并保存为图片文件。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "band_data": {
+                "type": "object",
+                "description": "能带数据字典，包含'kpath'、'energies'、'labels'等键"
+              },
+              "vbm_cbm_info": {
+                "type": "object",
+                "description": "VBM/CBM信息（可选），用于图中标记"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "图片保存目录，默认'./tool_images/'"
+              },
+              "filename": {
+                "type": "string",
+                "description": "保存文件名（可选）"
+              }
+            },
+            "required": [
+              "band_data"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_bandgap_comparison",
+          "description": "可视化多个材料的带隙对比柱状图并保存为图片文件。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "materials_data": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "材料数据列表；每个元素为字典对象，包含formula、bandgap、is_direct等字段"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "图片保存目录，默认'./tool_images/'"
+              },
+              "filename": {
+                "type": "string",
+                "description": "保存文件名（可选）"
+              }
+            },
+            "required": [
+              "materials_data"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "save_json_data",
+          "description": "将字典数据保存为JSON文件，统一保存在./mid_result/materials目录。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "filename": {
+                "type": "string",
+                "description": "文件名（不含路径），如 'peaks.json'"
+              },
+              "data": {
+                "type": "object",
+                "description": "需要保存的数据字典，如XRD图谱数据（包含peaks_2theta和intensity数组）",
+                "properties": {
+                  "peaks_2theta": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "description": "XRD峰位数组（度）"
+                  },
+                  "intensity": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "description": "对应的相对强度数组"
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "filename",
+              "data"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "identify_phases_by_matching",
+          "description": "从候选参考中识别最可能的晶相，基于峰匹配与可选的强度加权和漂移校准。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "observed_2theta": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "观测峰位（度）"
+              },
+              "observed_intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "观测相对强度（可选，用于强度加权）"
+              },
+              "candidate_refs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "参考相名称"
+                    },
+                    "peaks_2theta": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "参考峰位数组（度）"
+                    },
+                    "intensity": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "参考相对强度数组"
+                    }
+                  }
+                },
+                "description": "候选参考列表，每个包含{name, peaks_2theta, intensity}"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "峰位匹配容差（度），默认0.25"
+              },
+              "allow_shift": {
+                "type": "boolean",
+                "description": "是否允许整体角度漂移优化，默认True"
+              }
+            },
+            "required": [
+              "observed_2theta",
+              "candidate_refs"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_xrd_pattern",
+          "description": "绘制并保存XRD图谱（可叠加多条曲线），自动保存到./tool_images目录。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "patterns": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "two_theta": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "峰位数组（度）"
+                    },
+                    "intensity": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "description": "对应相对强度数组"
+                    }
+                  }
+                },
+                "description": "曲线字典，形如 {'Composite': {'two_theta': [...], 'intensity': [...]}, 'Ag2O': {...}}"
+              },
+              "title": {
+                "type": "string",
+                "description": "图标题"
+              },
+              "filename": {
+                "type": "string",
+                "description": "自定义文件名（不含路径和扩展名），默认根据标题自动生成"
+              }
+            },
+            "required": [
+              "patterns",
+              "title"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M020_0004.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "bragg_law_d_spacing",
+          "description": "根据Bragg定律计算晶面间距 d = λ / (2sinθ)。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta": {
+                "type": "number",
+                "description": "衍射角2θ（度），范围10-120°"
+              },
+              "wavelength": {
+                "type": "number",
+                "description": "X射线波长（Å），默认Cu Kα=1.5406 Å"
+              }
+            },
+            "required": [
+              "two_theta"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_xrd_pattern",
+          "description": "绘制XRD衍射图谱并标注峰位，可保存为图片文件。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "2θ角度列表（度）"
+              },
+              "intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "强度列表"
+              },
+              "peak_labels": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "position": {
+                      "type": "number",
+                      "description": "峰位置2θ（度）"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "峰标注文本（如'(hkl)'）"
+                    }
+                  },
+                  "required": [
+                    "position",
+                    "label"
+                  ]
+                },
+                "description": "峰标注列表，格式[{'position': 2θ, 'label': '(hkl)'}]"
+              },
+              "title": {
+                "type": "string",
+                "description": "图表标题"
+              },
+              "save_dir": {
+                "type": "string",
+                "description": "图片保存目录"
+              },
+              "filename": {
+                "type": "string",
+                "description": "文件名（不含扩展名），默认自动生成"
+              }
+            },
+            "required": [
+              "two_theta",
+              "intensity"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_xrd_toolkit_M021_0001.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_scherrer_grain_size",
+          "description": "用Scherrer方程计算平均晶粒尺寸。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "peak_2theta_deg": {
+                "type": "number",
+                "description": "峰位2θ（度），范围0-180"
+              },
+              "fwhm_deg": {
+                "type": "number",
+                "description": "测得FWHM（度），>0"
+              },
+              "wavelength_nm": {
+                "type": "number",
+                "description": "X射线波长（nm），如Cu Kα=0.15406"
+              },
+              "shape_factor": {
+                "type": "number",
+                "description": "形状因子K，通常0.89-1.0"
+              },
+              "instrument_fwhm_deg": {
+                "type": "number",
+                "description": "仪器展宽FWHM（度），默认0"
+              }
+            },
+            "required": [
+              "peak_2theta_deg",
+              "fwhm_deg"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "detect_strongest_peak",
+          "description": "从XRD数据中识别最强峰（返回峰位与强度）。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "two_theta_deg": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "2θ（度）列表"
+              },
+              "intensity": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "对应强度（a.u.）列表"
+              }
+            },
+            "required": [
+              "two_theta_deg",
+              "intensity"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/materials_toolkit_M022_0000.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "已知：给定蛋白质结构 PDB ID=6LU7 的三维图像（不含氢原子）。配体链定义为非聚合物链，且需过滤掉水分子（残基名 HOH/H2O）与常见金属离子（NA、K、CL、MG、CA、ZN、MN、CO、FE、CU，大小写不敏感）。提供的结构性计数数据包含三类：结构组成汇总、跨结构配体链对比计数、去氢/含氢交叉校验计数与过滤后配体链ID列表；三者可能不一致。任务：\n(1) 给出配体链数量（去除氢原子后）的整数值；\n(2) 给出配体链ID列表（按上述规则过滤水与常见金属离子）；\n(3) 给出去氢/含氢两次计数的一致性结论（可用差值或布尔一致性标记）；\n(4) 给出三类可视化产物的文件路径：结构组成饼图、跨结构配体链对比柱状图、交叉校验面板；\n(5) 若出现不一致，说明原因与采取的过滤/校正策略，并指明最终采信的数据来源。\n结果以数值与文本字符串给出；数值为整数；路径以原样字符串给出。",
+      "final_answer": {
+        "(1)": 0,
+        "(2)": [],
+        "(3)": {
+          "count_with_H": 0,
+          "count_without_H": 0,
+          "difference": 0,
+          "consistent": true
+        },
+        "(4)": {
+          "结构组成饼图": "./images/composition_pie_main.png",
+          "跨结构配体链对比柱状图": "./images/ligand_chain_comparison.png",
+          "交叉校验面板": "./images/validation_crosscheck.png"
+        },
+        "(5)": "存在不一致：跨结构对比计数与其他数据不符。采信依据：以交叉校验数据为最终来源，该数据按过滤规则（剔除水与常见金属离子）并同时给出去氢/含氢计数与链ID，且两版计数一致（差值为0）。策略：以交叉校验结果为准，弃用与其不一致的对比计数。"
+      }
+    },
+    "metadata_summary": {
+      "subject": "life",
+      "test_type": "refined",
+      "original_question_id": "55"
+    }
+  },
+  "model": "gemini-2.5-pro",
+  "use_tools": true,
+  "mode": "tool_mode",
+  "rounds": 4,
+  "messages": [
+    {
+      "role": "user",
+      "content": "已知：给定蛋白质结构 PDB ID=6LU7 的三维图像（不含氢原子）。配体链定义为非聚合物链，且需过滤掉水分子（残基名 HOH/H2O）与常见金属离子（NA、K、CL、MG、CA、ZN、MN、CO、FE、CU，大小写不敏感）。提供的结构性计数数据包含三类：结构组成汇总、跨结构配体链对比计数、去氢/含氢交叉校验计数与过滤后配体链ID列表；三者可能不一致。任务：\n(1) 给出配体链数量（去除氢原子后）的整数值；\n(2) 给出配体链ID列表（按上述规则过滤水与常见金属离子）；\n(3) 给出去氢/含氢两次计数的一致性结论（可用差值或布尔一致性标记）；\n(4) 给出三类可视化产物的文件路径：结构组成饼图、跨结构配体链对比柱状图、交叉校验面板；\n(5) 若出现不一致，说明原因与采取的过滤/校正策略，并指明最终采信的数据来源。\n结果以数值与文本字符串给出；数值为整数；路径以原样字符串给出。"
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_7aecd2faa2a74ce79e337f51161dce4c",
+          "type": "function",
+          "function": {
+            "name": "fetch_pdb_structure",
+            "arguments": "{\"pdb_id\":\"6LU7\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": "./pdb_files/6lu7.pdb",
+        "metadata": {
+          "pdb_id": "6LU7",
+          "file_size": 239112,
+          "source": "local_cache"
+        }
+      },
+      "tool_call_id": "call_7aecd2faa2a74ce79e337f51161dce4c"
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_e46f3a05842045ea8a2a1754d04a31da",
+          "type": "function",
+          "function": {
+            "name": "analyze_structure_composition",
+            "arguments": "{\"pdb_file\":\"./pdb_files/6lu7.pdb\",\"remove_hydrogen\":true}"
+          }
+        },
+        {
+          "id": "call_130d7bc0e1e04c3fa49b3a92b29453ed",
+          "type": "function",
+          "function": {
+            "name": "analyze_structure_composition",
+            "arguments": "{\"pdb_file\":\"./pdb_files/6lu7.pdb\",\"remove_hydrogen\":false}"
+          }
+        },
+        {
+          "id": "call_311ba32dae9340f9a34aefef366ba63b",
+          "type": "function",
+          "function": {
+            "name": "batch_analyze_pdb_structures",
+            "arguments": "{\"pdb_ids\":[\"6LU7\"],\"remove_hydrogen\":true}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "protein_residues": 309,
+          "ligand_molecules": 3,
+          "solvent_molecules": 84,
+          "modified_residues": 0,
+          "ligand_chains": 0
+        },
+        "metadata": {
+          "total_atoms": 2500,
+          "chain_breakdown": {
+            "A": {
+              "protein": 306,
+              "ligand": 0,
+              "solvent": 84,
+              "modified": 0
+            },
+            "C": {
+              "protein": 3,
+              "ligand": 3,
+              "solvent": 0,
+              "modified": 0
+            }
+          },
+          "ligand_chain_details": {
+            "total_chains": 2,
+            "protein_chains": 2,
+            "ligand_chains": [],
+            "chain_details": {
+              "A": {
+                "type": "protein",
+                "residue_count": 390,
+                "residue_types": [
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent"
+                ]
+              },
+              "C": {
+                "type": "protein",
+                "residue_count": 6,
+                "residue_types": [
+                  "ligand",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "ligand",
+                  "ligand"
+                ]
+              }
+            },
+            "pdb_file_path": "./pdb_files/6lu7.pdb"
+          }
+        }
+      },
+      "tool_call_id": "call_e46f3a05842045ea8a2a1754d04a31da"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "protein_residues": 309,
+          "ligand_molecules": 3,
+          "solvent_molecules": 84,
+          "modified_residues": 0,
+          "ligand_chains": 0
+        },
+        "metadata": {
+          "total_atoms": 2500,
+          "chain_breakdown": {
+            "A": {
+              "protein": 306,
+              "ligand": 0,
+              "solvent": 84,
+              "modified": 0
+            },
+            "C": {
+              "protein": 3,
+              "ligand": 3,
+              "solvent": 0,
+              "modified": 0
+            }
+          },
+          "ligand_chain_details": {
+            "total_chains": 2,
+            "protein_chains": 2,
+            "ligand_chains": [],
+            "chain_details": {
+              "A": {
+                "type": "protein",
+                "residue_count": 390,
+                "residue_types": [
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent",
+                  "solvent"
+                ]
+              },
+              "C": {
+                "type": "protein",
+                "residue_count": 6,
+                "residue_types": [
+                  "ligand",
+                  "protein",
+                  "protein",
+                  "protein",
+                  "ligand",
+                  "ligand"
+                ]
+              }
+            },
+            "pdb_file_path": "./pdb_files/6lu7.pdb"
+          }
+        }
+      },
+      "tool_call_id": "call_130d7bc0e1e04c3fa49b3a92b29453ed"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": {
+          "6LU7": 0
+        },
+        "metadata": {
+          "total_structures": 1,
+          "failed_structures": [],
+          "detailed_results": {
+            "6LU7": {
+              "total_chains": 2,
+              "protein_chains": 2,
+              "ligand_chains": [],
+              "pdb_file_path": "./pdb_files/6lu7.pdb"
+            }
+          }
+        }
+      },
+      "tool_call_id": "call_311ba32dae9340f9a34aefef366ba63b"
+    },
+    {
+      "role": "assistant",
+      "content": "我将使用工具来解决这个问题。",
+      "tool_calls": [
+        {
+          "id": "call_5f979786075a40d2b71682322d98be9e",
+          "type": "function",
+          "function": {
+            "name": "visualize_domain_specific",
+            "arguments": "{\"data\":{\"ligand_molecules\":3,\"protein_residues\":309,\"solvent_molecules\":84},\"domain\":\"structural_biology\",\"filename\":\"6LU7_composition_pie\",\"vis_type\":\"composition_pie\"}"
+          }
+        },
+        {
+          "id": "call_309c051944864561ac3a18c8ed240c88",
+          "type": "function",
+          "function": {
+            "name": "visualize_domain_specific",
+            "arguments": "{\"data\":{\"6LU7\":0},\"domain\":\"structural_biology\",\"filename\":\"6LU7_chain_comparison\",\"vis_type\":\"chain_comparison\"}"
+          }
+        },
+        {
+          "id": "call_db7c8d84304f493793594a93bffde3df",
+          "type": "function",
+          "function": {
+            "name": "visualize_domain_specific",
+            "arguments": "{\"data\":{\"With H\":0,\"Without H\":0},\"domain\":\"structural_biology\",\"filename\":\"6LU7_consistency_check_panel\",\"vis_type\":\"chain_comparison\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": null,
+        "metadata": {
+          "status": "error",
+          "error": "仅示范materials领域"
+        }
+      },
+      "tool_call_id": "call_5f979786075a40d2b71682322d98be9e"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": null,
+        "metadata": {
+          "status": "error",
+          "error": "仅示范materials领域"
+        }
+      },
+      "tool_call_id": "call_309c051944864561ac3a18c8ed240c88"
+    },
+    {
+      "role": "tool",
+      "content": {
+        "result": null,
+        "metadata": {
+          "status": "error",
+          "error": "仅示范materials领域"
+        }
+      },
+      "tool_call_id": "call_db7c8d84304f493793594a93bffde3df"
+    },
+    {
+      "role": "assistant",
+      "content": "(1) 0\n(2) []\n(3) 一致，差值为0\n(4) 结构组成饼图路径: `images/6LU7_composition_pie.png` (因工具限制无法生成), 跨结构配体链对比柱状图路径: `images/6LU7_chain_comparison.png` (因工具限制无法生成), 交叉校验面板路径: `images/6LU7_consistency_check_panel.png` (因工具限制无法生成)\n(5) 经`analyze_structure_composition`与`batch_analyze_pdb_structures`交叉验证，两种模式（去氢/含氢）下配体链数量均为0，结果一致。分析显示，结构中存在3个配体分子，但它们不构成独立的配体链。最终采信`analyze_structure_composition`的详细分析结果。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1)\": \"[数值]\",\n  \"(2)\": [],\n  \"(3)\": {\n    \"count_with_H\": \"[数值]\",\n    \"count_without_H\": \"[数值]\",\n    \"difference\": \"[数值]\",\n    \"consistent\": \"[布尔值]\"\n  },\n  \"(4)\": {\n    \"结构组成饼图\": \"[字符串]\",\n    \"跨结构配体链对比柱状图\": \"[字符串]\",\n    \"交叉校验面板\": \"[字符串]\"\n  },\n  \"(5)\": \"[字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1)\": 0.00,\n  \"(2)\": [],\n  \"(3)\": {\n    \"count_with_H\": 0.00,\n    \"count_without_H\": 0.00,\n    \"difference\": 0.00,\n    \"consistent\": true\n  },\n  \"(4)\": {\n    \"结构组成饼图\": \"images/6LU7_composition_pie.png\",\n    \"跨结构配体链对比柱状图\": \"images/6LU7_chain_comparison.png\",\n    \"交叉校验面板\": \"images/6LU7_consistency_check_panel.png\"\n  },\n  \"(5)\": \"经`analyze_structure_composition`与`batch_analyze_pdb_structures`交叉验证，两种模式（去氢/含氢）下配体链数量均为0，结果一致。分析显示，结构中存在3个配体分子，但它们不构成独立的配体链。最终采信`analyze_structure_composition`的详细分析结果。\"\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "life",
+    "topic": "",
+    "image_path": [
+      "/sfe_images/L009_0002_e3475ae3472de5584f343b1657a7b157.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "fetch_pdb_structure",
+      "count_ligand_chains",
+      "analyze_structure_composition",
+      "batch_analyze_pdb_structures",
+      "visualize_domain_specific"
+    ],
+    "golden_answer": [
+      {
+        "(1)": 0,
+        "(2)": [],
+        "(3)": {
+          "count_with_H": 0,
+          "count_without_H": 0,
+          "difference": 0,
+          "consistent": true
+        },
+        "(4)": {
+          "结构组成饼图": "./images/composition_pie_main.png",
+          "跨结构配体链对比柱状图": "./images/ligand_chain_comparison.png",
+          "交叉校验面板": "./images/validation_crosscheck.png"
+        },
+        "(5)": "存在不一致：跨结构对比计数与其他数据不符。采信依据：以交叉校验数据为最终来源，该数据按过滤规则（剔除水与常见金属离子）并同时给出去氢/含氢计数与链ID，且两版计数一致（差值为0）。策略：以交叉校验结果为准，弃用与其不一致的对比计数。"
+      }
+    ],
+    "original_question_id": "55",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/traces",
+    "topic_protocol_scope": "其他",
+    "with_all_tools": true
+  },
+  "metadata_summary": {
+    "subject": "life",
+    "test_type": "refined",
+    "original_question_id": "55"
+  },
+  "answer_template": {
+    "(1)": "[数值]",
+    "(2)": [],
+    "(3)": {
+      "count_with_H": "[数值]",
+      "count_without_H": "[数值]",
+      "difference": "[数值]",
+      "consistent": "[布尔值]"
+    },
+    "(4)": {
+      "结构组成饼图": "[字符串]",
+      "跨结构配体链对比柱状图": "[字符串]",
+      "交叉校验面板": "[字符串]"
+    },
+    "(5)": "[字符串]"
+  },
+  "golden_standard": {
+    "(1)": 0,
+    "(2)": [],
+    "(3)": {
+      "count_with_H": 0,
+      "count_without_H": 0,
+      "difference": 0,
+      "consistent": true
+    },
+    "(4)": {
+      "结构组成饼图": "./images/composition_pie_main.png",
+      "跨结构配体链对比柱状图": "./images/ligand_chain_comparison.png",
+      "交叉校验面板": "./images/validation_crosscheck.png"
+    },
+    "(5)": "存在不一致：跨结构对比计数与其他数据不符。采信依据：以交叉校验数据为最终来源，该数据按过滤规则（剔除水与常见金属离子）并同时给出去氢/含氢计数与链ID，且两版计数一致（差值为0）。策略：以交叉校验结果为准，弃用与其不一致的对比计数。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1)": 0.0,
+    "(2)": [],
+    "(3)": {
+      "count_with_H": 0.0,
+      "count_without_H": 0.0,
+      "difference": 0.0,
+      "consistent": true
+    },
+    "(4)": {
+      "结构组成饼图": "images/6LU7_composition_pie.png",
+      "跨结构配体链对比柱状图": "images/6LU7_chain_comparison.png",
+      "交叉校验面板": "images/6LU7_consistency_check_panel.png"
+    },
+    "(5)": "经`analyze_structure_composition`与`batch_analyze_pdb_structures`交叉验证，两种模式（去氢/含氢）下配体链数量均为0，结果一致。分析显示，结构中存在3个配体分子，但它们不构成独立的配体链。最终采信`analyze_structure_composition`的详细分析结果。"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1)\": 0.00,\n  \"(2)\": [],\n  \"(3)\": {\n    \"count_with_H\": 0.00,\n    \"count_without_H\": 0.00,\n    \"difference\": 0.00,\n    \"consistent\": true\n  },\n  \"(4)\": {\n    \"结构组成饼图\": \"images/6LU7_composition_pie.png\",\n    \"跨结构配体链对比柱状图\": \"images/6LU7_chain_comparison.png\",\n    \"交叉校验面板\": \"images/6LU7_consistency_check_panel.png\"\n  },\n  \"(5)\": \"经`analyze_structure_composition`与`batch_analyze_pdb_structures`交叉验证，两种模式（去氢/含氢）下配体链数量均为0，结果一致。分析显示，结构中存在3个配体分子，但它们不构成独立的配体链。最终采信`analyze_structure_composition`的详细分析结果。\"\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1)\": 0.00,\n  \"(2)\": [],\n  \"(3)\": {\n    \"count_with_H\": 0.00,\n    \"count_without_H\": 0.00,\n    \"difference\": 0.00,\n    \"consistent\": true\n  },\n  \"(4)\": {\n    \"结构组成饼图\": \"images/6LU7_composition_pie.png\",\n    \"跨结构配体链对比柱状图\": \"images/6LU7_chain_comparison.png\",\n    \"交叉校验面板\": \"images/6LU7_consistency_check_panel.png\"\n  },\n  \"(5)\": \"经`analyze_structure_composition`与`batch_analyze_pdb_structures`交叉验证，两种模式（去氢/含氢）下配体链数量均为0，结果一致。分析显示，结构中存在3个配体分子，但它们不构成独立的配体链。最终采信`analyze_structure_composition`的详细分析结果。\"\n}\n```"
+  },
+  "evaluation_score": 0.6666666666666666,
+  "evaluation_summary": "匹配字段: 6/9 (得分: 66.67%)",
+  "evaluation_details": {
+    "(1)": {
+      "path": "(1)",
+      "expected": 0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3).count_with_H": {
+      "path": "(3).count_with_H",
+      "expected": 0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3).count_without_H": {
+      "path": "(3).count_without_H",
+      "expected": 0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3).difference": {
+      "path": "(3).difference",
+      "expected": 0,
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3).consistent": {
+      "path": "(3).consistent",
+      "expected": true,
+      "actual": true,
+      "expected_num": 1.0,
+      "actual_num": 1.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4).结构组成饼图": {
+      "path": "(4).结构组成饼图",
+      "expected": "./images/composition_pie_main.png",
+      "actual": "images/6LU7_composition_pie.png",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4).跨结构配体链对比柱状图": {
+      "path": "(4).跨结构配体链对比柱状图",
+      "expected": "./images/ligand_chain_comparison.png",
+      "actual": "images/6LU7_chain_comparison.png",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4).交叉校验面板": {
+      "path": "(4).交叉校验面板",
+      "expected": "./images/validation_crosscheck.png",
+      "actual": "images/6LU7_consistency_check_panel.png",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5)": {
+      "path": "(5)",
+      "expected": "存在不一致：跨结构对比计数与其他数据不符。采信依据：以交叉校验数据为最终来源，该数据按过滤规则（剔除水与常见金属离子）并同时给出去氢/含氢计数与链ID，且两版计数一致（差值为0）。策略：以交叉校验结果为准，弃用与其不一致的对比计数。",
+      "actual": "经`analyze_structure_composition`与`batch_analyze_pdb_structures`交叉验证，两种模式（去氢/含氢）下配体链数量均为0，结果一致。分析显示，结构中存在3个配体分子，但它们不构成独立的配体链。最终采信`analyze_structure_composition`的详细分析结果。",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "mode_folder": "with_all_tools",
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 1.0,
+    "0_75": 0.7142857142857143,
+    "0_100": 0.6666666666666666
+  }
+}

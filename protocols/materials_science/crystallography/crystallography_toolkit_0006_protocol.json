@@ -1,0 +1,475 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "identify_crystal_system",
+            "description": "根据晶格参数识别晶系。基于晶格常数的比值关系和角度判断晶系类型（立方、四方、六方、正交、单斜、三斜）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_params": {
+                        "type": "object",
+                        "description": "晶格参数字典，包含 {'a': float, 'b': float, 'c': float, 'alpha': float, 'beta': float, 'gamma': float}，长度单位Å，角度单位度"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "判断相等的相对容差，默认0.01（1%）"
+                    }
+                },
+                "required": [
+                    "lattice_params"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_symmetry_operations",
+            "description": "分析晶体结构的对称操作。使用pymatgen的SpacegroupAnalyzer提取旋转轴、镜面、反演中心等对称元素。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure": {
+                        "type": "object",
+                        "description": "pymatgen Structure对象"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称性分析精度/Å，默认0.1"
+                    }
+                },
+                "required": [
+                    "structure"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_spacegroup_from_structure",
+            "description": "从晶体结构直接获取空间群信息。调用pymatgen的SpacegroupAnalyzer进行完整的空间群分析。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure": {
+                        "type": "object",
+                        "description": "pymatgen Structure对象"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称性分析精度/Å，默认0.1"
+                    }
+                },
+                "required": [
+                    "structure"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_symmetry_operations_from_parameters",
+            "description": "基于参数分析对称操作（OpenAI Function Calling兼容）。从晶格参数和原子坐标构建Structure对象，然后分析对称操作。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_params": {
+                        "type": "object",
+                        "description": "晶格参数字典 {'a', 'b', 'c', 'alpha', 'beta', 'gamma'}，长度单位Å，角度单位度"
+                    },
+                    "species": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "原子种类列表，如['Al', 'Ir']"
+                    },
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "分数坐标列表，每个坐标为[x, y, z]，范围0-1"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称性分析精度/Å，默认0.1"
+                    }
+                },
+                "required": [
+                    "lattice_params",
+                    "species",
+                    "coords"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_spacegroup_from_parameters",
+            "description": "基于参数获取空间群信息（OpenAI Function Calling兼容）。从晶格参数和原子坐标构建Structure对象，然后获取空间群信息。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_params": {
+                        "type": "object",
+                        "description": "晶格参数字典 {'a', 'b', 'c', 'alpha', 'beta', 'gamma'}，长度单位Å，角度单位度"
+                    },
+                    "species": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "原子种类列表，如['Al', 'Ir']"
+                    },
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "分数坐标列表，每个坐标为[x, y, z]，范围0-1"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称性分析精度/Å，默认0.1"
+                    }
+                },
+                "required": [
+                    "lattice_params",
+                    "species",
+                    "coords"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "verify_p63mmc_symmetry_from_parameters",
+            "description": "基于参数验证P6₃/mmc对称性（OpenAI Function Calling兼容）。从晶格参数和原子坐标构建Structure对象，然后验证是否符合P6₃/mmc空间群。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_params": {
+                        "type": "object",
+                        "description": "晶格参数字典 {'a', 'b', 'c', 'alpha', 'beta', 'gamma'}，长度单位Å，角度单位度"
+                    },
+                    "species": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "原子种类列表，如['Al', 'Ir']"
+                    },
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "分数坐标列表，每个坐标为[x, y, z]，范围0-1"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称性分析精度/Å，默认0.1"
+                    }
+                },
+                "required": [
+                    "lattice_params",
+                    "species",
+                    "coords"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "create_hexagonal_test_structure",
+            "description": "创建六方晶系测试结构。根据给定的晶格参数和原子坐标构建六方晶胞，用于空间群验证。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "a": {
+                        "type": "number",
+                        "description": "六方晶格的a轴长度/Å（a=b）"
+                    },
+                    "c": {
+                        "type": "number",
+                        "description": "六方晶格的c轴长度/Å"
+                    },
+                    "species": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "原子种类列表，如['Al', 'Ir']"
+                    },
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "分数坐标列表，每个坐标为[x, y, z]，范围0-1"
+                    }
+                },
+                "required": [
+                    "a",
+                    "c",
+                    "species",
+                    "coords"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "determine_spacegroup_from_lattice",
+            "description": "从晶格参数和原子坐标确定空间群。组合调用晶系识别、结构创建和对称性分析完成完整的空间群确定流程。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lattice_params": {
+                        "type": "object",
+                        "description": "晶格参数字典 {'a', 'b', 'c', 'alpha', 'beta', 'gamma'}，长度单位Å，角度单位度"
+                    },
+                    "species": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "原子种类列表，如['Al', 'Ir']"
+                    },
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "分数坐标列表，每个坐标为[x, y, z]，范围0-1"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称性分析精度/Å，默认0.1"
+                    }
+                },
+                "required": [
+                    "lattice_params",
+                    "species",
+                    "coords"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "verify_p63mmc_symmetry",
+            "description": "验证结构是否符合P6₃/mmc空间群。检查关键对称元素：6₃螺旋轴、镜面m、滑移面c，并与标准P6₃/mmc特征对比。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "structure": {
+                        "type": "object",
+                        "description": "待验证的pymatgen Structure对象"
+                    },
+                    "symprec": {
+                        "type": "number",
+                        "description": "对称性分析精度/Å，默认0.1"
+                    }
+                },
+                "required": [
+                    "structure"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "batch_analyze_hexagonal_structures",
+            "description": "批量分析不同晶格参数的六方结构。扫描a和c参数空间，识别每个结构的空间群，用于参数-对称性关系研究。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "a_values": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "a轴长度列表/Å"
+                    },
+                    "c_values": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "c轴长度列表/Å"
+                    },
+                    "species": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "原子种类，默认['Al', 'Ir']"
+                    },
+                    "coords": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "description": "分数坐标，默认None时使用[[0,0,0], [1/3,2/3,1/2]]"
+                    }
+                },
+                "required": [
+                    "a_values",
+                    "c_values"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_symmetry_analysis",
+            "description": "可视化对称性分析结果。生成对称元素分布图，包括旋转轴、镜面、滑移面的统计可视化。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "symmetry_data": {
+                        "type": "object",
+                        "description": "analyze_symmetry_operations()的返回结果"
+                    },
+                    "plot_type": {
+                        "type": "string",
+                        "description": "'interactive'使用plotly, 'static'使用matplotlib",
+                        "enum": ["interactive", "static"]
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "图片保存路径，默认'./images/'"
+                    }
+                },
+                "required": [
+                    "symmetry_data"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_spacegroup_distribution",
+            "description": "可视化批量分析的空间群分布。生成空间群统计饼图或柱状图，展示不同参数下的空间群分布。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "batch_results": {
+                        "type": "object",
+                        "description": "batch_analyze_hexagonal_structures()的返回结果"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "图片保存路径，默认'./images/'"
+                    }
+                },
+                "required": [
+                    "batch_results"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/crystallography_toolkit_0006.py"
+        }
+    }
+]

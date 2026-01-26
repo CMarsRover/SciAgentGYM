@@ -1,0 +1,167 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "extract_bh_curve_data",
+            "description": "提取特定材料的B-H曲线数据。该函数使用提供的曲线点或返回常见磁性材料的预定义数据。B-H曲线表示磁通密度(B)和磁场强度(H)之间的关系。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_name": {
+                        "type": "string",
+                        "description": "磁性材料的名称(例如，'mild steel'，'cast iron')"
+                    },
+                    "curve_points": {
+                        "type": "object",
+                        "description": "包含'H'和'B'数组的字典，带有测量数据点。如果为None，将使用预定义曲线。"
+                    }
+                },
+                "required": [
+                    "material_name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/magnetic_materials_analyzer_18856.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_flux_density",
+            "description": "计算给定材料和磁场强度(H)的磁通密度(B)。该函数使用B-H曲线上的插值来找到特定场强值下的磁通密度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_name": {
+                        "type": "string",
+                        "description": "磁性材料的名称"
+                    },
+                    "h_value": {
+                        "type": "number",
+                        "description": "磁场强度(H)，单位为A/m"
+                    },
+                    "curve_points": {
+                        "type": "object",
+                        "description": "包含'H'和'B'数组的字典，带有测量数据点。如果为None，将使用预定义曲线。"
+                    }
+                },
+                "required": [
+                    "material_name",
+                    "h_value"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/magnetic_materials_analyzer_18856.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_permeability",
+            "description": "计算给定材料和磁场强度(H)的相对磁导率(μr)。相对磁导率计算为μr = B/(μ0*H)，其中μ0是真空磁导率。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_name": {
+                        "type": "string",
+                        "description": "磁性材料的名称"
+                    },
+                    "h_value": {
+                        "type": "number",
+                        "description": "磁场强度(H)，单位为A/m"
+                    },
+                    "curve_points": {
+                        "type": "object",
+                        "description": "包含'H'和'B'数组的字典，带有测量数据点。如果为None，将使用预定义曲线。"
+                    }
+                },
+                "required": [
+                    "material_name",
+                    "h_value"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/magnetic_materials_analyzer_18856.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_bh_curves",
+            "description": "绘制多种材料的B-H曲线。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "materials": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "要绘制的材料名称列表"
+                    },
+                    "h_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "要绘制的H值范围(最小值，最大值)"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存图表的路径。如果为None，图表将不会被保存。"
+                    }
+                },
+                "required": [
+                    "materials"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/magnetic_materials_analyzer_18856.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_material_permeability",
+            "description": "分析材料在不同场强下的磁导率。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_name": {
+                        "type": "string",
+                        "description": "磁性材料的名称"
+                    },
+                    "h_values": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "磁场强度(H)值数组，单位为A/m"
+                    },
+                    "curve_points": {
+                        "type": "object",
+                        "description": "包含'H'和'B'数组的字典，带有测量数据点。如果为None，将使用预定义曲线。"
+                    }
+                },
+                "required": [
+                    "material_name",
+                    "h_values"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/magnetic_materials_analyzer_18856.py"
+        }
+    }
+]

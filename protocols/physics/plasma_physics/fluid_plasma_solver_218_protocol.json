@@ -1,0 +1,255 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "pipe_flow_velocity",
+            "description": "计算圆管内层流(泊肃叶流动)的速度分布。基于Hagen-Poiseuille方程，计算圆管内任意位置的流速。对于不可压缩流体在圆管内的层流，速度分布呈抛物线形。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "radius": {
+                        "type": "number",
+                        "description": "管道半径，单位：米"
+                    },
+                    "position": {
+                        "type": "number",
+                        "description": "距离管道中心的径向距离，单位：米"
+                    },
+                    "flow_rate": {
+                        "type": "number",
+                        "description": "体积流量，单位：立方米/秒"
+                    },
+                    "viscosity": {
+                        "type": "number",
+                        "description": "流体动力粘度，单位：Pa·s，默认为1.0"
+                    },
+                    "pressure_gradient": {
+                        "type": "number",
+                        "description": "沿管道轴向的压力梯度，单位：Pa/m，默认为1.0"
+                    }
+                },
+                "required": [
+                    "radius",
+                    "position",
+                    "flow_rate"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_218.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "mhd_flow_velocity",
+            "description": "计算磁流体动力学(MHD)条件下圆管内的速度分布。考虑洛伦兹力影响下的导电流体在圆管内的流动。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "radius": {
+                        "type": "number",
+                        "description": "管道半径，单位：米"
+                    },
+                    "position": {
+                        "type": "number",
+                        "description": "距离管道中心的径向距离，单位：米"
+                    },
+                    "B_field": {
+                        "type": "number",
+                        "description": "垂直于流动方向的磁场强度，单位：特斯拉"
+                    },
+                    "current_density": {
+                        "type": "number",
+                        "description": "电流密度，单位：安培/平方米"
+                    },
+                    "fluid_density": {
+                        "type": "number",
+                        "description": "流体密度，单位：千克/立方米"
+                    },
+                    "viscosity": {
+                        "type": "number",
+                        "description": "流体动力粘度，单位：Pa·s，默认为1.0"
+                    },
+                    "pressure_gradient": {
+                        "type": "number",
+                        "description": "沿管道轴向的压力梯度，单位：Pa/m，默认为1.0"
+                    }
+                },
+                "required": [
+                    "radius",
+                    "position",
+                    "B_field",
+                    "current_density",
+                    "fluid_density"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_218.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plasma_kinetic_simulation",
+            "description": "简化的等离子体粒子运动模拟。使用Boris算法模拟带电粒子在电磁场中的运动。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "n_particles": {
+                        "type": "integer",
+                        "description": "模拟粒子数量"
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "等离子体温度，单位：开尔文"
+                    },
+                    "B_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "磁场矢量，单位：特斯拉"
+                    },
+                    "E_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "电场矢量，单位：伏特/米"
+                    },
+                    "mass": {
+                        "type": "number",
+                        "description": "粒子质量，单位：千克，默认为质子质量"
+                    },
+                    "charge": {
+                        "type": "number",
+                        "description": "粒子电荷，单位：库仑，默认为电子电荷"
+                    },
+                    "time_span": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "模拟时间范围，单位：秒，默认为(0, 1e-6)"
+                    },
+                    "time_steps": {
+                        "type": "integer",
+                        "description": "时间步数，默认为1000"
+                    }
+                },
+                "required": [
+                    "n_particles",
+                    "temperature",
+                    "B_field",
+                    "E_field"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_218.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "turbulent_plasma_spectrum",
+            "description": "计算湍流等离子体的能量谱。基于Kolmogorov-理论和磁流体动力学修正，计算湍流等离子体的能量谱。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "k_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "波数范围，单位：1/米"
+                    },
+                    "L_outer": {
+                        "type": "number",
+                        "description": "外尺度(能量注入尺度)，单位：米"
+                    },
+                    "L_inner": {
+                        "type": "number",
+                        "description": "内尺度(耗散尺度)，单位：米"
+                    },
+                    "magnetic_field": {
+                        "type": "number",
+                        "description": "磁场强度，单位：特斯拉，默认为0.0"
+                    },
+                    "density": {
+                        "type": "number",
+                        "description": "等离子体密度，单位：kg/m^3，默认为1.0"
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "等离子体温度，单位：开尔文，默认为1e6"
+                    }
+                },
+                "required": [
+                    "k_range",
+                    "L_outer",
+                    "L_inner"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_218.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "continuity_equation_solver",
+            "description": "求解流体连续性方程。使用有限差分方法求解连续性方程 ∂ρ/∂t + ∇·(ρv) = 0",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "velocity_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "速度场，形状为(nx, ny, nz, 3)或(nx, ny, 3)"
+                    },
+                    "density_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "密度场，形状为(nx, ny, nz)或(nx, ny)"
+                    },
+                    "grid_spacing": {
+                        "type": "number",
+                        "description": "网格间距，单位：米"
+                    },
+                    "dt": {
+                        "type": "number",
+                        "description": "时间步长，单位：秒"
+                    },
+                    "boundary_condition": {
+                        "type": "string",
+                        "description": "边界条件，可选'periodic'或'fixed'，默认为'periodic'"
+                    }
+                },
+                "required": [
+                    "velocity_field",
+                    "density_field",
+                    "grid_spacing",
+                    "dt"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_218.py"
+        }
+    }
+]

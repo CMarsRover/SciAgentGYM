@@ -1,0 +1,303 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "parse_band_data_from_file",
+            "description": "从文件中解析能带结构数据，支持VASP/Quantum ESPRESSO/CASTEP等常见格式。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "能带数据文件路径"
+                    },
+                    "file_format": {
+                        "type": "string",
+                        "description": "文件格式（'vasp'，'qe'，'castep'，'auto'），默认为'auto'"
+                    }
+                },
+                "required": [
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "identify_vbm_cbm",
+            "description": "识别价带顶(VBM)和导带底(CBM)的位置，并计算带隙。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "energies": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "description": "能带能量数据，形状为 (n_bands × n_kpoints)"
+                    },
+                    "kpath": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "k点路径坐标，长度与每条能带的点数相同"
+                    },
+                    "fermi_energy": {
+                        "type": "number",
+                        "description": "费米能级(eV)，默认0.0"
+                    }
+                },
+                "required": [
+                    "energies",
+                    "kpath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "determine_bandgap_type",
+            "description": "判断带隙类型（直接/间接），并给出对应的高对称k点说明与k空间距离。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "vbm_info": {
+                        "type": "object",
+                        "description": "VBM信息字典，包含{'energy','kpoint_index','kpoint_value'}等键"
+                    },
+                    "cbm_info": {
+                        "type": "object",
+                        "description": "CBM信息字典，包含{'energy','kpoint_index','kpoint_value'}等键"
+                    },
+                    "labels": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "高对称点标记列表；每个元素为二元组(label: str, k_index: int)"
+                    },
+                    "k_tolerance": {
+                        "type": "number",
+                        "description": "k点位置判断容差，默认0.05"
+                    }
+                },
+                "required": [
+                    "vbm_info",
+                    "cbm_info",
+                    "labels"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "fetch_material_bandstructure_from_mp",
+            "description": "从Materials Project数据库获取材料的能带结构基础信息（带隙、是否直接带隙等）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_id": {
+                        "type": "string",
+                        "description": "Materials Project材料ID（如'mp-149'，'mp-66'）"
+                    },
+                    "api_key": {
+                        "type": "string",
+                        "description": "MP API密钥（可选，若未提供则尝试从环境变量MP_API_KEY读取）"
+                    }
+                },
+                "required": [
+                    "material_id"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_bandstructure_from_file",
+            "description": "从文件执行完整的能带结构分析流程：解析数据、识别VBM/CBM并判断带隙类型。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "能带数据文件路径"
+                    },
+                    "file_format": {
+                        "type": "string",
+                        "description": "文件格式（'vasp'，'qe'，'auto'），默认为'auto'"
+                    },
+                    "fermi_energy": {
+                        "type": "number",
+                        "description": "费米能级(eV)，默认0.0"
+                    }
+                },
+                "required": [
+                    "filepath"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_bandgaps_batch",
+            "description": "批量对比多个材料的带隙特性，从Materials Project获取数据并统计分析。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "material_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "材料ID列表，例如['mp-149','mp-66',...]"
+                    },
+                    "api_key": {
+                        "type": "string",
+                        "description": "MP API密钥（可选）"
+                    }
+                },
+                "required": [
+                    "material_ids"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_optical_properties",
+            "description": "基于带隙特性估算光学性质，包括吸收边波长与激子结合能等。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "bandgap": {
+                        "type": "number",
+                        "description": "带隙值(eV)"
+                    },
+                    "is_direct": {
+                        "type": "boolean",
+                        "description": "是否为直接带隙"
+                    },
+                    "effective_mass_e": {
+                        "type": "number",
+                        "description": "电子有效质量（以自由电子质量m0为单位），默认0.5"
+                    },
+                    "effective_mass_h": {
+                        "type": "number",
+                        "description": "空穴有效质量（以自由电子质量m0为单位），默认0.5"
+                    }
+                },
+                "required": [
+                    "bandgap",
+                    "is_direct"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_bandstructure",
+            "description": "可视化能带结构图，支持标记VBM/CBM并保存为图片文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "band_data": {
+                        "type": "object",
+                        "description": "能带数据字典，包含'kpath'、'energies'、'labels'等键"
+                    },
+                    "vbm_cbm_info": {
+                        "type": "object",
+                        "description": "VBM/CBM信息（可选），用于图中标记"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "图片保存目录，默认'./tool_images/'"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "保存文件名（可选）"
+                    }
+                },
+                "required": [
+                    "band_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_bandgap_comparison",
+            "description": "可视化多个材料的带隙对比柱状图并保存为图片文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "materials_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "材料数据列表；每个元素为字典对象，包含formula、bandgap、is_direct等字段"
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "图片保存目录，默认'./tool_images/'"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "保存文件名（可选）"
+                    }
+                },
+                "required": [
+                    "materials_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/materials_bandstructure_toolkit_M010_0001.py"
+        }
+    }
+]

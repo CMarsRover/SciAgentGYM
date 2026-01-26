@@ -1,0 +1,12 @@
+Orthogonality Matrix (|<vi|vj>|)
+============================================================
+
+                     W           X           Y           Z
+------------------------------------------------------------
+         W    1.000000N/A (diff dim)N/A (diff dim)N/A (diff dim)
+         XN/A (diff dim)    1.000000N/A (diff dim)N/A (diff dim)
+         YN/A (diff dim)N/A (diff dim)    1.000000N/A (diff dim)
+         ZN/A (diff dim)N/A (diff dim)N/A (diff dim)    1.000000
+
+============================================================
+Orthogonal pairs: []

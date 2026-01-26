@@ -1,0 +1,190 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_tension_circular_motion",
+            "description": "计算两个质点在水平面上做匀速圆周运动时绳索上的张力。该函数基于牛顿第二定律和向心力原理，计算连接两个质点的绳索上的张力。在匀速圆周运动中，向心力由绳索的张力提供。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个质点的质量，单位：kg"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个质点的质量，单位：kg"
+                    },
+                    "L1": {
+                        "type": "number",
+                        "description": "第一段绳索的长度（从固定点O到质点m1），单位：m"
+                    },
+                    "L2": {
+                        "type": "number",
+                        "description": "第二段绳索的长度（从质点m1到质点m2），单位：m"
+                    },
+                    "omega": {
+                        "type": "number",
+                        "description": "角速度，单位：rad/s"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "L1",
+                    "L2",
+                    "omega"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_107.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_circular_motion",
+            "description": "模拟两个质点在水平面上做匀速圆周运动的运动轨迹。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个质点的质量，单位：kg"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个质点的质量，单位：kg"
+                    },
+                    "L1": {
+                        "type": "number",
+                        "description": "第一段绳索的长度，单位：m"
+                    },
+                    "L2": {
+                        "type": "number",
+                        "description": "第二段绳索的长度，单位：m"
+                    },
+                    "omega": {
+                        "type": "number",
+                        "description": "角速度，单位：rad/s"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "description": "模拟持续时间，单位：s，默认为10秒"
+                    },
+                    "fps": {
+                        "type": "integer",
+                        "description": "每秒帧数，默认为30"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "L1",
+                    "L2",
+                    "omega"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_107.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_forces",
+            "description": "分析圆周运动中的力学关系，计算张力并验证力平衡。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个质点的质量，单位：kg"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个质点的质量，单位：kg"
+                    },
+                    "L1": {
+                        "type": "number",
+                        "description": "第一段绳索的长度，单位：m"
+                    },
+                    "L2": {
+                        "type": "number",
+                        "description": "第二段绳索的长度，单位：m"
+                    },
+                    "omega": {
+                        "type": "number",
+                        "description": "角速度，单位：rad/s"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "L1",
+                    "L2",
+                    "omega"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_107.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_motion",
+            "description": "可视化两个质点的圆周运动。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "m1": {
+                        "type": "number",
+                        "description": "第一个质点的质量，单位：kg"
+                    },
+                    "m2": {
+                        "type": "number",
+                        "description": "第二个质点的质量，单位：kg"
+                    },
+                    "L1": {
+                        "type": "number",
+                        "description": "第一段绳索的长度，单位：m"
+                    },
+                    "L2": {
+                        "type": "number",
+                        "description": "第二段绳索的长度，单位：m"
+                    },
+                    "omega": {
+                        "type": "number",
+                        "description": "角速度，单位：rad/s"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "description": "模拟持续时间，单位：s，默认为5秒"
+                    },
+                    "fps": {
+                        "type": "integer",
+                        "description": "每秒帧数，默认为30"
+                    }
+                },
+                "required": [
+                    "m1",
+                    "m2",
+                    "L1",
+                    "L2",
+                    "omega"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/circular_motion_solver_107.py"
+        }
+    }
+]

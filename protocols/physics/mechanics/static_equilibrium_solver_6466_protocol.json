@@ -1,0 +1,174 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_force_from_torque",
+            "description": "计算静态平衡系统中使用力矩平衡原理的力。适用于各种物理问题，包括杠杆、跷跷板和俯卧撑等身体力学问题。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体或身体的质量，单位：kg"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度，单位：m/s²，默认为9.8"
+                    },
+                    "pivot_point": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "支点或支轴的坐标(x, y)，单位：米"
+                    },
+                    "force_points": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                        },
+                        "description": "施加力的坐标点(x, y)列表，单位：米"
+                    },
+                    "weight_point": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "重心的坐标(x, y)，单位：米"
+                    },
+                    "precision": {
+                        "type": "integer",
+                        "description": "结果的有效数字位数，默认为3"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "force_points",
+                    "weight_point"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/static_equilibrium_solver_6466.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_static_equilibrium",
+            "description": "可视化静态平衡系统，包括力、支点和重心。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体或身体的质量，单位：kg"
+                    },
+                    "pivot_point": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "支点或支轴的坐标(x, y)"
+                    },
+                    "force_points": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                        },
+                        "description": "施加力的坐标点(x, y)列表"
+                    },
+                    "weight_point": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "重心的坐标(x, y)"
+                    },
+                    "forces": {
+                        "type": "object",
+                        "description": "每个力点上计算出的力的字典"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "可视化的标题，默认为'Static Equilibrium System'"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存可视化图像的路径"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "pivot_point",
+                    "force_points",
+                    "weight_point"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/static_equilibrium_solver_6466.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_pushup",
+            "description": "可视化俯卧撑场景，包括力和距离。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "人的质量，单位：kg"
+                    },
+                    "cg_distance": {
+                        "type": "number",
+                        "description": "从脚到重心的距离，单位：米"
+                    },
+                    "hand_distance": {
+                        "type": "number",
+                        "description": "从脚到手的距离，单位：米"
+                    },
+                    "force": {
+                        "type": "number",
+                        "description": "手部施加的力，单位：牛顿"
+                    },
+                    "save_path": {
+                        "type": "string",
+                        "description": "保存可视化图像的路径"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "cg_distance",
+                    "hand_distance"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/static_equilibrium_solver_6466.py"
+        }
+    }
+]

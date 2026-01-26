@@ -1,0 +1,216 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_total_nitrogen",
+            "description": "计算总氮浓度，通过累加有机氮、氨氮、亚硝酸盐氮和硝酸盐氮的浓度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "organic_n": {
+                        "type": "number",
+                        "description": "有机氮浓度，单位：mg/L"
+                    },
+                    "nh3_n": {
+                        "type": "number",
+                        "description": "氨氮浓度，单位：mg/L"
+                    },
+                    "no2_n": {
+                        "type": "number",
+                        "description": "亚硝酸盐氮浓度，单位：mg/L"
+                    },
+                    "no3_n": {
+                        "type": "number",
+                        "description": "硝酸盐氮浓度，单位：mg/L"
+                    }
+                },
+                "required": [
+                    "organic_n",
+                    "nh3_n",
+                    "no2_n",
+                    "no3_n"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_removal_efficiency",
+            "description": "计算去除效率百分比，基于进水和出水浓度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "inflow": {
+                        "type": "number",
+                        "description": "进水浓度，单位：mg/L"
+                    },
+                    "outflow": {
+                        "type": "number",
+                        "description": "出水浓度，单位：mg/L"
+                    }
+                },
+                "required": [
+                    "inflow",
+                    "outflow"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_nitrogen_removal",
+            "description": "综合分析污水处理系统的氮去除效率，包括总氮、有机氮、无机氮及各氮形态的去除率。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wastewater_data": {
+                        "type": "object",
+                        "description": "污水数据字典，包含'inflow'和'outflow'两个子字典，每个子字典包含organic_n、nh3_n、no2_n、no3_n字段"
+                    }
+                },
+                "required": [
+                    "wastewater_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "evaluate_nitrification_denitrification",
+            "description": "评估污水处理过程中的硝化和反硝化过程，量化氮的转化情况。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wastewater_data": {
+                        "type": "object",
+                        "description": "污水数据字典，包含'inflow'和'outflow'两个子字典，每个子字典包含organic_n、nh3_n、no2_n、no3_n字段"
+                    }
+                },
+                "required": [
+                    "wastewater_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_nitrogen_distribution",
+            "description": "可视化进水和出水中各氮形态的分布情况，生成柱状图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wastewater_data": {
+                        "type": "object",
+                        "description": "污水数据字典，包含'inflow'和'outflow'两个子字典，每个子字典包含organic_n、nh3_n、no2_n、no3_n字段"
+                    }
+                },
+                "required": [
+                    "wastewater_data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_nitrogen_transformation",
+            "description": "可视化氮的转化过程，包括硝化和反硝化过程的流程图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "wastewater_data": {
+                        "type": "object",
+                        "description": "污水数据字典，包含'inflow'和'outflow'两个子字典，每个子字典包含organic_n、nh3_n、no2_n、no3_n字段"
+                    },
+                    "bio_process_result": {
+                        "type": "object",
+                        "description": "生物过程评估结果，由evaluate_nitrification_denitrification函数返回的结果对象"
+                    }
+                },
+                "required": [
+                    "wastewater_data",
+                    "bio_process_result"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_mass_balance",
+            "description": "计算氮的质量平衡，包括总输入、总输出和总去除量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "inflow": {
+                        "type": "object",
+                        "description": "进水数据字典，包含organic_n、nh3_n、no2_n、no3_n字段"
+                    },
+                    "outflow": {
+                        "type": "object",
+                        "description": "出水数据字典，包含organic_n、nh3_n、no2_n、no3_n字段"
+                    }
+                },
+                "required": [
+                    "inflow",
+                    "outflow"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_removal_efficiency",
+            "description": "可视化各氮形态的去除效率，生成条形图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "analysis_result": {
+                        "type": "object",
+                        "description": "氮去除分析结果，由analyze_nitrogen_removal函数返回的结果对象"
+                    }
+                },
+                "required": [
+                    "analysis_result"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/wastewater_nitrogen_toolkit_claude_652.py"
+        }
+    }
+]

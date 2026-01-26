@@ -1,0 +1,248 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_magnetic_field_line_current",
+            "description": "计算无限长直线电流在空间某点产生的磁感应强度。基于毕奥-萨伐尔定律，无限长直线电流在距离为r的点产生的磁场大小为: B = (μ₀*I)/(2πr)，方向由右手螺旋定则确定。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "r_vector": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "场点位置矢量，形状为(3,)，表示(x,y,z)坐标"
+                    },
+                    "current_vector": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "电流方向的单位矢量，形状为(3,)"
+                    },
+                    "current_position": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "电流线所在直线上一点的位置矢量，形状为(3,)"
+                    }
+                },
+                "required": [
+                    "r_vector",
+                    "current_vector",
+                    "current_position"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_157.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_total_magnetic_field",
+            "description": "计算多个电流源在空间某点产生的总磁感应强度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "r_vector": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "场点位置矢量，形状为(3,)，表示(x,y,z)坐标"
+                    },
+                    "current_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "电流源列表，每个电流源为一个字典，包含：'position': 电流线上一点的位置矢量，'direction': 电流方向的单位矢量，'magnitude': 电流大小，单位为安培(A)"
+                    }
+                },
+                "required": [
+                    "r_vector",
+                    "current_sources"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_157.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_magnetic_field_grid",
+            "description": "计算空间网格点上的磁场分布。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "x_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "x坐标范围，形式为(x_min, x_max)"
+                    },
+                    "y_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "y坐标范围，形式为(y_min, y_max)"
+                    },
+                    "z_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "z坐标范围，形式为(z_min, z_max)"
+                    },
+                    "current_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "电流源列表"
+                    },
+                    "grid_size": {
+                        "type": "integer",
+                        "description": "每个维度上的网格点数，默认为10"
+                    }
+                },
+                "required": [
+                    "x_range",
+                    "y_range",
+                    "z_range",
+                    "current_sources"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_157.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_magnetic_field",
+            "description": "可视化电流源和磁场。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "current_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "电流源列表"
+                    },
+                    "field_point": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "要显示磁场的特定点，形状为(3,)"
+                    },
+                    "field_vector": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "field_point处的磁场矢量，形状为(3,)"
+                    },
+                    "plot_type": {
+                        "type": "string",
+                        "description": "绘图类型，可选 '3d' 或 '2d'，默认为 '3d'"
+                    }
+                },
+                "required": [
+                    "current_sources"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_157.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "save_calculation_results",
+            "description": "保存计算结果到文件。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "current_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "电流源列表"
+                    },
+                    "field_point": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "场点位置"
+                    },
+                    "calculated_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "计算得到的磁场"
+                    },
+                    "theoretical_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "理论磁场"
+                    }
+                },
+                "required": [
+                    "current_sources",
+                    "field_point",
+                    "calculated_field",
+                    "theoretical_field"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_157.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "interactive_demo",
+            "description": "交互式演示：允许用户修改参数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/electromagnetic_field_solver_157.py"
+        }
+    }
+]

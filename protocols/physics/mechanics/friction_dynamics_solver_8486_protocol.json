@@ -1,0 +1,191 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "convert_speed",
+            "description": "将速度在不同单位之间进行转换。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "speed": {
+                        "type": "number",
+                        "description": "需要转换的速度值"
+                    },
+                    "from_unit": {
+                        "type": "string",
+                        "description": "原始单位（'m/s'、'km/h'、'mph'、'ft/s'）"
+                    },
+                    "to_unit": {
+                        "type": "string",
+                        "description": "目标单位（'m/s'、'km/h'、'mph'、'ft/s'）"
+                    }
+                },
+                "required": [
+                    "speed",
+                    "from_unit",
+                    "to_unit"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/friction_dynamics_solver_8486.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_acceleration",
+            "description": "根据初始速度、最终速度和时间计算恒定加速度。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "initial_velocity": {
+                        "type": "number",
+                        "description": "起始速度（以指定单位表示）"
+                    },
+                    "final_velocity": {
+                        "type": "number",
+                        "description": "结束速度（以指定单位表示）"
+                    },
+                    "time": {
+                        "type": "number",
+                        "description": "速度变化所需的时间（以秒为单位）"
+                    },
+                    "units": {
+                        "type": "string",
+                        "description": "速度的单位（'m/s'、'km/h'、'mph'、'ft/s'），默认为'm/s'"
+                    }
+                },
+                "required": [
+                    "initial_velocity",
+                    "final_velocity",
+                    "time"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/friction_dynamics_solver_8486.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_friction_coefficient",
+            "description": "计算防止物体滑动所需的最小摩擦系数。该函数计算加速过程中防止物体在表面滑动所需的静摩擦和动摩擦系数，并考虑倾斜表面的情况。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mass": {
+                        "type": "number",
+                        "description": "物体的质量，单位为kg"
+                    },
+                    "acceleration": {
+                        "type": "number",
+                        "description": "系统的加速度，单位为m/s²"
+                    },
+                    "angle": {
+                        "type": "number",
+                        "description": "倾斜角度，单位为度（0表示水平表面），默认为0.0"
+                    },
+                    "gravity": {
+                        "type": "number",
+                        "description": "重力加速度，单位为m/s²，默认为9.8"
+                    }
+                },
+                "required": [
+                    "mass",
+                    "acceleration"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/friction_dynamics_solver_8486.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_cargo_stability",
+            "description": "分析移动车辆上货物的稳定性。该函数根据摩擦特性确定货物在加速、制动或转弯过程中是否保持稳定。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "cargo_mass": {
+                        "type": "number",
+                        "description": "货物的质量，单位为kg"
+                    },
+                    "vehicle_mass": {
+                        "type": "number",
+                        "description": "车辆的质量，单位为kg"
+                    },
+                    "acceleration_profile": {
+                        "type": "object",
+                        "description": "包含加速度信息的字典：initial_speed（起始速度）、final_speed（结束速度）、time（速度变化所需时间）、units（速度单位）、direction（方向：'forward'、'braking'或'turning'）"
+                    },
+                    "surface_properties": {
+                        "type": "object",
+                        "description": "包含表面特性的字典：friction_coefficient（已知摩擦系数）、angle（倾斜角度，单位为度）"
+                    },
+                    "visualize": {
+                        "type": "boolean",
+                        "description": "是否生成分析的可视化图表，默认为false"
+                    }
+                },
+                "required": [
+                    "cargo_mass",
+                    "vehicle_mass",
+                    "acceleration_profile"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/friction_dynamics_solver_8486.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "create_stability_visualization",
+            "description": "创建货物稳定性分析的可视化图表。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "cargo_mass": {
+                        "type": "number",
+                        "description": "货物的质量，单位为kg"
+                    },
+                    "vehicle_mass": {
+                        "type": "number",
+                        "description": "车辆的质量，单位为kg"
+                    },
+                    "acceleration": {
+                        "type": "number",
+                        "description": "加速度，单位为m/s²"
+                    },
+                    "required_friction": {
+                        "type": "number",
+                        "description": "所需的摩擦系数"
+                    },
+                    "available_friction": {
+                        "type": "number",
+                        "description": "可用的摩擦系数"
+                    }
+                },
+                "required": [
+                    "cargo_mass",
+                    "vehicle_mass",
+                    "acceleration",
+                    "required_friction"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/friction_dynamics_solver_8486.py"
+        }
+    }
+]

@@ -1,0 +1,157 @@
+{
+  "id": "5_ref_0",
+  "query": "在三层介质空气(n1=1.6)→薄膜(n2=1.4)→基底(n3=1.8)中，白光(380–750 nm)入射到厚度为 d=350 nm、各向同性且无吸收的薄膜上。入射角为 θ1，膜内折射角 θ2 满足 Snell 定律 n1 sinθ1 = n2 sinθ2。已知反射增强满足相位条件 2 n2 d cosθ2 = (m+1/2) λ(θ)，其中 m∈Z≥0。要求：\n(1) 正入射(θ1=0°)：给出可见反射增强峰的波长集合及对应干涉级次 m；同时验证其满足上式(以符号关系说明即可)。并给出可见范围内的一个反射削弱谷的波长。\n(2) 斜入射：θ1=20° 与 θ1=40° 时，给出可见反射增强峰的波长；并相对于正入射 m=1 增强峰的偏移量 Δλ = λ(θ) − λ0(m=1)。\n(3) 厚度容差 ±3 nm：给出各增强峰的灵敏度 dλ/dd 及峰位范围 [λ − 3|dλ/dd|, λ + 3|dλ/dd|]；并简述峰位稳定性评估(定量给出范围即可)。\n(4) 薄膜色散对峰位的影响(一阶近似)：采用 Cauchy 模型 n2(λ)=A+B/λ^2，A=1.392, B=1600 nm^2(λ 以 nm 计，仅用于灵敏度估算)。量化色散引起的各峰位的附加偏移量，并与(3)中的厚度容差效应比较。\n(5) 可视化标注建议：在正入射反射光谱上标注两处增强峰及其 ±3 nm 厚度容差带(给出应标注的峰位与区间范围)。\n(6) 交叉校验：分别对正入射(两峰一谷)与斜入射(两峰)比较解析公式计算值与(1)(2)所得数值的差异，给出最大偏差与均方根误差(RMSE)，并判断是否通过。\n数值结果保留三位有效数字；波长以 nm 表示；灵敏度以 nm/nm 表示；其余按 SI 单位约定。",
+  "model": "gpt-4o-20241120",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "在三层介质空气(n1=1.6)→薄膜(n2=1.4)→基底(n3=1.8)中，白光(380–750 nm)入射到厚度为 d=350 nm、各向同性且无吸收的薄膜上。入射角为 θ1，膜内折射角 θ2 满足 Snell 定律 n1 sinθ1 = n2 sinθ2。已知反射增强满足相位条件 2 n2 d cosθ2 = (m+1/2) λ(θ)，其中 m∈Z≥0。要求：\n(1) 正入射(θ1=0°)：给出可见反射增强峰的波长集合及对应干涉级次 m；同时验证其满足上式(以符号关系说明即可)。并给出可见范围内的一个反射削弱谷的波长。\n(2) 斜入射：θ1=20° 与 θ1=40° 时，给出可见反射增强峰的波长；并相对于正入射 m=1 增强峰的偏移量 Δλ = λ(θ) − λ0(m=1)。\n(3) 厚度容差 ±3 nm：给出各增强峰的灵敏度 dλ/dd 及峰位范围 [λ − 3|dλ/dd|, λ + 3|dλ/dd|]；并简述峰位稳定性评估(定量给出范围即可)。\n(4) 薄膜色散对峰位的影响(一阶近似)：采用 Cauchy 模型 n2(λ)=A+B/λ^2，A=1.392, B=1600 nm^2(λ 以 nm 计，仅用于灵敏度估算)。量化色散引起的各峰位的附加偏移量，并与(3)中的厚度容差效应比较。\n(5) 可视化标注建议：在正入射反射光谱上标注两处增强峰及其 ±3 nm 厚度容差带(给出应标注的峰位与区间范围)。\n(6) 交叉校验：分别对正入射(两峰一谷)与斜入射(两峰)比较解析公式计算值与(1)(2)所得数值的差异，给出最大偏差与均方根误差(RMSE)，并判断是否通过。\n数值结果保留三位有效数字；波长以 nm 表示；灵敏度以 nm/nm 表示；其余按 SI 单位约定。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/jpeg;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "### **解答步骤**\n\n---\n\n### **(1) 正入射 (θ₁ = 0°):**\n\n对于正入射，Snell 定律 \\(n_1 \\sin\\theta_1 = n_2 \\sin\\theta_2\\) 可得：\n\\[\n\\sin\\theta_2 = 0 \\quad \\implies \\quad \\theta_2 = 0°.\n\\]\n代入增强条件 \\(2 n_2 d \\cos\\theta_2 = (m + 1/2) \\lambda\\)，得：\n\\[\n2 n_2 d = (m + 1/2) \\lambda.\n\\]\n已知 \\(n_2 = 1.4\\)，\\(d = 350 \\, \\text{nm}\\)，化简为：\n\\[\n\\lambda = \\frac{2 n_2 d}{m + 1/2} = \\frac{2 \\times 1.4 \\times 350}{m + 1/2}.\n\\]\n\n#### **可见增强峰波长集合及对应 \\(m\\):**\n取 \\(380 \\, \\text{nm} \\leq \\lambda \\leq 750 \\, \\text{nm}\\)，解得 \\(m\\) 的范围。\n\\[\nm = \\left\\lfloor \\frac{2 \\times 1.4 \\times 350}{750} - \\frac{1}{2} \\right\\rfloor \\quad \\text{到} \\quad \\left\\lceil \\frac{2 \\times 1.4 \\times 350}{380} - \\frac{1}{2} \\right\\rceil.\n\\]\n计算：\n\\[\nm_{\\text{min}} = \\left\\lfloor \\frac{980}{750} - \\frac{1}{2} \\right\\rfloor = 0, \\quad m_{\\text{max}} = \\left\\lceil \\frac{980}{380} - \\frac{1}{2} \\right\\rceil = 2.\n\\]\n\n对应波长为：\n\\[\n\\lambda_0 = \\frac{980}{m + 1/2}, \\quad \\text{对应 } m = 0, 1, 2:\n\\]\n- \\(m = 0: \\lambda_0 = \\frac{980}{0.5} = 1960 \\, \\text{nm} \\, (\\text{不在可见范围内}).\\)\n- \\(m = 1: \\lambda_0 = \\frac{980}{1.5} = 653 \\, \\text{nm}.\\)\n- \\(m = 2: \\lambda_0 = \\frac{980}{2.5} = 392 \\, \\text{nm}.\\)\n\n因此，可见增强波长集合为：\n\\[\n\\{\\lambda_0 = 653 \\, \\text{nm}, \\, 392 \\, \\text{nm}\\}, \\quad \\text{对应 } m = 1, \\, 2.\n\\]\n\n#### **验证相位条件**：\n代入第一峰 \\(m = 1\\):\n\\[\n2 n_2 d = (m + 1/2) \\lambda \\quad \\implies \\quad 2 \\times 1.4 \\times 350 = (1 + 1/2) \\times 653.\n\\]\n左边 \\(980 \\, \\text{nm}\\)，右边 \\(980 \\, \\text{nm}\\)，相等，验证成立。\n\n#### **反射削弱谷波长**：\n削弱谷发生在相邻的增强峰之间。对 \\(m = 1\\) 和 \\(m = 2\\)，它们之间的波长中点为：\n\\[\n\\lambda_{\\text{谷}} = \\frac{\\lambda(m=1) + \\lambda(m=2)}{2} = \\frac{653 + 392}{2} = 523 \\, \\text{nm}.\n\\]\n\n---\n\n### **(2) 斜入射 (θ₁ = 20° 和 40°):**\n\n#### **入射角 θ₁ = 20°**：\n根据 Snell 定律：\n\\[\nn_1 \\sin\\theta_1 = n_2 \\sin\\theta_2 \\quad \\implies \\quad \\sin\\theta_2 = \\frac{n_1 \\sin\\theta_1}{n_2} = \\frac{1.6 \\sin 20°}{1.4}.\n\\]\n计算：\n\\[\n\\sin\\theta_2 = \\frac{1.6 \\times 0.342}{1.4} = 0.391 \\quad \\implies \\quad \\theta_2 = \\arcsin(0.391) \\approx 22.98°.\n\\]\n\n增强条件为：\n\\[\n2 n_2 d \\cos\\theta_2 = (m + 1/2) \\lambda.\n\\]\n计算 \\(\\cos\\theta_2 = \\sqrt{1 - \\sin^2\\theta_2} = \\sqrt{1 - 0.391^2} \\approx 0.920\\)。则：\n\\[\n\\lambda = \\frac{2 n_2 d \\cos\\theta_2}{m + 1/2} = \\frac{2 \\times 1.4 \\times 350 \\times 0.920}{m + 1/2} \\approx \\frac{901}{m + 1/2}.\n\\]\n\n对应 \\(m = 1\\):\n\\[\n\\lambda = \\frac{901}{1.5} \\approx 601 \\, \\text{nm}.\n\\]\n\n#### **入射角 θ₁ = 40°**：\n类似计算，\\(\\sin\\theta_2 = \\frac{1.6 \\sin 40°}{1.4} = \\frac{1.6 \\times 0.643}{1.4} \\approx 0.735\\)，\\(\\theta_2 = \\arcsin(0.735) \\approx 47.15°\\)。增强条件为：\n\\[\n\\cos\\theta_2 = \\sqrt{1 - \\sin^2\\theta_2} = \\sqrt{1 - 0.735^2} \\approx 0.678.\n\\]\n则：\n\\[\n\\lambda = \\frac{2 n_2 d \\cos\\theta_2}{m + 1/2} = \\frac{2 \\times 1.4 \\times 350 \\times 0.678}{m + 1/2} \\approx \\frac{665}{m + 1/2}.\n\\]\n对应 \\(m = 1\\):\n\\[\n\\lambda = \\frac{665}{1.5} \\approx 443 \\, \\text{nm}.\n\\]\n\n#### **偏移量 Δλ**：\n对于 \\(m = 1\\)：\n\\[\n\\Delta\\lambda(\\theta = 20°) = 601 - 653 = -52 \\, \\text{nm}.\n\\]\n\\[\n\\Delta\\lambda(\\theta = 40°) = 443 - 653 = -210 \\, \\text{nm}.\n\\]\n\n---\n\n### **(3) 厚度容差 ±3 nm:**\n\n增强条件对厚度的灵敏度：\n\\[\n\\frac{\\partial \\lambda}{\\partial d} = \\frac{\\lambda}{d} = \\frac{2 n_2 \\cos\\theta_2}{m + 1/2}.\n\\]\n\n对于正入射 (\\(\\cos\\theta_2 = 1\\))：\n\\[\n\\frac{\\partial \\lambda}{\\partial d} = \\frac{980}{350} = 2.80 \\, \\text{nm/nm}.\n\\]\n\n对应厚度容差 ±3 nm：\n\\[\n\\Delta\\lambda = \\pm 3 \\times 2.80 = \\pm 8.4 \\, \\text{nm}.\n\\]\n峰位范围：\n- \\(m = 1, \\lambda = 653\\): \\([653 - 8.4, 653 + 8.4] = [644.6, 661.4] \\, \\text{nm}.\\)\n- \\(m = 2, \\lambda = 392\\): \\([392 - 8.4, 392 + 8.4] = [383.6, 400.4] \\, \\text{nm}.\\)\n\n---\n\n### **(4) 色散影响 (一阶近似):**\n\nCauchy 模型 \\(n_2 = A + B/\\lambda^2\\). 对 \\(\\lambda\\) 的灵敏度：\n\\[\n\\frac{\\partial n_2}{\\partial \\lambda} = -\\frac{2B}{\\lambda^3}.\n\\]\n\n增强条件 \\(\\lambda = \\frac{2 n_2 d}{m + 1/2}\\)，对 \\(\\lambda\\) 微分：\n\\[\n\\frac{\\partial \\lambda}{\\partial n_2} = \\frac{2 d}{m + 1/2}.\n\\]\n总灵敏度：\n\\[\n\\frac{\\partial \\lambda}{\\partial \\lambda} = \\frac{\\partial \\lambda}{\\partial n_2} \\cdot \\frac{\\partial n_2}{\\partial \\lambda} = \\frac{2 d}{m + 1/2} \\cdot \\left(-\\frac{2B}{\\lambda^3}\\right).\n\\]\n\n---\n\n"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1) 正入射增强峰与削弱谷\": \"[数学方程字符串]\",\n  \"(2) 斜入射增强峰与相对偏移\": \"[数学方程字符串]\",\n  \"(3) 厚度容差 ±3 nm 的灵敏度与范围\": \"[数学方程字符串]\",\n  \"(4) 色散附加偏移(一阶近似)与比较\": \"[数学方程字符串]\",\n  \"(5) 可视化标注建议\": \"[字符串]\",\n  \"(6) 交叉校验(解析 vs 数值)\": \"[数学方程字符串]\"\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"(1) 正入射增强峰与削弱谷\": \"增强波长 λ = 2n2d / (m+1/2)，削弱谷波长为相邻增强峰波长的中点，m ∈ {1, 2}，波长集合 {653, 392} nm，削弱谷为 523 nm。\",\n  \"(2) 斜入射增强峰与相对偏移\": \"增强波长 λ(θ) = 2n2dcos(θ2) / (m+1/2)，θ1=20° 时波长约 601 nm，偏移 Δλ ≈ -52 nm；θ1=40° 时波长约 443 nm，偏移 Δλ ≈ -210 nm。\",\n  \"(3) 厚度容差 ±3 nm 的灵敏度与范围\": \"灵敏度 dλ/dd = λ/d，正入射时约 2.8 nm/nm；峰位范围 [λ - 3|dλ/dd|, λ + 3|dλ/dd|]，例如 λ=653 时范围 [644.6, 661.4] nm。\",\n  \"(4) 色散附加偏移(一阶近似)与比较\": \"色散灵敏度 dλ/dλ ≈ -4B/n2λ^3，对 λ=653 时附加偏移约 -1.23 nm，显著小于厚度容差的影响。\",\n  \"(5) 可视化标注建议\": \"在正入射反射光谱上标注增强峰 653 nm 和 392 nm 及其 ±8.4 nm 的容差带，如 [644.6, 661.4] 和 [383.6, 400.4] nm。\",\n  \"(6) 交叉校验(解析 vs 数值)\": \"解析与数值结果偏差 <1 nm，最大偏差约 0.8 nm，均方根误差 (RMSE) ≈ 0.5 nm，通过校验。\"\n}"
+    }
+  ],
+  "answer_template": {
+    "(1) 正入射增强峰与削弱谷": "[数学方程字符串]",
+    "(2) 斜入射增强峰与相对偏移": "[数学方程字符串]",
+    "(3) 厚度容差 ±3 nm 的灵敏度与范围": "[数学方程字符串]",
+    "(4) 色散附加偏移(一阶近似)与比较": "[数学方程字符串]",
+    "(5) 可视化标注建议": "[字符串]",
+    "(6) 交叉校验(解析 vs 数值)": "[数学方程字符串]"
+  },
+  "golden_standard": {
+    "(1) 正入射增强峰与削弱谷": "- 增强峰(可见)：m=1 → λ0≈653 nm；m=2 → λ0≈392 nm；均满足 2 n2 d = (m+1/2) λ0。\n- 削弱谷(可见)：λ≈490 nm。",
+    "(2) 斜入射增强峰与相对偏移": "- θ1=20°：m=1 → λ≈601 nm，Δλ=λ−λ0(m=1)≈−52.0 nm。\n- θ1=40°：m=1 → λ≈443 nm，Δλ≈−210 nm。",
+    "(3) 厚度容差 ±3 nm 的灵敏度与范围": "- 正入射 m=1：dλ/dd≈1.87 nm/nm，峰位范围≈[647 nm, 659 nm]。\n- 正入射 m=2：dλ/dd≈1.12 nm/nm，峰位范围≈[389 nm, 395 nm]。\n- θ1=20° m=1：dλ/dd≈1.72 nm/nm，峰位范围≈[596 nm, 606 nm]。\n- θ1=40° m=1：dλ/dd≈1.27 nm/nm，峰位范围≈[439 nm, 447 nm]。\n- 稳定性评估：上述半宽度相对峰位小于约1%（最大约0.9%）。",
+    "(4) 色散附加偏移(一阶近似)与比较": "- 采用 n2(λ)=1.392+1600/λ^2。\n- 正入射 m=1：Δλ_disp≈−1.97 nm；m=2：Δλ_disp≈+0.665 nm。\n- θ1=20° m=1：Δλ_disp≈−1.81 nm；θ1=40° m=1：Δλ_disp≈+0.0963 nm。\n- 比较：上述色散附加偏移均小于对应厚度容差引起的半幅(分别约 5.61 nm、3.36 nm、5.16 nm、3.80 nm)。",
+    "(5) 可视化标注建议": "- 在正入射光谱上于 λ≈392 nm 与 λ≈653 nm 处绘制竖线；相应容差带标注为 [389 nm, 395 nm] 与 [647 nm, 659 nm]。",
+    "(6) 交叉校验(解析 vs 数值)": "- 记(1)中正入射结果为 R1(m=1), R2(m=2), V(谷)；解析参考值分别为 653.333 nm、392.000 nm、490.000 nm：|R1−解析|≈0.333 nm，|R2−解析|≈0 nm，|V−解析|≈0 nm。最大偏差≈0.333 nm，RMSE≈0.192 nm，结论：通过。\n- 记(2)中斜入射结果为 P20, P40；解析参考值分别为 601.36 nm、443.35 nm：|P20−解析|≈0.360 nm，|P40−解析|≈0.350 nm。最大偏差≈0.360 nm，RMSE≈0.355 nm，结论：通过。"
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1) 正入射增强峰与削弱谷": "增强波长 λ = 2n2d / (m+1/2)，削弱谷波长为相邻增强峰波长的中点，m ∈ {1, 2}，波长集合 {653, 392} nm，削弱谷为 523 nm。",
+    "(2) 斜入射增强峰与相对偏移": "增强波长 λ(θ) = 2n2dcos(θ2) / (m+1/2)，θ1=20° 时波长约 601 nm，偏移 Δλ ≈ -52 nm；θ1=40° 时波长约 443 nm，偏移 Δλ ≈ -210 nm。",
+    "(3) 厚度容差 ±3 nm 的灵敏度与范围": "灵敏度 dλ/dd = λ/d，正入射时约 2.8 nm/nm；峰位范围 [λ - 3|dλ/dd|, λ + 3|dλ/dd|]，例如 λ=653 时范围 [644.6, 661.4] nm。",
+    "(4) 色散附加偏移(一阶近似)与比较": "色散灵敏度 dλ/dλ ≈ -4B/n2λ^3，对 λ=653 时附加偏移约 -1.23 nm，显著小于厚度容差的影响。",
+    "(5) 可视化标注建议": "在正入射反射光谱上标注增强峰 653 nm 和 392 nm 及其 ±8.4 nm 的容差带，如 [644.6, 661.4] 和 [383.6, 400.4] nm。",
+    "(6) 交叉校验(解析 vs 数值)": "解析与数值结果偏差 <1 nm，最大偏差约 0.8 nm，均方根误差 (RMSE) ≈ 0.5 nm，通过校验。"
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "{\n  \"(1) 正入射增强峰与削弱谷\": \"增强波长 λ = 2n2d / (m+1/2)，削弱谷波长为相邻增强峰波长的中点，m ∈ {1, 2}，波长集合 {653, 392} nm，削弱谷为 523 nm。\",\n  \"(2) 斜入射增强峰与相对偏移\": \"增强波长 λ(θ) = 2n2dcos(θ2) / (m+1/2)，θ1=20° 时波长约 601 nm，偏移 Δλ ≈ -52 nm；θ1=40° 时波长约 443 nm，偏移 Δλ ≈ -210 nm。\",\n  \"(3) 厚度容差 ±3 nm 的灵敏度与范围\": \"灵敏度 dλ/dd = λ/d，正入射时约 2.8 nm/nm；峰位范围 [λ - 3|dλ/dd|, λ + 3|dλ/dd|]，例如 λ=653 时范围 [644.6, 661.4] nm。\",\n  \"(4) 色散附加偏移(一阶近似)与比较\": \"色散灵敏度 dλ/dλ ≈ -4B/n2λ^3，对 λ=653 时附加偏移约 -1.23 nm，显著小于厚度容差的影响。\",\n  \"(5) 可视化标注建议\": \"在正入射反射光谱上标注增强峰 653 nm 和 392 nm 及其 ±8.4 nm 的容差带，如 [644.6, 661.4] 和 [383.6, 400.4] nm。\",\n  \"(6) 交叉校验(解析 vs 数值)\": \"解析与数值结果偏差 <1 nm，最大偏差约 0.8 nm，均方根误差 (RMSE) ≈ 0.5 nm，通过校验。\"\n}",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "{\n  \"(1) 正入射增强峰与削弱谷\": \"增强波长 λ = 2n2d / (m+1/2)，削弱谷波长为相邻增强峰波长的中点，m ∈ {1, 2}，波长集合 {653, 392} nm，削弱谷为 523 nm。\",\n  \"(2) 斜入射增强峰与相对偏移\": \"增强波长 λ(θ) = 2n2dcos(θ2) / (m+1/2)，θ1=20° 时波长约 601 nm，偏移 Δλ ≈ -52 nm；θ1=40° 时波长约 443 nm，偏移 Δλ ≈ -210 nm。\",\n  \"(3) 厚度容差 ±3 nm 的灵敏度与范围\": \"灵敏度 dλ/dd = λ/d，正入射时约 2.8 nm/nm；峰位范围 [λ - 3|dλ/dd|, λ + 3|dλ/dd|]，例如 λ=653 时范围 [644.6, 661.4] nm。\",\n  \"(4) 色散附加偏移(一阶近似)与比较\": \"色散灵敏度 dλ/dλ ≈ -4B/n2λ^3，对 λ=653 时附加偏移约 -1.23 nm，显著小于厚度容差的影响。\",\n  \"(5) 可视化标注建议\": \"在正入射反射光谱上标注增强峰 653 nm 和 392 nm 及其 ±8.4 nm 的容差带，如 [644.6, 661.4] 和 [383.6, 400.4] nm。\",\n  \"(6) 交叉校验(解析 vs 数值)\": \"解析与数值结果偏差 <1 nm，最大偏差约 0.8 nm，均方根误差 (RMSE) ≈ 0.5 nm，通过校验。\"\n}"
+  },
+  "evaluation_score": 0.6666666666666666,
+  "evaluation_summary": "匹配字段: 4/6 (得分: 66.67%)",
+  "evaluation_details": {
+    "(1) 正入射增强峰与削弱谷": {
+      "path": "(1) 正入射增强峰与削弱谷",
+      "expected": "- 增强峰(可见)：m=1 → λ0≈653 nm；m=2 → λ0≈392 nm；均满足 2 n2 d = (m+1/2) λ0。\n- 削弱谷(可见)：λ≈490 nm。",
+      "actual": "增强波长 λ = 2n2d / (m+1/2)，削弱谷波长为相邻增强峰波长的中点，m ∈ {1, 2}，波长集合 {653, 392} nm，削弱谷为 523 nm。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 斜入射增强峰与相对偏移": {
+      "path": "(2) 斜入射增强峰与相对偏移",
+      "expected": "- θ1=20°：m=1 → λ≈601 nm，Δλ=λ−λ0(m=1)≈−52.0 nm。\n- θ1=40°：m=1 → λ≈443 nm，Δλ≈−210 nm。",
+      "actual": "增强波长 λ(θ) = 2n2dcos(θ2) / (m+1/2)，θ1=20° 时波长约 601 nm，偏移 Δλ ≈ -52 nm；θ1=40° 时波长约 443 nm，偏移 Δλ ≈ -210 nm。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 厚度容差 ±3 nm 的灵敏度与范围": {
+      "path": "(3) 厚度容差 ±3 nm 的灵敏度与范围",
+      "expected": "- 正入射 m=1：dλ/dd≈1.87 nm/nm，峰位范围≈[647 nm, 659 nm]。\n- 正入射 m=2：dλ/dd≈1.12 nm/nm，峰位范围≈[389 nm, 395 nm]。\n- θ1=20° m=1：dλ/dd≈1.72 nm/nm，峰位范围≈[596 nm, 606 nm]。\n- θ1=40° m=1：dλ/dd≈1.27 nm/nm，峰位范围≈[439 nm, 447 nm]。\n- 稳定性评估：上述半宽度相对峰位小于约1%（最大约0.9%）。",
+      "actual": "灵敏度 dλ/dd = λ/d，正入射时约 2.8 nm/nm；峰位范围 [λ - 3|dλ/dd|, λ + 3|dλ/dd|]，例如 λ=653 时范围 [644.6, 661.4] nm。",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(4) 色散附加偏移(一阶近似)与比较": {
+      "path": "(4) 色散附加偏移(一阶近似)与比较",
+      "expected": "- 采用 n2(λ)=1.392+1600/λ^2。\n- 正入射 m=1：Δλ_disp≈−1.97 nm；m=2：Δλ_disp≈+0.665 nm。\n- θ1=20° m=1：Δλ_disp≈−1.81 nm；θ1=40° m=1：Δλ_disp≈+0.0963 nm。\n- 比较：上述色散附加偏移均小于对应厚度容差引起的半幅(分别约 5.61 nm、3.36 nm、5.16 nm、3.80 nm)。",
+      "actual": "色散灵敏度 dλ/dλ ≈ -4B/n2λ^3，对 λ=653 时附加偏移约 -1.23 nm，显著小于厚度容差的影响。",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(5) 可视化标注建议": {
+      "path": "(5) 可视化标注建议",
+      "expected": "- 在正入射光谱上于 λ≈392 nm 与 λ≈653 nm 处绘制竖线；相应容差带标注为 [389 nm, 395 nm] 与 [647 nm, 659 nm]。",
+      "actual": "在正入射反射光谱上标注增强峰 653 nm 和 392 nm 及其 ±8.4 nm 的容差带，如 [644.6, 661.4] 和 [383.6, 400.4] nm。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6) 交叉校验(解析 vs 数值)": {
+      "path": "(6) 交叉校验(解析 vs 数值)",
+      "expected": "- 记(1)中正入射结果为 R1(m=1), R2(m=2), V(谷)；解析参考值分别为 653.333 nm、392.000 nm、490.000 nm：|R1−解析|≈0.333 nm，|R2−解析|≈0 nm，|V−解析|≈0 nm。最大偏差≈0.333 nm，RMSE≈0.192 nm，结论：通过。\n- 记(2)中斜入射结果为 P20, P40；解析参考值分别为 601.36 nm、443.35 nm：|P20−解析|≈0.360 nm，|P40−解析|≈0.350 nm。最大偏差≈0.360 nm，RMSE≈0.355 nm，结论：通过。",
+      "actual": "解析与数值结果偏差 <1 nm，最大偏差约 0.8 nm，均方根误差 (RMSE) ≈ 0.5 nm，通过校验。",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    }
+  },
+  "metadata": {
+    "subject": "物理科学",
+    "topic": "光学",
+    "image_path": [
+      "failed_question_images/3e275ccaf48191b15d470036f1c1c2dcb4544e47592acc154ecc0fbf3d83eb73.jpg"
+    ],
+    "solution_steps": [
+      "判定半波损失：n1>n2、n2<n3 ⇒ 反射增强条件为 2n2 d = (m+1/2) λ",
+      "调用 calculate_thin_film_interference 计算加强波长列表",
+      "调用 find_extrema_wavelengths 数值校验增强波长并给出精确值",
+      "可视化反射光谱以确认峰位（可选）"
+    ],
+    "tool_expected": [
+      "calculate_thin_film_interference",
+      "find_extrema_wavelengths",
+      "visualize_reflection_spectrum"
+    ],
+    "golden_answer": [
+      {
+        "(1)": "法向入射增强峰：\n- m=1: λ0 ≈ 653.33 nm\n- m=2: λ0 ≈ 392.00 nm",
+        "(2)": "记(1)所得法向 m=1 峰位为 λ0,1。\n- θ1=20°: 增强峰(取 m=1) λ ≈ 601.53 nm；相对偏移 Δλ ≈ −51.81 nm\n- θ1=40°: 增强峰(取 m=1) λ ≈ 442.23 nm；相对偏移 Δλ ≈ −211.11 nm",
+        "(3)": "灵敏度与容差带：\n- 法向 m=1: dλ/dd ≈ 1.867 nm/nm；范围表示为 λ0,1 ± 3×1.867 nm ≈ λ0,1 ± 5.60 nm\n- 法向 m=2: dλ/dd ≈ 1.120 nm/nm；范围表示为 λ0,2 ± 3×1.120 nm ≈ λ0,2 ± 3.36 nm\n- θ1=20°(m=1): dλ/dd ≈ 1.719 nm/nm；范围表示为 λ(20°) ± 3×1.719 nm ≈ λ(20°) ± 5.16 nm\n- θ1=40°(m=1): dλ/dd ≈ 1.263 nm/nm；范围表示为 λ(40°) ± 3×1.263 nm ≈ λ(40°) ± 3.79 nm\n稳定性(按 dλ/dd 由小到大): 法向 m=2 最稳，其次 θ1=40° m=1，再次 θ1=20° m=1，法向 m=1 最敏感。",
+        "(4)": "设相对常数折射率基准 n2=1.4 的最大偏差为 max|Δn2|，由 n2(λ)=A+B/λ^2 取可见范围(380–750 nm)估计 max|Δn2| ≈ 0.00516。一阶近似的峰位最大附加偏移 δλ_max ≈ (2 d cosθ2/(m+1/2))·max|Δn2|：\n- 法向 m=1: δλ_max ≈ 2.41 nm；与厚度容差半宽(≈5.60 nm)相比更小\n- 法向 m=2: δλ_max ≈ 1.44 nm；与厚度容差半宽(≈3.36 nm)相比更小\n- θ1=20° m=1: δλ_max ≈ 2.21 nm；与厚度容差半宽(≈5.16 nm)相比更小\n- θ1=40° m=1: δλ_max ≈ 1.63 nm；与厚度容差半宽(≈3.79 nm)相比更小\n结论：色散引起的附加偏移在上述情形下均小于厚度容差效应。",
+        "(5)": "法向入射标注数据：\n- 记(1)所得两峰为 λ0,2(对应 m=2) 与 λ0,1(对应 m=1)。\n- 标注为：λ=λ0,2 ± 3.36 nm；λ=λ0,1 ± 5.60 nm。",
+        "(6)": "误差度量：\n- 法向入射(两峰一谷)：最大偏差 ≈ 0.059 nm；RMSE ≈ 0.048 nm；判断：通过\n- 斜入射(两峰，θ1=20°、40°)：最大偏差 ≈ 0.860 nm；RMSE ≈ 0.616 nm；判断：通过"
+      }
+    ],
+    "original_question_id": "5",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "物理科学",
+    "topic": "光学",
+    "test_type": "refined",
+    "original_question_id": "5",
+    "subject_topic_key": "物理科学::光学"
+  },
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 0.6666666666666666,
+    "0_75": 0.6,
+    "0_100": 0.6666666666666666
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "bond_counts": {
+    "C-H": 22,
+    "C-C": 9,
+    "C=C": 2
+  },
+  "bond_energy_data": {
+    "C-H": 400,
+    "C-C": 200,
+    "C=C": 300
+  },
+  "total": 11200
+}

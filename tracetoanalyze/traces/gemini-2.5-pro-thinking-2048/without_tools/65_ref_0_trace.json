@@ -1,0 +1,1018 @@
+{
+  "id": "65_ref_0",
+  "query": "一正方形底面容器，边长 a=200 mm，底面积 A=0.04 m^2；空容器质量 m_c=4 kg；装水初始静止高度 h0=0.15 m，水密度 ρ=1000 kg/m^3。容器置于水平粗糙平面上（动摩擦系数 μ=0.30），经轻绳跨过理想滑轮与悬挂重物 m2=25 kg 相连。系统自静止释放后做匀加速运动。取液面几何关系：在加速参考系中有 tanθ=a_sys/g；沿加速方向两端液面高度差 Δh=(a/2)·tanθ；若容器高度不足则高端溢出。摩擦取动摩擦，法向力为容器与水总重，水的质量参与整体加速与摩擦。要求容器高度 H 在全过程均不溢出，求最小 H_min。\n任务：\n(1) 分步计算：依次求 m_w，系统加速度 a_step（取 g=9.81 m/s^2），θ_step，Δh_step，H_min_step=h0+Δh_step。记(1)结果为 {a_step, θ_step, Δh_step, H_min_step}。\n(2) 合并计算：直接求 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}（取 g=9.80 m/s^2）。记(2)结果为 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}。\n(3) 汇总与一致性：给出 |H_min_step−H_min_pipe|，并与阈值 0.5 mm 比较，给出“通过/未通过”。\n(4) 受力与张力：给出容器-水整体动摩擦力 f_k（取 g=9.81 m/s^2），以及绳张力 T（由 m2 的受力关系得到），并判断 T>0、T<m2g、a_step>0。\n(5) 液面与体积：在 H_min_step 下，给出 h_high=H_min_step、h_low=h0−Δh_step，验证 (h_high+h_low)/2=h0，并给出体积 V=A·h0。\n(6) 敏感性：在 μ∈{0.25,0.30,0.35} 下，采用与(2)一致的取值方式计算对应的 H_min，列出三组 (μ, H_min)，指出最不利 μ（使 H_min 最大），并给出 H_safe=H_min(最不利 μ)+5 mm。\n说明：各小问均给出数值结果，保留三位有效数字，单位用 SI；角度用度表示。",
+  "query_data": {
+    "id": "65_ref_0",
+    "original_id": 65,
+    "refined_index": 0,
+    "question": "一正方形底面容器，边长 a=200 mm，底面积 A=0.04 m^2；空容器质量 m_c=4 kg；装水初始静止高度 h0=0.15 m，水密度 ρ=1000 kg/m^3。容器置于水平粗糙平面上（动摩擦系数 μ=0.30），经轻绳跨过理想滑轮与悬挂重物 m2=25 kg 相连。系统自静止释放后做匀加速运动。取液面几何关系：在加速参考系中有 tanθ=a_sys/g；沿加速方向两端液面高度差 Δh=(a/2)·tanθ；若容器高度不足则高端溢出。摩擦取动摩擦，法向力为容器与水总重，水的质量参与整体加速与摩擦。要求容器高度 H 在全过程均不溢出，求最小 H_min。\n任务：\n(1) 分步计算：依次求 m_w，系统加速度 a_step（取 g=9.81 m/s^2），θ_step，Δh_step，H_min_step=h0+Δh_step。记(1)结果为 {a_step, θ_step, Δh_step, H_min_step}。\n(2) 合并计算：直接求 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}（取 g=9.80 m/s^2）。记(2)结果为 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}。\n(3) 汇总与一致性：给出 |H_min_step−H_min_pipe|，并与阈值 0.5 mm 比较，给出“通过/未通过”。\n(4) 受力与张力：给出容器-水整体动摩擦力 f_k（取 g=9.81 m/s^2），以及绳张力 T（由 m2 的受力关系得到），并判断 T>0、T<m2g、a_step>0。\n(5) 液面与体积：在 H_min_step 下，给出 h_high=H_min_step、h_low=h0−Δh_step，验证 (h_high+h_low)/2=h0，并给出体积 V=A·h0。\n(6) 敏感性：在 μ∈{0.25,0.30,0.35} 下，采用与(2)一致的取值方式计算对应的 H_min，列出三组 (μ, H_min)，指出最不利 μ（使 H_min 最大），并给出 H_safe=H_min(最不利 μ)+5 mm。\n说明：各小问均给出数值结果，保留三位有效数字，单位用 SI；角度用度表示。",
+    "answer": "{'(1) 分步计算': {'m_w': '6.00 kg', 'a_step': '6.17 m/s^2', 'theta_step': '32.2 deg', 'Delta_h_step': '0.0629 m', 'H_min_step': '0.213 m'}, '(2) 合并计算': {'a_pipe': '6.16 m/s^2', 'theta_pipe': '32.2 deg', 'Delta_h_pipe': '0.0629 m', 'H_min_pipe': '0.213 m'}, '(3) 汇总与一致性': {'abs_diff_H': '0.000 m', 'threshold': '0.0005 m', 'pass_fail': '通过'}, '(4) 受力与张力': {'f_k': '29.4 N', 'T': '91.1 N', 'T>0': '是', 'T<m2g': '是', 'a_step>0': '是'}, '(5) 液面与体积': {'h_high': '0.213 m', 'h_low': '0.0871 m', 'average_height': '0.150 m', 'average_equals_h0': '是', 'V': '0.00600 m^3'}, '(6) 敏感性(与(2)一致方式)': {'mu_vs_H_min': [{'mu': 0.25, 'H_min': '0.214 m'}, {'mu': 0.3, 'H_min': '0.213 m'}, {'mu': 0.35, 'H_min': '0.211 m'}], 'worst_case_mu': 0.25, 'H_safe': '0.219 m'}}",
+    "metadata": {
+      "subject": "Physics",
+      "topic": "fluid_mechanics",
+      "image_path": [
+        "/r_bench/images/00003.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "calculate_water_mass",
+        "calculate_system_acceleration",
+        "calculate_tilt_angle",
+        "calculate_height_difference",
+        "calculate_minimum_height",
+        "visualize_liquid_surface",
+        "create_force_diagram",
+        "analyze_parameter_sensitivity",
+        "plot_sensitivity_analysis",
+        "solve_minimum_container_height"
+      ],
+      "golden_answer": [
+        {
+          "(1) 分步计算": {
+            "m_w": "6.00 kg",
+            "a_step": "6.17 m/s^2",
+            "theta_step": "32.2 deg",
+            "Delta_h_step": "0.0629 m",
+            "H_min_step": "0.213 m"
+          },
+          "(2) 合并计算": {
+            "a_pipe": "6.16 m/s^2",
+            "theta_pipe": "32.2 deg",
+            "Delta_h_pipe": "0.0629 m",
+            "H_min_pipe": "0.213 m"
+          },
+          "(3) 汇总与一致性": {
+            "abs_diff_H": "0.000 m",
+            "threshold": "0.0005 m",
+            "pass_fail": "通过"
+          },
+          "(4) 受力与张力": {
+            "f_k": "29.4 N",
+            "T": "91.1 N",
+            "T>0": "是",
+            "T<m2g": "是",
+            "a_step>0": "是"
+          },
+          "(5) 液面与体积": {
+            "h_high": "0.213 m",
+            "h_low": "0.0871 m",
+            "average_height": "0.150 m",
+            "average_equals_h0": "是",
+            "V": "0.00600 m^3"
+          },
+          "(6) 敏感性(与(2)一致方式)": {
+            "mu_vs_H_min": [
+              {
+                "mu": 0.25,
+                "H_min": "0.214 m"
+              },
+              {
+                "mu": 0.3,
+                "H_min": "0.213 m"
+              },
+              {
+                "mu": 0.35,
+                "H_min": "0.211 m"
+              }
+            ],
+            "worst_case_mu": 0.25,
+            "H_safe": "0.219 m"
+          }
+        }
+      ],
+      "original_question_id": "65",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_system_acceleration",
+          "description": "计算滑轮系统的加速度",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "m1": {
+                "type": "number",
+                "description": "容器质量 (kg)"
+              },
+              "m2": {
+                "type": "number",
+                "description": "重物质量 (kg)"
+              },
+              "mu": {
+                "type": "number",
+                "description": "摩擦系数"
+              },
+              "g": {
+                "type": "number",
+                "description": "重力加速度 (m/s^2)"
+              }
+            },
+            "required": [
+              "m1",
+              "m2",
+              "mu"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_water_mass",
+          "description": "计算容器中水的质量",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "base_area": {
+                "type": "number",
+                "description": "容器底面积 (m^2)"
+              },
+              "height": {
+                "type": "number",
+                "description": "水位高度 (m)"
+              },
+              "density": {
+                "type": "number",
+                "description": "水的密度 (kg/m^3), 默认1000"
+              }
+            },
+            "required": [
+              "base_area",
+              "height"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_tilt_angle",
+          "description": "计算液体表面相对于水平面的倾斜角度",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "acceleration": {
+                "type": "number",
+                "description": "容器加速度 (m/s^2)"
+              },
+              "g": {
+                "type": "number",
+                "description": "重力加速度 (m/s^2)"
+              }
+            },
+            "required": [
+              "acceleration"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_height_difference",
+          "description": "计算液面两端的高度差",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "base_width": {
+                "type": "number",
+                "description": "容器宽度 (m)"
+              },
+              "tilt_angle": {
+                "type": "number",
+                "description": "倾斜角度 (弧度)"
+              }
+            },
+            "required": [
+              "base_width",
+              "tilt_angle"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_minimum_height",
+          "description": "计算防止溢出的最小容器高度",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "initial_height": {
+                "type": "number",
+                "description": "初始水位高度 (m)"
+              },
+              "height_difference": {
+                "type": "number",
+                "description": "液面高度差 (m)"
+              }
+            },
+            "required": [
+              "initial_height",
+              "height_difference"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "solve_minimum_container_height",
+          "description": "求解防止水溢出的最小容器高度（完整流程）",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "container_mass": {
+                "type": "number",
+                "description": "容器质量 (kg)"
+              },
+              "hanging_mass": {
+                "type": "number",
+                "description": "悬挂重物质量 (kg)"
+              },
+              "friction_coef": {
+                "type": "number",
+                "description": "摩擦系数"
+              },
+              "base_width": {
+                "type": "number",
+                "description": "容器底边长 (m)"
+              },
+              "initial_water_height": {
+                "type": "number",
+                "description": "初始水位高度 (m)"
+              },
+              "water_density": {
+                "type": "number",
+                "description": "水的密度 (kg/m^3)"
+              }
+            },
+            "required": [
+              "container_mass",
+              "hanging_mass",
+              "friction_coef",
+              "base_width",
+              "initial_water_height"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_parameter_sensitivity",
+          "description": "分析参数敏感性",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "base_params": {
+                "type": "object",
+                "description": "基准参数字典，包含：container_mass, hanging_mass, friction_coef, base_width, initial_water_height"
+              },
+              "vary_param": {
+                "type": "string",
+                "description": "要变化的参数名称"
+              },
+              "param_range": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "参数变化范围"
+              }
+            },
+            "required": [
+              "base_params",
+              "vary_param",
+              "param_range"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_liquid_surface",
+          "description": "可视化液体表面倾斜情况",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "base_width": {
+                "type": "number",
+                "description": "容器宽度 (m)"
+              },
+              "initial_height": {
+                "type": "number",
+                "description": "初始水位 (m)"
+              },
+              "tilt_angle": {
+                "type": "number",
+                "description": "倾斜角度 (弧度)"
+              },
+              "min_height": {
+                "type": "number",
+                "description": "最小容器高度 (m)"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存路径"
+              }
+            },
+            "required": [
+              "base_width",
+              "initial_height",
+              "tilt_angle",
+              "min_height"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_sensitivity_analysis",
+          "description": "绘制参数敏感性分析图",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sensitivity_data": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "敏感性数据，格式：[{'param_value': x, 'min_height': y}, ...]"
+              },
+              "param_name": {
+                "type": "string",
+                "description": "参数名称"
+              },
+              "param_unit": {
+                "type": "string",
+                "description": "参数单位"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存路径"
+              }
+            },
+            "required": [
+              "sensitivity_data",
+              "param_name",
+              "param_unit"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "create_force_diagram",
+          "description": "绘制系统受力分析图",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "container_mass": {
+                "type": "number",
+                "description": "容器质量 (kg)"
+              },
+              "water_mass": {
+                "type": "number",
+                "description": "水的质量 (kg)"
+              },
+              "hanging_mass": {
+                "type": "number",
+                "description": "悬挂物质量 (kg)"
+              },
+              "friction_force": {
+                "type": "number",
+                "description": "摩擦力 (N)"
+              },
+              "tension": {
+                "type": "number",
+                "description": "绳子张力 (N)"
+              },
+              "acceleration": {
+                "type": "number",
+                "description": "加速度 (m/s^2)"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "保存路径"
+              }
+            },
+            "required": [
+              "container_mass",
+              "water_mass",
+              "hanging_mass",
+              "friction_force",
+              "tension",
+              "acceleration"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/fluid_mechanics_toolkit_claude_4.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "一正方形底面容器，边长 a=200 mm，底面积 A=0.04 m^2；空容器质量 m_c=4 kg；装水初始静止高度 h0=0.15 m，水密度 ρ=1000 kg/m^3。容器置于水平粗糙平面上（动摩擦系数 μ=0.30），经轻绳跨过理想滑轮与悬挂重物 m2=25 kg 相连。系统自静止释放后做匀加速运动。取液面几何关系：在加速参考系中有 tanθ=a_sys/g；沿加速方向两端液面高度差 Δh=(a/2)·tanθ；若容器高度不足则高端溢出。摩擦取动摩擦，法向力为容器与水总重，水的质量参与整体加速与摩擦。要求容器高度 H 在全过程均不溢出，求最小 H_min。\n任务：\n(1) 分步计算：依次求 m_w，系统加速度 a_step（取 g=9.81 m/s^2），θ_step，Δh_step，H_min_step=h0+Δh_step。记(1)结果为 {a_step, θ_step, Δh_step, H_min_step}。\n(2) 合并计算：直接求 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}（取 g=9.80 m/s^2）。记(2)结果为 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}。\n(3) 汇总与一致性：给出 |H_min_step−H_min_pipe|，并与阈值 0.5 mm 比较，给出“通过/未通过”。\n(4) 受力与张力：给出容器-水整体动摩擦力 f_k（取 g=9.81 m/s^2），以及绳张力 T（由 m2 的受力关系得到），并判断 T>0、T<m2g、a_step>0。\n(5) 液面与体积：在 H_min_step 下，给出 h_high=H_min_step、h_low=h0−Δh_step，验证 (h_high+h_low)/2=h0，并给出体积 V=A·h0。\n(6) 敏感性：在 μ∈{0.25,0.30,0.35} 下，采用与(2)一致的取值方式计算对应的 H_min，列出三组 (μ, H_min)，指出最不利 μ（使 H_min 最大），并给出 H_safe=H_min(最不利 μ)+5 mm。\n说明：各小问均给出数值结果，保留三位有效数字，单位用 SI；角度用度表示。",
+      "final_answer": {
+        "(1) 分步计算": {
+          "m_w": "6.00 kg",
+          "a_step": "6.17 m/s^2",
+          "theta_step": "32.2 deg",
+          "Delta_h_step": "0.0629 m",
+          "H_min_step": "0.213 m"
+        },
+        "(2) 合并计算": {
+          "a_pipe": "6.16 m/s^2",
+          "theta_pipe": "32.2 deg",
+          "Delta_h_pipe": "0.0629 m",
+          "H_min_pipe": "0.213 m"
+        },
+        "(3) 汇总与一致性": {
+          "abs_diff_H": "0.000 m",
+          "threshold": "0.0005 m",
+          "pass_fail": "通过"
+        },
+        "(4) 受力与张力": {
+          "f_k": "29.4 N",
+          "T": "91.1 N",
+          "T>0": "是",
+          "T<m2g": "是",
+          "a_step>0": "是"
+        },
+        "(5) 液面与体积": {
+          "h_high": "0.213 m",
+          "h_low": "0.0871 m",
+          "average_height": "0.150 m",
+          "average_equals_h0": "是",
+          "V": "0.00600 m^3"
+        },
+        "(6) 敏感性(与(2)一致方式)": {
+          "mu_vs_H_min": [
+            {
+              "mu": 0.25,
+              "H_min": "0.214 m"
+            },
+            {
+              "mu": 0.3,
+              "H_min": "0.213 m"
+            },
+            {
+              "mu": 0.35,
+              "H_min": "0.211 m"
+            }
+          ],
+          "worst_case_mu": 0.25,
+          "H_safe": "0.219 m"
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "Physics",
+      "topic": "fluid_mechanics",
+      "test_type": "refined",
+      "original_question_id": "65",
+      "subject_topic_key": "Physics::fluid_mechanics"
+    }
+  },
+  "model": "gemini-2.5-pro-thinking-2048",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "一正方形底面容器，边长 a=200 mm，底面积 A=0.04 m^2；空容器质量 m_c=4 kg；装水初始静止高度 h0=0.15 m，水密度 ρ=1000 kg/m^3。容器置于水平粗糙平面上（动摩擦系数 μ=0.30），经轻绳跨过理想滑轮与悬挂重物 m2=25 kg 相连。系统自静止释放后做匀加速运动。取液面几何关系：在加速参考系中有 tanθ=a_sys/g；沿加速方向两端液面高度差 Δh=(a/2)·tanθ；若容器高度不足则高端溢出。摩擦取动摩擦，法向力为容器与水总重，水的质量参与整体加速与摩擦。要求容器高度 H 在全过程均不溢出，求最小 H_min。\n任务：\n(1) 分步计算：依次求 m_w，系统加速度 a_step（取 g=9.81 m/s^2），θ_step，Δh_step，H_min_step=h0+Δh_step。记(1)结果为 {a_step, θ_step, Δh_step, H_min_step}。\n(2) 合并计算：直接求 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}（取 g=9.80 m/s^2）。记(2)结果为 {a_pipe, θ_pipe, Δh_pipe, H_min_pipe}。\n(3) 汇总与一致性：给出 |H_min_step−H_min_pipe|，并与阈值 0.5 mm 比较，给出“通过/未通过”。\n(4) 受力与张力：给出容器-水整体动摩擦力 f_k（取 g=9.81 m/s^2），以及绳张力 T（由 m2 的受力关系得到），并判断 T>0、T<m2g、a_step>0。\n(5) 液面与体积：在 H_min_step 下，给出 h_high=H_min_step、h_low=h0−Δh_step，验证 (h_high+h_low)/2=h0，并给出体积 V=A·h0。\n(6) 敏感性：在 μ∈{0.25,0.30,0.35} 下，采用与(2)一致的取值方式计算对应的 H_min，列出三组 (μ, H_min)，指出最不利 μ（使 H_min 最大），并给出 H_safe=H_min(最不利 μ)+5 mm。\n说明：各小问均给出数值结果，保留三位有效数字，单位用 SI；角度用度表示。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/png;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "好的，我们来分步解决这个问题。\n\n### (1) 分步计算 (g=9.81 m/s²)\n\n1.  **计算水的质量 (m_w)**\n    水的体积 `V = A * h0 = 0.04 m² * 0.15 m = 0.006 m³`。\n    水的质量 `m_w = ρ * V = 1000 kg/m³ * 0.006 m³ = 6.00 kg`。\n\n2.  **计算系统加速度 (a_step)**\n    系统总质量 `M_total = m_c + m_w + m2 = 4 kg + 6 kg + 25 kg = 35.0 kg`。\n    容器和水的总质量 `m1 = m_c + m_w = 10.0 kg`。\n    作用在 `m1` 上的动摩擦力 `f_k = μ * N = μ * m1 * g = 0.30 * 10.0 kg * 9.81 m/s² = 29.43 N`。\n    系统的合外力 `F_net = m2 * g - f_k = 25 kg * 9.81 m/s² - 29.43 N = 245.25 N - 29.43 N = 215.82 N`。\n    根据牛顿第二定律 `F_net = M_total * a_step`：\n    `a_step = F_net / M_total = 215.82 N / 35.0 kg ≈ 6.166 m/s²`。\n    取三位有效数字，`a_step = 6.17 m/s²`。\n\n3.  **计算液面倾斜角 (θ_step)**\n    `tan(θ_step) = a_step / g = 6.166 m/s² / 9.81 m/s² ≈ 0.62857`。\n    `θ_step = arctan(0.62857) ≈ 32.155°`。\n    取三位有效数字，`θ_step = 32.2°`。\n\n4.  **计算液面高度差 (Δh_step)**\n    `Δh_step = (a / 2) * tan(θ_step) = (0.200 m / 2) * 0.62857 ≈ 0.062857 m`。\n    取三位有效数字，`Δh_step = 0.0629 m`。\n\n5.  **计算最小容器高度 (H_min_step)**\n    为保证不溢出，容器高度至少要等于加速时液面的最高点。\n    `H_min_step = h0 + Δh_step = 0.15 m + 0.062857 m = 0.212857 m`。\n    取三位有效数字，`H_min_step = 0.213 m`。\n\n**结果汇总(1): {a_step=6.17 m/s², θ_step=32.2°, Δh_step=0.0629 m, H_min_step=0.213 m}**\n\n---\n\n### (2) 合并计算 (g=9.80 m/s²)\n\n将公式合并，直接求解 `H_min_pipe`。\n`m_w = ρ * A * h0`\n`a_pipe = (m2 * g - μ * (m_c + m_w) * g) / (m_c + m_w + m2)`\n`a_pipe = g * (m2 - μ * (m_c + ρ * A * h0)) / (m_c + ρ * A * h0 + m2)`\n`Δh_pipe = (a / 2) * tan(θ_pipe) = (a / 2) * (a_pipe / g)`\n`H_min_pipe = h0 + Δh_pipe = h0 + (a / 2) * (a_pipe / g)`\n\n代入数值 (g=9.80 m/s²):\n`m_w = 1000 * 0.04 * 0.15 = 6.00 kg`\n`a_pipe = 9.80 * (25 - 0.30 * (4 + 6)) / (4 + 6 + 25) = 9.80 * (25 - 3) / 35 = 9.80 * 22 / 35 ≈ 6.16 m/s²`\n`θ_pipe = arctan(a_pipe / g) = arctan(6.16 / 9.80) = arctan(22/35) ≈ 32.14°`\n`Δh_pipe = (0.200 / 2) * (a_pipe / g) = 0.1 * (6.16 / 9.80) = 0.1 * (22/35) ≈ 0.062857 m`\n`H_min_pipe = 0.15 + Δh_pipe = 0.15 + 0.062857 = 0.212857 m`\n\n取三位有效数字：\n`a_pipe = 6.16 m/s²`\n`θ_pipe = 32.1°`\n`Δh_pipe = 0.0629 m`\n`H_min_pipe = 0.213 m`\n\n**结果汇总(2): {a_pipe=6.16 m/s², θ_pipe=32.1°, Δh_pipe=0.0629 m, H_min_pipe=0.213 m}**\n\n---\n\n### (3) 汇总与一致性\n\n`H_min_step` 的未取整结果为 `0.212857 m`。\n`H_min_pipe` 的未取整结果为 `0.212857 m`。\n`|H_min_step - H_min_pipe| = |0.212857 - 0.212857| = 0 m = 0 mm`。\n阈值为 `0.5 mm`。\n因为 `0 mm < 0.5 mm`，所以一致性检验**通过**。\n\n---\n\n### (4) 受力与张力 (g=9.81 m/s²)\n\n*   **动摩擦力 (f_k)**\n    `f_k = μ * (m_c + m_w) * g = 0.30 * (4 kg + 6 kg) * 9.81 m/s² = 29.43 N`。\n    取三位有效数字，`f_k = 29.4 N`。\n\n*   **绳张力 (T)**\n    对悬挂物 `m2` 应用牛顿第二定律：`m2 * g - T = m2 * a_step`。\n    `T = m2 * (g - a_step) = 25 kg * (9.81 m/s² - 6.166 m/s²) = 25 * 3.644 = 91.1 N`。\n\n*   **判断**\n    1.  `T = 91.1 N > 0` (成立)\n    2.  `m2 * g = 25 kg * 9.81 m/s² = 245.25 N`。`T = 91.1 N < 245.25 N` (成立)\n    3.  `a_step = 6.17 m/s² > 0` (成立)\n    所有条件均满足，系统确实在向右加速运动。\n\n---\n\n### (5) 液面与体积\n\n使用 `H_min_step` 和 `Δh_step` 的未取整结果进行验证，以获得更高精度。\n`h0 = 0.15 m`, `Δh_step = 0.062857 m`。\n\n*   **高端与低端液面高度**\n    `h_high = H_min_step = h0 + Δh_step = 0.15 + 0.062857 = 0.212857 m`。\n    `h_low = h0 - Δh_step = 0.15 - 0.062857 = 0.087143 m`。\n    取三位有效数字：`h_high = 0.213 m`，`h_low = 0.0871 m`。\n\n*   **高度验证**\n    `(h_high + h_low) / 2 = (0.212857 + 0.087143) / 2 = 0.300000 / 2 = 0.150 m`。\n    这与初始高度 `h0 = 0.15 m` 相等，验证通过。\n\n*   **水的体积 (V)**\n    `V = A * h0 = 0.04 m² * 0.15 m = 0.00600 m³`。\n\n---\n\n### (6) 敏感性分析 (g=9.80 m/s²)\n\n采用与(2)一致的计算方式，`H_min = h0 + (a / 2) * (m2 - μ * m1) / (m1 + m2)`，其中 `m1 = m_c + m_w = 10 kg`。\n`H_min(μ) = 0.15 + (0.200 / 2) * (25 - μ * 10) / (10 + 25)`\n`H_min(μ) = 0.15 + 0.1 * (25 - 10μ) / 35`\n\n*   **μ = 0.25**\n    `H_min(0.25) = 0.15 + 0.1 * (25 - 10 * 0.25) / 35 = 0.15 + 0.1 * 22.5 / 35 ≈ 0.214 m`。\n\n*   **μ = 0.30**\n    `H_min(0.30) = 0.15 + 0.1 * (25 - 10 * 0.30) / 35 = 0.15 + 0.1 * 22 / 35 ≈ 0.213 m`。 (与(2)结果一致)\n\n*   **μ = 0.35**\n    `H_min(0.35) = 0.15 + 0.1 * (25 - 10 * 0.35) / 35 = 0.15 + 0.1 * 21.5 / 35 ≈ 0.211 m`。\n\n**三组结果：**\n*   (μ=0.25, H_min=0.214 m)\n*   (μ=0.30, H_min=0.213 m)\n*   (μ=0.35, H_min=0.211 m)\n\n**最不利 μ：**\n从公式 `H_min(μ) = 0.15 + C * (25 - 10μ)` (C为正常数) 可以看出，`H_min` 随 `μ` 的增大而减小。因此，在给定范围内，**μ=0.25** 是最不利的（导致所需容器高度 `H_min` 最大）。\n\n**安全高度 H_safe：**\n`H_safe = H_min(最不利μ) + 5 mm = 0.214 m + 0.005 m = 0.219 m`。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1) 分步计算\": {\n    \"m_w\": \"[字符串]\",\n    \"a_step\": \"[字符串]\",\n    \"theta_step\": \"[字符串]\",\n    \"Delta_h_step\": \"[字符串]\",\n    \"H_min_step\": \"[字符串]\"\n  },\n  \"(2) 合并计算\": {\n    \"a_pipe\": \"[字符串]\",\n    \"theta_pipe\": \"[字符串]\",\n    \"Delta_h_pipe\": \"[字符串]\",\n    \"H_min_pipe\": \"[字符串]\"\n  },\n  \"(3) 汇总与一致性\": {\n    \"abs_diff_H\": \"[字符串]\",\n    \"threshold\": \"[字符串]\",\n    \"pass_fail\": \"[字符串]\"\n  },\n  \"(4) 受力与张力\": {\n    \"f_k\": \"[字符串]\",\n    \"T\": \"[字符串]\",\n    \"T>0\": \"[字符串]\",\n    \"T<m2g\": \"[字符串]\",\n    \"a_step>0\": \"[字符串]\"\n  },\n  \"(5) 液面与体积\": {\n    \"h_high\": \"[字符串]\",\n    \"h_low\": \"[字符串]\",\n    \"average_height\": \"[字符串]\",\n    \"average_equals_h0\": \"[字符串]\",\n    \"V\": \"[字符串]\"\n  },\n  \"(6) 敏感性(与(2)一致方式)\": {\n    \"mu_vs_H_min\": [\n      {\n        \"mu\": \"[数值]\",\n        \"H_min\": \"[字符串]\"\n      }\n    ],\n    \"worst_case_mu\": \"[数值]\",\n    \"H_safe\": \"[字符串]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "```json\n{\n  \"(1) 分步计算\": {\n    \"m_w\": \"6.00 kg\",\n    \"a_step\": \"6.17 m/s^2\",\n    \"theta_step\": \"32.2 deg\",\n    \"Delta_h_step\": \"0.063 m\",\n    \"H_min_step\": \"0.213 m\"\n  },\n  \"(2) 合并计算\": {\n    \"a_pipe\": \"6.16 m/s^2\",\n    \"theta_pipe\": \"32.1 deg\",\n    \"Delta_h_pipe\": \"0.063 m\",\n    \"H_min_pipe\": \"0.213 m\"\n  },\n  \"(3) 汇总与一致性\": {\n    \"abs_diff_H\": \"0.00 mm\",\n    \"threshold\": \"0.50 mm\",\n    \"pass_fail\": \"通过\"\n  },\n  \"(4) 受力与张力\": {\n    \"f_k\": \"29.4 N\",\n    \"T\": \"91.1 N\",\n    \"T>0\": \"true\",\n    \"T<m2g\": \"true\",\n    \"a_step>0\": \"true\"\n  },\n  \"(5) 液面与体积\": {\n    \"h_high\": \"0.213 m\",\n    \"h_low\": \"0.087 m\",\n    \"average_height\": \"0.150 m\",\n    \"average_equals_h0\": \"true\",\n    \"V\": \"0.006 m^3\"\n  },\n  \"(6) 敏感性(与(2)一致方式)\": {\n    \"mu_vs_H_min\": [\n      {\n        \"mu\": 0.25,\n        \"H_min\": \"0.214 m\"\n      },\n      {\n        \"mu\": 0.30,\n        \"H_min\": \"0.213 m\"\n      },\n      {\n        \"mu\": 0.35,\n        \"H_min\": \"0.211 m\"\n      }\n    ],\n    \"worst_case_mu\": 0.25,\n    \"H_safe\": \"0.219 m\"\n  }\n}\n```"
+    }
+  ],
+  "metadata": {
+    "subject": "Physics",
+    "topic": "fluid_mechanics",
+    "image_path": [
+      "/r_bench/images/00003.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "calculate_water_mass",
+      "calculate_system_acceleration",
+      "calculate_tilt_angle",
+      "calculate_height_difference",
+      "calculate_minimum_height",
+      "visualize_liquid_surface",
+      "create_force_diagram",
+      "analyze_parameter_sensitivity",
+      "plot_sensitivity_analysis",
+      "solve_minimum_container_height"
+    ],
+    "golden_answer": [
+      {
+        "(1) 分步计算": {
+          "m_w": "6.00 kg",
+          "a_step": "6.17 m/s^2",
+          "theta_step": "32.2 deg",
+          "Delta_h_step": "0.0629 m",
+          "H_min_step": "0.213 m"
+        },
+        "(2) 合并计算": {
+          "a_pipe": "6.16 m/s^2",
+          "theta_pipe": "32.2 deg",
+          "Delta_h_pipe": "0.0629 m",
+          "H_min_pipe": "0.213 m"
+        },
+        "(3) 汇总与一致性": {
+          "abs_diff_H": "0.000 m",
+          "threshold": "0.0005 m",
+          "pass_fail": "通过"
+        },
+        "(4) 受力与张力": {
+          "f_k": "29.4 N",
+          "T": "91.1 N",
+          "T>0": "是",
+          "T<m2g": "是",
+          "a_step>0": "是"
+        },
+        "(5) 液面与体积": {
+          "h_high": "0.213 m",
+          "h_low": "0.0871 m",
+          "average_height": "0.150 m",
+          "average_equals_h0": "是",
+          "V": "0.00600 m^3"
+        },
+        "(6) 敏感性(与(2)一致方式)": {
+          "mu_vs_H_min": [
+            {
+              "mu": 0.25,
+              "H_min": "0.214 m"
+            },
+            {
+              "mu": 0.3,
+              "H_min": "0.213 m"
+            },
+            {
+              "mu": 0.35,
+              "H_min": "0.211 m"
+            }
+          ],
+          "worst_case_mu": 0.25,
+          "H_safe": "0.219 m"
+        }
+      }
+    ],
+    "original_question_id": "65",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+  },
+  "metadata_summary": {
+    "subject": "Physics",
+    "topic": "fluid_mechanics",
+    "test_type": "refined",
+    "original_question_id": "65",
+    "subject_topic_key": "Physics::fluid_mechanics"
+  },
+  "answer_template": {
+    "(1) 分步计算": {
+      "m_w": "[字符串]",
+      "a_step": "[字符串]",
+      "theta_step": "[字符串]",
+      "Delta_h_step": "[字符串]",
+      "H_min_step": "[字符串]"
+    },
+    "(2) 合并计算": {
+      "a_pipe": "[字符串]",
+      "theta_pipe": "[字符串]",
+      "Delta_h_pipe": "[字符串]",
+      "H_min_pipe": "[字符串]"
+    },
+    "(3) 汇总与一致性": {
+      "abs_diff_H": "[字符串]",
+      "threshold": "[字符串]",
+      "pass_fail": "[字符串]"
+    },
+    "(4) 受力与张力": {
+      "f_k": "[字符串]",
+      "T": "[字符串]",
+      "T>0": "[字符串]",
+      "T<m2g": "[字符串]",
+      "a_step>0": "[字符串]"
+    },
+    "(5) 液面与体积": {
+      "h_high": "[字符串]",
+      "h_low": "[字符串]",
+      "average_height": "[字符串]",
+      "average_equals_h0": "[字符串]",
+      "V": "[字符串]"
+    },
+    "(6) 敏感性(与(2)一致方式)": {
+      "mu_vs_H_min": [
+        {
+          "mu": "[数值]",
+          "H_min": "[字符串]"
+        }
+      ],
+      "worst_case_mu": "[数值]",
+      "H_safe": "[字符串]"
+    }
+  },
+  "golden_standard": {
+    "(1) 分步计算": {
+      "m_w": "6.00 kg",
+      "a_step": "6.17 m/s^2",
+      "theta_step": "32.2 deg",
+      "Delta_h_step": "0.0629 m",
+      "H_min_step": "0.213 m"
+    },
+    "(2) 合并计算": {
+      "a_pipe": "6.16 m/s^2",
+      "theta_pipe": "32.2 deg",
+      "Delta_h_pipe": "0.0629 m",
+      "H_min_pipe": "0.213 m"
+    },
+    "(3) 汇总与一致性": {
+      "abs_diff_H": "0.000 m",
+      "threshold": "0.0005 m",
+      "pass_fail": "通过"
+    },
+    "(4) 受力与张力": {
+      "f_k": "29.4 N",
+      "T": "91.1 N",
+      "T>0": "是",
+      "T<m2g": "是",
+      "a_step>0": "是"
+    },
+    "(5) 液面与体积": {
+      "h_high": "0.213 m",
+      "h_low": "0.0871 m",
+      "average_height": "0.150 m",
+      "average_equals_h0": "是",
+      "V": "0.00600 m^3"
+    },
+    "(6) 敏感性(与(2)一致方式)": {
+      "mu_vs_H_min": [
+        {
+          "mu": 0.25,
+          "H_min": "0.214 m"
+        },
+        {
+          "mu": 0.3,
+          "H_min": "0.213 m"
+        },
+        {
+          "mu": 0.35,
+          "H_min": "0.211 m"
+        }
+      ],
+      "worst_case_mu": 0.25,
+      "H_safe": "0.219 m"
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1) 分步计算": {
+      "m_w": "6.00 kg",
+      "a_step": "6.17 m/s^2",
+      "theta_step": "32.2 deg",
+      "Delta_h_step": "0.063 m",
+      "H_min_step": "0.213 m"
+    },
+    "(2) 合并计算": {
+      "a_pipe": "6.16 m/s^2",
+      "theta_pipe": "32.1 deg",
+      "Delta_h_pipe": "0.063 m",
+      "H_min_pipe": "0.213 m"
+    },
+    "(3) 汇总与一致性": {
+      "abs_diff_H": "0.00 mm",
+      "threshold": "0.50 mm",
+      "pass_fail": "通过"
+    },
+    "(4) 受力与张力": {
+      "f_k": "29.4 N",
+      "T": "91.1 N",
+      "T>0": true,
+      "T<m2g": true,
+      "a_step>0": true
+    },
+    "(5) 液面与体积": {
+      "h_high": "0.213 m",
+      "h_low": "0.087 m",
+      "average_height": "0.150 m",
+      "average_equals_h0": true,
+      "V": "0.006 m^3"
+    },
+    "(6) 敏感性(与(2)一致方式)": {
+      "mu_vs_H_min": [
+        {
+          "mu": 0.25,
+          "H_min": "0.214 m"
+        },
+        {
+          "mu": 0.3,
+          "H_min": "0.213 m"
+        },
+        {
+          "mu": 0.35,
+          "H_min": "0.211 m"
+        }
+      ],
+      "worst_case_mu": 0.25,
+      "H_safe": "0.219 m"
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "```json\n{\n  \"(1) 分步计算\": {\n    \"m_w\": \"6.00 kg\",\n    \"a_step\": \"6.17 m/s^2\",\n    \"theta_step\": \"32.2 deg\",\n    \"Delta_h_step\": \"0.063 m\",\n    \"H_min_step\": \"0.213 m\"\n  },\n  \"(2) 合并计算\": {\n    \"a_pipe\": \"6.16 m/s^2\",\n    \"theta_pipe\": \"32.1 deg\",\n    \"Delta_h_pipe\": \"0.063 m\",\n    \"H_min_pipe\": \"0.213 m\"\n  },\n  \"(3) 汇总与一致性\": {\n    \"abs_diff_H\": \"0.00 mm\",\n    \"threshold\": \"0.50 mm\",\n    \"pass_fail\": \"通过\"\n  },\n  \"(4) 受力与张力\": {\n    \"f_k\": \"29.4 N\",\n    \"T\": \"91.1 N\",\n    \"T>0\": \"true\",\n    \"T<m2g\": \"true\",\n    \"a_step>0\": \"true\"\n  },\n  \"(5) 液面与体积\": {\n    \"h_high\": \"0.213 m\",\n    \"h_low\": \"0.087 m\",\n    \"average_height\": \"0.150 m\",\n    \"average_equals_h0\": \"true\",\n    \"V\": \"0.006 m^3\"\n  },\n  \"(6) 敏感性(与(2)一致方式)\": {\n    \"mu_vs_H_min\": [\n      {\n        \"mu\": 0.25,\n        \"H_min\": \"0.214 m\"\n      },\n      {\n        \"mu\": 0.30,\n        \"H_min\": \"0.213 m\"\n      },\n      {\n        \"mu\": 0.35,\n        \"H_min\": \"0.211 m\"\n      }\n    ],\n    \"worst_case_mu\": 0.25,\n    \"H_safe\": \"0.219 m\"\n  }\n}\n```",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "```json\n{\n  \"(1) 分步计算\": {\n    \"m_w\": \"6.00 kg\",\n    \"a_step\": \"6.17 m/s^2\",\n    \"theta_step\": \"32.2 deg\",\n    \"Delta_h_step\": \"0.063 m\",\n    \"H_min_step\": \"0.213 m\"\n  },\n  \"(2) 合并计算\": {\n    \"a_pipe\": \"6.16 m/s^2\",\n    \"theta_pipe\": \"32.1 deg\",\n    \"Delta_h_pipe\": \"0.063 m\",\n    \"H_min_pipe\": \"0.213 m\"\n  },\n  \"(3) 汇总与一致性\": {\n    \"abs_diff_H\": \"0.00 mm\",\n    \"threshold\": \"0.50 mm\",\n    \"pass_fail\": \"通过\"\n  },\n  \"(4) 受力与张力\": {\n    \"f_k\": \"29.4 N\",\n    \"T\": \"91.1 N\",\n    \"T>0\": \"true\",\n    \"T<m2g\": \"true\",\n    \"a_step>0\": \"true\"\n  },\n  \"(5) 液面与体积\": {\n    \"h_high\": \"0.213 m\",\n    \"h_low\": \"0.087 m\",\n    \"average_height\": \"0.150 m\",\n    \"average_equals_h0\": \"true\",\n    \"V\": \"0.006 m^3\"\n  },\n  \"(6) 敏感性(与(2)一致方式)\": {\n    \"mu_vs_H_min\": [\n      {\n        \"mu\": 0.25,\n        \"H_min\": \"0.214 m\"\n      },\n      {\n        \"mu\": 0.30,\n        \"H_min\": \"0.213 m\"\n      },\n      {\n        \"mu\": 0.35,\n        \"H_min\": \"0.211 m\"\n      }\n    ],\n    \"worst_case_mu\": 0.25,\n    \"H_safe\": \"0.219 m\"\n  }\n}\n```"
+  },
+  "evaluation_score": 0.9666666666666667,
+  "evaluation_summary": "匹配字段: 29/30 (得分: 96.67%)",
+  "evaluation_details": {
+    "(1) 分步计算.m_w": {
+      "path": "(1) 分步计算.m_w",
+      "expected": "6.00 kg",
+      "actual": "6.00 kg",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 分步计算.a_step": {
+      "path": "(1) 分步计算.a_step",
+      "expected": "6.17 m/s^2",
+      "actual": "6.17 m/s^2",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 分步计算.theta_step": {
+      "path": "(1) 分步计算.theta_step",
+      "expected": "32.2 deg",
+      "actual": "32.2 deg",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(1) 分步计算.Delta_h_step": {
+      "path": "(1) 分步计算.Delta_h_step",
+      "expected": "0.0629 m",
+      "actual": "0.063 m",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(1) 分步计算.H_min_step": {
+      "path": "(1) 分步计算.H_min_step",
+      "expected": "0.213 m",
+      "actual": "0.213 m",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 合并计算.a_pipe": {
+      "path": "(2) 合并计算.a_pipe",
+      "expected": "6.16 m/s^2",
+      "actual": "6.16 m/s^2",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(2) 合并计算.theta_pipe": {
+      "path": "(2) 合并计算.theta_pipe",
+      "expected": "32.2 deg",
+      "actual": "32.1 deg",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 合并计算.Delta_h_pipe": {
+      "path": "(2) 合并计算.Delta_h_pipe",
+      "expected": "0.0629 m",
+      "actual": "0.063 m",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 合并计算.H_min_pipe": {
+      "path": "(2) 合并计算.H_min_pipe",
+      "expected": "0.213 m",
+      "actual": "0.213 m",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(3) 汇总与一致性.abs_diff_H": {
+      "path": "(3) 汇总与一致性.abs_diff_H",
+      "expected": "0.000 m",
+      "actual": "0.00 mm",
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3) 汇总与一致性.threshold": {
+      "path": "(3) 汇总与一致性.threshold",
+      "expected": "0.0005 m",
+      "actual": "0.50 mm",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 汇总与一致性.pass_fail": {
+      "path": "(3) 汇总与一致性.pass_fail",
+      "expected": "通过",
+      "actual": "通过",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 受力与张力.f_k": {
+      "path": "(4) 受力与张力.f_k",
+      "expected": "29.4 N",
+      "actual": "29.4 N",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 受力与张力.T": {
+      "path": "(4) 受力与张力.T",
+      "expected": "91.1 N",
+      "actual": "91.1 N",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 受力与张力.T>0": {
+      "path": "(4) 受力与张力.T>0",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4) 受力与张力.T<m2g": {
+      "path": "(4) 受力与张力.T<m2g",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(4) 受力与张力.a_step>0": {
+      "path": "(4) 受力与张力.a_step>0",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5) 液面与体积.h_high": {
+      "path": "(5) 液面与体积.h_high",
+      "expected": "0.213 m",
+      "actual": "0.213 m",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5) 液面与体积.h_low": {
+      "path": "(5) 液面与体积.h_low",
+      "expected": "0.0871 m",
+      "actual": "0.087 m",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5) 液面与体积.average_height": {
+      "path": "(5) 液面与体积.average_height",
+      "expected": "0.150 m",
+      "actual": "0.150 m",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(5) 液面与体积.average_equals_h0": {
+      "path": "(5) 液面与体积.average_equals_h0",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(5) 液面与体积.V": {
+      "path": "(5) 液面与体积.V",
+      "expected": "0.00600 m^3",
+      "actual": "0.006 m^3",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(6) 敏感性(与(2)一致方式).mu_vs_H_min[0].mu": {
+      "path": "(6) 敏感性(与(2)一致方式).mu_vs_H_min[0].mu",
+      "expected": 0.25,
+      "actual": 0.25,
+      "expected_num": 0.25,
+      "actual_num": 0.25,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 敏感性(与(2)一致方式).mu_vs_H_min[0].H_min": {
+      "path": "(6) 敏感性(与(2)一致方式).mu_vs_H_min[0].H_min",
+      "expected": "0.214 m",
+      "actual": "0.214 m",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 敏感性(与(2)一致方式).mu_vs_H_min[1].mu": {
+      "path": "(6) 敏感性(与(2)一致方式).mu_vs_H_min[1].mu",
+      "expected": 0.3,
+      "actual": 0.3,
+      "expected_num": 0.3,
+      "actual_num": 0.3,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 敏感性(与(2)一致方式).mu_vs_H_min[1].H_min": {
+      "path": "(6) 敏感性(与(2)一致方式).mu_vs_H_min[1].H_min",
+      "expected": "0.213 m",
+      "actual": "0.213 m",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 敏感性(与(2)一致方式).mu_vs_H_min[2].mu": {
+      "path": "(6) 敏感性(与(2)一致方式).mu_vs_H_min[2].mu",
+      "expected": 0.35,
+      "actual": 0.35,
+      "expected_num": 0.35,
+      "actual_num": 0.35,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 敏感性(与(2)一致方式).mu_vs_H_min[2].H_min": {
+      "path": "(6) 敏感性(与(2)一致方式).mu_vs_H_min[2].H_min",
+      "expected": "0.211 m",
+      "actual": "0.211 m",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 敏感性(与(2)一致方式).worst_case_mu": {
+      "path": "(6) 敏感性(与(2)一致方式).worst_case_mu",
+      "expected": 0.25,
+      "actual": 0.25,
+      "expected_num": 0.25,
+      "actual_num": 0.25,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(6) 敏感性(与(2)一致方式).H_safe": {
+      "path": "(6) 敏感性(与(2)一致方式).H_safe",
+      "expected": "0.219 m",
+      "actual": "0.219 m",
+      "status": "match",
+      "match_type": "exact"
+    }
+  },
+  "mode_folder": "without_tools"
+}

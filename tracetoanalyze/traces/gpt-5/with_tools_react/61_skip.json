@@ -1,0 +1,13 @@
+{
+  "id": 61,
+  "model": "gpt-5",
+  "mode": "with_tools_react",
+  "reason": "图片加载失败",
+  "timestamp": 1766475900.151568,
+  "details": {
+    "expected_images": 1,
+    "missing_images": [
+      "/sfe_images/M022_mp-353-xrd_d5b5f4f9302869ae0b1d65b0eac06311.png"
+    ]
+  }
+}

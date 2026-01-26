@@ -1,0 +1,37 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize",
+            "description": "综合可视化分子结构，支持2D结构、3D结构的2D投影和Matplotlib 3D图三种方式。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "smiles": {
+                        "type": "string",
+                        "description": "分子的SMILES字符串表示"
+                    },
+                    "output_prefix": {
+                        "type": "string",
+                        "description": "输出文件的前缀路径"
+                    },
+                    "methods": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "可视化方法列表，可选值：'2d'（标准2D结构）、'3d_projection'（3D结构的2D投影）、'3d_matplotlib'（Matplotlib 3D图），默认为全部三种方法"
+                    }
+                },
+                "required": [
+                    "smiles",
+                    "output_prefix"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/molecule_visualize.py"
+        }
+    }
+]

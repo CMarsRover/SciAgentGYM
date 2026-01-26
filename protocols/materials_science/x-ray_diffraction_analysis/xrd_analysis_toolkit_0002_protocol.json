@@ -1,0 +1,235 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "extract_peaks_from_pattern",
+            "description": "从XRD图谱中提取衍射峰位置和强度。使用scipy.signal.find_peaks算法识别局部最大值，通过prominence参数过滤噪声峰。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "two_theta": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "2θ角度数组 (degrees), 范围通常10-90°"
+                    },
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "对应的衍射强度数组 (a.u.)"
+                    },
+                    "prominence": {
+                        "type": "number",
+                        "description": "峰显著性阈值，默认5.0 a.u.，用于过滤弱峰"
+                    }
+                },
+                "required": [
+                    "two_theta",
+                    "intensity"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0002.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_peak_matching_score",
+            "description": "计算复合材料峰与参考材料峰的匹配度。采用最近邻匹配算法，对于复合材料中的每个峰，在容差范围内寻找参考材料的对应峰。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "composite_peaks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "复合材料的峰位数组 (degrees)"
+                    },
+                    "reference_peaks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "参考材料的峰位数组 (degrees)"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "峰位匹配容差 (degrees)，默认0.5°"
+                    }
+                },
+                "required": [
+                    "composite_peaks",
+                    "reference_peaks"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0002.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "normalize_intensity",
+            "description": "归一化XRD强度数据。支持最大值归一化和总和归一化两种方法，便于不同图谱间的强度对比。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "intensity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "原始强度数组 (a.u.)"
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "归一化方法",
+                        "enum": ["max", "sum"]
+                    }
+                },
+                "required": [
+                    "intensity"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0002.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "identify_phases_in_composite",
+            "description": "识别复合材料中存在的晶相组成。通过对比复合材料的XRD峰位与多个参考材料的峰位，计算匹配度并筛选出最可能存在的相。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "composite_data": {
+                        "type": "object",
+                        "description": "复合材料XRD数据，格式{'two_theta': array, 'intensity': array}"
+                    },
+                    "reference_materials": {
+                        "type": "object",
+                        "description": "参考材料字典，格式{材料名: {'two_theta': array, 'intensity': array}}"
+                    },
+                    "min_match_ratio": {
+                        "type": "number",
+                        "description": "最小匹配率阈值，默认0.6"
+                    },
+                    "num_phases": {
+                        "type": "integer",
+                        "description": "预期相数量，默认3"
+                    }
+                },
+                "required": [
+                    "composite_data",
+                    "reference_materials"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0002.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_xrd_pattern_comprehensive",
+            "description": "XRD图谱综合分析（包含峰提取、相识别、数据归一化）。这是一个高层次的分析函数，整合了峰提取、归一化和相识别功能。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "composite_data": {
+                        "type": "object",
+                        "description": "复合材料XRD数据，格式{'two_theta': array, 'intensity': array}"
+                    },
+                    "reference_materials": {
+                        "type": "object",
+                        "description": "参考材料数据字典，格式{材料名: {'two_theta': array, 'intensity': array}}"
+                    },
+                    "normalize": {
+                        "type": "boolean",
+                        "description": "是否进行强度归一化，默认true"
+                    }
+                },
+                "required": [
+                    "composite_data",
+                    "reference_materials"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0002.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "visualize_xrd_comparison",
+            "description": "材料科学领域专属可视化工具 - XRD图谱对比。生成XRD叠加图或匹配度柱状图。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "description": "要可视化的数据，包含composite和references或match_scores"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "领域类型，固定为'materials'"
+                    },
+                    "vis_type": {
+                        "type": "string",
+                        "description": "可视化类型",
+                        "enum": ["xrd_pattern", "match_scores"]
+                    },
+                    "save_dir": {
+                        "type": "string",
+                        "description": "保存目录，默认'./images/'"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "文件名（可选）"
+                    }
+                },
+                "required": [
+                    "data"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./extracted_code/xrd_analysis_toolkit_0002.py"
+        }
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+

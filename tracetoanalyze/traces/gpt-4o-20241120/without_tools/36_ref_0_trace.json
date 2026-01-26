@@ -1,0 +1,667 @@
+{
+  "id": "36_ref_0",
+  "query": "双环体系（norbornane、norbornene、norbornadiene）在两种3D构象方法（ETKDGv3、ETKDG；力场MMFF）下的单一低能构象数据如下（Rg：Å；能量：kcal/mol；PMI1/PMI3、Eccentricity：无量纲）：\n- ETKDGv3：\n  • norbornane: Rg=2.08, PMI1/PMI3=0.42, Eccentricity=0.63, Energy=48.72\n  • norbornene: Rg=2.05, PMI1/PMI3=0.44, Eccentricity=0.66, Energy=50.15\n  • norbornadiene: Rg=2.02, PMI1/PMI3=0.46, Eccentricity=0.69, Energy=52.03\n- ETKDG：\n  • norbornane: Rg=2.10, PMI1/PMI3=0.41, Eccentricity=0.62, Energy=49.36\n  • norbornene: Rg=2.07, PMI1/PMI3=0.43, Eccentricity=0.65, Energy=50.92\n  • norbornadiene: Rg=2.04, PMI1/PMI3=0.45, Eccentricity=0.68, Energy=52.81\n给定刚性指数公式：RI = (1/Rg) × (PMI1/PMI3) × (1 + Eccentricity) × 100。定义方法平均值：RI_avg(method) = (RI_norbornane + RI_norbornene + RI_norbornadiene)/3。\n一致性阈值：能量=2.0%，RI=5.0%，方法平均值=5.0%。百分比差均以ETKDGv3为基准：\n- 单分子能量差(%) = |E_v3 − E_etkdg| / E_v3 × 100；\n- 单分子RI差(%) = |RI_v3 − RI_etkdg| / RI_v3 × 100；\n- 方法平均值差(%) = |RI_avg_v3 − RI_avg_etkdg| / RI_avg_v3 × 100。\n判定：若两方法RI_avg的相对百分比差≤5.0%，取ETKDGv3为最终基准法；否则取两方法简单平均为最终结果。\n任务：\n(1) 计算并报告三种分子在两方法下的RI（逐分子）及各方法的RI_avg。\n(2) 报告单分子能量百分比差与RI百分比差，并标记是否在各自阈值内。\n(3) 报告两方法RI_avg的百分比差与阈值判定；据此给出最终RI_avg_final及采用的方法。\n(4) 提供质检用文件路径（字符串）：\n  • norbornane: ./qc_assets/2d/norbornane.png; ./qc_assets/3d/etkdgv3/norbornane_conf0.sdf; ./qc_assets/3d/etkdgv3/norbornane_conf0.xyz; ./qc_assets/3d/etkdg/norbornane_conf0.sdf; ./qc_assets/3d/etkdg/norbornane_conf0.xyz\n  • norbornene: ./qc_assets/2d/norbornene.png; ./qc_assets/3d/etkdgv3/norbornene_conf0.sdf; ./qc_assets/3d/etkdgv3/norbornene_conf0.xyz; ./qc_assets/3d/etkdg/norbornene_conf0.sdf; ./qc_assets/3d/etkdg/norbornene_conf0.xyz\n  • norbornadiene: ./qc_assets/2d/norbornadiene.png; ./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf; ./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz; ./qc_assets/3d/etkdg/norbornadiene_conf0.sdf; ./qc_assets/3d/etkdg/norbornadiene_conf0.xyz\n结果以数值表达，统一保留两位小数。",
+  "model": "gpt-4o-20241120",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "双环体系（norbornane、norbornene、norbornadiene）在两种3D构象方法（ETKDGv3、ETKDG；力场MMFF）下的单一低能构象数据如下（Rg：Å；能量：kcal/mol；PMI1/PMI3、Eccentricity：无量纲）：\n- ETKDGv3：\n  • norbornane: Rg=2.08, PMI1/PMI3=0.42, Eccentricity=0.63, Energy=48.72\n  • norbornene: Rg=2.05, PMI1/PMI3=0.44, Eccentricity=0.66, Energy=50.15\n  • norbornadiene: Rg=2.02, PMI1/PMI3=0.46, Eccentricity=0.69, Energy=52.03\n- ETKDG：\n  • norbornane: Rg=2.10, PMI1/PMI3=0.41, Eccentricity=0.62, Energy=49.36\n  • norbornene: Rg=2.07, PMI1/PMI3=0.43, Eccentricity=0.65, Energy=50.92\n  • norbornadiene: Rg=2.04, PMI1/PMI3=0.45, Eccentricity=0.68, Energy=52.81\n给定刚性指数公式：RI = (1/Rg) × (PMI1/PMI3) × (1 + Eccentricity) × 100。定义方法平均值：RI_avg(method) = (RI_norbornane + RI_norbornene + RI_norbornadiene)/3。\n一致性阈值：能量=2.0%，RI=5.0%，方法平均值=5.0%。百分比差均以ETKDGv3为基准：\n- 单分子能量差(%) = |E_v3 − E_etkdg| / E_v3 × 100；\n- 单分子RI差(%) = |RI_v3 − RI_etkdg| / RI_v3 × 100；\n- 方法平均值差(%) = |RI_avg_v3 − RI_avg_etkdg| / RI_avg_v3 × 100。\n判定：若两方法RI_avg的相对百分比差≤5.0%，取ETKDGv3为最终基准法；否则取两方法简单平均为最终结果。\n任务：\n(1) 计算并报告三种分子在两方法下的RI（逐分子）及各方法的RI_avg。\n(2) 报告单分子能量百分比差与RI百分比差，并标记是否在各自阈值内。\n(3) 报告两方法RI_avg的百分比差与阈值判定；据此给出最终RI_avg_final及采用的方法。\n(4) 提供质检用文件路径（字符串）：\n  • norbornane: ./qc_assets/2d/norbornane.png; ./qc_assets/3d/etkdgv3/norbornane_conf0.sdf; ./qc_assets/3d/etkdgv3/norbornane_conf0.xyz; ./qc_assets/3d/etkdg/norbornane_conf0.sdf; ./qc_assets/3d/etkdg/norbornane_conf0.xyz\n  • norbornene: ./qc_assets/2d/norbornene.png; ./qc_assets/3d/etkdgv3/norbornene_conf0.sdf; ./qc_assets/3d/etkdgv3/norbornene_conf0.xyz; ./qc_assets/3d/etkdg/norbornene_conf0.sdf; ./qc_assets/3d/etkdg/norbornene_conf0.xyz\n  • norbornadiene: ./qc_assets/2d/norbornadiene.png; ./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf; ./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz; ./qc_assets/3d/etkdg/norbornadiene_conf0.sdf; ./qc_assets/3d/etkdg/norbornadiene_conf0.xyz\n结果以数值表达，统一保留两位小数。"
+    },
+    {
+      "role": "assistant",
+      "content": "### 解答：\n\n#### (1) 计算RI (逐分子)及RI_avg (方法平均值)\n\n公式：  \n\\[ RI = \\left( \\frac{1}{Rg} \\times \\frac{PMI1}{PMI3} \\times (1 + Eccentricity) \\right) \\times 100 \\]  \n\\[ RI_{avg} = \\frac{RI_{norbornane} + RI_{norbornene} + RI_{norbornadiene}}{3} \\]  \n\n**ETKDGv3**:  \n- **norbornane**:  \n  \\[ RI = \\left( \\frac{1}{2.08} \\times 0.42 \\times (1 + 0.63) \\right) \\times 100 = 34.09 \\]  \n- **norbornene**:  \n  \\[ RI = \\left( \\frac{1}{2.05} \\times 0.44 \\times (1 + 0.66) \\right) \\times 100 = 35.65 \\]  \n- **norbornadiene**:  \n  \\[ RI = \\left( \\frac{1}{2.02} \\times 0.46 \\times (1 + 0.69) \\right) \\times 100 = 37.73 \\]  \n- **RI_avg (v3)**:  \n  \\[ RI_{avg} = \\frac{34.09 + 35.65 + 37.73}{3} = 35.82 \\]  \n\n**ETKDG**:  \n- **norbornane**:  \n  \\[ RI = \\left( \\frac{1}{2.10} \\times 0.41 \\times (1 + 0.62) \\right) \\times 100 = 33.00 \\]  \n- **norbornene**:  \n  \\[ RI = \\left( \\frac{1}{2.07} \\times 0.43 \\times (1 + 0.65) \\right) \\times 100 = 34.49 \\]  \n- **norbornadiene**:  \n  \\[ RI = \\left( \\frac{1}{2.04} \\times 0.45 \\times (1 + 0.68) \\right) \\times 100 = 36.45 \\]  \n- **RI_avg (ETKDG)**:  \n  \\[ RI_{avg} = \\frac{33.00 + 34.49 + 36.45}{3} = 34.65 \\]  \n\n---\n\n#### (2) 单分子能量百分比差与RI百分比差\n\n公式：\n- 单分子能量差(%)：  \n  \\[ \\text{Energy\\%} = \\left| \\frac{E_{v3} - E_{etkdg}}{E_{v3}} \\right| \\times 100 \\]  \n- 单分子RI差(%)：  \n  \\[ \\text{RI\\%} = \\left| \\frac{RI_{v3} - RI_{etkdg}}{RI_{v3}} \\right| \\times 100 \\]  \n\n**norbornane**:  \n- 能量差(%)：  \n  \\[ \\text{Energy\\%} = \\left| \\frac{48.72 - 49.36}{48.72} \\right| \\times 100 = 1.31 \\% \\] (在阈值2.0%内)  \n- RI差(%)：  \n  \\[ \\text{RI\\%} = \\left| \\frac{34.09 - 33.00}{34.09} \\right| \\times 100 = 3.20 \\% \\] (在阈值5.0%内)  \n\n**norbornene**:  \n- 能量差(%)：  \n  \\[ \\text{Energy\\%} = \\left| \\frac{50.15 - 50.92}{50.15} \\right| \\times 100 = 1.53 \\% \\] (在阈值2.0%内)  \n- RI差(%)：  \n  \\[ \\text{RI\\%} = \\left| \\frac{35.65 - 34.49}{35.65} \\right| \\times 100 = 3.25 \\% \\] (在阈值5.0%内)  \n\n**norbornadiene**:  \n- 能量差(%)：  \n  \\[ \\text{Energy\\%} = \\left| \\frac{52.03 - 52.81}{52.03} \\right| \\times 100 = 1.50 \\% \\] (在阈值2.0%内)  \n- RI差(%)：  \n  \\[ \\text{RI\\%} = \\left| \\frac{37.73 - 36.45}{37.73} \\right| \\times 100 = 3.39 \\% \\] (在阈值5.0%内)  \n\n---\n\n#### (3) 方法RI_avg百分比差与最终判定\n\n公式：  \n\\[ \\text{RI_avg\\%} = \\left| \\frac{RI_{avg,v3} - RI_{avg,etkdg}}{RI_{avg,v3}} \\right| \\times 100 \\]  \n\n- **RI_avg差(%)**：  \n  \\[ \\text{RI_avg\\%} = \\left| \\frac{35.82 - 34.65}{35.82} \\right| \\times 100 = 3.27 \\% \\] (在阈值5.0%内)  \n\n**判定**：由于RI_avg差≤5.0%，选择**ETKDGv3**为最终基准法。  \n\\[ RI_{avg,final} = 35.82 \\]  \n\n---\n\n#### (4) 提供质检用文件路径\n\n**norbornane**:  \n- ./qc_assets/2d/norbornane.png  \n- ./qc_assets/3d/etkdgv3/norbornane_conf0.sdf  \n- ./qc_assets/3d/etkdgv3/norbornane_conf0.xyz  \n- ./qc_assets/3d/etkdg/norbornane_conf0.sdf  \n- ./qc_assets/3d/etkdg/norbornane_conf0.xyz  \n\n**norbornene**:  \n- ./qc_assets/2d/norbornene.png  \n- ./qc_assets/3d/etkdgv3/norbornene_conf0.sdf  \n- ./qc_assets/3d/etkdgv3/norbornene_conf0.xyz  \n- ./qc_assets/3d/etkdg/norbornene_conf0.sdf  \n- ./qc_assets/3d/etkdg/norbornene_conf0.xyz  \n\n**norbornadiene**:  \n- ./qc_assets/2d/norbornadiene.png  \n- ./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf  \n- ./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz  \n- ./qc_assets/3d/etkdg/norbornadiene_conf0.sdf  \n- ./qc_assets/3d/etkdg/norbornadiene_conf0.xyz  \n\n---\n\n### 总结结果\n1. **RI (逐分子)**:  \n   - norbornane: ETKDGv3 = 34.09, ETKDG = 33.00  \n   - norbornene: ETKDGv3 = 35.65, ETKDG = 34.49  \n   - norbornadiene: ETKDGv3 = 37.73, ETKDG = 36.45  \n\n2. **RI_avg (方法平均值)**:  \n   - ETKDGv3 = 35.82  \n   - ETKDG = 34.65  \n\n3. **单分子能量差与RI差**:  \n   - 能量差均≤2.0%，RI差均≤5.0%。  \n\n4. **RI_avg差与判定**:  \n   - RI_avg差 = 3.27% ≤ 5.0%，选择**ETKDGv3**。  \n\n5. **最终RI_avg_final**:  \n   - **35.82** (基于ETKDGv3)。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"(1) RI 与 RI_avg（两位小数）\": {\n    \"ETKDGv3\": {\n      \"norbornane\": \"[字符串]\",\n      \"norbornene\": \"[字符串]\",\n      \"norbornadiene\": \"[字符串]\",\n      \"RI_avg_ETKDGv3\": \"[字符串]\"\n    },\n    \"ETKDG\": {\n      \"norbornane\": \"[字符串]\",\n      \"norbornene\": \"[字符串]\",\n      \"norbornadiene\": \"[字符串]\",\n      \"RI_avg_ETKDG\": \"[字符串]\"\n    }\n  },\n  \"(2) 一致性检查（百分比差与阈值判定）\": {\n    \"能量差_阈值2.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"[字符串]\",\n        \"within_threshold\": \"[字符串]\"\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"[字符串]\",\n        \"within_threshold\": \"[字符串]\"\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"[字符串]\",\n        \"within_threshold\": \"[字符串]\"\n      }\n    },\n    \"RI差_阈值5.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"[字符串]\",\n        \"within_threshold\": \"[字符串]\"\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"[字符串]\",\n        \"within_threshold\": \"[字符串]\"\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"[字符串]\",\n        \"within_threshold\": \"[字符串]\"\n      }\n    }\n  },\n  \"(3) 方法平均值差与最终结果\": {\n    \"method_avg_diff_percent\": \"[字符串]\",\n    \"within_5pct_threshold\": \"[字符串]\",\n    \"RI_avg_final\": \"[字符串]\",\n    \"final_method\": \"[字符串]\"\n  },\n  \"(4) 质检文件路径\": {\n    \"norbornane\": \"[5个字符串的数组]\",\n    \"norbornene\": \"[5个字符串的数组]\",\n    \"norbornadiene\": \"[5个字符串的数组]\"\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"(1) RI 与 RI_avg（两位小数）\": {\n    \"ETKDGv3\": {\n      \"norbornane\": \"34.09\",\n      \"norbornene\": \"35.65\",\n      \"norbornadiene\": \"37.73\",\n      \"RI_avg_ETKDGv3\": \"35.82\"\n    },\n    \"ETKDG\": {\n      \"norbornane\": \"33.00\",\n      \"norbornene\": \"34.49\",\n      \"norbornadiene\": \"36.45\",\n      \"RI_avg_ETKDG\": \"34.65\"\n    }\n  },\n  \"(2) 一致性检查（百分比差与阈值判定）\": {\n    \"能量差_阈值2.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"1.31\",\n        \"within_threshold\": true\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"1.53\",\n        \"within_threshold\": true\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"1.50\",\n        \"within_threshold\": true\n      }\n    },\n    \"RI差_阈值5.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"3.20\",\n        \"within_threshold\": true\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"3.25\",\n        \"within_threshold\": true\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"3.39\",\n        \"within_threshold\": true\n      }\n    }\n  },\n  \"(3) 方法平均值差与最终结果\": {\n    \"method_avg_diff_percent\": \"3.27\",\n    \"within_5pct_threshold\": true,\n    \"RI_avg_final\": \"35.82\",\n    \"final_method\": \"ETKDGv3\"\n  },\n  \"(4) 质检文件路径\": {\n    \"norbornane\": [\n      \"./qc_assets/2d/norbornane.png\",\n      \"./qc_assets/3d/etkdgv3/norbornane_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornane_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornane_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornane_conf0.xyz\"\n    ],\n    \"norbornene\": [\n      \"./qc_assets/2d/norbornene.png\",\n      \"./qc_assets/3d/etkdgv3/norbornene_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornene_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornene_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornene_conf0.xyz\"\n    ],\n    \"norbornadiene\": [\n      \"./qc_assets/2d/norbornadiene.png\",\n      \"./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornadiene_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornadiene_conf0.xyz\"\n    ]\n  }\n}"
+    }
+  ],
+  "answer_template": {
+    "(1) RI 与 RI_avg（两位小数）": {
+      "ETKDGv3": {
+        "norbornane": "[字符串]",
+        "norbornene": "[字符串]",
+        "norbornadiene": "[字符串]",
+        "RI_avg_ETKDGv3": "[字符串]"
+      },
+      "ETKDG": {
+        "norbornane": "[字符串]",
+        "norbornene": "[字符串]",
+        "norbornadiene": "[字符串]",
+        "RI_avg_ETKDG": "[字符串]"
+      }
+    },
+    "(2) 一致性检查（百分比差与阈值判定）": {
+      "能量差_阈值2.00%": {
+        "norbornane": {
+          "diff_percent": "[字符串]",
+          "within_threshold": "[字符串]"
+        },
+        "norbornene": {
+          "diff_percent": "[字符串]",
+          "within_threshold": "[字符串]"
+        },
+        "norbornadiene": {
+          "diff_percent": "[字符串]",
+          "within_threshold": "[字符串]"
+        }
+      },
+      "RI差_阈值5.00%": {
+        "norbornane": {
+          "diff_percent": "[字符串]",
+          "within_threshold": "[字符串]"
+        },
+        "norbornene": {
+          "diff_percent": "[字符串]",
+          "within_threshold": "[字符串]"
+        },
+        "norbornadiene": {
+          "diff_percent": "[字符串]",
+          "within_threshold": "[字符串]"
+        }
+      }
+    },
+    "(3) 方法平均值差与最终结果": {
+      "method_avg_diff_percent": "[字符串]",
+      "within_5pct_threshold": "[字符串]",
+      "RI_avg_final": "[字符串]",
+      "final_method": "[字符串]"
+    },
+    "(4) 质检文件路径": {
+      "norbornane": "[5个字符串的数组]",
+      "norbornene": "[5个字符串的数组]",
+      "norbornadiene": "[5个字符串的数组]"
+    }
+  },
+  "golden_standard": {
+    "(1) RI 与 RI_avg（两位小数）": {
+      "ETKDGv3": {
+        "norbornane": "32.91",
+        "norbornene": "35.63",
+        "norbornadiene": "38.49",
+        "RI_avg_ETKDGv3": "35.68"
+      },
+      "ETKDG": {
+        "norbornane": "31.63",
+        "norbornene": "34.28",
+        "norbornadiene": "37.06",
+        "RI_avg_ETKDG": "34.32"
+      }
+    },
+    "(2) 一致性检查（百分比差与阈值判定）": {
+      "能量差_阈值2.00%": {
+        "norbornane": {
+          "diff_percent": "1.31%",
+          "within_threshold": "是"
+        },
+        "norbornene": {
+          "diff_percent": "1.53%",
+          "within_threshold": "是"
+        },
+        "norbornadiene": {
+          "diff_percent": "1.50%",
+          "within_threshold": "是"
+        }
+      },
+      "RI差_阈值5.00%": {
+        "norbornane": {
+          "diff_percent": "3.90%",
+          "within_threshold": "是"
+        },
+        "norbornene": {
+          "diff_percent": "3.80%",
+          "within_threshold": "是"
+        },
+        "norbornadiene": {
+          "diff_percent": "3.71%",
+          "within_threshold": "是"
+        }
+      }
+    },
+    "(3) 方法平均值差与最终结果": {
+      "method_avg_diff_percent": "3.80%",
+      "within_5pct_threshold": "是",
+      "RI_avg_final": "35.68",
+      "final_method": "ETKDGv3"
+    },
+    "(4) 质检文件路径": {
+      "norbornane": [
+        "./qc_assets/2d/norbornane.png",
+        "./qc_assets/3d/etkdgv3/norbornane_conf0.sdf",
+        "./qc_assets/3d/etkdgv3/norbornane_conf0.xyz",
+        "./qc_assets/3d/etkdg/norbornane_conf0.sdf",
+        "./qc_assets/3d/etkdg/norbornane_conf0.xyz"
+      ],
+      "norbornene": [
+        "./qc_assets/2d/norbornene.png",
+        "./qc_assets/3d/etkdgv3/norbornene_conf0.sdf",
+        "./qc_assets/3d/etkdgv3/norbornene_conf0.xyz",
+        "./qc_assets/3d/etkdg/norbornene_conf0.sdf",
+        "./qc_assets/3d/etkdg/norbornene_conf0.xyz"
+      ],
+      "norbornadiene": [
+        "./qc_assets/2d/norbornadiene.png",
+        "./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf",
+        "./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz",
+        "./qc_assets/3d/etkdg/norbornadiene_conf0.sdf",
+        "./qc_assets/3d/etkdg/norbornadiene_conf0.xyz"
+      ]
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "(1) RI 与 RI_avg（两位小数）": {
+      "ETKDGv3": {
+        "norbornane": 34.09,
+        "norbornene": 35.65,
+        "norbornadiene": 37.73,
+        "RI_avg_ETKDGv3": 35.82
+      },
+      "ETKDG": {
+        "norbornane": 33.0,
+        "norbornene": 34.49,
+        "norbornadiene": 36.45,
+        "RI_avg_ETKDG": 34.65
+      }
+    },
+    "(2) 一致性检查（百分比差与阈值判定）": {
+      "能量差_阈值2.00%": {
+        "norbornane": {
+          "diff_percent": 1.31,
+          "within_threshold": true
+        },
+        "norbornene": {
+          "diff_percent": 1.53,
+          "within_threshold": true
+        },
+        "norbornadiene": {
+          "diff_percent": 1.5,
+          "within_threshold": true
+        }
+      },
+      "RI差_阈值5.00%": {
+        "norbornane": {
+          "diff_percent": 3.2,
+          "within_threshold": true
+        },
+        "norbornene": {
+          "diff_percent": 3.25,
+          "within_threshold": true
+        },
+        "norbornadiene": {
+          "diff_percent": 3.39,
+          "within_threshold": true
+        }
+      }
+    },
+    "(3) 方法平均值差与最终结果": {
+      "method_avg_diff_percent": 3.27,
+      "within_5pct_threshold": true,
+      "RI_avg_final": 35.82,
+      "final_method": "ETKDGv3"
+    },
+    "(4) 质检文件路径": {
+      "norbornane": [
+        "./qc_assets/2d/norbornane.png",
+        "./qc_assets/3d/etkdgv3/norbornane_conf0.sdf",
+        "./qc_assets/3d/etkdgv3/norbornane_conf0.xyz",
+        "./qc_assets/3d/etkdg/norbornane_conf0.sdf",
+        "./qc_assets/3d/etkdg/norbornane_conf0.xyz"
+      ],
+      "norbornene": [
+        "./qc_assets/2d/norbornene.png",
+        "./qc_assets/3d/etkdgv3/norbornene_conf0.sdf",
+        "./qc_assets/3d/etkdgv3/norbornene_conf0.xyz",
+        "./qc_assets/3d/etkdg/norbornene_conf0.sdf",
+        "./qc_assets/3d/etkdg/norbornene_conf0.xyz"
+      ],
+      "norbornadiene": [
+        "./qc_assets/2d/norbornadiene.png",
+        "./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf",
+        "./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz",
+        "./qc_assets/3d/etkdg/norbornadiene_conf0.sdf",
+        "./qc_assets/3d/etkdg/norbornadiene_conf0.xyz"
+      ]
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "{\n  \"(1) RI 与 RI_avg（两位小数）\": {\n    \"ETKDGv3\": {\n      \"norbornane\": \"34.09\",\n      \"norbornene\": \"35.65\",\n      \"norbornadiene\": \"37.73\",\n      \"RI_avg_ETKDGv3\": \"35.82\"\n    },\n    \"ETKDG\": {\n      \"norbornane\": \"33.00\",\n      \"norbornene\": \"34.49\",\n      \"norbornadiene\": \"36.45\",\n      \"RI_avg_ETKDG\": \"34.65\"\n    }\n  },\n  \"(2) 一致性检查（百分比差与阈值判定）\": {\n    \"能量差_阈值2.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"1.31\",\n        \"within_threshold\": true\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"1.53\",\n        \"within_threshold\": true\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"1.50\",\n        \"within_threshold\": true\n      }\n    },\n    \"RI差_阈值5.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"3.20\",\n        \"within_threshold\": true\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"3.25\",\n        \"within_threshold\": true\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"3.39\",\n        \"within_threshold\": true\n      }\n    }\n  },\n  \"(3) 方法平均值差与最终结果\": {\n    \"method_avg_diff_percent\": \"3.27\",\n    \"within_5pct_threshold\": true,\n    \"RI_avg_final\": \"35.82\",\n    \"final_method\": \"ETKDGv3\"\n  },\n  \"(4) 质检文件路径\": {\n    \"norbornane\": [\n      \"./qc_assets/2d/norbornane.png\",\n      \"./qc_assets/3d/etkdgv3/norbornane_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornane_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornane_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornane_conf0.xyz\"\n    ],\n    \"norbornene\": [\n      \"./qc_assets/2d/norbornene.png\",\n      \"./qc_assets/3d/etkdgv3/norbornene_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornene_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornene_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornene_conf0.xyz\"\n    ],\n    \"norbornadiene\": [\n      \"./qc_assets/2d/norbornadiene.png\",\n      \"./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornadiene_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornadiene_conf0.xyz\"\n    ]\n  }\n}",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "{\n  \"(1) RI 与 RI_avg（两位小数）\": {\n    \"ETKDGv3\": {\n      \"norbornane\": \"34.09\",\n      \"norbornene\": \"35.65\",\n      \"norbornadiene\": \"37.73\",\n      \"RI_avg_ETKDGv3\": \"35.82\"\n    },\n    \"ETKDG\": {\n      \"norbornane\": \"33.00\",\n      \"norbornene\": \"34.49\",\n      \"norbornadiene\": \"36.45\",\n      \"RI_avg_ETKDG\": \"34.65\"\n    }\n  },\n  \"(2) 一致性检查（百分比差与阈值判定）\": {\n    \"能量差_阈值2.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"1.31\",\n        \"within_threshold\": true\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"1.53\",\n        \"within_threshold\": true\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"1.50\",\n        \"within_threshold\": true\n      }\n    },\n    \"RI差_阈值5.00%\": {\n      \"norbornane\": {\n        \"diff_percent\": \"3.20\",\n        \"within_threshold\": true\n      },\n      \"norbornene\": {\n        \"diff_percent\": \"3.25\",\n        \"within_threshold\": true\n      },\n      \"norbornadiene\": {\n        \"diff_percent\": \"3.39\",\n        \"within_threshold\": true\n      }\n    }\n  },\n  \"(3) 方法平均值差与最终结果\": {\n    \"method_avg_diff_percent\": \"3.27\",\n    \"within_5pct_threshold\": true,\n    \"RI_avg_final\": \"35.82\",\n    \"final_method\": \"ETKDGv3\"\n  },\n  \"(4) 质检文件路径\": {\n    \"norbornane\": [\n      \"./qc_assets/2d/norbornane.png\",\n      \"./qc_assets/3d/etkdgv3/norbornane_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornane_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornane_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornane_conf0.xyz\"\n    ],\n    \"norbornene\": [\n      \"./qc_assets/2d/norbornene.png\",\n      \"./qc_assets/3d/etkdgv3/norbornene_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornene_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornene_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornene_conf0.xyz\"\n    ],\n    \"norbornadiene\": [\n      \"./qc_assets/2d/norbornadiene.png\",\n      \"./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf\",\n      \"./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz\",\n      \"./qc_assets/3d/etkdg/norbornadiene_conf0.sdf\",\n      \"./qc_assets/3d/etkdg/norbornadiene_conf0.xyz\"\n    ]\n  }\n}"
+  },
+  "evaluation_score": 0.8974358974358975,
+  "evaluation_summary": "匹配字段: 35/39 (得分: 89.74%)",
+  "evaluation_details": {
+    "(1) RI 与 RI_avg（两位小数）.ETKDGv3.norbornane": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDGv3.norbornane",
+      "expected": "32.91",
+      "actual": 34.09,
+      "expected_num": 32.91,
+      "actual_num": 34.09,
+      "expected_rounded": 32.91,
+      "actual_rounded": 34.09,
+      "relative_error": 0.03585536311151647,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) RI 与 RI_avg（两位小数）.ETKDGv3.norbornene": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDGv3.norbornene",
+      "expected": "35.63",
+      "actual": 35.65,
+      "expected_num": 35.63,
+      "actual_num": 35.65,
+      "expected_rounded": 35.63,
+      "actual_rounded": 35.65,
+      "relative_error": 0.0005613247263540842,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) RI 与 RI_avg（两位小数）.ETKDGv3.norbornadiene": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDGv3.norbornadiene",
+      "expected": "38.49",
+      "actual": 37.73,
+      "expected_num": 38.49,
+      "actual_num": 37.73,
+      "expected_rounded": 38.49,
+      "actual_rounded": 37.73,
+      "relative_error": 0.019745388412574828,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) RI 与 RI_avg（两位小数）.ETKDGv3.RI_avg_ETKDGv3": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDGv3.RI_avg_ETKDGv3",
+      "expected": "35.68",
+      "actual": 35.82,
+      "expected_num": 35.68,
+      "actual_num": 35.82,
+      "expected_rounded": 35.68,
+      "actual_rounded": 35.82,
+      "relative_error": 0.003923766816143513,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) RI 与 RI_avg（两位小数）.ETKDG.norbornane": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDG.norbornane",
+      "expected": "31.63",
+      "actual": 33.0,
+      "expected_num": 31.63,
+      "actual_num": 33.0,
+      "expected_rounded": 31.63,
+      "actual_rounded": 33.0,
+      "relative_error": 0.04331331014859314,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) RI 与 RI_avg（两位小数）.ETKDG.norbornene": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDG.norbornene",
+      "expected": "34.28",
+      "actual": 34.49,
+      "expected_num": 34.28,
+      "actual_num": 34.49,
+      "expected_rounded": 34.28,
+      "actual_rounded": 34.49,
+      "relative_error": 0.006126021003500608,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) RI 与 RI_avg（两位小数）.ETKDG.norbornadiene": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDG.norbornadiene",
+      "expected": "37.06",
+      "actual": 36.45,
+      "expected_num": 37.06,
+      "actual_num": 36.45,
+      "expected_rounded": 37.06,
+      "actual_rounded": 36.45,
+      "relative_error": 0.016459794927145152,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(1) RI 与 RI_avg（两位小数）.ETKDG.RI_avg_ETKDG": {
+      "path": "(1) RI 与 RI_avg（两位小数）.ETKDG.RI_avg_ETKDG",
+      "expected": "34.32",
+      "actual": 34.65,
+      "expected_num": 34.32,
+      "actual_num": 34.65,
+      "expected_rounded": 34.32,
+      "actual_rounded": 34.65,
+      "relative_error": 0.009615384615384566,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornane.diff_percent": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornane.diff_percent",
+      "expected": "1.31%",
+      "actual": 1.31,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornane.within_threshold": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornane.within_threshold",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornene.diff_percent": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornene.diff_percent",
+      "expected": "1.53%",
+      "actual": 1.53,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornene.within_threshold": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornene.within_threshold",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornadiene.diff_percent": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornadiene.diff_percent",
+      "expected": "1.50%",
+      "actual": 1.5,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornadiene.within_threshold": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.能量差_阈值2.00%.norbornadiene.within_threshold",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornane.diff_percent": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornane.diff_percent",
+      "expected": "3.90%",
+      "actual": 3.2,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornane.within_threshold": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornane.within_threshold",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornene.diff_percent": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornene.diff_percent",
+      "expected": "3.80%",
+      "actual": 3.25,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornene.within_threshold": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornene.within_threshold",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornadiene.diff_percent": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornadiene.diff_percent",
+      "expected": "3.71%",
+      "actual": 3.39,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornadiene.within_threshold": {
+      "path": "(2) 一致性检查（百分比差与阈值判定）.RI差_阈值5.00%.norbornadiene.within_threshold",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 方法平均值差与最终结果.method_avg_diff_percent": {
+      "path": "(3) 方法平均值差与最终结果.method_avg_diff_percent",
+      "expected": "3.80%",
+      "actual": 3.27,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "(3) 方法平均值差与最终结果.within_5pct_threshold": {
+      "path": "(3) 方法平均值差与最终结果.within_5pct_threshold",
+      "expected": "是",
+      "actual": true,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "(3) 方法平均值差与最终结果.RI_avg_final": {
+      "path": "(3) 方法平均值差与最终结果.RI_avg_final",
+      "expected": "35.68",
+      "actual": 35.82,
+      "expected_num": 35.68,
+      "actual_num": 35.82,
+      "expected_rounded": 35.68,
+      "actual_rounded": 35.82,
+      "relative_error": 0.003923766816143513,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "(3) 方法平均值差与最终结果.final_method": {
+      "path": "(3) 方法平均值差与最终结果.final_method",
+      "expected": "ETKDGv3",
+      "actual": "ETKDGv3",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornane[0]": {
+      "path": "(4) 质检文件路径.norbornane[0]",
+      "expected": "./qc_assets/2d/norbornane.png",
+      "actual": "./qc_assets/2d/norbornane.png",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornane[1]": {
+      "path": "(4) 质检文件路径.norbornane[1]",
+      "expected": "./qc_assets/3d/etkdgv3/norbornane_conf0.sdf",
+      "actual": "./qc_assets/3d/etkdgv3/norbornane_conf0.sdf",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornane[2]": {
+      "path": "(4) 质检文件路径.norbornane[2]",
+      "expected": "./qc_assets/3d/etkdgv3/norbornane_conf0.xyz",
+      "actual": "./qc_assets/3d/etkdgv3/norbornane_conf0.xyz",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornane[3]": {
+      "path": "(4) 质检文件路径.norbornane[3]",
+      "expected": "./qc_assets/3d/etkdg/norbornane_conf0.sdf",
+      "actual": "./qc_assets/3d/etkdg/norbornane_conf0.sdf",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornane[4]": {
+      "path": "(4) 质检文件路径.norbornane[4]",
+      "expected": "./qc_assets/3d/etkdg/norbornane_conf0.xyz",
+      "actual": "./qc_assets/3d/etkdg/norbornane_conf0.xyz",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornene[0]": {
+      "path": "(4) 质检文件路径.norbornene[0]",
+      "expected": "./qc_assets/2d/norbornene.png",
+      "actual": "./qc_assets/2d/norbornene.png",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornene[1]": {
+      "path": "(4) 质检文件路径.norbornene[1]",
+      "expected": "./qc_assets/3d/etkdgv3/norbornene_conf0.sdf",
+      "actual": "./qc_assets/3d/etkdgv3/norbornene_conf0.sdf",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornene[2]": {
+      "path": "(4) 质检文件路径.norbornene[2]",
+      "expected": "./qc_assets/3d/etkdgv3/norbornene_conf0.xyz",
+      "actual": "./qc_assets/3d/etkdgv3/norbornene_conf0.xyz",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornene[3]": {
+      "path": "(4) 质检文件路径.norbornene[3]",
+      "expected": "./qc_assets/3d/etkdg/norbornene_conf0.sdf",
+      "actual": "./qc_assets/3d/etkdg/norbornene_conf0.sdf",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornene[4]": {
+      "path": "(4) 质检文件路径.norbornene[4]",
+      "expected": "./qc_assets/3d/etkdg/norbornene_conf0.xyz",
+      "actual": "./qc_assets/3d/etkdg/norbornene_conf0.xyz",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornadiene[0]": {
+      "path": "(4) 质检文件路径.norbornadiene[0]",
+      "expected": "./qc_assets/2d/norbornadiene.png",
+      "actual": "./qc_assets/2d/norbornadiene.png",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornadiene[1]": {
+      "path": "(4) 质检文件路径.norbornadiene[1]",
+      "expected": "./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf",
+      "actual": "./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornadiene[2]": {
+      "path": "(4) 质检文件路径.norbornadiene[2]",
+      "expected": "./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz",
+      "actual": "./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornadiene[3]": {
+      "path": "(4) 质检文件路径.norbornadiene[3]",
+      "expected": "./qc_assets/3d/etkdg/norbornadiene_conf0.sdf",
+      "actual": "./qc_assets/3d/etkdg/norbornadiene_conf0.sdf",
+      "status": "match",
+      "match_type": "exact"
+    },
+    "(4) 质检文件路径.norbornadiene[4]": {
+      "path": "(4) 质检文件路径.norbornadiene[4]",
+      "expected": "./qc_assets/3d/etkdg/norbornadiene_conf0.xyz",
+      "actual": "./qc_assets/3d/etkdg/norbornadiene_conf0.xyz",
+      "status": "match",
+      "match_type": "exact"
+    }
+  },
+  "metadata": {
+    "subject": "化学科学",
+    "topic": "有机化学",
+    "image_path": [],
+    "solution_steps": [
+      "定义三种[2.2.1]双环体系的SMILES结构：norbornane (C1CC2CCC1C2), norbornene (C1CC2C=CC1C2), norbornadiene (C1=CC2C=CC1C2)",
+      "调用 chem_visualizer 生成三个分子的2D和3D可视化图像",
+      "对每个分子调用 optimize_geometry(smiles, method='ETKDGv3', force_field='MMFF', max_iters=200) 进行能量优化",
+      "对每个分子调用 get_3d_properties(smiles, method='ETKDGv3', conf_id=0) 计算3D性质",
+      "提取 Rg, PMI1, PMI3, eccentricity，计算刚性指数 RI = (1/Rg) × (PMI1/PMI3) × (1 + eccentricity) × 100",
+      "获取三个分子的RI：norbornane=81.58, norbornene=81.39, norbornadiene=84.50",
+      "计算平均刚性指数：RI_avg = (81.58 + 81.39 + 84.50) / 3 = 82.49"
+    ],
+    "tool_expected": [
+      "chem_visualizer",
+      "optimize_geometry",
+      "get_3d_properties"
+    ],
+    "golden_answer": [
+      {
+        "(1)": {
+          "RI_ETKDGv3": {
+            "norbornane": "32.91",
+            "norbornene": "35.63",
+            "norbornadiene": "38.49"
+          },
+          "RI_avg_ETKDGv3": "35.68",
+          "RI_ETKDG": {
+            "norbornane": "31.63",
+            "norbornene": "34.28",
+            "norbornadiene": "37.06"
+          },
+          "RI_avg_ETKDG": "34.32"
+        },
+        "(2)": {
+          "energy_diff_percent": {
+            "norbornane": "1.31%",
+            "norbornene": "1.54%",
+            "norbornadiene": "1.50%"
+          },
+          "energy_diff_within_2pct": {
+            "norbornane": "Yes",
+            "norbornene": "Yes",
+            "norbornadiene": "Yes"
+          },
+          "ri_diff_percent": {
+            "norbornane": "3.89%",
+            "norbornene": "3.79%",
+            "norbornadiene": "3.71%"
+          },
+          "ri_diff_within_5pct": {
+            "norbornane": "Yes",
+            "norbornene": "Yes",
+            "norbornadiene": "Yes"
+          }
+        },
+        "(3)": {
+          "method_avg_diff_percent": "3.81%",
+          "method_avg_diff_within_5pct": "Yes",
+          "RI_avg_final": "35.68",
+          "RI_avg_final_method": "ETKDGv3"
+        },
+        "(4)": {
+          "qc_paths": {
+            "norbornane": [
+              "./qc_assets/2d/norbornane.png",
+              "./qc_assets/3d/etkdgv3/norbornane_conf0.sdf",
+              "./qc_assets/3d/etkdgv3/norbornane_conf0.xyz",
+              "./qc_assets/3d/etkdg/norbornane_conf0.sdf",
+              "./qc_assets/3d/etkdg/norbornane_conf0.xyz"
+            ],
+            "norbornene": [
+              "./qc_assets/2d/norbornene.png",
+              "./qc_assets/3d/etkdgv3/norbornene_conf0.sdf",
+              "./qc_assets/3d/etkdgv3/norbornene_conf0.xyz",
+              "./qc_assets/3d/etkdg/norbornene_conf0.sdf",
+              "./qc_assets/3d/etkdg/norbornene_conf0.xyz"
+            ],
+            "norbornadiene": [
+              "./qc_assets/2d/norbornadiene.png",
+              "./qc_assets/3d/etkdgv3/norbornadiene_conf0.sdf",
+              "./qc_assets/3d/etkdgv3/norbornadiene_conf0.xyz",
+              "./qc_assets/3d/etkdg/norbornadiene_conf0.sdf",
+              "./qc_assets/3d/etkdg/norbornadiene_conf0.xyz"
+            ]
+          }
+        }
+      }
+    ],
+    "original_question_id": "36",
+    "test_type": "refined"
+  },
+  "metadata_summary": {
+    "subject": "化学科学",
+    "topic": "有机化学",
+    "test_type": "refined",
+    "original_question_id": "36",
+    "subject_topic_key": "化学科学::有机化学"
+  },
+  "evaluation_score_segments": {
+    "0_25": 1.0,
+    "0_50": 0.85,
+    "0_75": 0.8666666666666667,
+    "0_100": 0.8974358974358975
+  }
+}

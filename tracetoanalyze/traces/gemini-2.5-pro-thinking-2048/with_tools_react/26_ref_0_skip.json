@@ -1,0 +1,13 @@
+{
+  "id": "26_ref_0",
+  "model": "gemini-2.5-pro-thinking-2048",
+  "mode": "with_tools_react",
+  "reason": "图片加载失败",
+  "timestamp": 1763970730.9798856,
+  "details": {
+    "expected_images": 1,
+    "missing_images": [
+      "filtered_question_images/147284766.jpg"
+    ]
+  }
+}

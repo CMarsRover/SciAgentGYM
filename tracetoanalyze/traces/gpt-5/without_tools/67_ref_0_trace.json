@@ -1,0 +1,1108 @@
+{
+  "id": "67_ref_0",
+  "query": "复合圆轴受扭极限设计与校核（自包含）\n一根复合圆轴：左端刚性圆盘整体焊接，右端固支；轴向长度 l = 500 mm。内芯为实心钢圆杆（直径 d1 = 50 mm），外层为铝合金圆管（内径 d2 = 60 mm，外径 D2 = 76 mm）。两同长构件同轴受扭并满足端部扭转角一致；初始无预应力。\n材料参数与许用值（SI/题给单位）：钢 G1 = 77 GPa，许用剪应力 [τ]1 = 120 MPa；铝 G2 = 27 GPa，许用剪应力 [τ]2 = 70 MPa；端部最大允许扭转角 φ_max = 1.5°（= 0.0261799387799 rad）。\n几何与截面极惯性矩（已算）：\n- 钢实心杆 J1 = π d1^4 / 32 = 613592.3151542564 mm^4\n- 铝空心管 J2 = π (D2^4 − d2^4) / 32 = 2002978.9449639372 mm^4\n扭转刚度（已算，单位 N·mm/rad；G[MPa]×J[mm^4]/l[mm]）：k1 = 94493216.5337555，k2 = 108160863.02805261，k_eq = 202654079.5618081。\n单位总扭矩分配（已算，总扭矩取 1 N·mm）：T1_unit = 0.46627838303613184 N·mm（钢），T2_unit = 0.5337216169638682 N·mm（铝）。\n单位总扭矩下最大表面剪应力增量（已算，τ = T·r/J）：钢 τ1_unit = 1.8997890436376716e-5 MPa/(N·mm)；铝 τ2_unit = 1.0125628876738967e-5 MPa/(N·mm)。\n任务（单位按题给：扭矩 N·mm，角度 rad/deg，剪应力 MPa；除(5)特别说明外，以下要求均“给出数值，保留三位有效数字”）：\n(1) 在同时满足两材料许用剪应力与 φ_max 的条件下，求最大总扭矩 R1 = M_max，并指出控制条件（钢/铝许用应力或扭转角约束）。\n(2) 记(1)结果为 R1。求 R1 下分材料扭矩 T1*、T2*；表面剪应力 τ1*、τ2*；安全系数 SF_steel = [τ]1/τ1*、SF_al = [τ]2/τ2*。\n(3) 给出等效扭转刚度 k_eq（取上表数据）与端部扭转角 φ(R1)，并核对 φ(R1) ≤ φ_max。\n(4) 可视化验证数据：\n  - 扭矩承载能力对比：M_phi = k_eq·φ_max、M_steel = [τ]1/τ1_unit、M_al = [τ]2/τ2_unit；\n  - 截面剪应力分布：R1 下，钢实心杆 r ∈ {0, 12.5, 25} mm 与铝管壁 r ∈ {30, 34, 38} mm 的 (r, τ(r)) 数据（τ(r) = (T*/J)·r）。\n(5) 形成可追溯计算要点清单：列出 J1, J2, k1, k2, k_eq, T1_unit, T2_unit, τ1_unit, τ2_unit（用题给数值）；以及由此得到的各极限扭矩与结果，统一仅以符号引用前述结果 R1–R4（不重复给数值）。",
+  "query_data": {
+    "id": "67_ref_0",
+    "original_id": 67,
+    "refined_index": 0,
+    "question": "复合圆轴受扭极限设计与校核（自包含）\n一根复合圆轴：左端刚性圆盘整体焊接，右端固支；轴向长度 l = 500 mm。内芯为实心钢圆杆（直径 d1 = 50 mm），外层为铝合金圆管（内径 d2 = 60 mm，外径 D2 = 76 mm）。两同长构件同轴受扭并满足端部扭转角一致；初始无预应力。\n材料参数与许用值（SI/题给单位）：钢 G1 = 77 GPa，许用剪应力 [τ]1 = 120 MPa；铝 G2 = 27 GPa，许用剪应力 [τ]2 = 70 MPa；端部最大允许扭转角 φ_max = 1.5°（= 0.0261799387799 rad）。\n几何与截面极惯性矩（已算）：\n- 钢实心杆 J1 = π d1^4 / 32 = 613592.3151542564 mm^4\n- 铝空心管 J2 = π (D2^4 − d2^4) / 32 = 2002978.9449639372 mm^4\n扭转刚度（已算，单位 N·mm/rad；G[MPa]×J[mm^4]/l[mm]）：k1 = 94493216.5337555，k2 = 108160863.02805261，k_eq = 202654079.5618081。\n单位总扭矩分配（已算，总扭矩取 1 N·mm）：T1_unit = 0.46627838303613184 N·mm（钢），T2_unit = 0.5337216169638682 N·mm（铝）。\n单位总扭矩下最大表面剪应力增量（已算，τ = T·r/J）：钢 τ1_unit = 1.8997890436376716e-5 MPa/(N·mm)；铝 τ2_unit = 1.0125628876738967e-5 MPa/(N·mm)。\n任务（单位按题给：扭矩 N·mm，角度 rad/deg，剪应力 MPa；除(5)特别说明外，以下要求均“给出数值，保留三位有效数字”）：\n(1) 在同时满足两材料许用剪应力与 φ_max 的条件下，求最大总扭矩 R1 = M_max，并指出控制条件（钢/铝许用应力或扭转角约束）。\n(2) 记(1)结果为 R1。求 R1 下分材料扭矩 T1*、T2*；表面剪应力 τ1*、τ2*；安全系数 SF_steel = [τ]1/τ1*、SF_al = [τ]2/τ2*。\n(3) 给出等效扭转刚度 k_eq（取上表数据）与端部扭转角 φ(R1)，并核对 φ(R1) ≤ φ_max。\n(4) 可视化验证数据：\n  - 扭矩承载能力对比：M_phi = k_eq·φ_max、M_steel = [τ]1/τ1_unit、M_al = [τ]2/τ2_unit；\n  - 截面剪应力分布：R1 下，钢实心杆 r ∈ {0, 12.5, 25} mm 与铝管壁 r ∈ {30, 34, 38} mm 的 (r, τ(r)) 数据（τ(r) = (T*/J)·r）。\n(5) 形成可追溯计算要点清单：列出 J1, J2, k1, k2, k_eq, T1_unit, T2_unit, τ1_unit, τ2_unit（用题给数值）；以及由此得到的各极限扭矩与结果，统一仅以符号引用前述结果 R1–R4（不重复给数值）。",
+    "answer": "{'1': {'M_max': '5.31e6 N·mm', 'controlling_criterion': '扭转角约束'}, '2': {'T1_star': '2.47e6 N·mm', 'T2_star': '2.83e6 N·mm', 'tau1_star': '1.01e2 MPa', 'tau2_star': '5.37e1 MPa', 'SF_steel': '1.19', 'SF_al': '1.30'}, '3': {'k_eq': '2.03e8 N·mm/rad', 'phi_at_R1': '2.62e-2 rad (≈ 1.50°)', 'check': 'phi_at_R1 ≤ phi_max'}, '4': {'torque_capacity_comparison': {'M_phi': '5.31e6 N·mm', 'M_steel': '6.32e6 N·mm', 'M_al': '6.91e6 N·mm'}, 'shear_distribution_at_R1': {'steel_solid_rod_[r_mm, tau_MPa]': [['0', '0'], ['12.5', '5.04e1'], ['25.0', '1.01e2']], 'aluminum_tube_wall_[r_mm, tau_MPa]': [['30', '4.24e1'], ['34', '4.80e1'], ['38', '5.37e1']]}}, '5': {'given_data_numeric': {'J1': '613592.3151542564 mm^4', 'J2': '2002978.9449639372 mm^4', 'k1': '94493216.5337555 N·mm/rad', 'k2': '108160863.02805261 N·mm/rad', 'k_eq': '202654079.5618081 N·mm/rad', 'T1_unit': '0.46627838303613184 N·mm', 'T2_unit': '0.5337216169638682 N·mm', 'tau1_unit': '1.8997890436376716e-5 MPa/(N·mm)', 'tau2_unit': '1.0125628876738967e-5 MPa/(N·mm)'}, 'results_reference_only': {'R1': '见(1)之 M_max 及控制条件', 'R2': '见(2)之 T1*, T2*, τ1*, τ2*, SF_steel, SF_al', 'R3': '见(3)之 k_eq 与 φ(R1) 及核对结论', 'R4': '见(4)之承载能力对比与剪应力分布数据'}}}",
+    "metadata": {
+      "subject": "Materials Science",
+      "topic": "Composite Mechanics",
+      "image_path": [
+        "/r_bench/images/00006.png"
+      ],
+      "solution_steps": [],
+      "tool_expected": [
+        "calculate_polar_moment_solid",
+        "calculate_polar_moment_hollow",
+        "calculate_torsional_stiffness",
+        "distribute_torque_by_stiffness",
+        "calculate_max_shear_stress",
+        "plot_stress_distribution",
+        "plot_torque_capacity_comparison",
+        "save_calculation_report"
+      ],
+      "golden_answer": [
+        {
+          "1": {
+            "M_max": "5.31e6 N·mm",
+            "controlling_criterion": "扭转角约束"
+          },
+          "2": {
+            "T1_star": "2.47e6 N·mm",
+            "T2_star": "2.83e6 N·mm",
+            "tau1_star": "1.01e2 MPa",
+            "tau2_star": "5.37e1 MPa",
+            "SF_steel": "1.19",
+            "SF_al": "1.30"
+          },
+          "3": {
+            "k_eq": "2.03e8 N·mm/rad",
+            "phi_at_R1": "2.62e-2 rad (≈ 1.50°)",
+            "check": "phi_at_R1 ≤ phi_max"
+          },
+          "4": {
+            "torque_capacity_comparison": {
+              "M_phi": "5.31e6 N·mm",
+              "M_steel": "6.32e6 N·mm",
+              "M_al": "6.91e6 N·mm"
+            },
+            "shear_distribution_at_R1": {
+              "steel_solid_rod_[r_mm, tau_MPa]": [
+                [
+                  "0",
+                  "0"
+                ],
+                [
+                  "12.5",
+                  "5.04e1"
+                ],
+                [
+                  "25.0",
+                  "1.01e2"
+                ]
+              ],
+              "aluminum_tube_wall_[r_mm, tau_MPa]": [
+                [
+                  "30",
+                  "4.24e1"
+                ],
+                [
+                  "34",
+                  "4.80e1"
+                ],
+                [
+                  "38",
+                  "5.37e1"
+                ]
+              ]
+            }
+          },
+          "5": {
+            "given_data_numeric": {
+              "J1": "613592.3151542564 mm^4",
+              "J2": "2002978.9449639372 mm^4",
+              "k1": "94493216.5337555 N·mm/rad",
+              "k2": "108160863.02805261 N·mm/rad",
+              "k_eq": "202654079.5618081 N·mm/rad",
+              "T1_unit": "0.46627838303613184 N·mm",
+              "T2_unit": "0.5337216169638682 N·mm",
+              "tau1_unit": "1.8997890436376716e-5 MPa/(N·mm)",
+              "tau2_unit": "1.0125628876738967e-5 MPa/(N·mm)"
+            },
+            "results_reference_only": {
+              "R1": "见(1)之 M_max 及控制条件",
+              "R2": "见(2)之 T1*, T2*, τ1*, τ2*, SF_steel, SF_al",
+              "R3": "见(3)之 k_eq 与 φ(R1) 及核对结论",
+              "R4": "见(4)之承载能力对比与剪应力分布数据"
+            }
+          }
+        }
+      ],
+      "original_question_id": "67",
+      "test_type": "refined",
+      "dataset_key": "merged_questions_augmented",
+      "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+    },
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_polar_moment_solid",
+          "description": "计算实心圆截面的极惯性矩",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "diameter": {
+                "type": "number",
+                "description": "圆截面直径，单位：mm"
+              }
+            },
+            "required": [
+              "diameter"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_polar_moment_hollow",
+          "description": "计算空心圆截面的极惯性矩",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "outer_diameter": {
+                "type": "number",
+                "description": "外径，单位：mm"
+              },
+              "inner_diameter": {
+                "type": "number",
+                "description": "内径，单位：mm"
+              }
+            },
+            "required": [
+              "outer_diameter",
+              "inner_diameter"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_torsional_stiffness",
+          "description": "计算扭转刚度 GIp/l",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "shear_modulus": {
+                "type": "number",
+                "description": "剪切模量，单位：GPa"
+              },
+              "polar_moment": {
+                "type": "number",
+                "description": "极惯性矩，单位：mm^4"
+              },
+              "length": {
+                "type": "number",
+                "description": "长度，单位：mm"
+              }
+            },
+            "required": [
+              "shear_modulus",
+              "polar_moment",
+              "length"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate_max_shear_stress",
+          "description": "计算最大剪应力 τ = T*r/Ip",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "torque": {
+                "type": "number",
+                "description": "扭矩，单位：N·mm"
+              },
+              "polar_moment": {
+                "type": "number",
+                "description": "极惯性矩，单位：mm^4"
+              },
+              "radius": {
+                "type": "number",
+                "description": "半径，单位：mm"
+              }
+            },
+            "required": [
+              "torque",
+              "polar_moment",
+              "radius"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "distribute_torque_by_stiffness",
+          "description": "根据扭转刚度分配扭矩（变形协调条件）。对于并联扭转构件：φ1 = φ2，即 T1/(k1) = T2/(k2)，且 T1 + T2 = M_total",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "total_torque": {
+                "type": "number",
+                "description": "总扭矩，单位：N·mm"
+              },
+              "stiffness_list": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "各构件的扭转刚度列表，单位：N·mm"
+              }
+            },
+            "required": [
+              "total_torque",
+              "stiffness_list"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_stress_distribution",
+          "description": "绘制复合构件的剪应力分布图",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "analysis_result": {
+                "type": "object",
+                "description": "构件分析结果"
+              },
+              "max_torque_result": {
+                "type": "object",
+                "description": "最大扭矩计算结果"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "图像保存路径，默认为'./tool_images/stress_distribution.png'"
+              }
+            },
+            "required": [
+              "analysis_result",
+              "max_torque_result"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "plot_torque_capacity_comparison",
+          "description": "绘制各材料的扭矩承载能力对比图",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "analysis_result": {
+                "type": "object",
+                "description": "构件分析结果"
+              },
+              "max_torque_result": {
+                "type": "object",
+                "description": "最大扭矩计算结果"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "图像保存路径，默认为'./tool_images/torque_capacity.png'"
+              }
+            },
+            "required": [
+              "analysis_result",
+              "max_torque_result"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "save_calculation_report",
+          "description": "保存详细计算报告",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "analysis_result": {
+                "type": "object",
+                "description": "构件分析结果"
+              },
+              "max_torque_result": {
+                "type": "object",
+                "description": "最大扭矩计算结果"
+              },
+              "save_path": {
+                "type": "string",
+                "description": "报告保存路径，默认为'./mid_result/materials/torsion_report.json'"
+              }
+            },
+            "required": [
+              "analysis_result",
+              "max_torque_result"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/composite_torsion_toolkit_claude_7.py"
+        }
+      }
+    ],
+    "refined_version_data": {
+      "refined_question": "复合圆轴受扭极限设计与校核（自包含）\n一根复合圆轴：左端刚性圆盘整体焊接，右端固支；轴向长度 l = 500 mm。内芯为实心钢圆杆（直径 d1 = 50 mm），外层为铝合金圆管（内径 d2 = 60 mm，外径 D2 = 76 mm）。两同长构件同轴受扭并满足端部扭转角一致；初始无预应力。\n材料参数与许用值（SI/题给单位）：钢 G1 = 77 GPa，许用剪应力 [τ]1 = 120 MPa；铝 G2 = 27 GPa，许用剪应力 [τ]2 = 70 MPa；端部最大允许扭转角 φ_max = 1.5°（= 0.0261799387799 rad）。\n几何与截面极惯性矩（已算）：\n- 钢实心杆 J1 = π d1^4 / 32 = 613592.3151542564 mm^4\n- 铝空心管 J2 = π (D2^4 − d2^4) / 32 = 2002978.9449639372 mm^4\n扭转刚度（已算，单位 N·mm/rad；G[MPa]×J[mm^4]/l[mm]）：k1 = 94493216.5337555，k2 = 108160863.02805261，k_eq = 202654079.5618081。\n单位总扭矩分配（已算，总扭矩取 1 N·mm）：T1_unit = 0.46627838303613184 N·mm（钢），T2_unit = 0.5337216169638682 N·mm（铝）。\n单位总扭矩下最大表面剪应力增量（已算，τ = T·r/J）：钢 τ1_unit = 1.8997890436376716e-5 MPa/(N·mm)；铝 τ2_unit = 1.0125628876738967e-5 MPa/(N·mm)。\n任务（单位按题给：扭矩 N·mm，角度 rad/deg，剪应力 MPa；除(5)特别说明外，以下要求均“给出数值，保留三位有效数字”）：\n(1) 在同时满足两材料许用剪应力与 φ_max 的条件下，求最大总扭矩 R1 = M_max，并指出控制条件（钢/铝许用应力或扭转角约束）。\n(2) 记(1)结果为 R1。求 R1 下分材料扭矩 T1*、T2*；表面剪应力 τ1*、τ2*；安全系数 SF_steel = [τ]1/τ1*、SF_al = [τ]2/τ2*。\n(3) 给出等效扭转刚度 k_eq（取上表数据）与端部扭转角 φ(R1)，并核对 φ(R1) ≤ φ_max。\n(4) 可视化验证数据：\n  - 扭矩承载能力对比：M_phi = k_eq·φ_max、M_steel = [τ]1/τ1_unit、M_al = [τ]2/τ2_unit；\n  - 截面剪应力分布：R1 下，钢实心杆 r ∈ {0, 12.5, 25} mm 与铝管壁 r ∈ {30, 34, 38} mm 的 (r, τ(r)) 数据（τ(r) = (T*/J)·r）。\n(5) 形成可追溯计算要点清单：列出 J1, J2, k1, k2, k_eq, T1_unit, T2_unit, τ1_unit, τ2_unit（用题给数值）；以及由此得到的各极限扭矩与结果，统一仅以符号引用前述结果 R1–R4（不重复给数值）。",
+      "final_answer": {
+        "1": {
+          "M_max": "5.31e6 N·mm",
+          "controlling_criterion": "扭转角约束"
+        },
+        "2": {
+          "T1_star": "2.47e6 N·mm",
+          "T2_star": "2.83e6 N·mm",
+          "tau1_star": "1.01e2 MPa",
+          "tau2_star": "5.37e1 MPa",
+          "SF_steel": "1.19",
+          "SF_al": "1.30"
+        },
+        "3": {
+          "k_eq": "2.03e8 N·mm/rad",
+          "phi_at_R1": "2.62e-2 rad (≈ 1.50°)",
+          "check": "phi_at_R1 ≤ phi_max"
+        },
+        "4": {
+          "torque_capacity_comparison": {
+            "M_phi": "5.31e6 N·mm",
+            "M_steel": "6.32e6 N·mm",
+            "M_al": "6.91e6 N·mm"
+          },
+          "shear_distribution_at_R1": {
+            "steel_solid_rod_[r_mm, tau_MPa]": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "12.5",
+                "5.04e1"
+              ],
+              [
+                "25.0",
+                "1.01e2"
+              ]
+            ],
+            "aluminum_tube_wall_[r_mm, tau_MPa]": [
+              [
+                "30",
+                "4.24e1"
+              ],
+              [
+                "34",
+                "4.80e1"
+              ],
+              [
+                "38",
+                "5.37e1"
+              ]
+            ]
+          }
+        },
+        "5": {
+          "given_data_numeric": {
+            "J1": "613592.3151542564 mm^4",
+            "J2": "2002978.9449639372 mm^4",
+            "k1": "94493216.5337555 N·mm/rad",
+            "k2": "108160863.02805261 N·mm/rad",
+            "k_eq": "202654079.5618081 N·mm/rad",
+            "T1_unit": "0.46627838303613184 N·mm",
+            "T2_unit": "0.5337216169638682 N·mm",
+            "tau1_unit": "1.8997890436376716e-5 MPa/(N·mm)",
+            "tau2_unit": "1.0125628876738967e-5 MPa/(N·mm)"
+          },
+          "results_reference_only": {
+            "R1": "见(1)之 M_max 及控制条件",
+            "R2": "见(2)之 T1*, T2*, τ1*, τ2*, SF_steel, SF_al",
+            "R3": "见(3)之 k_eq 与 φ(R1) 及核对结论",
+            "R4": "见(4)之承载能力对比与剪应力分布数据"
+          }
+        }
+      }
+    },
+    "metadata_summary": {
+      "subject": "Materials Science",
+      "topic": "Composite Mechanics",
+      "test_type": "refined",
+      "original_question_id": "67",
+      "subject_topic_key": "Materials Science::Composite Mechanics"
+    }
+  },
+  "model": "gpt-5",
+  "use_tools": false,
+  "mode": "text_mode",
+  "rounds": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "复合圆轴受扭极限设计与校核（自包含）\n一根复合圆轴：左端刚性圆盘整体焊接，右端固支；轴向长度 l = 500 mm。内芯为实心钢圆杆（直径 d1 = 50 mm），外层为铝合金圆管（内径 d2 = 60 mm，外径 D2 = 76 mm）。两同长构件同轴受扭并满足端部扭转角一致；初始无预应力。\n材料参数与许用值（SI/题给单位）：钢 G1 = 77 GPa，许用剪应力 [τ]1 = 120 MPa；铝 G2 = 27 GPa，许用剪应力 [τ]2 = 70 MPa；端部最大允许扭转角 φ_max = 1.5°（= 0.0261799387799 rad）。\n几何与截面极惯性矩（已算）：\n- 钢实心杆 J1 = π d1^4 / 32 = 613592.3151542564 mm^4\n- 铝空心管 J2 = π (D2^4 − d2^4) / 32 = 2002978.9449639372 mm^4\n扭转刚度（已算，单位 N·mm/rad；G[MPa]×J[mm^4]/l[mm]）：k1 = 94493216.5337555，k2 = 108160863.02805261，k_eq = 202654079.5618081。\n单位总扭矩分配（已算，总扭矩取 1 N·mm）：T1_unit = 0.46627838303613184 N·mm（钢），T2_unit = 0.5337216169638682 N·mm（铝）。\n单位总扭矩下最大表面剪应力增量（已算，τ = T·r/J）：钢 τ1_unit = 1.8997890436376716e-5 MPa/(N·mm)；铝 τ2_unit = 1.0125628876738967e-5 MPa/(N·mm)。\n任务（单位按题给：扭矩 N·mm，角度 rad/deg，剪应力 MPa；除(5)特别说明外，以下要求均“给出数值，保留三位有效数字”）：\n(1) 在同时满足两材料许用剪应力与 φ_max 的条件下，求最大总扭矩 R1 = M_max，并指出控制条件（钢/铝许用应力或扭转角约束）。\n(2) 记(1)结果为 R1。求 R1 下分材料扭矩 T1*、T2*；表面剪应力 τ1*、τ2*；安全系数 SF_steel = [τ]1/τ1*、SF_al = [τ]2/τ2*。\n(3) 给出等效扭转刚度 k_eq（取上表数据）与端部扭转角 φ(R1)，并核对 φ(R1) ≤ φ_max。\n(4) 可视化验证数据：\n  - 扭矩承载能力对比：M_phi = k_eq·φ_max、M_steel = [τ]1/τ1_unit、M_al = [τ]2/τ2_unit；\n  - 截面剪应力分布：R1 下，钢实心杆 r ∈ {0, 12.5, 25} mm 与铝管壁 r ∈ {30, 34, 38} mm 的 (r, τ(r)) 数据（τ(r) = (T*/J)·r）。\n(5) 形成可追溯计算要点清单：列出 J1, J2, k1, k2, k_eq, T1_unit, T2_unit, τ1_unit, τ2_unit（用题给数值）；以及由此得到的各极限扭矩与结果，统一仅以符号引用前述结果 R1–R4（不重复给数值）。"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "data:image/png;base64,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"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "解题思路（同轴、等角扭转，串联刚度求和、并联分扭）：两构件等长同轴、端部扭转角一致，故总扭矩 T 由两支路分担，Ti = ki/(k1+k2)·T；端部角 φ = T/k_eq = T/(k1+k2)。材料强度按外表面剪应力 τ = T·r/J 控制；角度按 φ ≤ φ_max 控制。\n\n已知与已算（题给）：\n- 尺寸/长度：l = 500 mm；钢芯 d1 = 50 mm（r1 = 25 mm）；铝管 d2 = 60 mm，D2 = 76 mm（R2 = 38 mm）\n- 材料：G1 = 77 GPa，G2 = 27 GPa；[τ]1 = 120 MPa，[τ]2 = 70 MPa；φ_max = 1.5° = 0.02617994 rad\n- 极惯性矩：J1 = 613592.315 mm^4；J2 = 2002978.945 mm^4\n- 扭转刚度：k1 = 9.44932×10^7 N·mm/rad；k2 = 1.08161×10^8 N·mm/rad；k_eq = 2.02654×10^8 N·mm/rad\n- 单位总扭矩分配（T_total = 1 N·mm）：T1_unit = 0.466278（钢），T2_unit = 0.533722（铝）\n- 单位总扭矩的外表面剪应力增量：τ1_unit = 1.89979×10^-5 MPa/(N·mm)；τ2_unit = 1.01256×10^-5 MPa/(N·mm)\n\n(1) 综合极限总扭矩 R1 = M_max（3位有效数字）\n- 角度约束：M_phi = k_eq·φ_max = 5.31×10^6 N·mm\n- 钢许用：M_steel = [τ]1/τ1_unit ≈ 6.32×10^6 N·mm\n- 铝许用：M_al = [τ]2/τ2_unit ≈ 6.91×10^6 N·mm\n- 结论：R1 = M_max = 5.31×10^6 N·mm，控制条件为扭转角 φ_max\n\n(2) 在 R1 下的分扭矩、剪应力与安全系数（3位有效数字）\n- 分扭矩（也可由 Ti = ki·φ_max 得到）\n  - T1*（钢）= 2.47×10^6 N·mm\n  - T2*（铝）= 2.83×10^6 N·mm\n- 外表面剪应力（τi* = τi_unit·R1）\n  - 钢：τ1* ≈ 101 MPa\n  - 铝：τ2* ≈ 53.7 MPa\n- 安全系数\n  - SF_steel = [τ]1/τ1* ≈ 1.19\n  - SF_al = [τ]2/τ2* ≈ 1.30\n\n(3) 等效刚度与角度校核（3位有效数字）\n- k_eq = 2.03×10^8 N·mm/rad\n- φ(R1) = R1/k_eq = 0.0262 rad = 1.50°，满足 φ(R1) ≤ φ_max（等号成立）\n\n(4) 可视化验证数据（3位有效数字）\n- 扭矩承载能力对比\n  - M_phi = 5.31×10^6 N·mm（角度约束）\n  - M_steel = 6.32×10^6 N·mm（钢许用）\n  - M_al = 6.91×10^6 N·mm（铝许用）\n- 截面剪应力分布（关系线性，τ(r) = (T*/J)·r）\n  - 钢（r ∈ {0, 12.5, 25} mm；τ1* = 101 MPa 为 r = 25 mm 处）\n    - r = 0 mm → τ = 0.000 MPa\n    - r = 12.5 mm → τ ≈ 50.4 MPa\n    - r = 25 mm → τ ≈ 100.8 MPa\n  - 铝（r ∈ {30, 34, 38} mm；τ2* = 53.7 MPa 为 r = 38 mm 处）\n    - r = 30 mm → τ ≈ 42.9 MPa\n    - r = 34 mm → τ ≈ 48.1 MPa\n    - r = 38 mm → τ ≈ 53.7 MPa\n\n(5) 可追溯计算要点清单\n- 采用（题给/上表）数据：J1, J2, k1, k2, k_eq, T1_unit, T2_unit, τ1_unit, τ2_unit\n- 由此得到的各极限扭矩与结果，仅以符号引用：\n  - R2 = M_phi = k_eq·φ_max\n  - R3 = M_steel = [τ]1/τ1_unit\n  - R4 = M_al = [τ]2/τ2_unit\n  - R1 = min(R2, R3, R4)（本题为 R2 控制）\n  - 在 R1 下：分扭矩 T1*, T2*；剪应力 τ1*, τ2*；安全系数 SF_steel, SF_al；扭转角 φ(R1) = R1/k_eq（= φ_max）\n\n备注\n- 分扭矩比例常数：T1/T = k1/k_eq = 0.466，T2/T = k2/k_eq = 0.534（不随载荷水平而变）\n- 剪应力分布在半径上线性，核心/内壁处应力为零，外表面取最大值用于强度校核。"
+    },
+    {
+      "role": "user",
+      "content": "现在请仅输出严格 JSON，必须完全匹配以下结构（键名、层级、字段齐全），所有数值用数字表示（保留2-3位小数），布尔用 true/false，字符串填写说明文字。不要输出任何解释文字或前后缀，也不要多余字段；若无法计算某值请给出可解析的近似值。\n\n{\n  \"1\": {\n    \"M_max\": \"[字符串]\",\n    \"controlling_criterion\": \"[字符串]\"\n  },\n  \"2\": {\n    \"T1_star\": \"[字符串]\",\n    \"T2_star\": \"[字符串]\",\n    \"tau1_star\": \"[字符串]\",\n    \"tau2_star\": \"[字符串]\",\n    \"SF_steel\": \"[字符串]\",\n    \"SF_al\": \"[字符串]\"\n  },\n  \"3\": {\n    \"k_eq\": \"[字符串]\",\n    \"phi_at_R1\": \"[字符串]\",\n    \"check\": \"[字符串]\"\n  },\n  \"4\": {\n    \"torque_capacity_comparison\": {\n      \"M_phi\": \"[字符串]\",\n      \"M_steel\": \"[字符串]\",\n      \"M_al\": \"[字符串]\"\n    },\n    \"shear_distribution_at_R1\": {\n      \"steel_solid_rod_[r_mm, tau_MPa]\": [\n        \"[2个字符串的数组]\"\n      ],\n      \"aluminum_tube_wall_[r_mm, tau_MPa]\": [\n        \"[2个字符串的数组]\"\n      ]\n    }\n  },\n  \"5\": {\n    \"given_data_numeric\": {\n      \"J1\": \"[字符串]\",\n      \"J2\": \"[字符串]\",\n      \"k1\": \"[字符串]\",\n      \"k2\": \"[字符串]\",\n      \"k_eq\": \"[字符串]\",\n      \"T1_unit\": \"[字符串]\",\n      \"T2_unit\": \"[字符串]\",\n      \"tau1_unit\": \"[字符串]\",\n      \"tau2_unit\": \"[字符串]\"\n    },\n    \"results_reference_only\": {\n      \"R1\": \"[字符串]\",\n      \"R2\": \"[字符串]\",\n      \"R3\": \"[字符串]\",\n      \"R4\": \"[字符串]\"\n    }\n  }\n}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"1\": {\n    \"M_max\": \"5305471.40\",\n    \"controlling_criterion\": \"扭转角约束 φ_max\"\n  },\n  \"2\": {\n    \"T1_star\": \"2473826.62\",\n    \"T2_star\": \"2831644.77\",\n    \"tau1_star\": \"100.79\",\n    \"tau2_star\": \"53.72\",\n    \"SF_steel\": \"1.19\",\n    \"SF_al\": \"1.30\"\n  },\n  \"3\": {\n    \"k_eq\": \"202654079.56\",\n    \"phi_at_R1\": \"0.02618\",\n    \"check\": \"满足 φ(R1) ≤ φ_max\"\n  },\n  \"4\": {\n    \"torque_capacity_comparison\": {\n      \"M_phi\": \"5305471.40\",\n      \"M_steel\": \"6316491.00\",\n      \"M_al\": \"6913150.00\"\n    },\n    \"shear_distribution_at_R1\": {\n      \"steel_solid_rod_[r_mm, tau_MPa]\": [\n        [\"0.00\", \"0.00\"],\n        [\"12.50\", \"50.40\"],\n        [\"25.00\", \"100.79\"]\n      ],\n      \"aluminum_tube_wall_[r_mm, tau_MPa]\": [\n        [\"30.00\", \"42.41\"],\n        [\"34.00\", \"48.07\"],\n        [\"38.00\", \"53.72\"]\n      ]\n    }\n  },\n  \"5\": {\n    \"given_data_numeric\": {\n      \"J1\": \"613592.315\",\n      \"J2\": \"2002978.945\",\n      \"k1\": \"94493216.534\",\n      \"k2\": \"108160863.028\",\n      \"k_eq\": \"202654079.562\",\n      \"T1_unit\": \"0.466\",\n      \"T2_unit\": \"0.534\",\n      \"tau1_unit\": \"0.0000190\",\n      \"tau2_unit\": \"0.0000101\"\n    },\n    \"results_reference_only\": {\n      \"R1\": \"5305471.40\",\n      \"R2\": \"5305471.40\",\n      \"R3\": \"6316491.00\",\n      \"R4\": \"6913150.00\"\n    }\n  }\n}"
+    }
+  ],
+  "metadata": {
+    "subject": "Materials Science",
+    "topic": "Composite Mechanics",
+    "image_path": [
+      "/r_bench/images/00006.png"
+    ],
+    "solution_steps": [],
+    "tool_expected": [
+      "calculate_polar_moment_solid",
+      "calculate_polar_moment_hollow",
+      "calculate_torsional_stiffness",
+      "distribute_torque_by_stiffness",
+      "calculate_max_shear_stress",
+      "plot_stress_distribution",
+      "plot_torque_capacity_comparison",
+      "save_calculation_report"
+    ],
+    "golden_answer": [
+      {
+        "1": {
+          "M_max": "5.31e6 N·mm",
+          "controlling_criterion": "扭转角约束"
+        },
+        "2": {
+          "T1_star": "2.47e6 N·mm",
+          "T2_star": "2.83e6 N·mm",
+          "tau1_star": "1.01e2 MPa",
+          "tau2_star": "5.37e1 MPa",
+          "SF_steel": "1.19",
+          "SF_al": "1.30"
+        },
+        "3": {
+          "k_eq": "2.03e8 N·mm/rad",
+          "phi_at_R1": "2.62e-2 rad (≈ 1.50°)",
+          "check": "phi_at_R1 ≤ phi_max"
+        },
+        "4": {
+          "torque_capacity_comparison": {
+            "M_phi": "5.31e6 N·mm",
+            "M_steel": "6.32e6 N·mm",
+            "M_al": "6.91e6 N·mm"
+          },
+          "shear_distribution_at_R1": {
+            "steel_solid_rod_[r_mm, tau_MPa]": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "12.5",
+                "5.04e1"
+              ],
+              [
+                "25.0",
+                "1.01e2"
+              ]
+            ],
+            "aluminum_tube_wall_[r_mm, tau_MPa]": [
+              [
+                "30",
+                "4.24e1"
+              ],
+              [
+                "34",
+                "4.80e1"
+              ],
+              [
+                "38",
+                "5.37e1"
+              ]
+            ]
+          }
+        },
+        "5": {
+          "given_data_numeric": {
+            "J1": "613592.3151542564 mm^4",
+            "J2": "2002978.9449639372 mm^4",
+            "k1": "94493216.5337555 N·mm/rad",
+            "k2": "108160863.02805261 N·mm/rad",
+            "k_eq": "202654079.5618081 N·mm/rad",
+            "T1_unit": "0.46627838303613184 N·mm",
+            "T2_unit": "0.5337216169638682 N·mm",
+            "tau1_unit": "1.8997890436376716e-5 MPa/(N·mm)",
+            "tau2_unit": "1.0125628876738967e-5 MPa/(N·mm)"
+          },
+          "results_reference_only": {
+            "R1": "见(1)之 M_max 及控制条件",
+            "R2": "见(2)之 T1*, T2*, τ1*, τ2*, SF_steel, SF_al",
+            "R3": "见(3)之 k_eq 与 φ(R1) 及核对结论",
+            "R4": "见(4)之承载能力对比与剪应力分布数据"
+          }
+        }
+      }
+    ],
+    "original_question_id": "67",
+    "test_type": "refined",
+    "dataset_key": "merged_questions_augmented",
+    "trace_root": "/root/workspace/hbz/MutliSciTool/tracetoanalyze/traces"
+  },
+  "metadata_summary": {
+    "subject": "Materials Science",
+    "topic": "Composite Mechanics",
+    "test_type": "refined",
+    "original_question_id": "67",
+    "subject_topic_key": "Materials Science::Composite Mechanics"
+  },
+  "answer_template": {
+    "1": {
+      "M_max": "[字符串]",
+      "controlling_criterion": "[字符串]"
+    },
+    "2": {
+      "T1_star": "[字符串]",
+      "T2_star": "[字符串]",
+      "tau1_star": "[字符串]",
+      "tau2_star": "[字符串]",
+      "SF_steel": "[字符串]",
+      "SF_al": "[字符串]"
+    },
+    "3": {
+      "k_eq": "[字符串]",
+      "phi_at_R1": "[字符串]",
+      "check": "[字符串]"
+    },
+    "4": {
+      "torque_capacity_comparison": {
+        "M_phi": "[字符串]",
+        "M_steel": "[字符串]",
+        "M_al": "[字符串]"
+      },
+      "shear_distribution_at_R1": {
+        "steel_solid_rod_[r_mm, tau_MPa]": [
+          "[2个字符串的数组]"
+        ],
+        "aluminum_tube_wall_[r_mm, tau_MPa]": [
+          "[2个字符串的数组]"
+        ]
+      }
+    },
+    "5": {
+      "given_data_numeric": {
+        "J1": "[字符串]",
+        "J2": "[字符串]",
+        "k1": "[字符串]",
+        "k2": "[字符串]",
+        "k_eq": "[字符串]",
+        "T1_unit": "[字符串]",
+        "T2_unit": "[字符串]",
+        "tau1_unit": "[字符串]",
+        "tau2_unit": "[字符串]"
+      },
+      "results_reference_only": {
+        "R1": "[字符串]",
+        "R2": "[字符串]",
+        "R3": "[字符串]",
+        "R4": "[字符串]"
+      }
+    }
+  },
+  "golden_standard": {
+    "1": {
+      "M_max": "5.31e6 N·mm",
+      "controlling_criterion": "扭转角约束"
+    },
+    "2": {
+      "T1_star": "2.47e6 N·mm",
+      "T2_star": "2.83e6 N·mm",
+      "tau1_star": "1.01e2 MPa",
+      "tau2_star": "5.37e1 MPa",
+      "SF_steel": "1.19",
+      "SF_al": "1.30"
+    },
+    "3": {
+      "k_eq": "2.03e8 N·mm/rad",
+      "phi_at_R1": "2.62e-2 rad (≈ 1.50°)",
+      "check": "phi_at_R1 ≤ phi_max"
+    },
+    "4": {
+      "torque_capacity_comparison": {
+        "M_phi": "5.31e6 N·mm",
+        "M_steel": "6.32e6 N·mm",
+        "M_al": "6.91e6 N·mm"
+      },
+      "shear_distribution_at_R1": {
+        "steel_solid_rod_[r_mm, tau_MPa]": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "12.5",
+            "5.04e1"
+          ],
+          [
+            "25.0",
+            "1.01e2"
+          ]
+        ],
+        "aluminum_tube_wall_[r_mm, tau_MPa]": [
+          [
+            "30",
+            "4.24e1"
+          ],
+          [
+            "34",
+            "4.80e1"
+          ],
+          [
+            "38",
+            "5.37e1"
+          ]
+        ]
+      }
+    },
+    "5": {
+      "given_data_numeric": {
+        "J1": "613592.3151542564 mm^4",
+        "J2": "2002978.9449639372 mm^4",
+        "k1": "94493216.5337555 N·mm/rad",
+        "k2": "108160863.02805261 N·mm/rad",
+        "k_eq": "202654079.5618081 N·mm/rad",
+        "T1_unit": "0.46627838303613184 N·mm",
+        "T2_unit": "0.5337216169638682 N·mm",
+        "tau1_unit": "1.8997890436376716e-5 MPa/(N·mm)",
+        "tau2_unit": "1.0125628876738967e-5 MPa/(N·mm)"
+      },
+      "results_reference_only": {
+        "R1": "见(1)之 M_max 及控制条件",
+        "R2": "见(2)之 T1*, T2*, τ1*, τ2*, SF_steel, SF_al",
+        "R3": "见(3)之 k_eq 与 φ(R1) 及核对结论",
+        "R4": "见(4)之承载能力对比与剪应力分布数据"
+      }
+    }
+  },
+  "expected_format": "structured_json",
+  "model_structured_answer": {
+    "1": {
+      "M_max": 5305471.4,
+      "controlling_criterion": "扭转角约束 φ_max"
+    },
+    "2": {
+      "T1_star": 2473826.62,
+      "T2_star": 2831644.77,
+      "tau1_star": 100.79,
+      "tau2_star": 53.72,
+      "SF_steel": 1.19,
+      "SF_al": 1.3
+    },
+    "3": {
+      "k_eq": 202654079.56,
+      "phi_at_R1": 0.02618,
+      "check": "满足 φ(R1) ≤ φ_max"
+    },
+    "4": {
+      "torque_capacity_comparison": {
+        "M_phi": 5305471.4,
+        "M_steel": 6316491.0,
+        "M_al": 6913150.0
+      },
+      "shear_distribution_at_R1": {
+        "steel_solid_rod_[r_mm, tau_MPa]": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            12.5,
+            50.4
+          ],
+          [
+            25.0,
+            100.79
+          ]
+        ],
+        "aluminum_tube_wall_[r_mm, tau_MPa]": [
+          [
+            30.0,
+            42.41
+          ],
+          [
+            34.0,
+            48.07
+          ],
+          [
+            38.0,
+            53.72
+          ]
+        ]
+      }
+    },
+    "5": {
+      "given_data_numeric": {
+        "J1": 613592.315,
+        "J2": 2002978.945,
+        "k1": 94493216.534,
+        "k2": 108160863.028,
+        "k_eq": 202654079.562,
+        "T1_unit": 0.466,
+        "T2_unit": 0.534,
+        "tau1_unit": 1.9e-05,
+        "tau2_unit": 1.01e-05
+      },
+      "results_reference_only": {
+        "R1": 5305471.4,
+        "R2": 5305471.4,
+        "R3": 6316491.0,
+        "R4": 6913150.0
+      }
+    }
+  },
+  "answer_extraction_success": true,
+  "model_raw_answer": "{\n  \"1\": {\n    \"M_max\": \"5305471.40\",\n    \"controlling_criterion\": \"扭转角约束 φ_max\"\n  },\n  \"2\": {\n    \"T1_star\": \"2473826.62\",\n    \"T2_star\": \"2831644.77\",\n    \"tau1_star\": \"100.79\",\n    \"tau2_star\": \"53.72\",\n    \"SF_steel\": \"1.19\",\n    \"SF_al\": \"1.30\"\n  },\n  \"3\": {\n    \"k_eq\": \"202654079.56\",\n    \"phi_at_R1\": \"0.02618\",\n    \"check\": \"满足 φ(R1) ≤ φ_max\"\n  },\n  \"4\": {\n    \"torque_capacity_comparison\": {\n      \"M_phi\": \"5305471.40\",\n      \"M_steel\": \"6316491.00\",\n      \"M_al\": \"6913150.00\"\n    },\n    \"shear_distribution_at_R1\": {\n      \"steel_solid_rod_[r_mm, tau_MPa]\": [\n        [\"0.00\", \"0.00\"],\n        [\"12.50\", \"50.40\"],\n        [\"25.00\", \"100.79\"]\n      ],\n      \"aluminum_tube_wall_[r_mm, tau_MPa]\": [\n        [\"30.00\", \"42.41\"],\n        [\"34.00\", \"48.07\"],\n        [\"38.00\", \"53.72\"]\n      ]\n    }\n  },\n  \"5\": {\n    \"given_data_numeric\": {\n      \"J1\": \"613592.315\",\n      \"J2\": \"2002978.945\",\n      \"k1\": \"94493216.534\",\n      \"k2\": \"108160863.028\",\n      \"k_eq\": \"202654079.562\",\n      \"T1_unit\": \"0.466\",\n      \"T2_unit\": \"0.534\",\n      \"tau1_unit\": \"0.0000190\",\n      \"tau2_unit\": \"0.0000101\"\n    },\n    \"results_reference_only\": {\n      \"R1\": \"5305471.40\",\n      \"R2\": \"5305471.40\",\n      \"R3\": \"6316491.00\",\n      \"R4\": \"6913150.00\"\n    }\n  }\n}",
+  "model_last_assistant_message": {
+    "role": "assistant",
+    "content": "{\n  \"1\": {\n    \"M_max\": \"5305471.40\",\n    \"controlling_criterion\": \"扭转角约束 φ_max\"\n  },\n  \"2\": {\n    \"T1_star\": \"2473826.62\",\n    \"T2_star\": \"2831644.77\",\n    \"tau1_star\": \"100.79\",\n    \"tau2_star\": \"53.72\",\n    \"SF_steel\": \"1.19\",\n    \"SF_al\": \"1.30\"\n  },\n  \"3\": {\n    \"k_eq\": \"202654079.56\",\n    \"phi_at_R1\": \"0.02618\",\n    \"check\": \"满足 φ(R1) ≤ φ_max\"\n  },\n  \"4\": {\n    \"torque_capacity_comparison\": {\n      \"M_phi\": \"5305471.40\",\n      \"M_steel\": \"6316491.00\",\n      \"M_al\": \"6913150.00\"\n    },\n    \"shear_distribution_at_R1\": {\n      \"steel_solid_rod_[r_mm, tau_MPa]\": [\n        [\"0.00\", \"0.00\"],\n        [\"12.50\", \"50.40\"],\n        [\"25.00\", \"100.79\"]\n      ],\n      \"aluminum_tube_wall_[r_mm, tau_MPa]\": [\n        [\"30.00\", \"42.41\"],\n        [\"34.00\", \"48.07\"],\n        [\"38.00\", \"53.72\"]\n      ]\n    }\n  },\n  \"5\": {\n    \"given_data_numeric\": {\n      \"J1\": \"613592.315\",\n      \"J2\": \"2002978.945\",\n      \"k1\": \"94493216.534\",\n      \"k2\": \"108160863.028\",\n      \"k_eq\": \"202654079.562\",\n      \"T1_unit\": \"0.466\",\n      \"T2_unit\": \"0.534\",\n      \"tau1_unit\": \"0.0000190\",\n      \"tau2_unit\": \"0.0000101\"\n    },\n    \"results_reference_only\": {\n      \"R1\": \"5305471.40\",\n      \"R2\": \"5305471.40\",\n      \"R3\": \"6316491.00\",\n      \"R4\": \"6913150.00\"\n    }\n  }\n}"
+  },
+  "evaluation_score": 0.8974358974358975,
+  "evaluation_summary": "匹配字段: 35/39 (得分: 89.74%)",
+  "evaluation_details": {
+    "1.M_max": {
+      "path": "1.M_max",
+      "expected": "5.31e6 N·mm",
+      "actual": 5305471.4,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "1.controlling_criterion": {
+      "path": "1.controlling_criterion",
+      "expected": "扭转角约束",
+      "actual": "扭转角约束 φ_max",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "2.T1_star": {
+      "path": "2.T1_star",
+      "expected": "2.47e6 N·mm",
+      "actual": 2473826.62,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "2.T2_star": {
+      "path": "2.T2_star",
+      "expected": "2.83e6 N·mm",
+      "actual": 2831644.77,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "2.tau1_star": {
+      "path": "2.tau1_star",
+      "expected": "1.01e2 MPa",
+      "actual": 100.79,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "2.tau2_star": {
+      "path": "2.tau2_star",
+      "expected": "5.37e1 MPa",
+      "actual": 53.72,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "2.SF_steel": {
+      "path": "2.SF_steel",
+      "expected": "1.19",
+      "actual": 1.19,
+      "expected_num": 1.19,
+      "actual_num": 1.19,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "2.SF_al": {
+      "path": "2.SF_al",
+      "expected": "1.30",
+      "actual": 1.3,
+      "expected_num": 1.3,
+      "actual_num": 1.3,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "3.k_eq": {
+      "path": "3.k_eq",
+      "expected": "2.03e8 N·mm/rad",
+      "actual": 202654079.56,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "3.phi_at_R1": {
+      "path": "3.phi_at_R1",
+      "expected": "2.62e-2 rad (≈ 1.50°)",
+      "actual": 0.02618,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "3.check": {
+      "path": "3.check",
+      "expected": "phi_at_R1 ≤ phi_max",
+      "actual": "满足 φ(R1) ≤ φ_max",
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "4.torque_capacity_comparison.M_phi": {
+      "path": "4.torque_capacity_comparison.M_phi",
+      "expected": "5.31e6 N·mm",
+      "actual": 5305471.4,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "4.torque_capacity_comparison.M_steel": {
+      "path": "4.torque_capacity_comparison.M_steel",
+      "expected": "6.32e6 N·mm",
+      "actual": 6316491.0,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "4.torque_capacity_comparison.M_al": {
+      "path": "4.torque_capacity_comparison.M_al",
+      "expected": "6.91e6 N·mm",
+      "actual": 6913150.0,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][0][0]": {
+      "path": "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][0][0]",
+      "expected": "0",
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][0][1]": {
+      "path": "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][0][1]",
+      "expected": "0",
+      "actual": 0.0,
+      "expected_num": 0.0,
+      "actual_num": 0.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][1][0]": {
+      "path": "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][1][0]",
+      "expected": "12.5",
+      "actual": 12.5,
+      "expected_num": 12.5,
+      "actual_num": 12.5,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][1][1]": {
+      "path": "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][1][1]",
+      "expected": "5.04e1",
+      "actual": 50.4,
+      "expected_num": 50.4,
+      "actual_num": 50.4,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][2][0]": {
+      "path": "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][2][0]",
+      "expected": "25.0",
+      "actual": 25.0,
+      "expected_num": 25.0,
+      "actual_num": 25.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][2][1]": {
+      "path": "4.shear_distribution_at_R1.steel_solid_rod_[r_mm, tau_MPa][2][1]",
+      "expected": "1.01e2",
+      "actual": 100.79,
+      "expected_num": 101.0,
+      "actual_num": 100.79,
+      "expected_rounded": 101.0,
+      "actual_rounded": 100.79,
+      "relative_error": 0.0020792079207920173,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][0][0]": {
+      "path": "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][0][0]",
+      "expected": "30",
+      "actual": 30.0,
+      "expected_num": 30.0,
+      "actual_num": 30.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][0][1]": {
+      "path": "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][0][1]",
+      "expected": "4.24e1",
+      "actual": 42.41,
+      "expected_num": 42.4,
+      "actual_num": 42.41,
+      "expected_rounded": 42.4,
+      "actual_rounded": 42.41,
+      "relative_error": 0.00023584905660372667,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][1][0]": {
+      "path": "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][1][0]",
+      "expected": "34",
+      "actual": 34.0,
+      "expected_num": 34.0,
+      "actual_num": 34.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][1][1]": {
+      "path": "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][1][1]",
+      "expected": "4.80e1",
+      "actual": 48.07,
+      "expected_num": 48.0,
+      "actual_num": 48.07,
+      "expected_rounded": 48.0,
+      "actual_rounded": 48.07,
+      "relative_error": 0.0014583333333333393,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][2][0]": {
+      "path": "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][2][0]",
+      "expected": "38",
+      "actual": 38.0,
+      "expected_num": 38.0,
+      "actual_num": 38.0,
+      "status": "match",
+      "match_type": "exact"
+    },
+    "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][2][1]": {
+      "path": "4.shear_distribution_at_R1.aluminum_tube_wall_[r_mm, tau_MPa][2][1]",
+      "expected": "5.37e1",
+      "actual": 53.72,
+      "expected_num": 53.7,
+      "actual_num": 53.72,
+      "expected_rounded": 53.7,
+      "actual_rounded": 53.72,
+      "relative_error": 0.00037243947858465586,
+      "status": "match",
+      "match_type": "tolerance"
+    },
+    "5.given_data_numeric.J1": {
+      "path": "5.given_data_numeric.J1",
+      "expected": "613592.3151542564 mm^4",
+      "actual": 613592.315,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.J2": {
+      "path": "5.given_data_numeric.J2",
+      "expected": "2002978.9449639372 mm^4",
+      "actual": 2002978.945,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.k1": {
+      "path": "5.given_data_numeric.k1",
+      "expected": "94493216.5337555 N·mm/rad",
+      "actual": 94493216.534,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.k2": {
+      "path": "5.given_data_numeric.k2",
+      "expected": "108160863.02805261 N·mm/rad",
+      "actual": 108160863.028,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.k_eq": {
+      "path": "5.given_data_numeric.k_eq",
+      "expected": "202654079.5618081 N·mm/rad",
+      "actual": 202654079.562,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.T1_unit": {
+      "path": "5.given_data_numeric.T1_unit",
+      "expected": "0.46627838303613184 N·mm",
+      "actual": 0.466,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.T2_unit": {
+      "path": "5.given_data_numeric.T2_unit",
+      "expected": "0.5337216169638682 N·mm",
+      "actual": 0.534,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.tau1_unit": {
+      "path": "5.given_data_numeric.tau1_unit",
+      "expected": "1.8997890436376716e-5 MPa/(N·mm)",
+      "actual": 1.9e-05,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.given_data_numeric.tau2_unit": {
+      "path": "5.given_data_numeric.tau2_unit",
+      "expected": "1.0125628876738967e-5 MPa/(N·mm)",
+      "actual": 1.01e-05,
+      "status": "match",
+      "match_type": "secondary_llm_verification"
+    },
+    "5.results_reference_only.R1": {
+      "path": "5.results_reference_only.R1",
+      "expected": "见(1)之 M_max 及控制条件",
+      "actual": 5305471.4,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "5.results_reference_only.R2": {
+      "path": "5.results_reference_only.R2",
+      "expected": "见(2)之 T1*, T2*, τ1*, τ2*, SF_steel, SF_al",
+      "actual": 5305471.4,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "5.results_reference_only.R3": {
+      "path": "5.results_reference_only.R3",
+      "expected": "见(3)之 k_eq 与 φ(R1) 及核对结论",
+      "actual": 6316491.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    },
+    "5.results_reference_only.R4": {
+      "path": "5.results_reference_only.R4",
+      "expected": "见(4)之承载能力对比与剪应力分布数据",
+      "actual": 6913150.0,
+      "status": "mismatch",
+      "match_type": "secondary_llm_failed"
+    }
+  },
+  "mode_folder": "without_tools"
+}

@@ -1,0 +1,150 @@
+{
+  "class_name": "Unknown",
+  "description": "A collection of utility functions for computing and visualizing relativistic mass effects based on special relativity, including Lorentz factors, relativistic mass calculations, and plotting results.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "derive_relativistic_mass_factors",
+        "description": "Computes relativistic parameters such as Lorentz factor (gamma) based on the speed of light and fundamental physical constants. This function serves as a foundational calculation for relativistic effects.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "计算结果",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "计算结果"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/derive_relativistic_mass_factors/derive_relativistic_mass_factors.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_mass_functions",
+        "description": "Retrieves or constructs functions related to mass calculations under relativistic conditions, parameterized by the speed of light (c_val). Used to configure physical constants for subsequent computations.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "c_val": {
+              "type": "number",
+              "description": "float"
+            }
+          },
+          "required": [
+            "c_val"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "获取的数据",
+        "properties": {
+          "data": {
+            "type": "any",
+            "description": "获取的数据"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/derive_relativistic_mass_factors/derive_relativistic_mass_factors.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "calculate_relativistic_masses",
+        "description": "Calculates relativistic masses for given velocities and rest masses using the Lorentz transformation. Returns a dictionary mapping velocity to corresponding relativistic mass and gamma factor.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "velocities": {
+              "type": "number",
+              "description": "float"
+            },
+            "rest_mass": {
+              "type": "number",
+              "description": "float"
+            },
+            "c": {
+              "type": "number",
+              "description": "float"
+            }
+          },
+          "required": [
+            "velocities",
+            "rest_mass",
+            "c"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "计算结果",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "计算结果"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/derive_relativistic_mass_factors/derive_relativistic_mass_factors.py"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "plot_relativistic_masses",
+        "description": "Generates a plot of relativistic mass versus velocity from a result dictionary. Optionally includes the Lorentz factor (gamma) in the visualization for analysis.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "result_dict": {
+              "type": "object",
+              "description": "dict"
+            },
+            "show_gamma": {
+              "type": "number",
+              "description": "float"
+            }
+          },
+          "required": [
+            "result_dict",
+            "show_gamma"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "result": {
+        "type": "object",
+        "description": "图表对象",
+        "properties": {
+          "chart": {
+            "type": "object",
+            "description": "图表对象"
+          }
+        }
+      },
+      "additionalProperties": {
+        "function_path": "tools/derive_relativistic_mass_factors/derive_relativistic_mass_factors.py"
+      }
+    }
+  ]
+}

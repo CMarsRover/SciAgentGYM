@@ -1,0 +1,197 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_river_crossing",
+            "description": "计算河流中船只往返时的水流速度比值。该问题是流体动力学中相对运动的典型应用，可类比于等离子体中带电粒子在电磁场中的运动轨迹计算。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "angle_outbound": {
+                        "type": "number",
+                        "description": "去程时船只与河岸的夹角（度），指船只航向与河岸法线的夹角"
+                    },
+                    "angle_return": {
+                        "type": "number",
+                        "description": "返程时船只与河岸的夹角（度），指船只航向与河岸法线的夹角"
+                    },
+                    "v_boat": {
+                        "type": "number",
+                        "description": "船只在静水中的速度，默认为1.0（单位长度/单位时间）"
+                    }
+                },
+                "required": [
+                    "angle_outbound",
+                    "angle_return"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_239.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "simulate_plasma_particle_trajectory",
+            "description": "模拟带电粒子在电磁场中的运动轨迹。使用洛伦兹力方程计算带电粒子在电磁场中的运动，这是等离子体物理中的基础问题。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "E_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "电场向量函数 E(t, r) 或常数电场向量 [Ex, Ey, Ez]"
+                    },
+                    "B_field": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "磁场向量函数 B(t, r) 或常数磁场向量 [Bx, By, Bz]"
+                    },
+                    "q_m_ratio": {
+                        "type": "number",
+                        "description": "粒子电荷与质量的比值 (q/m)"
+                    },
+                    "initial_position": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "初始位置向量 [x0, y0, z0]"
+                    },
+                    "initial_velocity": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "初始速度向量 [vx0, vy0, vz0]"
+                    },
+                    "t_span": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "时间积分区间 (t_start, t_end)"
+                    },
+                    "t_points": {
+                        "type": "integer",
+                        "description": "时间积分点数，默认为1000"
+                    }
+                },
+                "required": [
+                    "E_field",
+                    "B_field",
+                    "q_m_ratio",
+                    "initial_position",
+                    "initial_velocity",
+                    "t_span"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_239.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_mhd_equilibrium",
+            "description": "求解磁流体力学(MHD)平衡方程。在理想MHD中，平衡状态满足: ∇p = j × B，其中p是压力，j是电流密度，B是磁场。这是等离子体约束和稳定性研究中的基本问题。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pressure_gradient": {
+                        "type": "object",
+                        "description": "压力梯度函数 ∇p(x, y, z)，返回向量 [dpx, dpy, dpz]"
+                    },
+                    "j_current": {
+                        "type": "object",
+                        "description": "电流密度函数 j(x, y, z)，返回向量 [jx, jy, jz]"
+                    },
+                    "B_field": {
+                        "type": "object",
+                        "description": "磁场函数 B(x, y, z)，返回向量 [Bx, By, Bz]"
+                    },
+                    "grid_shape": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "计算网格的形状 (nx, ny, nz)，默认为(50, 50, 50)"
+                    },
+                    "domain_size": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "计算域的大小 (Lx, Ly, Lz)，默认为(1.0, 1.0, 1.0)"
+                    }
+                },
+                "required": [
+                    "pressure_gradient",
+                    "j_current",
+                    "B_field"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_239.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_plasma_turbulence_spectrum",
+            "description": "计算等离子体湍流的能量谱。湍流是等离子体物理中的重要现象，能量谱分析可以揭示湍流的尺度分布和能量级联过程。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "velocity_field": {
+                        "type": "object",
+                        "description": "速度场函数 v(x, y, z) 或预先计算的速度场数组"
+                    },
+                    "domain_size": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "计算域的物理尺寸 (Lx, Ly, Lz)"
+                    },
+                    "resolution": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "计算网格的分辨率 (nx, ny, nz)"
+                    }
+                },
+                "required": [
+                    "velocity_field",
+                    "domain_size",
+                    "resolution"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/fluid_plasma_solver_239.py"
+        }
+    }
+]

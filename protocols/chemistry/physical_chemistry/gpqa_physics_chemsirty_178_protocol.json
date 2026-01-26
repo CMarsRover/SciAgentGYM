@@ -1,0 +1,502 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "ensure_dirs",
+            "description": "确保创建用于中间结果与图像的目录，返回路径信息。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "主题/学科名称；将创建 ./mid_result/<subject> 与 ./tool_images/ 目录。"
+                    }
+                },
+                "required": [
+                    "subject"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "save_mid_result",
+            "description": "将给定数据以JSON格式保存到中间结果目录中，返回文件路径。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "主题/学科名称；用于定位 ./mid_result/<subject>/ 目录。"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "保存文件名（不含拓展名），将保存为 name.json。"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "要保存的JSON可序列化字典数据（通用容器）。"
+                    }
+                },
+                "required": [
+                    "subject",
+                    "name",
+                    "data"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "load_file",
+            "description": "按类型加载文件内容，支持json与txt。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "filepath": {
+                        "type": "string",
+                        "description": "文件路径。"
+                    },
+                    "file_type": {
+                        "type": "string",
+                        "description": "文件类型，支持 json 或 txt。"
+                    }
+                },
+                "required": [
+                    "filepath",
+                    "file_type"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_atomic_weight",
+            "description": "返回指定元素符号的原子量。来源可选：mendeleev、pubchem、textbook_integer。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "symbol": {
+                        "type": "string",
+                        "description": "元素符号，如 H、O、Cl。"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "原子量来源：mendeleev（准确IUPAC）、pubchem（网络备选）、textbook_integer（教材整数近似）。默认 mendeleev。"
+                    },
+                    "allow_fallback": {
+                        "type": "boolean",
+                        "description": "当首选来源失败时是否允许回退到备选来源。默认 true。"
+                    }
+                },
+                "required": [
+                    "symbol"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "parse_formula",
+            "description": "解析化学式为元素计数构成（符号->计数）。优先使用chempy，失败则使用简易解析器。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "formula": {
+                        "type": "string",
+                        "description": "化学式字符串，如 H2O、Cl2、C6H6。"
+                    }
+                },
+                "required": [
+                    "formula"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "molar_mass_from_formula",
+            "description": "根据化学式与指定原子量来源计算摩尔质量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "formula": {
+                        "type": "string",
+                        "description": "化学式，如 H2O、HCl。"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "原子量来源：mendeleev、pubchem、textbook_integer。默认 mendeleev。"
+                    }
+                },
+                "required": [
+                    "formula"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "infer_A_B_candidates",
+            "description": "在相同温压下，利用密度比≈摩尔质量比，筛选满足条件的(A,B)候选对（使 max(MA,MB)/min(MA,MB) 接近给定密度比）。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "density_ratio": {
+                        "type": "number",
+                        "description": "密度比（取较大/较小），正数。"
+                    },
+                    "candidates_A": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A 的候选气体化学式列表，如 ['O2','Cl2','H2']。"
+                    },
+                    "candidates_B": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "B 的候选气体化学式列表。"
+                    },
+                    "mass_source": {
+                        "type": "string",
+                        "description": "原子量来源：mendeleev、pubchem、textbook_integer。默认 mendeleev。"
+                    },
+                    "tolerance": {
+                        "type": "number",
+                        "description": "相对误差容忍度（例如0.2表示±20%）。默认 0.2。"
+                    }
+                },
+                "required": [
+                    "density_ratio",
+                    "candidates_A",
+                    "candidates_B"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "choose_halogen_from_pairs",
+            "description": "从候选对中选择包含O2与卤素X2（F2、Cl2、Br2、I2）的一对，并返回所选卤素。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pairs": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "候选对列表；每个元素通常包含A、B、MA、MB、ratio、rel_err等字段。"
+                    }
+                },
+                "required": [
+                    "pairs"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_products_from_mixture",
+            "description": "根据(A,B,C)三种气体的体积（摩尔数比例）及其身份（O2、H2、X2）计算爆炸反应后生成的H2O、HX及剩余H2的物质的量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "volumes": {
+                        "type": "object",
+                        "properties": {
+                            "A": {
+                                "type": "number",
+                                "description": "气体A的体积（与摩尔数成正比）。"
+                            },
+                            "B": {
+                                "type": "number",
+                                "description": "气体B的体积（与摩尔数成正比）。"
+                            },
+                            "C": {
+                                "type": "number",
+                                "description": "气体C的体积（与摩尔数成正比）。"
+                            }
+                        },
+                        "required": [
+                            "A",
+                            "B",
+                            "C"
+                        ],
+                        "description": "三种气体的体积（同温同压下与摩尔数成正比）。"
+                    },
+                    "gases": {
+                        "type": "object",
+                        "properties": {
+                            "A": {
+                                "type": "string",
+                                "description": "A 的化学式，应为 'O2'、'H2' 或卤素X2（如 'Cl2'）。"
+                            },
+                            "B": {
+                                "type": "string",
+                                "description": "B 的化学式，应为 'O2'、'H2' 或卤素X2。"
+                            },
+                            "C": {
+                                "type": "string",
+                                "description": "C 的化学式，应为 'O2'、'H2' 或卤素X2。"
+                            }
+                        },
+                        "required": [
+                            "A",
+                            "B",
+                            "C"
+                        ],
+                        "description": "标注A、B、C分别是哪种气体（必须包含且仅包含 O2、H2 与一个卤素X2）。"
+                    }
+                },
+                "required": [
+                    "volumes",
+                    "gases"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "mass_fractions",
+            "description": "计算产物集合内（H2O与HX）以及包含剩余H2在内的质量分数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "products_moles": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "number"
+                        },
+                        "description": "各物种的物质的量，需包含键 'H2O' 与 'HX'（可选 'H2_leftover'）。"
+                    },
+                    "halogen": {
+                        "type": "string",
+                        "description": "卤素元素符号（F、Cl、Br、I），用于确定HX的摩尔质量。"
+                    },
+                    "mass_source": {
+                        "type": "string",
+                        "description": "原子量来源：mendeleev、pubchem、textbook_integer。默认 mendeleev。"
+                    }
+                },
+                "required": [
+                    "products_moles",
+                    "halogen"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "plot_mass_fractions",
+            "description": "绘制质量分数柱状图并保存到 ./tool_images/，返回图片路径。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "fractions": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "number"
+                        },
+                        "description": "各组分质量分数（百分比）。"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "图表标题。"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "输出文件名（含扩展名，如 scene1.png）。"
+                    }
+                },
+                "required": [
+                    "fractions",
+                    "title",
+                    "filename"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "solve_original_problem",
+            "description": "端到端求解原题：由密度比与体积比推断A、B（O2与X2）、与C（H2）混合的反应产物，并计算质量分数。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "density_ratio_A_B": {
+                        "type": "number",
+                        "description": "A与B的密度比（取较大/较小）。"
+                    },
+                    "A_to_B_ratio": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "A与B的体积比，[A, B]。"
+                    },
+                    "AB_to_C_ratio": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "description": "(A+B) 与 C 的体积比，[(A+B), C]。"
+                    },
+                    "mass_source": {
+                        "type": "string",
+                        "description": "原子量来源：mendeleev、pubchem、textbook_integer。默认 mendeleev。"
+                    }
+                },
+                "required": [
+                    "density_ratio_A_B",
+                    "A_to_B_ratio",
+                    "AB_to_C_ratio"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "create_local_sqlite_db",
+            "description": "创建或更新本地SQLite化合物数据库，写入给定的化合物记录。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite数据库文件路径。"
+                    },
+                    "entries": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "化合物名称（主键）。"
+                                },
+                                "formula": {
+                                    "type": "string",
+                                    "description": "化合物化学式。"
+                                },
+                                "molar_mass": {
+                                    "type": "number",
+                                    "description": "摩尔质量（相对分子质量）。"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "formula",
+                                "molar_mass"
+                            ]
+                        },
+                        "description": "待写入的化合物列表，每个为{name, formula, molar_mass}对象。"
+                    }
+                },
+                "required": [
+                    "db_path",
+                    "entries"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "query_local_sqlite_molar_mass",
+            "description": "从本地SQLite数据库中按名称查询化合物的摩尔质量。",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db_path": {
+                        "type": "string",
+                        "description": "SQLite数据库文件路径。"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "化合物名称，用于查询。"
+                    }
+                },
+                "required": [
+                    "db_path",
+                    "name"
+                ]
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./gpqa_physics_chemsirty_178.py"
+        }
+    }
+]

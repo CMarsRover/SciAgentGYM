@@ -1,0 +1,18 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_physics_statements",
+            "description": "执行分析计算",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        "additionalProperties": {
+            "function_path": "./tools/doppler_blood_velocity.py"
+        }
+    }
+]
