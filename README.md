@@ -68,6 +68,44 @@ SciAgentGym contains **1,780+ scientific tools from 4 major disciplines**:
 </p>
 <p align="center"><em>Tool clustering results by discipline</em></p>
 
+## Key Findings
+
+We analyze 6,617 error instances to understand model failures in scientific tool-use:
+
+<p align="center">
+  <img src="./pic/fig_failure_patterns_mid_feedback_metrics.png" width="45%" alt="Feedback Metrics">
+  &nbsp;&nbsp;
+  <img src="./pic/fig_failure_patterns_right_recovery_rate.png" width="45%" alt="Recovery Rate">
+</p>
+
+- **Process-Level**: Models show low Adaptation (32.9%), Tuning (6.6%), Switching (15.3%), and Loop Escape (35.7%) rates
+- **Recovery Dynamics**: Strong models can escape error loops with a Rise-Fall-Rise pattern; weaker models decline monotonically and remain stuck
+
+## Main Results
+
+Success Rate (SR, %) for **without tools** and **with tools** settings. Δ denotes the improvement from tool usage.
+
+| Model | w/o Tools | w/ Tools | Δ | Phys. | Chem. | Mat. | Life |
+|-------|:---------:|:--------:|:---:|:-----:|:-----:|:----:|:----:|
+| **Closed-Source** ||||||||
+| GPT-5 | 32.3 | **41.3** | +9.0 | 46.3 | **43.8** | 28.6 | **32.3** |
+| Grok-4-1 | 30.4 | 40.3 | +9.9 | 47.2 | 38.2 | **32.4** | 30.0 |
+| Claude-Sonnet-4 | 22.4 | 35.9 | **+13.5** | 39.4 | 39.5 | 27.0 | 25.0 |
+| Gemini-2.5-Flash | 28.5 | 32.7 | +4.2 | 38.3 | 32.4 | 28.6 | 17.2 |
+| Gemini-2.5-Pro | 24.8 | 32.6 | +7.8 | 37.3 | 35.1 | 26.5 | 18.8 |
+| O3 | 26.6 | 32.0 | +5.4 | 35.5 | 37.3 | 32.4 | 6.5 |
+| O4-mini | 27.8 | 31.1 | +3.3 | 31.2 | 35.5 | 30.6 | 20.0 |
+| GPT-4o | 17.1 | 18.7 | +1.6 | 21.3 | 20.5 | 8.6 | 16.0 |
+| **Open-Source (>30B)** ||||||||
+| GLM-4.6V | 26.0 | 30.9 | +4.9 | 30.9 | 37.5 | 22.2 | 18.8 |
+| Qwen3-VL-235B-Think | 24.4 | 28.0 | +3.6 | 30.6 | 29.5 | 22.9 | 22.6 |
+| Qwen3-VL-32B-Think | 24.4 | 27.9 | +3.5 | 33.0 | 31.2 | 8.8 | 22.6 |
+| **Open-Source (≤30B)** ||||||||
+| Qwen3-VL-8B-Inst | 18.4 | 23.4 | +5.0 | 24.0 | 28.6 | 7.1 | 24.1 |
+| SciAgent-8B | 23.3 | 30.1 | +6.8 | 33.0 | 35.2 | 9.1 | 31.0 |
+| SciAgent-4B | 17.4 | 25.2 | +7.8 | 28.4 | 28.4 | 14.7 | 19.4 |
+| *Average* | 23.2 | 28.1 | +4.9 | 31.7 | 30.4 | 18.9 | 20.2 |
+
 ## Architecture
 
 ```
@@ -175,7 +213,7 @@ class CalculateThinFilmInterferenceTool(EnvironmentTool):
 **Installation**
 
 ```bash
-git clone <repository_url>
+git clone git@github.com:CMarsRover/SciAgentGYM.git
 cd SciAgentGym
 pip install -r requirements.txt
 ```
@@ -271,15 +309,6 @@ SciAgentGym supports multiple LLM providers:
 - **Qwen**: Qwen-Max, Qwen-Plus
 - **Google**: Gemini-Pro
 - **Kimi**: Moonshot
-
-## Documentation
-
-See `gym/docs/` for detailed documentation:
-
-- [Tool Registration Guide](docs/工具注册流程说明.md)
-- [Tool Development Guide](docs/工具封装与LLM调用指南.md)
-- [Toolbox Usage](docs/Toolbox使用说明.md)
-- [Environment Integration](docs/ENVIRONMENT_INTEGRATION.md)
 
 ## 📚 Citation
 

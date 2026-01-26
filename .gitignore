@@ -1,0 +1,9 @@
+# 忽略 gym/tool_images 目录下的所有图片
+gym/tool_images/*.png
+gym/tool_images/*.jpg
+gym/tool_images/*.jpeg
+gym/tool_images/*.gif
+gym/tool_images/*.bmp
+gym/tool_images/*.ico
+gym/tool_images/*.svg
+gym/tool_images/*.webp
