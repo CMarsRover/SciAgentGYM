@@ -11,7 +11,7 @@
 We present **SciAgentGym**, the first benchmark environment for evaluating LLM agents' capability in multi-step scientific tool-use. SciAgentGym provides a comprehensive suite of scientific tools across multiple disciplines, enabling rigorous evaluation of how well LLMs can solve complex scientific problems through sequential tool invocation.
 
 <p align="center">
-  <img src="./pic/fig_overview.png" width="100%" alt="SciAgentGym Overview">
+  <img src="./pic/main.png" width="100%" alt="SciAgentGym Overview">
 </p>
 
 ---
