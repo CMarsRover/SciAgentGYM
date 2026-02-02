@@ -7,3 +7,13 @@ gym/tool_images/*.bmp
 gym/tool_images/*.ico
 gym/tool_images/*.svg
 gym/tool_images/*.webp
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# macOS 系统文件
+.DS_Store
+
+# 备份目录
+src_backup/
