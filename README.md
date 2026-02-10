@@ -310,7 +310,7 @@ SciAgentGym supports multiple LLM providers:
 - **Google**: Gemini-Pro
 - **Kimi**: Moonshot
 
-## 📚 Citation
+<!-- ## 📚 Citation
 
 ```bibtex
 @article{sciagentgym2024,
@@ -319,4 +319,4 @@ SciAgentGym supports multiple LLM providers:
   year      = {2024},
   url       = {...},
 }
-```
+``` -->
