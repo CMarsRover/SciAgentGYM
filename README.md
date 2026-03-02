@@ -1,7 +1,7 @@
 <h1 align="center"> SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents </h1>
 
 <p align="center">
-  <a href="#">📃 Paper</a>
+  <a href="https://arxiv.org/abs/2602.12984">📃 Paper</a>
   •
   <a href="#">🤗 Data & Models</a>
   •
@@ -289,13 +289,13 @@ Success Rate (SR, %) for **without tools** and **with tools** settings. Δ denot
 | SciAgent-4B | 17.4 | 25.2 | +7.8 | 28.4 | 28.4 | 14.7 | 19.4 |
 | *Average* | 23.2 | 28.1 | +4.9 | 31.7 | 30.4 | 18.9 | 20.2 |
 
-<!-- ## 📚 Citation
+## Citation
 
 ```bibtex
-@article{sciagentgym2024,
-  title     = {SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents},
-  author    = {...},
-  year      = {2024},
-  url       = {...},
+@article{shen2026sciagentgym,
+  title={SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents},
+  author={Shen, Yujiong and Yang, Yajie and Xi, Zhiheng and Hu, Binze and Sha, Huayu and Zhang, Jiazheng and Peng, Qiyuan and Shang, Junlin and Huang, Jixuan and Fan, Yutao and others},
+  journal={arXiv preprint arXiv:2602.12984},
+  year={2026}
 }
-``` -->
+```
