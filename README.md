@@ -266,10 +266,13 @@ class RefractionCalculator:
 ## Citation
 
 ```bibtex
-@article{shen2026sciagentgym,
-  title={SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents},
-  author={Shen, Yujiong and Yang, Yajie and Xi, Zhiheng and Hu, Binze and Sha, Huayu and Zhang, Jiazheng and Peng, Qiyuan and Shang, Junlin and Huang, Jixuan and Fan, Yutao and others},
-  journal={arXiv preprint arXiv:2602.12984},
-  year={2026}
+@misc{shen2026sciagentgymbenchmarkingmultistepscientific,
+      title={SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents}, 
+      author={Yujiong Shen and Yajie Yang and Zhiheng Xi and Binze Hu and Huayu Sha and Jiazheng Zhang and Qiyuan Peng and Junlin Shang and Jixuan Huang and Yutao Fan and Jingqi Tong and Shihan Dou and Ming Zhang and Lei Bai and Zhenfei Yin and Tao Gui and Xingjun Ma and Qi Zhang and Xuanjing Huang and Yu-Gang Jiang},
+      year={2026},
+      eprint={2602.12984},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2602.12984}, 
 }
 ```
