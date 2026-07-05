@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-x-ray_diffraction_analysis 工具注册模块
-使用 gym.tool.EnvironmentTool 为 x-ray_diffraction_analysis 目录中的工具提供统一的注册与调用接口
+x_ray_diffraction_analysis 工具注册模块
+使用 gym.tool.EnvironmentTool 为 x_ray_diffraction_analysis 目录中的工具提供统一的注册与调用接口
 
 本文件由 collect_and_register_tools.py 自动生成
 """
@@ -16,12 +16,12 @@ from gym.toolbox import Toolbox
 
 # 注意: 实际导入在工具类中动态进行，以避免循环依赖
 
-# from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M020_0004 import *  # 动态导入
-# from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M022_0000 import *  # 动态导入
-# from toolkits.materials_science.x-ray_diffraction_analysis.materials_xrd_toolkit_M021_0001 import *  # 动态导入
-# from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import *  # 动态导入
-# from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0002 import *  # 动态导入
-# from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import *  # 动态导入
+# from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M020_0004 import *  # 动态导入
+# from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M022_0000 import *  # 动态导入
+# from toolkits.materials_science.x_ray_diffraction_analysis.materials_xrd_toolkit_M021_0001 import *  # 动态导入
+# from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import *  # 动态导入
+# from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0002 import *  # 动态导入
+# from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import *  # 动态导入
 
 # ==================== 工具类定义 ====================
 
@@ -57,7 +57,7 @@ class DetectPeaksFromPatternTool(EnvironmentTool):
             min_distance = args.get("min_distance", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import detect_peaks_from_pattern
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import detect_peaks_from_pattern
             
             # 调用函数
             result = detect_peaks_from_pattern(two_theta, intensity, prominence, min_distance)
@@ -101,7 +101,7 @@ class CalculateDSpacingTool(EnvironmentTool):
             wavelength = args.get("wavelength", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import calculate_d_spacing
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import calculate_d_spacing
             
             # 调用函数
             result = calculate_d_spacing(two_theta, wavelength)
@@ -153,7 +153,7 @@ class AssignMillerIndicesTetragonalTool(EnvironmentTool):
             tolerance = args.get("tolerance", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import assign_miller_indices_tetragonal
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import assign_miller_indices_tetragonal
             
             # 调用函数
             result = assign_miller_indices_tetragonal(d_spacing, a, c, tolerance)
@@ -203,7 +203,7 @@ class RefineLatticeParametersTetragonalTool(EnvironmentTool):
                 return Observation(self.name, "错误: 缺少必需参数 initial_c")
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import refine_lattice_parameters_tetragonal
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import refine_lattice_parameters_tetragonal
             
             # 调用函数
             result = refine_lattice_parameters_tetragonal(peak_data, initial_a, initial_c)
@@ -247,7 +247,7 @@ class FetchStructureFromMpTool(EnvironmentTool):
             api_key = args.get("api_key", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import fetch_structure_from_mp
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import fetch_structure_from_mp
             
             # 调用函数
             result = fetch_structure_from_mp(formula, api_key)
@@ -297,7 +297,7 @@ class AnalyzeXrdPatternTool(EnvironmentTool):
             prominence = args.get("prominence", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import analyze_xrd_pattern
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import analyze_xrd_pattern
             
             # 调用函数
             result = analyze_xrd_pattern(two_theta, intensity, expected_phase, prominence)
@@ -347,7 +347,7 @@ class CompareExperimentalTheoreticalXrdTool(EnvironmentTool):
                 return Observation(self.name, "错误: 缺少必需参数 structure")
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import compare_experimental_theoretical_xrd
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import compare_experimental_theoretical_xrd
             
             # 调用函数
             result = compare_experimental_theoretical_xrd(experimental_2theta, experimental_intensity, structure)
@@ -401,7 +401,7 @@ class PlotXrdAnalysisTool(EnvironmentTool):
             save_path = args.get("save_path", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0001 import plot_xrd_analysis
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0001 import plot_xrd_analysis
             
             # 调用函数
             result = plot_xrd_analysis(two_theta, intensity, peak_assignments, theoretical_pattern, save_path)
@@ -449,7 +449,7 @@ class ExtractPeaksFromPatternTool(EnvironmentTool):
             prominence = args.get("prominence", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0002 import extract_peaks_from_pattern
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0002 import extract_peaks_from_pattern
             
             # 调用函数
             result = extract_peaks_from_pattern(two_theta, intensity, prominence)
@@ -497,7 +497,7 @@ class CalculatePeakMatchingScoreTool(EnvironmentTool):
             tolerance = args.get("tolerance", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0002 import calculate_peak_matching_score
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0002 import calculate_peak_matching_score
             
             # 调用函数
             result = calculate_peak_matching_score(composite_peaks, reference_peaks, tolerance)
@@ -541,7 +541,7 @@ class NormalizeIntensityTool(EnvironmentTool):
             method = args.get("method", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0002 import normalize_intensity
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0002 import normalize_intensity
             
             # 调用函数
             result = normalize_intensity(intensity, method)
@@ -591,7 +591,7 @@ class IdentifyPhasesInCompositeTool(EnvironmentTool):
             num_phases = args.get("num_phases", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0002 import identify_phases_in_composite
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0002 import identify_phases_in_composite
             
             # 调用函数
             result = identify_phases_in_composite(composite_data, reference_materials, min_match_ratio, num_phases)
@@ -639,7 +639,7 @@ class AnalyzeXrdPatternComprehensiveTool(EnvironmentTool):
             normalize = args.get("normalize", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0002 import analyze_xrd_pattern_comprehensive
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0002 import analyze_xrd_pattern_comprehensive
             
             # 调用函数
             result = analyze_xrd_pattern_comprehensive(composite_data, reference_materials, normalize)
@@ -689,7 +689,7 @@ class VisualizeXrdComparisonTool(EnvironmentTool):
             filename = args.get("filename", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0002 import visualize_xrd_comparison
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0002 import visualize_xrd_comparison
             
             # 调用函数
             result = visualize_xrd_comparison(data, domain, vis_type, save_dir, filename)
@@ -733,7 +733,7 @@ class BraggLawDSpacingTool(EnvironmentTool):
             wavelength = args.get("wavelength", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import bragg_law_d_spacing
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import bragg_law_d_spacing
             
             # 调用函数
             result = bragg_law_d_spacing(two_theta, wavelength)
@@ -779,7 +779,7 @@ class CubicLatticeParameterTool(EnvironmentTool):
                 return Observation(self.name, "错误: 缺少必需参数 hkl")
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import cubic_lattice_parameter
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import cubic_lattice_parameter
             
             # 调用函数
             result = cubic_lattice_parameter(d_spacing, hkl)
@@ -823,7 +823,7 @@ class AssignFccMillerIndicesTool(EnvironmentTool):
             wavelength = args.get("wavelength", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import assign_fcc_miller_indices
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import assign_fcc_miller_indices
             
             # 调用函数
             result = assign_fcc_miller_indices(peak_positions, wavelength)
@@ -869,7 +869,7 @@ class RefineLatticeParameterLsqTool(EnvironmentTool):
             wavelength = args.get("wavelength", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import refine_lattice_parameter_lsq
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import refine_lattice_parameter_lsq
             
             # 调用函数
             result = refine_lattice_parameter_lsq(peak_data, initial_guess, wavelength)
@@ -913,7 +913,7 @@ class FetchStructureFromMpTool(EnvironmentTool):
             api_key = args.get("api_key", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import fetch_structure_from_mp
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import fetch_structure_from_mp
             
             # 调用函数
             result = fetch_structure_from_mp(material_id, api_key)
@@ -959,7 +959,7 @@ class AnalyzeXrdPatternTool(EnvironmentTool):
             wavelength = args.get("wavelength", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import analyze_xrd_pattern
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import analyze_xrd_pattern
             
             # 调用函数
             result = analyze_xrd_pattern(peak_positions, structure_type, wavelength)
@@ -1009,7 +1009,7 @@ class CompareWithDatabaseTool(EnvironmentTool):
             wavelength = args.get("wavelength", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import compare_with_database
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import compare_with_database
             
             # 调用函数
             result = compare_with_database(experimental_peaks, material_formula, api_key, wavelength)
@@ -1063,7 +1063,7 @@ class PlotXrdAnalysisTool(EnvironmentTool):
             save_path = args.get("save_path", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.xrd_analysis_toolkit_0003 import plot_xrd_analysis
+            from toolkits.materials_science.x_ray_diffraction_analysis.xrd_analysis_toolkit_0003 import plot_xrd_analysis
             
             # 调用函数
             result = plot_xrd_analysis(peak_positions, intensities, assignments, plot_type, save_path)
@@ -1109,7 +1109,7 @@ class SaveJsonDataTool(EnvironmentTool):
                 return Observation(self.name, "错误: 缺少必需参数 data")
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M020_0004 import save_json_data
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M020_0004 import save_json_data
             
             # 调用函数
             result = save_json_data(filename, data)
@@ -1161,7 +1161,7 @@ class IdentifyPhasesByMatchingTool(EnvironmentTool):
             allow_shift = args.get("allow_shift", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M020_0004 import identify_phases_by_matching
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M020_0004 import identify_phases_by_matching
             
             # 调用函数
             result = identify_phases_by_matching(observed_2theta, observed_intensity, candidate_refs, tolerance, allow_shift)
@@ -1209,7 +1209,7 @@ class PlotXrdPatternTool(EnvironmentTool):
             filename = args.get("filename", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M020_0004 import plot_xrd_pattern
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M020_0004 import plot_xrd_pattern
             
             # 调用函数
             result = plot_xrd_pattern(patterns, title, filename)
@@ -1253,7 +1253,7 @@ class BraggLawDSpacingTool(EnvironmentTool):
             wavelength = args.get("wavelength", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_xrd_toolkit_M021_0001 import bragg_law_d_spacing
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_xrd_toolkit_M021_0001 import bragg_law_d_spacing
             
             # 调用函数
             result = bragg_law_d_spacing(two_theta, wavelength)
@@ -1307,7 +1307,7 @@ class VisualizeXrdPatternTool(EnvironmentTool):
             filename = args.get("filename", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_xrd_toolkit_M021_0001 import visualize_xrd_pattern
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_xrd_toolkit_M021_0001 import visualize_xrd_pattern
             
             # 调用函数
             result = visualize_xrd_pattern(two_theta, intensity, peak_labels, title, save_dir, filename)
@@ -1359,7 +1359,7 @@ class CalculateScherrerGrainSizeTool(EnvironmentTool):
             instrument_fwhm_deg = args.get("instrument_fwhm_deg", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M022_0000 import calculate_scherrer_grain_size
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M022_0000 import calculate_scherrer_grain_size
             
             # 调用函数
             result = calculate_scherrer_grain_size(peak_2theta_deg, fwhm_deg, wavelength_nm, shape_factor, instrument_fwhm_deg)
@@ -1405,7 +1405,7 @@ class DetectStrongestPeakTool(EnvironmentTool):
                 return Observation(self.name, "错误: 缺少必需参数 intensity")
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M022_0000 import detect_strongest_peak
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M022_0000 import detect_strongest_peak
             
             # 调用函数
             result = detect_strongest_peak(two_theta_deg, intensity)
@@ -1455,7 +1455,7 @@ class VisualizeXrdPatternTool(EnvironmentTool):
             filename = args.get("filename", None)
             
             # 导入并调用原始函数
-            from toolkits.materials_science.x-ray_diffraction_analysis.materials_toolkit_M022_0000 import visualize_xrd_pattern
+            from toolkits.materials_science.x_ray_diffraction_analysis.materials_toolkit_M022_0000 import visualize_xrd_pattern
             
             # 调用函数
             result = visualize_xrd_pattern(two_theta_deg, intensity, title, filename)
@@ -1476,9 +1476,9 @@ class VisualizeXrdPatternTool(EnvironmentTool):
 
 # ==================== 工具注册函数 ====================
 
-def register_x-ray_diffraction_analysis_tools(environment):
+def register_x_ray_diffraction_analysis_tools(environment):
     """
-    将所有 x-ray_diffraction_analysis 工具注册到环境中
+    将所有 x_ray_diffraction_analysis 工具注册到环境中
     
     Args:
         environment: RepoEnv 实例

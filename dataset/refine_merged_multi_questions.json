@@ -1812,7 +1812,7 @@
     "id": 7,
     "filename": "failed_questions_218_0914.json",
     "question": "如图所示，流体在圆形管内定态流动，比较A、B两点的流速。",
-    "answer": "v_A < v_B ",
+    "answer": "v_A > v_B",
     "metadata": {
       "subject": "Physics",
       "topic": "Plasma Physics",
@@ -1831,15 +1831,15 @@
           "parameters": {
             "radius": 0.05,
             "flow_rate": 0.001,
-            "r_A": 0.02,
-            "r_B": 0.01
+            "r_A": 0.01,
+            "r_B": 0.02
           },
           "numerical": {
-            "v_A_mps": 0.2139,
-            "v_B_mps": 0.2445
+            "v_A_mps": 0.2445,
+            "v_B_mps": 0.2139
           },
-          "conclusion": "v_A < v_B",
-          "explanation": "层流抛物线分布：r_A>r_B ⇒ v_A<v_B"
+          "conclusion": "v_A > v_B",
+          "explanation": "层流抛物线分布：r_A<r_B ⇒ v_A>v_B"
         }
       ],
       "original_question_id": "218"
@@ -2621,7 +2621,7 @@
     "id": 10,
     "filename": "failed_questions_65_0914.json",
     "question": "当平面波向等腰直角玻璃棱镜的底边垂直投射时，若玻璃的相对介电常数$\\varepsilon_{r}=4$，计算反射功率$W^{r}$与入射功率$W^{i}$之比。",
-    "answer": "1",
+    "answer": "1/9",
     "metadata": {
       "subject": "Physics",
       "topic": "Optics",
@@ -25220,7 +25220,7 @@
     "question": "The steel pipe shown with an outer diameter of 300 mm is made by spirally winding and welding a 8mm thick steel strip at an angle of $20^{\\circ}$. Determine the shear stress along the weld seam direction and the normal stress perpendicular to the weld seam direction under the following conditions: 1. Subjected only to an axial load $F_{\\mathrm{P}}=250 \\mathrm{kN}$; 2. Subjected only to an internal pressure $p=5.0 \\mathrm{MPa}$ (both ends are sealed).",
     "answer": "1. Normal stress: 30.08 MPa, Shear stress: -10.95 MPa; 2. Normal stress: 50.96 MPa, Shear stress: 14.66 MPa",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Composite Mechanics",
       "image_path": [
         "gym/test_images/00009.png"
@@ -28335,7 +28335,7 @@
     "question": "As shown in Figure a, a component consists of a solid steel circular rod with a diameter of $d_{1}$ and an aluminum circular tube with inner and outer diameters of $d_{2}$ and $D_{2}$, respectively. The right end of the component is constrained as a fixed end, and the left end is welded integrally with a rigid circular disc. The length of the component is $l$. Before applying the external load, there is no stress inside the rod and tube. A torsional couple $M_{\\mathrm{e}}$ is applied to the rigid circular disc at the left end (as shown in the figure as vector $\\boldsymbol{M}_{\\mathrm{e}}$). It is given that $d_{1}=50 \\mathrm{~mm}, d_{2}=60 \\mathrm{~mm}, D_{2}=76 \\mathrm{~mm}, l=500 \\mathrm{~mm}$; shear modulus of steel $G_{1}=77 \\mathrm{GPa}$, allowable shear stress $[\\tau]_{1}=120 \\mathrm{MPa}$; shear modulus of aluminum $G_{2}=27 \\mathrm{GPa}$, allowable shear stress $[\\tau]_{2}=70 \\mathrm{MPa}$. Determine: the maximum torque couple moment that the component can withstand.",
     "answer": " 6.32 kN·m\n",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Composite Mechanics",
       "image_path": [
         "gym/test_images/00006.png"
@@ -35471,7 +35471,7 @@
     "question": "The figure represents a binary system containing an incongruent melting compound. At the eutectic point $E$, the following crystallization process occurs: $L \\Leftrightarrow A + A_mB_n$. The $B$ content at point $E$ is $20\\%$, and the compound $A_mB_n$ contains $64\\%$ $B$. There are two mixtures, $C_1$ and $C_2$, with their respective composition points located on either side of point $E$. It is known that the $B$ content in $C_1$ is 1.5 times that in $C_2$, and during the cooling crystallization process before reaching the eutectic temperature, the amounts of primary crystalline phases precipitated from these two mixtures are equal. Calculate the compositions of $C_1$ and $C_2$.",
     "answer": "26% 17.3%",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Phase Diagram Analysis",
       "image_path": [
         "gym/test_images/00655.png"
@@ -35978,7 +35978,7 @@
     "question": "The figure shows the relationship between the radius $r$ of a crystal nucleus and $\\triangle G$. There are three curves corresponding to different temperatures. Please indicate which temperature is the highest and which is the lowest.",
     "answer": "$T_1$ $T_3$",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Phase Diagram Analysis",
       "image_path": [
         "gym/test_images/00658.png"
@@ -36413,7 +36413,7 @@
     "question": "How many of the binary phase diagrams in the figure are correct?",
     "answer": "0",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Phase Diagram Analysis",
       "image_path": [
         "gym/test_images/00659.png"
@@ -37224,7 +37224,7 @@
     "question": "The $\\mathrm{Fe}-3\\% \\mathrm{Si}$ alloy (bcc structure) has a lattice constant of $a=0.3 \\mathrm{~nm}$. After deformation, the recovery and recrystallization mechanism is studied. During recovery annealing, the material undergoes a polygonization process, and three subgrains converge at point $O$ as shown in the figure. Through the etch-pit method, the total number of edge dislocations in the three subgrain boundaries ($OA$, $OB$, and $OC$, each with a length of $0.2 \\mathrm{~mm}$) is measured to be $1.198 \\times 10^1$. Assume the dislocations are uniformly distributed and form subgrain boundaries ($\\alpha=120^\\circ$, $\\beta=80^\\circ$). (1) Calculate the misorientation angle $\\theta$ between adjacent subgrains. (2) If after recrystallization these subgrain boundaries transform into high-angle grain boundaries at their original locations and the grain boundary energy of $OA$ is measured to be $0.8 \\mathrm{~J}/\\mathrm{m}^2$, calculate the grain boundary energies of the other two boundaries.",
     "answer": "1.$0.298^{\\circ}$ 2.$0.70 \\mathrm{~J} / \\mathrm{m}^2$, $0.28\\mathrm{~J} / \\mathrm{m}^2$",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Phase Diagram Analysis",
       "image_path": [
         "gym/test_images/00661.png"
@@ -37753,7 +37753,7 @@
     "question": "Figure (a) is the concentration triangle of a ternary eutectic phase diagram for three immiscible solid components, where the composition of the ternary eutectic point E is $w(A)=20\\%, w(B)=30\\%, w(C)=50\\%$. Figure (b) is a horizontal cross-sectional diagram at a certain temperature (higher than $T_{\\mathrm{E}}$). (1) Which of the melting points of components A, B, and C is the lowest? (2) Calculate the mass fraction of the eutectic mixture in the ingot.",
     "answer": "1.C 2.$33.3\\%$",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Phase Diagram Analysis",
       "image_path": [
         "gym/test_images/00662.png"
@@ -38144,7 +38144,7 @@
     "question": "The figure below is a phase diagram of commonly used ceramic materials. Use phase rule to calculate the degrees of freedom for phase regions A and B, as well as point E.",
     "answer": "1，1，0",
     "metadata": {
-      "subject": "Materials",
+      "subject": "Materials Science",
       "topic": "Phase Diagram Analysis",
       "image_path": [
         "gym/test_images/00664.png"

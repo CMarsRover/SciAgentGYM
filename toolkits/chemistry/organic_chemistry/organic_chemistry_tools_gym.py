@@ -81,9 +81,9 @@ class SimulateNucleophilicSubstitutionTool(EnvironmentTool):
     name = "simulate_nucleophilic_substitution"
     description = "模拟有机化学中的亲核取代反应，预测产物和反应能量。"
     arguments = {
-        "nucleophile": {"type": "string", "description": "亲核试剂的SMILES表示，例如 "CH3O-" 表示甲氧基负离子"},
-        "substrate": {"type": "string", "description": "底物的SMILES表示，例如 "CH3Br" 表示溴甲烷"},
-        "solvent": {"type": "string", "description": "溶剂类型，可选值为 "polar", "nonpolar", "neutral"，默认为 "neutral""},
+        "nucleophile": {"type": "string", "description": '亲核试剂的SMILES表示，例如 "CH3O-" 表示甲氧基负离子'},
+        "substrate": {"type": "string", "description": '底物的SMILES表示，例如 "CH3Br" 表示溴甲烷'},
+        "solvent": {"type": "string", "description": '溶剂类型，可选值为 "polar", "nonpolar", "neutral"，默认为 "neutral"'},
         "temperature": {"type": "number", "description": "反应温度，单位为K，默认为298.15K (25°C)"}
     }
     
@@ -135,7 +135,7 @@ class PredictHydrolysisProductTool(EnvironmentTool):
     name = "predict_hydrolysis_product"
     description = "预测有机化合物在水解条件下的产物。基于底物结构和反应条件，模拟水解反应并预测主要产物。"
     arguments = {
-        "substrate": {"type": "string", "description": "底物的SMILES表示，例如 "CH3C(OCH3)2+" 表示缩醛正离子"},
+        "substrate": {"type": "string", "description": '底物的SMILES表示，例如 "CH3C(OCH3)2+" 表示缩醛正离子'},
         "pH": {"type": "number", "description": "反应溶液的pH值，默认为7.0（中性）"},
         "temperature": {"type": "number", "description": "反应温度，单位为K，默认为298.15K (25°C)"}
     }
@@ -188,7 +188,7 @@ class CalculateReactionEnergyTool(EnvironmentTool):
     arguments = {
         "reactants": {"type": "array", "description": "反应物的SMILES表示列表"},
         "products": {"type": "array", "description": "产物的SMILES表示列表"},
-        "method": {"type": "string", "description": "计算方法，可选值为 "semi-empirical", "DFT", "force-field"，默认为 "semi-empirical""}
+        "method": {"type": "string", "description": '计算方法，可选值为 "semi-empirical", "DFT", "force-field"，默认为 "semi-empirical"'}
     }
     
     def use(self, environment, action) -> Observation:
@@ -241,8 +241,8 @@ class VisualizeReactionPathwayTool(EnvironmentTool):
     arguments = {
         "reaction_steps": {"type": "array", "description": "反应步骤的描述列表"},
         "energies": {"type": "array", "description": "对应每个反应步骤的能量值 (kJ/mol)"},
-        "title": {"type": "string", "description": "图表标题，默认为 "反应能量图""},
-        "out_path": {"type": "string", "description": "输出图像的保存路径，默认为 "./images/reaction_pathway.png""}
+        "title": {"type": "string", "description": '图表标题，默认为 "反应能量图"'},
+        "out_path": {"type": "string", "description": '输出图像的保存路径，默认为 "./images/reaction_pathway.png"'}
     }
     
     def use(self, environment, action) -> Observation:
@@ -294,7 +294,7 @@ class OptimizeMolecularGeometryTool(EnvironmentTool):
     description = "优化分子几何构型，寻找能量最低构象。使用分子力场或量子化学方法优化分子的三维结构。"
     arguments = {
         "smiles": {"type": "string", "description": "分子的SMILES表示"},
-        "force_field": {"type": "string", "description": "使用的力场类型，可选值为 "MMFF94", "UFF"，默认为 "MMFF94""},
+        "force_field": {"type": "string", "description": '使用的力场类型，可选值为 "MMFF94", "UFF"，默认为 "MMFF94"'},
         "max_iterations": {"type": "integer", "description": "优化的最大迭代次数，默认为1000"}
     }
     
@@ -345,7 +345,7 @@ class PredictOrganicReactionProductsTool(EnvironmentTool):
     description = "预测有机反应的产物。基于反应物和反应类型，预测可能的产物及其分布。"
     arguments = {
         "reactants": {"type": "array", "description": "反应物的SMILES表示列表"},
-        "reaction_type": {"type": "string", "description": "反应类型，如 "SN2", "E2", "aldol", "Diels-Alder" 等"},
+        "reaction_type": {"type": "string", "description": '反应类型，如 "SN2", "E2", "aldol", "Diels-Alder" 等'},
         "conditions": {"type": "object", "description": "反应条件，包含温度、溶剂、催化剂等信息"}
     }
     

@@ -635,7 +635,7 @@ H : scipy.sparse.csr_matrix
 --------"""
     
     name = "create_heisenberg_hamiltonian"
-    description = "创建二维正方晶格上的量子海森堡模型哈密顿量。
+    description = """创建二维正方晶格上的量子海森堡模型哈密顿量。
 
 Parameters:
 -----------
@@ -648,7 +648,7 @@ periodic : bool
 Returns:
 H : scipy.sparse.csr_matrix
     哈密顿量
---------"
+--------"""
     arguments = {
         "L": {"type": "string", "description": "参数 L"},
         "J": {"type": "string", "description": "参数 J"},
@@ -714,7 +714,7 @@ array_like
     不同温度下的磁化率"""
     
     name = "calculate_susceptibility"
-    description = "计算不同温度下的磁化率
+    description = """计算不同温度下的磁化率
 
 Parameters:
 -----------
@@ -730,7 +730,7 @@ h_small : float
 Returns:
 --------
 array_like
-    不同温度下的磁化率"
+    不同温度下的磁化率"""
     arguments = {
         "n_sites": {"type": "string", "description": "参数 n_sites"},
         "T_range": {"type": "string", "description": "参数 T_range"},
@@ -795,7 +795,7 @@ numpy.ndarray
     每个格点的磁化强度分布"""
     
     name = "calculate_magnetization"
-    description = "计算给定量子态的磁化强度。
+    description = """计算给定量子态的磁化强度。
 
 Parameters:
 -----------
@@ -809,7 +809,7 @@ Returns:
 float
     平均每个格点的磁化强度
 numpy.ndarray
-    每个格点的磁化强度分布"
+    每个格点的磁化强度分布"""
     arguments = {
         "state": {"type": "string", "description": "参数 state"},
         "L": {"type": "string", "description": "参数 L"}
@@ -872,7 +872,7 @@ float
     算符的热力学期望值"""
     
     name = "calculate_thermal_expectation"
-    description = "计算给定温度下量子算符的热力学期望值。
+    description = """计算给定温度下量子算符的热力学期望值。
 
 Parameters:
 -----------
@@ -886,7 +886,7 @@ temperature : float
 Returns:
 --------
 float
-    算符的热力学期望值"
+    算符的热力学期望值"""
     arguments = {
         "hamiltonian": {"type": "string", "description": "参数 hamiltonian"},
         "operator": {"type": "string", "description": "参数 operator"},
@@ -958,7 +958,7 @@ Dict[str, np.ndarray]
     - 'susceptibility': 磁化率数组"""
     
     name = "simulate_phase_transition"
-    description = "模拟不同磁场和温度下的磁化行为，研究相变现象。
+    description = """模拟不同磁场和温度下的磁化行为，研究相变现象。
 
 Parameters:
 -----------
@@ -980,7 +980,7 @@ Dict[str, np.ndarray]
     - 'h_fields': 磁场强度数组
     - 'temperatures': 温度数组
     - 'magnetization': 磁化强度数组（形状为[len(temperatures), len(h_fields)]）
-    - 'susceptibility': 磁化率数组"
+    - 'susceptibility': 磁化率数组"""
     arguments = {
         "n_sites": {"type": "string", "description": "参数 n_sites"},
         "j_coupling": {"type": "string", "description": "参数 j_coupling"},
@@ -1044,7 +1044,7 @@ float
     估计的临界磁场强度"""
     
     name = "find_critical_point"
-    description = "通过寻找磁化率峰值来确定临界点。
+    description = """通过寻找磁化率峰值来确定临界点。
 
 Parameters:
 -----------
@@ -1056,7 +1056,7 @@ susceptibility : np.ndarray
 Returns:
 --------
 float
-    估计的临界磁场强度"
+    估计的临界磁场强度"""
     arguments = {
         "h_fields": {"type": "string", "description": "参数 h_fields"},
         "susceptibility": {"type": "string", "description": "参数 susceptibility"}
@@ -1112,14 +1112,14 @@ save_path : str, optional
     保存图像的路径，如果为None则显示图像"""
     
     name = "plot_results"
-    description = "绘制模拟结果。
+    description = """绘制模拟结果。
 
 Parameters:
 -----------
 results : Dict[str, np.ndarray]
     模拟结果字典
 save_path : str, optional
-    保存图像的路径，如果为None则显示图像"
+    保存图像的路径，如果为None则显示图像"""
     arguments = {
         "results": {"type": "string", "description": "参数 results"},
         "save_path": {"type": "string", "description": "参数 save_path"}
@@ -1229,7 +1229,7 @@ tuple
     (基态能量, 基态波函数)"""
     
     name = "calculate_ground_state"
-    description = "计算哈密顿量的基态和基态能量。
+    description = """计算哈密顿量的基态和基态能量。
 
 Parameters:
 -----------
@@ -1242,7 +1242,7 @@ periodic : bool
 Returns:
 --------
 tuple
-    (基态能量, 基态波函数)"
+    (基态能量, 基态波函数)"""
     arguments = {
         "L": {"type": "string", "description": "参数 L"},
         "J": {"type": "string", "description": "参数 J"},
@@ -1306,7 +1306,7 @@ float
     纠缠熵值"""
     
     name = "calculate_entanglement_entropy"
-    description = "计算量子态的纠缠熵
+    description = """计算量子态的纠缠熵
 
 Parameters:
 -----------
@@ -1320,7 +1320,7 @@ N : int
 Returns:
 --------
 float
-    纠缠熵值"
+    纠缠熵值"""
     arguments = {
         "state": {"type": "string", "description": "参数 state"},
         "site": {"type": "string", "description": "参数 site"},
@@ -1391,7 +1391,7 @@ Dict[str, np.ndarray]
     - 算符名称: 对应算符在每个时间点的期望值"""
     
     name = "simulate_time_evolution"
-    description = "模拟量子系统的时间演化。
+    description = """模拟量子系统的时间演化。
 
 在量子多体系统模拟中，时间演化是研究动力学行为的基本工具。
 此函数基于薛定谔方程计算量子态随时间的演化。
@@ -1412,7 +1412,7 @@ Returns:
 Dict[str, np.ndarray]
     包含时间演化结果的字典:
     - 'states': 每个时间点的量子态
-    - 算符名称: 对应算符在每个时间点的期望值"
+    - 算符名称: 对应算符在每个时间点的期望值"""
     arguments = {
         "hamiltonian": {"type": "string", "description": "参数 hamiltonian"},
         "initial_state": {"type": "string", "description": "参数 initial_state"},
@@ -1477,7 +1477,7 @@ matplotlib.figure.Figure
     绘制的图形"""
     
     name = "plot_magnetization_dynamics"
-    description = "绘制磁化强度随时间的演化
+    description = """绘制磁化强度随时间的演化
 
 Parameters:
 -----------
@@ -1491,7 +1491,7 @@ times : numpy.ndarray
 Returns:
 --------
 matplotlib.figure.Figure
-    绘制的图形"
+    绘制的图形"""
     arguments = {
         "result": {"type": "string", "description": "参数 result"},
         "N": {"type": "string", "description": "参数 N"},
@@ -1553,7 +1553,7 @@ matplotlib.figure.Figure
     绘制的图形"""
     
     name = "plot_entanglement_entropy"
-    description = "绘制不同耦合强度下的纠缠熵
+    description = """绘制不同耦合强度下的纠缠熵
 
 Parameters:
 -----------
@@ -1565,7 +1565,7 @@ N : int
 Returns:
 --------
 matplotlib.figure.Figure
-    绘制的图形"
+    绘制的图形"""
     arguments = {
         "J_values": {"type": "string", "description": "参数 J_values"},
         "N": {"type": "string", "description": "参数 N"}
@@ -1630,7 +1630,7 @@ tuple
     (温度数组, 磁化强度数组)"""
     
     name = "simulate_temperature_dependence"
-    description = "模拟不同温度下的磁化行为。
+    description = """模拟不同温度下的磁化行为。
 
 Parameters:
 -----------
@@ -1646,7 +1646,7 @@ periodic : bool
 Returns:
 --------
 tuple
-    (温度数组, 磁化强度数组)"
+    (温度数组, 磁化强度数组)"""
     arguments = {
         "L": {"type": "string", "description": "参数 L"},
         "J": {"type": "string", "description": "参数 J"},
@@ -1706,7 +1706,7 @@ save_path : str
     保存路径，如果为None则显示图形"""
     
     name = "visualize_magnetization"
-    description = "可视化磁化强度分布。
+    description = """可视化磁化强度分布。
 
 Parameters:
 -----------
@@ -1715,7 +1715,7 @@ mag_2d : ndarray
 title : str
     图表标题
 save_path : str
-    保存路径，如果为None则显示图形"
+    保存路径，如果为None则显示图形"""
     arguments = {
         "mag_2d": {"type": "string", "description": "参数 mag_2d"},
         "title": {"type": "string", "description": "参数 title"},
@@ -1776,7 +1776,7 @@ save_path : str
     保存路径，如果为None则显示图形"""
     
     name = "visualize_temperature_dependence"
-    description = "可视化磁化强度随温度的变化。
+    description = """可视化磁化强度随温度的变化。
 
 Parameters:
 -----------
@@ -1787,7 +1787,7 @@ magnetizations : List[float]
 J : float
     交换耦合强度
 save_path : str
-    保存路径，如果为None则显示图形"
+    保存路径，如果为None则显示图形"""
     arguments = {
         "T_range": {"type": "string", "description": "参数 T_range"},
         "magnetizations": {"type": "string", "description": "参数 magnetizations"},
@@ -2310,7 +2310,7 @@ Examples:
 6.666666666666667  # 约等于6.67Ω"""
     
     name = "calculate_parallel_resistance"
-    description = "计算并联电阻的等效电阻值。
+    description = """计算并联电阻的等效电阻值。
 
 在凝聚态物理中，电子传输网络和量子电路模拟中常需要计算等效电阻。
 此函数基于并联电阻公式: 1/R_eq = 1/R₁ + 1/R₂ + ... + 1/Rₙ
@@ -2328,7 +2328,7 @@ float
 Examples:
 ---------
 >>> calculate_parallel_resistance([10.0, 20.0])
-6.666666666666667  # 约等于6.67Ω"
+6.666666666666667  # 约等于6.67Ω"""
     arguments = {
         "resistances": {"type": "string", "description": "参数 resistances"}
     }
@@ -2394,7 +2394,7 @@ Examples:
 30.0  # 30Ω"""
     
     name = "calculate_series_resistance"
-    description = "计算串联电阻的等效电阻值。
+    description = """计算串联电阻的等效电阻值。
 
 在凝聚态物理中，电子传输通道和量子点阵列中常需要计算串联电阻。
 此函数基于串联电阻公式: R_eq = R₁ + R₂ + ... + Rₙ
@@ -2412,7 +2412,7 @@ float
 Examples:
 ---------
 >>> calculate_series_resistance([10.0, 20.0])
-30.0  # 30Ω"
+30.0  # 30Ω"""
     arguments = {
         "resistances": {"type": "string", "description": "参数 resistances"}
     }
@@ -2483,7 +2483,7 @@ float
     整个电路的等效电阻值，单位为欧姆(Ω)"""
     
     name = "solve_complex_circuit"
-    description = "求解复杂电路网络的等效电阻。
+    description = """求解复杂电路网络的等效电阻。
 
 通过递归方式处理复杂的电路结构，包含串联和并联组合。
 在凝聚态物理中，此类计算对于理解电子传输网络、量子点阵列和纳米线网络至关重要。
@@ -2506,7 +2506,7 @@ resistances : Dict[str, float]
 Returns:
 --------
 float
-    整个电路的等效电阻值，单位为欧姆(Ω)"
+    整个电路的等效电阻值，单位为欧姆(Ω)"""
     arguments = {
         "circuit_structure": {"type": "string", "description": "参数 circuit_structure"},
         "resistances": {"type": "string", "description": "参数 resistances"}
@@ -2563,10 +2563,11 @@ circuit_structure : Dict[str, List[Union[str, List[str]]]]
 resistances : Dict[str, float]
     电阻元件名称到电阻值的映射，单位为欧姆(Ω)
 filename : str, optional
-    图像保存的文件名，默认为"circuit_visualization.png""""
+    图像保存的文件名，默认为"circuit_visualization.png"
+    """
     
     name = "visualize_circuit"
-    description = "可视化电路结构并显示等效电阻。
+    description = """可视化电路结构并显示等效电阻。
 
 使用NetworkX创建电路的图形表示，便于理解电路拓扑结构。
 
@@ -2577,7 +2578,8 @@ circuit_structure : Dict[str, List[Union[str, List[str]]]]
 resistances : Dict[str, float]
     电阻元件名称到电阻值的映射，单位为欧姆(Ω)
 filename : str, optional
-    图像保存的文件名，默认为"circuit_visualization.png""
+    图像保存的文件名，默认为"circuit_visualization.png"
+    """
     arguments = {
         "circuit_structure": {"type": "string", "description": "参数 circuit_structure"},
         "resistances": {"type": "string", "description": "参数 resistances"},
@@ -2642,7 +2644,7 @@ complex
     算符的期望值，对于厄米算符，结果应为实数"""
     
     name = "calculate_expectation_value"
-    description = "计算量子力学中的期望值。
+    description = """计算量子力学中的期望值。
 
 在量子多体系统模拟中，期望值是预测物理量测量结果的关键。
 此函数计算给定密度矩阵和算符的期望值: ⟨O⟩ = Tr(ρO)
@@ -2657,7 +2659,7 @@ density_matrix : np.ndarray
 Returns:
 --------
 complex
-    算符的期望值，对于厄米算符，结果应为实数"
+    算符的期望值，对于厄米算符，结果应为实数"""
     arguments = {
         "operator": {"type": "string", "description": "参数 operator"},
         "density_matrix": {"type": "string", "description": "参数 density_matrix"}
@@ -2714,10 +2716,11 @@ time_points : np.ndarray
 results : Dict[str, np.ndarray]
     simulate_time_evolution函数返回的结果字典
 filename : str, optional
-    图像保存的文件名，默认为"time_evolution.png""""
+    图像保存的文件名，默认为"time_evolution.png"
+    """
     
     name = "visualize_time_evolution"
-    description = "可视化量子系统时间演化的结果。
+    description = """可视化量子系统时间演化的结果。
 
 绘制算符期望值随时间的变化，帮助理解量子系统的动力学行为。
 
@@ -2728,7 +2731,8 @@ time_points : np.ndarray
 results : Dict[str, np.ndarray]
     simulate_time_evolution函数返回的结果字典
 filename : str, optional
-    图像保存的文件名，默认为"time_evolution.png""
+    图像保存的文件名，默认为"time_evolution.png"
+    """
     arguments = {
         "time_points": {"type": "string", "description": "参数 time_points"},
         "results": {"type": "string", "description": "参数 results"},
@@ -2797,7 +2801,7 @@ float
     系统的总能量，单位为电子伏特(eV)"""
     
     name = "calculate_dft_energy"
-    description = "模拟第一性原理计算中的密度泛函理论(DFT)能量计算。
+    description = """模拟第一性原理计算中的密度泛函理论(DFT)能量计算。
 
 此函数提供了一个简化的DFT能量计算模型，用于材料性质预测。
 实际应用中通常会使用专业软件包如VASP、Quantum ESPRESSO等。
@@ -2816,7 +2820,7 @@ basis_set : str, optional
 Returns:
 --------
 float
-    系统的总能量，单位为电子伏特(eV)"
+    系统的总能量，单位为电子伏特(eV)"""
     arguments = {
         "atomic_positions": {"type": "string", "description": "参数 atomic_positions"},
         "atomic_numbers": {"type": "string", "description": "参数 atomic_numbers"},
@@ -2886,7 +2890,7 @@ Tuple[np.ndarray, float]
     优化后的原子位置坐标和对应的能量值"""
     
     name = "optimize_crystal_structure"
-    description = "优化晶体结构以找到能量最低的构型。
+    description = """优化晶体结构以找到能量最低的构型。
 
 在材料科学和凝聚态物理中，结构优化是预测稳定材料结构的关键步骤。
 此函数使用数值优化方法寻找能量最低的原子构型。
@@ -2905,7 +2909,7 @@ basis_set : str, optional
 Returns:
 --------
 Tuple[np.ndarray, float]
-    优化后的原子位置坐标和对应的能量值"
+    优化后的原子位置坐标和对应的能量值"""
     arguments = {
         "initial_positions": {"type": "string", "description": "参数 initial_positions"},
         "atomic_numbers": {"type": "string", "description": "参数 atomic_numbers"},
@@ -3564,7 +3568,7 @@ tuple
     (时间数组, 速度数组, 位置数组)，单位分别为s, m/s, m"""
     
     name = "electron_motion_in_field"
-    description = "计算电子在恒定电场下的运动
+    description = """计算电子在恒定电场下的运动
 
 基于经典力学和半导体物理学原理，计算电子在恒定电场下的加速运动。
 F = qE = m*a，其中q是电子电荷，E是电场强度，m是有效质量，a是加速度。
@@ -3583,7 +3587,7 @@ initial_velocity : float, optional
 Returns:
 --------
 tuple
-    (时间数组, 速度数组, 位置数组)，单位分别为s, m/s, m"
+    (时间数组, 速度数组, 位置数组)，单位分别为s, m/s, m"""
     arguments = {
         "electric_field": {"type": "string", "description": "参数 electric_field"},
         "effective_mass": {"type": "string", "description": "参数 effective_mass"},
@@ -3654,7 +3658,7 @@ tuple
     (k点数组, 能量数组)，单位分别为1/m和eV"""
     
     name = "band_structure_1d"
-    description = "计算一维晶体的能带结构
+    description = """计算一维晶体的能带结构
 
 基于不同的能带模型（抛物线、紧束缚等）计算能带结构。
 
@@ -3674,7 +3678,7 @@ band_type : str, optional
 Returns:
 --------
 tuple
-    (k点数组, 能量数组)，单位分别为1/m和eV"
+    (k点数组, 能量数组)，单位分别为1/m和eV"""
     arguments = {
         "k_range": {"type": "string", "description": "参数 k_range"},
         "band_params": {"type": "string", "description": "参数 band_params"},
@@ -3744,7 +3748,7 @@ tuple
     (温度数组, 能量数组, 磁化强度数组, 比热容数组, 磁化率数组)"""
     
     name = "monte_carlo_phase_transition"
-    description = "使用蒙特卡洛方法模拟二维Ising模型的相变
+    description = """使用蒙特卡洛方法模拟二维Ising模型的相变
 
 基于Metropolis算法实现的蒙特卡洛模拟，用于研究二维Ising模型的相变现象。
 
@@ -3764,7 +3768,7 @@ equilibration : int, optional
 Returns:
 --------
 tuple
-    (温度数组, 能量数组, 磁化强度数组, 比热容数组, 磁化率数组)"
+    (温度数组, 能量数组, 磁化强度数组, 比热容数组, 磁化率数组)"""
     arguments = {
         "lattice_size": {"type": "string", "description": "参数 lattice_size"},
         "temperature_range": {"type": "string", "description": "参数 temperature_range"},
@@ -3834,7 +3838,7 @@ tuple
     (时间数组, 量子态数组)，量子态数组形状为(time_points, n)"""
     
     name = "quantum_state_evolution"
-    description = "计算量子态在给定哈密顿量下的时间演化
+    description = """计算量子态在给定哈密顿量下的时间演化
 
 基于量子力学的薛定谔方程，计算量子态随时间的演化。
 
@@ -3852,7 +3856,7 @@ method : str, optional
 Returns:
 --------
 tuple
-    (时间数组, 量子态数组)，量子态数组形状为(time_points, n)"
+    (时间数组, 量子态数组)，量子态数组形状为(time_points, n)"""
     arguments = {
         "hamiltonian": {"type": "string", "description": "参数 hamiltonian"},
         "initial_state": {"type": "string", "description": "参数 initial_state"},

@@ -1,9 +1,9 @@
 """
-批量多题调试脚本（实验性）
+批量多题调试脚本（benchmark 入口）
 
 功能：
-- 使用重构后的 `simple_test_query` 或 `test_query` + 评价逻辑，对
-  `gym/dataset/refine_merged_questions_augmented.json` 中的所有案例逐一测试。
+- 对 ``dataset/refine_merged_multi_questions.json`` 或
+  ``dataset/refine_merged_single_questions.json`` 中的所有案例逐一测试。
 - 对每个案例：
   - 调用模型（可选使用工具）
   - 提取 boxed 答案或结构化答案
@@ -17,11 +17,26 @@
 
 运行方式（在项目根目录）：
 
+    # 跑多模态数据集全部案例（默认）
     python gym/test_querys.py
 
-或指定模型 / 是否用工具 / 测试类型：
+    # 跑单模态数据集
+    python gym/test_querys.py --dataset single
 
-    python -m gym.test_querys
+    # 指定模型 + 关闭工具（纯 LLM baseline）
+    python gym/test_querys.py --model gpt-4o --no-tools
+
+    # 只跑指定 case
+    python gym/test_querys.py --case-id 5
+
+    # 纯文本模式（Issue #6）：不把图像回传给模型，
+    # 适用于不支持 image_url 消息的 OpenAI 兼容 API。
+    python gym/test_querys.py --text-only
+
+    # single 和 multi 全跑
+    python gym/test_querys.py --dataset both
+
+参数总览：见 `python gym/test_querys.py --help` 或本文件 `_build_arg_parser()`。
 
 注意：
 - 本文件依赖 `gym.test_executor` 模块
@@ -379,10 +394,14 @@ def run_all_refined_cases(
     force_retest: bool = False,
     load_all_topic_tools: bool = False,
     auto_infer_from_metadata: bool = True,
+    dataset_key: Optional[str] = None,
+    dataset_path: Optional[Path] = None,
+    case_ids: Optional[List[Any]] = None,
+    text_only: bool = False,
 ) -> None:
     """
-    对 refine_merged_questions_augmented.json 中的所有案例逐一执行测试 + evaluation + trace 落盘。
-    
+    对指定 dataset 里的所有案例逐一执行测试 + evaluation + trace 落盘。
+
     Args:
         model_name: 模型名称
         use_tools: 是否使用工具
@@ -393,9 +412,32 @@ def run_all_refined_cases(
         load_all_topic_tools: 是否加载相同topic的所有工具（仅对 refine 类型有效）
         auto_infer_from_metadata: 是否根据 metadata 中的 subject/topic 自动推断并加载工具目录
                                    默认为 True，会自动加载 toolkits/{subject}/{topic}/ 下的所有工具
+        dataset_key: dataset 键名（"multi" / "single" / 完整键），传入时优先级高于默认
+        dataset_path: 直接给定 dataset JSON 路径，优先级最高
+        case_ids: 只跑这些 id（str/int 均可）。为 None 时跑全部
+        text_only: True 时禁用图像回传（题面图 + 工具生成图都跳过），适合不支持
+                   image_url 消息的 OpenAI 兼容 API
     """
-    core_dir = Path(__file__).resolve().parent
-    dataset_path = core_dir / "dataset" / "refine_merged_questions_augmented.json"
+    import os
+
+    from gym.config.dataset_config import (
+        get_dataset_entry,
+        set_current_dataset_key,
+    )
+
+    # Issue #6: text-only 模式通过环境变量向 gym.test_executor 透传，
+    # 让 tool-message 图像回传路径也能拿到开关。
+    if text_only:
+        os.environ["SCIAGENT_TEXT_ONLY"] = "1"
+
+    if dataset_path is not None:
+        dataset_path = Path(dataset_path)
+        if dataset_key:
+            set_current_dataset_key(dataset_key)
+    else:
+        entry = get_dataset_entry(dataset_key)
+        set_current_dataset_key(entry.key)
+        dataset_path = entry.dataset_path
 
     if not dataset_path.exists():
         print(f"❌ 数据集文件不存在: {dataset_path}")
@@ -431,16 +473,32 @@ def run_all_refined_cases(
     skipped = 0
 
     test_type_label = "refine (结构化评估)" if test_type == "refine" else "normal (boxed评估)"
-    print(f"\n=== 开始批量测试 refine_merged_questions_augmented.json ({total} 个案例) ===")
-    print(f"模型: {current_model} | 模式: {'with_tools_react' if use_tools else 'without_tools'} | 类型: {test_type_label}")
+    modality_label = "text-only" if text_only else "multimodal"
+    print(f"\n=== 开始批量测试 {dataset_path.name} ({total} 个案例) ===")
+    print(
+        f"模型: {current_model} | "
+        f"模式: {'with_tools_react' if use_tools else 'without_tools'} | "
+        f"类型: {test_type_label} | "
+        f"输入形态: {modality_label}"
+    )
+    if case_ids:
+        wanted = {str(c) for c in case_ids}
+        print(f"仅执行指定 case_id: {sorted(wanted)}")
+    else:
+        wanted = None
 
     for idx, case in enumerate(cases, start=1):
-        case_id = case.get("id", f"case_{idx}") 
-        ## TODO
-        if idx!=5: 
+        case_id = case.get("id", f"case_{idx}")
+        if wanted is not None and str(case_id) not in wanted:
             continue
-        # 统一处理图片路径
-        normalize_case_image_paths(case)
+        # 纯文本模式下，主动去掉 metadata.image_path，避免图像被打包进 message
+        if text_only:
+            metadata = case.get("metadata")
+            if isinstance(metadata, dict):
+                metadata.pop("image_path", None)
+        else:
+            # 统一处理图片路径（仅在多模态模式下）
+            normalize_case_image_paths(case)
         
         # refine 类型：显示原始 ID 和精炼索引
         if test_type == "refine":
@@ -528,20 +586,98 @@ def run_all_refined_cases(
         print("判题准确率    : 无有效评测结果")
 
 
+def _build_arg_parser():
+    import argparse
+
+    p = argparse.ArgumentParser(
+        prog="python gym/test_querys.py",
+        description="SciAgentGYM benchmark 入口：批量跑 refined dataset 里的所有案例。",
+    )
+    p.add_argument(
+        "--dataset",
+        default="multi",
+        choices=["multi", "single", "both",
+                 "refine_merged_multi_questions", "refine_merged_single_questions"],
+        help="要跑的数据集：multi=多模态，single=单模态，both=两个都跑。默认 multi。",
+    )
+    p.add_argument(
+        "--model",
+        default=None,
+        help="模型名（见 gym/config/config.py 里的 SUPPORTED_MODELS）。留空则使用 DEFAULT_MODEL。",
+    )
+    p.add_argument(
+        "--no-tools",
+        action="store_true",
+        help="关闭工具（纯 LLM baseline）。默认开启工具。",
+    )
+    p.add_argument(
+        "--test-type",
+        default="normal",
+        choices=["normal", "refine"],
+        help="normal=boxed 答案评估；refine=结构化过程评估。默认 normal。",
+    )
+    p.add_argument(
+        "--force-retest",
+        action="store_true",
+        help="忽略已存在的 trace 文件，强制重跑。",
+    )
+    p.add_argument(
+        "--case-id",
+        action="append",
+        default=None,
+        help="只跑指定 id 的 case，可多次传（如 --case-id 5 --case-id 12）。",
+    )
+    p.add_argument(
+        "--text-only",
+        action="store_true",
+        help=(
+            "纯文本模式（Issue #6）：不把 metadata.image_path 或工具生成的 base64 图像"
+            "回传给模型，适合不支持 image_url 消息的 OpenAI 兼容 API / 纯文本模型。"
+            "也可通过环境变量 SCIAGENT_TEXT_ONLY=1 开启。"
+        ),
+    )
+    p.add_argument(
+        "--load-all-topic-tools",
+        action="store_true",
+        help="除本 case 的工具外，同时加载同 topic 下的所有工具（仅 refine 类型有效）。",
+    )
+    p.add_argument(
+        "--no-auto-infer",
+        action="store_true",
+        help="关闭「从 metadata.subject/topic 自动推断工具目录」的行为。",
+    )
+    return p
+
+
+def _resolve_dataset_keys(spec: str) -> List[str]:
+    if spec == "both":
+        return ["refine_merged_multi_questions", "refine_merged_single_questions"]
+    if spec == "multi":
+        return ["refine_merged_multi_questions"]
+    if spec == "single":
+        return ["refine_merged_single_questions"]
+    return [spec]
+
+
 if __name__ == "__main__":
-    # 默认使用配置中的 DEFAULT_MODEL，开启工具模式
-    # run_all_refined_cases(model_name="glm-4.6v", use_tools=True) 
-    
-    #run_all_refined_cases(model_name="Qwen/Qwen3-VL-235B-A22B-Thinking", use_tools=True) 
-    # run_all_refined_cases(model_name="gpt-5", use_tools=True)  
-    # run_all_refined_cases(model_name="gpt-4o", use_tools=True) 
-    # run_all_refined_cases(model_name="qwen3-vl-8b-thinking", use_tools=True)
-    run_all_refined_cases(model_name="claude-sonnet-4-20250514", use_tools=True)
-    # run_all_refined_cases(model_name="gemini-2.5-pro-thinking-2048", use_tools=True) 
-    # run_all_refined_cases(model_name="glm-4.6v", use_tools=True, test_type="refine")
+    import os
 
+    args = _build_arg_parser().parse_args()
 
+    text_only = args.text_only or os.environ.get("SCIAGENT_TEXT_ONLY", "").strip() in {"1", "true", "TRUE", "yes"}
 
-
+    for dataset_key in _resolve_dataset_keys(args.dataset):
+        print(f"\n########## 数据集: {dataset_key} ##########")
+        run_all_refined_cases(
+            model_name=args.model,
+            use_tools=not args.no_tools,
+            test_type=args.test_type,
+            force_retest=args.force_retest,
+            load_all_topic_tools=args.load_all_topic_tools,
+            auto_infer_from_metadata=not args.no_auto_infer,
+            dataset_key=dataset_key,
+            case_ids=args.case_id,
+            text_only=text_only,
+        )
 
 

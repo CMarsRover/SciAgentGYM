@@ -373,6 +373,242 @@ def create_diagnostic_flowchart(diagnosis_results: dict) -> dict:
         }
     }
 
+# ====================================================================
+# Case #39 (gpqa_cellbio_20) 补齐的 4 个工具函数
+# 用途：数据集 refine_merged_single_questions.json id=39 的 tool_expected 里
+# 列了这 4 个函数名，但仓库里未实现。此处按照该 case 的 metadata.golden_answer
+# 的输入/输出结构补齐，保证 case 可运行且返回值形状与 golden_answer 对齐。
+# ====================================================================
+
+# 扩展的酶-甲基化敏感性表，字段命名与 golden_answer 对齐
+_ENZYME_METHYLATION_TABLE = {
+    'EcoRI':   {'recognition_site': 'GAATTC', 'methylation_sensitive': True, 'affected_by_dam': False, 'affected_by_dcm': True},
+    'BamHI':   {'recognition_site': 'GGATCC', 'methylation_sensitive': True, 'affected_by_dam': True,  'affected_by_dcm': False},
+    'HindIII': {'recognition_site': 'AAGCTT', 'methylation_sensitive': True, 'affected_by_dam': True,  'affected_by_dcm': False},
+    'ClaI':    {'recognition_site': 'ATCGAT', 'methylation_sensitive': True, 'affected_by_dam': False, 'affected_by_dcm': True},
+    'XbaI':    {'recognition_site': 'TCTAGA', 'methylation_sensitive': True, 'affected_by_dam': True,  'affected_by_dcm': False},
+    'MboI':    {'recognition_site': 'GATC',   'methylation_sensitive': True, 'affected_by_dam': True,  'affected_by_dcm': False},
+}
+
+# 扩展的菌株-甲基化系统状态表（补充 JM110/SCS110 等 dam-/dcm- 菌株）
+_STRAIN_METHYLATION_STATUS = {
+    'DH5alpha': {'dam_active': True,  'dcm_active': True},
+    'DH10B':    {'dam_active': True,  'dcm_active': True},
+    'TOP10':    {'dam_active': True,  'dcm_active': True},
+    'JM109':    {'dam_active': True,  'dcm_active': True},
+    'JM110':    {'dam_active': False, 'dcm_active': False, 'genotype': 'dam- dcm-', 'advantage': '无甲基化修饰，酶切效率高'},
+    'SCS110':   {'dam_active': False, 'dcm_active': False, 'genotype': 'dam- dcm-', 'advantage': '克隆稳定性好，适合大片段'},
+    'GM2163':   {'dam_active': False, 'dcm_active': False, 'genotype': 'dam- dcm-', 'advantage': 'Dam-/Dcm- strain for methylation-sensitive work'},
+    'ER2925':   {'dam_active': False, 'dcm_active': False, 'genotype': 'dam- dcm-', 'advantage': 'Dam-/Dcm- strain, CpG unmethylated'},
+}
+
+
+def analyze_restriction_enzyme_sensitivity(
+    enzyme_list: List[str],
+    strain: str,
+    observed_issue: str = "",
+) -> dict:
+    """分析给定限制酶在指定 E.coli 菌株中的甲基化敏感性。
+
+    Args:
+        enzyme_list: 限制酶名字列表，如 ["EcoRI", "BamHI"].
+        strain: 宿主菌株名，如 "DH5alpha".
+        observed_issue: 实验观察到的现象描述（可选，如 "拖尾现象"），用于生成诊断文本。
+
+    Returns:
+        dict: 每个酶名映射到其 {recognition_site, methylation_sensitive,
+              affected_by_dam, affected_by_dcm}，另加一个 ``diagnosis`` 字段。
+    """
+    strain_status = _STRAIN_METHYLATION_STATUS.get(
+        strain, {'dam_active': True, 'dcm_active': True}
+    )
+    dam_active = strain_status.get('dam_active', True)
+    dcm_active = strain_status.get('dcm_active', True)
+
+    result: Dict[str, Any] = {}
+    blocked_any = False
+    for enzyme in enzyme_list:
+        info = _ENZYME_METHYLATION_TABLE.get(enzyme)
+        if info is None:
+            result[enzyme] = {
+                'recognition_site': 'UNKNOWN',
+                'methylation_sensitive': False,
+                'affected_by_dam': False,
+                'affected_by_dcm': False,
+            }
+            continue
+        result[enzyme] = {
+            'recognition_site': info['recognition_site'],
+            'methylation_sensitive': info['methylation_sensitive'],
+            'affected_by_dam': info['affected_by_dam'],
+            'affected_by_dcm': info['affected_by_dcm'],
+        }
+        if (info['affected_by_dam'] and dam_active) or (info['affected_by_dcm'] and dcm_active):
+            blocked_any = True
+
+    if blocked_any:
+        diagnosis = f"{strain}菌株的dam/dcm甲基化系统干扰酶切效率"
+    else:
+        diagnosis = f"{strain}菌株的dam/dcm状态与所测酶不冲突"
+    if observed_issue:
+        diagnosis += f"（观察现象：{observed_issue}）"
+    result['diagnosis'] = diagnosis
+    return result
+
+
+def check_methylation_sites(strain: str, target_sequences: List[str]) -> dict:
+    """检查 E.coli 菌株的 dam / dcm 甲基化系统在给定目标序列上的活性。
+
+    Args:
+        strain: 菌株名，如 "DH5alpha".
+        target_sequences: 目标序列列表，如 ["GATC", "CCWGG"].
+
+    Returns:
+        dict: 包含 ``dam_methylation`` / ``dcm_methylation`` / ``impact`` 三个字段。
+              每个甲基化子字典包括 ``active`` / ``target`` / ``modification``。
+    """
+    strain_status = _STRAIN_METHYLATION_STATUS.get(
+        strain, {'dam_active': True, 'dcm_active': True}
+    )
+    dam_active_strain = strain_status.get('dam_active', True)
+    dcm_active_strain = strain_status.get('dcm_active', True)
+
+    dam_hit = any(seq.upper() == 'GATC' for seq in target_sequences)
+    dcm_hit = any(seq.upper() == 'CCWGG' for seq in target_sequences)
+
+    result: Dict[str, Any] = {
+        'dam_methylation': {
+            'active': bool(dam_active_strain and dam_hit),
+            'target': 'GATC',
+            'modification': 'N6-methyladenine',
+        },
+        'dcm_methylation': {
+            'active': bool(dcm_active_strain and dcm_hit),
+            'target': 'CCWGG',
+            'modification': '5-methylcytosine',
+        },
+    }
+    if dam_active_strain or dcm_active_strain:
+        result['impact'] = "甲基化修饰降低限制酶切割效率，导致不完全酶切和拖尾"
+    else:
+        result['impact'] = f"{strain}菌株为dam-/dcm-背景，甲基化不影响酶切"
+    return result
+
+
+def recommend_alternative_strains(current_strain: str, issue: str = "") -> dict:
+    """针对甲基化干扰等问题，推荐可用于替代的 dam-/dcm- 菌株。
+
+    Args:
+        current_strain: 当前使用的菌株名。
+        issue: 遇到的问题描述（如 "甲基化干扰酶切"），当前用于结果打标注。
+
+    Returns:
+        dict: ``recommended_strains`` (3 条) + ``alternative_solutions`` (通用建议列表)。
+    """
+    recommended: List[Dict[str, str]] = []
+    for name in ('JM110', 'SCS110', 'GM2163', 'ER2925'):
+        if name == current_strain:
+            continue
+        info = _STRAIN_METHYLATION_STATUS.get(name, {})
+        if info.get('dam_active', True) or info.get('dcm_active', True):
+            continue
+        recommended.append({
+            'strain': name,
+            'genotype': info.get('genotype', 'dam- dcm-'),
+            'advantage': info.get('advantage', 'Dam-/Dcm- strain, 适合甲基化敏感应用'),
+        })
+
+    recommended.append({
+        'strain': 'dam-/dcm- competent cells',
+        'genotype': 'dam- dcm-',
+        'advantage': '商业化菌株，质量稳定',
+    })
+
+    return {
+        'recommended_strains': recommended[:3],
+        'alternative_solutions': [
+            "延长酶切时间至4-6小时",
+            "增加酶量至2-3倍",
+            "使用甲基化不敏感的同尾酶",
+        ],
+    }
+
+
+def visualize_methylation_pattern(
+    strain_comparison: List[str],
+    enzyme_sites: List[str],
+) -> dict:
+    """绘制不同 E.coli 菌株在指定限制酶位点上的甲基化屏蔽情况热力图。
+
+    Args:
+        strain_comparison: 待对比的菌株列表，如 ["DH5alpha", "JM110"].
+        enzyme_sites: 限制酶名列表，如 ["EcoRI", "BamHI"].
+
+    Returns:
+        dict: 包含 ``image_save_path`` (str) 与 ``description`` (str)。
+    """
+    n_strain = max(len(strain_comparison), 1)
+    n_enzyme = max(len(enzyme_sites), 1)
+    combined = np.zeros((n_strain, n_enzyme), dtype=int)
+    labels = [['none'] * n_enzyme for _ in range(n_strain)]
+
+    for i, strain in enumerate(strain_comparison):
+        s = _STRAIN_METHYLATION_STATUS.get(strain, {'dam_active': True, 'dcm_active': True})
+        dam_active = s.get('dam_active', True)
+        dcm_active = s.get('dcm_active', True)
+        for j, enzyme in enumerate(enzyme_sites):
+            e = _ENZYME_METHYLATION_TABLE.get(enzyme, {})
+            dam_hit = bool(dam_active and e.get('affected_by_dam'))
+            dcm_hit = bool(dcm_active and e.get('affected_by_dcm'))
+            score = int(dam_hit) + int(dcm_hit)
+            combined[i, j] = score
+            if dam_hit and dcm_hit:
+                labels[i][j] = 'dam+dcm'
+            elif dam_hit:
+                labels[i][j] = 'dam'
+            elif dcm_hit:
+                labels[i][j] = 'dcm'
+
+    fig_w = 2.0 + 1.4 * n_enzyme
+    fig_h = 1.5 + 0.9 * n_strain
+    fig, ax = plt.subplots(figsize=(fig_w, fig_h))
+    im = ax.imshow(combined, cmap='YlOrRd', vmin=0, vmax=2, aspect='auto')
+    ax.set_xticks(range(n_enzyme))
+    ax.set_xticklabels(enzyme_sites)
+    ax.set_yticks(range(n_strain))
+    ax.set_yticklabels(strain_comparison)
+    ax.set_xlabel('Restriction enzyme')
+    ax.set_ylabel('E. coli strain')
+    ax.set_title('Methylation-driven blockage per strain x enzyme')
+    for i in range(n_strain):
+        for j in range(n_enzyme):
+            ax.text(
+                j, i, labels[i][j],
+                ha='center', va='center', fontsize=9,
+                color='black' if combined[i, j] < 2 else 'white',
+            )
+    cbar = plt.colorbar(im, ax=ax, ticks=[0, 1, 2])
+    cbar.set_label('blocked systems')
+    plt.tight_layout()
+
+    tag = '_vs_'.join(strain_comparison) if strain_comparison else 'strains'
+    save_dir = './tool_images'
+    os.makedirs(save_dir, exist_ok=True)
+    save_path = os.path.join(save_dir, f'methylation_comparison_{tag}.png')
+    plt.savefig(save_path, dpi=120)
+    plt.close(fig)
+
+    others = '/'.join(strain_comparison[1:]) if len(strain_comparison) > 1 else '对比组'
+    description = (
+        f"对比图显示{strain_comparison[0] if strain_comparison else '目标菌株'}"
+        f"在酶切位点附近的甲基化屏蔽情况，而{others}的甲基化状态用于对照。"
+    )
+    return {
+        'image_save_path': save_path,
+        'description': description,
+    }
+
+
 # 文件加载函数
 def load_file(filepath: str) -> dict:
     """加载各种格式的文件"""

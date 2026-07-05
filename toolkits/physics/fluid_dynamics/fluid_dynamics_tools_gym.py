@@ -50,7 +50,7 @@ dict : {'result': float, 'metadata': dict}
     加速度值及计算详情"""
     
     name = "calculate_system_acceleration"
-    description = "计算滑轮系统的加速度
+    description = """计算滑轮系统的加速度
 
 物理原理：
 - 对m2：T - m2*g = -m2*a (向下为正)
@@ -73,7 +73,7 @@ g : float
 Returns:
 --------
 dict : {'result': float, 'metadata': dict}
-    加速度值及计算详情"
+    加速度值及计算详情"""
     arguments = {
         "m1": {"type": "string", "description": "参数 m1"},
         "m2": {"type": "string", "description": "参数 m2"},
@@ -137,7 +137,7 @@ Returns:
 dict : {'result': float, 'metadata': dict}"""
     
     name = "calculate_water_mass"
-    description = "计算容器中水的质量
+    description = """计算容器中水的质量
 
 Parameters:
 -----------
@@ -150,7 +150,7 @@ density : float
 
 Returns:
 --------
-dict : {'result': float, 'metadata': dict}"
+dict : {'result': float, 'metadata': dict}"""
     arguments = {
         "base_area": {"type": "string", "description": "参数 base_area"},
         "height": {"type": "string", "description": "参数 height"},
@@ -217,7 +217,7 @@ dict : {'result': float, 'metadata': dict}
     倾斜角度(弧度)及相关信息"""
     
     name = "calculate_tilt_angle"
-    description = "计算液体表面相对于水平面的倾斜角度
+    description = """计算液体表面相对于水平面的倾斜角度
 
 物理原理：
 在加速参考系中，液体受到惯性力和重力的合力
@@ -234,7 +234,7 @@ g : float
 Returns:
 --------
 dict : {'result': float, 'metadata': dict}
-    倾斜角度(弧度)及相关信息"
+    倾斜角度(弧度)及相关信息"""
     arguments = {
         "acceleration": {"type": "string", "description": "参数 acceleration"},
         "g": {"type": "string", "description": "参数 g"}
@@ -298,7 +298,7 @@ dict : {'result': float, 'metadata': dict}
     高度差(m)"""
     
     name = "calculate_height_difference"
-    description = "计算液面两端的高度差
+    description = """计算液面两端的高度差
 
 几何关系：Δh = (a/2) * tan(θ)
 其中a是容器宽度，θ是倾斜角
@@ -313,7 +313,7 @@ tilt_angle : float
 Returns:
 --------
 dict : {'result': float, 'metadata': dict}
-    高度差(m)"
+    高度差(m)"""
     arguments = {
         "base_width": {"type": "string", "description": "参数 base_width"},
         "tilt_angle": {"type": "string", "description": "参数 tilt_angle"}
@@ -376,7 +376,7 @@ Returns:
 dict : {'result': float, 'metadata': dict}"""
     
     name = "calculate_minimum_height"
-    description = "计算防止溢出的最小容器高度
+    description = """计算防止溢出的最小容器高度
 
 临界条件：H = h + Δh
 其中h是初始水位，Δh是液面高度差
@@ -390,7 +390,7 @@ height_difference : float
 
 Returns:
 --------
-dict : {'result': float, 'metadata': dict}"
+dict : {'result': float, 'metadata': dict}"""
     arguments = {
         "initial_height": {"type": "string", "description": "参数 initial_height"},
         "height_difference": {"type": "string", "description": "参数 height_difference"}
@@ -458,7 +458,7 @@ Returns:
 dict : 包含最终结果和所有中间步骤"""
     
     name = "solve_minimum_container_height"
-    description = "求解防止水溢出的最小容器高度（完整流程）
+    description = """求解防止水溢出的最小容器高度（完整流程）
 
 Parameters:
 -----------
@@ -477,7 +477,7 @@ water_density : float
 
 Returns:
 --------
-dict : 包含最终结果和所有中间步骤"
+dict : 包含最终结果和所有中间步骤"""
     arguments = {
         "container_mass": {"type": "string", "description": "参数 container_mass"},
         "hanging_mass": {"type": "string", "description": "参数 hanging_mass"},
@@ -545,7 +545,7 @@ Returns:
 dict : 敏感性分析结果"""
     
     name = "analyze_parameter_sensitivity"
-    description = "分析参数敏感性
+    description = """分析参数敏感性
 
 Parameters:
 -----------
@@ -560,7 +560,7 @@ param_range : list
 
 Returns:
 --------
-dict : 敏感性分析结果"
+dict : 敏感性分析结果"""
     arguments = {
         "base_params": {"type": "string", "description": "参数 base_params"},
         "vary_param": {"type": "string", "description": "参数 vary_param"},
@@ -627,7 +627,7 @@ Returns:
 dict : 图像信息"""
     
     name = "visualize_liquid_surface"
-    description = "可视化液体表面倾斜情况
+    description = """可视化液体表面倾斜情况
 
 Parameters:
 -----------
@@ -644,7 +644,7 @@ save_path : str
 
 Returns:
 --------
-dict : 图像信息"
+dict : 图像信息"""
     arguments = {
         "base_width": {"type": "string", "description": "参数 base_width"},
         "initial_height": {"type": "string", "description": "参数 initial_height"},
@@ -711,7 +711,7 @@ Returns:
 dict : 图像信息"""
     
     name = "plot_sensitivity_analysis"
-    description = "绘制参数敏感性分析图
+    description = """绘制参数敏感性分析图
 
 Parameters:
 -----------
@@ -726,7 +726,7 @@ save_path : str
 
 Returns:
 --------
-dict : 图像信息"
+dict : 图像信息"""
     arguments = {
         "sensitivity_data": {"type": "string", "description": "参数 sensitivity_data"},
         "param_name": {"type": "string", "description": "参数 param_name"},
@@ -798,7 +798,7 @@ Returns:
 dict : 图像信息"""
     
     name = "create_force_diagram"
-    description = "绘制系统受力分析图
+    description = """绘制系统受力分析图
 
 Parameters:
 -----------
@@ -819,7 +819,7 @@ save_path : str
 
 Returns:
 --------
-dict : 图像信息"
+dict : 图像信息"""
     arguments = {
         "container_mass": {"type": "string", "description": "参数 container_mass"},
         "water_mass": {"type": "string", "description": "参数 water_mass"},
@@ -898,7 +898,7 @@ dict : {
 - 工业废水：Kz = 1.3 ~ 1.5 (相对稳定)"""
     
     name = "calculate_total_variation_coefficient"
-    description = "计算污水总变化系数 Kz
+    description = """计算污水总变化系数 Kz
 
 根据《室外排水设计标准》GB 50014-2021，总变化系数用于将平均流量转换为设计流量。
 
@@ -923,7 +923,7 @@ dict : {
 公式依据：
 - 生活污水：Kz = 2.3 / Q^0.07 (Q < 20 L/s)
 - 生活污水：Kz = 1.98 / Q^0.04 (20 ≤ Q ≤ 1000 L/s)
-- 工业废水：Kz = 1.3 ~ 1.5 (相对稳定)"
+- 工业废水：Kz = 1.3 ~ 1.5 (相对稳定)"""
     arguments = {
         "average_flow": {"type": "string", "description": "参数 average_flow"},
         "coefficient_type": {"type": "string", "description": "参数 coefficient_type"}
@@ -992,7 +992,7 @@ dict : {
 公式：Qd = Kz * Qavg"""
     
     name = "calculate_design_flow"
-    description = "计算设计流量
+    description = """计算设计流量
 
 Parameters:
 -----------
@@ -1012,7 +1012,7 @@ dict : {
     }
 }
 
-公式：Qd = Kz * Qavg"
+公式：Qd = Kz * Qavg"""
     arguments = {
         "average_flow": {"type": "string", "description": "参数 average_flow"},
         "total_variation_coefficient": {"type": "string", "description": "参数 total_variation_coefficient"}
@@ -1078,7 +1078,7 @@ dict : {
 }"""
     
     name = "calculate_concentrated_flow_coefficient"
-    description = "计算集中流量的变化系数
+    description = """计算集中流量的变化系数
 
 Parameters:
 -----------
@@ -1095,7 +1095,7 @@ dict : {
         'source_type': str,
         'coefficient_range': str
     }
-}"
+}"""
     arguments = {
         "flow_rate": {"type": "string", "description": "参数 flow_rate"},
         "source_type": {"type": "string", "description": "参数 source_type"}
@@ -1162,7 +1162,7 @@ dict : {
 }"""
     
     name = "sum_flows_at_node"
-    description = "计算节点处的流量汇总
+    description = """计算节点处的流量汇总
 
 Parameters:
 -----------
@@ -1180,7 +1180,7 @@ dict : {
         'upstream_total': float,
         'concentrated_flow': float
     }
-}"
+}"""
     arguments = {
         "upstream_flows": {"type": "string", "description": "参数 upstream_flows"},
         "concentrated_flow": {"type": "string", "description": "参数 concentrated_flow"}
@@ -1250,7 +1250,7 @@ dict : {
 规范要求：污水管道流速应在 0.6 ~ 3.0 m/s 之间"""
     
     name = "calculate_pipe_velocity"
-    description = "计算管道流速
+    description = """计算管道流速
 
 Parameters:
 -----------
@@ -1271,7 +1271,7 @@ dict : {
     }
 }
 
-规范要求：污水管道流速应在 0.6 ~ 3.0 m/s 之间"
+规范要求：污水管道流速应在 0.6 ~ 3.0 m/s 之间"""
     arguments = {
         "flow_rate": {"type": "string", "description": "参数 flow_rate"},
         "diameter": {"type": "string", "description": "参数 diameter"}
@@ -1343,7 +1343,7 @@ dict : {
 }"""
     
     name = "calculate_section_design_flow"
-    description = "计算管段设计流量（综合考虑本段生活污水、上游来水、集中流量）
+    description = """计算管段设计流量（综合考虑本段生活污水、上游来水、集中流量）
 
 Parameters:
 -----------
@@ -1366,7 +1366,7 @@ dict : {
         'concentrated_design': float,
         'calculation_steps': list
     }
-}"
+}"""
     arguments = {
         "section_domestic_flow": {"type": "string", "description": "参数 section_domestic_flow"},
         "upstream_design_flow": {"type": "string", "description": "参数 upstream_design_flow"},
@@ -1438,7 +1438,7 @@ dict : {
 }"""
     
     name = "design_pipe_diameter"
-    description = "根据设计流量和目标流速选择标准管径
+    description = """根据设计流量和目标流速选择标准管径
 
 Parameters:
 -----------
@@ -1458,7 +1458,7 @@ dict : {
         'actual_velocity': float,
         'velocity_check': str
     }
-}"
+}"""
     arguments = {
         "design_flow": {"type": "string", "description": "参数 design_flow"},
         "target_velocity": {"type": "string", "description": "参数 target_velocity"},
@@ -1531,7 +1531,7 @@ dict : {
 }"""
     
     name = "analyze_pipeline_network"
-    description = "分析整个管网系统的流量分布
+    description = """分析整个管网系统的流量分布
 
 Parameters:
 -----------
@@ -1554,7 +1554,7 @@ dict : {
         'max_flow_section': str,
         'calculation_order': List[str]
     }
-}"
+}"""
     arguments = {
         "sections": {"type": "string", "description": "参数 sections"}
     }
@@ -1619,7 +1619,7 @@ dict : {
 }"""
     
     name = "visualize_flow_distribution"
-    description = "可视化管网流量分布
+    description = """可视化管网流量分布
 
 Parameters:
 -----------
@@ -1636,7 +1636,7 @@ dict : {
         'file_type': str,
         'sections_count': int
     }
-}"
+}"""
     arguments = {
         "section_flows": {"type": "string", "description": "参数 section_flows"},
         "output_path": {"type": "string", "description": "参数 output_path"}
@@ -1704,7 +1704,7 @@ dict : {
 }"""
     
     name = "visualize_network_schematic"
-    description = "绘制管网系统示意图
+    description = """绘制管网系统示意图
 
 Parameters:
 -----------
@@ -1723,7 +1723,7 @@ dict : {
         'file_type': str,
         'nodes_count': int
     }
-}"
+}"""
     arguments = {
         "sections": {"type": "string", "description": "参数 sections"},
         "section_flows": {"type": "string", "description": "参数 section_flows"},
@@ -1792,7 +1792,7 @@ dict : {
 }"""
     
     name = "generate_calculation_report"
-    description = "生成详细的计算报告
+    description = """生成详细的计算报告
 
 Parameters:
 -----------
@@ -1811,7 +1811,7 @@ dict : {
         'file_type': str,
         'timestamp': str
     }
-}"
+}"""
     arguments = {
         "problem_description": {"type": "string", "description": "参数 problem_description"},
         "calculation_results": {"type": "string", "description": "参数 calculation_results"},

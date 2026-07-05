@@ -1,10 +1,13 @@
 """
 Dataset configuration utilities for the testall suite.
 
-Allows switching between the refined-data JSON sources and their corresponding
-trace output directories so that the CLI and helper scripts can target either
-`dataset/merged_questions_augmented.json` (default, traces/) or
-`dataset/merged_single_questions.json` (traces_refine_single_questions/).
+Registers the two benchmark JSON files actually shipped with the repository:
+
+- `dataset/refine_merged_multi_questions.json`  (multi-modal, 83 cases; DEFAULT)
+- `dataset/refine_merged_single_questions.json` (single-modal, 48 cases)
+
+The historic keys (``merged_questions_augmented`` / ``merged_single_questions``)
+are kept as aliases so old scripts / trace files keep resolving.
 """
 from __future__ import annotations
 
@@ -35,28 +38,47 @@ class DatasetEntry:
         }
 
 
+_TRACE_ROOT = PROJECT_ROOT / "data_analysis" / "tracetoanalyze" / "traces"
+
+_MULTI_ENTRY = DatasetEntry(
+    key="refine_merged_multi_questions",
+    label="refine_merged_multi_questions (multi-modal, 83 cases)",
+    dataset_path=PROJECT_ROOT / "dataset" / "refine_merged_multi_questions.json",
+    trace_root=_TRACE_ROOT,
+)
+_SINGLE_ENTRY = DatasetEntry(
+    key="refine_merged_single_questions",
+    label="refine_merged_single_questions (single-modal, 48 cases)",
+    dataset_path=PROJECT_ROOT / "dataset" / "refine_merged_single_questions.json",
+    trace_root=_TRACE_ROOT,
+)
+
 _DATASETS: Mapping[str, DatasetEntry] = {
-    "merged_questions_augmented": DatasetEntry(
-        key="merged_questions_augmented",
-        label="merged_questions_augmented (默认)",
-        dataset_path=PROJECT_ROOT / "dataset" / "merged_questions_augmented.json",
-        trace_root=PROJECT_ROOT / "tracetoanalyze" / "traces",
-    ),
-    "merged_single_questions": DatasetEntry(
-        key="merged_single_questions",
-        label="merged_single_questions",
-        dataset_path=PROJECT_ROOT / "dataset" / "merged_single_questions.json",
-        trace_root=PROJECT_ROOT / "tracetoanalyze" / "traces",  # 统一使用 traces 目录，通过 dataset_folder 区分
-    ),
+    _MULTI_ENTRY.key: _MULTI_ENTRY,
+    _SINGLE_ENTRY.key: _SINGLE_ENTRY,
+    # Short aliases for CLI ergonomics.
+    "multi": _MULTI_ENTRY,
+    "single": _SINGLE_ENTRY,
+    # Legacy keys used by older scripts and trace files — kept for
+    # back-compat so nothing silently mismatches.
+    "merged_questions_augmented": _MULTI_ENTRY,
+    "merged_single_questions": _SINGLE_ENTRY,
 }
 
-DEFAULT_DATASET_KEY = "merged_questions_augmented"
+DEFAULT_DATASET_KEY = _MULTI_ENTRY.key
 _current_dataset_key: str = DEFAULT_DATASET_KEY
 
 
 def list_available_datasets() -> Iterable[DatasetEntry]:
-    """Yield every registered dataset entry."""
-    return _DATASETS.values()
+    """Yield every canonical registered dataset entry (no aliases)."""
+    seen: set[str] = set()
+    unique: list[DatasetEntry] = []
+    for entry in _DATASETS.values():
+        if entry.key in seen:
+            continue
+        seen.add(entry.key)
+        unique.append(entry)
+    return unique
 
 
 def get_dataset_entry(dataset_key: str | None = None) -> DatasetEntry:

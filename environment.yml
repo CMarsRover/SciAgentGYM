@@ -1,0 +1,19 @@
+# =============================================================================
+# SciAgentGYM — environment.yml
+# =============================================================================
+# Minimal conda spec: a Python 3.11 interpreter, and everything else via pip.
+# Modern PyPI manylinux wheels bundle their own C/C++/Fortran runtimes, so
+# there is nothing else to install at the conda layer.
+#
+# Usage:
+#   conda env create -f environment.yml
+#   conda activate sciagentgym
+# =============================================================================
+name: sciagentgym
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements.txt

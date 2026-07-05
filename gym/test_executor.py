@@ -20,10 +20,203 @@ from __future__ import annotations
 
 import json
 import base64
+import os
 import time
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
+
+
+def _is_text_only_mode() -> bool:
+    """
+    Issue #6 —— 纯文本模式开关。
+
+    True 时，工具生成的图像 base64 **不会** 被回传给模型，只把结构化 JSON
+    结果（去掉 base64 字段后）作为普通 tool message 返回。用于兼容不支持
+    ``image_url`` 消息的 OpenAI 兼容 API / 纯文本模型。
+
+    通过 ``SCIAGENT_TEXT_ONLY=1``（或 ``true`` / ``yes``）开启。
+    """
+    return os.environ.get("SCIAGENT_TEXT_ONLY", "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _strip_embedded_file_fields(result: Any) -> Any:
+    """
+    在纯文本模式下，剥离 tool result 里所有超大 base64 字段，避免污染 context。
+    保留：
+      - ``_generated_artifacts``：非图像产物的路径元信息（数据库 / 数据文件 / 报告）
+      - ``_embedded_images``：图像产物的路径 / mime / size 元信息（**去掉 base64 字段**）
+      - 旧字段 ``_embedded_file_name`` / ``_generated_file_path``：合并成 ``generated_file_path``
+    """
+    if not isinstance(result, dict):
+        return result
+    stripped: Dict[str, Any] = {}
+    for k, v in result.items():
+        if k == "_embedded_images" and isinstance(v, list):
+            # 保留元信息，去掉每张图的 base64
+            stripped[k] = [
+                {ik: iv for ik, iv in img.items() if ik != "base64"} if isinstance(img, dict) else img
+                for img in v
+            ]
+            continue
+        if k.startswith("_embedded_file_"):
+            # 旧字段：只跳过 base64 本身，其它保留
+            if k != "_embedded_file_base64":
+                stripped[k] = v
+            continue
+        stripped[k] = v
+
+    generated_path = result.get("_generated_file_path") or result.get("_embedded_file_name")
+    if generated_path and "generated_file_path" not in stripped:
+        stripped["generated_file_path"] = generated_path
+        stripped["note"] = (
+            "text-only mode: embedded image base64 stripped; "
+            "agent should treat generated_file_path / _generated_artifacts as artifact references."
+        )
+    return stripped
+
+
+# ---------------------------------------------------------------------------
+# Tool-generated artifact detection (Issue #6)
+# ---------------------------------------------------------------------------
+# 由 `scripts/scan_tool_return_paths.py` 扫全库 golden_answer 得到：工具返回值里
+# 表示"这里有一个刚落盘的文件"的键名多达 30 种（image_save_path / plot_path /
+# composition_pie_chart / …），且相当多是"每个工具起个专属名"。所以侦测策略
+# 采用"扫值不扫键"：递归遍历 result 里所有字符串，按扩展名归类。
+_IMAGE_EXTS: set[str] = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp", ".svg"}
+_DATABASE_EXTS: set[str] = {".db", ".sqlite", ".sqlite3"}
+_DATA_EXTS: set[str] = {
+    ".csv", ".tsv", ".json", ".jsonl", ".xml", ".yaml", ".yml",
+    ".npz", ".npy", ".parquet", ".h5", ".hdf5", ".mat", ".nc",
+}
+_REPORT_EXTS: set[str] = {".txt", ".md", ".html", ".log"}
+
+_PATH_LIKE_RE = None  # 延迟编译
+
+
+def _get_path_like_re():
+    global _PATH_LIKE_RE
+    if _PATH_LIKE_RE is None:
+        import re
+        exts = "|".join(
+            ext.lstrip(".")
+            for ext in (_IMAGE_EXTS | _DATABASE_EXTS | _DATA_EXTS | _REPORT_EXTS)
+        )
+        # 允许任意非空白字符（含中文/CJK/UTF-8 路径），只要以支持的扩展名结尾。
+        # 排除空白避免把"一段带路径的自然语句"当成路径匹配。
+        _PATH_LIKE_RE = re.compile(rf"^\S+\.({exts})$", re.IGNORECASE)
+    return _PATH_LIKE_RE
+
+
+def _classify_path_by_ext(s: Any) -> Optional[str]:
+    """把字符串按后缀分类为 image / database / data / report。不是路径样字符串返回 None。"""
+    if not isinstance(s, str) or "\n" in s or len(s) > 400 or not s.strip():
+        return None
+    m = _get_path_like_re().match(s.strip())
+    if not m:
+        return None
+    ext = "." + m.group(1).lower()
+    if ext in _IMAGE_EXTS:
+        return "image"
+    if ext in _DATABASE_EXTS:
+        return "database"
+    if ext in _DATA_EXTS:
+        return "data"
+    if ext in _REPORT_EXTS:
+        return "report"
+    return None
+
+
+def _mime_from_ext(path: str) -> str:
+    lower = path.lower()
+    if lower.endswith(".png"):
+        return "image/png"
+    if lower.endswith((".jpg", ".jpeg")):
+        return "image/jpeg"
+    if lower.endswith(".gif"):
+        return "image/gif"
+    if lower.endswith(".bmp"):
+        return "image/bmp"
+    if lower.endswith(".webp"):
+        return "image/webp"
+    if lower.endswith(".svg"):
+        return "image/svg+xml"
+    return "image/png"
+
+
+def _detect_generated_artifacts(
+    result: Any,
+    arguments: Optional[Dict[str, Any]] = None,
+) -> List[Dict[str, Any]]:
+    """
+    递归扫描工具的 result + 调用参数，找出所有已经落盘的产物文件。
+    返回按发现顺序去重的 list::
+        [{path: 绝对/相对路径 str, key_trail: str, category: str, size_bytes: int|None}, ...]
+    key_trail 保留完整访问链路（如 "result.metadata.figure_path"），
+    方便日志和后续回溯排查。
+    """
+    seen_paths: set[str] = set()
+    hits: List[Dict[str, Any]] = []
+
+    def walk(obj: Any, trail: str) -> None:
+        if isinstance(obj, str):
+            cls = _classify_path_by_ext(obj)
+            if cls is None:
+                return
+            raw = obj.strip()
+            resolved = _resolve_existing_path(raw)
+            if resolved is None or not resolved.exists():
+                return
+            path_str = str(resolved)
+            if path_str in seen_paths:
+                return
+            seen_paths.add(path_str)
+            try:
+                size = resolved.stat().st_size
+            except OSError:
+                size = None
+            hits.append({
+                "path": path_str,
+                "key_trail": trail,
+                "category": cls,
+                "size_bytes": size,
+            })
+        elif isinstance(obj, dict):
+            for k, v in obj.items():
+                # 跳过我们自己塞进去的 _embedded_* 元字段，避免重复
+                if isinstance(k, str) and k.startswith("_embedded_file_"):
+                    continue
+                walk(v, f"{trail}.{k}" if trail else str(k))
+        elif isinstance(obj, list):
+            for i, item in enumerate(obj):
+                walk(item, f"{trail}[{i}]")
+
+    walk(result, "result")
+    if arguments is not None:
+        walk(arguments, "args")
+    return hits
+
+
+def _encode_file_to_base64(path: str) -> str:
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode("ascii")
+
+
+def _build_image_content_part(b64: str, mime_type: str, provider: str) -> Dict[str, Any]:
+    """按 provider 组装单张图的 content part（Anthropic vs OpenAI-compatible）。"""
+    if provider == "anthropic":
+        return {
+            "type": "image",
+            "source": {
+                "type": "base64",
+                "media_type": mime_type,
+                "data": b64,
+            },
+        }
+    return {
+        "type": "image_url",
+        "image_url": {"url": f"data:{mime_type};base64,{b64}"},
+    }
 
 # 直接复用现有 agent / data_loader / tool_loader 等模块
 from gym.agent import (
@@ -585,7 +778,8 @@ def _build_basic_user_message(
     if not user_text.strip():
         raise ValueError("问题内容为空，无法构造用户消息。")
 
-    images = question_data.get("images") or []
+    # Issue #6: text-only 模式下丢弃 image_url 段
+    images = [] if _is_text_only_mode() else (question_data.get("images") or [])
     if images:
         content_parts: List[Dict[str, Any]] = []
         # 先放所有图片
@@ -1634,141 +1828,111 @@ def test_query(
                             print(f"工具执行结果(raw): {tool_result}")
                             result = tool_result.get("result")
 
-                            # 保持原有的图片嵌入与预览逻辑
+                            # Issue #6: 递归扫描 result + arguments 里所有"看起来像刚生成的文件"
+                            # 分类：image / database / data / report。
+                            # 图像 → 全部 base64 嵌入；其它 → 只暴露路径元信息不 base64。
                             try:
-                                # 情况1：返回结果中包含 filename 字段
-                                if isinstance(result, dict) and 'filename' in result:
-                                    fname = str(result['filename'])
-                                    resolved = _resolve_existing_path(fname)
-                                    if resolved:
-                                        with open(resolved, 'rb') as f:
-                                            b64 = base64.b64encode(f.read()).decode('ascii')
-                                        result['_embedded_file_base64'] = b64
-                                        result['_embedded_file_name'] = resolved.name
-                                        result['_generated_file_path'] = str(resolved)
-                                        _refresh_preview_image(str(resolved))
-                                    else:
-                                        result['_embedded_file_error'] = f"file not found: {fname}"
+                                artifacts = _detect_generated_artifacts(result, arguments)
+                            except Exception as e_scan:
+                                print(f"⚠️ 扫描工具产物失败: {e_scan}")
+                                artifacts = []
 
-                                # 情况2：检查参数中是否有 save_path，并且文件确实被生成了
-                                elif isinstance(arguments, dict) and 'save_path' in arguments:
-                                    save_path = str(arguments['save_path'])
-                                    resolved_save_path = _resolve_existing_path(save_path)
-                                    if resolved_save_path and resolved_save_path.exists():
-                                        with open(resolved_save_path, 'rb') as f:
-                                            b64 = base64.b64encode(f.read()).decode('ascii')
-                                        if result is None:
-                                            result = {}
-                                        elif not isinstance(result, dict):
-                                            result = {'original_result': result}
+                            image_artifacts = [a for a in artifacts if a["category"] == "image"]
+                            other_artifacts = [a for a in artifacts if a["category"] != "image"]
 
-                                        result['_embedded_file_base64'] = b64
-                                        result['_embedded_file_name'] = resolved_save_path.name
-                                        result['_generated_file_path'] = str(resolved_save_path)
-                                        print(f"检测到生成的文件: {resolved_save_path}")
-                                        _refresh_preview_image(str(resolved_save_path))
-                                    else:
-                                        if result is None:
-                                            result = {}
-                                        elif not isinstance(result, dict):
-                                            result = {'original_result': result}
-                                        result['_embedded_file_error'] = f"expected file not found: {save_path}"
-                                elif isinstance(result, str):
-                                    candidate_path = result.strip().strip('"').strip("'")
-                                    if _is_supported_image_path(candidate_path):
-                                        resolved_candidate = _resolve_existing_path(candidate_path)
-                                        if resolved_candidate and resolved_candidate.exists():
-                                            with open(resolved_candidate, 'rb') as f:
-                                                b64 = base64.b64encode(f.read()).decode('ascii')
-                                            result = {
-                                                'original_result': candidate_path,
-                                                '_embedded_file_base64': b64,
-                                                '_embedded_file_name': resolved_candidate.name,
-                                                '_generated_file_path': str(resolved_candidate),
-                                            }
-                                            print(f"检测到工具返回的图片路径: {resolved_candidate}")
-                                            _refresh_preview_image(str(resolved_candidate))
-                                        else:
-                                            result = {
-                                                'original_result': candidate_path,
-                                                '_embedded_file_error': f"file not found: {candidate_path}"
-                                            }
-
-                            except Exception as e_file:
+                            # 非图像产物（数据库/数据/报告）：只暴露路径 + 大小元信息
+                            if other_artifacts:
                                 if result is None:
                                     result = {}
                                 elif not isinstance(result, dict):
-                                    result = {'original_result': result}
-                                result['_embedded_file_error'] = str(e_file)
+                                    result = {"original_result": result}
+                                result["_generated_artifacts"] = [
+                                    {
+                                        "path": a["path"],
+                                        "category": a["category"],
+                                        "size_bytes": a["size_bytes"],
+                                        "key_trail": a["key_trail"],
+                                        "note": (
+                                            f"{a['category']} artifact saved to disk; "
+                                            "not embedded (only image artifacts are embedded)"
+                                        ),
+                                    }
+                                    for a in other_artifacts
+                                ]
 
-                            # 检查是否包含图片数据，如果有则构造多模态消息
-                            if isinstance(result, dict) and '_embedded_file_base64' in result:
-                                content_parts = []
-                                
-                                text_result = {k: v for k, v in result.items() 
-                                             if not k.startswith('_embedded_file_')}
+                            # 图像产物：全部读入 base64，准备构造多模态 message
+                            if image_artifacts:
+                                if result is None:
+                                    result = {}
+                                elif not isinstance(result, dict):
+                                    result = {"original_result": result}
+                                result["_embedded_images"] = []
+                                for a in image_artifacts:
+                                    try:
+                                        b64 = _encode_file_to_base64(a["path"])
+                                        mime = _mime_from_ext(a["path"])
+                                        result["_embedded_images"].append({
+                                            "path": a["path"],
+                                            "mime_type": mime,
+                                            "size_bytes": a["size_bytes"],
+                                            "key_trail": a["key_trail"],
+                                            "base64": b64,
+                                        })
+                                        _refresh_preview_image(a["path"])
+                                    except OSError as e_read:
+                                        print(f"⚠️ 读取图片失败 {a['path']}: {e_read}")
+
+                            embedded_images = result.get("_embedded_images", []) if isinstance(result, dict) else []
+                            if embedded_images and not _is_text_only_mode():
+                                # 多模态分支：一个 text part + 每张图一个 image part
+                                text_result = {
+                                    k: v for k, v in result.items()
+                                    if not k.startswith("_embedded_")
+                                }
                                 text_content = json.dumps(text_result, default=str, ensure_ascii=False)
-                                
-                                if text_content and text_content.strip() not in ['{}', 'null']:
-                                    content_parts.append({
-                                        "type": "text",
-                                        "text": f"工具执行结果: {text_content}"
-                                    })
+                                if not text_content or text_content.strip() in ("{}", "null"):
+                                    text_content = f"工具执行完成，生成了 {len(embedded_images)} 张图像"
                                 else:
-                                    content_parts.append({
-                                        "type": "text", 
-                                        "text": "工具执行完成，生成了以下图片："
-                                    })
-                                
-                                file_name = result.get('_embedded_file_name', '')
-                                if file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp')):
-                                    if file_name.lower().endswith('.png'):
-                                        mime_type = 'image/png'
-                                    elif file_name.lower().endswith(('.jpg', '.jpeg')):
-                                        mime_type = 'image/jpeg'
-                                    elif file_name.lower().endswith('.gif'):
-                                        mime_type = 'image/gif'
-                                    elif file_name.lower().endswith('.bmp'):
-                                        mime_type = 'image/bmp'
-                                    elif file_name.lower().endswith('.webp'):
-                                        mime_type = 'image/webp'
-                                    else:
-                                        mime_type = 'image/png'
-                                else:
-                                    mime_type = 'image/png'
-                                
-                                print(f"🖼️ 工具生成图片: {file_name} (类型: {mime_type})")
-                                if hasattr(test_client, 'provider') and test_client.provider == "anthropic":
-                                    content_parts.append({
-                                        "type": "image",
-                                        "source": {
-                                            "type": "base64",
-                                            "media_type": mime_type,
-                                            "data": result['_embedded_file_base64']
-                                        }
-                                    })
-                                else:
-                                    content_parts.append({
-                                        "type": "image_url",
-                                        "image_url": {
-                                            "url": f"data:{mime_type};base64,{result['_embedded_file_base64']}"
-                                        }
-                                    })
-                                
+                                    text_content = f"工具执行结果: {text_content}"
+
+                                content_parts: List[Dict[str, Any]] = [
+                                    {"type": "text", "text": text_content}
+                                ]
+                                provider = getattr(test_client, "provider", "openai")
+                                for img in embedded_images:
+                                    content_parts.append(
+                                        _build_image_content_part(img["base64"], img["mime_type"], provider)
+                                    )
+                                    print(
+                                        f"🖼️ 工具生成图片: {Path(img['path']).name}"
+                                        f" (类型: {img['mime_type']}, 从字段: {img['key_trail']})"
+                                    )
+
                                 function_message = {
                                     "role": "tool",
                                     "tool_call_id": tool_call.id,
-                                    "content": content_parts
+                                    "content": content_parts,
                                 }
                             else:
-                                result_content = json.dumps(result, default=str, ensure_ascii=False)
-                                if not result_content or result_content.strip() in ['', '{}', 'null']:
-                                    result_content = json.dumps({"result": "工具执行完成，无返回内容"}, ensure_ascii=False)
-                                
+                                # 纯文本回退（未侦测到图 / text-only 模式）
+                                # text-only: 剥离 _embedded_images 里的 base64 巨字段，只保留路径元信息
+                                if isinstance(result, dict) and result.get("_embedded_images"):
+                                    slim_images = [
+                                        {k: v for k, v in img.items() if k != "base64"}
+                                        for img in result["_embedded_images"]
+                                    ]
+                                    result["_embedded_images"] = slim_images
+                                stripped_result = _strip_embedded_file_fields(result) if _is_text_only_mode() else result
+                                result_content = json.dumps(stripped_result, default=str, ensure_ascii=False)
+                                if not result_content or result_content.strip() in ("", "{}", "null"):
+                                    result_content = json.dumps(
+                                        {"result": "工具执行完成，无返回内容"}, ensure_ascii=False
+                                    )
+
                                 function_message = {
                                     "role": "tool",
                                     "tool_call_id": tool_call.id,
-                                    "content": result_content
+                                    "content": result_content,
                                 }
                             
                             print(function_message)
@@ -2073,21 +2237,24 @@ def test_query(
 def debug_simple_test_query_with_first_refined_case(
     model_name: Optional[str] = None,
     use_tools: bool = True,
+    dataset_key: Optional[str] = None,
 ) -> Optional[str]:
     """
     最小单元测试函数：
-    - 从 refine_merged_questions_augmented.json 中读取第一个案例
-    - 调用 simple_test_query
+    - 从 dataset_config 中解析出对应的 JSON 文件（默认 multi）
+    - 取第一个 case，调用 simple_test_query
     - 打印并返回最终回答文本
 
     使用方式（在项目根目录）：
-        python -c "from gym.test_executor import debug_simple_test_query_with_first_refined_case as f; f('glm-4.6v')"
+        python -c "from gym.test_executor import debug_simple_test_query_with_first_refined_case as f; f('gpt-4o')"
+        # 或指定 single 数据集：
+        python -c "from gym.test_executor import debug_simple_test_query_with_first_refined_case as f; f('gpt-4o', dataset_key='single')"
     """
     import json
-    from pathlib import Path
+    from gym.config.dataset_config import get_dataset_entry
 
-    core_dir = Path(__file__).resolve().parent
-    dataset_path = core_dir / "dataset" / "refine_merged_questions_augmented.json"
+    entry = get_dataset_entry(dataset_key)
+    dataset_path = entry.dataset_path
     if not dataset_path.exists():
         print(f"警告：数据集文件不存在: {dataset_path}")
         return None

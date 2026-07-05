@@ -25696,7 +25696,137 @@
       },
       "original_question_id": "20"
     },
-    "usage_tool_protocol": [],
+    "usage_tool_protocol": [
+      {
+        "type": "function",
+        "function": {
+          "name": "analyze_restriction_enzyme_sensitivity",
+          "description": "分析给定限制性内切酶在指定 E.coli 菌株中的甲基化敏感性。返回每个酶的识别位点、是否受 dam/dcm 甲基化影响，以及一段整合诊断文本。适用于诊断质粒酶切失败/拖尾/不完全切割等现象。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "enzyme_list": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "待检查的限制酶名字列表，如 [\"EcoRI\", \"BamHI\"]"
+              },
+              "strain": {
+                "type": "string",
+                "description": "宿主 E.coli 菌株名，如 \"DH5alpha\""
+              },
+              "observed_issue": {
+                "type": "string",
+                "description": "实验中观察到的现象描述，用于生成诊断文本（可为空字符串）"
+              }
+            },
+            "required": [
+              "enzyme_list",
+              "strain",
+              "observed_issue"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/molecular_biology_toolkit_claude_20.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_methylation_sites",
+          "description": "检查指定 E.coli 菌株的 dam / dcm 甲基化系统在给定目标序列（如 GATC / CCWGG）上的活性，并给出对酶切效率的影响说明。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "strain": {
+                "type": "string",
+                "description": "宿主 E.coli 菌株名，如 \"DH5alpha\""
+              },
+              "target_sequences": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "待检查的目标序列列表，通常为 [\"GATC\", \"CCWGG\"]"
+              }
+            },
+            "required": [
+              "strain",
+              "target_sequences"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/molecular_biology_toolkit_claude_20.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "recommend_alternative_strains",
+          "description": "针对甲基化干扰等酶切问题，推荐可用于替代的 dam-/dcm- 菌株（如 JM110、SCS110、GM2163），并给出通用备选解决方案列表。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "current_strain": {
+                "type": "string",
+                "description": "当前使用且遇到问题的菌株名"
+              },
+              "issue": {
+                "type": "string",
+                "description": "问题描述，如 \"甲基化干扰酶切\"（可为空字符串）"
+              }
+            },
+            "required": [
+              "current_strain",
+              "issue"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/molecular_biology_toolkit_claude_20.py"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "visualize_methylation_pattern",
+          "description": "绘制不同 E.coli 菌株在指定限制酶位点上的甲基化屏蔽情况热力图，并把图像文件保存到 ./tool_images/ 目录，返回保存路径与文字说明。",
+          "strict": true,
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "strain_comparison": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "待对比的菌株列表，如 [\"DH5alpha\", \"JM110\"]"
+              },
+              "enzyme_sites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "作为列名的限制酶名列表，如 [\"EcoRI\", \"BamHI\"]"
+              }
+            },
+            "required": [
+              "strain_comparison",
+              "enzyme_sites"
+            ]
+          }
+        },
+        "additionalProperties": {
+          "function_path": "./tools/molecular_biology_toolkit_claude_20.py"
+        }
+      }
+    ],
     "augmented_versions": [
       {
         "augmented_question": "你是一名分子生物学实验诊断与题目设计专家。现给出一套自洽且可计算的数据，请基于这些数据完成如下任务并作出结论：\n\n背景与构建信息\n- 载体骨架与位点：采用pBackbone_X 骨架，长度LB=5000 bp，单一HindIII位点在骨架外侧（1200 bp），EcoRI与BamHI夹住MCS（EcoRI≈2400，BamHI≈2412，近邻）。\n- 未改造质粒（unmodified）：MCS中为stuffer（Ls=800 bp），总长5800 bp。理论双酶切（EcoRI+BamHI）应得到：5000 bp骨架片段 + 800 bp stuffer片段。\n- 改造后质粒（modified）：stuffer被长度Li=1500 bp的插入片段替换，总长6500 bp。设计目标为插入片段无EcoRI/BamHI/HindIII内切位点，但可能出现未知内部位点。为枚举与诊断，规定：若插入片段存在内部位点，则内部EcoRI定位于插入5'端起450 bp（Eint=450），内部BamHI定位于插入5'端起900 bp（Bint=900）。\n- 方向性：常规方向性（forward，EcoRI→BamHI）与反向（reverse）均给出预测（注：无内部位点时双酶切条带与方向无关）。\n\n消化与电泳条件\n- 反应体系：20 μL，总DNA设定为1 μg，NEB CutSmart 1×，EcoRI-HF与BamHI-HF各10 U（各1 μL，酶原液含50%甘油），37°C孵育60 min。\n- 由此推得：总酶体积=2 μL，总甘油体积分数=5%（=1 μL/20 μL），恰在NEB星切阈值5%临界线；10×缓冲液2 μL；其余为样品与水补足。\n- 柱纯或TE洗脱假设：洗脱液含EDTA=1 mM；方法学约束：样品体积分数≤25%，且终浓度EDTA≤0.2 mM，则样品体积上限为min(0.25×20 μL, 0.2 mM/1 mM×20 μL)=4 μL。\n\n样品定量（NanoDrop与dsDNA特异法）\n- NanoDrop读数（来自执行记录integrate与risk模块）：\n  • unmodified：A260/280=1.86，A260/230=2.15，C_ND=120 ng/μL\n  • Clone #1：A260/280=1.72，A260/230=1.25，C_ND=110 ng/μL\n  • Clone #2：A260/280=1.68，A260/230=1.30，C_ND=115 ng/μL\n  • Clone #3：A260/280=1.78，A260/230=1.40，C_ND=130 ng/μL\n- dsDNA特异法（Qubit）读数（按给定场景测得）：\n  • unmodified：108 ng/μL\n  • Clone #1：45 ng/μL\n  • Clone #2：48 ng/μL\n  • Clone #3：65 ng/μL\n- 由此计算dsDNA占比R=Qubit/NanoDrop：\n  • unmodified：0.90\n  • Clone #1：0.41\n  • Clone #2：0.42\n  • Clone #3：0.50\n- 以NanoDrop配量1 μg时，所用样品体积V_ND=1000/C_ND（μL）：\n  • unmodified：8.33 μL\n  • Clone #1：9.09 μL\n  • Clone #2：8.70 μL\n  • Clone #3：7.69 μL\n- 允许样品体积上限（由EDTA与体积分数约束）为4 μL；推荐装载（以Qubit计）在20 μL反应中的最大可装载DNA质量：\n  • unmodified：4 μL×108=432 ng\n  • Clone #1：4 μL×45=180 ng\n  • Clone #2：4 μL×48=192 ng\n  • Clone #3：4 μL×65=260 ng\n\n风险指数（执行记录integrate模块给出）\n- 星切风险指数（EcoRI/BamHI在CutSmart基础值0.15）：\n  • unmodified：0.10；Clone #1：0.65；Clone #2：0.65；Clone #3：0.50\n- 抑制风险指数：\n  • unmodified：0.10；Clone #1：0.90；Clone #2：0.90；Clone #3：0.65\n\n凝胶成像与条带定量（1%琼脂糖+EB，1 kb+梯，紫外成像；图像分析得到）\n- 5条泳道对应如下（与原题一致）：\n  1) No enzyme + unmodified + CutSmart：未切质粒多构象，smear_fraction≈0.10\n  2) EcoRI/BamHI + unmodified + CutSmart：两条离散条带，约5000 bp与800 bp，smear_fraction≈0.10（与理论一致）\n  3) EcoRI/BamHI + Clone #1 + CutSmart：连续涂抹，smear_fraction≈0.85\n  4) EcoRI/BamHI + Clone #2 + CutSmart：连续涂抹，smear_fraction≈0.85\n  5) EcoRI/BamHI + Clone #3 + CutSmart：多条异常离散条带，约650 bp、1500 bp、2800 bp，smear_fraction≈0.35\n- 以偏差≤±100 bp作为“尺寸匹配容差”。\n\n任务与问题\nA) 列出在以下全部情形下的预测条带尺寸清单（EcoRI+BamHI双酶与单酶EcoRI-only、BamHI-only），并标注骨架片段与诊断性片段：\n  1. 插入片段无内部位点（forward与reverse）\n  2. 仅有内部EcoRI（Eint=450）（forward与reverse）\n  3. 仅有内部BamHI（Bint=900）（forward与reverse）\n  4. 同时存在内部EcoRI与BamHI（Eint=450，Bint=900）（forward与reverse）\nB) 计算并报告每个样本的dsDNA占比R=Qubit/NanoDrop，并据此讨论RNA/盐污染对定量与装载质量的影响；对比V_ND与允许体积4 μL是否超限。\nC) 在20 μL反应、总酶甘油5%条件下，结合A260/230与R，给出星切/抑制风险判断，并引用上文风险指数核对。\nD) 提出一套扩展对照消化矩阵设计（含HindIII单切与与EcoRI/BamHI的二酶组合）及各情形的期望结果，用于区分“内部位点/部分消化/样品抑制/星切”。\nE) 用给定的凝胶定量（smear_fraction与条带尺寸）对照你的预测，整合证据给出“子克隆消化异常的单一最佳解释”，并给出高层级纠偏策略（思路与判据，不写具体操作步骤）。",

@@ -175,10 +175,26 @@ class CalculateThinFilmInterferenceTool(EnvironmentTool):
 
 **Installation**
 
+We recommend the one-shot script — it creates a conda env named
+`sciagentgym` (Python 3.11), installs every scientific package via
+conda-forge for binary compatibility, then runs a soft-fail verification
+step:
+
 ```bash
 git clone git@github.com:CMarsRover/SciAgentGYM.git
-cd SciAgentGym
-pip install -r requirements.txt
+cd SciAgentGYM
+
+# Option A: one-shot script (recommended)
+bash install.sh
+
+# Useful flags:
+#   REBUILD=1        recreate the env from scratch
+#   USE_TSINGHUA=1   route conda + pip through Tsinghua mirrors (mainland China)
+REBUILD=1 USE_TSINGHUA=1 bash install.sh
+
+# Option B: manual (equivalent to Option A minus the verification step)
+conda env create -f environment.yml
+conda activate sciagentgym
 ```
 
 **Configure API Keys**
@@ -196,17 +212,50 @@ SUPPORTED_MODELS = {
 }
 ```
 
+**Datasets**
+
+`dataset/refine_merged_multi_questions.json` (83 cases, multi-modal) and
+`dataset/refine_merged_single_questions.json` (48 cases, text-only) —— combined
+they form the paper's 131 original + 128 refined = **259 tasks / 1134 subquestions**.
+
+Each case is a JSON object with the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | int | Case identifier |
+| `question` | str | Original problem statement (multi-modal cases reference images via `metadata.image_path`) |
+| `answer` | str | Gold answer for the original question (used by boxed-answer evaluation) |
+| `metadata.subject` / `topic` | str | Discipline / sub-field, used to auto-infer toolkit directories |
+| `metadata.image_path` | list[str] | Image files attached to the question (multi-modal input) |
+| `metadata.solution_steps` | list | Reference reasoning steps |
+| `metadata.tool_expected` | list[str] | Expected tool function names |
+| `metadata.golden_answer` | list | Structured gold answers keyed by sub-question |
+| `usage_tool_protocol` | list | OpenAI function-calling schemas, injected into the tool-call turn |
+| `refined_versions` | list | Refined variants: `refined_question` + `final_answer` (a dict of sub-question → answer) |
+
 **Run Evaluation**
 
 ```bash
-# Run full benchmark
+# See all flags
+python gym/test_querys.py --help
+
+# Full multi-modal benchmark (default)
 python gym/test_querys.py
 
-# Specify model
-python gym/test_querys.py --model gpt-4o
+# Single-modal split
+python gym/test_querys.py --dataset single
 
-# Run single case
-python gym/test_querys.py --case-id 1
+# Both splits
+python gym/test_querys.py --dataset both
+
+# Pick model & disable tools (LLM baseline)
+python gym/test_querys.py --model gpt-4o --no-tools
+
+# Run one specific case id (repeat --case-id to select several)
+python gym/test_querys.py --case-id 5 --case-id 12
+
+# Structured (refine) evaluation instead of boxed-answer matching
+python gym/test_querys.py --test-type refine
 ```
 
 ## Evaluation Pipeline

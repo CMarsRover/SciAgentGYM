@@ -123,8 +123,7 @@ def find_tool_file(function_path: str, subject: Optional[str] = None, topic: Opt
     # 文件位于 gym/core/，向上两级到项目根目录
     project_root = Path(__file__).resolve().parents[2]
     
-    # 清理路径，提取文件名
-    clean_path = function_path.strip()
+    clean_path = str(function_path).strip()
     if clean_path.startswith('./'):
         clean_path = clean_path[2:]
     
@@ -216,8 +215,29 @@ def find_tool_file(function_path: str, subject: Optional[str] = None, topic: Opt
         if path.exists() and path.is_file():
             found_path = path
             break
-    
-    # 如果没找到，打印调试信息
+
+    # 优先级7（兜底）：如果通过 subject/topic 拼路径都没命中，做一次 toolkits/**/{filename}
+    # 全局递归搜索。这处理了 case metadata 里 subject/topic 与工具实际所在
+    # 目录不一致的情形（例如 issue #3 multi #62/68/73/79/81）。工具文件名带数字
+    # 后缀（如 mechanics_of_materials_toolkit_claude_10.py），在整个 toolkits 里
+    # 是唯一的，所以全局搜索不会产生歧义。
+    if found_path is None:
+        toolkits_root = project_root / "toolkits"
+        if toolkits_root.exists():
+            matches = list(toolkits_root.rglob(filename))
+            if matches:
+                found_path = matches[0]
+                if len(matches) > 1:
+                    print(
+                        f"⚠️ 兜底搜索找到多个 {filename}，使用第一个: {found_path}"
+                    )
+                else:
+                    print(
+                        f"ℹ️ 兜底搜索命中: {filename} → {found_path.relative_to(project_root)}"
+                        f" (metadata subject/topic: {subject!r}/{topic!r})"
+                    )
+
+    # 如果仍没找到，打印调试信息
     if found_path is None:
         print(f"⚠️ 找不到工具文件: {function_path}")
         print(f"   尝试的路径（前10个）:")
@@ -259,6 +279,12 @@ def dynamic_import_tool_functions(tool_path: str, subject: Optional[str] = None,
         project_root = Path(__file__).resolve().parents[2]
         if str(project_root) not in sys.path:
             sys.path.insert(0, str(project_root))
+        
+        # 关键补丁（修复 Issue #3 类型附带发现）：把工具文件所在目录加入 sys.path
+        # 让形如 `from thin_film_interference import ...` 这类"同目录绝对 import"能解析。
+        parent_dir = str(file_path.parent)
+        if parent_dir not in sys.path:
+            sys.path.insert(0, parent_dir)
         
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
@@ -638,7 +664,13 @@ def load_all_tools_from_directory(
         return [], {}
     
     # 默认排除模式
-    default_exclude = ["__init__.py", "__pycache__", "test_*.py", "convert_*.py"]
+    # code_block_*.py / example_*.py / usage_*.py / demo_*.py 是文档/演示片段，
+    # 不是真实工具，避免它们污染扫描结果（且这些文件常引用不存在的辅助模块）。
+    default_exclude = [
+        "__init__.py", "__pycache__",
+        "test_*.py", "convert_*.py",
+        "example_*.py", "usage_*.py", "demo_*.py", "code_block_*.py",
+    ]
     exclude_patterns = list(exclude_patterns or []) + default_exclude
     
     tool_protocols: List[Dict[str, Any]] = []
@@ -648,6 +680,10 @@ def load_all_tools_from_directory(
     # 确保路径在 sys.path 中
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
+    # 关键补丁：把 topic 目录本身也加入 sys.path，让工具间的
+    # 同目录 import（如 `from thin_film_interference import ...`）能解析。
+    if str(dir_path) not in sys.path:
+        sys.path.insert(0, str(dir_path))
     
     # 1. 优先加载 *_tools_gym.py（已通过 @Toolbox.register 注册的工具）
     gym_files = list(dir_path.glob("*_tools_gym.py"))

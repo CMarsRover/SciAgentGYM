@@ -1,0 +1,102 @@
+# =============================================================================
+# SciAgentGYM — requirements.txt (pip-driven install)
+# =============================================================================
+# Purpose:
+#   Full pip dependency list for the SciAgentGYM evaluation harness
+#   (agent + 1780+ scientific tools). Modern PyPI wheels cover essentially
+#   every scientific package we need.
+#
+# Version policy:
+#   Names only, no version pins. Pip will pick the newest wheel compatible
+#   with Python 3.11. This keeps the install script resilient to future
+#   yanked / renamed versions and lets reproducers get a "just works"
+#   experience out of the box.
+#
+# NOT included (verl-agent-only, not needed by the evaluation harness):
+#   torch / vllm / flash-attn / ray / tensordict / liger-kernel / transformers /
+#   accelerate / peft / datasets / wandb / swanlab / xformers / triton / cupy /
+#   tensorboard.
+#
+# Recommended install:
+#   conda env create -f environment.yml   # creates env + runs pip install -r
+#   conda activate sciagentgym
+#
+# Alternative (pure pip, no conda; works on modern Linux with Python 3.11):
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install --upgrade pip setuptools wheel
+#   pip install -r requirements.txt
+#
+# Python: 3.11 recommended.
+# =============================================================================
+
+# ---- LLM clients ----
+openai
+zhipuai
+tiktoken
+
+# ---- Data validation / typing ----
+pydantic
+
+# ---- Core numeric / plotting ----
+numpy
+scipy
+scikit-learn
+pandas
+matplotlib
+seaborn
+plotly
+networkx
+sympy
+mpmath
+h5py
+numba
+tqdm
+requests
+
+# ---- Chemistry & materials science ----
+# rdkit ships an official PyPI wheel since 2022 -- do NOT use the abandoned rdkit-pypi.
+rdkit
+pymatgen
+spglib
+ase
+chempy
+CoolProp
+pubchempy
+cirpy
+mp-api
+mendeleev
+py3Dmol
+
+# ---- Physics / quantum ----
+pyscf
+qutip
+qiskit
+pythtb
+lmfit
+quantities
+quspin
+
+# ---- Astronomy ----
+astropy
+astroquery
+
+# ---- Life science ----
+biopython
+
+# ---- Math / symbolic ----
+PuLP
+pyneqsys
+pyodesys
+asteval
+latex2sympy2
+latex2sympy2_extended
+math-verify
+pylatexenc
+
+# ---- Utilities used across the codebase ----
+jsonlines
+python-dotenv
+rich
+click
+dataclasses-json
+lxml
