@@ -1,19 +1,58 @@
-# 忽略 gym/tool_images 目录下的所有图片
-gym/tool_images/*.png
-gym/tool_images/*.jpg
-gym/tool_images/*.jpeg
-gym/tool_images/*.gif
-gym/tool_images/*.bmp
-gym/tool_images/*.ico
-gym/tool_images/*.svg
-gym/tool_images/*.webp
+# === 工具运行时产物 / trace 输出 ===
+# 注意：`gym/test_images/` 是 dataset 原题的输入图（约 2000 个），不要 ignore
+#
+# 图像类（工具 savefig 后落在这里；出现的目录名不统一，历史遗留）
+tool_images/
+gym/tool_images/
+images/
+figs/
+figures/
+tool_visual_images/
+qc_assets/
+assets/
 
-# Python 缓存
+# 结构化数据 / 报告类
+mid_result/
+outputs/
+out/
+results/
+reports/
+artifacts/
+
+# 根目录裸露产物兜底：极少数工具（gas_kinetics / kinetic_energy 等）
+# 用 plt.savefig(args.output) 拿到裸文件名时，可能直接写到 cwd。
+# 前导 `/` 只匹配仓库根，不影响 pic/、assets/ 等子目录里的正常图片资源。
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.svg
+/*.pdf
+/*.csv
+/*.db
+/*.sqlite
+/*.h5
+/*.hdf5
+/*.npy
+/*.npz
+
+# LLM 交互 trace（评测跑完的完整对话痕迹）
+data_analysis/tracetoanalyze/
+traces_dependency/
+
+# === Python 缓存 ===
 __pycache__/
 *.pyc
+*.pyo
 
-# macOS 系统文件
+# === 系统 / IDE 文件 ===
 .DS_Store
+.vscode/
+.idea/
 
-# 备份目录
+# === 安装脚本产物 ===
 src_backup/
+_install_logs/
+
+# === 数据集时间戳备份 ===
+dataset/*.bak_*.json
